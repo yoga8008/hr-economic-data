@@ -20,10 +20,12 @@ jobs:
           python-version: "3.11"
 
       - name: Install packages
-        run: pip install pandas
+        run: pip install pandas requests beautifulsoup4
 
-      - name: Run script
-        run: python scripts/update_data.py
+      - name: Run scripts
+        run: |
+          python scripts/update_data.py
+          python scripts/update_news.py
 
       - name: Commit files
         run: |
