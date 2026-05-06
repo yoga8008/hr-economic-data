@@ -21,29 +21,22 @@ SOURCES = [
 ]
 
 IGNORE_KEYWORDS = [
-    "Enter",
+    "Enter 到主內容區",
+    "按 Enter 到主內容區",
     "主內容區",
     "網站導覽",
-    "回首頁",
-    "搜尋",
-    ":::"
+    "回首頁"
 ]
 
-def roc_to_ad(text):
-    text = text.replace("-", "/")
-    m = re.search(r"(11[3-9]|12[0-9])/\d{1,2}/\d{1,2}", text)
+def roc_to_ad(date_text):
+    date_text = date_text.strip()
+    parts = date_text.replace("-", "/").split("/")
 
-    if not m:
-        return ""
+    if len(parts) == 3 and len(parts[0]) == 3:
+        year = int(parts[0]) + 1911
+        return f"{year}/{parts[1].zfill(2)}/{parts[2].zfill(2)}"
 
-    y, mth, d = m.group().split("/")
-    return f"{int(y) + 1911}/{mth.zfill(2)}/{d.zfill(2)}"
-
-def clean_title(title):
-    title = re.sub(r"\s+", " ", title).strip()
-    title = re.sub(r"^\d+\s*", "", title)
-    title = re.sub(r"(11[3-9]|12[0-9])[-/]\d{1,2}[-/]\d{1,2}", "", title)
-    return title.strip()
+    return date_text
 
 def fetch_news(source):
     items = []
@@ -51,47 +44,46 @@ def fetch_news(source):
     try:
         res = requests.get(
             source["url"],
-            timeout=20,
+            timeout=15,
             headers={"User-Agent": "Mozilla/5.0"}
         )
 
         res.encoding = "utf-8"
         soup = BeautifulSoup(res.text, "html.parser")
+        text_items = soup.find_all("a")
 
-        links = soup.find_all("a")
-
-        for a in links:
-            raw_title = a.get_text(" ", strip=True)
+        for a in text_items:
+            title = a.get_text(" ", strip=True)
             href = a.get("href", "")
 
-            if not raw_title:
+            if not title or len(title) < 8:
                 continue
 
-            if any(k in raw_title for k in IGNORE_KEYWORDS):
+            if any(k in title for k in IGNORE_KEYWORDS):
                 continue
 
-            block = a.find_parent()
-            block_text = block.get_text(" ", strip=True) if block else raw_title
+            parent_text = a.parent.get_text(" ", strip=True) if a.parent else ""
+            date = ""
 
-            date = roc_to_ad(block_text + " " + raw_title)
+            match = re.search(r"\d{3}[-/]\d{2}[-/]\d{2}", parent_text)
+
+            if match:
+                date = roc_to_ad(match.group())
 
             if not date:
                 continue
 
-            title = clean_title(raw_title)
-
-            if len(title) < 8:
-                continue
+            href = urljoin(source["url"], href)
 
             items.append({
                 "日期": date,
                 "單位": source["unit"],
                 "標題": title,
-                "連結": urljoin(source["url"], href)
+                "連結": href
             })
 
     except Exception as e:
-        print(f"{source['unit']} 抓取失敗：{e}")
+        print(f"抓取失敗：{source['unit']} {e}")
 
     return items
 
