@@ -36,10 +36,18 @@ button{
 
 <h1>台灣經濟數據</h1>
 
-<div>
-    <button onclick="changeYear(12)">近1年</button>
-    <button onclick="changeYear(24)">近2年</button>
-    <button onclick="changeYear(36)">近3年</button>
+    <label>顯示月份：</label>
+
+    <input
+        type="range"
+        id="rangeSlider"
+        min="12"
+        max="36"
+        value="12"
+    >
+
+    <span id="rangeText">近12個月</span>
+
 </div>
 
 <div class="card">
@@ -66,6 +74,11 @@ fetch("./data/taiwan_cpi_unemployment.json")
     allData = data;
 
     changeYear(12);
+
+document.getElementById("rangeSlider").addEventListener("input", function(){
+    const months = Number(this.value);
+    document.getElementById("rangeText").innerText = `近${months}個月`;
+    changeYear(months);
 
 });
 
