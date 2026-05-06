@@ -11,7 +11,16 @@ SOURCES = [
     {"unit": "健保署", "url": "https://www.nhi.gov.tw/ch/lp-3255-1.html"}
 ]
 
-IGNORE_KEYWORDS = ["按Enter到主內容區", "Enter到主內容區", "主內容區", "網站導覽", "回首頁", ":::"]
+IGNORE_KEYWORDS = [
+    "按Enter到主內容區",
+    "按 Enter 到主內容區",
+    "Enter到主內容區",
+    "Enter 到主內容區",
+    "主內容區",
+    "網站導覽",
+    "回首頁",
+    ":::"
+]
 
 def normalize_date(text):
     text = text.replace("-", "/")
@@ -21,7 +30,7 @@ def normalize_date(text):
         y, mo, d = m.group().split("/")
         return f"{y}/{mo.zfill(2)}/{d.zfill(2)}"
 
-    m = re.search(r"(?<!\d)(11[3-9]|12[0-9])/\d{1,2}/\d{1,2}", text)
+    m = re.search(r"(11[3-9]|12[0-9])/\d{1,2}/\d{1,2}", text)
     if m:
         y, mo, d = m.group().split("/")
         return f"{int(y)+1911}/{mo.zfill(2)}/{d.zfill(2)}"
@@ -39,7 +48,12 @@ def fetch_news(source):
     items = []
 
     try:
-        res = requests.get(source["url"], timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+        res = requests.get(
+            source["url"],
+            timeout=15,
+            headers={"User-Agent": "Mozilla/5.0"}
+        )
+
         res.encoding = "utf-8"
         soup = BeautifulSoup(res.text, "html.parser")
         page_text = soup.get_text(" ", strip=True)
@@ -57,7 +71,6 @@ def fetch_news(source):
 
             parent_text = a.parent.get_text(" ", strip=True) if a.parent else ""
 
-            # 重點：同時看 title + parent + 附近文字
             search_text = raw_title + " " + parent_text
 
             if raw_title in page_text:
@@ -86,12 +99,61 @@ def fetch_news(source):
 
     return items
 
+def fetch_nhi_news():
+    url = "https://www.nhi.gov.tw/ch/lp-3255-1.html"
+    items = []
+
+    try:
+        res = requests.get(
+            url,
+            timeout=15,
+            headers={"User-Agent": "Mozilla/5.0"}
+        )
+
+        res.encoding = "utf-8"
+        soup = BeautifulSoup(res.text, "html.parser")
+
+        for a in soup.find_all("a"):
+            raw = a.get_text(" ", strip=True)
+
+            if not raw:
+                continue
+
+            # 健保署格式：1 標題 115-05-06
+            match = re.search(r"^\d+\s+(.+?)\s+(11[3-9]|12[0-9])[-/](\d{1,2})[-/](\d{1,2})$", raw)
+
+            if not match:
+                continue
+
+            title = match.group(1).strip()
+            y = int(match.group(2)) + 1911
+            m = match.group(3).zfill(2)
+            d = match.group(4).zfill(2)
+
+            items.append({
+                "日期": f"{y}/{m}/{d}",
+                "單位": "健保署",
+                "標題": title,
+                "連結": urljoin(url, a.get("href", ""))
+            })
+
+    except Exception as e:
+        print(f"抓取失敗：健保署 {e}")
+
+    return items
+
 all_news = []
 
 for source in SOURCES:
-    news = fetch_news(source)
+    if source["unit"] == "健保署":
+        news = fetch_nhi_news()
+    else:
+        news = fetch_news(source)
+
     news = sorted(news, key=lambda x: x["日期"], reverse=True)[:5]
+
     print(source["unit"], "抓到", len(news), "筆")
+
     all_news.extend(news)
 
 seen = set()
