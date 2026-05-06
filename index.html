@@ -127,10 +127,36 @@ function drawCharts(data){
             }
         },
 
-        plugins: {
-            legend: {
-                display: false
-            },
+plugins: {
+
+    legend: {
+        display: false
+    },
+
+    tooltip: {
+
+        callbacks: {
+
+            afterBody: function(context){
+
+                const index = context[0].dataIndex;
+
+                const summary =
+                    data[index]["AI摘要"];
+
+                if(summary){
+
+                    return "摘要：" + summary;
+
+                }
+
+                return "";
+
+            }
+
+        }
+
+    },
             datalabels: {
                 align: "top",
                 anchor: "end",
