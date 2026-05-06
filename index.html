@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>台灣經濟數據</title>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
 <style>
 body{
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     padding:20px;
 }
 
@@ -25,9 +27,8 @@ canvas{
     height:250px !important;
 }
 
-button{
-    margin-left:10px;
-    padding:6px 14px;
+select{
+    padding:6px 12px;
 }
 </style>
 </head>
@@ -37,13 +38,12 @@ button{
 <h1>台灣經濟數據</h1>
 
 <div class="filter">
-    起：
-    <input type="month" id="startMonth">
-
-    迄：
-    <input type="month" id="endMonth">
-
-    <button onclick="filterData()">查詢</button>
+    <label>顯示區間：</label>
+    <select id="monthRange" onchange="changeRange()">
+        <option value="12">近12個月至今</option>
+        <option value="24">近24個月至今</option>
+        <option value="36" selected>近36個月至今</option>
+    </select>
 </div>
 
 <div class="card">
@@ -65,24 +65,13 @@ fetch("./data/taiwan_cpi_unemployment.json")
 .then(res => res.json())
 .then(data => {
     allData = data;
-
-    const latest12 = allData.slice(-12);
-    document.getElementById("startMonth").value = latest12[0]["年月"].replace("/", "-");
-    document.getElementById("endMonth").value = latest12[latest12.length - 1]["年月"].replace("/", "-");
-
-    drawCharts(latest12);
+    changeRange();
 });
 
-function filterData(){
-    const start = document.getElementById("startMonth").value;
-    const end = document.getElementById("endMonth").value;
-
-    const filtered = allData.filter(d => {
-        const month = d["年月"].replace("/", "-");
-        return month >= start && month <= end;
-    });
-
-    drawCharts(filtered);
+function changeRange(){
+    const months = Number(document.getElementById("monthRange").value);
+    const data = allData.slice(-months);
+    drawCharts(data);
 }
 
 function drawCharts(data){
@@ -93,15 +82,49 @@ function drawCharts(data){
     if(cpiChart) cpiChart.destroy();
     if(unemploymentChart) unemploymentChart.destroy();
 
+    const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            },
+            datalabels: {
+                align: "top",
+                anchor: "end",
+                formatter: function(value){
+                    return value.toFixed(1) + "%";
+                },
+                font: {
+                    weight: "bold",
+                    size: 11
+                }
+            }
+        },
+        scales: {
+            y: {
+                ticks: {
+                    callback: function(value){
+                        return value + "%";
+                    }
+                }
+            }
+        }
+    };
+
     cpiChart = new Chart(document.getElementById("cpiChart"), {
         type: "line",
         data: {
             labels: labels,
             datasets: [{
-                label: "CPI年增率",
-                data: cpiData
+                data: cpiData,
+                tension: 0.2,
+                pointRadius: 4,
+                pointHoverRadius: 6
             }]
-        }
+        },
+        options: commonOptions,
+        plugins: [ChartDataLabels]
     });
 
     unemploymentChart = new Chart(document.getElementById("unemploymentChart"), {
@@ -109,10 +132,14 @@ function drawCharts(data){
         data: {
             labels: labels,
             datasets: [{
-                label: "失業率",
-                data: unemploymentData
+                data: unemploymentData,
+                tension: 0.2,
+                pointRadius: 4,
+                pointHoverRadius: 6
             }]
-        }
+        },
+        options: commonOptions,
+        plugins: [ChartDataLabels]
     });
 }
 </script>
