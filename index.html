@@ -1,43 +1,121 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>台灣經濟數據</title>
+<meta charset="UTF-8">
+<title>台灣經濟數據</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+    font-family: Arial;
+    padding:20px;
+}
+
+.card{
+    margin-bottom:40px;
+}
+
+canvas{
+    max-width:1200px;
+    height:400px;
+}
+
+button{
+    margin-right:10px;
+    padding:8px 16px;
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>台灣 CPI / 失業率</h1>
+<h1>台灣經濟數據</h1>
 
-<table border="1" id="table">
-  <thead>
-    <tr>
-      <th>年月</th>
-      <th>CPI年增率</th>
-      <th>失業率</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+<div>
+    <button onclick="changeYear(12)">近1年</button>
+    <button onclick="changeYear(24)">近2年</button>
+    <button onclick="changeYear(36)">近3年</button>
+</div>
+
+<div class="card">
+    <h2>CPI 年增率</h2>
+    <canvas id="cpiChart"></canvas>
+</div>
+
+<div class="card">
+    <h2>失業率</h2>
+    <canvas id="unemploymentChart"></canvas>
+</div>
 
 <script>
+
+let allData = [];
+
+let cpiChart;
+let unemploymentChart;
+
 fetch("./data/taiwan_cpi_unemployment.json")
-  .then(res => res.json())
-  .then(data => {
+.then(res => res.json())
+.then(data => {
 
-    const tbody = document.querySelector("tbody");
+    allData = data;
 
-    data.forEach(row => {
+    changeYear(12);
 
-      tbody.innerHTML += `
-        <tr>
-          <td>${row["年月"]}</td>
-          <td>${row["CPI年增率"]}</td>
-          <td>${row["失業率"]}</td>
-        </tr>
-      `;
-    });
+});
 
-  });
+function changeYear(months){
+
+    const data = allData.slice(-months);
+
+    const labels = data.map(d => d["年月"]);
+
+    const cpiData = data.map(d => d["CPI年增率"]);
+
+    const unemploymentData = data.map(d => d["失業率"]);
+
+    if(cpiChart){
+        cpiChart.destroy();
+    }
+
+    if(unemploymentChart){
+        unemploymentChart.destroy();
+    }
+
+    cpiChart = new Chart(
+        document.getElementById('cpiChart'),
+        {
+            type:'line',
+            data:{
+                labels:labels,
+                datasets:[{
+                    label:'CPI年增率',
+                    data:cpiData
+                }]
+            }
+        }
+    );
+
+    unemploymentChart = new Chart(
+        document.getElementById('unemploymentChart'),
+        {
+            type:'line',
+            data:{
+                labels:labels,
+                datasets:[{
+                    label:'失業率',
+                    data:unemploymentData
+                }]
+            }
+        }
+    );
+
+}
+
 </script>
 
 </body>
