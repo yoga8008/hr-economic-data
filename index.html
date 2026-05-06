@@ -35,13 +35,27 @@ label{ margin-right:10px; }
 </div>
 
 <div class="card">
+
     <h2>消費者物價指數年增率(CPI)</h2>
+
+    <div style="margin-bottom:10px; color:#666; font-size:14px;">
+        說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞
+    </div>
+
     <canvas id="cpiChart"></canvas>
+
 </div>
 
 <div class="card">
+
     <h2>失業率</h2>
+
+    <div style="margin-bottom:10px; color:#666; font-size:14px;">
+        說明：「想工作卻找不到工作的人」占勞動力的比例。
+    </div>
+
     <canvas id="unemploymentChart"></canvas>
+
 </div>
 
 <div class="source">
@@ -154,7 +168,7 @@ function drawCharts(currentData, previousData, compareMode){
         plugins: {
             legend: {
                 display: compareMode,
-                position: "top",
+                position: "bottom",
                 align: "center",
                 fullSize: true,
                 labels: {
