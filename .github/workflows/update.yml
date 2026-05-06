@@ -26,4 +26,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: taiwan-data
-          path: taiwan_cpi_unemployment.csv
+          path: data/taiwan_cpi_unemployment.csv
