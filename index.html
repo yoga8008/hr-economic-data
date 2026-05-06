@@ -55,7 +55,11 @@ h1{
     color:#666;
     font-size:14px;
 }
-
+.sectionTitle{
+    padding-bottom:10px;
+    margin-bottom:15px;
+    border-bottom:1px solid #dcdcdc;
+}
 canvas{
     width:100% !important;
     height:360px !important;
@@ -140,7 +144,7 @@ label{
 <div class="leftPanel">
 
     <div class="card">
-        <h2>GDP 經濟成長率</h2>
+        <h2 class="sectionTitle">GDP 經濟成長率</h2>
         <div class="desc">說明：國內生產毛額（GDP）成長率，反映整體經濟成長情況。</div>
 
         <div class="filter">
@@ -180,11 +184,11 @@ label{
         <button onclick="filterData()">查詢</button>
     </div>
 
-    <h2>消費者物價指數年增率(CPI)</h2>
+    <h2 class="sectionTitle">消費者物價指數年增率(CPI)</h2>
     <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
     <canvas id="cpiChart"></canvas>
 
-    <h2 style="margin-top:40px;">失業率</h2>
+    <h2 class="sectionTitle" style="margin-top:40px;">失業率</h2>
     <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
     <canvas id="unemploymentChart"></canvas>
 
