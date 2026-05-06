@@ -8,25 +8,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
 <style>
-body{
-    font-family: Arial, sans-serif;
-    padding:20px;
-}
-.filter{
-    margin-bottom:20px;
-}
-.card{
-    margin-bottom:40px;
-    width:900px;
-}
-canvas{
-    max-width:900px;
-    height:250px !important;
-}
-select, button{
-    padding:6px 10px;
-    margin-right:10px;
-}
+body{ font-family: Arial, sans-serif; padding:20px; }
+.filter{ margin-bottom:20px; }
+.card{ margin-bottom:40px; width:900px; }
+canvas{ max-width:900px; height:250px !important; }
+select, button{ padding:6px 10px; margin-right:10px; }
 </style>
 </head>
 
@@ -35,12 +21,8 @@ select, button{
 <h1>台灣經濟數據</h1>
 
 <div class="filter">
-    起：
-    <select id="startMonth"></select>
-
-    迄：
-    <select id="endMonth"></select>
-
+    起：<select id="startMonth"></select>
+    迄：<select id="endMonth"></select>
     <button onclick="filterData()">查詢</button>
 </div>
 
@@ -122,41 +104,32 @@ function drawCharts(data){
         maintainAspectRatio: false,
 
         layout: {
-            padding: {
-                top: 30
-            }
+            padding: { top: 30 }
         },
 
-plugins: {
+        plugins: {
+            legend: {
+                display: false
+            },
 
-    legend: {
-        display: false
-    },
+            tooltip: {
+                callbacks: {
+                    label: function(context){
+                        return context.parsed.y.toFixed(1) + "%";
+                    },
+                    afterBody: function(context){
+                        const index = context[0].dataIndex;
+                        const summary = data[index]["AI摘要"];
 
-    tooltip: {
+                        if(summary){
+                            return "摘要：" + summary;
+                        }
 
-        callbacks: {
-
-            afterBody: function(context){
-
-                const index = context[0].dataIndex;
-
-                const summary =
-                    data[index]["AI摘要"];
-
-                if(summary){
-
-                    return "摘要：" + summary;
-
+                        return "";
+                    }
                 }
+            },
 
-                return "";
-
-            }
-
-        }
-
-    },
             datalabels: {
                 align: "top",
                 anchor: "end",
