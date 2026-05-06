@@ -10,10 +10,11 @@
 <style>
 body{ font-family: Arial, sans-serif; padding:20px; }
 .filter{ margin-bottom:20px; }
-.card{ margin-bottom:60px; width:900px; }
-canvas{ max-width:900px; height:300px !important; }
+.card{ margin-bottom:70px; width:900px; }
+canvas{ max-width:900px; height:320px !important; }
 select, button{ padding:6px 10px; margin-right:10px; }
 label{ margin-right:10px; }
+.source{ margin-top:40px; font-size:14px; color:#666; }
 </style>
 </head>
 
@@ -41,6 +42,13 @@ label{ margin-right:10px; }
 <div class="card">
     <h2>失業率</h2>
     <canvas id="unemploymentChart"></canvas>
+</div>
+
+<div class="source">
+    資料來源：
+    <a href="https://www.stat.gov.tw/" target="_blank">
+        中華民國統計資訊網 / 主計總處
+    </a>
 </div>
 
 <script>
@@ -135,22 +143,27 @@ function drawCharts(currentData, previousData, compareMode){
         maintainAspectRatio: false,
 
         layout: {
-            padding: { top: 25 }
+            padding: {
+                top: 45,
+                right: 20,
+                left: 10,
+                bottom: 10
+            }
         },
 
         plugins: {
             legend: {
-    display: compareMode,
-    position: "top",
-    align: "center",
-    fullSize: true,
-    labels: {
-        padding: 20,
-        font: {
-            size: 14
-        }
-    }
-},
+                display: compareMode,
+                position: "top",
+                align: "center",
+                fullSize: true,
+                labels: {
+                    padding: 24,
+                    font: {
+                        size: 14
+                    }
+                }
+            },
 
             tooltip: {
                 callbacks: {
@@ -174,7 +187,8 @@ function drawCharts(currentData, previousData, compareMode){
                 align: "top",
                 anchor: "end",
                 offset: 18,
-                clamp: true,
+                clamp: false,
+                clip: false,
                 formatter: function(value){
                     return value.toFixed(1) + "%";
                 },
@@ -201,7 +215,7 @@ function drawCharts(currentData, previousData, compareMode){
             label: "本期 CPI",
             data: currentCpi,
             tension: 0.2,
-            pointRadius: 4
+            pointRadius: 4,
             clip: false
         }
     ];
@@ -211,7 +225,8 @@ function drawCharts(currentData, previousData, compareMode){
             label: "本期失業率",
             data: currentUnemployment,
             tension: 0.2,
-            pointRadius: 4
+            pointRadius: 4,
+            clip: false
         }
     ];
 
@@ -221,7 +236,8 @@ function drawCharts(currentData, previousData, compareMode){
             data: previousCpi,
             tension: 0.2,
             pointRadius: 4,
-            borderDash: [6, 4]
+            borderDash: [6, 4],
+            clip: false
         });
 
         unemploymentDatasets.push({
@@ -229,7 +245,8 @@ function drawCharts(currentData, previousData, compareMode){
             data: previousUnemployment,
             tension: 0.2,
             pointRadius: 4,
-            borderDash: [6, 4]
+            borderDash: [6, 4],
+            clip: false
         });
     }
 
@@ -254,17 +271,6 @@ function drawCharts(currentData, previousData, compareMode){
     });
 }
 </script>
-<div style="margin-top:40px; font-size:14px; color:#666;">
 
-    資料來源：
-    
-    <a 
-        href="https://www.stat.gov.tw/"
-        target="_blank"
-    >
-        中華民國統計資訊網 / 主計總處
-    </a>
-
-</div>
 </body>
 </html>
