@@ -54,7 +54,7 @@ h1{
 
 canvas{
     width:100% !important;
-    height:360px !important;
+    height:420px !important;
     margin-top:25px;
 }
 
@@ -452,7 +452,63 @@ function drawMonthlyCharts(current,previous,compare){
         options:getChartOptions(compare)
     });
 }
+function getChartOptions(showLegend){
+    return {
+        responsive:true,
+        maintainAspectRatio:false,
 
+        layout:{
+            padding:{
+                top:40,
+                right:20,
+                left:15,
+                bottom:10
+            }
+        },
+
+        plugins:{
+            legend:{
+                display:showLegend,
+                position:"bottom",
+                labels:{
+                    font:{ size:16 }
+                }
+            },
+
+            datalabels:{
+                align:"top",
+                anchor:"end",
+                offset:8,
+                formatter:function(value){
+                    return value.toFixed(1) + "%";
+                },
+                font:{
+                    size:14,
+                    weight:"bold"
+                },
+                color:"#111827"
+            }
+        },
+
+        scales:{
+            x:{
+                ticks:{
+                    font:{ size:13 },
+                    maxRotation:0,
+                    autoSkip:false
+                }
+            },
+            y:{
+                ticks:{
+                    font:{ size:13 },
+                    callback:function(value){
+                        return value.toFixed(1) + "%";
+                    }
+                }
+            }
+        }
+    };
+}
 
 </script>
 
