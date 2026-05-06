@@ -7,6 +7,9 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,8 +25,10 @@ jobs:
       - name: Run script
         run: python scripts/update_data.py
 
-      - name: Upload file
-        uses: actions/upload-artifact@v4
-        with:
-          name: taiwan-data
-          path: data/taiwan_cpi_unemployment.csv
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update Taiwan data" || echo "No changes"
+          git push
