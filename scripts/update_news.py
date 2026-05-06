@@ -2,8 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
-import re
-from urllib.parse import urljoin
+from datetime import datetime
 
 SOURCES = [
     {
@@ -20,36 +19,22 @@ SOURCES = [
     }
 ]
 
-IGNORE_KEYWORDS = [
-    "Enter 到主內容區",
-    "按 Enter 到主內容區",
-    "主內容區",
-    "網站導覽",
-    "回首頁"
-]
-
 def roc_to_ad(date_text):
     date_text = date_text.strip()
     parts = date_text.replace("-", "/").split("/")
-
     if len(parts) == 3 and len(parts[0]) == 3:
         year = int(parts[0]) + 1911
         return f"{year}/{parts[1].zfill(2)}/{parts[2].zfill(2)}"
-
     return date_text
 
 def fetch_news(source):
     items = []
 
     try:
-        res = requests.get(
-            source["url"],
-            timeout=15,
-            headers={"User-Agent": "Mozilla/5.0"}
-        )
-
+        res = requests.get(source["url"], timeout=15)
         res.encoding = "utf-8"
         soup = BeautifulSoup(res.text, "html.parser")
+
         text_items = soup.find_all("a")
 
         for a in text_items:
@@ -59,21 +44,23 @@ def fetch_news(source):
             if not title or len(title) < 8:
                 continue
 
-            if any(k in title for k in IGNORE_KEYWORDS):
-                continue
-
             parent_text = a.parent.get_text(" ", strip=True) if a.parent else ""
             date = ""
 
+            import re
             match = re.search(r"\d{3}[-/]\d{2}[-/]\d{2}", parent_text)
-
             if match:
                 date = roc_to_ad(match.group())
 
             if not date:
                 continue
 
-            href = urljoin(source["url"], href)
+            if href.startswith("/"):
+                base = source["url"].split("/")[0] + "//" + source["url"].split("/")[2]
+                href = base + href
+            elif not href.startswith("http"):
+                base = "/".join(source["url"].split("/")[:3])
+                href = base + "/" + href
 
             items.append({
                 "日期": date,
@@ -90,30 +77,29 @@ def fetch_news(source):
 all_news = []
 
 for source in SOURCES:
-    result = fetch_news(source)
-    print(source["unit"], "抓到", len(result), "筆")
-    all_news.extend(result)
+    all_news.extend(fetch_news(source))
 
+# 去重
 seen = set()
 unique_news = []
 
 for item in all_news:
     key = item["單位"] + item["標題"]
-
     if key not in seen:
         seen.add(key)
         unique_news.append(item)
 
+# 日期排序，取最新10筆
 unique_news = sorted(
     unique_news,
     key=lambda x: x["日期"],
     reverse=True
-)
+)[:10]
 
 os.makedirs("data", exist_ok=True)
 
 with open("data/taiwan_news.json", "w", encoding="utf-8") as f:
     json.dump(unique_news, f, ensure_ascii=False, indent=2)
 
-print("公告更新完成，共", len(unique_news), "筆")
-print(json.dumps(unique_news[:20], ensure_ascii=False, indent=2))
+print("公告更新完成")
+print(json.dumps(unique_news, ensure_ascii=False, indent=2))
