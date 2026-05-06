@@ -114,7 +114,15 @@ label{
 .newsTitle a:hover{
     text-decoration:underline;
 }
+.newsGroup{
+    margin-bottom:25px;
+}
 
+.newsGroup h3{
+    margin:15px 0 10px;
+    padding-bottom:6px;
+    border-bottom:2px solid #ddd;
+}
 .source{
     margin-top:40px;
     font-size:14px;
@@ -194,8 +202,20 @@ label{
 <div class="rightPanel">
     <div class="newsCard">
         <h2>重要公告彙整</h2>
-        <div id="newsList">載入中...</div>
-    </div>
+        <div class="newsGroup">
+    <h3>勞動部</h3>
+    <div id="newsMol">載入中...</div>
+</div>
+
+<div class="newsGroup">
+    <h3>勞動力發展署</h3>
+    <div id="newsWda">載入中...</div>
+</div>
+
+<div class="newsGroup">
+    <h3>健保局</h3>
+    <div id="newsNhi">載入中...</div>
+</div>
 </div>
 
 </div>
@@ -223,33 +243,62 @@ fetch("./data/taiwan_gdp.json")
     initGDPSelect();
     drawGDP();
 });
-
 fetch("./data/taiwan_news.json")
 .then(res => res.json())
 .then(news => {
-    const newsList = document.getElementById("newsList");
-    newsList.innerHTML = "";
 
-    news
-    .sort((a,b) => b.日期.localeCompare(a.日期))
-    .slice(0,10)
-    .forEach(item => {
-        newsList.innerHTML += `
+    renderNewsGroup(news, "勞動部", "newsMol");
+
+    renderNewsGroup(news, "勞動力發展署", "newsWda");
+
+    renderNewsGroup(news, "健保署", "newsNhi");
+
+});
+
+function renderNewsGroup(news, unitName, elementId){
+
+    const box = document.getElementById(elementId);
+
+    box.innerHTML = "";
+
+    const filtered = news
+        .filter(item => item.單位 === unitName)
+        .sort((a,b) => b.日期.localeCompare(a.日期))
+        .slice(0,5);
+
+    if(filtered.length === 0){
+
+        box.innerHTML = "暫無資料";
+
+        return;
+
+    }
+
+    filtered.forEach(item => {
+
+        box.innerHTML += `
             <div class="newsItem">
-                <div class="newsDate">${item.日期}</div>
-                <div class="newsUnit">${item.單位}</div>
-                <div class="newsTitle">
-                    <a href="${item.連結}" target="_blank">
-                        ${item.標題}
-                    </a>
+
+                <div class="newsDate">
+                    ${item.日期}
                 </div>
+
+                <div class="newsTitle">
+
+                    <a href="${item.連結}" target="_blank">
+
+                        ${item.標題}
+
+                    </a>
+
+                </div>
+
             </div>
         `;
+
     });
-})
-.catch(() => {
-    document.getElementById("newsList").innerHTML = "尚未建立公告資料";
-});
+
+}
 
 function initMonthSelect(){
     const startSelect = document.getElementById("startMonth");
@@ -512,7 +561,7 @@ function getChartOptions(showLegend, sourceData){
                 },
                 font: {
                     weight: "bold",
-                    size: 14
+                    size: 11
                 }
             }
         },
