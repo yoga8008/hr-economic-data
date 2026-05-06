@@ -6,18 +6,9 @@ import re
 from urllib.parse import urljoin
 
 SOURCES = [
-    {
-        "unit": "勞動部",
-        "url": "https://www.mol.gov.tw/1607/1632/1633/"
-    },
-    {
-        "unit": "勞動力發展署",
-        "url": "https://www.wda.gov.tw/News.aspx?n=6&sms=10294"
-    },
-    {
-        "unit": "健保署",
-        "url": "https://www.nhi.gov.tw/ch/lp-3255-1.html"
-    }
+    {"unit": "勞動部", "url": "https://www.mol.gov.tw/1607/1632/1633/"},
+    {"unit": "勞動力發展署", "url": "https://www.wda.gov.tw/News.aspx?n=6&sms=10294"},
+    {"unit": "健保署", "url": "https://www.nhi.gov.tw/ch/lp-3255-1.html"}
 ]
 
 IGNORE_KEYWORDS = [
@@ -50,7 +41,10 @@ def normalize_date(text):
 
 def clean_title(title):
     title = re.sub(r"\s+", " ", title).strip()
-    return title
+    title = re.sub(r"^\d+\s*", "", title)
+    title = re.sub(r"20\d{2}[-/]\d{1,2}[-/]\d{1,2}", "", title)
+    title = re.sub(r"(11[3-9]|12[0-9])[-/]\d{1,2}[-/]\d{1,2}", "", title)
+    return title.strip()
 
 def fetch_news(source):
     items = []
@@ -64,31 +58,34 @@ def fetch_news(source):
 
         res.encoding = "utf-8"
         soup = BeautifulSoup(res.text, "html.parser")
-
         page_text = soup.get_text(" ", strip=True)
 
         for a in soup.find_all("a"):
-            title = clean_title(a.get_text(" ", strip=True))
-            title_clean = title.replace(" ", "")
+            raw_title = a.get_text(" ", strip=True)
+            title_clean_for_check = raw_title.replace(" ", "")
             href = a.get("href", "")
 
-            if not title or len(title) < 8:
+            if not raw_title or len(raw_title) < 8:
                 continue
 
-            if any(k in title_clean for k in IGNORE_KEYWORDS):
+            if any(k in title_clean_for_check for k in IGNORE_KEYWORDS):
                 continue
 
-            # 取標題附近文字，避免只抓父層抓不到日期
             parent_text = a.parent.get_text(" ", strip=True) if a.parent else ""
-            nearby_text = parent_text
+            nearby_text = parent_text + " " + raw_title
 
-            if title in page_text:
-                pos = page_text.find(title)
-                nearby_text += " " + page_text[pos:pos + 250]
+            if raw_title in page_text:
+                pos = page_text.find(raw_title)
+                nearby_text += " " + page_text[pos:pos + 300]
 
             date = normalize_date(nearby_text)
 
             if not date:
+                continue
+
+            title = clean_title(raw_title)
+
+            if not title or len(title) < 8:
                 continue
 
             href = urljoin(source["url"], href)
