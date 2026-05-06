@@ -14,6 +14,7 @@ body{ font-family: Arial, sans-serif; padding:20px; }
 canvas{ max-width:900px; height:320px !important; }
 select, button{ padding:6px 10px; margin-right:10px; }
 label{ margin-right:10px; }
+.desc{ margin-bottom:10px; color:#666; font-size:14px; }
 .source{ margin-top:40px; font-size:14px; color:#666; }
 </style>
 </head>
@@ -21,6 +22,33 @@ label{ margin-right:10px; }
 <body>
 
 <h1>台灣重要經社指標</h1>
+
+<div class="card">
+    <h2>GDP 經濟成長率</h2>
+    <div class="desc">說明：國內生產毛額（GDP）成長率，反映整體經濟成長情況。</div>
+
+    <div class="filter">
+        年度：<select id="gdpYear"></select>
+
+        季度：
+        <select id="gdpQuarter">
+            <option value="">全部季度</option>
+            <option value="Q1">第一季</option>
+            <option value="Q2">第二季</option>
+            <option value="Q3">第三季</option>
+            <option value="Q4">第四季</option>
+        </select>
+
+        <label>
+            <input type="checkbox" id="gdpCompare">
+            同期比較
+        </label>
+
+        <button onclick="drawGDP()">查詢</button>
+    </div>
+
+    <canvas id="gdpChart"></canvas>
+</div>
 
 <div class="filter">
     起：<select id="startMonth"></select>
@@ -35,27 +63,15 @@ label{ margin-right:10px; }
 </div>
 
 <div class="card">
-
     <h2>消費者物價指數年增率(CPI)</h2>
-
-    <div style="margin-bottom:10px; color:#666; font-size:14px;">
-        說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞
-    </div>
-
+    <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
     <canvas id="cpiChart"></canvas>
-
 </div>
 
 <div class="card">
-
     <h2>失業率</h2>
-
-    <div style="margin-bottom:10px; color:#666; font-size:14px;">
-        說明：「想工作卻找不到工作的人」占勞動力的比例。
-    </div>
-
+    <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
     <canvas id="unemploymentChart"></canvas>
-
 </div>
 
 <div class="source">
@@ -67,6 +83,9 @@ label{ margin-right:10px; }
 
 <script>
 let allData = [];
+let gdpData = [];
+
+let gdpChart;
 let cpiChart;
 let unemploymentChart;
 
@@ -76,6 +95,14 @@ fetch("./data/taiwan_cpi_unemployment.json")
     allData = data;
     initMonthSelect();
     filterData();
+});
+
+fetch("./data/taiwan_gdp.json")
+.then(res => res.json())
+.then(data => {
+    gdpData = data;
+    initGDPSelect();
+    drawGDP();
 });
 
 function initMonthSelect(){
@@ -91,6 +118,17 @@ function initMonthSelect(){
     const latest12 = allData.slice(-12);
     startSelect.value = latest12[0]["年月"];
     endSelect.value = allData[allData.length - 1]["年月"];
+}
+
+function initGDPSelect(){
+    const yearSelect = document.getElementById("gdpYear");
+    const years = [...new Set(gdpData.map(d => d["年度"]))];
+
+    years.forEach(year => {
+        yearSelect.innerHTML += `<option value="${year}">${year}</option>`;
+    });
+
+    yearSelect.value = years[years.length - 1];
 }
 
 function shiftYear(monthText, diff){
@@ -137,10 +175,68 @@ function filterData(){
         });
     }
 
-    drawCharts(currentData, previousData, compareMode);
+    drawMonthlyCharts(currentData, previousData, compareMode);
 }
 
-function drawCharts(currentData, previousData, compareMode){
+function drawGDP(){
+    const year = document.getElementById("gdpYear").value;
+    const quarter = document.getElementById("gdpQuarter").value;
+    const compare = document.getElementById("gdpCompare").checked;
+
+    let current = gdpData.filter(d => d["年度"] === year);
+
+    if(quarter){
+        current = current.filter(d => d["季度"] === quarter);
+    }
+
+    let previous = [];
+
+    if(compare){
+        const previousYear = String(Number(year) - 1);
+        previous = gdpData.filter(d => d["年度"] === previousYear);
+
+        if(quarter){
+            previous = previous.filter(d => d["季度"] === quarter);
+        }
+    }
+
+    const labels = current.map(d => quarter ? `${d["年度"]} ${d["季度"]}` : d["季度"]);
+    const currentGDP = current.map(d => d["GDP成長率"]);
+    const previousGDP = previous.map(d => d["GDP成長率"]);
+
+    if(gdpChart) gdpChart.destroy();
+
+    const datasets = [{
+        label: year + " GDP",
+        data: currentGDP,
+        tension: 0.2,
+        pointRadius: 4,
+        clip: false
+    }];
+
+    if(compare){
+        datasets.push({
+            label: String(Number(year) - 1) + " GDP",
+            data: previousGDP,
+            tension: 0.2,
+            pointRadius: 4,
+            borderDash: [6,4],
+            clip: false
+        });
+    }
+
+    gdpChart = new Chart(document.getElementById("gdpChart"), {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: datasets
+        },
+        options: getChartOptions(compare, current),
+        plugins: [ChartDataLabels]
+    });
+}
+
+function drawMonthlyCharts(currentData, previousData, compareMode){
     const labels = currentData.map(d => d["年月"]);
 
     const currentCpi = currentData.map(d => d["CPI年增率"]);
@@ -152,97 +248,21 @@ function drawCharts(currentData, previousData, compareMode){
     if(cpiChart) cpiChart.destroy();
     if(unemploymentChart) unemploymentChart.destroy();
 
-    const commonOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
+    const cpiDatasets = [{
+        label: "本期 CPI",
+        data: currentCpi,
+        tension: 0.2,
+        pointRadius: 4,
+        clip: false
+    }];
 
-        layout: {
-            padding: {
-                top: 45,
-                right: 20,
-                left: 10,
-                bottom: 10
-            }
-        },
-
-        plugins: {
-            legend: {
-                display: compareMode,
-                position: "bottom",
-                align: "center",
-                fullSize: true,
-                labels: {
-                    padding: 24,
-                    font: {
-                        size: 14
-                    }
-                }
-            },
-
-            tooltip: {
-                callbacks: {
-                    label: function(context){
-                        return context.dataset.label + "：" + context.parsed.y.toFixed(1) + "%";
-                    },
-                    afterBody: function(context){
-                        const index = context[0].dataIndex;
-                        const summary = currentData[index]["AI摘要"];
-
-                        if(summary){
-                            return "摘要：" + summary;
-                        }
-
-                        return "";
-                    }
-                }
-            },
-
-            datalabels: {
-                align: "top",
-                anchor: "end",
-                offset: 18,
-                clamp: false,
-                clip: false,
-                formatter: function(value){
-                    return value.toFixed(1) + "%";
-                },
-                font: {
-                    weight: "bold",
-                    size: 14
-                }
-            }
-        },
-
-        scales: {
-            y: {
-                ticks: {
-                    callback: function(value){
-                        return value.toFixed(1) + "%";
-                    }
-                }
-            }
-        }
-    };
-
-    const cpiDatasets = [
-        {
-            label: "本期 CPI",
-            data: currentCpi,
-            tension: 0.2,
-            pointRadius: 4,
-            clip: false
-        }
-    ];
-
-    const unemploymentDatasets = [
-        {
-            label: "本期失業率",
-            data: currentUnemployment,
-            tension: 0.2,
-            pointRadius: 4,
-            clip: false
-        }
-    ];
+    const unemploymentDatasets = [{
+        label: "本期失業率",
+        data: currentUnemployment,
+        tension: 0.2,
+        pointRadius: 4,
+        clip: false
+    }];
 
     if(compareMode){
         cpiDatasets.push({
@@ -270,7 +290,7 @@ function drawCharts(currentData, previousData, compareMode){
             labels: labels,
             datasets: cpiDatasets
         },
-        options: commonOptions,
+        options: getChartOptions(compareMode, currentData),
         plugins: [ChartDataLabels]
     });
 
@@ -280,9 +300,80 @@ function drawCharts(currentData, previousData, compareMode){
             labels: labels,
             datasets: unemploymentDatasets
         },
-        options: commonOptions,
+        options: getChartOptions(compareMode, currentData),
         plugins: [ChartDataLabels]
     });
+}
+
+function getChartOptions(showLegend, sourceData){
+    return {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        layout: {
+            padding: {
+                top: 35,
+                right: 20,
+                left: 10,
+                bottom: 10
+            }
+        },
+
+        plugins: {
+            legend: {
+                display: showLegend,
+                position: "bottom",
+                align: "center",
+                labels: {
+                    padding: 18,
+                    font: { size: 14 }
+                }
+            },
+
+            tooltip: {
+                callbacks: {
+                    label: function(context){
+                        return context.dataset.label + "：" + context.parsed.y.toFixed(1) + "%";
+                    },
+                    afterBody: function(context){
+                        const index = context[0].dataIndex;
+                        const summary = sourceData[index]["AI摘要"];
+
+                        if(summary){
+                            return "摘要：" + summary;
+                        }
+
+                        return "";
+                    }
+                }
+            },
+
+            datalabels: {
+                align: "top",
+                anchor: "end",
+                offset: 12,
+                clamp: false,
+                clip: false,
+                formatter: function(value){
+                    return value.toFixed(1) + "%";
+                },
+                font: {
+                    weight: "bold",
+                    size: 14
+                }
+            }
+        },
+
+        scales: {
+            y: {
+                ticks: {
+                    callback: function(value){
+                        return value.toFixed(1) + "%";
+                    }
+                }
+            }
+        }
+    };
 }
 </script>
 
