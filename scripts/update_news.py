@@ -3,27 +3,54 @@ from bs4 import BeautifulSoup
 import json
 import os
 import re
+from urllib.parse import urljoin
 
 SOURCES = [
-    {"unit": "勞動部", "url": "https://www.mol.gov.tw/1607/1632/1633/"},
-    {"unit": "勞動力發展署", "url": "https://www.wda.gov.tw/News.aspx?n=6&sms=10294"},
-    {"unit": "健保署", "url": "https://www.nhi.gov.tw/ch/lp-3255-1.html"}
+    {
+        "unit": "勞動部",
+        "url": "https://www.mol.gov.tw/1607/1632/1633/"
+    },
+    {
+        "unit": "勞動力發展署",
+        "url": "https://www.wda.gov.tw/News.aspx?n=6&sms=10294"
+    },
+    {
+        "unit": "健保署",
+        "url": "https://www.nhi.gov.tw/ch/lp-3255-1.html"
+    }
 ]
 
 IGNORE_KEYWORDS = [
     "按Enter到主內容區",
+    "按 Enter 到主內容區",
     "Enter到主內容區",
+    "Enter 到主內容區",
     "主內容區",
     "網站導覽",
-    "回首頁"
+    "回首頁",
+    ":::"
 ]
 
-def roc_to_ad(date_text):
-    parts = date_text.replace("-", "/").split("/")
-    if len(parts) == 3 and len(parts[0]) == 3:
-        year = int(parts[0]) + 1911
-        return f"{year}/{parts[1].zfill(2)}/{parts[2].zfill(2)}"
+def normalize_date(text):
+    text = text.replace("-", "/")
+
+    # 西元年：2026/05/06
+    match = re.search(r"20\d{2}/\d{1,2}/\d{1,2}", text)
+    if match:
+        y, m, d = match.group().split("/")
+        return f"{y}/{m.zfill(2)}/{d.zfill(2)}"
+
+    # 民國年：115/05/06
+    match = re.search(r"(?<!\d)(11[3-9]|12[0-9])/\d{1,2}/\d{1,2}", text)
+    if match:
+        y, m, d = match.group().split("/")
+        return f"{int(y) + 1911}/{m.zfill(2)}/{d.zfill(2)}"
+
     return ""
+
+def clean_title(title):
+    title = re.sub(r"\s+", " ", title).strip()
+    return title
 
 def fetch_news(source):
     items = []
@@ -34,11 +61,14 @@ def fetch_news(source):
             timeout=15,
             headers={"User-Agent": "Mozilla/5.0"}
         )
+
         res.encoding = "utf-8"
         soup = BeautifulSoup(res.text, "html.parser")
 
+        page_text = soup.get_text(" ", strip=True)
+
         for a in soup.find_all("a"):
-            title = a.get_text(" ", strip=True)
+            title = clean_title(a.get_text(" ", strip=True))
             title_clean = title.replace(" ", "")
             href = a.get("href", "")
 
@@ -48,27 +78,20 @@ def fetch_news(source):
             if any(k in title_clean for k in IGNORE_KEYWORDS):
                 continue
 
+            # 取標題附近文字，避免只抓父層抓不到日期
             parent_text = a.parent.get_text(" ", strip=True) if a.parent else ""
+            nearby_text = parent_text
 
-            match = re.search(r"\d{3}[-/]\d{2}[-/]\d{2}", parent_text)
-            if not match:
-                continue
+            if title in page_text:
+                pos = page_text.find(title)
+                nearby_text += " " + page_text[pos:pos + 250]
 
-            date = roc_to_ad(match.group())
+            date = normalize_date(nearby_text)
 
             if not date:
                 continue
 
-            year = int(date.split("/")[0])
-            if year < 2024:
-                continue
-
-            if href.startswith("/"):
-                base = source["url"].split("/")[0] + "//" + source["url"].split("/")[2]
-                href = base + href
-            elif not href.startswith("http"):
-                base = "/".join(source["url"].split("/")[:3])
-                href = base + "/" + href
+            href = urljoin(source["url"], href)
 
             items.append({
                 "日期": date,
@@ -97,11 +120,13 @@ for source in SOURCES:
 
     all_news.extend(news)
 
+# 去重
 seen = set()
 unique_news = []
 
 for item in all_news:
     key = item["單位"] + item["標題"]
+
     if key not in seen:
         seen.add(key)
         unique_news.append(item)
