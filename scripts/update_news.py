@@ -6,9 +6,18 @@ import re
 from urllib.parse import urljoin
 
 SOURCES = [
-    {"unit": "勞動部", "url": "https://www.mol.gov.tw/1607/1632/1633/"},
-    {"unit": "勞動力發展署", "url": "https://www.wda.gov.tw/News.aspx?n=6&sms=10294"},
-    {"unit": "健保署", "url": "https://www.nhi.gov.tw/ch/lp-3255-1.html"}
+    {
+        "unit": "勞動部",
+        "url": "https://www.mol.gov.tw/1607/1632/1633/"
+    },
+    {
+        "unit": "勞動力發展署",
+        "url": "https://www.wda.gov.tw/News.aspx?n=6&sms=10294"
+    },
+    {
+        "unit": "勞保局",
+        "url": "https://www.bli.gov.tw/0104161.html"
+    }
 ]
 
 IGNORE_KEYWORDS = [
@@ -25,15 +34,15 @@ IGNORE_KEYWORDS = [
 def normalize_date(text):
     text = text.replace("-", "/")
 
-    m = re.search(r"20\d{2}/\d{1,2}/\d{1,2}", text)
-    if m:
-        y, mo, d = m.group().split("/")
-        return f"{y}/{mo.zfill(2)}/{d.zfill(2)}"
+    match = re.search(r"20\d{2}/\d{1,2}/\d{1,2}", text)
+    if match:
+        y, m, d = match.group().split("/")
+        return f"{y}/{m.zfill(2)}/{d.zfill(2)}"
 
-    m = re.search(r"(11[3-9]|12[0-9])/\d{1,2}/\d{1,2}", text)
-    if m:
-        y, mo, d = m.group().split("/")
-        return f"{int(y)+1911}/{mo.zfill(2)}/{d.zfill(2)}"
+    match = re.search(r"(11[3-9]|12[0-9])/\d{1,2}/\d{1,2}", text)
+    if match:
+        y, m, d = match.group().split("/")
+        return f"{int(y) + 1911}/{m.zfill(2)}/{d.zfill(2)}"
 
     return ""
 
@@ -70,7 +79,6 @@ def fetch_news(source):
                 continue
 
             parent_text = a.parent.get_text(" ", strip=True) if a.parent else ""
-
             search_text = raw_title + " " + parent_text
 
             if raw_title in page_text:
@@ -99,58 +107,16 @@ def fetch_news(source):
 
     return items
 
-def fetch_nhi_news():
-    url = "https://www.nhi.gov.tw/ch/lp-3255-1.html"
-    items = []
-
-    try:
-        res = requests.get(
-            url,
-            timeout=15,
-            headers={"User-Agent": "Mozilla/5.0"}
-        )
-
-        res.encoding = "utf-8"
-        soup = BeautifulSoup(res.text, "html.parser")
-
-        for a in soup.find_all("a"):
-            raw = a.get_text(" ", strip=True)
-
-            if not raw:
-                continue
-
-            # 健保署格式：1 標題 115-05-06
-            match = re.search(r"^\d+\s+(.+?)\s+(11[3-9]|12[0-9])[-/](\d{1,2})[-/](\d{1,2})$", raw)
-
-            if not match:
-                continue
-
-            title = match.group(1).strip()
-            y = int(match.group(2)) + 1911
-            m = match.group(3).zfill(2)
-            d = match.group(4).zfill(2)
-
-            items.append({
-                "日期": f"{y}/{m}/{d}",
-                "單位": "健保署",
-                "標題": title,
-                "連結": urljoin(url, a.get("href", ""))
-            })
-
-    except Exception as e:
-        print(f"抓取失敗：健保署 {e}")
-
-    return items
-
 all_news = []
 
 for source in SOURCES:
-    if source["unit"] == "健保署":
-        news = fetch_nhi_news()
-    else:
-        news = fetch_news(source)
+    news = fetch_news(source)
 
-    news = sorted(news, key=lambda x: x["日期"], reverse=True)[:5]
+    news = sorted(
+        news,
+        key=lambda x: x["日期"],
+        reverse=True
+    )[:5]
 
     print(source["unit"], "抓到", len(news), "筆")
 
@@ -161,6 +127,7 @@ unique_news = []
 
 for item in all_news:
     key = item["單位"] + item["標題"]
+
     if key not in seen:
         seen.add(key)
         unique_news.append(item)
