@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>台灣經濟數據</title>
+</head>
+<body>
+
+<h1>台灣 CPI / 失業率</h1>
+
+<table border="1" id="table">
+  <thead>
+    <tr>
+      <th>年月</th>
+      <th>CPI年增率</th>
+      <th>失業率</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+fetch("./data/taiwan_cpi_unemployment.json")
+  .then(res => res.json())
+  .then(data => {
+
+    const tbody = document.querySelector("tbody");
+
+    data.forEach(row => {
+
+      tbody.innerHTML += `
+        <tr>
+          <td>${row["年月"]}</td>
+          <td>${row["CPI年增率"]}</td>
+          <td>${row["失業率"]}</td>
+        </tr>
+      `;
+    });
+
+  });
+</script>
+
+</body>
+</html>
