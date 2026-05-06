@@ -168,21 +168,39 @@ function drawCharts(data){
 
         plugins: {
 
-            legend: {
-                display: false
-            },
+    legend: {
+        display: false
+    },
 
-            datalabels: {
+    datalabels: {
 
-                align: "top",
+        align: "top",
 
-                anchor: "end",
+        anchor: "end",
 
-                formatter: function(value){
+        offset: 8,
 
-                    return value.toFixed(1) + "%";
+        clamp: true,
 
-                },
+        formatter: function(value){
+
+            return value.toFixed(1) + "%";
+
+        }
+
+    }
+
+},
+
+layout: {
+
+    padding: {
+
+        top: 25
+
+    }
+
+},
 
                 font: {
 
