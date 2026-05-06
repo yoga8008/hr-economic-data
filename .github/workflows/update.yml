@@ -1,0 +1,29 @@
+name: Update Taiwan Data
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install packages
+        run: pip install pandas
+
+      - name: Run script
+        run: python scripts/update_data.py
+
+      - name: Upload file
+        uses: actions/upload-artifact@v4
+        with:
+          name: taiwan-data
+          path: taiwan_cpi_unemployment.csv
