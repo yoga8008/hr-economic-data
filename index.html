@@ -12,22 +12,18 @@ body{
     font-family: Arial, sans-serif;
     padding:20px;
 }
-
 .filter{
     margin-bottom:20px;
 }
-
 .card{
     margin-bottom:40px;
     width:900px;
 }
-
 canvas{
     max-width:900px;
     height:250px !important;
 }
-
-select{
+select, button{
     padding:6px 10px;
     margin-right:10px;
 }
@@ -39,7 +35,6 @@ select{
 <h1>台灣經濟數據</h1>
 
 <div class="filter">
-
     起：
     <select id="startMonth"></select>
 
@@ -47,7 +42,6 @@ select{
     <select id="endMonth"></select>
 
     <button onclick="filterData()">查詢</button>
-
 </div>
 
 <div class="card">
@@ -61,7 +55,6 @@ select{
 </div>
 
 <script>
-
 let allData = [];
 let cpiChart;
 let unemploymentChart;
@@ -69,225 +62,129 @@ let unemploymentChart;
 fetch("./data/taiwan_cpi_unemployment.json")
 .then(res => res.json())
 .then(data => {
-
     allData = data;
-
     initMonthSelect();
-
     filterData();
-
 });
 
 function initMonthSelect(){
-
     const startSelect = document.getElementById("startMonth");
     const endSelect = document.getElementById("endMonth");
 
     allData.forEach(d => {
-
         const value = d["年月"];
-
-        startSelect.innerHTML += `
-            <option value="${value}">
-                ${value}
-            </option>
-        `;
-
-        endSelect.innerHTML += `
-            <option value="${value}">
-                ${value}
-            </option>
-        `;
-
+        startSelect.innerHTML += `<option value="${value}">${value}</option>`;
+        endSelect.innerHTML += `<option value="${value}">${value}</option>`;
     });
 
     startSelect.value = "2024/01";
-
     endSelect.value = allData[allData.length - 1]["年月"];
-
 }
 
 function filterData(){
-
     const start = document.getElementById("startMonth").value;
-
     const end = document.getElementById("endMonth").value;
 
     const startDate = new Date(start + "/01");
-
     const endDate = new Date(end + "/01");
 
     const monthDiff =
-        (endDate.getFullYear() - startDate.getFullYear()) * 12
-        +
+        (endDate.getFullYear() - startDate.getFullYear()) * 12 +
         (endDate.getMonth() - startDate.getMonth());
 
-    if(monthDiff > 11){
-
-        alert("最多只能選擇12個月區間");
-
+    if(start > end){
+        alert("起始月份不能大於迄止月份");
         return;
-
     }
 
-    if(start > end){
-
-        alert("起始月份不能大於迄止月份");
-
+    if(monthDiff > 11){
+        alert("最多只能選擇12個月區間");
         return;
-
     }
 
     const filtered = allData.filter(d => {
-
         return d["年月"] >= start && d["年月"] <= end;
-
     });
 
     drawCharts(filtered);
-
 }
 
 function drawCharts(data){
-
     const labels = data.map(d => d["年月"]);
-
     const cpiData = data.map(d => d["CPI年增率"]);
-
     const unemploymentData = data.map(d => d["失業率"]);
 
     if(cpiChart) cpiChart.destroy();
-
     if(unemploymentChart) unemploymentChart.destroy();
 
     const commonOptions = {
-
         responsive: true,
-
         maintainAspectRatio: false,
 
-        plugins: {
-
-    legend: {
-        display: false
-    },
-
-    datalabels: {
-
-        align: "top",
-
-        anchor: "end",
-
-        offset: 8,
-
-        clamp: true,
-
-        formatter: function(value){
-
-            return value.toFixed(1) + "%";
-
-        }
-
-    }
-
-},
-
-layout: {
-
-    padding: {
-
-        top: 25
-
-    }
-
-},
-
-                font: {
-
-                    weight: "bold",
-
-                    size: 11
-
-                }
-
+        layout: {
+            padding: {
+                top: 30
             }
+        },
 
+        plugins: {
+            legend: {
+                display: false
+            },
+            datalabels: {
+                align: "top",
+                anchor: "end",
+                offset: 8,
+                clamp: true,
+                formatter: function(value){
+                    return value.toFixed(1) + "%";
+                },
+                font: {
+                    weight: "bold",
+                    size: 11
+                }
+            }
         },
 
         scales: {
-
             y: {
-
                 ticks: {
-
                     callback: function(value){
-
                         return value.toFixed(1) + "%";
-
                     }
-
                 }
-
             }
-
         }
-
     };
 
     cpiChart = new Chart(document.getElementById("cpiChart"), {
-
         type: "line",
-
         data: {
-
             labels: labels,
-
             datasets: [{
-
                 data: cpiData,
-
                 tension: 0.2,
-
                 pointRadius: 4
-
             }]
-
         },
-
         options: commonOptions,
-
         plugins: [ChartDataLabels]
-
     });
 
     unemploymentChart = new Chart(document.getElementById("unemploymentChart"), {
-
         type: "line",
-
         data: {
-
             labels: labels,
-
             datasets: [{
-
                 data: unemploymentData,
-
                 tension: 0.2,
-
                 pointRadius: 4
-
             }]
-
         },
-
         options: commonOptions,
-
         plugins: [ChartDataLabels]
-
     });
-
 }
-
 </script>
 
 </body>
