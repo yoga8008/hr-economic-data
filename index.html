@@ -135,13 +135,20 @@ function drawCharts(currentData, previousData, compareMode){
         maintainAspectRatio: false,
 
         layout: {
-            padding: { top: 30 }
+            padding: { top: 50 }
         },
 
         plugins: {
             legend: {
-                display: compareMode
-            },
+    display: compareMode,
+    position: "top",
+    labels: {
+        padding: 20,
+        font: {
+            size: 14
+        }
+    }
+},
 
             tooltip: {
                 callbacks: {
