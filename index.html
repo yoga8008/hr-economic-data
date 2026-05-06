@@ -19,21 +19,11 @@ h1{
 }
 
 .layout{
-    display:flex;
-    gap:30px;
-    align-items:flex-start;
+    display:block;
 }
 
 .leftPanel{
-    width:65%;
-    background:#f3f4f6;
-}
-
-.rightPanel{
-    width:35%;
-    position:sticky;
-    top:20px;
-    background:#f3f4f6;
+    width:100%;
 }
 
 .filter{
@@ -55,11 +45,13 @@ h1{
     color:#666;
     font-size:14px;
 }
+
 .sectionTitle{
     padding-bottom:10px;
-    margin-bottom:15px;
-    border-bottom:1px solid #dcdcdc;
+    margin-bottom:20px;
+    border-bottom:1px solid #ddd;
 }
+
 canvas{
     width:100% !important;
     height:360px !important;
@@ -75,21 +67,85 @@ label{
     margin-right:10px;
 }
 
-.newsCard{
-    border:1px solid #ddd;
-    border-radius:10px;
-    padding:20px;
-    background:#ffffff;
+.source{
+    margin-top:40px;
+    font-size:14px;
+    color:#666;
 }
 
-.newsCard h2{
-    margin-top:0;
+/* 公告浮動按鈕 */
+.newsFloatingBtn{
+    position:fixed;
+    right:0;
+    top:220px;
+    background:#1e3a8a;
+    color:#fff;
+    padding:18px 14px;
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    font-weight:bold;
+    border-radius:10px 0 0 10px;
+    cursor:pointer;
+    z-index:1000;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* 公告抽屜 */
+.newsDrawer{
+    position:fixed;
+    top:0;
+    right:-430px;
+    width:410px;
+    height:100vh;
+    background:#fff;
+    box-shadow:-4px 0 20px rgba(0,0,0,0.15);
+    transition:all .3s ease;
+    z-index:1100;
+    display:flex;
+    flex-direction:column;
+}
+
+.newsDrawer.open{
+    right:0;
+}
+
+.newsDrawerHeader{
+    padding:20px;
+    border-bottom:1px solid #ddd;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.newsDrawerHeader button{
+    border:none;
+    background:none;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.newsDrawerContent{
+    padding:20px;
+    overflow-y:auto;
+    flex:1;
+}
+
+.newsGroup{
+    margin-bottom:30px;
+}
+
+.newsGroup h3{
+    margin-bottom:12px;
+    padding-bottom:6px;
+    border-bottom:2px solid #ddd;
 }
 
 .newsItem{
     margin-bottom:15px;
     padding-bottom:10px;
-    border-bottom:1px solid #e5e5e5;
+    border-bottom:1px solid #eee;
 }
 
 .newsDate{
@@ -98,39 +154,16 @@ label{
     margin-bottom:4px;
 }
 
-.newsUnit{
-    font-size:12px;
-    color:#666;
-    margin-bottom:4px;
-}
-
-.newsTitle{
-    font-weight:bold;
-    line-height:1.5;
-    font-size:14px;
-}
-
 .newsTitle a{
     color:#1a5fb4;
     text-decoration:none;
+    font-size:14px;
+    line-height:1.5;
+    font-weight:bold;
 }
 
 .newsTitle a:hover{
     text-decoration:underline;
-}
-.newsGroup{
-    margin-bottom:25px;
-}
-
-.newsGroup h3{
-    margin:15px 0 10px;
-    padding-bottom:6px;
-    border-bottom:2px solid #ddd;
-}
-.source{
-    margin-top:40px;
-    font-size:14px;
-    color:#666;
 }
 </style>
 </head>
@@ -140,7 +173,6 @@ label{
 <h1>台灣重要經社指標</h1>
 
 <div class="layout">
-
 <div class="leftPanel">
 
     <div class="card">
@@ -170,29 +202,29 @@ label{
         <canvas id="gdpChart"></canvas>
     </div>
 
-<div class="card">
+    <div class="card">
 
-    <div class="filter">
-        起：<select id="startMonth"></select>
-        迄：<select id="endMonth"></select>
+        <div class="filter">
+            起：<select id="startMonth"></select>
+            迄：<select id="endMonth"></select>
 
-        <label>
-            <input type="checkbox" id="compareMode">
-            同期比較
-        </label>
+            <label>
+                <input type="checkbox" id="compareMode">
+                同期比較
+            </label>
 
-        <button onclick="filterData()">查詢</button>
+            <button onclick="filterData()">查詢</button>
+        </div>
+
+        <h2 class="sectionTitle">消費者物價指數年增率(CPI)</h2>
+        <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
+        <canvas id="cpiChart"></canvas>
+
+        <h2 class="sectionTitle" style="margin-top:40px;">失業率</h2>
+        <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
+        <canvas id="unemploymentChart"></canvas>
+
     </div>
-
-    <h2 class="sectionTitle">消費者物價指數年增率(CPI)</h2>
-    <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
-    <canvas id="cpiChart"></canvas>
-
-    <h2 class="sectionTitle" style="margin-top:40px;">失業率</h2>
-    <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
-    <canvas id="unemploymentChart"></canvas>
-
-</div>
 
     <div class="source">
         資料來源：
@@ -202,35 +234,44 @@ label{
     </div>
 
 </div>
+</div>
 
-<div class="rightPanel">
-    <div class="newsCard">
-        <h2>重要公告彙整</h2>
+<!-- 公告浮動按鈕 -->
+<div class="newsFloatingBtn" onclick="toggleNewsPanel()">
+    重要公告
+</div>
+
+<!-- 公告抽屜 -->
+<div class="newsDrawer" id="newsDrawer">
+    <div class="newsDrawerHeader">
+        <span>重要公告彙整</span>
+        <button onclick="toggleNewsPanel()">✕</button>
+    </div>
+
+    <div class="newsDrawerContent">
+
         <div class="newsGroup">
-    <h3>勞動部</h3>
-    <div id="newsMol">載入中...</div>
-</div>
+            <h3>勞動部</h3>
+            <div id="newsMol">載入中...</div>
+        </div>
 
-<div class="newsGroup">
-    <h3>勞動力發展署</h3>
-    <div id="newsWda">載入中...</div>
-</div>
+        <div class="newsGroup">
+            <h3>勞動力發展署</h3>
+            <div id="newsWda">載入中...</div>
+        </div>
 
-<div class="newsGroup">
-    <h3>勞保局</h3>
-    <div id="newsNhi">載入中...</div>
-</div>
-</div>
+        <div class="newsGroup">
+            <h3>勞保局</h3>
+            <div id="newsNhi">載入中...</div>
+        </div>
 
+    </div>
 </div>
 
 <script>
 let allData = [];
 let gdpData = [];
-
-let gdpChart;
-let cpiChart;
-let unemploymentChart;
+let gdpChart, cpiChart, unemploymentChart;
 
 fetch("./data/taiwan_cpi_unemployment.json")
 .then(res => res.json())
@@ -247,336 +288,179 @@ fetch("./data/taiwan_gdp.json")
     initGDPSelect();
     drawGDP();
 });
+
 fetch("./data/taiwan_news.json")
 .then(res => res.json())
 .then(news => {
-
-    renderNewsGroup(news, "勞動部", "newsMol");
-
-    renderNewsGroup(news, "勞動力發展署", "newsWda");
-
-    renderNewsGroup(news, "勞保局", "newsNhi");
-
+    renderNewsGroup(news,"勞動部","newsMol");
+    renderNewsGroup(news,"勞動力發展署","newsWda");
+    renderNewsGroup(news,"勞保局","newsNhi");
 });
 
+function toggleNewsPanel(){
+    document.getElementById("newsDrawer").classList.toggle("open");
+}
+
 function renderNewsGroup(news, unitName, elementId){
-
     const box = document.getElementById(elementId);
-
     box.innerHTML = "";
 
     const filtered = news
-        .filter(item => item.單位 === unitName)
-        .sort((a,b) => b.日期.localeCompare(a.日期))
+        .filter(x => x.單位 === unitName)
+        .sort((a,b)=>b.日期.localeCompare(a.日期))
         .slice(0,5);
 
-    if(filtered.length === 0){
-
-        box.innerHTML = "暫無資料";
-
+    if(filtered.length===0){
+        box.innerHTML="暫無資料";
         return;
-
     }
 
-    filtered.forEach(item => {
-
+    filtered.forEach(item=>{
         box.innerHTML += `
             <div class="newsItem">
-
-                <div class="newsDate">
-                    ${item.日期}
-                </div>
-
+                <div class="newsDate">${item.日期}</div>
                 <div class="newsTitle">
-
-                    <a href="${item.連結}" target="_blank">
-
-                        ${item.標題}
-
-                    </a>
-
+                    <a href="${item.連結}" target="_blank">${item.標題}</a>
                 </div>
-
             </div>
         `;
-
     });
-
 }
 
 function initMonthSelect(){
-    const startSelect = document.getElementById("startMonth");
-    const endSelect = document.getElementById("endMonth");
+    const start = document.getElementById("startMonth");
+    const end = document.getElementById("endMonth");
 
-    allData.forEach(d => {
-        const value = d["年月"];
-        startSelect.innerHTML += `<option value="${value}">${value}</option>`;
-        endSelect.innerHTML += `<option value="${value}">${value}</option>`;
+    allData.forEach(d=>{
+        start.innerHTML += `<option value="${d.年月}">${d.年月}</option>`;
+        end.innerHTML += `<option value="${d.年月}">${d.年月}</option>`;
     });
 
     const latest12 = allData.slice(-12);
-    startSelect.value = latest12[0]["年月"];
-    endSelect.value = allData[allData.length - 1]["年月"];
+    start.value = latest12[0].年月;
+    end.value = allData[allData.length-1].年月;
 }
 
 function initGDPSelect(){
     const yearSelect = document.getElementById("gdpYear");
-    const years = [...new Set(gdpData.map(d => d["年度"]))];
+    const years = [...new Set(gdpData.map(d=>d.年度))];
 
-    years.forEach(year => {
-        yearSelect.innerHTML += `<option value="${year}">${year}</option>`;
+    years.forEach(y=>{
+        yearSelect.innerHTML += `<option value="${y}">${y}</option>`;
     });
 
-    yearSelect.value = years[years.length - 1];
+    yearSelect.value = years[years.length-1];
 }
 
-function shiftYear(monthText, diff){
-    const parts = monthText.split("/");
-    const year = Number(parts[0]) + diff;
-    const month = parts[1];
-    return year + "/" + month;
+function shiftYear(month,diff){
+    const [y,m]=month.split("/");
+    return `${Number(y)+diff}/${m}`;
 }
 
 function filterData(){
-    const start = document.getElementById("startMonth").value;
-    const end = document.getElementById("endMonth").value;
-    const compareMode = document.getElementById("compareMode").checked;
+    const start=document.getElementById("startMonth").value;
+    const end=document.getElementById("endMonth").value;
+    const compare=document.getElementById("compareMode").checked;
 
-    const startDate = new Date(start + "/01");
-    const endDate = new Date(end + "/01");
+    const current=allData.filter(d=>d.年月>=start && d.年月<=end);
 
-    const monthDiff =
-        (endDate.getFullYear() - startDate.getFullYear()) * 12 +
-        (endDate.getMonth() - startDate.getMonth());
+    let previous=[];
 
-    if(start > end){
-        alert("起始月份不能大於迄止月份");
-        return;
+    if(compare){
+        previous=allData.filter(d=>
+            d.年月>=shiftYear(start,-1) &&
+            d.年月<=shiftYear(end,-1)
+        );
     }
 
-    if(monthDiff > 11){
-        alert("最多只能選擇12個月區間");
-        return;
-    }
-
-    const currentData = allData.filter(d => {
-        return d["年月"] >= start && d["年月"] <= end;
-    });
-
-    let previousData = [];
-
-    if(compareMode){
-        const previousStart = shiftYear(start, -1);
-        const previousEnd = shiftYear(end, -1);
-
-        previousData = allData.filter(d => {
-            return d["年月"] >= previousStart && d["年月"] <= previousEnd;
-        });
-    }
-
-    drawMonthlyCharts(currentData, previousData, compareMode);
+    drawMonthlyCharts(current,previous,compare);
 }
 
 function drawGDP(){
-    const year = document.getElementById("gdpYear").value;
-    const quarter = document.getElementById("gdpQuarter").value;
-    const compare = document.getElementById("gdpCompare").checked;
+    const year=document.getElementById("gdpYear").value;
+    const quarter=document.getElementById("gdpQuarter").value;
+    const compare=document.getElementById("gdpCompare").checked;
 
-    let current = gdpData.filter(d => d["年度"] === year);
+    let current=gdpData.filter(d=>d.年度===year);
+    if(quarter) current=current.filter(d=>d.季度===quarter);
 
-    if(quarter){
-        current = current.filter(d => d["季度"] === quarter);
-    }
-
-    let previous = [];
-
+    let previous=[];
     if(compare){
-        const previousYear = String(Number(year) - 1);
-        previous = gdpData.filter(d => d["年度"] === previousYear);
-
-        if(quarter){
-            previous = previous.filter(d => d["季度"] === quarter);
-        }
+        previous=gdpData.filter(d=>d.年度===String(Number(year)-1));
+        if(quarter) previous=previous.filter(d=>d.季度===quarter);
     }
-
-    const labels = current.map(d => quarter ? `${d["年度"]} ${d["季度"]}` : d["季度"]);
-    const currentGDP = current.map(d => d["GDP成長率"]);
-    const previousGDP = previous.map(d => d["GDP成長率"]);
 
     if(gdpChart) gdpChart.destroy();
 
-    const datasets = [{
-        label: year + " GDP",
-        data: currentGDP,
-        tension: 0.2,
-        pointRadius: 4,
-        clip: false
-    }];
-
-    if(compare){
-        datasets.push({
-            label: String(Number(year) - 1) + " GDP",
-            data: previousGDP,
-            tension: 0.2,
-            pointRadius: 4,
-            borderDash: [6,4],
-            clip: false
-        });
-    }
-
-    gdpChart = new Chart(document.getElementById("gdpChart"), {
-        type: "line",
-        data: {
-            labels: labels,
-            datasets: datasets
+    gdpChart=new Chart(document.getElementById("gdpChart"),{
+        type:"line",
+        data:{
+            labels:current.map(d=>quarter?`${d.年度} ${d.季度}`:d.季度),
+            datasets:[
+                {
+                    label:`${year} GDP`,
+                    data:current.map(d=>d.GDP成長率),
+                    tension:.2
+                },
+                ...(compare?[{
+                    label:`${Number(year)-1} GDP`,
+                    data:previous.map(d=>d.GDP成長率),
+                    borderDash:[6,4],
+                    tension:.2
+                }]:[])
+            ]
         },
-        options: getChartOptions(compare, current),
-        plugins: [ChartDataLabels]
+        options:getChartOptions(compare)
     });
 }
 
-function drawMonthlyCharts(currentData, previousData, compareMode){
-    const labels = currentData.map(d => d["年月"]);
-
-    const currentCpi = currentData.map(d => d["CPI年增率"]);
-    const currentUnemployment = currentData.map(d => d["失業率"]);
-
-    const previousCpi = previousData.map(d => d["CPI年增率"]);
-    const previousUnemployment = previousData.map(d => d["失業率"]);
-
+function drawMonthlyCharts(current,previous,compare){
     if(cpiChart) cpiChart.destroy();
     if(unemploymentChart) unemploymentChart.destroy();
 
-    const cpiDatasets = [{
-        label: "本期 CPI",
-        data: currentCpi,
-        tension: 0.2,
-        pointRadius: 4,
-        clip: false
-    }];
-
-    const unemploymentDatasets = [{
-        label: "本期失業率",
-        data: currentUnemployment,
-        tension: 0.2,
-        pointRadius: 4,
-        clip: false
-    }];
-
-    if(compareMode){
-        cpiDatasets.push({
-            label: "去年同期 CPI",
-            data: previousCpi,
-            tension: 0.2,
-            pointRadius: 4,
-            borderDash: [6, 4],
-            clip: false
-        });
-
-        unemploymentDatasets.push({
-            label: "去年同期失業率",
-            data: previousUnemployment,
-            tension: 0.2,
-            pointRadius: 4,
-            borderDash: [6, 4],
-            clip: false
-        });
-    }
-
-    cpiChart = new Chart(document.getElementById("cpiChart"), {
-        type: "line",
-        data: {
-            labels: labels,
-            datasets: cpiDatasets
+    cpiChart=new Chart(document.getElementById("cpiChart"),{
+        type:"line",
+        data:{
+            labels:current.map(d=>d.年月),
+            datasets:[
+                {label:"本期 CPI",data:current.map(d=>d.CPI年增率),tension:.2},
+                ...(compare?[{
+                    label:"去年同期 CPI",
+                    data:previous.map(d=>d.CPI年增率),
+                    borderDash:[6,4],
+                    tension:.2
+                }]:[])
+            ]
         },
-        options: getChartOptions(compareMode, currentData),
-        plugins: [ChartDataLabels]
+        options:getChartOptions(compare)
     });
 
-    unemploymentChart = new Chart(document.getElementById("unemploymentChart"), {
-        type: "line",
-        data: {
-            labels: labels,
-            datasets: unemploymentDatasets
+    unemploymentChart=new Chart(document.getElementById("unemploymentChart"),{
+        type:"line",
+        data:{
+            labels:current.map(d=>d.年月),
+            datasets:[
+                {label:"本期失業率",data:current.map(d=>d.失業率),tension:.2},
+                ...(compare?[{
+                    label:"去年同期失業率",
+                    data:previous.map(d=>d.失業率),
+                    borderDash:[6,4],
+                    tension:.2
+                }]:[])
+            ]
         },
-        options: getChartOptions(compareMode, currentData),
-        plugins: [ChartDataLabels]
+        options:getChartOptions(compare)
     });
 }
 
-function getChartOptions(showLegend, sourceData){
+function getChartOptions(showLegend){
     return {
-        responsive: true,
-        maintainAspectRatio: false,
-
-        layout: {
-            padding: {
-                top: 60,
-                right: 20,
-                left: 10,
-                bottom: 10
-            }
-        },
-
-        plugins: {
-            legend: {
-                display: showLegend,
-                position: "bottom",
-                align: "center",
-                labels: {
-                    padding: 18,
-                    font: { size: 14 }
-                }
-            },
-
-            tooltip: {
-                callbacks: {
-                    label: function(context){
-                        return context.dataset.label + "：" + context.parsed.y.toFixed(1) + "%";
-                    },
-                    afterBody: function(context){
-                        const index = context[0].dataIndex;
-                        const summary = sourceData[index]["AI摘要"];
-                        const type = sourceData[index]["類型"];
-
-                        let text = "";
-
-                        if(type){
-                            text += "類型：" + type;
-                        }
-
-                        if(summary){
-                            text += (text ? "\n" : "") + "摘要：" + summary;
-                        }
-
-                        return text;
-                    }
-                }
-            },
-
-            datalabels: {
-                align: "top",
-                anchor: "end",
-                offset: 12,
-                clamp: false,
-                clip: false,
-                formatter: function(value){
-                    return value.toFixed(1) + "%";
-                },
-                font: {
-                    weight: "bold",
-                    size: 11
-                }
-            }
-        },
-
-        scales: {
-            y: {
-                ticks: {
-                    callback: function(value){
-                        return value.toFixed(1) + "%";
-                    }
-                }
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+            legend:{
+                display:showLegend,
+                position:"bottom"
             }
         }
     };
