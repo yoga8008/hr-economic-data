@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime
+import os
 
 # 模擬資料
 data = [
@@ -36,12 +37,32 @@ data = [
 
 ]
 
-df = pd.DataFrame(data, columns=["年月", "CPI年增率", "失業率"])
+# AI摘要
+summaries = {
 
+    "2024/01": "春節帶動消費增加",
+
+    "2024/07": "暑假旅遊需求推升服務價格",
+
+    "2025/08": "電價調整影響 CPI",
+
+    "2026/03": "物價漲幅回落，失業率維持低檔"
+
+}
+
+# DataFrame
+df = pd.DataFrame(
+    data,
+    columns=["年月", "CPI年增率", "失業率"]
+)
+
+# 加入 AI摘要
+df["AI摘要"] = df["年月"].map(summaries).fillna("")
+
+# 更新時間
 df["更新時間"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 # 建立 data 資料夾
-import os
 os.makedirs("data", exist_ok=True)
 
 # 輸出 CSV
@@ -60,4 +81,5 @@ df.to_json(
 )
 
 print(df)
+
 print("完成")
