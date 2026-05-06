@@ -20,22 +20,29 @@ SOURCES = [
 ]
 
 IGNORE_KEYWORDS = [
-    "Enter 到主內容區",
+    "Enter",
+    "主內容區",
+    "跳到",
     "網站導覽",
     "回首頁",
-    "跳到主要內容",
-    "主要內容區"
+    ":::",
+    "搜尋",
+    "按 Enter"
 ]
 
 def roc_to_ad(date_text):
-    date_text = date_text.strip()
     parts = date_text.replace("-", "/").split("/")
-
     if len(parts) == 3 and len(parts[0]) == 3:
         year = int(parts[0]) + 1911
         return f"{year}/{parts[1].zfill(2)}/{parts[2].zfill(2)}"
+    return ""
 
-    return date_text
+def valid_date(date):
+    try:
+        year = int(date.split("/")[0])
+        return 2024 <= year <= 2026
+    except:
+        return False
 
 def fetch_news(source):
     items = []
@@ -44,45 +51,37 @@ def fetch_news(source):
         res = requests.get(
             source["url"],
             timeout=15,
-            headers={
-                "User-Agent": "Mozilla/5.0"
-            }
+            headers={"User-Agent": "Mozilla/5.0"}
         )
-
         res.encoding = "utf-8"
 
         soup = BeautifulSoup(res.text, "html.parser")
 
-        text_items = soup.find_all("a")
-
-        for a in text_items:
-
+        for a in soup.find_all("a"):
             title = a.get_text(" ", strip=True)
+            href = a.get("href", "")
 
             if not title or len(title) < 8:
                 continue
 
-            if any(keyword in title for keyword in IGNORE_KEYWORDS):
+            if any(k in title for k in IGNORE_KEYWORDS):
                 continue
-
-            href = a.get("href", "")
 
             parent_text = a.parent.get_text(" ", strip=True) if a.parent else ""
 
-            date = ""
-
             match = re.search(r"\d{3}[-/]\d{2}[-/]\d{2}", parent_text)
 
-            if match:
-                date = roc_to_ad(match.group())
+            if not match:
+                continue
 
-            if not date:
+            date = roc_to_ad(match.group())
+
+            if not valid_date(date):
                 continue
 
             if href.startswith("/"):
                 base = source["url"].split("/")[0] + "//" + source["url"].split("/")[2]
                 href = base + href
-
             elif not href.startswith("http"):
                 base = "/".join(source["url"].split("/")[:3])
                 href = base + "/" + href
@@ -104,18 +103,15 @@ all_news = []
 for source in SOURCES:
     all_news.extend(fetch_news(source))
 
-# 去重
 seen = set()
 unique_news = []
 
 for item in all_news:
     key = item["單位"] + item["標題"]
-
     if key not in seen:
         seen.add(key)
         unique_news.append(item)
 
-# 日期排序
 unique_news = sorted(
     unique_news,
     key=lambda x: x["日期"],
