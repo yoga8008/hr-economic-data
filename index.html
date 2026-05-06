@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>台灣經濟數據</title>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-
 body{
     font-family: Arial;
     padding:20px;
+}
+
+.filter{
+    margin-bottom:20px;
 }
 
 .card{
@@ -24,30 +26,24 @@ canvas{
 }
 
 button{
-    margin-right:10px;
-    padding:8px 16px;
+    margin-left:10px;
+    padding:6px 14px;
 }
-
 </style>
-
 </head>
 
 <body>
 
 <h1>台灣經濟數據</h1>
 
-    <label>顯示月份：</label>
+<div class="filter">
+    起：
+    <input type="month" id="startMonth">
 
-    <input
-        type="range"
-        id="rangeSlider"
-        min="12"
-        max="36"
-        value="12"
-    >
+    迄：
+    <input type="month" id="endMonth">
 
-    <span id="rangeText">近12個月</span>
-
+    <button onclick="filterData()">查詢</button>
 </div>
 
 <div class="card">
@@ -61,75 +57,64 @@ button{
 </div>
 
 <script>
-
 let allData = [];
-
 let cpiChart;
 let unemploymentChart;
 
 fetch("./data/taiwan_cpi_unemployment.json")
 .then(res => res.json())
 .then(data => {
-
     allData = data;
 
-    changeYear(12);
+    const latest12 = allData.slice(-12);
+    document.getElementById("startMonth").value = latest12[0]["年月"].replace("/", "-");
+    document.getElementById("endMonth").value = latest12[latest12.length - 1]["年月"].replace("/", "-");
 
-document.getElementById("rangeSlider").addEventListener("input", function(){
-    const months = Number(this.value);
-    document.getElementById("rangeText").innerText = `近${months}個月`;
-    changeYear(months);
-
+    drawCharts(latest12);
 });
 
-function changeYear(months){
+function filterData(){
+    const start = document.getElementById("startMonth").value;
+    const end = document.getElementById("endMonth").value;
 
-    const data = allData.slice(-months);
+    const filtered = allData.filter(d => {
+        const month = d["年月"].replace("/", "-");
+        return month >= start && month <= end;
+    });
 
-    const labels = data.map(d => d["年月"]);
-
-    const cpiData = data.map(d => d["CPI年增率"]);
-
-    const unemploymentData = data.map(d => d["失業率"]);
-
-    if(cpiChart){
-        cpiChart.destroy();
-    }
-
-    if(unemploymentChart){
-        unemploymentChart.destroy();
-    }
-
-    cpiChart = new Chart(
-        document.getElementById('cpiChart'),
-        {
-            type:'line',
-            data:{
-                labels:labels,
-                datasets:[{
-                    label:'CPI年增率',
-                    data:cpiData
-                }]
-            }
-        }
-    );
-
-    unemploymentChart = new Chart(
-        document.getElementById('unemploymentChart'),
-        {
-            type:'line',
-            data:{
-                labels:labels,
-                datasets:[{
-                    label:'失業率',
-                    data:unemploymentData
-                }]
-            }
-        }
-    );
-
+    drawCharts(filtered);
 }
 
+function drawCharts(data){
+    const labels = data.map(d => d["年月"]);
+    const cpiData = data.map(d => d["CPI年增率"]);
+    const unemploymentData = data.map(d => d["失業率"]);
+
+    if(cpiChart) cpiChart.destroy();
+    if(unemploymentChart) unemploymentChart.destroy();
+
+    cpiChart = new Chart(document.getElementById("cpiChart"), {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "CPI年增率",
+                data: cpiData
+            }]
+        }
+    });
+
+    unemploymentChart = new Chart(document.getElementById("unemploymentChart"), {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "失業率",
+                data: unemploymentData
+            }]
+        }
+    });
+}
 </script>
 
 </body>
