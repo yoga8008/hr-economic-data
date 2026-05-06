@@ -135,13 +135,15 @@ function drawCharts(currentData, previousData, compareMode){
         maintainAspectRatio: false,
 
         layout: {
-            padding: { top: 70 }
+            padding: { top: 25 }
         },
 
         plugins: {
             legend: {
     display: compareMode,
     position: "top",
+    align: "center",
+    fullSize: true,
     labels: {
         padding: 20,
         font: {
@@ -171,7 +173,7 @@ function drawCharts(currentData, previousData, compareMode){
             datalabels: {
                 align: "top",
                 anchor: "end",
-                offset: 14,
+                offset: 18,
                 clamp: true,
                 formatter: function(value){
                     return value.toFixed(1) + "%";
@@ -200,6 +202,7 @@ function drawCharts(currentData, previousData, compareMode){
             data: currentCpi,
             tension: 0.2,
             pointRadius: 4
+            clip: false
         }
     ];
 
