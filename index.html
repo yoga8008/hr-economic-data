@@ -110,7 +110,33 @@ function initMonthSelect(){
 function filterData(){
 
     const start = document.getElementById("startMonth").value;
+
     const end = document.getElementById("endMonth").value;
+
+    const startDate = new Date(start + "/01");
+
+    const endDate = new Date(end + "/01");
+
+    const monthDiff =
+        (endDate.getFullYear() - startDate.getFullYear()) * 12
+        +
+        (endDate.getMonth() - startDate.getMonth());
+
+    if(monthDiff > 11){
+
+        alert("最多只能選擇12個月區間");
+
+        return;
+
+    }
+
+    if(start > end){
+
+        alert("起始月份不能大於迄止月份");
+
+        return;
+
+    }
 
     const filtered = allData.filter(d => {
 
