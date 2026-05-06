@@ -16,7 +16,7 @@ SOURCES = [
     },
     {
         "unit": "勞保局",
-        "url": "https://www.bli.gov.tw/0104161.html"
+        "url": "https://www.bli.gov.tw/0100147.html"
     }
 ]
 
