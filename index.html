@@ -13,6 +13,7 @@ body{ font-family: Arial, sans-serif; padding:20px; }
 .card{ margin-bottom:40px; width:900px; }
 canvas{ max-width:900px; height:250px !important; }
 select, button{ padding:6px 10px; margin-right:10px; }
+label{ margin-right:10px; }
 </style>
 </head>
 
@@ -23,6 +24,12 @@ select, button{ padding:6px 10px; margin-right:10px; }
 <div class="filter">
     起：<select id="startMonth"></select>
     迄：<select id="endMonth"></select>
+
+    <label>
+        <input type="checkbox" id="compareMode">
+        同期比較
+    </label>
+
     <button onclick="filterData()">查詢</button>
 </div>
 
@@ -59,13 +66,22 @@ function initMonthSelect(){
         endSelect.innerHTML += `<option value="${value}">${value}</option>`;
     });
 
-    startSelect.value = "2024/01";
+    const latest12 = allData.slice(-12);
+    startSelect.value = latest12[0]["年月"];
     endSelect.value = allData[allData.length - 1]["年月"];
+}
+
+function shiftYear(monthText, diff){
+    const parts = monthText.split("/");
+    const year = Number(parts[0]) + diff;
+    const month = parts[1];
+    return year + "/" + month;
 }
 
 function filterData(){
     const start = document.getElementById("startMonth").value;
     const end = document.getElementById("endMonth").value;
+    const compareMode = document.getElementById("compareMode").checked;
 
     const startDate = new Date(start + "/01");
     const endDate = new Date(end + "/01");
@@ -84,17 +100,32 @@ function filterData(){
         return;
     }
 
-    const filtered = allData.filter(d => {
+    const currentData = allData.filter(d => {
         return d["年月"] >= start && d["年月"] <= end;
     });
 
-    drawCharts(filtered);
+    let previousData = [];
+
+    if(compareMode){
+        const previousStart = shiftYear(start, -1);
+        const previousEnd = shiftYear(end, -1);
+
+        previousData = allData.filter(d => {
+            return d["年月"] >= previousStart && d["年月"] <= previousEnd;
+        });
+    }
+
+    drawCharts(currentData, previousData, compareMode);
 }
 
-function drawCharts(data){
-    const labels = data.map(d => d["年月"]);
-    const cpiData = data.map(d => d["CPI年增率"]);
-    const unemploymentData = data.map(d => d["失業率"]);
+function drawCharts(currentData, previousData, compareMode){
+    const labels = currentData.map(d => d["年月"]);
+
+    const currentCpi = currentData.map(d => d["CPI年增率"]);
+    const currentUnemployment = currentData.map(d => d["失業率"]);
+
+    const previousCpi = previousData.map(d => d["CPI年增率"]);
+    const previousUnemployment = previousData.map(d => d["失業率"]);
 
     if(cpiChart) cpiChart.destroy();
     if(unemploymentChart) unemploymentChart.destroy();
@@ -109,17 +140,17 @@ function drawCharts(data){
 
         plugins: {
             legend: {
-                display: false
+                display: compareMode
             },
 
             tooltip: {
                 callbacks: {
                     label: function(context){
-                        return context.parsed.y.toFixed(1) + "%";
+                        return context.dataset.label + "：" + context.parsed.y.toFixed(1) + "%";
                     },
                     afterBody: function(context){
                         const index = context[0].dataIndex;
-                        const summary = data[index]["AI摘要"];
+                        const summary = currentData[index]["AI摘要"];
 
                         if(summary){
                             return "摘要：" + summary;
@@ -156,15 +187,47 @@ function drawCharts(data){
         }
     };
 
+    const cpiDatasets = [
+        {
+            label: "本期 CPI",
+            data: currentCpi,
+            tension: 0.2,
+            pointRadius: 4
+        }
+    ];
+
+    const unemploymentDatasets = [
+        {
+            label: "本期失業率",
+            data: currentUnemployment,
+            tension: 0.2,
+            pointRadius: 4
+        }
+    ];
+
+    if(compareMode){
+        cpiDatasets.push({
+            label: "去年同期 CPI",
+            data: previousCpi,
+            tension: 0.2,
+            pointRadius: 4,
+            borderDash: [6, 4]
+        });
+
+        unemploymentDatasets.push({
+            label: "去年同期失業率",
+            data: previousUnemployment,
+            tension: 0.2,
+            pointRadius: 4,
+            borderDash: [6, 4]
+        });
+    }
+
     cpiChart = new Chart(document.getElementById("cpiChart"), {
         type: "line",
         data: {
             labels: labels,
-            datasets: [{
-                data: cpiData,
-                tension: 0.2,
-                pointRadius: 4
-            }]
+            datasets: cpiDatasets
         },
         options: commonOptions,
         plugins: [ChartDataLabels]
@@ -174,11 +237,7 @@ function drawCharts(data){
         type: "line",
         data: {
             labels: labels,
-            datasets: [{
-                data: unemploymentData,
-                tension: 0.2,
-                pointRadius: 4
-            }]
+            datasets: unemploymentDatasets
         },
         options: commonOptions,
         plugins: [ChartDataLabels]
