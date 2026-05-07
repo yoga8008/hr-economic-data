@@ -407,55 +407,131 @@ function renderNewsGroup(news, unitName, elementId){
 }
 
 function recommendSite(){
+
     const q = document.getElementById("siteQuestion").value.trim();
+
     const result = document.getElementById("siteRecommendResult");
 
     if(!q){
+
         result.innerHTML = "請先輸入你想查詢的內容。";
+
         return;
     }
 
     let answer = "";
 
-    if(q.includes("資遣") || q.includes("遣散")){
+    if(
+        q.includes("資遣") ||
+        q.includes("遣散")
+    ){
+
         answer = `
             <b>建議網站：資遣費試算</b><br>
             適合查詢資遣費、年資與給付概算。<br><br>
-            <a href="https://calcr2.mol.gov.tw/SeverancePay" target="_blank">前往網站</a>
+
+            <a href="https://calcr2.mol.gov.tw/SeverancePay"
+               target="_blank">
+               前往網站
+            </a>
         `;
     }
-    else if(q.includes("勞基法") || q.includes("法規") || q.includes("工時") || q.includes("加班")){
+
+    else if(
+        q.includes("資遣通報") ||
+        q.includes("就業金卡") ||
+        q.includes("外勞") ||
+        q.includes("移工") ||
+        q.includes("聘僱") ||
+        q.includes("職能") ||
+        q.includes("訓練")
+    ){
+
+        answer = `
+            <b>建議網站：勞動力發展署</b><br>
+            適合查詢資遣通報、外國人聘僱、就業金卡、職能發展與訓練資源。<br><br>
+
+            <a href="https://www.wda.gov.tw/"
+               target="_blank">
+               前往網站
+            </a>
+        `;
+    }
+
+    else if(
+        q.includes("勞基法") ||
+        q.includes("法規") ||
+        q.includes("工時") ||
+        q.includes("加班")
+    ){
+
         answer = `
             <b>建議網站：勞動法令查詢系統</b><br>
             適合查詢勞基法、勞退、加班、工時等法規。<br><br>
-            <a href="https://laws.mol.gov.tw/" target="_blank">前往網站</a>
+
+            <a href="https://laws.mol.gov.tw/"
+               target="_blank">
+               前往網站
+            </a>
         `;
     }
-    else if(q.includes("勞保") || q.includes("退休金") || q.includes("職災")){
+
+    else if(
+        q.includes("勞保") ||
+        q.includes("退休金") ||
+        q.includes("職災")
+    ){
+
         answer = `
             <b>建議網站：勞工保險局</b><br>
             適合查詢勞保、勞退、職災相關資訊。<br><br>
-            <a href="https://www.bli.gov.tw/" target="_blank">前往網站</a>
+
+            <a href="https://www.bli.gov.tw/"
+               target="_blank">
+               前往網站
+            </a>
         `;
     }
-    else if(q.includes("健保") || q.includes("眷屬")){
+
+    else if(
+        q.includes("健保") ||
+        q.includes("眷屬")
+    ){
+
         answer = `
             <b>建議網站：健保署</b><br>
             適合查詢健保加退保與保費資訊。<br><br>
-            <a href="https://www.nhi.gov.tw/" target="_blank">前往網站</a>
+
+            <a href="https://www.nhi.gov.tw/"
+               target="_blank">
+               前往網站
+            </a>
         `;
     }
-    else if(q.includes("財報") || q.includes("年報") || q.includes("公開資訊")){
+
+    else if(
+        q.includes("財報") ||
+        q.includes("年報") ||
+        q.includes("公開資訊")
+    ){
+
         answer = `
             <b>建議網站：公開資訊觀測站</b><br>
             適合查詢上市櫃公司財報與重大訊息。<br><br>
-            <a href="https://mops.twse.com.tw/" target="_blank">前往網站</a>
+
+            <a href="https://mops.twse.com.tw/"
+               target="_blank">
+               前往網站
+            </a>
         `;
     }
+
     else{
+
         answer = `
             <b>建議先查詢：</b><br>
             勞動部 或 勞動法令查詢系統。<br><br>
+
             若是法規條文建議使用「勞動法令查詢」。<br>
             若是政策公告建議使用「勞動部」。
         `;
