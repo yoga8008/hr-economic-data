@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>輿情觀察</title>
 
+<style>
+.navbar{
+    background:#1e3a8a;
+    padding:14px 24px;
+    margin:-20px -20px 30px -20px;
+    display:flex;
+    gap:24px;
+    align-items:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.navbar a{
+    color:#ffffff;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:15px;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    padding:20px;
+    background:#f3f4f6;
+    margin:0;
+}
+
+.leftPanel{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+}
+
+.card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:20px;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+}
+
+th, td{
+    padding:12px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:left;
+    font-size:14px;
+}
+
+th{
+    background:#f8fafc;
+    font-weight:bold;
+}
+
+td a{
+    color:#1a5fb4;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+td a:hover{
+    text-decoration:underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <a href="index.html">首頁</a>
+    <a href="links.html">常用網站</a>
+    <a href="tools.html">HR工具</a>
+    <a href="insight.html">輿情觀察</a>
+</div>
+
+<div class="leftPanel">
+    <h1>輿情觀察</h1>
+
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:140px;">更新日</th>
+                    <th style="width:160px;">來源</th>
+                    <th>標題</th>
+                </tr>
+            </thead>
+            <tbody id="insightTable">
+                <tr>
+                    <td colspan="3">載入中...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+fetch("./data/insight_news.json")
+.then(res => res.json())
+.then(news => {
+    const tbody = document.getElementById("insightTable");
+
+    if(!news || news.length === 0){
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="3">目前沒有資料</td>
+            </tr>
+        `;
+        return;
+    }
+
+    tbody.innerHTML = news.slice(0,20).map(item => `
+        <tr>
+            <td>${item.日期 || ""}</td>
+            <td>${item.來源 || ""}</td>
+            <td>
+                <a href="${item.連結}" target="_blank">
+                    ${item.標題 || ""}
+                </a>
+            </td>
+        </tr>
+    `).join("");
+})
+.catch(err => {
+    document.getElementById("insightTable").innerHTML = `
+        <tr>
+            <td colspan="3">資料載入失敗，請確認 data/insight_news.json 是否存在。</td>
+        </tr>
+    `;
+});
+</script>
+
+</body>
+</html>
