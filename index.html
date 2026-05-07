@@ -29,6 +29,7 @@
 .navbar a:hover{
     opacity:.8;
 }    
+
 body{
     font-family: Arial, sans-serif;
     padding:0;
@@ -37,7 +38,10 @@ body{
 }
 
 h1{
-    margin-bottom:20px;
+    max-width:1200px;
+    margin:0 auto 20px auto;
+    padding:0 20px;
+    box-sizing:border-box;
 }
 
 .layout{
@@ -46,6 +50,10 @@ h1{
 
 .leftPanel{
     width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 20px;
+    box-sizing:border-box;
 }
 
 .filter{
@@ -53,7 +61,7 @@ h1{
 }
 
 .card{
-    margin-bottom:30px;
+    margin:0 auto 24px auto;
     width:100%;
     border:1px solid #ddd;
     border-radius:10px;
@@ -76,8 +84,8 @@ h1{
 
 canvas{
     width:100% !important;
-    height:720px !important;
-    margin-top:25px;
+    height:420px !important;
+    margin-top:20px;
 }
 
 select, button{
@@ -93,6 +101,7 @@ label{
     margin-top:40px;
     font-size:14px;
     color:#666;
+    padding-bottom:40px;
 }
 
 /* 公告浮動按鈕 */
@@ -187,6 +196,31 @@ label{
 .newsTitle a:hover{
     text-decoration:underline;
 }
+
+@media(max-width:768px){
+    .navbar{
+        flex-wrap:wrap;
+        gap:14px;
+        padding:12px 16px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    canvas{
+        height:340px !important;
+    }
+
+    .newsDrawer{
+        width:100%;
+        right:-100%;
+    }
+}
 </style>
 </head>
 
@@ -197,6 +231,7 @@ label{
     <a href="tools.html">HR工具</a>
     <a href="insight.html">輿情觀察</a>
 </div>
+
 <h1>台灣重要經社指標</h1>
 
 <div class="layout">
@@ -229,35 +264,30 @@ label{
         <canvas id="gdpChart"></canvas>
     </div>
 
-    <!-- CPI -->
-<div class="card">
+    <div class="card">
+        <h2 class="sectionTitle">消費者物價指數年增率(CPI)</h2>
+        <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
 
-    <div class="filter">
-        起：<select id="startMonth"></select>
-        迄：<select id="endMonth"></select>
+        <div class="filter">
+            起：<select id="startMonth"></select>
+            迄：<select id="endMonth"></select>
 
-        <label>
-            <input type="checkbox" id="compareMode">
-            同期比較
-        </label>
+            <label>
+                <input type="checkbox" id="compareMode">
+                同期比較
+            </label>
 
-        <button onclick="filterData()">查詢</button>
+            <button onclick="filterData()">查詢</button>
+        </div>
+
+        <canvas id="cpiChart"></canvas>
     </div>
 
-    <h2 class="sectionTitle">消費者物價指數年增率(CPI)</h2>
-    <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
-    <canvas id="cpiChart"></canvas>
-
-</div>
-
-<!-- 失業率 -->
-<div class="card">
-
-    <h2 class="sectionTitle">失業率</h2>
-    <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
-    <canvas id="unemploymentChart"></canvas>
-
-</div>
+    <div class="card">
+        <h2 class="sectionTitle">失業率</h2>
+        <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
+        <canvas id="unemploymentChart"></canvas>
+    </div>
 
     <div class="source">
         資料來源：
@@ -269,12 +299,10 @@ label{
 </div>
 </div>
 
-<!-- 公告浮動按鈕 -->
 <div class="newsFloatingBtn" onclick="toggleNewsPanel()">
     重要公告
 </div>
 
-<!-- 公告抽屜 -->
 <div class="newsDrawer" id="newsDrawer">
     <div class="newsDrawerHeader">
         <span>重要公告彙整</span>
@@ -303,6 +331,7 @@ label{
 
 <script>
 Chart.register(ChartDataLabels);
+
 let allData = [];
 let gdpData = [];
 let gdpChart, cpiChart, unemploymentChart;
@@ -506,6 +535,7 @@ function drawMonthlyCharts(current,previous,compare){
         options:getChartOptions(compare)
     });
 }
+
 function getChartOptions(showLegend){
     return {
         responsive:true,
@@ -513,7 +543,7 @@ function getChartOptions(showLegend){
 
         layout:{
             padding:{
-                top:70,
+                top:55,
                 right:20,
                 left:15,
                 bottom:10
@@ -525,19 +555,19 @@ function getChartOptions(showLegend){
                 display:showLegend,
                 position:"bottom",
                 labels:{
-                    font:{ size:16 }
+                    font:{ size:14 }
                 }
             },
 
             datalabels:{
                 align:"top",
                 anchor:"end",
-                offset:18,
+                offset:12,
                 formatter:function(value){
                     return value.toFixed(1) + "%";
                 },
                 font:{
-                    size:18,
+                    size:14,
                     weight:"bold"
                 },
                 color:"#111827"
@@ -547,14 +577,14 @@ function getChartOptions(showLegend){
         scales:{
             x:{
                 ticks:{
-                    font:{ size:15 },
+                    font:{ size:13 },
                     maxRotation:0,
                     autoSkip:false
                 }
             },
             y:{
                 ticks:{
-                    font:{ size:16 },
+                    font:{ size:13 },
                     callback:function(value){
                         return value.toFixed(1) + "%";
                     }
@@ -563,7 +593,6 @@ function getChartOptions(showLegend){
         }
     };
 }
-
 </script>
 
 </body>
