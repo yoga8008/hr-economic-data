@@ -101,7 +101,13 @@ def fetch_news(source):
             date = normalize_date(search_text)
 
             if not date:
-                continue
+
+            # 最新法令動態沒有日期時，直接給今天日期
+            if source["unit"] == "最新法令動態":
+            date = datetime.now().strftime("%Y/%m/%d")
+
+            else:
+            continue
 
             title = clean_title(raw_title)
 
