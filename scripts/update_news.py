@@ -41,8 +41,11 @@ IGNORE_KEYWORDS = [
     "主內容區",
     "網站導覽",
     "回首頁",
-    ":::"
+    ":::",
+    "勞動部勞動法令查詢系統"
 ]
+
+LAW_KEYWORDS = ["修正", "訂定", "發布", "廢止", "生效", "公告"]
 
 def normalize_date(text):
     text = text.replace("-", "/")
@@ -64,6 +67,8 @@ def clean_title(title):
     title = re.sub(r"^\d+\s*", "", title)
     title = re.sub(r"20\d{2}[-/]\d{1,2}[-/]\d{1,2}", "", title)
     title = re.sub(r"(11[3-9]|12[0-9])[-/]\d{1,2}[-/]\d{1,2}", "", title)
+    title = re.sub(r"^[-/]\d{1,2}[-/]\d{1,2}\s*", "", title)
+    title = re.sub(r"^頭條\s*", "", title)
     return title.strip()
 
 def fetch_news(source):
@@ -88,8 +93,15 @@ def fetch_news(source):
             if not raw_title or len(raw_title) < 8:
                 continue
 
+            if any(k in raw_title for k in IGNORE_KEYWORDS):
+                continue
+
             if any(k in title_check for k in IGNORE_KEYWORDS):
                 continue
+
+            if source["unit"] == "最新法令動態":
+                if not any(k in raw_title for k in LAW_KEYWORDS):
+                    continue
 
             parent_text = a.parent.get_text(" ", strip=True) if a.parent else ""
             search_text = raw_title + " " + parent_text
