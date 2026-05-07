@@ -20,7 +20,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install packages
-        run: pip install pandas requests beautifulsoup4
+        run: pip install pandas openpyxl requests beautifulsoup4 lxml feedparser
 
       - name: Run scripts
         run: |
