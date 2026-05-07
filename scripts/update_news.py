@@ -101,6 +101,18 @@ for rss_url in rss_urls:
                 "連結": link
             })
 
+# 讀取舊資料
+old_news = []
+
+try:
+    with open("data/insight_news.json", "r", encoding="utf-8") as f:
+        old_news = json.load(f)
+except Exception:
+    old_news = []
+
+# 新舊合併
+all_news.extend(old_news)
+
 # 去重複
 unique_news = []
 seen_titles = set()
@@ -120,7 +132,7 @@ with open("data/insight_news.json", "w", encoding="utf-8") as f:
     json.dump(unique_news, f, ensure_ascii=False, indent=2)
 
 # AI摘要
-titles_text = " ".join([n["標題"] for n in unique_news])
+titles_text = " ".join([n["標題"] for n in unique_news[:20]])
 
 summary = []
 
