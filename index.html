@@ -426,13 +426,17 @@ function drawGDP(){
                 {
                     label:`${year} GDP`,
                     data:current.map(d=>d.GDP成長率),
-                    tension:.2
+                    tension:.2,
+                    borderWidth:3,
+                    pointRadius:5
                 },
                 ...(compare?[{
                     label:`${Number(year)-1} GDP`,
                     data:previous.map(d=>d.GDP成長率),
                     borderDash:[6,4],
-                    tension:.2
+                    tension:.2,
+                    borderWidth:3,
+                    pointRadius:5
                 }]:[])
             ]
         },
@@ -449,12 +453,20 @@ function drawMonthlyCharts(current,previous,compare){
         data:{
             labels:current.map(d=>d.年月),
             datasets:[
-                {label:"本期 CPI",data:current.map(d=>d.CPI年增率),tension:.2},
+                {
+                    label:"本期 CPI",
+                    data:current.map(d=>d.CPI年增率),
+                    tension:.2,
+                    borderWidth:3,
+                    pointRadius:5
+                },
                 ...(compare?[{
                     label:"去年同期 CPI",
                     data:previous.map(d=>d.CPI年增率),
                     borderDash:[6,4],
-                    tension:.2
+                    tension:.2,
+                    borderWidth:3,
+                    pointRadius:5
                 }]:[])
             ]
         },
@@ -466,12 +478,20 @@ function drawMonthlyCharts(current,previous,compare){
         data:{
             labels:current.map(d=>d.年月),
             datasets:[
-                {label:"本期失業率",data:current.map(d=>d.失業率),tension:.2},
+                {
+                    label:"本期失業率",
+                    data:current.map(d=>d.失業率),
+                    tension:.2,
+                    borderWidth:3,
+                    pointRadius:5
+                },
                 ...(compare?[{
                     label:"去年同期失業率",
                     data:previous.map(d=>d.失業率),
                     borderDash:[6,4],
-                    tension:.2
+                    tension:.2,
+                    borderWidth:3,
+                    pointRadius:5
                 }]:[])
             ]
         },
@@ -504,12 +524,12 @@ function getChartOptions(showLegend){
             datalabels:{
                 align:"top",
                 anchor:"end",
-                offset:8,
+                offset:14,
                 formatter:function(value){
                     return value.toFixed(1) + "%";
                 },
                 font:{
-                    size:14,
+                    size:18,
                     weight:"bold"
                 },
                 color:"#111827"
@@ -519,14 +539,14 @@ function getChartOptions(showLegend){
         scales:{
             x:{
                 ticks:{
-                    font:{ size:13 },
+                    font:{ size:15 },
                     maxRotation:0,
                     autoSkip:false
                 }
             },
             y:{
                 ticks:{
-                    font:{ size:13 },
+                    font:{ size:16 },
                     callback:function(value){
                         return value.toFixed(1) + "%";
                     }
