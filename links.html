@@ -128,7 +128,56 @@ h1{
     box-shadow:0 8px 20px rgba(0,0,0,0.08);
     background:#eff6ff;
 }
+.assistantBox{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
 
+.assistantBox input{
+    flex:1;
+    min-width:260px;
+
+    padding:12px 14px;
+
+    border:1px solid #ccc;
+    border-radius:10px;
+
+    font-size:15px;
+}
+
+.assistantBox button{
+    padding:12px 18px;
+
+    border:none;
+    background:#1e3a8a;
+    color:#fff;
+
+    border-radius:10px;
+
+    cursor:pointer;
+    font-weight:bold;
+
+    transition:.2s;
+}
+
+.assistantBox button:hover{
+    opacity:.9;
+}
+
+.recommendResult{
+    margin-top:16px;
+
+    padding:16px 18px;
+
+    background:#f8fafc;
+
+    border-left:5px solid #1e3a8a;
+    border-radius:10px;
+
+    line-height:1.8;
+    color:#1f2937;
+}
 /* 公告浮動按鈕 */
 .newsFloatingBtn{
     position:fixed;
@@ -258,7 +307,28 @@ h1{
 </div>
 
 <h1>常用網站</h1>
+<div class="card">
 
+    <h2 class="sectionTitle">AI 小助手｜網站推薦</h2>
+
+    <div class="assistantBox">
+
+        <input
+            id="siteQuestion"
+            placeholder="例如：我想查資遣費、勞基法、勞保、健保、公司財報"
+        >
+
+        <button onclick="recommendSite()">
+            推薦網站
+        </button>
+
+    </div>
+
+    <div id="siteRecommendResult" class="recommendResult">
+        輸入需求後，我會建議你可以去哪個網站查。
+    </div>
+
+</div>
 <div class="layout">
 <div class="leftPanel">
 
@@ -409,7 +479,19 @@ function renderNewsGroup(news, unitName, elementId){
         </div>
     `).join("");
 }
+function renderNewsGroup(news, unitName, elementId){
 
+    const box = document.getElementById(elementId);
+
+    const filtered = news
+        .filter(x => x.單位 === unitName)
+        .sort((a,b)=>b.日期.localeCompare(a.日期))
+        .slice(0,5);
+
+    box.innerHTML = filtered.map(item => `
+        ...
+    `).join("");
+}
 </script>
 
 </body>
