@@ -1,141 +1,66 @@
-import requests
-from bs4 import BeautifulSoup
+import feedparser
 import json
-import os
-import re
-from urllib.parse import urljoin
+from datetime import datetime
 
-SOURCES = [
-    {
-        "unit": "勞動部",
-        "url": "https://www.mol.gov.tw/1607/1632/1633/"
-    },
-    {
-        "unit": "勞動力發展署",
-        "url": "https://www.wda.gov.tw/News.aspx?n=6&sms=10294"
-    },
-    {
-        "unit": "勞保局",
-        "url": "https://www.bli.gov.tw/0100147.html"
-    }
+keywords = [
+    "勞基法",
+    "工時",
+    "加班",
+    "薪資",
+    "基本工資",
+    "最低工資",
+    "裁員",
+    "資遣",
+    "缺工",
+    "徵才",
+    "招募",
+    "AI",
+    "就業",
+    "勞保",
+    "健保",
+    "退休"
 ]
 
-IGNORE_KEYWORDS = [
-    "按Enter到主內容區",
-    "按 Enter 到主內容區",
-    "Enter到主內容區",
-    "Enter 到主內容區",
-    "主內容區",
-    "網站導覽",
-    "回首頁",
-    ":::"
+rss_urls = [
+    "https://news.google.com/rss/search?q=台灣+人資&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
+    "https://news.google.com/rss/search?q=台灣+勞工&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
+    "https://news.google.com/rss/search?q=台灣+薪資&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
 ]
-
-def normalize_date(text):
-    text = text.replace("-", "/")
-
-    match = re.search(r"20\d{2}/\d{1,2}/\d{1,2}", text)
-    if match:
-        y, m, d = match.group().split("/")
-        return f"{y}/{m.zfill(2)}/{d.zfill(2)}"
-
-    match = re.search(r"(11[3-9]|12[0-9])/\d{1,2}/\d{1,2}", text)
-    if match:
-        y, m, d = match.group().split("/")
-        return f"{int(y) + 1911}/{m.zfill(2)}/{d.zfill(2)}"
-
-    return ""
-
-def clean_title(title):
-    title = re.sub(r"\s+", " ", title).strip()
-    title = re.sub(r"^\d+\s*", "", title)
-    title = re.sub(r"20\d{2}[-/]\d{1,2}[-/]\d{1,2}", "", title)
-    title = re.sub(r"(11[3-9]|12[0-9])[-/]\d{1,2}[-/]\d{1,2}", "", title)
-    return title.strip()
-
-def fetch_news(source):
-    items = []
-
-    try:
-        res = requests.get(
-            source["url"],
-            timeout=15,
-            headers={"User-Agent": "Mozilla/5.0"}
-        )
-
-        res.encoding = "utf-8"
-        soup = BeautifulSoup(res.text, "html.parser")
-        page_text = soup.get_text(" ", strip=True)
-
-        for a in soup.find_all("a"):
-            raw_title = a.get_text(" ", strip=True)
-            title_check = raw_title.replace(" ", "")
-            href = a.get("href", "")
-
-            if not raw_title or len(raw_title) < 8:
-                continue
-
-            if any(k in title_check for k in IGNORE_KEYWORDS):
-                continue
-
-            parent_text = a.parent.get_text(" ", strip=True) if a.parent else ""
-            search_text = raw_title + " " + parent_text
-
-            if raw_title in page_text:
-                pos = page_text.find(raw_title)
-                search_text += " " + page_text[pos:pos + 300]
-
-            date = normalize_date(search_text)
-
-            if not date:
-                continue
-
-            title = clean_title(raw_title)
-
-            if not title or len(title) < 8:
-                continue
-
-            items.append({
-                "日期": date,
-                "單位": source["unit"],
-                "標題": title,
-                "連結": urljoin(source["url"], href)
-            })
-
-    except Exception as e:
-        print(f"抓取失敗：{source['unit']} {e}")
-
-    return items
 
 all_news = []
 
-for source in SOURCES:
-    news = fetch_news(source)
+for rss_url in rss_urls:
 
-    news = sorted(
-        news,
-        key=lambda x: x["日期"],
-        reverse=True
-    )[:5]
+    feed = feedparser.parse(rss_url)
 
-    print(source["unit"], "抓到", len(news), "筆")
+    for item in feed.entries:
 
-    all_news.extend(news)
+        title = item.title
 
-seen = set()
+        if any(k in title for k in keywords):
+
+            news = {
+                "日期": item.published,
+                "來源": item.source.title if hasattr(item, "source") else "新聞",
+                "標題": title,
+                "連結": item.link
+            }
+
+            all_news.append(news)
+
+# 去重複
 unique_news = []
+titles = set()
 
-for item in all_news:
-    key = item["單位"] + item["標題"]
+for n in all_news:
+    if n["標題"] not in titles:
+        titles.add(n["標題"])
+        unique_news.append(n)
 
-    if key not in seen:
-        seen.add(key)
-        unique_news.append(item)
+# 最新20筆
+unique_news = unique_news[:20]
 
-os.makedirs("data", exist_ok=True)
-
-with open("data/taiwan_news.json", "w", encoding="utf-8") as f:
+with open("data/insight_news.json", "w", encoding="utf-8") as f:
     json.dump(unique_news, f, ensure_ascii=False, indent=2)
 
-print("公告更新完成")
-print(json.dumps(unique_news, ensure_ascii=False, indent=2))
+print(f"完成，共 {len(unique_news)} 筆新聞")
