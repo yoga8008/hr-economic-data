@@ -92,7 +92,13 @@ for n in all_news:
         seen_titles.add(n["標題"])
         unique_news.append(n)
 
-# 最新20筆
+# 日期排序（最新在前）
+unique_news.sort(
+    key=lambda x: x["日期"],
+    reverse=True
+)
+
+# 只取最新20筆
 unique_news = unique_news[:20]
 
 with open("data/insight_news.json", "w", encoding="utf-8") as f:
