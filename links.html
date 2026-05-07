@@ -26,6 +26,7 @@
 .navbar a:hover{
     opacity:.8;
 }    
+
 body{
     font-family: Arial, sans-serif;
     padding:20px;
@@ -56,16 +57,22 @@ h1{
     margin-bottom:30px;
     width:100%;
     border:1px solid #ddd;
-    border-radius:10px;
+    border-radius:16px;
     padding:20px;
     background:#ffffff;
     box-sizing:border-box;
+    transition:.2s;
+}
+
+.card:hover{
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
 }
 
 .sectionTitle{
     padding-bottom:10px;
     margin-bottom:20px;
     border-bottom:1px solid #ddd;
+    color:#1e3a8a;
 }
 
 /* Link Cards */
@@ -78,7 +85,7 @@ h1{
 .linkCard{
     background:#f8fafc;
     border:1px solid #e5e7eb;
-    border-radius:12px;
+    border-radius:14px;
     padding:24px 16px;
     text-align:center;
     text-decoration:none;
@@ -197,42 +204,90 @@ h1{
 </head>
 
 <body>
+
 <div class="navbar">
     <a href="index.html">首頁</a>
     <a href="links.html">常用網站</a>
     <a href="tools.html">HR工具</a>
     <a href="insight.html">輿情觀察</a>
 </div>
+
 <h1>常用網站</h1>
 
 <div class="layout">
 <div class="leftPanel">
 
+    <!-- 政府法規 -->
     <div class="card">
         <h2 class="sectionTitle">政府法規</h2>
+
         <div class="linkGrid">
             <a class="linkCard" href="https://www.mol.gov.tw/" target="_blank">⚖️<span>勞動部</span></a>
+
+            <a class="linkCard" href="https://laws.mol.gov.tw/" target="_blank">📚<span>勞動法令查詢</span></a>
+
             <a class="linkCard" href="https://www.wda.gov.tw/" target="_blank">🧰<span>勞動力發展署</span></a>
+
+            <a class="linkCard" href="https://www.osha.gov.tw/" target="_blank">🦺<span>職業安全衛生署</span></a>
+
             <a class="linkCard" href="https://www.bli.gov.tw/" target="_blank">🛡️<span>勞工保險局</span></a>
+
             <a class="linkCard" href="https://www.nhi.gov.tw/" target="_blank">🏥<span>健保署</span></a>
+
             <a class="linkCard" href="https://ilabor.ntpc.gov.tw/" target="_blank">🏛️<span>新北勞工局</span></a>
+
             <a class="linkCard" href="https://www.ntbna.gov.tw/" target="_blank">💰<span>國稅局</span></a>
         </div>
     </div>
 
+    <!-- 統計資料 -->
     <div class="card">
         <h2 class="sectionTitle">統計資料</h2>
+
         <div class="linkGrid">
             <a class="linkCard" href="https://www.stat.gov.tw/" target="_blank">📊<span>行政院主計總處</span></a>
+
             <a class="linkCard" href="https://mops.twse.com.tw/" target="_blank">📈<span>公開資訊觀測站</span></a>
         </div>
     </div>
 
+    <!-- 人資網站 -->
     <div class="card">
         <h2 class="sectionTitle">人資相關網站</h2>
+
         <div class="linkGrid">
             <a class="linkCard" href="https://www.104.com.tw/" target="_blank">👔<span>104人力銀行</span></a>
+
             <a class="linkCard" href="https://www.1111.com.tw/" target="_blank">💼<span>1111人力銀行</span></a>
+        </div>
+    </div>
+
+    <!-- HR咖啡站 -->
+    <div class="card">
+        <h2 class="sectionTitle">HR咖啡站</h2>
+
+        <div class="linkGrid">
+
+            <a class="linkCard" href="https://www.hr.org.tw/" target="_blank">
+                ☕
+                <span>中華人事主管協會</span>
+            </a>
+
+            <a class="linkCard" href="https://www.chrma.net/Template/Index.aspx" target="_blank">
+                📘
+                <span>中華人力資源管理協會</span>
+            </a>
+
+            <a class="linkCard" href="https://hrlearning.com.tw/" target="_blank">
+                🌿
+                <span>人資小周末</span>
+            </a>
+
+            <a class="linkCard" href="https://hiproficiency.com/forum/%e4%ba%ba%e5%8a%9b%e8%b3%87%e6%ba%90%e8%ab%96%e5%a3%87/" target="_blank">
+                🚶
+                <span>HRJOURNEY</span>
+            </a>
+
         </div>
     </div>
 
@@ -246,6 +301,7 @@ h1{
 
 <!-- 公告抽屜 -->
 <div class="newsDrawer" id="newsDrawer">
+
     <div class="newsDrawerHeader">
         <span>重要公告彙整</span>
         <button onclick="toggleNewsPanel()">✕</button>
@@ -265,19 +321,22 @@ h1{
 
         <div class="newsGroup">
             <h3>勞保局</h3>
-            <div id="newsNhi">載入中...</div>
+            <div id="newsBli">載入中...</div>
         </div>
 
     </div>
 </div>
 
 <script>
+
 fetch("./data/taiwan_news.json")
 .then(res => res.json())
 .then(news => {
+
     renderNewsGroup(news,"勞動部","newsMol");
     renderNewsGroup(news,"勞動力發展署","newsWda");
-    renderNewsGroup(news,"勞保局","newsNhi");
+    renderNewsGroup(news,"勞保局","newsBli");
+
 });
 
 function toggleNewsPanel(){
@@ -285,6 +344,7 @@ function toggleNewsPanel(){
 }
 
 function renderNewsGroup(news, unitName, elementId){
+
     const box = document.getElementById(elementId);
 
     const filtered = news
@@ -295,12 +355,16 @@ function renderNewsGroup(news, unitName, elementId){
     box.innerHTML = filtered.map(item => `
         <div class="newsItem">
             <div class="newsDate">${item.日期}</div>
+
             <div class="newsTitle">
-                <a href="${item.連結}" target="_blank">${item.標題}</a>
+                <a href="${item.連結}" target="_blank">
+                    ${item.標題}
+                </a>
             </div>
         </div>
     `).join("");
 }
+
 </script>
 
 </body>
