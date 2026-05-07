@@ -1,9 +1,160 @@
-import feedparser
+import requests
+from bs4 import BeautifulSoup
 import json
+import os
+import re
+import feedparser
 from datetime import datetime
 from email.utils import parsedate_to_datetime
+from urllib.parse import urljoin
 
-# 重大新聞關鍵字
+os.makedirs("data", exist_ok=True)
+
+# =====================================================
+# 一、重要公告：政府機關公告自動更新
+# =====================================================
+
+SOURCES = [
+    {
+        "unit": "最新法令動態",
+        "url": "https://laws.mol.gov.tw/index.aspx"
+    },
+    {
+        "unit": "勞動部",
+        "url": "https://www.mol.gov.tw/1607/1632/1633/"
+    },
+    {
+        "unit": "勞動力發展署",
+        "url": "https://www.wda.gov.tw/News.aspx?n=6&sms=10294"
+    },
+    {
+        "unit": "勞保局",
+        "url": "https://www.bli.gov.tw/0104161.html"
+    }
+]
+
+IGNORE_KEYWORDS = [
+    "按Enter到主內容區",
+    "按 Enter 到主內容區",
+    "Enter到主內容區",
+    "Enter 到主內容區",
+    "主內容區",
+    "網站導覽",
+    "回首頁",
+    ":::"
+]
+
+def normalize_date(text):
+    text = text.replace("-", "/")
+
+    match = re.search(r"20\d{2}/\d{1,2}/\d{1,2}", text)
+    if match:
+        y, m, d = match.group().split("/")
+        return f"{y}/{m.zfill(2)}/{d.zfill(2)}"
+
+    match = re.search(r"(11[3-9]|12[0-9])/\d{1,2}/\d{1,2}", text)
+    if match:
+        y, m, d = match.group().split("/")
+        return f"{int(y) + 1911}/{m.zfill(2)}/{d.zfill(2)}"
+
+    return ""
+
+def clean_title(title):
+    title = re.sub(r"\s+", " ", title).strip()
+    title = re.sub(r"^\d+\s*", "", title)
+    title = re.sub(r"20\d{2}[-/]\d{1,2}[-/]\d{1,2}", "", title)
+    title = re.sub(r"(11[3-9]|12[0-9])[-/]\d{1,2}[-/]\d{1,2}", "", title)
+    return title.strip()
+
+def fetch_news(source):
+    items = []
+
+    try:
+        res = requests.get(
+            source["url"],
+            timeout=15,
+            headers={"User-Agent": "Mozilla/5.0"}
+        )
+
+        res.encoding = "utf-8"
+        soup = BeautifulSoup(res.text, "html.parser")
+        page_text = soup.get_text(" ", strip=True)
+
+        for a in soup.find_all("a"):
+            raw_title = a.get_text(" ", strip=True)
+            title_check = raw_title.replace(" ", "")
+            href = a.get("href", "")
+
+            if not raw_title or len(raw_title) < 8:
+                continue
+
+            if any(k in title_check for k in IGNORE_KEYWORDS):
+                continue
+
+            parent_text = a.parent.get_text(" ", strip=True) if a.parent else ""
+            search_text = raw_title + " " + parent_text
+
+            if raw_title in page_text:
+                pos = page_text.find(raw_title)
+                search_text += " " + page_text[pos:pos + 300]
+
+            date = normalize_date(search_text)
+
+            if not date:
+                continue
+
+            title = clean_title(raw_title)
+
+            if not title or len(title) < 8:
+                continue
+
+            items.append({
+                "日期": date,
+                "單位": source["unit"],
+                "標題": title,
+                "連結": urljoin(source["url"], href)
+            })
+
+    except Exception as e:
+        print(f"抓取失敗：{source['unit']} {e}")
+
+    return items
+
+all_gov_news = []
+
+for source in SOURCES:
+    news = fetch_news(source)
+
+    news = sorted(
+        news,
+        key=lambda x: x["日期"],
+        reverse=True
+    )[:5]
+
+    print(source["unit"], "抓到", len(news), "筆")
+
+    all_gov_news.extend(news)
+
+seen = set()
+unique_gov_news = []
+
+for item in all_gov_news:
+    key = item["單位"] + item["標題"]
+
+    if key not in seen:
+        seen.add(key)
+        unique_gov_news.append(item)
+
+with open("data/taiwan_news.json", "w", encoding="utf-8") as f:
+    json.dump(unique_gov_news, f, ensure_ascii=False, indent=2)
+
+print("重要公告更新完成")
+
+
+# =====================================================
+# 二、輿情觀察：Google News RSS 自動更新
+# =====================================================
+
 major_keywords = [
     "補助", "津貼", "失業", "職災", "工資", "基本工資", "勞基法", "修法",
     "職安", "防護", "退休", "就業", "人才", "缺工", "補貼", "減班",
@@ -13,7 +164,6 @@ major_keywords = [
     "AI", "半導體", "電動車", "海外併購", "罷工", "調薪", "加薪"
 ]
 
-# 通用 HR / 經濟 / 產業關鍵字
 general_keywords = [
     "裁員", "裁撤", "資遣", "關廠", "停工", "缺工", "徵才", "招募",
     "職缺", "人力", "人資", "勞動", "勞基法", "工時", "退休", "退休金",
@@ -48,25 +198,20 @@ rss_urls = [
     "https://news.google.com/rss/search?q=台灣+缺工&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=台灣+薪資&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=台灣+就業&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
-
     "https://news.google.com/rss/search?q=台灣+設廠&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=台灣+擴廠&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=台灣+電動車&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=台灣+半導體&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
-
     "https://news.google.com/rss/search?q=印度+設廠&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=越南+設廠&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
-
     "https://news.google.com/rss/search?q=董事長+異動&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=總經理+接任&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
-
     "https://news.google.com/rss/search?q=三星+裁員+AI+半導體&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=台積電+設廠+擴廠+人才&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=比亞迪+電動車+設廠+人力&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=特斯拉+裁員+電動車+人力&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=聯發科+半導體+人才+徵才&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=華碩+人力+裁員+AI&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
-
     "https://news.google.com/rss/search?q=Digitimes+半導體+AI&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=Inside+科技+AI+人才&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
     "https://news.google.com/rss/search?q=ABMedia+科技+AI&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
@@ -74,7 +219,7 @@ rss_urls = [
     "https://news.google.com/rss/search?q=鉅亨網+半導體+電動車+AI&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
 ]
 
-all_news = []
+all_insight_news = []
 
 for rss_url in rss_urls:
     feed = feedparser.parse(rss_url)
@@ -94,14 +239,13 @@ for rss_url in rss_urls:
             any(k in title for k in keywords)
             and any(m in title for m in major_keywords)
         ):
-            all_news.append({
+            all_insight_news.append({
                 "日期": published,
                 "來源": source,
                 "標題": title,
                 "連結": link
             })
 
-# 讀取舊資料
 old_news = []
 
 try:
@@ -110,29 +254,23 @@ try:
 except Exception:
     old_news = []
 
-# 新舊合併
-all_news.extend(old_news)
+all_insight_news.extend(old_news)
 
-# 去重複
-unique_news = []
+unique_insight_news = []
 seen_titles = set()
 
-for n in all_news:
+for n in all_insight_news:
     if n["標題"] not in seen_titles:
         seen_titles.add(n["標題"])
-        unique_news.append(n)
+        unique_insight_news.append(n)
 
-# 日期排序（最新在前）
-unique_news.sort(key=lambda x: x["日期"], reverse=True)
-
-# 保留最新100筆
-unique_news = unique_news[:100]
+unique_insight_news.sort(key=lambda x: x["日期"], reverse=True)
+unique_insight_news = unique_insight_news[:100]
 
 with open("data/insight_news.json", "w", encoding="utf-8") as f:
-    json.dump(unique_news, f, ensure_ascii=False, indent=2)
+    json.dump(unique_insight_news, f, ensure_ascii=False, indent=2)
 
-# AI摘要
-titles_text = " ".join([n["標題"] for n in unique_news[:20]])
+titles_text = " ".join([n["標題"] for n in unique_insight_news[:20]])
 
 summary = []
 
@@ -162,4 +300,6 @@ summary_data = {
 with open("data/insight_summary.json", "w", encoding="utf-8") as f:
     json.dump(summary_data, f, ensure_ascii=False, indent=2)
 
-print(f"完成，共 {len(unique_news)} 筆新聞")
+print("輿情觀察更新完成")
+print(f"重要公告共 {len(unique_gov_news)} 筆")
+print(f"輿情新聞共 {len(unique_insight_news)} 筆")
