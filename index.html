@@ -357,7 +357,7 @@ fetch("./data/taiwan_gdp.json")
     drawGDP();
 });
 
-fetch("./data/taiwan_news.json")
+fetch("./data/taiwan_news.json?v=" + new Date().getTime())
 .then(res => res.json())
 .then(news => {
     renderNewsGroup(news,"最新法令動態","newsLaw");
