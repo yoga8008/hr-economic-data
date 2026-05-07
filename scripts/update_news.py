@@ -147,7 +147,11 @@ for rss_url in rss_urls:
         except:
             published = datetime.now().strftime("%Y/%m/%d")
 
-        if any(k in title for k in keywords):
+        if (
+        any(k in title for k in keywords)
+        and
+        any(m in title for m in major_keywords)
+        ):
 
             all_news.append({
                 "日期": published,
