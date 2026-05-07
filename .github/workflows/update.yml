@@ -1,14 +1,17 @@
-name: Update Taiwan Data
+name: update
 
 on:
   workflow_dispatch:
 
-jobs:
-  update:
-    runs-on: ubuntu-latest
+  schedule:
+    - cron: '0 */6 * * *'
 
-    permissions:
-      contents: write
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -17,12 +20,12 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install packages
         run: pip install pandas openpyxl requests beautifulsoup4 lxml feedparser
 
-      - name: Run scripts
+      - name: Run update
         run: |
           python scripts/update_data.py
           python scripts/update_news.py
@@ -30,7 +33,7 @@ jobs:
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "github-actions"
           git add .
-          git commit -m "Update Taiwan data" || echo "No changes"
+          git commit -m "auto update" || echo "no changes"
           git push
