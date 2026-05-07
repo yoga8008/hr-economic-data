@@ -228,29 +228,35 @@ label{
         <canvas id="gdpChart"></canvas>
     </div>
 
-    <div class="card">
+    <!-- CPI -->
+<div class="card">
 
-        <div class="filter">
-            起：<select id="startMonth"></select>
-            迄：<select id="endMonth"></select>
+    <div class="filter">
+        起：<select id="startMonth"></select>
+        迄：<select id="endMonth"></select>
 
-            <label>
-                <input type="checkbox" id="compareMode">
-                同期比較
-            </label>
+        <label>
+            <input type="checkbox" id="compareMode">
+            同期比較
+        </label>
 
-            <button onclick="filterData()">查詢</button>
-        </div>
-
-        <h2 class="sectionTitle">消費者物價指數年增率(CPI)</h2>
-        <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
-        <canvas id="cpiChart"></canvas>
-
-        <h2 class="sectionTitle" style="margin-top:40px;">失業率</h2>
-        <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
-        <canvas id="unemploymentChart"></canvas>
-
+        <button onclick="filterData()">查詢</button>
     </div>
+
+    <h2 class="sectionTitle">消費者物價指數年增率(CPI)</h2>
+    <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
+    <canvas id="cpiChart"></canvas>
+
+</div>
+
+<!-- 失業率 -->
+<div class="card">
+
+    <h2 class="sectionTitle">失業率</h2>
+    <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
+    <canvas id="unemploymentChart"></canvas>
+
+</div>
 
     <div class="source">
         資料來源：
