@@ -9,16 +9,12 @@
     width:calc(100% - 80px);
     max-width:1200px;
     height:64px;
-
     margin:20px auto 40px auto;
-
     background:#1e3a8a;
     border-radius:36px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     overflow:hidden;
     box-shadow:0 4px 12px rgba(0,0,0,0.12);
 }
@@ -28,25 +24,17 @@
     text-decoration:none;
     font-weight:bold;
     font-size:16px;
-
     height:100%;
     padding:0 36px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-right:1px solid rgba(255,255,255,0.18);
     transition:.2s;
 }
 
-.navbar a:last-child{
-    border-right:none;
-}
-
-.navbar a:hover{
-    background:rgba(255,255,255,0.10);
-}   
+.navbar a:last-child{ border-right:none; }
+.navbar a:hover{ background:rgba(255,255,255,0.10); }
 
 body{
     font-family: Arial, sans-serif;
@@ -62,9 +50,7 @@ h1{
     box-sizing:border-box;
 }
 
-.layout{
-    display:block;
-}
+.layout{ display:block; }
 
 .leftPanel{
     width:100%;
@@ -96,7 +82,6 @@ h1{
     color:#1e3a8a;
 }
 
-/* Link Cards */
 .linkGrid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
@@ -128,71 +113,48 @@ h1{
     box-shadow:0 8px 20px rgba(0,0,0,0.08);
     background:#eff6ff;
 }
-.assistantBox button{
-    height:48px;
-    width:120px;
 
-    border:none;
-    background:#1e3a8a;
-    color:#fff;
-
-    border-radius:10px;
-
-    cursor:pointer;
-    font-weight:bold;
-
-    transition:.2s;
+.assistantBox{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
 .assistantBox input{
-    width:100%;
+    flex:1;
     height:48px;
-
     padding:0 14px;
-
     border:1px solid #ccc;
     border-radius:10px;
-
     font-size:15px;
-
     box-sizing:border-box;
 }
 
 .assistantBox button{
-    width:120px;
-    min-width:120px;
+    width:140px;
+    min-width:140px;
     height:48px;
-
     border:none;
     background:#1e3a8a;
     color:#fff;
-
     border-radius:10px;
-
     cursor:pointer;
     font-weight:bold;
-
     transition:.2s;
 }
 
-.assistantBox button:hover{
-    opacity:.9;
-}
+.assistantBox button:hover{ opacity:.9; }
 
 .recommendResult{
     margin-top:16px;
-
     padding:16px 18px;
-
     background:#f8fafc;
-
     border-left:5px solid #1e3a8a;
     border-radius:10px;
-
     line-height:1.8;
     color:#1f2937;
 }
-/* 公告浮動按鈕 */
+
 .newsFloatingBtn{
     position:fixed;
     right:0;
@@ -209,7 +171,6 @@ h1{
     box-shadow:0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* 公告抽屜 */
 .newsDrawer{
     position:fixed;
     top:0;
@@ -224,9 +185,7 @@ h1{
     flex-direction:column;
 }
 
-.newsDrawer.open{
-    right:0;
-}
+.newsDrawer.open{ right:0; }
 
 .newsDrawerHeader{
     padding:20px;
@@ -251,9 +210,7 @@ h1{
     flex:1;
 }
 
-.newsGroup{
-    margin-bottom:30px;
-}
+.newsGroup{ margin-bottom:30px; }
 
 .newsGroup h3{
     margin-bottom:12px;
@@ -281,11 +238,9 @@ h1{
     font-weight:bold;
 }
 
-.newsTitle a:hover{
-    text-decoration:underline;
-}
-@media(max-width:768px){
+.newsTitle a:hover{ text-decoration:underline; }
 
+@media(max-width:768px){
     .navbar{
         width:calc(100% - 32px);
         height:auto;
@@ -304,7 +259,8 @@ h1{
     }
 
     .assistantBox{
-        grid-template-columns:1fr;
+        flex-direction:column;
+        align-items:stretch;
     }
 
     .assistantBox button{
@@ -329,123 +285,79 @@ h1{
 </div>
 
 <h1>常用網站</h1>
-<div class="card">
 
-    <h2 class="sectionTitle">網站引導</h2>
-
-    <div class="assistantBox">
-
-        <input
-            id="siteQuestion"
-            placeholder="例如：我想查資遣費、勞基法、勞保、健保、公司財報"
-        >
-
-        <button onclick="recommendSite()">
-            推薦網站
-        </button>
-
-    </div>
-
-    <div id="siteRecommendResult" class="recommendResult">
-        輸入需求後，我會建議你可以去哪個網站查。
-    </div>
-
-</div>
 <div class="layout">
 <div class="leftPanel">
 
-    <!-- 政府法規 -->
+    <div class="card">
+        <h2 class="sectionTitle">網站引導</h2>
+
+        <div class="assistantBox">
+            <input id="siteQuestion" placeholder="例如：我想查資遣費、勞基法、勞保、健保、公司財報">
+            <button onclick="recommendSite()">推薦網站</button>
+        </div>
+
+        <div id="siteRecommendResult" class="recommendResult">
+            輸入需求後，我會建議你可以去哪個網站查。
+        </div>
+    </div>
+
     <div class="card">
         <h2 class="sectionTitle">政府法規</h2>
 
         <div class="linkGrid">
             <a class="linkCard" href="https://www.mol.gov.tw/" target="_blank">⚖️<span>勞動部</span></a>
-
             <a class="linkCard" href="https://laws.mol.gov.tw/" target="_blank">📚<span>勞動法令查詢</span></a>
-
             <a class="linkCard" href="https://www.wda.gov.tw/" target="_blank">🧰<span>勞動力發展署</span></a>
-
             <a class="linkCard" href="https://www.osha.gov.tw/" target="_blank">🦺<span>職業安全衛生署</span></a>
-
             <a class="linkCard" href="https://www.bli.gov.tw/" target="_blank">🛡️<span>勞工保險局</span></a>
-
             <a class="linkCard" href="https://www.nhi.gov.tw/" target="_blank">🏥<span>健保署</span></a>
-
             <a class="linkCard" href="https://ilabor.ntpc.gov.tw/" target="_blank">🏛️<span>新北勞工局</span></a>
-
             <a class="linkCard" href="https://www.ntbna.gov.tw/" target="_blank">💰<span>國稅局</span></a>
         </div>
     </div>
 
-    <!-- 統計資料 -->
     <div class="card">
         <h2 class="sectionTitle">統計資料</h2>
 
         <div class="linkGrid">
             <a class="linkCard" href="https://www.stat.gov.tw/" target="_blank">📊<span>行政院主計總處</span></a>
-
             <a class="linkCard" href="https://mops.twse.com.tw/" target="_blank">📈<span>公開資訊觀測站</span></a>
         </div>
     </div>
 
-    <!-- 人資網站 -->
     <div class="card">
         <h2 class="sectionTitle">人資相關網站</h2>
 
         <div class="linkGrid">
             <a class="linkCard" href="https://www.104.com.tw/" target="_blank">👔<span>104人力銀行</span></a>
-
             <a class="linkCard" href="https://www.1111.com.tw/" target="_blank">💼<span>1111人力銀行</span></a>
         </div>
     </div>
 
-    <!-- HR咖啡站 -->
     <div class="card">
         <h2 class="sectionTitle">人資咖啡站</h2>
 
         <div class="linkGrid">
-
-            <a class="linkCard" href="https://www.hr.org.tw/" target="_blank">
-                ☕
-                <span>中華人事主管協會</span>
-            </a>
-
-            <a class="linkCard" href="https://www.chrma.net/Template/Index.aspx" target="_blank">
-                📘
-                <span>中華人力資源管理協會</span>
-            </a>
-
-            <a class="linkCard" href="https://hrlearning.com.tw/" target="_blank">
-                🌿
-                <span>人資小周末</span>
-            </a>
-
-            <a class="linkCard" href="https://hiproficiency.com/forum/%e4%ba%ba%e5%8a%9b%e8%b3%87%e6%ba%90%e8%ab%96%e5%a3%87/" target="_blank">
-                🚶
-                <span>HRJOURNEY</span>
-            </a>
-
+            <a class="linkCard" href="https://www.hr.org.tw/" target="_blank">☕<span>中華人事主管協會</span></a>
+            <a class="linkCard" href="https://www.chrma.net/Template/Index.aspx" target="_blank">📘<span>中華人力資源管理協會</span></a>
+            <a class="linkCard" href="https://hrlearning.com.tw/" target="_blank">🌿<span>人資小周末</span></a>
+            <a class="linkCard" href="https://hiproficiency.com/forum/%e4%ba%ba%e5%8a%9b%e8%b3%87%e6%ba%90%e8%ab%96%e5%a3%87/" target="_blank">🚶<span>HRJOURNEY</span></a>
         </div>
     </div>
 
 </div>
 </div>
 
-<!-- 公告浮動按鈕 -->
-<div class="newsFloatingBtn" onclick="toggleNewsPanel()">
-    重要公告
-</div>
+<div class="newsFloatingBtn" onclick="toggleNewsPanel()">重要公告</div>
 
-<!-- 公告抽屜 -->
 <div class="newsDrawer" id="newsDrawer">
-
     <div class="newsDrawerHeader">
         <span>重要公告彙整</span>
         <button onclick="toggleNewsPanel()">✕</button>
     </div>
 
     <div class="newsDrawerContent">
-
         <div class="newsGroup">
             <h3>勞動部</h3>
             <div id="newsMol">載入中...</div>
@@ -460,20 +372,16 @@ h1{
             <h3>勞保局</h3>
             <div id="newsBli">載入中...</div>
         </div>
-
     </div>
 </div>
 
 <script>
-
 fetch("./data/taiwan_news.json")
 .then(res => res.json())
 .then(news => {
-
     renderNewsGroup(news,"勞動部","newsMol");
     renderNewsGroup(news,"勞動力發展署","newsWda");
     renderNewsGroup(news,"勞保局","newsBli");
-
 });
 
 function toggleNewsPanel(){
@@ -481,7 +389,6 @@ function toggleNewsPanel(){
 }
 
 function renderNewsGroup(news, unitName, elementId){
-
     const box = document.getElementById(elementId);
 
     const filtered = news
@@ -492,27 +399,69 @@ function renderNewsGroup(news, unitName, elementId){
     box.innerHTML = filtered.map(item => `
         <div class="newsItem">
             <div class="newsDate">${item.日期}</div>
-
             <div class="newsTitle">
-                <a href="${item.連結}" target="_blank">
-                    ${item.標題}
-                </a>
+                <a href="${item.連結}" target="_blank">${item.標題}</a>
             </div>
         </div>
     `).join("");
 }
-function renderNewsGroup(news, unitName, elementId){
 
-    const box = document.getElementById(elementId);
+function recommendSite(){
+    const q = document.getElementById("siteQuestion").value.trim();
+    const result = document.getElementById("siteRecommendResult");
 
-    const filtered = news
-        .filter(x => x.單位 === unitName)
-        .sort((a,b)=>b.日期.localeCompare(a.日期))
-        .slice(0,5);
+    if(!q){
+        result.innerHTML = "請先輸入你想查詢的內容。";
+        return;
+    }
 
-    box.innerHTML = filtered.map(item => `
-        ...
-    `).join("");
+    let answer = "";
+
+    if(q.includes("資遣") || q.includes("遣散")){
+        answer = `
+            <b>建議網站：資遣費試算</b><br>
+            適合查詢資遣費、年資與給付概算。<br><br>
+            <a href="https://calcr2.mol.gov.tw/SeverancePay" target="_blank">前往網站</a>
+        `;
+    }
+    else if(q.includes("勞基法") || q.includes("法規") || q.includes("工時") || q.includes("加班")){
+        answer = `
+            <b>建議網站：勞動法令查詢系統</b><br>
+            適合查詢勞基法、勞退、加班、工時等法規。<br><br>
+            <a href="https://laws.mol.gov.tw/" target="_blank">前往網站</a>
+        `;
+    }
+    else if(q.includes("勞保") || q.includes("退休金") || q.includes("職災")){
+        answer = `
+            <b>建議網站：勞工保險局</b><br>
+            適合查詢勞保、勞退、職災相關資訊。<br><br>
+            <a href="https://www.bli.gov.tw/" target="_blank">前往網站</a>
+        `;
+    }
+    else if(q.includes("健保") || q.includes("眷屬")){
+        answer = `
+            <b>建議網站：健保署</b><br>
+            適合查詢健保加退保與保費資訊。<br><br>
+            <a href="https://www.nhi.gov.tw/" target="_blank">前往網站</a>
+        `;
+    }
+    else if(q.includes("財報") || q.includes("年報") || q.includes("公開資訊")){
+        answer = `
+            <b>建議網站：公開資訊觀測站</b><br>
+            適合查詢上市櫃公司財報與重大訊息。<br><br>
+            <a href="https://mops.twse.com.tw/" target="_blank">前往網站</a>
+        `;
+    }
+    else{
+        answer = `
+            <b>建議先查詢：</b><br>
+            勞動部 或 勞動法令查詢系統。<br><br>
+            若是法規條文建議使用「勞動法令查詢」。<br>
+            若是政策公告建議使用「勞動部」。
+        `;
+    }
+
+    result.innerHTML = answer;
 }
 </script>
 
