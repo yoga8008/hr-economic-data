@@ -35,15 +35,38 @@ body{
     margin:0 auto;
 }
 
+h1{
+    margin-bottom:20px;
+}
+
 .card{
     background:#fff;
     border:1px solid #ddd;
     border-radius:10px;
     padding:20px;
+    margin-bottom:24px;
 }
 
-h1{
-    margin-bottom:20px;
+.sectionTitle{
+    padding-bottom:10px;
+    margin-bottom:16px;
+    border-bottom:1px solid #ddd;
+}
+
+.summaryTime{
+    font-size:13px;
+    color:#666;
+    margin-bottom:12px;
+}
+
+.summaryList{
+    margin:0;
+    padding-left:22px;
+}
+
+.summaryList li{
+    margin-bottom:10px;
+    line-height:1.6;
 }
 
 table{
@@ -57,6 +80,7 @@ th, td{
     border-bottom:1px solid #e5e7eb;
     text-align:left;
     font-size:14px;
+    vertical-align:top;
 }
 
 th{
@@ -89,10 +113,17 @@ td a:hover{
     <h1>輿情觀察</h1>
 
     <div class="card">
+        <h2 class="sectionTitle">AI 今日重點摘要</h2>
+        <div id="aiSummary">載入中...</div>
+    </div>
+
+    <div class="card">
+        <h2 class="sectionTitle">最新輿情資訊</h2>
+
         <table>
             <thead>
                 <tr>
-                    <th style="width:140px;">更新日</th>
+                    <th style="width:180px;">更新日</th>
                     <th style="width:160px;">來源</th>
                     <th>標題</th>
                 </tr>
@@ -107,6 +138,28 @@ td a:hover{
 </div>
 
 <script>
+fetch("./data/insight_summary.json")
+.then(res => res.json())
+.then(data => {
+    const box = document.getElementById("aiSummary");
+
+    if(!data.摘要 || data.摘要.length === 0){
+        box.innerHTML = "目前尚無摘要";
+        return;
+    }
+
+    box.innerHTML = `
+        <div class="summaryTime">更新時間：${data.更新時間 || ""}</div>
+        <ol class="summaryList">
+            ${data.摘要.map(x => `<li>${x}</li>`).join("")}
+        </ol>
+    `;
+})
+.catch(() => {
+    document.getElementById("aiSummary").innerHTML =
+        "摘要載入失敗，請確認 data/insight_summary.json 是否存在。";
+});
+
 fetch("./data/insight_news.json")
 .then(res => res.json())
 .then(news => {
@@ -133,7 +186,7 @@ fetch("./data/insight_news.json")
         </tr>
     `).join("");
 })
-.catch(err => {
+.catch(() => {
     document.getElementById("insightTable").innerHTML = `
         <tr>
             <td colspan="3">資料載入失敗，請確認 data/insight_news.json 是否存在。</td>
