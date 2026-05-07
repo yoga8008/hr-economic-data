@@ -8,7 +8,7 @@
 .navbar{
     background:#1e3a8a;
     padding:14px 24px;
-    margin:-20px -20px 30px -20px;
+    margin:0 0 30px 0;
     display:flex;
     gap:24px;
     align-items:center;
@@ -24,15 +24,17 @@
 
 body{
     font-family: Arial, sans-serif;
-    padding:20px;
+    padding:0;
     background:#f3f4f6;
     margin:0;
 }
 
 .leftPanel{
     width:100%;
-    max-width:1200px;
+    max-width:1400px;
     margin:0 auto;
+    padding:0 20px 40px 20px;
+    box-sizing:border-box;
 }
 
 h1{
@@ -66,7 +68,35 @@ h1{
 
 .summaryList li{
     margin-bottom:10px;
-    line-height:1.6;
+    line-height:1.7;
+    font-size:15px;
+}
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.toolbarLeft{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.toolbarRight{
+    font-size:13px;
+    color:#666;
+}
+
+select{
+    padding:6px 12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    background:#fff;
 }
 
 table{
@@ -76,7 +106,7 @@ table{
 }
 
 th, td{
-    padding:12px;
+    padding:14px 12px;
     border-bottom:1px solid #e5e7eb;
     text-align:left;
     font-size:14px;
@@ -86,16 +116,33 @@ th, td{
 th{
     background:#f8fafc;
     font-weight:bold;
+    font-size:15px;
+}
+
+tr:hover{
+    background:#f9fbff;
 }
 
 td a{
     color:#1a5fb4;
     text-decoration:none;
     font-weight:bold;
+    line-height:1.6;
 }
 
 td a:hover{
     text-decoration:underline;
+}
+
+.newsDate{
+    white-space:nowrap;
+    color:#555;
+}
+
+.newsSource{
+    white-space:nowrap;
+    font-weight:bold;
+    color:#374151;
 }
 </style>
 </head>
@@ -110,6 +157,7 @@ td a:hover{
 </div>
 
 <div class="leftPanel">
+
     <h1>輿情觀察</h1>
 
     <div class="card">
@@ -118,29 +166,53 @@ td a:hover{
     </div>
 
     <div class="card">
-        <h2 class="sectionTitle">最新輿情資訊</h2>
+
+        <div class="toolbar">
+
+            <div class="toolbarLeft">
+                <h2 style="margin:0;">最新輿情資訊</h2>
+
+                <select id="displayCount" onchange="renderInsightTable()">
+                    <option value="20">20則</option>
+                    <option value="30">30則</option>
+                    <option value="50">50則</option>
+                </select>
+            </div>
+
+            <div class="toolbarRight">
+                最多保留 100 則歷史輿情
+            </div>
+
+        </div>
 
         <table>
             <thead>
                 <tr>
-                    <th style="width:180px;">更新日</th>
-                    <th style="width:160px;">來源</th>
+                    <th style="width:140px;">更新日</th>
+                    <th style="width:180px;">來源</th>
                     <th>標題</th>
                 </tr>
             </thead>
+
             <tbody id="insightTable">
                 <tr>
                     <td colspan="3">載入中...</td>
                 </tr>
             </tbody>
         </table>
+
     </div>
+
 </div>
 
 <script>
+
+let insightNews = [];
+
 fetch("./data/insight_summary.json")
 .then(res => res.json())
 .then(data => {
+
     const box = document.getElementById("aiSummary");
 
     if(!data.摘要 || data.摘要.length === 0){
@@ -149,50 +221,87 @@ fetch("./data/insight_summary.json")
     }
 
     box.innerHTML = `
-        <div class="summaryTime">更新時間：${data.更新時間 || ""}</div>
+        <div class="summaryTime">
+            更新時間：${data.更新時間 || ""}
+        </div>
+
         <ol class="summaryList">
             ${data.摘要.map(x => `<li>${x}</li>`).join("")}
         </ol>
     `;
 })
 .catch(() => {
+
     document.getElementById("aiSummary").innerHTML =
         "摘要載入失敗，請確認 data/insight_summary.json 是否存在。";
+
 });
 
 fetch("./data/insight_news.json")
 .then(res => res.json())
 .then(news => {
+
+    insightNews = news || [];
+
+    renderInsightTable();
+
+})
+.catch(() => {
+
+    document.getElementById("insightTable").innerHTML = `
+        <tr>
+            <td colspan="3">
+                資料載入失敗，請確認 data/insight_news.json 是否存在。
+            </td>
+        </tr>
+    `;
+
+});
+
+function renderInsightTable(){
+
     const tbody = document.getElementById("insightTable");
 
-    if(!news || news.length === 0){
+    const count = Number(
+        document.getElementById("displayCount").value || 20
+    );
+
+    const news = insightNews.slice(0, count);
+
+    if(news.length === 0){
+
         tbody.innerHTML = `
             <tr>
                 <td colspan="3">目前沒有資料</td>
             </tr>
         `;
+
         return;
     }
 
-    tbody.innerHTML = news.slice(0,20).map(item => `
+    tbody.innerHTML = news.map(item => `
+
         <tr>
-            <td>${item.日期 || ""}</td>
-            <td>${item.來源 || ""}</td>
+
+            <td class="newsDate">
+                ${item.日期 || ""}
+            </td>
+
+            <td class="newsSource">
+                ${item.來源 || ""}
+            </td>
+
             <td>
                 <a href="${item.連結}" target="_blank">
                     ${item.標題 || ""}
                 </a>
             </td>
+
         </tr>
+
     `).join("");
-})
-.catch(() => {
-    document.getElementById("insightTable").innerHTML = `
-        <tr>
-            <td colspan="3">資料載入失敗，請確認 data/insight_news.json 是否存在。</td>
-        </tr>
-    `;
-});
+}
+
 </script>
 
 </body>
