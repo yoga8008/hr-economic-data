@@ -312,6 +312,11 @@ label{
     <div class="newsDrawerContent">
 
         <div class="newsGroup">
+            <h3>最新法令動態</h3>
+            <div id="newsLaw">載入中...</div>
+        </div>
+
+        <div class="newsGroup">
             <h3>勞動部</h3>
             <div id="newsMol">載入中...</div>
         </div>
@@ -323,7 +328,7 @@ label{
 
         <div class="newsGroup">
             <h3>勞保局</h3>
-            <div id="newsNhi">載入中...</div>
+            <div id="newsBli">載入中...</div>
         </div>
 
     </div>
@@ -355,9 +360,10 @@ fetch("./data/taiwan_gdp.json")
 fetch("./data/taiwan_news.json")
 .then(res => res.json())
 .then(news => {
+    renderNewsGroup(news,"最新法令動態","newsLaw");
     renderNewsGroup(news,"勞動部","newsMol");
     renderNewsGroup(news,"勞動力發展署","newsWda");
-    renderNewsGroup(news,"勞保局","newsNhi");
+    renderNewsGroup(news,"勞保局","newsBli");
 });
 
 function toggleNewsPanel(){
