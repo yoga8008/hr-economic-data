@@ -17,7 +17,7 @@ os.makedirs("data", exist_ok=True)
 SOURCES = [
     {
         "unit": "最新法令動態",
-        "url": "https://laws.mol.gov.tw/index.aspx"
+        "url": "https://laws.mol.gov.tw/"
     },
     {
         "unit": "勞動部",
