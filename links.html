@@ -422,22 +422,6 @@ function recommendSite(){
     let answer = "";
 
     if(
-        q.includes("資遣") ||
-        q.includes("遣散")
-    ){
-
-        answer = `
-            <b>建議網站：資遣費試算</b><br>
-            適合查詢資遣費、年資與給付概算。<br><br>
-
-            <a href="https://calcr2.mol.gov.tw/SeverancePay"
-               target="_blank">
-               前往網站
-            </a>
-        `;
-    }
-
-    else if(
         q.includes("資遣通報") ||
         q.includes("就業金卡") ||
         q.includes("外勞") ||
@@ -452,6 +436,22 @@ function recommendSite(){
             適合查詢資遣通報、外國人聘僱、就業金卡、職能發展與訓練資源。<br><br>
 
             <a href="https://www.wda.gov.tw/"
+               target="_blank">
+               前往網站
+            </a>
+        `;
+    }
+
+    else if(
+        q.includes("資遣") ||
+        q.includes("遣散")
+    ){
+
+        answer = `
+            <b>建議網站：資遣費試算</b><br>
+            適合查詢資遣費、年資與給付概算。<br><br>
+
+            <a href="https://calcr2.mol.gov.tw/SeverancePay"
                target="_blank">
                前往網站
             </a>
