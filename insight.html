@@ -9,47 +9,33 @@
     width:calc(100% - 80px);
     max-width:1200px;
     height:64px;
-
     margin:20px auto 40px auto;
-
     background:#1e3a8a;
     border-radius:36px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     overflow:hidden;
-
     box-shadow:0 4px 12px rgba(0,0,0,0.12);
 }
 
 .navbar a{
     color:#ffffff;
     text-decoration:none;
-
     font-weight:bold;
     font-size:16px;
-
     height:100%;
     padding:0 36px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-right:1px solid rgba(255,255,255,0.18);
-
     transition:.2s;
 }
 
-.navbar a:last-child{
-    border-right:none;
-}
+.navbar a:last-child{ border-right:none; }
 
-.navbar a:hover{
-    background:rgba(255,255,255,0.10);
-}
+.navbar a:hover{ background:rgba(255,255,255,0.10); }
 
 body{
     font-family: Arial, sans-serif;
@@ -151,9 +137,7 @@ th{
     font-size:15px;
 }
 
-tr:hover{
-    background:#f9fbff;
-}
+tr:hover{ background:#f9fbff; }
 
 td a{
     color:#1a5fb4;
@@ -162,9 +146,7 @@ td a{
     line-height:1.6;
 }
 
-td a:hover{
-    text-decoration:underline;
-}
+td a:hover{ text-decoration:underline; }
 
 .newsDate{
     white-space:nowrap;
@@ -176,18 +158,51 @@ td a:hover{
     font-weight:bold;
     color:#374151;
 }
-    @media(max-width:768px){
 
+.paginationArea{
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.paginationButtons{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.paginationButtons button{
+    padding:8px 14px;
+    border:none;
+    background:#1e3a8a;
+    color:#fff;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.paginationButtons button:hover{ opacity:.9; }
+
+.paginationButtons button:disabled{
+    background:#cbd5e1;
+    cursor:not-allowed;
+}
+
+#pageInfo{
+    font-size:14px;
+    color:#555;
+}
+
+@media(max-width:768px){
     .navbar{
         width:calc(100% - 32px);
         height:auto;
         min-height:56px;
-
         flex-wrap:wrap;
         justify-content:center;
-
         border-radius:24px;
-
         margin:16px auto 30px auto;
     }
 
@@ -195,7 +210,6 @@ td a:hover{
         height:48px;
         padding:0 18px;
         font-size:15px;
-
         border-right:none;
     }
 
@@ -204,12 +218,13 @@ td a:hover{
         align-items:flex-start;
     }
 
-    table{
-        font-size:13px;
-    }
+    table{ font-size:13px; }
 
-    th, td{
-        padding:10px 8px;
+    th, td{ padding:10px 8px; }
+
+    .paginationArea{
+        flex-direction:column;
+        align-items:flex-start;
     }
 }
 </style>
@@ -236,21 +251,13 @@ td a:hover{
     <div class="card">
 
         <div class="toolbar">
-
             <div class="toolbarLeft">
                 <h2 style="margin:0;">最新輿情資訊</h2>
-
-                <select id="displayCount" onchange="renderInsightTable()">
-                    <option value="20">20則</option>
-                    <option value="30">30則</option>
-                    <option value="50">50則</option>
-                </select>
             </div>
 
             <div class="toolbarRight">
                 最多保留 100 則歷史輿情
             </div>
-
         </div>
 
         <table>
@@ -269,18 +276,34 @@ td a:hover{
             </tbody>
         </table>
 
+        <div class="paginationArea">
+            <div class="pageSizeBox">
+                每頁顯示：
+                <select id="displayCount" onchange="changePageSize()">
+                    <option value="20">20則</option>
+                    <option value="30">30則</option>
+                    <option value="50">50則</option>
+                </select>
+            </div>
+
+            <div class="paginationButtons">
+                <button id="prevBtn" onclick="prevPage()">上一頁</button>
+                <span id="pageInfo"></span>
+                <button id="nextBtn" onclick="nextPage()">下一頁</button>
+            </div>
+        </div>
+
     </div>
 
 </div>
 
 <script>
-
 let insightNews = [];
+let currentPage = 1;
 
 fetch("./data/insight_summary.json")
 .then(res => res.json())
 .then(data => {
-
     const box = document.getElementById("aiSummary");
 
     if(!data.摘要 || data.摘要.length === 0){
@@ -299,23 +322,17 @@ fetch("./data/insight_summary.json")
     `;
 })
 .catch(() => {
-
     document.getElementById("aiSummary").innerHTML =
         "摘要載入失敗，請確認 data/insight_summary.json 是否存在。";
-
 });
 
 fetch("./data/insight_news.json")
 .then(res => res.json())
 .then(news => {
-
     insightNews = news || [];
-
     renderInsightTable();
-
 })
 .catch(() => {
-
     document.getElementById("insightTable").innerHTML = `
         <tr>
             <td colspan="3">
@@ -323,53 +340,84 @@ fetch("./data/insight_news.json")
             </td>
         </tr>
     `;
-
 });
 
 function renderInsightTable(){
-
     const tbody = document.getElementById("insightTable");
 
     const count = Number(
         document.getElementById("displayCount").value || 20
     );
 
-    const news = insightNews.slice(0, count);
+    const totalPages = Math.max(1, Math.ceil(insightNews.length / count));
+
+    if(currentPage > totalPages){
+        currentPage = totalPages;
+    }
+
+    const start = (currentPage - 1) * count;
+    const end = start + count;
+
+    const news = insightNews.slice(start, end);
 
     if(news.length === 0){
-
         tbody.innerHTML = `
             <tr>
                 <td colspan="3">目前沒有資料</td>
             </tr>
         `;
 
+        updatePagination(totalPages);
         return;
     }
 
     tbody.innerHTML = news.map(item => `
-
         <tr>
-
-            <td class="newsDate">
-                ${item.日期 || ""}
-            </td>
-
-            <td class="newsSource">
-                ${item.來源 || ""}
-            </td>
-
+            <td class="newsDate">${item.日期 || ""}</td>
+            <td class="newsSource">${item.來源 || ""}</td>
             <td>
                 <a href="${item.連結}" target="_blank">
                     ${item.標題 || ""}
                 </a>
             </td>
-
         </tr>
-
     `).join("");
+
+    updatePagination(totalPages);
 }
 
+function updatePagination(totalPages){
+    document.getElementById("pageInfo").innerText =
+        `第 ${currentPage} / ${totalPages} 頁`;
+
+    document.getElementById("prevBtn").disabled = currentPage <= 1;
+    document.getElementById("nextBtn").disabled = currentPage >= totalPages;
+}
+
+function nextPage(){
+    const count = Number(
+        document.getElementById("displayCount").value || 20
+    );
+
+    const totalPages = Math.max(1, Math.ceil(insightNews.length / count));
+
+    if(currentPage < totalPages){
+        currentPage++;
+        renderInsightTable();
+    }
+}
+
+function prevPage(){
+    if(currentPage > 1){
+        currentPage--;
+        renderInsightTable();
+    }
+}
+
+function changePageSize(){
+    currentPage = 1;
+    renderInsightTable();
+}
 </script>
 
 </body>
