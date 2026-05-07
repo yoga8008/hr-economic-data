@@ -75,7 +75,7 @@ h1{
 
 canvas{
     width:100% !important;
-    height:420px !important;
+    height:560px !important;
     margin-top:25px;
 }
 
@@ -295,6 +295,7 @@ label{
 </div>
 
 <script>
+Chart.register(ChartDataLabels);
 let allData = [];
 let gdpData = [];
 let gdpChart, cpiChart, unemploymentChart;
@@ -505,7 +506,7 @@ function getChartOptions(showLegend){
 
         layout:{
             padding:{
-                top:40,
+                top:70,
                 right:20,
                 left:15,
                 bottom:10
@@ -524,7 +525,7 @@ function getChartOptions(showLegend){
             datalabels:{
                 align:"top",
                 anchor:"end",
-                offset:14,
+                offset:18,
                 formatter:function(value){
                     return value.toFixed(1) + "%";
                 },
