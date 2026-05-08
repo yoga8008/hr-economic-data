@@ -78,6 +78,30 @@ h1{
     opacity:.9;
 }
 
+.levelFilters,
+.fieldFilters{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:0 0 20px 0;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:14px 18px;
+}
+
+.levelFilters label,
+.fieldFilters label{
+    font-size:14px;
+    color:#374151;
+    cursor:pointer;
+}
+
+.levelFilters input,
+.fieldFilters input{
+    margin-right:5px;
+}
+
 .chartBox{
     background:#fff;
     border:1px solid #ddd;
@@ -158,6 +182,14 @@ h1{
     padding-left:30px;
 }
 
+.totalPeople{
+    margin-top:8px;
+    padding-top:8px;
+    border-top:1px dashed #cbd5e1;
+    font-weight:bold;
+    color:#1e3a8a;
+}
+
 .hidden{
     display:none;
 }
@@ -167,34 +199,14 @@ h1{
     background:#fff1f2;
 }
 
+.pathOnly{
+    opacity:.45;
+}
+
 .summary{
     margin-bottom:15px;
     color:#374151;
     font-size:14px;
-}
-.levelFilters{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    margin:0 0 20px 0;
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:14px 18px;
-}
-
-.levelFilters label{
-    font-size:14px;
-    color:#374151;
-    cursor:pointer;
-}
-
-.levelFilters input{
-    margin-right:5px;
-}
-
-.pathOnly{
-    opacity:.45;
 }
 </style>
 </head>
@@ -221,6 +233,7 @@ h1{
 </div>
 
 <div id="levelFilters" class="levelFilters"></div>
+<div id="fieldFilters" class="fieldFilters"></div>
 
 <div class="chartBox">
     <div id="summary" class="summary"></div>
@@ -244,6 +257,13 @@ let allNodes = [];
 let rootNodes = [];
 let selectedLevels = new Set();
 
+let visibleFields = new Set([
+    "level",
+    "deptCode",
+    "costCode",
+    "manager"
+]);
+
 document.getElementById("excelFile").addEventListener("change", handleFile);
 document.getElementById("searchInput").addEventListener("input", searchTree);
 
@@ -262,6 +282,7 @@ function handleFile(e){
         checkColumns(rows);
         buildTreeData(rows);
         renderLevelFilters();
+        renderFieldFilters();
         renderTree();
     };
 
@@ -313,15 +334,17 @@ function buildTreeData(rows){
         const levelText = String(row["層級"]).trim() || "未設定";
 
         const node = {
-        row: row,
-        deptCode: deptCode,
-        parentCode: String(row["上級部門"]).trim(),
-        levelText: levelText,
-        level: Number(levelText) || 999,
-        order: index,
-        children: [],
-        expanded: true
-};
+            row: row,
+            deptCode: deptCode,
+            parentCode: String(row["上級部門"]).trim(),
+            levelText: levelText,
+            level: Number(levelText) || 999,
+            order: index,
+            ownPeople: parsePeople(row["在職人數"]),
+            totalPeople: 0,
+            children: [],
+            expanded: true
+        };
 
         deptMap[deptCode] = node;
         allNodes.push(node);
@@ -340,6 +363,7 @@ function buildTreeData(rows){
     });
 
     sortNodes(rootNodes);
+    rootNodes.forEach(node => calculateTotalPeople(node));
 
     if(errors.length > 0){
         errorList.innerHTML = `
@@ -363,30 +387,36 @@ function sortNodes(nodes){
     nodes.forEach(node => sortNodes(node.children));
 }
 
-function renderTree(){
-    const tree = document.getElementById("tree");
-    tree.innerHTML = "";
-
-    rootNodes.forEach(node => {
-        if(shouldShowNode(node)){
-            tree.appendChild(createNodeElement(node));
-        }
-    });
+function parsePeople(value){
+    const num = Number(String(value).replace(/,/g, "").trim());
+    return isNaN(num) ? 0 : num;
 }
+
+function calculateTotalPeople(node){
+    let total = node.ownPeople;
+
+    node.children.forEach(child => {
+        total += calculateTotalPeople(child);
+    });
+
+    node.totalPeople = total;
+    return total;
+}
+
 function renderLevelFilters(){
     const box = document.getElementById("levelFilters");
     box.innerHTML = "";
 
-const levels = [...new Set(allNodes.map(node => node.levelText))]
-    .sort((a,b) => {
-        const na = Number(a);
-        const nb = Number(b);
+    const levels = [...new Set(allNodes.map(node => node.levelText))]
+        .sort((a,b) => {
+            const na = Number(a);
+            const nb = Number(b);
 
-        if(isNaN(na)) return 1;
-        if(isNaN(nb)) return -1;
+            if(isNaN(na)) return 1;
+            if(isNaN(nb)) return -1;
 
-        return na - nb;
-    });
+            return na - nb;
+        });
 
     const title = document.createElement("div");
     title.innerHTML = "<b>層級篩選：</b>";
@@ -417,6 +447,56 @@ const levels = [...new Set(allNodes.map(node => node.levelText))]
     });
 }
 
+function renderFieldFilters(){
+    const box = document.getElementById("fieldFilters");
+    box.innerHTML = "";
+
+    const title = document.createElement("div");
+    title.innerHTML = "<b>顯示資訊：</b>";
+    box.appendChild(title);
+
+    const fields = [
+        { key:"level", label:"部門層級" },
+        { key:"deptCode", label:"部門代碼" },
+        { key:"costCode", label:"費用代碼" },
+        { key:"manager", label:"主管" }
+    ];
+
+    fields.forEach(field => {
+        const label = document.createElement("label");
+
+        label.innerHTML = `
+            <input type="checkbox" value="${field.key}" checked>
+            ${field.label}
+        `;
+
+        const checkbox = label.querySelector("input");
+
+        checkbox.addEventListener("change", function(){
+            if(this.checked){
+                visibleFields.add(this.value);
+            }else{
+                visibleFields.delete(this.value);
+            }
+
+            renderTree();
+        });
+
+        box.appendChild(label);
+    });
+}
+
+function renderTree(){
+    const tree = document.getElementById("tree");
+    tree.innerHTML = "";
+
+    rootNodes.forEach(node => {
+        if(shouldShowNode(node)){
+            tree.appendChild(createNodeElement(node));
+        }
+    });
+}
+
 function shouldShowNode(node){
     if(selectedLevels.size === 0){
         return true;
@@ -436,17 +516,48 @@ function isPathOnly(node){
 
     return !selectedLevels.has(node.levelText);
 }
+
+function renderNodeInfo(node){
+    const row = node.row;
+    const lines = [];
+
+    if(visibleFields.has("level")){
+        lines.push(`層級：${row["層級"] || "-"}`);
+    }
+
+    if(visibleFields.has("deptCode")){
+        lines.push(`部門代碼：${row["部門代碼"] || "-"}`);
+    }
+
+    if(visibleFields.has("costCode")){
+        lines.push(`費用代碼：${row["費用代碼"] || "-"}`);
+    }
+
+    if(visibleFields.has("manager")){
+        lines.push(`主管：${row["主管一姓名"] || "-"} / ${row["主管一職稱"] || "-"}`);
+    }
+
+    lines.push(`
+        <div class="totalPeople">
+            本單位人數：${node.ownPeople} 人<br>
+            含轄下合計：${node.totalPeople} 人
+        </div>
+    `);
+
+    return lines.join("<br>");
+}
+
 function createNodeElement(node){
     const li = document.createElement("li");
-
     const hasChildren = node.children.length > 0;
 
     const nodeDiv = document.createElement("div");
     nodeDiv.className = "node";
 
     if(isPathOnly(node)){
-    nodeDiv.classList.add("pathOnly");
-}
+        nodeDiv.classList.add("pathOnly");
+    }
+
     nodeDiv.dataset.search = [
         node.row["部門全名"],
         node.row["主管一姓名"],
@@ -465,11 +576,7 @@ function createNodeElement(node){
             <span class="deptName">${node.row["部門全名"] || "-"}</span>
         </div>
         <div class="nodeInfo">
-            層級：${node.row["層級"] || "-"}<br>
-            部門代碼：${node.row["部門代碼"] || "-"}<br>
-            費用代碼：${node.row["費用代碼"] || "-"}<br>
-            主管：${node.row["主管一姓名"] || "-"} / ${node.row["主管一職稱"] || "-"}<br>
-            在職人數：${node.row["在職人數"] || 0} 人
+            ${renderNodeInfo(node)}
         </div>
     `;
 
@@ -491,10 +598,10 @@ function createNodeElement(node){
         }
 
         node.children.forEach(child => {
-        if(shouldShowNode(child)){
-        ul.appendChild(createNodeElement(child));
-    }
-});
+            if(shouldShowNode(child)){
+                ul.appendChild(createNodeElement(child));
+            }
+        });
 
         li.appendChild(ul);
     }
@@ -515,25 +622,19 @@ function collapseAll(){
 function searchTree(){
     const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
 
-    document.querySelectorAll(".node").forEach(node => {
-        node.classList.remove("match");
-
-        if(keyword && node.dataset.search.includes(keyword)){
-            node.classList.add("match");
-        }
-    });
-
     if(keyword){
         expandAll();
-
-        setTimeout(() => {
-            document.querySelectorAll(".node").forEach(node => {
-                if(node.dataset.search.includes(keyword)){
-                    node.classList.add("match");
-                }
-            });
-        }, 0);
     }
+
+    setTimeout(() => {
+        document.querySelectorAll(".node").forEach(node => {
+            node.classList.remove("match");
+
+            if(keyword && node.dataset.search.includes(keyword)){
+                node.classList.add("match");
+            }
+        });
+    }, 0);
 }
 </script>
 
