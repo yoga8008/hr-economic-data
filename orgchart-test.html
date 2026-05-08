@@ -26,7 +26,6 @@ h1{
     margin-bottom:20px;
 }
 
-/* 上方兩塊固定左右 50% */
 .topGrid{
     display:flex;
     gap:20px;
@@ -114,7 +113,6 @@ h1{
     font-weight:bold;
 }
 
-/* 層級篩選 / 顯示資訊左右 50% */
 .filterGrid{
     display:flex;
     gap:20px;
@@ -254,7 +252,6 @@ h1{
     margin-bottom:15px;
 }
 
-/* 樹狀清單 */
 .tree{
     list-style:none;
     padding-left:0;
@@ -394,7 +391,6 @@ h1{
     padding-top:0;
 }
 
-/* 父節點往下 */
 .orgNodeGroup.hasChildren > .orgNode::after{
     content:"";
     position:absolute;
@@ -406,7 +402,6 @@ h1{
     transform:translateX(-50%);
 }
 
-/* 子節點往上 */
 .orgChildren > .orgNodeGroup::before{
     content:"";
     position:absolute;
@@ -418,7 +413,6 @@ h1{
     transform:translateX(-50%);
 }
 
-/* JS 動態產生的水平連接線 */
 .orgConnectorLine{
     position:absolute;
     top:-21px;
@@ -477,7 +471,7 @@ h1{
 
             <label class="focusOption">
                 <input type="checkbox" id="focusCheckbox">
-                單一事業群
+                搜尋結果及轄下
             </label>
 
             <button onclick="searchAndJump()">搜尋</button>
@@ -527,7 +521,7 @@ let allNodes = [];
 let rootNodes = [];
 let selectedLevels = new Set();
 let currentViewMode = "tree";
-let focusNode = null;
+let focusNodes = [];
 
 let visibleFields = new Set([
     "level",
@@ -550,7 +544,7 @@ document.getElementById("searchInput").addEventListener("keydown", function(e){
 
 document.getElementById("focusCheckbox").addEventListener("change", function(){
     if(!this.checked){
-        focusNode = null;
+        focusNodes = [];
         renderChart();
     }
 });
@@ -597,7 +591,7 @@ function clearPageData(){
     allNodes = [];
     rootNodes = [];
     selectedLevels.clear();
-    focusNode = null;
+    focusNodes = [];
 
     const focusCheckbox = document.getElementById("focusCheckbox");
     if(focusCheckbox){
@@ -646,7 +640,7 @@ function buildTreeData(rows){
     const result = document.getElementById("uploadResult");
 
     selectedLevels.clear();
-    focusNode = null;
+    focusNodes = [];
 
     const focusCheckbox = document.getElementById("focusCheckbox");
     if(focusCheckbox){
@@ -909,7 +903,7 @@ function renderTree(){
 
     tree.innerHTML = "";
 
-    const displayRoots = focusNode ? [focusNode] : rootNodes;
+    const displayRoots = focusNodes.length > 0 ? focusNodes : rootNodes;
 
     displayRoots.forEach(node => {
         if(shouldShowNode(node)){
@@ -927,7 +921,7 @@ function renderOrgChart(){
 
     orgChart.innerHTML = "";
 
-    const displayRoots = focusNode ? [focusNode] : rootNodes;
+    const displayRoots = focusNodes.length > 0 ? focusNodes : rootNodes;
 
     displayRoots.forEach(node => {
         if(shouldShowNode(node)){
@@ -1122,15 +1116,44 @@ function updateOrgConnectorLines(){
     });
 }
 
+function normalizeText(text){
+    return String(text || "")
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .replace(/　/g, "");
+}
+
 function getSearchText(node){
-    return [
+    return normalizeText([
         node.row["部門全名"],
         node.row["主管一姓名"],
         node.row["主管一職稱"],
         node.row["部門代碼"],
         node.row["費用代碼"],
         node.row["公司代碼"]
-    ].join(" ").toLowerCase();
+    ].join(" "));
+}
+
+function isFuzzyMatch(searchText, keyword){
+    const normalizedKeyword = normalizeText(keyword);
+
+    if(!normalizedKeyword) return false;
+
+    const keywords = String(keyword)
+        .trim()
+        .split(/\s+/)
+        .map(k => normalizeText(k))
+        .filter(Boolean);
+
+    if(searchText.includes(normalizedKeyword)){
+        return true;
+    }
+
+    if(keywords.length > 1){
+        return keywords.every(k => searchText.includes(k));
+    }
+
+    return false;
 }
 
 function expandAll(){
@@ -1144,7 +1167,7 @@ function collapseAll(){
 }
 
 function searchTree(jumpToFirst = false){
-    const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
+    const keyword = document.getElementById("searchInput").value.trim();
 
     setTimeout(() => {
         const nodes = document.querySelectorAll(".node, .orgNode");
@@ -1153,7 +1176,7 @@ function searchTree(jumpToFirst = false){
         nodes.forEach(node => {
             node.classList.remove("match");
 
-            if(keyword && node.dataset.search.includes(keyword)){
+            if(keyword && isFuzzyMatch(node.dataset.search, keyword)){
                 node.classList.add("match");
 
                 if(!firstMatch){
@@ -1176,33 +1199,49 @@ function searchTree(jumpToFirst = false){
     }, 0);
 }
 
-function findFirstMatchedNode(keyword){
-    if(!keyword) return null;
+function findMatchedNodes(keyword){
+    if(!keyword) return [];
 
-    return allNodes.find(node => {
-        return getSearchText(node).includes(keyword);
-    }) || null;
+    const matched = allNodes.filter(node => {
+        return isFuzzyMatch(getSearchText(node), keyword);
+    });
+
+    return filterTopMatchedNodes(matched);
+}
+
+function filterTopMatchedNodes(nodes){
+    return nodes.filter(node => {
+        return !nodes.some(other => {
+            return other !== node && isDescendantOf(node, other);
+        });
+    });
+}
+
+function isDescendantOf(node, possibleParent){
+    return possibleParent.children.some(child => {
+        return child === node || isDescendantOf(node, child);
+    });
 }
 
 function searchAndJump(){
-    const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
+    const keyword = document.getElementById("searchInput").value.trim();
     const focusChecked = document.getElementById("focusCheckbox").checked;
 
     if(!keyword){
-        focusNode = null;
+        focusNodes = [];
         renderChart();
         return;
     }
 
     if(focusChecked){
-        const matchedNode = findFirstMatchedNode(keyword);
+        const matchedNodes = findMatchedNodes(keyword);
 
-        if(!matchedNode){
+        if(matchedNodes.length === 0){
             alert("找不到符合的部門、主管或代碼");
             return;
         }
 
-        focusNode = matchedNode;
+        focusNodes = matchedNodes;
         allNodes.forEach(node => node.expanded = true);
         renderChart();
 
@@ -1210,7 +1249,7 @@ function searchAndJump(){
             searchTree(true);
         }, 0);
     }else{
-        focusNode = null;
+        focusNodes = [];
         allNodes.forEach(node => node.expanded = true);
         renderChart();
 
