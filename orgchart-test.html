@@ -26,6 +26,36 @@ h1{
     margin-bottom:20px;
 }
 
+.topPanelHeader{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:10px;
+}
+
+.toggleTopBtn{
+    height:34px;
+    padding:0 14px;
+    border:0;
+    border-radius:8px;
+    background:#374151;
+    color:#fff;
+    font-weight:bold;
+    font-size:12px;
+    cursor:pointer;
+}
+
+.toggleTopBtn:hover{
+    opacity:.9;
+}
+
+.topPanel{
+    display:block;
+}
+
+.topPanel.collapsed{
+    display:none;
+}
+
 .topGrid{
     display:flex;
     gap:20px;
@@ -445,23 +475,31 @@ h1{
 上傳 Excel 後，系統會依「上級部門」建立組織圖，可切換樹狀清單或組織圖呈現。
 </div>
 
-<div class="topGrid">
-    <div class="uploadBox">
-        <div class="uploadActions">
-            <input type="file" id="excelFile" accept=".xlsx,.xls">
-            <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
+<div class="topPanelHeader">
+    <button id="toggleTopPanelBtn" class="toggleTopBtn" onclick="toggleTopPanel()">
+        收合上方設定 ▲
+    </button>
+</div>
+
+<div id="topPanel" class="topPanel">
+    <div class="topGrid">
+        <div class="uploadBox">
+            <div class="uploadActions">
+                <input type="file" id="excelFile" accept=".xlsx,.xls">
+                <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
+            </div>
+        </div>
+
+        <div id="uploadResult" class="resultArea">
+            <b>上傳結果</b><br>
+            尚未上傳 Excel
         </div>
     </div>
 
-    <div id="uploadResult" class="resultArea">
-        <b>上傳結果</b><br>
-        尚未上傳 Excel
+    <div class="filterGrid">
+        <div id="levelFilters" class="levelFilters"></div>
+        <div id="fieldFilters" class="fieldFilters"></div>
     </div>
-</div>
-
-<div class="filterGrid">
-    <div id="levelFilters" class="levelFilters"></div>
-    <div id="fieldFilters" class="fieldFilters"></div>
 </div>
 
 <div class="chartBox">
@@ -558,6 +596,19 @@ document.getElementById("zoomRange").addEventListener("input", function(){
         requestAnimationFrame(updateOrgConnectorLines);
     }
 });
+
+function toggleTopPanel(){
+    const panel = document.getElementById("topPanel");
+    const btn = document.getElementById("toggleTopPanelBtn");
+
+    panel.classList.toggle("collapsed");
+
+    if(panel.classList.contains("collapsed")){
+        btn.innerText = "展開上方設定 ▼";
+    }else{
+        btn.innerText = "收合上方設定 ▲";
+    }
+}
 
 function handleFile(e){
     const file = e.target.files[0];
