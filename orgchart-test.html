@@ -1239,7 +1239,7 @@ function getSpecialDisplayKeyword(keyword){
     const type = getSpecialSearchType(keyword);
 
     if(type === "subGroup") return "次集團";
-    if(type === "group") return "集團";
+    if(type === "group") return "集團中央";
 
     return keyword;
 }
@@ -1305,7 +1305,7 @@ function findSpecialMatchedNodes(type){
         });
 
         return [
-            createVirtualNode("集團", filterTopMatchedNodes(matched))
+            createVirtualNode("集團中央", filterTopMatchedNodes(matched))
         ];
     }
 
