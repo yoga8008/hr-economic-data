@@ -254,6 +254,7 @@ h1{
     margin-bottom:15px;
 }
 
+/* 樹狀清單 */
 .tree{
     list-style:none;
     padding-left:0;
@@ -417,15 +418,14 @@ h1{
     transform:translateX(-50%);
 }
 
-/* 同一父層底下的水平線，只畫在這一組 children 裡 */
-.orgChildren.hasMultiple::after{
-    content:"";
+/* JS 動態產生的水平連接線 */
+.orgConnectorLine{
     position:absolute;
     top:-21px;
-    left:150px;
-    right:150px;
     height:1px;
     background:#94a3b8;
+    pointer-events:none;
+    z-index:1;
 }
 
 @media(max-width:1300px){
@@ -559,6 +559,10 @@ document.getElementById("zoomRange").addEventListener("input", function(){
     const value = this.value;
     document.getElementById("zoomValue").innerText = value + "%";
     document.getElementById("zoomWrap").style.transform = `scale(${value / 100})`;
+
+    if(currentViewMode === "org"){
+        requestAnimationFrame(updateOrgConnectorLines);
+    }
 });
 
 function handleFile(e){
@@ -930,6 +934,8 @@ function renderOrgChart(){
             orgChart.appendChild(createOrgNodeElement(node));
         }
     });
+
+    requestAnimationFrame(updateOrgConnectorLines);
 }
 
 function shouldShowNode(node){
@@ -1091,6 +1097,29 @@ function createOrgNodeElement(node){
     }
 
     return group;
+}
+
+function updateOrgConnectorLines(){
+    document.querySelectorAll(".orgChildren").forEach(box => {
+        box.querySelectorAll(":scope > .orgConnectorLine").forEach(line => line.remove());
+
+        const groups = [...box.children].filter(el => el.classList.contains("orgNodeGroup"));
+
+        if(groups.length < 2) return;
+
+        const first = groups[0];
+        const last = groups[groups.length - 1];
+
+        const firstCenter = first.offsetLeft + first.offsetWidth / 2;
+        const lastCenter = last.offsetLeft + last.offsetWidth / 2;
+
+        const line = document.createElement("div");
+        line.className = "orgConnectorLine";
+        line.style.left = firstCenter + "px";
+        line.style.width = (lastCenter - firstCenter) + "px";
+
+        box.prepend(line);
+    });
 }
 
 function getSearchText(node){
