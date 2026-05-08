@@ -24,29 +24,63 @@ h1{
     margin-bottom:20px;
 }
 
-.uploadBox{
+.topGrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    align-items:stretch;
+    margin-bottom:20px;
+}
+
+.uploadBox,
+.resultArea{
     background:#fff;
     border:1px solid #ddd;
     border-radius:12px;
     padding:20px;
-    margin-bottom:20px;
+    min-height:120px;
+    box-sizing:border-box;
 }
 
-#message{
-    margin:15px 0;
+.uploadActions{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.templateBtn{
+    padding:8px 12px;
+    border:0;
+    border-radius:8px;
+    background:#1e3a8a;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.templateBtn:hover{
+    opacity:.9;
+}
+
+.resultArea{
+    line-height:1.8;
+    color:#374151;
+}
+
+.resultSuccess{
     color:#15803d;
     font-weight:bold;
 }
 
-.errorBox{
-    background:#fff7ed;
-    border:1px solid #fdba74;
-    border-radius:10px;
-    padding:12px;
-    margin:0;
+.resultError{
+    color:#b91c1c;
+    font-weight:bold;
+}
+
+.resultWarn{
     color:#9a3412;
-    font-size:14px;
-    line-height:1.7;
+    font-weight:bold;
 }
 
 .toolbar{
@@ -229,23 +263,6 @@ h1{
     font-size:14px;
 }
 
-.topGrid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-    align-items:stretch;
-    margin-bottom:20px;
-}
-
-.topGrid .uploadBox,
-.topGrid .errorArea{
-    margin-bottom:0;
-}
-
-.errorArea{
-    min-height:120px;
-}
-
 @media(max-width:900px){
     .topGrid{
         grid-template-columns:1fr;
@@ -264,11 +281,16 @@ h1{
 
 <div class="topGrid">
     <div class="uploadBox">
-        <input type="file" id="excelFile" accept=".xlsx,.xls">
-        <div id="message"></div>
+        <div class="uploadActions">
+            <input type="file" id="excelFile" accept=".xlsx,.xls">
+            <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
+        </div>
     </div>
 
-    <div id="errorList" class="errorArea"></div>
+    <div id="uploadResult" class="resultArea">
+        <b>上傳結果</b><br>
+        尚未上傳 Excel
+    </div>
 </div>
 
 <div id="levelFilters" class="levelFilters"></div>
@@ -338,7 +360,13 @@ function handleFile(e){
         const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
         const rows = XLSX.utils.sheet_to_json(firstSheet, {defval:""});
 
-        checkColumns(rows);
+        const isValid = checkColumns(rows);
+
+        if(!isValid){
+            clearPageData();
+            return;
+        }
+
         buildTreeData(rows);
         renderLevelFilters();
         renderFieldFilters();
@@ -348,30 +376,50 @@ function handleFile(e){
     reader.readAsArrayBuffer(file);
 }
 
+function clearPageData(){
+    allNodes = [];
+    rootNodes = [];
+    selectedLevels.clear();
+
+    document.getElementById("levelFilters").innerHTML = "";
+    document.getElementById("fieldFilters").innerHTML = "";
+    document.getElementById("summary").innerText = "";
+    document.getElementById("tree").innerHTML = "";
+}
+
 function checkColumns(rows){
-    const message = document.getElementById("message");
+    const result = document.getElementById("uploadResult");
 
     if(rows.length === 0){
-        message.innerText = "Excel 沒有資料";
-        message.style.color = "#b91c1c";
-        return;
+        result.innerHTML = `
+            <b>上傳結果</b><br>
+            <span class="resultError">Excel 沒有資料</span>
+        `;
+        return false;
     }
 
     const columns = Object.keys(rows[0]);
     const missing = requiredColumns.filter(col => !columns.includes(col));
 
     if(missing.length > 0){
-        message.innerText = "缺少欄位：" + missing.join("、");
-        message.style.color = "#b91c1c";
-    }else{
-        message.innerText = "Excel 讀取成功";
-        message.style.color = "#15803d";
+        result.innerHTML = `
+            <b>上傳結果</b><br>
+            <span class="resultError">缺少欄位：${missing.join("、")}</span>
+        `;
+        return false;
     }
+
+    result.innerHTML = `
+        <b>上傳結果</b><br>
+        <span class="resultSuccess">Excel 讀取成功</span><br>
+        資料檢查中...
+    `;
+
+    return true;
 }
 
 function buildTreeData(rows){
-    const errorList = document.getElementById("errorList");
-    errorList.innerHTML = "";
+    const result = document.getElementById("uploadResult");
 
     selectedLevels.clear();
 
@@ -425,11 +473,17 @@ function buildTreeData(rows){
     rootNodes.forEach(node => calculateTotalPeople(node));
 
     if(errors.length > 0){
-        errorList.innerHTML = `
-            <div class="errorBox">
-                <b>資料提醒：</b><br>
-                ${errors.join("<br>")}
-            </div>
+        result.innerHTML = `
+            <b>上傳結果</b><br>
+            <span class="resultSuccess">Excel 讀取成功</span><br>
+            <span class="resultWarn">資料提醒：</span><br>
+            ${errors.join("<br>")}
+        `;
+    }else{
+        result.innerHTML = `
+            <b>上傳結果</b><br>
+            <span class="resultSuccess">Excel 讀取成功</span><br>
+            資料檢查結果：目前無資料異常
         `;
     }
 
@@ -694,6 +748,50 @@ function searchTree(){
             }
         });
     }, 0);
+}
+
+function downloadTemplate(){
+    const templateData = [
+        {
+            "公司代碼":"HH",
+            "層級":1,
+            "上級部門":"HH",
+            "部門代碼":"DA60",
+            "費用代碼":"DA611700H7",
+            "部門全名":"中央人資",
+            "主管一姓名":"夏國安",
+            "主管一職稱":"人資長",
+            "在職人數":1
+        },
+        {
+            "公司代碼":"HH",
+            "層級":2,
+            "上級部門":"DA60",
+            "部門代碼":"DA610100H7",
+            "費用代碼":"DA610100H7",
+            "部門全名":"人資營運效能處",
+            "主管一姓名":"王小明",
+            "主管一職稱":"處長",
+            "在職人數":3
+        },
+        {
+            "公司代碼":"HH",
+            "層級":3,
+            "上級部門":"DA610100H7",
+            "部門代碼":"DA610101H7",
+            "費用代碼":"DA610101H7",
+            "部門全名":"人資服務部",
+            "主管一姓名":"陳小華",
+            "主管一職稱":"部長",
+            "在職人數":8
+        }
+    ];
+
+    const worksheet = XLSX.utils.json_to_sheet(templateData);
+    const workbook = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, "組織圖上傳模板");
+    XLSX.writeFile(workbook, "組織圖上傳模板.xlsx");
 }
 </script>
 
