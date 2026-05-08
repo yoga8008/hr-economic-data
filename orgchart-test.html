@@ -114,12 +114,27 @@ h1{
     font-weight:bold;
 }
 
+/* 層級篩選 / 顯示資訊左右 50% */
+.filterGrid{
+    display:flex;
+    gap:20px;
+    align-items:stretch;
+    margin-bottom:20px;
+}
+
+.filterGrid > .levelFilters,
+.filterGrid > .fieldFilters{
+    flex:0 0 calc(50% - 10px);
+    width:calc(50% - 10px);
+    margin:0;
+    box-sizing:border-box;
+}
+
 .levelFilters,
 .fieldFilters{
     display:flex;
     gap:12px;
     flex-wrap:wrap;
-    margin:0 0 20px 0;
     background:#fff;
     border:1px solid #ddd;
     border-radius:12px;
@@ -336,17 +351,18 @@ h1{
 .orgChart{
     display:flex;
     justify-content:center;
-    padding:20px 20px 40px;
+    padding:24px 20px 50px;
     min-width:max-content;
+    overflow:visible;
 }
 
 .orgNodeGroup{
-    width:300px;
     display:flex;
     flex-direction:column;
     align-items:center;
     position:relative;
     flex-shrink:0;
+    padding:0 18px;
 }
 
 .orgNode{
@@ -359,6 +375,7 @@ h1{
     text-align:left;
     position:relative;
     box-sizing:border-box;
+    z-index:2;
 }
 
 .orgNode .deptName{
@@ -371,42 +388,62 @@ h1{
     display:flex;
     justify-content:center;
     align-items:flex-start;
-    gap:28px;
-    margin-top:36px;
+    gap:44px;
+    margin-top:38px;
     position:relative;
+    isolation:isolate;
 }
 
+/* 父節點往下短線 */
 .orgNodeGroup.hasChildren > .orgNode::after{
     content:"";
     position:absolute;
     left:50%;
-    bottom:-18px;
+    bottom:-19px;
     width:1px;
-    height:18px;
+    height:19px;
     background:#94a3b8;
     transform:translateX(-50%);
 }
 
+/* 子節點往上短線 */
 .orgChildren > .orgNodeGroup::before{
     content:"";
     position:absolute;
-    top:-18px;
+    top:-19px;
     left:50%;
     width:1px;
-    height:18px;
+    height:19px;
     background:#94a3b8;
     transform:translateX(-50%);
 }
 
-/* 多個子節點時，畫一條完整水平線 */
-.orgChildren.hasMultiple::before{
+/* 同一父層底下，才畫橫線 */
+.orgChildren.hasMultiple > .orgNodeGroup::after{
     content:"";
     position:absolute;
-    top:-18px;
-    left:150px;
-    right:150px;
+    top:-19px;
     height:1px;
     background:#94a3b8;
+    z-index:1;
+}
+
+/* 第一個子節點：只往右連 */
+.orgChildren.hasMultiple > .orgNodeGroup:first-child::after{
+    left:50%;
+    right:18px;
+}
+
+/* 最後一個子節點：只往左連 */
+.orgChildren.hasMultiple > .orgNodeGroup:last-child::after{
+    left:18px;
+    right:50%;
+}
+
+/* 中間子節點：左右連，但不碰到其他父層 */
+.orgChildren.hasMultiple > .orgNodeGroup:not(:first-child):not(:last-child)::after{
+    left:18px;
+    right:18px;
 }
 
 @media(max-width:1300px){
@@ -446,8 +483,10 @@ h1{
     </div>
 </div>
 
-<div id="levelFilters" class="levelFilters"></div>
-<div id="fieldFilters" class="fieldFilters"></div>
+<div class="filterGrid">
+    <div id="levelFilters" class="levelFilters"></div>
+    <div id="fieldFilters" class="fieldFilters"></div>
+</div>
 
 <div class="chartBox">
     <div class="chartHeader">
