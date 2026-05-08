@@ -64,7 +64,7 @@ h1{
 
 .templateBtn,
 .exportBtn,
-.toolbar button,
+.chartLeftActions button,
 .modeBtn{
     padding:10px 14px;
     border:0;
@@ -77,7 +77,7 @@ h1{
 
 .templateBtn:hover,
 .exportBtn:hover,
-.toolbar button:hover,
+.chartLeftActions button:hover,
 .modeBtn:hover{
     opacity:.9;
 }
@@ -127,21 +127,6 @@ h1{
     margin-right:5px;
 }
 
-.toolbar{
-    display:flex;
-    gap:10px;
-    margin:20px 0;
-    flex-wrap:wrap;
-}
-
-.toolbar input{
-    width:280px;
-    padding:10px 12px;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    font-size:14px;
-}
-
 .chartBox{
     background:#fff;
     border:1px solid #ddd;
@@ -156,6 +141,21 @@ h1{
     align-items:center;
     gap:12px;
     margin-bottom:16px;
+}
+
+.chartLeftActions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.chartLeftActions input{
+    width:280px;
+    padding:10px 12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:14px;
 }
 
 .chartActions{
@@ -187,6 +187,7 @@ h1{
 .summary{
     color:#374151;
     font-size:14px;
+    margin-bottom:15px;
 }
 
 .tree{
@@ -407,15 +408,14 @@ h1{
 <div id="levelFilters" class="levelFilters"></div>
 <div id="fieldFilters" class="fieldFilters"></div>
 
-<div class="toolbar">
-    <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
-    <button onclick="expandAll()">全部展開</button>
-    <button onclick="collapseAll()">全部收合</button>
-</div>
-
 <div class="chartBox">
     <div class="chartHeader">
-        <div id="summary" class="summary"></div>
+        <div class="chartLeftActions">
+            <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
+            <button onclick="searchAndJump()">搜尋</button>
+            <button onclick="expandAll()">全部展開</button>
+            <button onclick="collapseAll()">全部收合</button>
+        </div>
 
         <div class="chartActions">
             <div class="viewModeControl">
@@ -433,6 +433,8 @@ h1{
             <button class="exportBtn" onclick="exportPDF()">匯出 PDF</button>
         </div>
     </div>
+
+    <div id="summary" class="summary"></div>
 
     <div id="zoomWrap" class="zoomWrap">
         <ul id="tree" class="tree"></ul>
@@ -466,7 +468,16 @@ let visibleFields = new Set([
 ]);
 
 document.getElementById("excelFile").addEventListener("change", handleFile);
-document.getElementById("searchInput").addEventListener("input", searchTree);
+
+document.getElementById("searchInput").addEventListener("input", function(){
+    searchTree(false);
+});
+
+document.getElementById("searchInput").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        searchAndJump();
+    }
+});
 
 document.getElementById("zoomRange").addEventListener("input", function(){
     const value = this.value;
@@ -557,7 +568,6 @@ function buildTreeData(rows){
     allNodes = [];
     rootNodes = [];
 
-    // 先建立法人節點，例如 HH
     rows.forEach((row) => {
         const companyCode = String(row["公司代碼"]).trim();
 
@@ -795,7 +805,7 @@ function renderChart(){
         renderOrgChart();
     }
 
-    searchTree();
+    searchTree(false);
 }
 
 function renderTree(){
@@ -1012,7 +1022,7 @@ function collapseAll(){
     renderChart();
 }
 
-function searchTree(){
+function searchTree(jumpToFirst = false){
     const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
 
     if(keyword && currentViewMode === "tree"){
@@ -1021,14 +1031,37 @@ function searchTree(){
     }
 
     setTimeout(() => {
-        document.querySelectorAll(".node, .orgNode").forEach(node => {
+        const nodes = document.querySelectorAll(".node, .orgNode");
+        let firstMatch = null;
+
+        nodes.forEach(node => {
             node.classList.remove("match");
 
             if(keyword && node.dataset.search.includes(keyword)){
                 node.classList.add("match");
+
+                if(!firstMatch){
+                    firstMatch = node;
+                }
             }
         });
+
+        if(jumpToFirst && firstMatch){
+            firstMatch.scrollIntoView({
+                behavior:"smooth",
+                block:"center",
+                inline:"center"
+            });
+        }
+
+        if(jumpToFirst && keyword && !firstMatch){
+            alert("找不到符合的部門、主管或代碼");
+        }
     }, 0);
+}
+
+function searchAndJump(){
+    searchTree(true);
 }
 
 async function exportPDF(){
