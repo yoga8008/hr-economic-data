@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>組織圖測試版</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f3f4f6;
+    margin:0;
+    padding:30px;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+.desc{
+    color:#666;
+    margin-bottom:20px;
+}
+
+.uploadBox{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+#message{
+    margin:15px 0;
+    color:#b91c1c;
+    font-weight:bold;
+}
+
+.chart{
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+    margin-top:30px;
+    overflow:auto;
+}
+
+.levelRow{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+    min-height:120px;
+    padding:10px 0;
+    border-top:1px dashed #ccc;
+}
+
+.levelLabel{
+    width:80px;
+    flex-shrink:0;
+    font-weight:bold;
+    color:#1e3a8a;
+    padding-top:20px;
+}
+
+.nodeWrap{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.node{
+    width:240px;
+    background:#ffffff;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    padding:14px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.nodeTitle{
+    font-weight:bold;
+    font-size:16px;
+    color:#111827;
+    margin-bottom:8px;
+}
+
+.nodeInfo{
+    font-size:13px;
+    color:#374151;
+    line-height:1.6;
+}
+
+.parent{
+    margin-top:8px;
+    font-size:12px;
+    color:#64748b;
+}
+
+.errorBox{
+    background:#fff7ed;
+    border:1px solid #fdba74;
+    border-radius:10px;
+    padding:12px;
+    margin-top:15px;
+    color:#9a3412;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>組織圖測試版</h1>
+<div class="desc">上傳 Excel 後，會依「層級」排列，並用「上級部門」對應「部門代碼」。</div>
+
+<div class="uploadBox">
+    <input type="file" id="excelFile" accept=".xlsx,.xls">
+    <div id="message"></div>
+</div>
+
+<div id="errorList"></div>
+<div id="chart" class="chart"></div>
+
+<script>
+const requiredColumns = [
+    "公司代碼",
+    "層級",
+    "上級部門",
+    "部門代碼",
+    "費用代碼",
+    "部門全名",
+    "主管一姓名",
+    "主管一職稱",
+    "在職人數"
+];
+
+document.getElementById("excelFile").addEventListener("change", handleFile);
+
+function handleFile(e){
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+        const data = new Uint8Array(event.target.result);
+        const workbook = XLSX.read(data, {type:"array"});
+        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(firstSheet, {defval:""});
+
+        checkColumns(rows);
+        buildChart(rows);
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+function checkColumns(rows){
+    const message = document.getElementById("message");
+
+    if(rows.length === 0){
+        message.innerText = "Excel 沒有資料";
+        return;
+    }
+
+    const columns = Object.keys(rows[0]);
+    const missing = requiredColumns.filter(col => !columns.includes(col));
+
+    if(missing.length > 0){
+        message.innerText = "缺少欄位：" + missing.join("、");
+    }else{
+        message.innerText = "Excel 讀取成功";
+        message.style.color = "#15803d";
+    }
+}
+
+function buildChart(rows){
+    const chart = document.getElementById("chart");
+    const errorList = document.getElementById("errorList");
+
+    chart.innerHTML = "";
+    errorList.innerHTML = "";
+
+    const deptMap = {};
+    const errors = [];
+
+    rows.forEach(row => {
+        const deptCode = String(row["部門代碼"]).trim();
+
+        if(!deptCode) return;
+
+        if(deptMap[deptCode]){
+            errors.push("部門代碼重複：" + deptCode);
+        }
+
+        deptMap[deptCode] = row;
+    });
+
+    rows.forEach(row => {
+        const deptCode = String(row["部門代碼"]).trim();
+        const parentCode = String(row["上級部門"]).trim();
+
+        if(parentCode && !deptMap[parentCode]){
+            errors.push("找不到上級部門：" + parentCode + "，部門：" + deptCode);
+        }
+    });
+
+    if(errors.length > 0){
+        errorList.innerHTML = `
+            <div class="errorBox">
+                <b>資料提醒：</b><br>
+                ${errors.join("<br>")}
+            </div>
+        `;
+    }
+
+    const levelGroups = {};
+
+    rows.forEach(row => {
+        const level = String(row["層級"]).trim() || "未設定";
+
+        if(!levelGroups[level]){
+            levelGroups[level] = [];
+        }
+
+        levelGroups[level].push(row);
+    });
+
+    const sortedLevels = Object.keys(levelGroups).sort((a,b) => {
+        return Number(a) - Number(b);
+    });
+
+    sortedLevels.forEach(level => {
+        const levelRow = document.createElement("div");
+        levelRow.className = "levelRow";
+
+        const label = document.createElement("div");
+        label.className = "levelLabel";
+        label.innerText = "層級 " + level;
+
+        const nodeWrap = document.createElement("div");
+        nodeWrap.className = "nodeWrap";
+
+        levelGroups[level].forEach(row => {
+            const node = document.createElement("div");
+            node.className = "node";
+
+            node.innerHTML = `
+                <div class="nodeTitle">${row["部門全名"] || "-"}</div>
+                <div class="nodeInfo">
+                    部門代碼：${row["部門代碼"] || "-"}<br>
+                    費用代碼：${row["費用代碼"] || "-"}<br>
+                    主管：${row["主管一姓名"] || "-"} / ${row["主管一職稱"] || "-"}<br>
+                    在職人數：${row["在職人數"] || 0} 人
+                </div>
+                <div class="parent">
+                    上級部門：${row["上級部門"] || "無"}
+                </div>
+            `;
+
+            nodeWrap.appendChild(node);
+        });
+
+        levelRow.appendChild(label);
+        levelRow.appendChild(nodeWrap);
+        chart.appendChild(levelRow);
+    });
+}
+</script>
+
+</body>
+</html>
