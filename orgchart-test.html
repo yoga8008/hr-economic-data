@@ -66,14 +66,18 @@ h1{
 .exportBtn,
 .chartLeftActions button,
 .modeBtn{
-    padding:8px 12px;
+    height:36px;
+    padding:0 12px;
     border:0;
     border-radius:8px;
     background:#1e3a8a;
     color:#fff;
     font-weight:bold;
+    font-size:12px;
     cursor:pointer;
     white-space:nowrap;
+    box-sizing:border-box;
+    line-height:36px;
 }
 
 .templateBtn:hover,
@@ -140,7 +144,7 @@ h1{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:10px;
+    gap:12px;
     margin-bottom:16px;
     flex-wrap:nowrap;
 }
@@ -148,42 +152,48 @@ h1{
 .chartLeftActions{
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:10px;
     flex-wrap:nowrap;
     flex:1;
     min-width:0;
 }
 
 .chartLeftActions input[type="text"]{
-    width:240px;
-    padding:8px 10px;
+    width:350px;
+    height:36px;
+    padding:0 12px;
     border:1px solid #cbd5e1;
     border-radius:8px;
     font-size:13px;
+    box-sizing:border-box;
 }
 
 .focusOption{
     display:flex;
     align-items:center;
     gap:6px;
+    height:36px;
+    padding:0 12px;
     background:#fff;
-    border:1px solid #ddd;
+    border:1px solid #d1d5db;
     border-radius:8px;
-    padding:8px 10px;
-    font-size:13px;
+    font-size:12px;
     color:#374151;
     cursor:pointer;
     white-space:nowrap;
+    box-sizing:border-box;
 }
 
 .focusOption input{
+    width:15px;
+    height:15px;
     margin:0;
 }
 
 .chartActions{
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:10px;
     flex-wrap:nowrap;
     flex-shrink:0;
 }
@@ -193,15 +203,23 @@ h1{
     display:flex;
     align-items:center;
     gap:8px;
+    min-height:36px;
+    padding:6px 12px;
     background:#fff;
     border:1px solid #ddd;
-    border-radius:10px;
-    padding:8px 10px;
+    border-radius:12px;
     white-space:nowrap;
+    box-sizing:border-box;
+}
+
+.viewModeControl b,
+.zoomControl b{
+    font-size:12px;
 }
 
 .zoomControl input{
-    width:130px;
+    width:110px;
+    height:auto;
 }
 
 .zoomWrap{
@@ -391,7 +409,7 @@ h1{
     right:0;
 }
 
-@media(max-width:1100px){
+@media(max-width:1300px){
     .chartHeader{
         align-items:flex-start;
         flex-direction:column;
@@ -408,53 +426,6 @@ h1{
     .topGrid{
         grid-template-columns:1fr;
     }
-}
-    /* 統一上方工具列高度 */
-.chartHeader{
-    align-items:center;
-}
-
-.chartLeftActions,
-.chartActions{
-    align-items:center;
-}
-
-.chartLeftActions input[type="text"],
-.chartLeftActions button,
-.modeBtn,
-.exportBtn,
-.focusOption,
-.viewModeControl,
-.zoomControl{
-    height:44px;
-    box-sizing:border-box;
-}
-
-.chartLeftActions input[type="text"]{
-    padding:0 12px;
-    line-height:44px;
-}
-
-.chartLeftActions button,
-.modeBtn,
-.exportBtn{
-    padding:0 14px;
-    line-height:44px;
-}
-
-.focusOption,
-.viewModeControl,
-.zoomControl{
-    padding:0 12px;
-}
-
-.focusOption input{
-    width:16px;
-    height:16px;
-}
-
-.zoomControl input{
-    height:auto;
 }
 </style>
 </head>
@@ -488,13 +459,13 @@ h1{
     <div class="chartHeader">
         <div class="chartLeftActions">
             <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
-            <button onclick="searchAndJump()">搜尋</button>
 
             <label class="focusOption">
                 <input type="checkbox" id="focusCheckbox">
                 單一事業群
             </label>
 
+            <button onclick="searchAndJump()">搜尋</button>
             <button onclick="expandAll()">全部展開</button>
             <button onclick="collapseAll()">全部收合</button>
         </div>
