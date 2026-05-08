@@ -44,6 +44,17 @@ h1{
     box-sizing:border-box;
 }
 
+.uploadBox{
+    max-height:260px;
+}
+
+.resultArea{
+    line-height:1.8;
+    color:#374151;
+    max-height:260px;
+    overflow:auto;
+}
+
 .uploadActions{
     display:flex;
     gap:12px;
@@ -76,11 +87,6 @@ h1{
     color:#374151;
 }
 
-.resultArea{
-    line-height:1.8;
-    color:#374151;
-}
-
 .resultSuccess{
     color:#15803d;
     font-weight:bold;
@@ -97,8 +103,7 @@ h1{
 }
 
 .levelFilters,
-.fieldFilters,
-.modeFilters{
+.fieldFilters{
     display:flex;
     gap:12px;
     flex-wrap:wrap;
@@ -160,6 +165,7 @@ h1{
     flex-wrap:wrap;
 }
 
+.viewModeControl,
 .zoomControl{
     display:flex;
     align-items:center;
@@ -264,7 +270,7 @@ h1{
 }
 
 .hidden{
-    display:none;
+    display:none !important;
 }
 
 .match{
@@ -394,12 +400,6 @@ h1{
 <div id="levelFilters" class="levelFilters"></div>
 <div id="fieldFilters" class="fieldFilters"></div>
 
-<div class="modeFilters">
-    <b>呈現方式：</b>
-    <button id="treeModeBtn" class="modeBtn" onclick="setViewMode('tree')">樹狀清單</button>
-    <button id="orgModeBtn" class="modeBtn inactive" onclick="setViewMode('org')">組織圖</button>
-</div>
-
 <div class="toolbar">
     <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
     <button onclick="expandAll()">全部展開</button>
@@ -411,6 +411,12 @@ h1{
         <div id="summary" class="summary"></div>
 
         <div class="chartActions">
+            <div class="viewModeControl">
+                <b>呈現方式：</b>
+                <button id="treeModeBtn" class="modeBtn" onclick="setViewMode('tree')">樹狀清單</button>
+                <button id="orgModeBtn" class="modeBtn inactive" onclick="setViewMode('org')">組織圖</button>
+            </div>
+
             <div class="zoomControl">
                 <b>縮放：</b>
                 <input type="range" id="zoomRange" min="50" max="150" value="100">
@@ -1003,31 +1009,31 @@ function downloadTemplate(){
             "公司代碼":"HH",
             "層級":1,
             "上級部門":"HH",
-            "部門代碼":"DA60",
-            "費用代碼":"DA611700H7",
-            "部門全名":"中央人資",
-            "主管一姓名":"夏國安",
-            "主管一職稱":"人資長",
+            "部門代碼":"DA10",
+            "費用代碼":"DA12345678",
+            "部門全名":"中央營運",
+            "主管一姓名":"林小明",
+            "主管一職稱":"營運長",
             "在職人數":1
         },
         {
             "公司代碼":"HH",
             "層級":2,
-            "上級部門":"DA60",
-            "部門代碼":"DA610100H7",
-            "費用代碼":"DA610100H7",
-            "部門全名":"人資營運效能處",
-            "主管一姓名":"王小明",
+            "上級部門":"DA10",
+            "部門代碼":"DA110",
+            "費用代碼":"DA12345678",
+            "部門全名":"營運處",
+            "主管一姓名":"王一二",
             "主管一職稱":"處長",
             "在職人數":3
         },
         {
             "公司代碼":"HH",
             "層級":3,
-            "上級部門":"DA610100H7",
-            "部門代碼":"DA610101H7",
-            "費用代碼":"DA610101H7",
-            "部門全名":"人資服務部",
+            "上級部門":"DA110",
+            "部門代碼":"DA1110",
+            "費用代碼":"DA12345678",
+            "部門全名":"營運一部",
             "主管一姓名":"陳小華",
             "主管一職稱":"部長",
             "在職人數":8
