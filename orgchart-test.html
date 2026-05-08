@@ -351,7 +351,7 @@ h1{
 .orgChart{
     display:flex;
     justify-content:center;
-    padding:24px 20px 50px;
+    padding:30px 20px 60px;
     min-width:max-content;
     overflow:visible;
 }
@@ -362,7 +362,6 @@ h1{
     align-items:center;
     position:relative;
     flex-shrink:0;
-    padding:0 18px;
 }
 
 .orgNode{
@@ -389,61 +388,44 @@ h1{
     justify-content:center;
     align-items:flex-start;
     gap:44px;
-    margin-top:38px;
+    margin-top:42px;
     position:relative;
-    isolation:isolate;
+    padding-top:0;
 }
 
-/* 父節點往下短線 */
+/* 父節點往下 */
 .orgNodeGroup.hasChildren > .orgNode::after{
     content:"";
     position:absolute;
     left:50%;
-    bottom:-19px;
+    bottom:-22px;
     width:1px;
-    height:19px;
+    height:22px;
     background:#94a3b8;
     transform:translateX(-50%);
 }
 
-/* 子節點往上短線 */
+/* 子節點往上 */
 .orgChildren > .orgNodeGroup::before{
     content:"";
     position:absolute;
-    top:-19px;
+    top:-21px;
     left:50%;
     width:1px;
-    height:19px;
+    height:21px;
     background:#94a3b8;
     transform:translateX(-50%);
 }
 
-/* 同一父層底下，才畫橫線 */
-.orgChildren.hasMultiple > .orgNodeGroup::after{
+/* 同一父層底下的水平線，只畫在這一組 children 裡 */
+.orgChildren.hasMultiple::after{
     content:"";
     position:absolute;
-    top:-19px;
+    top:-21px;
+    left:150px;
+    right:150px;
     height:1px;
     background:#94a3b8;
-    z-index:1;
-}
-
-/* 第一個子節點：只往右連 */
-.orgChildren.hasMultiple > .orgNodeGroup:first-child::after{
-    left:50%;
-    right:18px;
-}
-
-/* 最後一個子節點：只往左連 */
-.orgChildren.hasMultiple > .orgNodeGroup:last-child::after{
-    left:18px;
-    right:50%;
-}
-
-/* 中間子節點：左右連，但不碰到其他父層 */
-.orgChildren.hasMultiple > .orgNodeGroup:not(:first-child):not(:last-child)::after{
-    left:18px;
-    right:18px;
 }
 
 @media(max-width:1300px){
