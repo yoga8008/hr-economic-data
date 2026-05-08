@@ -208,6 +208,28 @@ h1{
     color:#374151;
     font-size:14px;
 }
+.topGrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    align-items:stretch;
+    margin-bottom:20px;
+}
+
+.topGrid .uploadBox,
+.topGrid .errorArea{
+    margin-bottom:0;
+}
+
+.errorArea{
+    min-height:120px;
+}
+
+@media(max-width:900px){
+    .topGrid{
+        grid-template-columns:1fr;
+    }
+}
 </style>
 </head>
 
@@ -219,21 +241,23 @@ h1{
 上傳 Excel 後，系統會依「上級部門」建立樹狀組織圖，並可展開 / 收合。
 </div>
 
-<div class="uploadBox">
-    <input type="file" id="excelFile" accept=".xlsx,.xls">
-    <div id="message"></div>
+<div class="topGrid">
+    <div class="uploadBox">
+        <input type="file" id="excelFile" accept=".xlsx,.xls">
+        <div id="message"></div>
+    </div>
+
+    <div id="errorList" class="errorArea"></div>
 </div>
 
-<div id="errorList"></div>
+<div id="levelFilters" class="levelFilters"></div>
+<div id="fieldFilters" class="fieldFilters"></div>
 
 <div class="toolbar">
     <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
     <button onclick="expandAll()">全部展開</button>
     <button onclick="collapseAll()">全部收合</button>
 </div>
-
-<div id="levelFilters" class="levelFilters"></div>
-<div id="fieldFilters" class="fieldFilters"></div>
 
 <div class="chartBox">
     <div id="summary" class="summary"></div>
@@ -351,17 +375,17 @@ function buildTreeData(rows){
     });
 
     allNodes.forEach(node => {
-        if(node.parentCode && deptMap[node.parentCode]){
-            deptMap[node.parentCode].children.push(node);
-        }else{
-            rootNodes.push(node);
+    if(node.parentCode && deptMap[node.parentCode]){
+        deptMap[node.parentCode].children.push(node);
+    }else{
+        rootNodes.push(node);
 
-            if(node.parentCode && !deptMap[node.parentCode]){
-                errors.push("找不到上級部門：" + node.parentCode + "，部門：" + node.deptCode);
-            }
+        // HH 是公司主體，視為最上層，不列為異常
+        if(node.parentCode && node.parentCode !== "HH" && !deptMap[node.parentCode]){
+            errors.push("找不到上級部門：" + node.parentCode + "，部門：" + node.deptCode);
         }
-    });
-
+    }
+});
     sortNodes(rootNodes);
     rootNodes.forEach(node => calculateTotalPeople(node));
 
