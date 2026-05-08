@@ -5,6 +5,8 @@
 <title>組織圖測試版</title>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
 <style>
 body{
@@ -49,8 +51,11 @@ h1{
     flex-wrap:wrap;
 }
 
-.templateBtn{
-    padding:8px 12px;
+.templateBtn,
+.exportBtn,
+.toolbar button,
+.modeBtn{
+    padding:10px 14px;
     border:0;
     border-radius:8px;
     background:#1e3a8a;
@@ -59,8 +64,16 @@ h1{
     cursor:pointer;
 }
 
-.templateBtn:hover{
+.templateBtn:hover,
+.exportBtn:hover,
+.toolbar button:hover,
+.modeBtn:hover{
     opacity:.9;
+}
+
+.modeBtn.inactive{
+    background:#e5e7eb;
+    color:#374151;
 }
 
 .resultArea{
@@ -83,6 +96,32 @@ h1{
     font-weight:bold;
 }
 
+.levelFilters,
+.fieldFilters,
+.modeFilters{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:0 0 20px 0;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:14px 18px;
+    align-items:center;
+}
+
+.levelFilters label,
+.fieldFilters label{
+    font-size:14px;
+    color:#374151;
+    cursor:pointer;
+}
+
+.levelFilters input,
+.fieldFilters input{
+    margin-right:5px;
+}
+
 .toolbar{
     display:flex;
     gap:10px;
@@ -98,42 +137,27 @@ h1{
     font-size:14px;
 }
 
-.toolbar button{
-    padding:10px 14px;
-    border:0;
-    border-radius:8px;
-    background:#1e3a8a;
-    color:#fff;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.toolbar button:hover{
-    opacity:.9;
-}
-
-.levelFilters,
-.fieldFilters{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    margin:0 0 20px 0;
+.chartBox{
     background:#fff;
     border:1px solid #ddd;
     border-radius:12px;
-    padding:14px 18px;
+    padding:20px;
+    overflow:auto;
 }
 
-.levelFilters label,
-.fieldFilters label{
-    font-size:14px;
-    color:#374151;
-    cursor:pointer;
+.chartHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:16px;
 }
 
-.levelFilters input,
-.fieldFilters input{
-    margin-right:5px;
+.chartActions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
 }
 
 .zoomControl{
@@ -143,25 +167,20 @@ h1{
     background:#fff;
     border:1px solid #ddd;
     border-radius:12px;
-    padding:12px 16px;
-    margin:0 0 20px 0;
-    width:fit-content;
+    padding:10px 14px;
 }
 
 .zoomControl input{
-    width:200px;
-}
-
-.chartBox{
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:20px;
-    overflow:auto;
+    width:180px;
 }
 
 .zoomWrap{
     transform-origin:top left;
+}
+
+.summary{
+    color:#374151;
+    font-size:14px;
 }
 
 .tree{
@@ -249,23 +268,102 @@ h1{
 }
 
 .match{
-    border:2px solid #dc2626;
-    background:#fff1f2;
+    border:2px solid #dc2626 !important;
+    background:#fff1f2 !important;
 }
 
 .pathOnly{
     opacity:.45;
 }
 
-.summary{
-    margin-bottom:15px;
-    color:#374151;
-    font-size:14px;
+/* 組織圖模式 */
+.orgChart{
+    display:flex;
+    justify-content:center;
+    padding:20px;
+    min-width:max-content;
+}
+
+.orgNodeGroup{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:relative;
+}
+
+.orgNode{
+    min-width:260px;
+    max-width:360px;
+    background:#fff;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    padding:12px 14px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    text-align:left;
+}
+
+.orgNode .deptName{
+    display:block;
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.orgChildren{
+    display:flex;
+    justify-content:center;
+    gap:24px;
+    margin-top:38px;
+    position:relative;
+}
+
+.orgChildren::before{
+    content:"";
+    position:absolute;
+    top:-20px;
+    left:50%;
+    width:1px;
+    height:20px;
+    background:#94a3b8;
+}
+
+.orgNodeGroup.hasChildren > .orgNode::after{
+    content:"";
+    position:absolute;
+    top:100%;
+    left:50%;
+    width:1px;
+    height:20px;
+    background:#94a3b8;
+}
+
+.orgChildren .orgNodeGroup::before{
+    content:"";
+    position:absolute;
+    top:-20px;
+    left:50%;
+    width:1px;
+    height:20px;
+    background:#94a3b8;
+}
+
+.orgChildren::after{
+    content:"";
+    position:absolute;
+    top:-20px;
+    left:0;
+    right:0;
+    height:1px;
+    background:#94a3b8;
 }
 
 @media(max-width:900px){
     .topGrid{
         grid-template-columns:1fr;
+    }
+
+    .chartHeader{
+        align-items:flex-start;
+        flex-direction:column;
     }
 }
 </style>
@@ -276,7 +374,7 @@ h1{
 <h1>組織圖測試版</h1>
 
 <div class="desc">
-上傳 Excel 後，系統會依「上級部門」建立樹狀組織圖，並可展開 / 收合。
+上傳 Excel 後，系統會依「上級部門」建立組織圖，可切換樹狀清單或組織圖呈現。
 </div>
 
 <div class="topGrid">
@@ -296,22 +394,36 @@ h1{
 <div id="levelFilters" class="levelFilters"></div>
 <div id="fieldFilters" class="fieldFilters"></div>
 
+<div class="modeFilters">
+    <b>呈現方式：</b>
+    <button id="treeModeBtn" class="modeBtn" onclick="setViewMode('tree')">樹狀清單</button>
+    <button id="orgModeBtn" class="modeBtn inactive" onclick="setViewMode('org')">組織圖</button>
+</div>
+
 <div class="toolbar">
     <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
     <button onclick="expandAll()">全部展開</button>
     <button onclick="collapseAll()">全部收合</button>
 </div>
 
-<div class="zoomControl">
-    <b>縮放：</b>
-    <input type="range" id="zoomRange" min="50" max="150" value="100">
-    <span id="zoomValue">100%</span>
-</div>
-
 <div class="chartBox">
-    <div id="zoomWrap" class="zoomWrap">
+    <div class="chartHeader">
         <div id="summary" class="summary"></div>
+
+        <div class="chartActions">
+            <div class="zoomControl">
+                <b>縮放：</b>
+                <input type="range" id="zoomRange" min="50" max="150" value="100">
+                <span id="zoomValue">100%</span>
+            </div>
+
+            <button class="exportBtn" onclick="exportPDF()">匯出 PDF</button>
+        </div>
+    </div>
+
+    <div id="zoomWrap" class="zoomWrap">
         <ul id="tree" class="tree"></ul>
+        <div id="orgChart" class="orgChart hidden"></div>
     </div>
 </div>
 
@@ -331,6 +443,7 @@ const requiredColumns = [
 let allNodes = [];
 let rootNodes = [];
 let selectedLevels = new Set();
+let currentViewMode = "tree";
 
 let visibleFields = new Set([
     "level",
@@ -370,7 +483,7 @@ function handleFile(e){
         buildTreeData(rows);
         renderLevelFilters();
         renderFieldFilters();
-        renderTree();
+        renderChart();
     };
 
     reader.readAsArrayBuffer(file);
@@ -385,6 +498,7 @@ function clearPageData(){
     document.getElementById("fieldFilters").innerHTML = "";
     document.getElementById("summary").innerText = "";
     document.getElementById("tree").innerHTML = "";
+    document.getElementById("orgChart").innerHTML = "";
 }
 
 function checkColumns(rows){
@@ -553,7 +667,7 @@ function renderLevelFilters(){
             }
 
             expandAll();
-            renderTree();
+            renderChart();
         });
 
         box.appendChild(label);
@@ -592,20 +706,60 @@ function renderFieldFilters(){
                 visibleFields.delete(this.value);
             }
 
-            renderTree();
+            renderChart();
         });
 
         box.appendChild(label);
     });
 }
 
+function setViewMode(mode){
+    currentViewMode = mode;
+
+    document.getElementById("treeModeBtn").classList.toggle("inactive", mode !== "tree");
+    document.getElementById("orgModeBtn").classList.toggle("inactive", mode !== "org");
+
+    renderChart();
+}
+
+function renderChart(){
+    if(currentViewMode === "tree"){
+        renderTree();
+    }else{
+        renderOrgChart();
+    }
+
+    searchTree();
+}
+
 function renderTree(){
     const tree = document.getElementById("tree");
+    const orgChart = document.getElementById("orgChart");
+
+    tree.classList.remove("hidden");
+    orgChart.classList.add("hidden");
+
     tree.innerHTML = "";
 
     rootNodes.forEach(node => {
         if(shouldShowNode(node)){
-            tree.appendChild(createNodeElement(node));
+            tree.appendChild(createTreeNodeElement(node));
+        }
+    });
+}
+
+function renderOrgChart(){
+    const tree = document.getElementById("tree");
+    const orgChart = document.getElementById("orgChart");
+
+    tree.classList.add("hidden");
+    orgChart.classList.remove("hidden");
+
+    orgChart.innerHTML = "";
+
+    rootNodes.forEach(node => {
+        if(shouldShowNode(node)){
+            orgChart.appendChild(createOrgNodeElement(node));
         }
     });
 }
@@ -660,7 +814,7 @@ function renderNodeInfo(node){
     return lines.join("<br>");
 }
 
-function createNodeElement(node){
+function createTreeNodeElement(node){
     const li = document.createElement("li");
     const hasChildren = node.children.length > 0;
 
@@ -671,13 +825,7 @@ function createNodeElement(node){
         nodeDiv.classList.add("pathOnly");
     }
 
-    nodeDiv.dataset.search = [
-        node.row["部門全名"],
-        node.row["主管一姓名"],
-        node.row["主管一職稱"],
-        node.row["部門代碼"],
-        node.row["費用代碼"]
-    ].join(" ").toLowerCase();
+    nodeDiv.dataset.search = getSearchText(node);
 
     nodeDiv.innerHTML = `
         <div class="nodeHeader">
@@ -697,7 +845,7 @@ function createNodeElement(node){
         nodeDiv.addEventListener("click", function(e){
             e.stopPropagation();
             node.expanded = !node.expanded;
-            renderTree();
+            renderChart();
         });
     }
 
@@ -712,7 +860,7 @@ function createNodeElement(node){
 
         node.children.forEach(child => {
             if(shouldShowNode(child)){
-                ul.appendChild(createNodeElement(child));
+                ul.appendChild(createTreeNodeElement(child));
             }
         });
 
@@ -722,25 +870,80 @@ function createNodeElement(node){
     return li;
 }
 
+function createOrgNodeElement(node){
+    const hasChildren = node.children.some(child => shouldShowNode(child));
+
+    const group = document.createElement("div");
+    group.className = "orgNodeGroup";
+
+    if(hasChildren){
+        group.classList.add("hasChildren");
+    }
+
+    const nodeDiv = document.createElement("div");
+    nodeDiv.className = "orgNode";
+
+    if(isPathOnly(node)){
+        nodeDiv.classList.add("pathOnly");
+    }
+
+    nodeDiv.dataset.search = getSearchText(node);
+
+    nodeDiv.innerHTML = `
+        <span class="deptName">${node.row["部門全名"] || "-"}</span>
+        <div class="nodeInfo">
+            ${renderNodeInfo(node)}
+        </div>
+    `;
+
+    group.appendChild(nodeDiv);
+
+    if(hasChildren){
+        const childrenBox = document.createElement("div");
+        childrenBox.className = "orgChildren";
+
+        node.children.forEach(child => {
+            if(shouldShowNode(child)){
+                childrenBox.appendChild(createOrgNodeElement(child));
+            }
+        });
+
+        group.appendChild(childrenBox);
+    }
+
+    return group;
+}
+
+function getSearchText(node){
+    return [
+        node.row["部門全名"],
+        node.row["主管一姓名"],
+        node.row["主管一職稱"],
+        node.row["部門代碼"],
+        node.row["費用代碼"]
+    ].join(" ").toLowerCase();
+}
+
 function expandAll(){
     allNodes.forEach(node => node.expanded = true);
-    renderTree();
+    renderChart();
 }
 
 function collapseAll(){
     allNodes.forEach(node => node.expanded = false);
-    renderTree();
+    renderChart();
 }
 
 function searchTree(){
     const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
 
-    if(keyword){
-        expandAll();
+    if(keyword && currentViewMode === "tree"){
+        allNodes.forEach(node => node.expanded = true);
+        renderTree();
     }
 
     setTimeout(() => {
-        document.querySelectorAll(".node").forEach(node => {
+        document.querySelectorAll(".node, .orgNode").forEach(node => {
             node.classList.remove("match");
 
             if(keyword && node.dataset.search.includes(keyword)){
@@ -748,6 +951,50 @@ function searchTree(){
             }
         });
     }, 0);
+}
+
+async function exportPDF(){
+    const target = document.getElementById("zoomWrap");
+
+    if(!target || allNodes.length === 0){
+        alert("請先上傳 Excel 並產生組織圖");
+        return;
+    }
+
+    const originalTransform = target.style.transform;
+    target.style.transform = "scale(1)";
+
+    const canvas = await html2canvas(target, {
+        scale: 2,
+        backgroundColor: "#ffffff",
+        useCORS: true
+    });
+
+    target.style.transform = originalTransform;
+
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jspdf.jsPDF("l", "mm", "a4");
+
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgWidth = pageWidth - 20;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+
+    let heightLeft = imgHeight;
+    let position = 10;
+
+    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while(heightLeft > 0){
+        pdf.addPage();
+        position = heightLeft - imgHeight + 10;
+        pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+    }
+
+    pdf.save("組織圖_匯出.pdf");
 }
 
 function downloadTemplate(){
