@@ -43,7 +43,7 @@ h1{
     border:1px solid #fdba74;
     border-radius:10px;
     padding:12px;
-    margin:15px 0;
+    margin:0;
     color:#9a3412;
     font-size:14px;
     line-height:1.7;
@@ -102,12 +102,32 @@ h1{
     margin-right:5px;
 }
 
+.zoomControl{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:12px 16px;
+    margin:0 0 20px 0;
+    width:fit-content;
+}
+
+.zoomControl input{
+    width:200px;
+}
+
 .chartBox{
     background:#fff;
     border:1px solid #ddd;
     border-radius:12px;
     padding:20px;
     overflow:auto;
+}
+
+.zoomWrap{
+    transform-origin:top left;
 }
 
 .tree{
@@ -208,6 +228,7 @@ h1{
     color:#374151;
     font-size:14px;
 }
+
 .topGrid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -259,9 +280,17 @@ h1{
     <button onclick="collapseAll()">全部收合</button>
 </div>
 
+<div class="zoomControl">
+    <b>縮放：</b>
+    <input type="range" id="zoomRange" min="50" max="150" value="100">
+    <span id="zoomValue">100%</span>
+</div>
+
 <div class="chartBox">
-    <div id="summary" class="summary"></div>
-    <ul id="tree" class="tree"></ul>
+    <div id="zoomWrap" class="zoomWrap">
+        <div id="summary" class="summary"></div>
+        <ul id="tree" class="tree"></ul>
+    </div>
 </div>
 
 <script>
@@ -290,6 +319,12 @@ let visibleFields = new Set([
 
 document.getElementById("excelFile").addEventListener("change", handleFile);
 document.getElementById("searchInput").addEventListener("input", searchTree);
+
+document.getElementById("zoomRange").addEventListener("input", function(){
+    const value = this.value;
+    document.getElementById("zoomValue").innerText = value + "%";
+    document.getElementById("zoomWrap").style.transform = `scale(${value / 100})`;
+});
 
 function handleFile(e){
     const file = e.target.files[0];
@@ -375,17 +410,17 @@ function buildTreeData(rows){
     });
 
     allNodes.forEach(node => {
-    if(node.parentCode && deptMap[node.parentCode]){
-        deptMap[node.parentCode].children.push(node);
-    }else{
-        rootNodes.push(node);
+        if(node.parentCode && deptMap[node.parentCode]){
+            deptMap[node.parentCode].children.push(node);
+        }else{
+            rootNodes.push(node);
 
-        // HH 是公司主體，視為最上層，不列為異常
-        if(node.parentCode && node.parentCode !== "HH" && !deptMap[node.parentCode]){
-            errors.push("找不到上級部門：" + node.parentCode + "，部門：" + node.deptCode);
+            if(node.parentCode && node.parentCode !== "HH" && !deptMap[node.parentCode]){
+                errors.push("找不到上級部門：" + node.parentCode + "，部門：" + node.deptCode);
+            }
         }
-    }
-});
+    });
+
     sortNodes(rootNodes);
     rootNodes.forEach(node => calculateTotalPeople(node));
 
@@ -480,10 +515,10 @@ function renderFieldFilters(){
     box.appendChild(title);
 
     const fields = [
+        { key:"manager", label:"主管" },
         { key:"level", label:"部門層級" },
         { key:"deptCode", label:"部門代碼" },
-        { key:"costCode", label:"費用代碼" },
-        { key:"manager", label:"主管" }
+        { key:"costCode", label:"費用代碼" }
     ];
 
     fields.forEach(field => {
