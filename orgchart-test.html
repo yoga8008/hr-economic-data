@@ -306,6 +306,7 @@ h1{
     padding:12px 14px;
     box-shadow:0 2px 8px rgba(0,0,0,0.08);
     text-align:left;
+    position:relative;
 }
 
 .orgNode .deptName{
@@ -322,27 +323,19 @@ h1{
     position:relative;
 }
 
-.orgChildren::before{
-    content:"";
-    position:absolute;
-    top:-20px;
-    left:50%;
-    width:1px;
-    height:20px;
-    background:#94a3b8;
-}
-
+/* 父節點往下短線 */
 .orgNodeGroup.hasChildren > .orgNode::after{
     content:"";
     position:absolute;
-    top:100%;
     left:50%;
+    bottom:-18px;
     width:1px;
-    height:20px;
+    height:18px;
     background:#94a3b8;
 }
 
-.orgChildren .orgNodeGroup::before{
+/* 子節點往上短線 */
+.orgChildren > .orgNodeGroup::before{
     content:"";
     position:absolute;
     top:-20px;
@@ -352,14 +345,28 @@ h1{
     background:#94a3b8;
 }
 
-.orgChildren::after{
+/* 多個子節點才畫橫線 */
+.orgChildren.hasMultiple > .orgNodeGroup::after{
     content:"";
     position:absolute;
     top:-20px;
-    left:0;
-    right:0;
     height:1px;
     background:#94a3b8;
+}
+
+.orgChildren.hasMultiple > .orgNodeGroup:first-child::after{
+    left:50%;
+    right:0;
+}
+
+.orgChildren.hasMultiple > .orgNodeGroup:last-child::after{
+    left:0;
+    right:50%;
+}
+
+.orgChildren.hasMultiple > .orgNodeGroup:not(:first-child):not(:last-child)::after{
+    left:0;
+    right:0;
 }
 
 @media(max-width:900px){
@@ -544,10 +551,48 @@ function buildTreeData(rows){
     selectedLevels.clear();
 
     const deptMap = {};
+    const legalMap = {};
     const errors = [];
 
     allNodes = [];
     rootNodes = [];
+
+    // 先建立法人節點，例如 HH
+    rows.forEach((row) => {
+        const companyCode = String(row["公司代碼"]).trim();
+
+        if(!companyCode) return;
+
+        if(!legalMap[companyCode]){
+            const legalNode = {
+                row: {
+                    "公司代碼": companyCode,
+                    "層級": "法人",
+                    "上級部門": "",
+                    "部門代碼": companyCode,
+                    "費用代碼": "",
+                    "部門全名": companyCode,
+                    "主管一姓名": "",
+                    "主管一職稱": "",
+                    "在職人數": 0
+                },
+                deptCode: companyCode,
+                parentCode: "",
+                levelText: "法人",
+                level: 0,
+                order: -1,
+                ownPeople: 0,
+                totalPeople: 0,
+                children: [],
+                expanded: true,
+                isLegalEntity: true
+            };
+
+            legalMap[companyCode] = legalNode;
+            deptMap[companyCode] = legalNode;
+            allNodes.push(legalNode);
+        }
+    });
 
     rows.forEach((row, index) => {
         const deptCode = String(row["部門代碼"]).trim();
@@ -570,7 +615,8 @@ function buildTreeData(rows){
             ownPeople: parsePeople(row["在職人數"]),
             totalPeople: 0,
             children: [],
-            expanded: true
+            expanded: true,
+            isLegalEntity: false
         };
 
         deptMap[deptCode] = node;
@@ -578,12 +624,23 @@ function buildTreeData(rows){
     });
 
     allNodes.forEach(node => {
+        if(node.isLegalEntity){
+            rootNodes.push(node);
+            return;
+        }
+
         if(node.parentCode && deptMap[node.parentCode]){
             deptMap[node.parentCode].children.push(node);
         }else{
-            rootNodes.push(node);
+            const companyCode = String(node.row["公司代碼"]).trim();
 
-            if(node.parentCode && node.parentCode !== "HH" && !deptMap[node.parentCode]){
+            if(companyCode && legalMap[companyCode]){
+                legalMap[companyCode].children.push(node);
+            }else{
+                rootNodes.push(node);
+            }
+
+            if(node.parentCode && !deptMap[node.parentCode]){
                 errors.push("找不到上級部門：" + node.parentCode + "，部門：" + node.deptCode);
             }
         }
@@ -608,7 +665,7 @@ function buildTreeData(rows){
     }
 
     document.getElementById("summary").innerText =
-        "共讀取 " + allNodes.length + " 個部門，最上層部門 " + rootNodes.length + " 個。";
+        "共讀取 " + allNodes.length + " 個節點，最上層節點 " + rootNodes.length + " 個。";
 }
 
 function sortNodes(nodes){
@@ -642,6 +699,9 @@ function renderLevelFilters(){
 
     const levels = [...new Set(allNodes.map(node => node.levelText))]
         .sort((a,b) => {
+            if(a === "法人") return -1;
+            if(b === "法人") return 1;
+
             const na = Number(a);
             const nb = Number(b);
 
@@ -660,7 +720,7 @@ function renderLevelFilters(){
 
         label.innerHTML = `
             <input type="checkbox" value="${level}">
-            層級 ${level}
+            ${level === "法人" ? "法人" : "層級 " + level}
         `;
 
         const checkbox = label.querySelector("input");
@@ -794,7 +854,7 @@ function renderNodeInfo(node){
     const row = node.row;
     const lines = [];
 
-    if(visibleFields.has("manager")){
+    if(visibleFields.has("manager") && !node.isLegalEntity){
         lines.push(`主管：${row["主管一姓名"] || "-"} / ${row["主管一職稱"] || "-"}`);
     }
 
@@ -806,16 +866,24 @@ function renderNodeInfo(node){
         lines.push(`部門代碼：${row["部門代碼"] || "-"}`);
     }
 
-    if(visibleFields.has("costCode")){
+    if(visibleFields.has("costCode") && !node.isLegalEntity){
         lines.push(`費用代碼：${row["費用代碼"] || "-"}`);
     }
 
-    lines.push(`
-        <div class="totalPeople">
-            本單位人數：${node.ownPeople} 人<br>
-            含轄下合計：${node.totalPeople} 人
-        </div>
-    `);
+    if(node.isLegalEntity){
+        lines.push(`
+            <div class="totalPeople">
+                含轄下合計：${node.totalPeople} 人
+            </div>
+        `);
+    }else{
+        lines.push(`
+            <div class="totalPeople">
+                本單位人數：${node.ownPeople} 人<br>
+                含轄下合計：${node.totalPeople} 人
+            </div>
+        `);
+    }
 
     return lines.join("<br>");
 }
@@ -840,7 +908,7 @@ function createTreeNodeElement(node){
                 ? `<span class="toggle">${node.expanded ? "－" : "＋"}</span>`
                 : `<span class="emptyToggle"></span>`
             }
-            <span class="deptName">${node.row["部門全名"] || "-"}</span>
+            <span class="deptName">${node.isLegalEntity ? "法人：" + node.row["部門全名"] : node.row["部門全名"] || "-"}</span>
         </div>
         <div class="nodeInfo">
             ${renderNodeInfo(node)}
@@ -877,7 +945,8 @@ function createTreeNodeElement(node){
 }
 
 function createOrgNodeElement(node){
-    const hasChildren = node.children.some(child => shouldShowNode(child));
+    const visibleChildren = node.children.filter(child => shouldShowNode(child));
+    const hasChildren = visibleChildren.length > 0;
 
     const group = document.createElement("div");
     group.className = "orgNodeGroup";
@@ -896,7 +965,7 @@ function createOrgNodeElement(node){
     nodeDiv.dataset.search = getSearchText(node);
 
     nodeDiv.innerHTML = `
-        <span class="deptName">${node.row["部門全名"] || "-"}</span>
+        <span class="deptName">${node.isLegalEntity ? "法人：" + node.row["部門全名"] : node.row["部門全名"] || "-"}</span>
         <div class="nodeInfo">
             ${renderNodeInfo(node)}
         </div>
@@ -908,10 +977,12 @@ function createOrgNodeElement(node){
         const childrenBox = document.createElement("div");
         childrenBox.className = "orgChildren";
 
-        node.children.forEach(child => {
-            if(shouldShowNode(child)){
-                childrenBox.appendChild(createOrgNodeElement(child));
-            }
+        if(visibleChildren.length > 1){
+            childrenBox.classList.add("hasMultiple");
+        }
+
+        visibleChildren.forEach(child => {
+            childrenBox.appendChild(createOrgNodeElement(child));
         });
 
         group.appendChild(childrenBox);
@@ -926,7 +997,8 @@ function getSearchText(node){
         node.row["主管一姓名"],
         node.row["主管一職稱"],
         node.row["部門代碼"],
-        node.row["費用代碼"]
+        node.row["費用代碼"],
+        node.row["公司代碼"]
     ].join(" ").toLowerCase();
 }
 
