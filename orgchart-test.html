@@ -521,6 +521,10 @@ function renderNodeInfo(node){
     const row = node.row;
     const lines = [];
 
+    if(visibleFields.has("manager")){
+        lines.push(`主管：${row["主管一姓名"] || "-"} / ${row["主管一職稱"] || "-"}`);
+    }
+
     if(visibleFields.has("level")){
         lines.push(`層級：${row["層級"] || "-"}`);
     }
@@ -531,10 +535,6 @@ function renderNodeInfo(node){
 
     if(visibleFields.has("costCode")){
         lines.push(`費用代碼：${row["費用代碼"] || "-"}`);
-    }
-
-    if(visibleFields.has("manager")){
-        lines.push(`主管：${row["主管一姓名"] || "-"} / ${row["主管一職稱"] || "-"}`);
     }
 
     lines.push(`
