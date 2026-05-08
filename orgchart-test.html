@@ -100,6 +100,7 @@ h1{
 
 .templateBtn,
 .exportBtn,
+.clearMemoryBtn,
 .chartLeftActions button,
 .modeBtn{
     height:36px;
@@ -118,6 +119,7 @@ h1{
 
 .templateBtn:hover,
 .exportBtn:hover,
+.clearMemoryBtn:hover,
 .chartLeftActions button:hover,
 .modeBtn:hover{
     opacity:.9;
@@ -126,6 +128,21 @@ h1{
 .modeBtn.inactive{
     background:#e5e7eb;
     color:#374151;
+}
+
+.clearMemoryBtn{
+    background:#991b1b;
+}
+
+.sortSelect{
+    height:36px;
+    padding:0 10px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:13px;
+    background:#fff;
+    color:#374151;
+    box-sizing:border-box;
 }
 
 .resultSuccess{
@@ -487,6 +504,7 @@ h1{
             <div class="uploadActions">
                 <input type="file" id="excelFile" accept=".xlsx,.xls">
                 <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
+                <button class="clearMemoryBtn" onclick="clearSavedDataWithPassword()">清除記憶資料</button>
             </div>
         </div>
 
@@ -505,6 +523,12 @@ h1{
 <div class="chartBox">
     <div class="chartHeader">
         <div class="chartLeftActions">
+            <select id="sortMode" class="sortSelect" onchange="applySortAndRender()">
+                <option value="default">原始順序</option>
+                <option value="name">依名稱排序</option>
+                <option value="code">依部門代碼排序</option>
+            </select>
+
             <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
 
             <label class="focusOption">
@@ -555,6 +579,11 @@ const requiredColumns = [
     "在職人數"
 ];
 
+const STORAGE_KEY_ROWS = "orgChartSavedRows";
+const STORAGE_KEY_FILE = "orgChartFileName";
+const STORAGE_KEY_UPDATED_AT = "orgChartUpdatedAt";
+const ADMIN_PASSWORD = "1234"; // 清除記憶資料密碼，可自行修改
+
 let allNodes = [];
 let rootNodes = [];
 let selectedLevels = new Set();
@@ -567,6 +596,8 @@ let visibleFields = new Set([
     "costCode",
     "manager"
 ]);
+
+loadSavedData();
 
 document.getElementById("excelFile").addEventListener("change", handleFile);
 
@@ -596,6 +627,109 @@ document.getElementById("zoomRange").addEventListener("input", function(){
         requestAnimationFrame(updateOrgConnectorLines);
     }
 });
+
+
+function getNowText(){
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    const hh = String(d.getHours()).padStart(2, "0");
+    const mi = String(d.getMinutes()).padStart(2, "0");
+
+    return `${yyyy}/${mm}/${dd} ${hh}:${mi}`;
+}
+
+function saveOrgChartMemory(rows, fileName, updatedAt){
+    try{
+        localStorage.setItem(STORAGE_KEY_ROWS, JSON.stringify(rows));
+        localStorage.setItem(STORAGE_KEY_FILE, fileName || "未命名檔案");
+        localStorage.setItem(STORAGE_KEY_UPDATED_AT, updatedAt || getNowText());
+    }catch(err){
+        alert("資料已產生，但瀏覽器記憶空間不足，無法儲存本次上傳資料。");
+    }
+}
+
+function loadSavedData(){
+    const savedRows = localStorage.getItem(STORAGE_KEY_ROWS);
+
+    if(!savedRows){
+        return;
+    }
+
+    try{
+        const rows = JSON.parse(savedRows);
+        const fileName = localStorage.getItem(STORAGE_KEY_FILE) || "未命名檔案";
+        const updatedAt = localStorage.getItem(STORAGE_KEY_UPDATED_AT) || "未記錄";
+
+        if(!Array.isArray(rows) || rows.length === 0){
+            return;
+        }
+
+        buildTreeData(rows);
+        renderLevelFilters();
+        renderFieldFilters();
+        renderChart();
+        appendMemoryInfo(fileName, updatedAt, false);
+    }catch(err){
+        localStorage.removeItem(STORAGE_KEY_ROWS);
+        localStorage.removeItem(STORAGE_KEY_FILE);
+        localStorage.removeItem(STORAGE_KEY_UPDATED_AT);
+
+        document.getElementById("uploadResult").innerHTML = `
+            <b>上傳結果</b><br>
+            <span class="resultError">記憶資料讀取失敗，已清除舊資料</span>
+        `;
+    }
+}
+
+function appendMemoryInfo(fileName, updatedAt, isNewUpload){
+    const result = document.getElementById("uploadResult");
+    const status = isNewUpload ? "組織資料已儲存" : "已自動載入上次儲存資料";
+
+    result.innerHTML += `
+        <hr style="border:0;border-top:1px solid #e5e7eb;margin:10px 0;">
+        <span class="resultSuccess">${status}</span><br>
+        最後更新日：${updatedAt}<br>
+        來源檔案：${fileName}
+    `;
+}
+
+function clearSavedDataWithPassword(){
+    const input = prompt("請輸入管理密碼，確認後將清除已儲存的組織圖資料：");
+
+    if(input === null){
+        return;
+    }
+
+    if(input !== ADMIN_PASSWORD){
+        alert("密碼錯誤，無法清除資料。");
+        return;
+    }
+
+    const confirmClear = confirm("確認要清除所有記憶資料嗎？此動作無法復原。");
+
+    if(!confirmClear){
+        return;
+    }
+
+    localStorage.removeItem(STORAGE_KEY_ROWS);
+    localStorage.removeItem(STORAGE_KEY_FILE);
+    localStorage.removeItem(STORAGE_KEY_UPDATED_AT);
+
+    clearPageData();
+
+    document.getElementById("uploadResult").innerHTML = `
+        <b>上傳結果</b><br>
+        <span class="resultSuccess">已清除記憶資料</span><br>
+        尚未上傳 Excel
+    `;
+
+    const excelFile = document.getElementById("excelFile");
+    if(excelFile){
+        excelFile.value = "";
+    }
+}
 
 function toggleTopPanel(){
     const panel = document.getElementById("topPanel");
@@ -629,10 +763,15 @@ function handleFile(e){
             return;
         }
 
+        const updatedAt = getNowText();
+
+        saveOrgChartMemory(rows, file.name, updatedAt);
+
         buildTreeData(rows);
         renderLevelFilters();
         renderFieldFilters();
         renderChart();
+        appendMemoryInfo(file.name, updatedAt, true);
     };
 
     reader.readAsArrayBuffer(file);
@@ -818,12 +957,29 @@ function buildTreeData(rows){
 }
 
 function sortNodes(nodes){
+    const mode = document.getElementById("sortMode")?.value || "default";
+
     nodes.sort((a,b) => {
+        if(mode === "name"){
+            return String(a.row["部門全名"] || "")
+                .localeCompare(String(b.row["部門全名"] || ""), "zh-Hant");
+        }
+
+        if(mode === "code"){
+            return String(a.row["部門代碼"] || "")
+                .localeCompare(String(b.row["部門代碼"] || ""), "zh-Hant");
+        }
+
         if(a.level !== b.level) return a.level - b.level;
         return a.order - b.order;
     });
 
     nodes.forEach(node => sortNodes(node.children));
+}
+
+function applySortAndRender(){
+    sortNodes(rootNodes);
+    renderChart();
 }
 
 function parsePeople(value){
