@@ -172,6 +172,30 @@ h1{
     color:#374151;
     font-size:14px;
 }
+.levelFilters{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:0 0 20px 0;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:14px 18px;
+}
+
+.levelFilters label{
+    font-size:14px;
+    color:#374151;
+    cursor:pointer;
+}
+
+.levelFilters input{
+    margin-right:5px;
+}
+
+.pathOnly{
+    opacity:.45;
+}
 </style>
 </head>
 
@@ -196,6 +220,8 @@ h1{
     <button onclick="collapseAll()">全部收合</button>
 </div>
 
+<div id="levelFilters" class="levelFilters"></div>
+
 <div class="chartBox">
     <div id="summary" class="summary"></div>
     <ul id="tree" class="tree"></ul>
@@ -216,6 +242,7 @@ const requiredColumns = [
 
 let allNodes = [];
 let rootNodes = [];
+let selectedLevels = new Set();
 
 document.getElementById("excelFile").addEventListener("change", handleFile);
 document.getElementById("searchInput").addEventListener("input", searchTree);
@@ -234,6 +261,7 @@ function handleFile(e){
 
         checkColumns(rows);
         buildTreeData(rows);
+        renderLevelFilters();
         renderTree();
     };
 
@@ -265,6 +293,8 @@ function buildTreeData(rows){
     const errorList = document.getElementById("errorList");
     errorList.innerHTML = "";
 
+    selectedLevels.clear();
+
     const deptMap = {};
     const errors = [];
 
@@ -280,15 +310,18 @@ function buildTreeData(rows){
             errors.push("部門代碼重複：" + deptCode);
         }
 
+        const levelText = String(row["層級"]).trim() || "未設定";
+
         const node = {
-            row: row,
-            deptCode: deptCode,
-            parentCode: String(row["上級部門"]).trim(),
-            level: Number(row["層級"]) || 999,
-            order: index,
-            children: [],
-            expanded: true
-        };
+        row: row,
+        deptCode: deptCode,
+        parentCode: String(row["上級部門"]).trim(),
+        levelText: levelText,
+        level: Number(levelText) || 999,
+        order: index,
+        children: [],
+        expanded: true
+};
 
         deptMap[deptCode] = node;
         allNodes.push(node);
@@ -335,10 +368,74 @@ function renderTree(){
     tree.innerHTML = "";
 
     rootNodes.forEach(node => {
-        tree.appendChild(createNodeElement(node));
+        if(shouldShowNode(node)){
+            tree.appendChild(createNodeElement(node));
+        }
+    });
+}
+function renderLevelFilters(){
+    const box = document.getElementById("levelFilters");
+    box.innerHTML = "";
+
+const levels = [...new Set(allNodes.map(node => node.levelText))]
+    .sort((a,b) => {
+        const na = Number(a);
+        const nb = Number(b);
+
+        if(isNaN(na)) return 1;
+        if(isNaN(nb)) return -1;
+
+        return na - nb;
+    });
+
+    const title = document.createElement("div");
+    title.innerHTML = "<b>層級篩選：</b>";
+    box.appendChild(title);
+
+    levels.forEach(level => {
+        const label = document.createElement("label");
+
+        label.innerHTML = `
+            <input type="checkbox" value="${level}">
+            層級 ${level}
+        `;
+
+        const checkbox = label.querySelector("input");
+
+        checkbox.addEventListener("change", function(){
+            if(this.checked){
+                selectedLevels.add(this.value);
+            }else{
+                selectedLevels.delete(this.value);
+            }
+
+            expandAll();
+            renderTree();
+        });
+
+        box.appendChild(label);
     });
 }
 
+function shouldShowNode(node){
+    if(selectedLevels.size === 0){
+        return true;
+    }
+
+    if(selectedLevels.has(node.levelText)){
+        return true;
+    }
+
+    return node.children.some(child => shouldShowNode(child));
+}
+
+function isPathOnly(node){
+    if(selectedLevels.size === 0){
+        return false;
+    }
+
+    return !selectedLevels.has(node.levelText);
+}
 function createNodeElement(node){
     const li = document.createElement("li");
 
@@ -346,6 +443,10 @@ function createNodeElement(node){
 
     const nodeDiv = document.createElement("div");
     nodeDiv.className = "node";
+
+    if(isPathOnly(node)){
+    nodeDiv.classList.add("pathOnly");
+}
     nodeDiv.dataset.search = [
         node.row["部門全名"],
         node.row["主管一姓名"],
@@ -390,8 +491,10 @@ function createNodeElement(node){
         }
 
         node.children.forEach(child => {
-            ul.appendChild(createNodeElement(child));
-        });
+        if(shouldShowNode(child)){
+        ul.appendChild(createNodeElement(child));
+    }
+});
 
         li.appendChild(ul);
     }
