@@ -436,7 +436,6 @@ h1{
                 只看此部門及轄下
             </label>
 
-            <button onclick="clearFocus()">顯示全部</button>
             <button onclick="expandAll()">全部展開</button>
             <button onclick="collapseAll()">全部收合</button>
         </div>
@@ -501,6 +500,13 @@ document.getElementById("searchInput").addEventListener("input", function(){
 document.getElementById("searchInput").addEventListener("keydown", function(e){
     if(e.key === "Enter"){
         searchAndJump();
+    }
+});
+
+document.getElementById("focusCheckbox").addEventListener("change", function(){
+    if(!this.checked){
+        focusNode = null;
+        renderChart();
     }
 });
 
@@ -1114,7 +1120,8 @@ function searchAndJump(){
     const focusChecked = document.getElementById("focusCheckbox").checked;
 
     if(!keyword){
-        alert("請先輸入要查詢的部門、主管或代碼");
+        focusNode = null;
+        renderChart();
         return;
     }
 
@@ -1135,19 +1142,12 @@ function searchAndJump(){
         }, 0);
     }else{
         focusNode = null;
-        searchTree(true);
+        renderChart();
+
+        setTimeout(() => {
+            searchTree(true);
+        }, 0);
     }
-}
-
-function clearFocus(){
-    focusNode = null;
-
-    const checkbox = document.getElementById("focusCheckbox");
-    if(checkbox){
-        checkbox.checked = false;
-    }
-
-    renderChart();
 }
 
 async function exportPDF(){
