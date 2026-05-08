@@ -409,6 +409,53 @@ h1{
         grid-template-columns:1fr;
     }
 }
+    /* 統一上方工具列高度 */
+.chartHeader{
+    align-items:center;
+}
+
+.chartLeftActions,
+.chartActions{
+    align-items:center;
+}
+
+.chartLeftActions input[type="text"],
+.chartLeftActions button,
+.modeBtn,
+.exportBtn,
+.focusOption,
+.viewModeControl,
+.zoomControl{
+    height:44px;
+    box-sizing:border-box;
+}
+
+.chartLeftActions input[type="text"]{
+    padding:0 12px;
+    line-height:44px;
+}
+
+.chartLeftActions button,
+.modeBtn,
+.exportBtn{
+    padding:0 14px;
+    line-height:44px;
+}
+
+.focusOption,
+.viewModeControl,
+.zoomControl{
+    padding:0 12px;
+}
+
+.focusOption input{
+    width:16px;
+    height:16px;
+}
+
+.zoomControl input{
+    height:auto;
+}
 </style>
 </head>
 
