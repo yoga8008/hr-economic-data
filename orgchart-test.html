@@ -150,12 +150,29 @@ h1{
     flex-wrap:wrap;
 }
 
-.chartLeftActions input{
+.chartLeftActions input[type="text"]{
     width:280px;
     padding:10px 12px;
     border:1px solid #cbd5e1;
     border-radius:8px;
     font-size:14px;
+}
+
+.focusOption{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:14px;
+    color:#374151;
+    cursor:pointer;
+}
+
+.focusOption input{
+    margin:0;
 }
 
 .chartActions{
@@ -413,6 +430,13 @@ h1{
         <div class="chartLeftActions">
             <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
             <button onclick="searchAndJump()">搜尋</button>
+
+            <label class="focusOption">
+                <input type="checkbox" id="focusCheckbox">
+                只看此部門及轄下
+            </label>
+
+            <button onclick="clearFocus()">顯示全部</button>
             <button onclick="expandAll()">全部展開</button>
             <button onclick="collapseAll()">全部收合</button>
         </div>
@@ -459,6 +483,7 @@ let allNodes = [];
 let rootNodes = [];
 let selectedLevels = new Set();
 let currentViewMode = "tree";
+let focusNode = null;
 
 let visibleFields = new Set([
     "level",
@@ -517,6 +542,12 @@ function clearPageData(){
     allNodes = [];
     rootNodes = [];
     selectedLevels.clear();
+    focusNode = null;
+
+    const focusCheckbox = document.getElementById("focusCheckbox");
+    if(focusCheckbox){
+        focusCheckbox.checked = false;
+    }
 
     document.getElementById("levelFilters").innerHTML = "";
     document.getElementById("fieldFilters").innerHTML = "";
@@ -560,6 +591,12 @@ function buildTreeData(rows){
     const result = document.getElementById("uploadResult");
 
     selectedLevels.clear();
+    focusNode = null;
+
+    const focusCheckbox = document.getElementById("focusCheckbox");
+    if(focusCheckbox){
+        focusCheckbox.checked = false;
+    }
 
     const deptMap = {};
     const legalMap = {};
@@ -817,7 +854,9 @@ function renderTree(){
 
     tree.innerHTML = "";
 
-    rootNodes.forEach(node => {
+    const displayRoots = focusNode ? [focusNode] : rootNodes;
+
+    displayRoots.forEach(node => {
         if(shouldShowNode(node)){
             tree.appendChild(createTreeNodeElement(node));
         }
@@ -833,7 +872,9 @@ function renderOrgChart(){
 
     orgChart.innerHTML = "";
 
-    rootNodes.forEach(node => {
+    const displayRoots = focusNode ? [focusNode] : rootNodes;
+
+    displayRoots.forEach(node => {
         if(shouldShowNode(node)){
             orgChart.appendChild(createOrgNodeElement(node));
         }
@@ -1060,8 +1101,53 @@ function searchTree(jumpToFirst = false){
     }, 0);
 }
 
+function findFirstMatchedNode(keyword){
+    if(!keyword) return null;
+
+    return allNodes.find(node => {
+        return getSearchText(node).includes(keyword);
+    }) || null;
+}
+
 function searchAndJump(){
-    searchTree(true);
+    const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
+    const focusChecked = document.getElementById("focusCheckbox").checked;
+
+    if(!keyword){
+        alert("請先輸入要查詢的部門、主管或代碼");
+        return;
+    }
+
+    if(focusChecked){
+        const matchedNode = findFirstMatchedNode(keyword);
+
+        if(!matchedNode){
+            alert("找不到符合的部門、主管或代碼");
+            return;
+        }
+
+        focusNode = matchedNode;
+        expandAll();
+        renderChart();
+
+        setTimeout(() => {
+            searchTree(true);
+        }, 0);
+    }else{
+        focusNode = null;
+        searchTree(true);
+    }
+}
+
+function clearFocus(){
+    focusNode = null;
+
+    const checkbox = document.getElementById("focusCheckbox");
+    if(checkbox){
+        checkbox.checked = false;
+    }
+
+    renderChart();
 }
 
 async function exportPDF(){
