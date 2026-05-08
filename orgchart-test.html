@@ -732,7 +732,8 @@ function buildTreeData(rows){
                 totalPeople: 0,
                 children: [],
                 expanded: true,
-                isLegalEntity: true
+                isLegalEntity: true,
+                isVirtualRoot: false
             };
 
             legalMap[companyCode] = legalNode;
@@ -763,7 +764,8 @@ function buildTreeData(rows){
             totalPeople: 0,
             children: [],
             expanded: true,
-            isLegalEntity: false
+            isLegalEntity: false,
+            isVirtualRoot: false
         };
 
         deptMap[deptCode] = node;
@@ -1007,7 +1009,7 @@ function renderNodeInfo(node){
     const row = node.row;
     const lines = [];
 
-    if(visibleFields.has("manager") && !node.isLegalEntity){
+    if(visibleFields.has("manager") && !node.isLegalEntity && !node.isVirtualRoot){
         lines.push(`主管：${row["主管一姓名"] || "-"} / ${row["主管一職稱"] || "-"}`);
     }
 
@@ -1019,11 +1021,11 @@ function renderNodeInfo(node){
         lines.push(`部門代碼：${row["部門代碼"] || "-"}`);
     }
 
-    if(visibleFields.has("costCode") && !node.isLegalEntity){
+    if(visibleFields.has("costCode") && !node.isLegalEntity && !node.isVirtualRoot){
         lines.push(`費用代碼：${row["費用代碼"] || "-"}`);
     }
 
-    if(node.isLegalEntity){
+    if(node.isLegalEntity || node.isVirtualRoot){
         lines.push(`
             <div class="totalPeople">
                 含轄下合計：${node.totalPeople} 人
@@ -1039,6 +1041,18 @@ function renderNodeInfo(node){
     }
 
     return lines.join("<br>");
+}
+
+function getNodeTitle(node){
+    if(node.isVirtualRoot){
+        return node.row["部門全名"] || "-";
+    }
+
+    if(node.isLegalEntity){
+        return "法人：" + node.row["部門全名"];
+    }
+
+    return node.row["部門全名"] || "-";
 }
 
 function createTreeNodeElement(node){
@@ -1061,7 +1075,7 @@ function createTreeNodeElement(node){
                 ? `<span class="toggle">${node.expanded ? "－" : "＋"}</span>`
                 : `<span class="emptyToggle"></span>`
             }
-            <span class="deptName">${node.isLegalEntity ? "法人：" + node.row["部門全名"] : node.row["部門全名"] || "-"}</span>
+            <span class="deptName">${getNodeTitle(node)}</span>
         </div>
         <div class="nodeInfo">
             ${renderNodeInfo(node)}
@@ -1118,7 +1132,7 @@ function createOrgNodeElement(node){
     nodeDiv.dataset.search = getSearchText(node);
 
     nodeDiv.innerHTML = `
-        <span class="deptName">${node.isLegalEntity ? "法人：" + node.row["部門全名"] : node.row["部門全名"] || "-"}</span>
+        <span class="deptName">${getNodeTitle(node)}</span>
         <div class="nodeInfo">
             ${renderNodeInfo(node)}
         </div>
@@ -1207,18 +1221,113 @@ function isFuzzyMatch(searchText, keyword){
     return false;
 }
 
+function getSpecialSearchType(keyword){
+    const k = normalizeText(keyword);
+
+    if(k === "*次集團"){
+        return "subGroup";
+    }
+
+    if(k === "*集團"){
+        return "group";
+    }
+
+    return "";
+}
+
+function getSpecialDisplayKeyword(keyword){
+    const type = getSpecialSearchType(keyword);
+
+    if(type === "subGroup") return "次集團";
+    if(type === "group") return "集團";
+
+    return keyword;
+}
+
+function isSubGroupNode(node){
+    const name = normalizeText(node.row["部門全名"]);
+    return name.includes("次集團") || name.includes("事業群");
+}
+
+function createVirtualNode(title, children){
+    const total = children.reduce((sum, node) => sum + node.totalPeople, 0);
+
+    return {
+        row:{
+            "公司代碼":"",
+            "層級":"虛擬法人",
+            "上級部門":"",
+            "部門代碼":title,
+            "費用代碼":"",
+            "部門全名":title,
+            "主管一姓名":"",
+            "主管一職稱":"",
+            "在職人數":0
+        },
+        deptCode:title,
+        parentCode:"",
+        levelText:"虛擬法人",
+        level:0,
+        order:-1,
+        ownPeople:0,
+        totalPeople:total,
+        children:children,
+        expanded:true,
+        isLegalEntity:false,
+        isVirtualRoot:true
+    };
+}
+
+function isUnderAnyNode(node, parentNodes){
+    return parentNodes.some(parent => {
+        return parent === node || isDescendantOf(node, parent);
+    });
+}
+
+function findSpecialMatchedNodes(type){
+    const subGroupRoots = filterTopMatchedNodes(
+        allNodes.filter(node => !node.isLegalEntity && isSubGroupNode(node))
+    );
+
+    if(type === "subGroup"){
+        return [
+            createVirtualNode("次集團", subGroupRoots)
+        ];
+    }
+
+    if(type === "group"){
+        const matched = allNodes.filter(node => {
+            return (
+                !node.isLegalEntity &&
+                !isSubGroupNode(node) &&
+                !isUnderAnyNode(node, subGroupRoots)
+            );
+        });
+
+        return [
+            createVirtualNode("集團", filterTopMatchedNodes(matched))
+        ];
+    }
+
+    return [];
+}
+
 function expandAll(){
     allNodes.forEach(node => node.expanded = true);
+    focusNodes.forEach(node => node.expanded = true);
     renderChart();
 }
 
 function collapseAll(){
     allNodes.forEach(node => node.expanded = false);
+    focusNodes.forEach(node => node.expanded = false);
     renderChart();
 }
 
 function searchTree(jumpToFirst = false){
-    const keyword = document.getElementById("searchInput").value.trim();
+    const rawKeyword = document.getElementById("searchInput").value.trim();
+    const keyword = getSpecialDisplayKeyword(rawKeyword);
+    const specialType = getSpecialSearchType(rawKeyword);
 
     setTimeout(() => {
         const nodes = document.querySelectorAll(".node, .orgNode");
@@ -1244,7 +1353,7 @@ function searchTree(jumpToFirst = false){
             });
         }
 
-        if(jumpToFirst && keyword && !firstMatch){
+        if(jumpToFirst && rawKeyword && !firstMatch && !specialType){
             alert("找不到符合的部門、主管或代碼");
         }
     }, 0);
@@ -1277,10 +1386,24 @@ function isDescendantOf(node, possibleParent){
 function searchAndJump(){
     const keyword = document.getElementById("searchInput").value.trim();
     const focusChecked = document.getElementById("focusCheckbox").checked;
+    const specialType = getSpecialSearchType(keyword);
 
     if(!keyword){
         focusNodes = [];
         renderChart();
+        return;
+    }
+
+    if(specialType){
+        focusNodes = findSpecialMatchedNodes(specialType);
+        allNodes.forEach(node => node.expanded = true);
+        focusNodes.forEach(node => node.expanded = true);
+        renderChart();
+
+        setTimeout(() => {
+            searchTree(true);
+        }, 0);
+
         return;
     }
 
