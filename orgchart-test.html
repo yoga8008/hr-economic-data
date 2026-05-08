@@ -26,12 +26,18 @@ h1{
     margin-bottom:20px;
 }
 
+/* 上方兩塊固定左右 50% */
 .topGrid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
+    display:flex;
     gap:20px;
     align-items:stretch;
     margin-bottom:20px;
+}
+
+.topGrid > .uploadBox,
+.topGrid > .resultArea{
+    flex:0 0 calc(50% - 10px);
+    width:calc(50% - 10px);
 }
 
 .uploadBox,
@@ -46,6 +52,7 @@ h1{
 
 .uploadBox{
     max-height:260px;
+    overflow:auto;
 }
 
 .resultArea{
@@ -329,20 +336,21 @@ h1{
 .orgChart{
     display:flex;
     justify-content:center;
-    padding:20px;
+    padding:20px 20px 40px;
     min-width:max-content;
 }
 
 .orgNodeGroup{
+    width:300px;
     display:flex;
     flex-direction:column;
     align-items:center;
     position:relative;
+    flex-shrink:0;
 }
 
 .orgNode{
-    min-width:260px;
-    max-width:360px;
+    width:300px;
     background:#fff;
     border:1px solid #cbd5e1;
     border-radius:12px;
@@ -350,6 +358,7 @@ h1{
     box-shadow:0 2px 8px rgba(0,0,0,0.08);
     text-align:left;
     position:relative;
+    box-sizing:border-box;
 }
 
 .orgNode .deptName{
@@ -361,8 +370,9 @@ h1{
 .orgChildren{
     display:flex;
     justify-content:center;
-    gap:24px;
-    margin-top:38px;
+    align-items:flex-start;
+    gap:28px;
+    margin-top:36px;
     position:relative;
 }
 
@@ -374,39 +384,29 @@ h1{
     width:1px;
     height:18px;
     background:#94a3b8;
+    transform:translateX(-50%);
 }
 
 .orgChildren > .orgNodeGroup::before{
     content:"";
     position:absolute;
-    top:-20px;
+    top:-18px;
     left:50%;
     width:1px;
-    height:20px;
+    height:18px;
     background:#94a3b8;
+    transform:translateX(-50%);
 }
 
-.orgChildren.hasMultiple > .orgNodeGroup::after{
+/* 多個子節點時，畫一條完整水平線 */
+.orgChildren.hasMultiple::before{
     content:"";
     position:absolute;
-    top:-20px;
+    top:-18px;
+    left:150px;
+    right:150px;
     height:1px;
     background:#94a3b8;
-}
-
-.orgChildren.hasMultiple > .orgNodeGroup:first-child::after{
-    left:50%;
-    right:0;
-}
-
-.orgChildren.hasMultiple > .orgNodeGroup:last-child::after{
-    left:0;
-    right:50%;
-}
-
-.orgChildren.hasMultiple > .orgNodeGroup:not(:first-child):not(:last-child)::after{
-    left:0;
-    right:0;
 }
 
 @media(max-width:1300px){
@@ -419,12 +419,6 @@ h1{
     .chartLeftActions,
     .chartActions{
         flex-wrap:wrap;
-    }
-}
-
-@media(max-width:900px){
-    .topGrid{
-        grid-template-columns:1fr;
     }
 }
 </style>
