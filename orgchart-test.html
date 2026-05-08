@@ -66,13 +66,14 @@ h1{
 .exportBtn,
 .chartLeftActions button,
 .modeBtn{
-    padding:10px 14px;
+    padding:8px 12px;
     border:0;
     border-radius:8px;
     background:#1e3a8a;
     color:#fff;
     font-weight:bold;
     cursor:pointer;
+    white-space:nowrap;
 }
 
 .templateBtn:hover,
@@ -139,23 +140,26 @@ h1{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:12px;
+    gap:10px;
     margin-bottom:16px;
+    flex-wrap:nowrap;
 }
 
 .chartLeftActions{
     display:flex;
     align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
+    gap:8px;
+    flex-wrap:nowrap;
+    flex:1;
+    min-width:0;
 }
 
 .chartLeftActions input[type="text"]{
-    width:280px;
-    padding:10px 12px;
+    width:240px;
+    padding:8px 10px;
     border:1px solid #cbd5e1;
     border-radius:8px;
-    font-size:14px;
+    font-size:13px;
 }
 
 .focusOption{
@@ -165,10 +169,11 @@ h1{
     background:#fff;
     border:1px solid #ddd;
     border-radius:8px;
-    padding:10px 12px;
-    font-size:14px;
+    padding:8px 10px;
+    font-size:13px;
     color:#374151;
     cursor:pointer;
+    white-space:nowrap;
 }
 
 .focusOption input{
@@ -178,23 +183,25 @@ h1{
 .chartActions{
     display:flex;
     align-items:center;
-    gap:12px;
-    flex-wrap:wrap;
+    gap:8px;
+    flex-wrap:nowrap;
+    flex-shrink:0;
 }
 
 .viewModeControl,
 .zoomControl{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:8px;
     background:#fff;
     border:1px solid #ddd;
-    border-radius:12px;
-    padding:10px 14px;
+    border-radius:10px;
+    padding:8px 10px;
+    white-space:nowrap;
 }
 
 .zoomControl input{
-    width:180px;
+    width:130px;
 }
 
 .zoomWrap{
@@ -341,7 +348,6 @@ h1{
     position:relative;
 }
 
-/* 父節點往下短線 */
 .orgNodeGroup.hasChildren > .orgNode::after{
     content:"";
     position:absolute;
@@ -352,7 +358,6 @@ h1{
     background:#94a3b8;
 }
 
-/* 子節點往上短線 */
 .orgChildren > .orgNodeGroup::before{
     content:"";
     position:absolute;
@@ -363,7 +368,6 @@ h1{
     background:#94a3b8;
 }
 
-/* 多個子節點才畫橫線 */
 .orgChildren.hasMultiple > .orgNodeGroup::after{
     content:"";
     position:absolute;
@@ -387,14 +391,22 @@ h1{
     right:0;
 }
 
-@media(max-width:900px){
-    .topGrid{
-        grid-template-columns:1fr;
-    }
-
+@media(max-width:1100px){
     .chartHeader{
         align-items:flex-start;
         flex-direction:column;
+        flex-wrap:wrap;
+    }
+
+    .chartLeftActions,
+    .chartActions{
+        flex-wrap:wrap;
+    }
+}
+
+@media(max-width:900px){
+    .topGrid{
+        grid-template-columns:1fr;
     }
 }
 </style>
@@ -1072,11 +1084,6 @@ function collapseAll(){
 function searchTree(jumpToFirst = false){
     const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
 
-    if(keyword && currentViewMode === "tree"){
-        allNodes.forEach(node => node.expanded = true);
-        renderTree();
-    }
-
     setTimeout(() => {
         const nodes = document.querySelectorAll(".node, .orgNode");
         let firstMatch = null;
@@ -1134,7 +1141,7 @@ function searchAndJump(){
         }
 
         focusNode = matchedNode;
-        expandAll();
+        allNodes.forEach(node => node.expanded = true);
         renderChart();
 
         setTimeout(() => {
@@ -1142,6 +1149,7 @@ function searchAndJump(){
         }, 0);
     }else{
         focusNode = null;
+        allNodes.forEach(node => node.expanded = true);
         renderChart();
 
         setTimeout(() => {
