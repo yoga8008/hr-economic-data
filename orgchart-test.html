@@ -474,7 +474,7 @@ h1{
     z-index:1;
 }
 
-/* 人員明細 */
+/* 人員資訊 */
 .personPanel{
     background:#fff;
     border:1px solid #e5e7eb;
@@ -547,7 +547,7 @@ h1{
 <h1>組織圖測試版</h1>
 
 <div class="desc">
-上傳 Excel 後，系統會依「部門資訊」建立組織圖，並依「人員明細」顯示部門人員。
+上傳 Excel 後，系統會依「部門資訊」建立組織圖，並依「人員資訊」顯示部門人員。
 </div>
 
 <div class="topPanelHeader">
@@ -567,7 +567,7 @@ h1{
             <div style="margin-top:12px;color:#6b7280;font-size:13px;line-height:1.7;">
                 Excel 請使用兩個工作表：<br>
                 1. 部門資訊<br>
-                2. 人員明細
+                2. 人員資訊
             </div>
         </div>
 
@@ -636,7 +636,7 @@ h1{
 <div class="chartBox" style="margin-top:20px;">
     <div class="chartHeader">
         <div class="chartLeftActions">
-            <b>人員明細</b>
+            <b>人員資訊</b>
         </div>
     </div>
 
@@ -797,7 +797,7 @@ function appendMemoryInfo(fileName, updatedAt, isNewUpload){
         <span class="resultSuccess">${status}</span><br>
         最後更新日：${updatedAt}<br>
         來源檔案：${fileName}<br>
-        人員明細：${personRows.length} 筆
+        人員資訊：${personRows.length} 筆
     `;
 }
 
@@ -865,8 +865,8 @@ function handleFile(e){
             ? "部門資訊"
             : workbook.SheetNames[0];
 
-        const personSheetName = workbook.SheetNames.includes("人員明細")
-            ? "人員明細"
+        const personSheetName = workbook.SheetNames.includes("人員資訊")
+            ? "人員資訊"
             : "";
 
         const deptSheet = workbook.Sheets[deptSheetName];
@@ -983,7 +983,7 @@ function checkPersonColumns(rows){
     if(missing.length > 0){
         result.innerHTML = `
             <b>上傳結果</b><br>
-            <span class="resultError">人員明細缺少欄位：${missing.join("、")}</span>
+            <span class="resultError">人員資訊缺少欄位：${missing.join("、")}</span>
         `;
         return false;
     }
@@ -1136,7 +1136,7 @@ function buildTreeData(rows){
     }
 
     document.getElementById("summary").innerText =
-        "共讀取 " + allNodes.length + " 個節點，最上層節點 " + rootNodes.length + " 個，人員明細 " + personRows.length + " 筆。";
+        "共讀取 " + allNodes.length + " 個節點，最上層節點 " + rootNodes.length + " 個，人員資訊 " + personRows.length + " 筆。";
 
     document.getElementById("personSummary").innerText = "請點選部門查看人員資訊";
     document.getElementById("personPanel").innerHTML = "尚未選擇部門";
@@ -1284,7 +1284,7 @@ function renderLegalFilters(){
     if(legals.length === 0){
         const empty = document.createElement("span");
         empty.className = "noPerson";
-        empty.innerText = "尚無人員明細資料";
+        empty.innerText = "尚無人員資訊資料";
         box.appendChild(empty);
         return;
     }
@@ -1453,8 +1453,8 @@ function showDepartmentPersons(deptCode){
     if(persons.length === 0){
         panel.innerHTML = `
             <div class="noPerson">
-                此部門目前查無符合條件的人員明細。<br>
-                請確認「人員明細」工作表的部門代碼是否與「部門資訊」一致。
+                此部門目前查無符合條件的人員資訊。<br>
+                請確認「人員資訊」工作表的部門代碼是否與「部門資訊」一致。
             </div>
         `;
         return;
@@ -2001,7 +2001,7 @@ function downloadTemplate(){
     const personSheet = XLSX.utils.json_to_sheet(personTemplateData);
 
     XLSX.utils.book_append_sheet(workbook, deptSheet, "部門資訊");
-    XLSX.utils.book_append_sheet(workbook, personSheet, "人員明細");
+    XLSX.utils.book_append_sheet(workbook, personSheet, "人員資訊");
 
     XLSX.writeFile(workbook, "組織圖上傳模板.xlsx");
 }
