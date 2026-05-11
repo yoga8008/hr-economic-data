@@ -2301,7 +2301,29 @@ async function preparePdfCanvas(titleText){
 
     return canvas;
 }
+function saveCanvasAsOneLongPdf(canvas, pdfTitle){
+    const imgData = canvas.toDataURL("image/png");
 
+    const canvasRatio = canvas.height / canvas.width;
+
+    let pdfWidth = 1200;
+    let pdfHeight = pdfWidth * canvasRatio;
+
+    if(pdfHeight < 210){
+        pdfHeight = 210;
+    }
+
+    const pdf = new jspdf.jsPDF({
+        orientation: pdfWidth >= pdfHeight ? "l" : "p",
+        unit: "mm",
+        format: [pdfWidth, pdfHeight]
+    });
+
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+    const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
+    pdf.save(safeFileName + ".pdf");
+}
 function addCanvasMultiPage(pdf, canvas){
     const imgData = canvas.toDataURL("image/png");
 
@@ -2366,11 +2388,9 @@ function addCanvasFitOnePage(pdf, canvas, addNewPage){
 
 async function exportCurrentPdf(pdfTitle){
     const canvas = await preparePdfCanvas(pdfTitle);
-    const pdf = new jspdf.jsPDF("l", "mm", "a4");
-    addCanvasMultiPage(pdf, canvas);
 
-    const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
-    pdf.save(safeFileName + ".pdf");
+    // 目前畫面：長版 PDF，不切頁、不切斷組織框
+    saveCanvasAsOneLongPdf(canvas, pdfTitle);
 }
 
 async function exportFitOnePagePdf(pdfTitle){
