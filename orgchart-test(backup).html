@@ -17,9 +17,7 @@ body{
     color:#111827;
 }
 
-h1{
-    margin-bottom:10px;
-}
+h1{ margin-bottom:10px; }
 
 .desc{
     color:#666;
@@ -44,17 +42,8 @@ h1{
     cursor:pointer;
 }
 
-.toggleTopBtn:hover{
-    opacity:.9;
-}
-
-.topPanel{
-    display:block;
-}
-
-.topPanel.collapsed{
-    display:none;
-}
+.topPanel{ display:block; }
+.topPanel.collapsed{ display:none; }
 
 .topGrid{
     display:flex;
@@ -93,9 +82,37 @@ h1{
 
 .uploadActions{
     display:flex;
+    gap:16px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+.uploadMain{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.uploadButtons{
+    display:flex;
     gap:12px;
     align-items:center;
     flex-wrap:wrap;
+}
+
+.uploadHelp{
+    color:#6b7280;
+    font-size:13px;
+    line-height:1.7;
+    padding-top:4px;
+    min-width:280px;
+}
+
+.memoryInfo{
+    margin-top:10px;
+    color:#374151;
+    font-size:13px;
+    line-height:1.7;
 }
 
 .templateBtn,
@@ -130,9 +147,7 @@ h1{
     color:#374151;
 }
 
-.clearMemoryBtn{
-    background:#991b1b;
-}
+.clearMemoryBtn{ background:#991b1b; }
 
 .sortSelect{
     height:36px;
@@ -160,43 +175,76 @@ h1{
     font-weight:bold;
 }
 
-.filterGrid{
+.filterBar{
     display:flex;
-    gap:20px;
-    align-items:stretch;
+    gap:12px;
+    align-items:center;
     margin-bottom:20px;
+    flex-wrap:wrap;
 }
 
-.filterGrid > .levelFilters,
-.filterGrid > .fieldFilters{
-    flex:0 0 calc(50% - 10px);
-    width:calc(50% - 10px);
-    margin:0;
+.dropdownFilter{
+    position:relative;
+    min-width:220px;
+}
+
+.dropdownBtn{
+    width:100%;
+    height:38px;
+    padding:0 12px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    background:#fff;
+    color:#374151;
+    font-size:13px;
+    text-align:left;
+    cursor:pointer;
     box-sizing:border-box;
 }
 
-.levelFilters,
-.fieldFilters{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:14px 18px;
-    align-items:center;
+.dropdownBtn::after{
+    content:"▼";
+    float:right;
+    font-size:10px;
+    color:#6b7280;
+    margin-top:2px;
 }
 
-.levelFilters label,
-.fieldFilters label{
-    font-size:14px;
+.dropdownMenu{
+    display:none;
+    position:absolute;
+    top:44px;
+    left:0;
+    width:100%;
+    max-height:260px;
+    overflow:auto;
+    background:#fff;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+    z-index:50;
+    padding:8px;
+    box-sizing:border-box;
+}
+
+.dropdownFilter.open .dropdownMenu{ display:block; }
+
+.dropdownMenu label{
+    display:block;
+    padding:7px 8px;
+    font-size:13px;
     color:#374151;
     cursor:pointer;
+    border-radius:6px;
 }
 
-.levelFilters input,
-.fieldFilters input{
-    margin-right:5px;
+.dropdownMenu label:hover{ background:#f3f4f6; }
+.dropdownMenu input{ margin-right:6px; }
+
+.selectAllLabel{
+    font-weight:bold;
+    border-bottom:1px solid #e5e7eb;
+    margin-bottom:4px;
 }
 
 .chartBox{
@@ -280,18 +328,14 @@ h1{
 }
 
 .viewModeControl b,
-.zoomControl b{
-    font-size:12px;
-}
+.zoomControl b{ font-size:12px; }
 
 .zoomControl input{
     width:110px;
     height:auto;
 }
 
-.zoomWrap{
-    transform-origin:top left;
-}
+.zoomWrap{ transform-origin:top left; }
 
 .summary{
     color:#374151;
@@ -329,9 +373,7 @@ h1{
     cursor:pointer;
 }
 
-.node:hover{
-    border-color:#1e3a8a;
-}
+.node:hover{ border-color:#1e3a8a; }
 
 .nodeHeader{
     display:flex;
@@ -379,20 +421,22 @@ h1{
     color:#1e3a8a;
 }
 
-.hidden{
-    display:none !important;
+.peopleLink{
+    color:#1e3a8a;
+    font-weight:bold;
+    text-decoration:underline;
+    cursor:pointer;
 }
+
+.hidden{ display:none !important; }
 
 .match{
     border:2px solid #dc2626 !important;
     background:#fff1f2 !important;
 }
 
-.pathOnly{
-    opacity:.45;
-}
+.pathOnly{ opacity:.45; }
 
-/* 組織圖模式 */
 .orgChart{
     display:flex;
     justify-content:center;
@@ -420,7 +464,10 @@ h1{
     position:relative;
     box-sizing:border-box;
     z-index:2;
+    cursor:pointer;
 }
+
+.orgNode:hover{ border-color:#1e3a8a; }
 
 .orgNode .deptName{
     display:block;
@@ -469,6 +516,43 @@ h1{
     z-index:1;
 }
 
+.personPanel{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:14px;
+    overflow:auto;
+}
+
+.personTable{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+}
+
+.personTable th{
+    background:#f3f4f6;
+    color:#374151;
+    text-align:left;
+    padding:10px;
+    border-bottom:1px solid #d1d5db;
+    white-space:nowrap;
+}
+
+.personTable td{
+    padding:10px;
+    border-bottom:1px solid #e5e7eb;
+    color:#374151;
+    white-space:nowrap;
+}
+
+.personTable tr:hover{ background:#f9fafb; }
+
+.noPerson{
+    color:#6b7280;
+    line-height:1.8;
+}
+
 @media(max-width:1300px){
     .chartHeader{
         align-items:flex-start;
@@ -480,6 +564,16 @@ h1{
     .chartActions{
         flex-wrap:wrap;
     }
+
+    .topGrid{
+        flex-direction:column;
+    }
+
+    .topGrid > .uploadBox,
+    .topGrid > .resultArea{
+        flex:0 0 100%;
+        width:100%;
+    }
 }
 </style>
 </head>
@@ -489,7 +583,7 @@ h1{
 <h1>組織圖測試版</h1>
 
 <div class="desc">
-上傳 Excel 後，系統會依「上級部門」建立組織圖，可切換樹狀清單或組織圖呈現。
+上傳 Excel 後，系統會依「部門資訊」建立組織圖，並依「人員資訊」顯示部門人員。
 </div>
 
 <div class="topPanelHeader">
@@ -502,9 +596,20 @@ h1{
     <div class="topGrid">
         <div class="uploadBox">
             <div class="uploadActions">
-                <input type="file" id="excelFile" accept=".xlsx,.xls">
-                <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
-                <button class="clearMemoryBtn" onclick="clearSavedDataWithPassword()">清除記憶資料</button>
+                <div class="uploadMain">
+                    <input type="file" id="excelFile" accept=".xlsx,.xls">
+                    <div id="memoryInfo" class="memoryInfo"></div>
+                    <div class="uploadButtons">
+                        <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
+                        <button class="clearMemoryBtn" onclick="clearSavedDataWithPassword()">清除記憶資料</button>
+                    </div>
+                </div>
+
+                <div class="uploadHelp">
+                    Excel 請使用一個檔案，內含兩個分頁：<br>
+                    1. 部門資訊<br>
+                    2. 人員資訊
+                </div>
             </div>
         </div>
 
@@ -514,9 +619,10 @@ h1{
         </div>
     </div>
 
-    <div class="filterGrid">
-        <div id="levelFilters" class="levelFilters"></div>
-        <div id="fieldFilters" class="fieldFilters"></div>
+    <div class="filterBar">
+        <div id="levelFilters" class="dropdownFilter"></div>
+        <div id="fieldFilters" class="dropdownFilter"></div>
+        <div id="legalFilters" class="dropdownFilter"></div>
     </div>
 </div>
 
@@ -566,68 +672,94 @@ h1{
     </div>
 </div>
 
+<div class="chartBox" style="margin-top:20px;">
+    <div class="chartHeader">
+        <div class="chartLeftActions">
+            <b>人員資訊</b>
+        </div>
+    </div>
+
+    <div id="personSummary" class="summary">
+        請點選部門人數查看人員資訊
+    </div>
+
+    <div id="personPanel" class="personPanel">
+        尚未選擇部門
+    </div>
+</div>
+
 <script>
 const requiredColumns = [
-    "公司代碼",
-    "層級",
-    "上級部門",
-    "部門代碼",
-    "費用代碼",
-    "部門全名",
-    "主管一姓名",
-    "主管一職稱",
-    "在職人數"
+    "公司代碼","層級","上級部門","部門代碼","費用代碼",
+    "部門全名","主管一姓名","主管一職稱","在職人數"
+];
+
+const requiredPersonColumns = [
+    "所屬法人","部門代碼","部門名稱","員工工號","員工姓名","職稱名稱","資位"
 ];
 
 const STORAGE_KEY_ROWS = "orgChartSavedRows";
+const STORAGE_KEY_PERSON_ROWS = "orgChartSavedPersonRows";
 const STORAGE_KEY_FILE = "orgChartFileName";
 const STORAGE_KEY_UPDATED_AT = "orgChartUpdatedAt";
-const ADMIN_PASSWORD = "1234"; // 清除記憶資料密碼，可自行修改
+const ADMIN_PASSWORD = "1234";
 
 let allNodes = [];
 let rootNodes = [];
 let selectedLevels = new Set();
+let selectedLegals = new Set();
 let currentViewMode = "tree";
 let focusNodes = [];
 
-let visibleFields = new Set([
-    "level",
-    "deptCode",
-    "costCode",
-    "manager"
-]);
+let personRows = [];
+let personMapByDept = {};
+let currentSelectedDeptCode = "";
+let currentSelectedPersonType = "own";
 
-loadSavedData();
+let filteredPersonRows = [];
+let ownPeopleCountCache = {};
+let totalPeopleCountCache = new Map();
 
-document.getElementById("excelFile").addEventListener("change", handleFile);
+let visibleFields = new Set(["level","deptCode","costCode","manager"]);
 
-document.getElementById("searchInput").addEventListener("input", function(){
-    searchTree(false);
+document.addEventListener("DOMContentLoaded", function(){
+    loadSavedData();
+
+    document.getElementById("excelFile").addEventListener("change", handleFile);
+
+    document.getElementById("searchInput").addEventListener("input", function(){
+        searchTree(false);
+    });
+
+    document.getElementById("searchInput").addEventListener("keydown", function(e){
+        if(e.key === "Enter"){
+            searchAndJump();
+        }
+    });
+
+    document.getElementById("focusCheckbox").addEventListener("change", function(){
+        if(!this.checked){
+            focusNodes = [];
+            renderChart();
+        }
+    });
+
+    document.getElementById("zoomRange").addEventListener("input", function(){
+        const value = this.value;
+        document.getElementById("zoomValue").innerText = value + "%";
+        document.getElementById("zoomWrap").style.transform = `scale(${value / 100})`;
+
+        if(currentViewMode === "org"){
+            requestAnimationFrame(updateOrgConnectorLines);
+        }
+    });
+
+    document.addEventListener("click", function(e){
+        if(!e.target.closest(".dropdownFilter")){
+            closeAllDropdowns();
+        }
+    });
 });
-
-document.getElementById("searchInput").addEventListener("keydown", function(e){
-    if(e.key === "Enter"){
-        searchAndJump();
-    }
-});
-
-document.getElementById("focusCheckbox").addEventListener("change", function(){
-    if(!this.checked){
-        focusNodes = [];
-        renderChart();
-    }
-});
-
-document.getElementById("zoomRange").addEventListener("input", function(){
-    const value = this.value;
-    document.getElementById("zoomValue").innerText = value + "%";
-    document.getElementById("zoomWrap").style.transform = `scale(${value / 100})`;
-
-    if(currentViewMode === "org"){
-        requestAnimationFrame(updateOrgConnectorLines);
-    }
-});
-
 
 function getNowText(){
     const d = new Date();
@@ -640,9 +772,10 @@ function getNowText(){
     return `${yyyy}/${mm}/${dd} ${hh}:${mi}`;
 }
 
-function saveOrgChartMemory(rows, fileName, updatedAt){
+function saveOrgChartMemory(rows, persons, fileName, updatedAt){
     try{
         localStorage.setItem(STORAGE_KEY_ROWS, JSON.stringify(rows));
+        localStorage.setItem(STORAGE_KEY_PERSON_ROWS, JSON.stringify(persons || []));
         localStorage.setItem(STORAGE_KEY_FILE, fileName || "未命名檔案");
         localStorage.setItem(STORAGE_KEY_UPDATED_AT, updatedAt || getNowText());
     }catch(err){
@@ -659,6 +792,7 @@ function loadSavedData(){
 
     try{
         const rows = JSON.parse(savedRows);
+        const persons = JSON.parse(localStorage.getItem(STORAGE_KEY_PERSON_ROWS) || "[]");
         const fileName = localStorage.getItem(STORAGE_KEY_FILE) || "未命名檔案";
         const updatedAt = localStorage.getItem(STORAGE_KEY_UPDATED_AT) || "未記錄";
 
@@ -666,13 +800,18 @@ function loadSavedData(){
             return;
         }
 
+        personRows = Array.isArray(persons) ? persons : [];
+        buildPersonMap();
+
         buildTreeData(rows);
         renderLevelFilters();
         renderFieldFilters();
+        renderLegalFilters();
         renderChart();
         appendMemoryInfo(fileName, updatedAt, false);
     }catch(err){
         localStorage.removeItem(STORAGE_KEY_ROWS);
+        localStorage.removeItem(STORAGE_KEY_PERSON_ROWS);
         localStorage.removeItem(STORAGE_KEY_FILE);
         localStorage.removeItem(STORAGE_KEY_UPDATED_AT);
 
@@ -684,23 +823,21 @@ function loadSavedData(){
 }
 
 function appendMemoryInfo(fileName, updatedAt, isNewUpload){
-    const result = document.getElementById("uploadResult");
-    const status = isNewUpload ? "組織資料已儲存" : "已自動載入上次儲存資料";
+    const box = document.getElementById("memoryInfo");
+    const status = isNewUpload ? "組織與人員資料已儲存" : "已自動載入上次儲存資料";
 
-    result.innerHTML += `
-        <hr style="border:0;border-top:1px solid #e5e7eb;margin:10px 0;">
+    box.innerHTML = `
         <span class="resultSuccess">${status}</span><br>
         最後更新日：${updatedAt}<br>
-        來源檔案：${fileName}
+        來源檔案：${fileName}<br>
+        人員資訊：${personRows.length} 筆
     `;
 }
 
 function clearSavedDataWithPassword(){
     const input = prompt("請輸入管理密碼，確認後將清除已儲存的組織圖資料：");
 
-    if(input === null){
-        return;
-    }
+    if(input === null) return;
 
     if(input !== ADMIN_PASSWORD){
         alert("密碼錯誤，無法清除資料。");
@@ -709,11 +846,10 @@ function clearSavedDataWithPassword(){
 
     const confirmClear = confirm("確認要清除所有記憶資料嗎？此動作無法復原。");
 
-    if(!confirmClear){
-        return;
-    }
+    if(!confirmClear) return;
 
     localStorage.removeItem(STORAGE_KEY_ROWS);
+    localStorage.removeItem(STORAGE_KEY_PERSON_ROWS);
     localStorage.removeItem(STORAGE_KEY_FILE);
     localStorage.removeItem(STORAGE_KEY_UPDATED_AT);
 
@@ -725,10 +861,10 @@ function clearSavedDataWithPassword(){
         尚未上傳 Excel
     `;
 
+    document.getElementById("memoryInfo").innerHTML = "";
+
     const excelFile = document.getElementById("excelFile");
-    if(excelFile){
-        excelFile.value = "";
-    }
+    if(excelFile) excelFile.value = "";
 }
 
 function toggleTopPanel(){
@@ -737,11 +873,9 @@ function toggleTopPanel(){
 
     panel.classList.toggle("collapsed");
 
-    if(panel.classList.contains("collapsed")){
-        btn.innerText = "展開上方設定 ▼";
-    }else{
-        btn.innerText = "收合上方設定 ▲";
-    }
+    btn.innerText = panel.classList.contains("collapsed")
+        ? "展開上方設定 ▼"
+        : "收合上方設定 ▲";
 }
 
 function handleFile(e){
@@ -753,8 +887,24 @@ function handleFile(e){
     reader.onload = function(event){
         const data = new Uint8Array(event.target.result);
         const workbook = XLSX.read(data, {type:"array"});
-        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-        const rows = XLSX.utils.sheet_to_json(firstSheet, {defval:""});
+
+        const deptSheetName = workbook.SheetNames.includes("部門資訊")
+            ? "部門資訊"
+            : workbook.SheetNames[0];
+
+        const personSheetName = workbook.SheetNames.includes("人員資訊")
+            ? "人員資訊"
+            : "";
+
+        const deptSheet = workbook.Sheets[deptSheetName];
+        const rows = XLSX.utils.sheet_to_json(deptSheet, {defval:""});
+
+        let persons = [];
+
+        if(personSheetName){
+            const personSheet = workbook.Sheets[personSheetName];
+            persons = XLSX.utils.sheet_to_json(personSheet, {defval:""});
+        }
 
         const isValid = checkColumns(rows);
 
@@ -763,13 +913,26 @@ function handleFile(e){
             return;
         }
 
+        if(persons.length > 0){
+            const isPersonValid = checkPersonColumns(persons);
+
+            if(!isPersonValid){
+                clearPageData();
+                return;
+            }
+        }
+
         const updatedAt = getNowText();
 
-        saveOrgChartMemory(rows, file.name, updatedAt);
+        personRows = persons;
+        buildPersonMap();
+
+        saveOrgChartMemory(rows, persons, file.name, updatedAt);
 
         buildTreeData(rows);
         renderLevelFilters();
         renderFieldFilters();
+        renderLegalFilters();
         renderChart();
         appendMemoryInfo(file.name, updatedAt, true);
     };
@@ -781,28 +944,35 @@ function clearPageData(){
     allNodes = [];
     rootNodes = [];
     selectedLevels.clear();
+    selectedLegals.clear();
     focusNodes = [];
+    personRows = [];
+    personMapByDept = {};
+    filteredPersonRows = [];
+    ownPeopleCountCache = {};
+    totalPeopleCountCache = new Map();
+    currentSelectedDeptCode = "";
+    currentSelectedPersonType = "own";
 
     const focusCheckbox = document.getElementById("focusCheckbox");
-    if(focusCheckbox){
-        focusCheckbox.checked = false;
-    }
+    if(focusCheckbox) focusCheckbox.checked = false;
 
     document.getElementById("levelFilters").innerHTML = "";
     document.getElementById("fieldFilters").innerHTML = "";
+    document.getElementById("legalFilters").innerHTML = "";
     document.getElementById("summary").innerText = "";
     document.getElementById("tree").innerHTML = "";
     document.getElementById("orgChart").innerHTML = "";
+
+    document.getElementById("personSummary").innerText = "請點選部門人數查看人員資訊";
+    document.getElementById("personPanel").innerHTML = "尚未選擇部門";
 }
 
 function checkColumns(rows){
     const result = document.getElementById("uploadResult");
 
     if(rows.length === 0){
-        result.innerHTML = `
-            <b>上傳結果</b><br>
-            <span class="resultError">Excel 沒有資料</span>
-        `;
+        result.innerHTML = `<b>上傳結果</b><br><span class="resultError">部門資訊沒有資料</span>`;
         return false;
     }
 
@@ -810,32 +980,79 @@ function checkColumns(rows){
     const missing = requiredColumns.filter(col => !columns.includes(col));
 
     if(missing.length > 0){
-        result.innerHTML = `
-            <b>上傳結果</b><br>
-            <span class="resultError">缺少欄位：${missing.join("、")}</span>
-        `;
+        result.innerHTML = `<b>上傳結果</b><br><span class="resultError">部門資訊缺少欄位：${missing.join("、")}</span>`;
         return false;
     }
 
-    result.innerHTML = `
-        <b>上傳結果</b><br>
-        <span class="resultSuccess">Excel 讀取成功</span><br>
-        資料檢查中...
-    `;
+    result.innerHTML = `<b>上傳結果</b><br><span class="resultSuccess">Excel 讀取成功</span><br>資料檢查中...`;
 
     return true;
+}
+
+function checkPersonColumns(rows){
+    const result = document.getElementById("uploadResult");
+
+    if(rows.length === 0) return true;
+
+    const columns = Object.keys(rows[0]);
+    const missing = requiredPersonColumns.filter(col => !columns.includes(col));
+
+    if(missing.length > 0){
+        result.innerHTML = `<b>上傳結果</b><br><span class="resultError">人員資訊缺少欄位：${missing.join("、")}</span>`;
+        return false;
+    }
+
+    return true;
+}
+
+function buildPersonMap(){
+    personMapByDept = {};
+
+    personRows.forEach(person => {
+        const deptCode = String(person["部門代碼"] || "").trim();
+
+        if(!deptCode) return;
+
+        if(!personMapByDept[deptCode]){
+            personMapByDept[deptCode] = [];
+        }
+
+        personMapByDept[deptCode].push(person);
+    });
+}
+
+function rebuildPeopleCountCache(){
+    if(selectedLegals.size === 0){
+        filteredPersonRows = [];
+    }else{
+        filteredPersonRows = personRows.filter(person => {
+            const legal = String(person["所屬法人"] || "").trim();
+            return selectedLegals.has(legal);
+        });
+    }
+
+    ownPeopleCountCache = {};
+    totalPeopleCountCache = new Map();
+
+    filteredPersonRows.forEach(person => {
+        const deptCode = String(person["部門代碼"] || "").trim();
+        if(!deptCode) return;
+
+        ownPeopleCountCache[deptCode] = (ownPeopleCountCache[deptCode] || 0) + 1;
+    });
 }
 
 function buildTreeData(rows){
     const result = document.getElementById("uploadResult");
 
     selectedLevels.clear();
+    selectedLegals.clear();
     focusNodes = [];
+    currentSelectedDeptCode = "";
+    currentSelectedPersonType = "own";
 
     const focusCheckbox = document.getElementById("focusCheckbox");
-    if(focusCheckbox){
-        focusCheckbox.checked = false;
-    }
+    if(focusCheckbox) focusCheckbox.checked = false;
 
     const deptMap = {};
     const legalMap = {};
@@ -941,7 +1158,7 @@ function buildTreeData(rows){
         result.innerHTML = `
             <b>上傳結果</b><br>
             <span class="resultSuccess">Excel 讀取成功</span><br>
-            <span class="resultWarn">資料提醒：</span><br>
+            <span class="resultWarn">異常訊息：</span><br>
             ${errors.join("<br>")}
         `;
     }else{
@@ -953,7 +1170,10 @@ function buildTreeData(rows){
     }
 
     document.getElementById("summary").innerText =
-        "共讀取 " + allNodes.length + " 個節點，最上層節點 " + rootNodes.length + " 個。";
+        "共讀取 " + allNodes.length + " 個節點，最上層節點 " + rootNodes.length + " 個，人員資訊 " + personRows.length + " 筆。";
+
+    document.getElementById("personSummary").innerText = "請點選部門人數查看人員資訊";
+    document.getElementById("personPanel").innerHTML = "尚未選擇部門";
 }
 
 function sortNodes(nodes){
@@ -998,10 +1218,105 @@ function calculateTotalPeople(node){
     return total;
 }
 
-function renderLevelFilters(){
-    const box = document.getElementById("levelFilters");
+function closeAllDropdowns(exceptBox){
+    document.querySelectorAll(".dropdownFilter").forEach(box => {
+        if(box !== exceptBox){
+            box.classList.remove("open");
+        }
+    });
+}
+
+function createDropdownCheckbox(boxId, title, items, selectedSet, onChange, defaultText){
+    const box = document.getElementById(boxId);
     box.innerHTML = "";
 
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "dropdownBtn";
+
+    const menu = document.createElement("div");
+    menu.className = "dropdownMenu";
+
+    function isAllSelected(){
+        return items.length > 0 && selectedSet.size === items.length;
+    }
+
+    function updateBtnText(){
+        if(isAllSelected()){
+            btn.innerText = `${title}：全選`;
+        }else if(selectedSet.size === 0){
+            btn.innerText = defaultText || title;
+        }else{
+            btn.innerText = `${title}：${selectedSet.size} 項`;
+        }
+
+        const selectAll = menu.querySelector(".selectAllCheckbox");
+        if(selectAll){
+            selectAll.checked = isAllSelected();
+        }
+    }
+
+    btn.addEventListener("click", function(e){
+        e.stopPropagation();
+        const isOpen = box.classList.contains("open");
+        closeAllDropdowns(box);
+        box.classList.toggle("open", !isOpen);
+    });
+
+    const allLabel = document.createElement("label");
+    allLabel.className = "selectAllLabel";
+    allLabel.innerHTML = `<input type="checkbox" class="selectAllCheckbox">全選`;
+
+    const allCheckbox = allLabel.querySelector("input");
+
+    allCheckbox.addEventListener("change", function(){
+        if(this.checked){
+            selectedSet.clear();
+            items.forEach(item => selectedSet.add(item.value));
+        }else{
+            selectedSet.clear();
+        }
+
+        menu.querySelectorAll("input.itemCheckbox").forEach(cb => {
+            cb.checked = selectedSet.has(cb.value);
+        });
+
+        updateBtnText();
+        onChange();
+    });
+
+    menu.appendChild(allLabel);
+
+    items.forEach(item => {
+        const label = document.createElement("label");
+        label.innerHTML = `
+            <input type="checkbox" class="itemCheckbox" value="${item.value}" ${selectedSet.has(item.value) ? "checked" : ""}>
+            ${item.label}
+        `;
+
+        const checkbox = label.querySelector("input");
+
+        checkbox.addEventListener("change", function(){
+            if(this.checked){
+                selectedSet.add(this.value);
+            }else{
+                selectedSet.delete(this.value);
+            }
+
+            updateBtnText();
+            onChange();
+        });
+
+        menu.appendChild(label);
+    });
+
+    box.appendChild(btn);
+    box.appendChild(menu);
+
+    updateBtnText();
+}
+
+function renderLevelFilters(){
     const levels = [...new Set(allNodes.map(node => node.levelText))]
         .sort((a,b) => {
             if(a === "法人") return -1;
@@ -1014,74 +1329,80 @@ function renderLevelFilters(){
             if(isNaN(nb)) return -1;
 
             return na - nb;
-        });
+        })
+        .map(level => ({
+            value: level,
+            label: level === "法人" ? "法人" : "層級 " + level
+        }));
 
-    const title = document.createElement("div");
-    title.innerHTML = "<b>層級篩選：</b>";
-    box.appendChild(title);
+    selectedLevels.clear();
+    levels.forEach(item => selectedLevels.add(item.value));
 
-    levels.forEach(level => {
-        const label = document.createElement("label");
-
-        label.innerHTML = `
-            <input type="checkbox" value="${level}">
-            ${level === "法人" ? "法人" : "層級 " + level}
-        `;
-
-        const checkbox = label.querySelector("input");
-
-        checkbox.addEventListener("change", function(){
-            if(this.checked){
-                selectedLevels.add(this.value);
-            }else{
-                selectedLevels.delete(this.value);
-            }
-
-            expandAll();
-            renderChart();
-        });
-
-        box.appendChild(label);
-    });
+    createDropdownCheckbox(
+        "levelFilters",
+        "層級篩選",
+        levels,
+        selectedLevels,
+        function(){ expandAll(); },
+        "層級篩選：全部"
+    );
 }
 
 function renderFieldFilters(){
-    const box = document.getElementById("fieldFilters");
-    box.innerHTML = "";
-
-    const title = document.createElement("div");
-    title.innerHTML = "<b>顯示資訊：</b>";
-    box.appendChild(title);
-
     const fields = [
-        { key:"manager", label:"主管" },
-        { key:"level", label:"部門層級" },
-        { key:"deptCode", label:"部門代碼" },
-        { key:"costCode", label:"費用代碼" }
+        { value:"manager", label:"主管" },
+        { value:"level", label:"部門層級" },
+        { value:"deptCode", label:"部門代碼" },
+        { value:"costCode", label:"費用代碼" }
     ];
 
-    fields.forEach(field => {
-        const label = document.createElement("label");
+    createDropdownCheckbox(
+        "fieldFilters",
+        "顯示資訊",
+        fields,
+        visibleFields,
+        function(){ renderChart(); },
+        "顯示資訊"
+    );
+}
 
-        label.innerHTML = `
-            <input type="checkbox" value="${field.key}" checked>
-            ${field.label}
+function renderLegalFilters(){
+    const legals = [...new Set(personRows.map(row => String(row["所屬法人"] || "").trim()).filter(Boolean))]
+        .sort((a,b) => a.localeCompare(b, "zh-Hant"))
+        .map(legal => ({
+            value: legal,
+            label: legal
+        }));
+
+    if(legals.length === 0){
+        selectedLegals.clear();
+        rebuildPeopleCountCache();
+
+        document.getElementById("legalFilters").innerHTML = `
+            <button type="button" class="dropdownBtn">所屬法人：無人員資料</button>
         `;
+        return;
+    }
 
-        const checkbox = label.querySelector("input");
+    selectedLegals.clear();
+    legals.forEach(item => selectedLegals.add(item.value));
+    rebuildPeopleCountCache();
 
-        checkbox.addEventListener("change", function(){
-            if(this.checked){
-                visibleFields.add(this.value);
-            }else{
-                visibleFields.delete(this.value);
-            }
-
+    createDropdownCheckbox(
+        "legalFilters",
+        "所屬法人",
+        legals,
+        selectedLegals,
+        function(){
+            rebuildPeopleCountCache();
             renderChart();
-        });
 
-        box.appendChild(label);
-    });
+            if(currentSelectedDeptCode){
+                showDepartmentPersons(currentSelectedDeptCode, currentSelectedPersonType);
+            }
+        },
+        "所屬法人：全部"
+    );
 }
 
 function setViewMode(mode){
@@ -1143,7 +1464,7 @@ function renderOrgChart(){
 
 function shouldShowNode(node){
     if(selectedLevels.size === 0){
-        return true;
+        return false;
     }
 
     if(selectedLevels.has(node.levelText)){
@@ -1159,6 +1480,29 @@ function isPathOnly(node){
     }
 
     return !selectedLevels.has(node.levelText);
+}
+
+function getFilteredPersons(){
+    return filteredPersonRows;
+}
+
+function getOwnPeopleByLegal(node){
+    return ownPeopleCountCache[node.deptCode] || 0;
+}
+
+function getTotalPeopleByLegal(node){
+    if(totalPeopleCountCache.has(node.deptCode)){
+        return totalPeopleCountCache.get(node.deptCode);
+    }
+
+    let total = getOwnPeopleByLegal(node);
+
+    node.children.forEach(child => {
+        total += getTotalPeopleByLegal(child);
+    });
+
+    totalPeopleCountCache.set(node.deptCode, total);
+    return total;
 }
 
 function renderNodeInfo(node){
@@ -1181,22 +1525,145 @@ function renderNodeInfo(node){
         lines.push(`費用代碼：${row["費用代碼"] || "-"}`);
     }
 
+    const ownPeople = getOwnPeopleByLegal(node);
+    const totalPeople = getTotalPeopleByLegal(node);
+
     if(node.isLegalEntity || node.isVirtualRoot){
         lines.push(`
             <div class="totalPeople">
-                含轄下合計：${node.totalPeople} 人
+                含轄下合計：
+                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
             </div>
         `);
     }else{
         lines.push(`
             <div class="totalPeople">
-                本單位人數：${node.ownPeople} 人<br>
-                含轄下合計：${node.totalPeople} 人
+                本單位人數：
+                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="own">${ownPeople} 人</span><br>
+                含轄下合計：
+                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
             </div>
         `);
     }
 
     return lines.join("<br>");
+}
+
+function bindPeopleLinks(container){
+    container.querySelectorAll(".peopleLink").forEach(link => {
+        link.addEventListener("click", function(e){
+            e.stopPropagation();
+
+            const deptCode = this.dataset.deptCode;
+            const type = this.dataset.type || "own";
+
+            showDepartmentPersons(deptCode, type);
+        });
+    });
+}
+
+function findNodeByDeptCode(deptCode){
+    const found = allNodes.find(n => n.deptCode === deptCode);
+    if(found) return found;
+
+    for(const root of focusNodes){
+        const result = findNodeInTree(root, deptCode);
+        if(result) return result;
+    }
+
+    return null;
+}
+
+function findNodeInTree(node, deptCode){
+    if(node.deptCode === deptCode){
+        return node;
+    }
+
+    for(const child of node.children){
+        const result = findNodeInTree(child, deptCode);
+        if(result) return result;
+    }
+
+    return null;
+}
+
+function getDescendantDeptCodes(node){
+    let codes = [node.deptCode];
+
+    node.children.forEach(child => {
+        codes = codes.concat(getDescendantDeptCodes(child));
+    });
+
+    return codes;
+}
+
+function showDepartmentPersons(deptCode, type = "own"){
+    currentSelectedDeptCode = deptCode;
+    currentSelectedPersonType = type;
+
+    const node = findNodeByDeptCode(deptCode);
+    const deptName = node ? node.row["部門全名"] : deptCode;
+
+    let persons = getFilteredPersons();
+
+    if(type === "total" && node){
+        const deptCodes = getDescendantDeptCodes(node);
+
+        persons = persons.filter(person => {
+            const personDeptCode = String(person["部門代碼"] || "").trim();
+            return deptCodes.includes(personDeptCode);
+        });
+    }else{
+        persons = persons.filter(person => {
+            return String(person["部門代碼"] || "").trim() === deptCode;
+        });
+    }
+
+    const summary = document.getElementById("personSummary");
+    const panel = document.getElementById("personPanel");
+
+    const rangeText = type === "total" ? "含轄下" : "本單位";
+
+    summary.innerText = `${deptName}｜部門代碼：${deptCode}｜${rangeText}人員 ${persons.length} 人`;
+
+    if(persons.length === 0){
+        panel.innerHTML = `
+            <div class="noPerson">
+                此部門目前查無符合條件的人員資訊。<br>
+                請確認「人員資訊」分頁的部門代碼是否與「部門資訊」一致。
+            </div>
+        `;
+        return;
+    }
+
+    panel.innerHTML = `
+        <table class="personTable">
+            <thead>
+                <tr>
+                    <th>所屬法人</th>
+                    <th>部門代碼</th>
+                    <th>部門名稱</th>
+                    <th>員工工號</th>
+                    <th>員工姓名</th>
+                    <th>職稱名稱</th>
+                    <th>資位</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${persons.map(person => `
+                    <tr>
+                        <td>${person["所屬法人"] || ""}</td>
+                        <td>${person["部門代碼"] || ""}</td>
+                        <td>${person["部門名稱"] || ""}</td>
+                        <td>${person["員工工號"] || ""}</td>
+                        <td>${person["員工姓名"] || ""}</td>
+                        <td>${person["職稱名稱"] || ""}</td>
+                        <td>${person["資位"] || ""}</td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>
+    `;
 }
 
 function getNodeTitle(node){
@@ -1238,13 +1705,20 @@ function createTreeNodeElement(node){
         </div>
     `;
 
-    if(hasChildren){
-        nodeDiv.addEventListener("click", function(e){
-            e.stopPropagation();
+    bindPeopleLinks(nodeDiv);
+
+    nodeDiv.addEventListener("click", function(e){
+        e.stopPropagation();
+
+        if(!node.isLegalEntity && !node.isVirtualRoot){
+            showDepartmentPersons(node.deptCode, "own");
+        }
+
+        if(hasChildren){
             node.expanded = !node.expanded;
             renderChart();
-        });
-    }
+        }
+    });
 
     li.appendChild(nodeDiv);
 
@@ -1293,6 +1767,16 @@ function createOrgNodeElement(node){
             ${renderNodeInfo(node)}
         </div>
     `;
+
+    bindPeopleLinks(nodeDiv);
+
+    nodeDiv.addEventListener("click", function(e){
+        e.stopPropagation();
+
+        if(!node.isLegalEntity && !node.isVirtualRoot){
+            showDepartmentPersons(node.deptCode, "own");
+        }
+    });
 
     group.appendChild(nodeDiv);
 
@@ -1406,7 +1890,7 @@ function isSubGroupNode(node){
 }
 
 function createVirtualNode(title, children){
-    const total = children.reduce((sum, node) => sum + node.totalPeople, 0);
+    const total = children.reduce((sum, node) => sum + getTotalPeopleByLegal(node), 0);
 
     return {
         row:{
@@ -1446,9 +1930,7 @@ function findSpecialMatchedNodes(type){
     );
 
     if(type === "subGroup"){
-        return [
-            createVirtualNode("次集團", subGroupRoots)
-        ];
+        return [createVirtualNode("次集團", subGroupRoots)];
     }
 
     if(type === "group"){
@@ -1460,9 +1942,7 @@ function findSpecialMatchedNodes(type){
             );
         });
 
-        return [
-            createVirtualNode("集團中央", filterTopMatchedNodes(matched))
-        ];
+        return [createVirtualNode("集團中央", filterTopMatchedNodes(matched))];
     }
 
     return [];
@@ -1556,9 +2036,7 @@ function searchAndJump(){
         focusNodes.forEach(node => node.expanded = true);
         renderChart();
 
-        setTimeout(() => {
-            searchTree(true);
-        }, 0);
+        setTimeout(() => searchTree(true), 0);
 
         return;
     }
@@ -1575,17 +2053,13 @@ function searchAndJump(){
         allNodes.forEach(node => node.expanded = true);
         renderChart();
 
-        setTimeout(() => {
-            searchTree(true);
-        }, 0);
+        setTimeout(() => searchTree(true), 0);
     }else{
         focusNodes = [];
         allNodes.forEach(node => node.expanded = true);
         renderChart();
 
-        setTimeout(() => {
-            searchTree(true);
-        }, 0);
+        setTimeout(() => searchTree(true), 0);
     }
 }
 
@@ -1634,7 +2108,7 @@ async function exportPDF(){
 }
 
 function downloadTemplate(){
-    const templateData = [
+    const deptTemplateData = [
         {
             "公司代碼":"HH",
             "層級":1,
@@ -1670,10 +2144,35 @@ function downloadTemplate(){
         }
     ];
 
-    const worksheet = XLSX.utils.json_to_sheet(templateData);
+    const personTemplateData = [
+        {
+            "所屬法人":"HH",
+            "部門代碼":"DA1110",
+            "部門名稱":"營運一部",
+            "員工工號":"A123456",
+            "員工姓名":"張小美",
+            "職稱名稱":"管理師",
+            "資位":"師三"
+        },
+        {
+            "所屬法人":"HH",
+            "部門代碼":"DA1110",
+            "部門名稱":"營運一部",
+            "員工工號":"A123457",
+            "員工姓名":"李小華",
+            "職稱名稱":"高級管理師",
+            "資位":"師四"
+        }
+    ];
+
     const workbook = XLSX.utils.book_new();
 
-    XLSX.utils.book_append_sheet(workbook, worksheet, "組織圖上傳模板");
+    const deptSheet = XLSX.utils.json_to_sheet(deptTemplateData);
+    const personSheet = XLSX.utils.json_to_sheet(personTemplateData);
+
+    XLSX.utils.book_append_sheet(workbook, deptSheet, "部門資訊");
+    XLSX.utils.book_append_sheet(workbook, personSheet, "人員資訊");
+
     XLSX.writeFile(workbook, "組織圖上傳模板.xlsx");
 }
 </script>
