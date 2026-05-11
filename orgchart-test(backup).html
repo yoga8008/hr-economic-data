@@ -1,1 +1,1682 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>組織圖測試版</title>
 
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f3f4f6;
+    margin:0;
+    padding:30px;
+    color:#111827;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+.desc{
+    color:#666;
+    margin-bottom:20px;
+}
+
+.topPanelHeader{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:10px;
+}
+
+.toggleTopBtn{
+    height:34px;
+    padding:0 14px;
+    border:0;
+    border-radius:8px;
+    background:#374151;
+    color:#fff;
+    font-weight:bold;
+    font-size:12px;
+    cursor:pointer;
+}
+
+.toggleTopBtn:hover{
+    opacity:.9;
+}
+
+.topPanel{
+    display:block;
+}
+
+.topPanel.collapsed{
+    display:none;
+}
+
+.topGrid{
+    display:flex;
+    gap:20px;
+    align-items:stretch;
+    margin-bottom:20px;
+}
+
+.topGrid > .uploadBox,
+.topGrid > .resultArea{
+    flex:0 0 calc(50% - 10px);
+    width:calc(50% - 10px);
+}
+
+.uploadBox,
+.resultArea{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:20px;
+    min-height:120px;
+    box-sizing:border-box;
+}
+
+.uploadBox{
+    max-height:260px;
+    overflow:auto;
+}
+
+.resultArea{
+    line-height:1.8;
+    color:#374151;
+    max-height:260px;
+    overflow:auto;
+}
+
+.uploadActions{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.templateBtn,
+.exportBtn,
+.clearMemoryBtn,
+.chartLeftActions button,
+.modeBtn{
+    height:36px;
+    padding:0 12px;
+    border:0;
+    border-radius:8px;
+    background:#1e3a8a;
+    color:#fff;
+    font-weight:bold;
+    font-size:12px;
+    cursor:pointer;
+    white-space:nowrap;
+    box-sizing:border-box;
+    line-height:36px;
+}
+
+.templateBtn:hover,
+.exportBtn:hover,
+.clearMemoryBtn:hover,
+.chartLeftActions button:hover,
+.modeBtn:hover{
+    opacity:.9;
+}
+
+.modeBtn.inactive{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.clearMemoryBtn{
+    background:#991b1b;
+}
+
+.sortSelect{
+    height:36px;
+    padding:0 10px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:13px;
+    background:#fff;
+    color:#374151;
+    box-sizing:border-box;
+}
+
+.resultSuccess{
+    color:#15803d;
+    font-weight:bold;
+}
+
+.resultError{
+    color:#b91c1c;
+    font-weight:bold;
+}
+
+.resultWarn{
+    color:#9a3412;
+    font-weight:bold;
+}
+
+.filterGrid{
+    display:flex;
+    gap:20px;
+    align-items:stretch;
+    margin-bottom:20px;
+}
+
+.filterGrid > .levelFilters,
+.filterGrid > .fieldFilters{
+    flex:0 0 calc(50% - 10px);
+    width:calc(50% - 10px);
+    margin:0;
+    box-sizing:border-box;
+}
+
+.levelFilters,
+.fieldFilters{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:14px 18px;
+    align-items:center;
+}
+
+.levelFilters label,
+.fieldFilters label{
+    font-size:14px;
+    color:#374151;
+    cursor:pointer;
+}
+
+.levelFilters input,
+.fieldFilters input{
+    margin-right:5px;
+}
+
+.chartBox{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:20px;
+    overflow:auto;
+}
+
+.chartHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:16px;
+    flex-wrap:nowrap;
+}
+
+.chartLeftActions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:nowrap;
+    flex:1;
+    min-width:0;
+}
+
+.chartLeftActions input[type="text"]{
+    width:350px;
+    height:36px;
+    padding:0 12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:13px;
+    box-sizing:border-box;
+}
+
+.focusOption{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    height:36px;
+    padding:0 12px;
+    background:#fff;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:12px;
+    color:#374151;
+    cursor:pointer;
+    white-space:nowrap;
+    box-sizing:border-box;
+}
+
+.focusOption input{
+    width:15px;
+    height:15px;
+    margin:0;
+}
+
+.chartActions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:nowrap;
+    flex-shrink:0;
+}
+
+.viewModeControl,
+.zoomControl{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    min-height:36px;
+    padding:6px 12px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    white-space:nowrap;
+    box-sizing:border-box;
+}
+
+.viewModeControl b,
+.zoomControl b{
+    font-size:12px;
+}
+
+.zoomControl input{
+    width:110px;
+    height:auto;
+}
+
+.zoomWrap{
+    transform-origin:top left;
+}
+
+.summary{
+    color:#374151;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.tree{
+    list-style:none;
+    padding-left:0;
+    margin:0;
+}
+
+.tree ul{
+    list-style:none;
+    margin:8px 0 0 30px;
+    padding-left:18px;
+    border-left:1px dashed #cbd5e1;
+}
+
+.tree li{
+    margin:10px 0;
+    position:relative;
+}
+
+.node{
+    display:inline-block;
+    min-width:320px;
+    max-width:520px;
+    background:#ffffff;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    padding:12px 14px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    cursor:pointer;
+}
+
+.node:hover{
+    border-color:#1e3a8a;
+}
+
+.nodeHeader{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:6px;
+}
+
+.toggle{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#1e3a8a;
+    color:#fff;
+    font-size:14px;
+    line-height:22px;
+    text-align:center;
+    flex-shrink:0;
+}
+
+.emptyToggle{
+    width:22px;
+    height:22px;
+    flex-shrink:0;
+}
+
+.deptName{
+    font-weight:bold;
+    font-size:16px;
+    color:#111827;
+}
+
+.nodeInfo{
+    font-size:13px;
+    color:#374151;
+    line-height:1.6;
+    padding-left:30px;
+}
+
+.totalPeople{
+    margin-top:8px;
+    padding-top:8px;
+    border-top:1px dashed #cbd5e1;
+    font-weight:bold;
+    color:#1e3a8a;
+}
+
+.hidden{
+    display:none !important;
+}
+
+.match{
+    border:2px solid #dc2626 !important;
+    background:#fff1f2 !important;
+}
+
+.pathOnly{
+    opacity:.45;
+}
+
+/* 組織圖模式 */
+.orgChart{
+    display:flex;
+    justify-content:center;
+    padding:30px 20px 60px;
+    min-width:max-content;
+    overflow:visible;
+}
+
+.orgNodeGroup{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:relative;
+    flex-shrink:0;
+}
+
+.orgNode{
+    width:300px;
+    background:#fff;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    padding:12px 14px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    text-align:left;
+    position:relative;
+    box-sizing:border-box;
+    z-index:2;
+}
+
+.orgNode .deptName{
+    display:block;
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.orgChildren{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:44px;
+    margin-top:42px;
+    position:relative;
+    padding-top:0;
+}
+
+.orgNodeGroup.hasChildren > .orgNode::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-22px;
+    width:1px;
+    height:22px;
+    background:#94a3b8;
+    transform:translateX(-50%);
+}
+
+.orgChildren > .orgNodeGroup::before{
+    content:"";
+    position:absolute;
+    top:-21px;
+    left:50%;
+    width:1px;
+    height:21px;
+    background:#94a3b8;
+    transform:translateX(-50%);
+}
+
+.orgConnectorLine{
+    position:absolute;
+    top:-21px;
+    height:1px;
+    background:#94a3b8;
+    pointer-events:none;
+    z-index:1;
+}
+
+@media(max-width:1300px){
+    .chartHeader{
+        align-items:flex-start;
+        flex-direction:column;
+        flex-wrap:wrap;
+    }
+
+    .chartLeftActions,
+    .chartActions{
+        flex-wrap:wrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>組織圖測試版</h1>
+
+<div class="desc">
+上傳 Excel 後，系統會依「上級部門」建立組織圖，可切換樹狀清單或組織圖呈現。
+</div>
+
+<div class="topPanelHeader">
+    <button id="toggleTopPanelBtn" class="toggleTopBtn" onclick="toggleTopPanel()">
+        收合上方設定 ▲
+    </button>
+</div>
+
+<div id="topPanel" class="topPanel">
+    <div class="topGrid">
+        <div class="uploadBox">
+            <div class="uploadActions">
+                <input type="file" id="excelFile" accept=".xlsx,.xls">
+                <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
+                <button class="clearMemoryBtn" onclick="clearSavedDataWithPassword()">清除記憶資料</button>
+            </div>
+        </div>
+
+        <div id="uploadResult" class="resultArea">
+            <b>上傳結果</b><br>
+            尚未上傳 Excel
+        </div>
+    </div>
+
+    <div class="filterGrid">
+        <div id="levelFilters" class="levelFilters"></div>
+        <div id="fieldFilters" class="fieldFilters"></div>
+    </div>
+</div>
+
+<div class="chartBox">
+    <div class="chartHeader">
+        <div class="chartLeftActions">
+            <select id="sortMode" class="sortSelect" onchange="applySortAndRender()">
+                <option value="default">原始順序</option>
+                <option value="name">依名稱排序</option>
+                <option value="code">依部門代碼排序</option>
+            </select>
+
+            <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
+
+            <label class="focusOption">
+                <input type="checkbox" id="focusCheckbox">
+                搜尋結果及轄下
+            </label>
+
+            <button onclick="searchAndJump()">搜尋</button>
+            <button onclick="expandAll()">全部展開</button>
+            <button onclick="collapseAll()">全部收合</button>
+        </div>
+
+        <div class="chartActions">
+            <div class="viewModeControl">
+                <b>呈現方式：</b>
+                <button id="treeModeBtn" class="modeBtn" onclick="setViewMode('tree')">樹狀清單</button>
+                <button id="orgModeBtn" class="modeBtn inactive" onclick="setViewMode('org')">組織圖</button>
+            </div>
+
+            <div class="zoomControl">
+                <b>縮放：</b>
+                <input type="range" id="zoomRange" min="50" max="150" value="100">
+                <span id="zoomValue">100%</span>
+            </div>
+
+            <button class="exportBtn" onclick="exportPDF()">匯出 PDF</button>
+        </div>
+    </div>
+
+    <div id="summary" class="summary"></div>
+
+    <div id="zoomWrap" class="zoomWrap">
+        <ul id="tree" class="tree"></ul>
+        <div id="orgChart" class="orgChart hidden"></div>
+    </div>
+</div>
+
+<script>
+const requiredColumns = [
+    "公司代碼",
+    "層級",
+    "上級部門",
+    "部門代碼",
+    "費用代碼",
+    "部門全名",
+    "主管一姓名",
+    "主管一職稱",
+    "在職人數"
+];
+
+const STORAGE_KEY_ROWS = "orgChartSavedRows";
+const STORAGE_KEY_FILE = "orgChartFileName";
+const STORAGE_KEY_UPDATED_AT = "orgChartUpdatedAt";
+const ADMIN_PASSWORD = "1234"; // 清除記憶資料密碼，可自行修改
+
+let allNodes = [];
+let rootNodes = [];
+let selectedLevels = new Set();
+let currentViewMode = "tree";
+let focusNodes = [];
+
+let visibleFields = new Set([
+    "level",
+    "deptCode",
+    "costCode",
+    "manager"
+]);
+
+loadSavedData();
+
+document.getElementById("excelFile").addEventListener("change", handleFile);
+
+document.getElementById("searchInput").addEventListener("input", function(){
+    searchTree(false);
+});
+
+document.getElementById("searchInput").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        searchAndJump();
+    }
+});
+
+document.getElementById("focusCheckbox").addEventListener("change", function(){
+    if(!this.checked){
+        focusNodes = [];
+        renderChart();
+    }
+});
+
+document.getElementById("zoomRange").addEventListener("input", function(){
+    const value = this.value;
+    document.getElementById("zoomValue").innerText = value + "%";
+    document.getElementById("zoomWrap").style.transform = `scale(${value / 100})`;
+
+    if(currentViewMode === "org"){
+        requestAnimationFrame(updateOrgConnectorLines);
+    }
+});
+
+
+function getNowText(){
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    const hh = String(d.getHours()).padStart(2, "0");
+    const mi = String(d.getMinutes()).padStart(2, "0");
+
+    return `${yyyy}/${mm}/${dd} ${hh}:${mi}`;
+}
+
+function saveOrgChartMemory(rows, fileName, updatedAt){
+    try{
+        localStorage.setItem(STORAGE_KEY_ROWS, JSON.stringify(rows));
+        localStorage.setItem(STORAGE_KEY_FILE, fileName || "未命名檔案");
+        localStorage.setItem(STORAGE_KEY_UPDATED_AT, updatedAt || getNowText());
+    }catch(err){
+        alert("資料已產生，但瀏覽器記憶空間不足，無法儲存本次上傳資料。");
+    }
+}
+
+function loadSavedData(){
+    const savedRows = localStorage.getItem(STORAGE_KEY_ROWS);
+
+    if(!savedRows){
+        return;
+    }
+
+    try{
+        const rows = JSON.parse(savedRows);
+        const fileName = localStorage.getItem(STORAGE_KEY_FILE) || "未命名檔案";
+        const updatedAt = localStorage.getItem(STORAGE_KEY_UPDATED_AT) || "未記錄";
+
+        if(!Array.isArray(rows) || rows.length === 0){
+            return;
+        }
+
+        buildTreeData(rows);
+        renderLevelFilters();
+        renderFieldFilters();
+        renderChart();
+        appendMemoryInfo(fileName, updatedAt, false);
+    }catch(err){
+        localStorage.removeItem(STORAGE_KEY_ROWS);
+        localStorage.removeItem(STORAGE_KEY_FILE);
+        localStorage.removeItem(STORAGE_KEY_UPDATED_AT);
+
+        document.getElementById("uploadResult").innerHTML = `
+            <b>上傳結果</b><br>
+            <span class="resultError">記憶資料讀取失敗，已清除舊資料</span>
+        `;
+    }
+}
+
+function appendMemoryInfo(fileName, updatedAt, isNewUpload){
+    const result = document.getElementById("uploadResult");
+    const status = isNewUpload ? "組織資料已儲存" : "已自動載入上次儲存資料";
+
+    result.innerHTML += `
+        <hr style="border:0;border-top:1px solid #e5e7eb;margin:10px 0;">
+        <span class="resultSuccess">${status}</span><br>
+        最後更新日：${updatedAt}<br>
+        來源檔案：${fileName}
+    `;
+}
+
+function clearSavedDataWithPassword(){
+    const input = prompt("請輸入管理密碼，確認後將清除已儲存的組織圖資料：");
+
+    if(input === null){
+        return;
+    }
+
+    if(input !== ADMIN_PASSWORD){
+        alert("密碼錯誤，無法清除資料。");
+        return;
+    }
+
+    const confirmClear = confirm("確認要清除所有記憶資料嗎？此動作無法復原。");
+
+    if(!confirmClear){
+        return;
+    }
+
+    localStorage.removeItem(STORAGE_KEY_ROWS);
+    localStorage.removeItem(STORAGE_KEY_FILE);
+    localStorage.removeItem(STORAGE_KEY_UPDATED_AT);
+
+    clearPageData();
+
+    document.getElementById("uploadResult").innerHTML = `
+        <b>上傳結果</b><br>
+        <span class="resultSuccess">已清除記憶資料</span><br>
+        尚未上傳 Excel
+    `;
+
+    const excelFile = document.getElementById("excelFile");
+    if(excelFile){
+        excelFile.value = "";
+    }
+}
+
+function toggleTopPanel(){
+    const panel = document.getElementById("topPanel");
+    const btn = document.getElementById("toggleTopPanelBtn");
+
+    panel.classList.toggle("collapsed");
+
+    if(panel.classList.contains("collapsed")){
+        btn.innerText = "展開上方設定 ▼";
+    }else{
+        btn.innerText = "收合上方設定 ▲";
+    }
+}
+
+function handleFile(e){
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+        const data = new Uint8Array(event.target.result);
+        const workbook = XLSX.read(data, {type:"array"});
+        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(firstSheet, {defval:""});
+
+        const isValid = checkColumns(rows);
+
+        if(!isValid){
+            clearPageData();
+            return;
+        }
+
+        const updatedAt = getNowText();
+
+        saveOrgChartMemory(rows, file.name, updatedAt);
+
+        buildTreeData(rows);
+        renderLevelFilters();
+        renderFieldFilters();
+        renderChart();
+        appendMemoryInfo(file.name, updatedAt, true);
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+function clearPageData(){
+    allNodes = [];
+    rootNodes = [];
+    selectedLevels.clear();
+    focusNodes = [];
+
+    const focusCheckbox = document.getElementById("focusCheckbox");
+    if(focusCheckbox){
+        focusCheckbox.checked = false;
+    }
+
+    document.getElementById("levelFilters").innerHTML = "";
+    document.getElementById("fieldFilters").innerHTML = "";
+    document.getElementById("summary").innerText = "";
+    document.getElementById("tree").innerHTML = "";
+    document.getElementById("orgChart").innerHTML = "";
+}
+
+function checkColumns(rows){
+    const result = document.getElementById("uploadResult");
+
+    if(rows.length === 0){
+        result.innerHTML = `
+            <b>上傳結果</b><br>
+            <span class="resultError">Excel 沒有資料</span>
+        `;
+        return false;
+    }
+
+    const columns = Object.keys(rows[0]);
+    const missing = requiredColumns.filter(col => !columns.includes(col));
+
+    if(missing.length > 0){
+        result.innerHTML = `
+            <b>上傳結果</b><br>
+            <span class="resultError">缺少欄位：${missing.join("、")}</span>
+        `;
+        return false;
+    }
+
+    result.innerHTML = `
+        <b>上傳結果</b><br>
+        <span class="resultSuccess">Excel 讀取成功</span><br>
+        資料檢查中...
+    `;
+
+    return true;
+}
+
+function buildTreeData(rows){
+    const result = document.getElementById("uploadResult");
+
+    selectedLevels.clear();
+    focusNodes = [];
+
+    const focusCheckbox = document.getElementById("focusCheckbox");
+    if(focusCheckbox){
+        focusCheckbox.checked = false;
+    }
+
+    const deptMap = {};
+    const legalMap = {};
+    const errors = [];
+
+    allNodes = [];
+    rootNodes = [];
+
+    rows.forEach((row) => {
+        const companyCode = String(row["公司代碼"]).trim();
+
+        if(!companyCode) return;
+
+        if(!legalMap[companyCode]){
+            const legalNode = {
+                row: {
+                    "公司代碼": companyCode,
+                    "層級": "法人",
+                    "上級部門": "",
+                    "部門代碼": companyCode,
+                    "費用代碼": "",
+                    "部門全名": companyCode,
+                    "主管一姓名": "",
+                    "主管一職稱": "",
+                    "在職人數": 0
+                },
+                deptCode: companyCode,
+                parentCode: "",
+                levelText: "法人",
+                level: 0,
+                order: -1,
+                ownPeople: 0,
+                totalPeople: 0,
+                children: [],
+                expanded: true,
+                isLegalEntity: true,
+                isVirtualRoot: false
+            };
+
+            legalMap[companyCode] = legalNode;
+            deptMap[companyCode] = legalNode;
+            allNodes.push(legalNode);
+        }
+    });
+
+    rows.forEach((row, index) => {
+        const deptCode = String(row["部門代碼"]).trim();
+
+        if(!deptCode) return;
+
+        if(deptMap[deptCode]){
+            errors.push("部門代碼重複：" + deptCode);
+        }
+
+        const levelText = String(row["層級"]).trim() || "未設定";
+
+        const node = {
+            row: row,
+            deptCode: deptCode,
+            parentCode: String(row["上級部門"]).trim(),
+            levelText: levelText,
+            level: Number(levelText) || 999,
+            order: index,
+            ownPeople: parsePeople(row["在職人數"]),
+            totalPeople: 0,
+            children: [],
+            expanded: true,
+            isLegalEntity: false,
+            isVirtualRoot: false
+        };
+
+        deptMap[deptCode] = node;
+        allNodes.push(node);
+    });
+
+    allNodes.forEach(node => {
+        if(node.isLegalEntity){
+            rootNodes.push(node);
+            return;
+        }
+
+        if(node.parentCode && deptMap[node.parentCode]){
+            deptMap[node.parentCode].children.push(node);
+        }else{
+            const companyCode = String(node.row["公司代碼"]).trim();
+
+            if(companyCode && legalMap[companyCode]){
+                legalMap[companyCode].children.push(node);
+            }else{
+                rootNodes.push(node);
+            }
+
+            if(node.parentCode && !deptMap[node.parentCode]){
+                errors.push("找不到上級部門：" + node.parentCode + "，部門：" + node.deptCode);
+            }
+        }
+    });
+
+    sortNodes(rootNodes);
+    rootNodes.forEach(node => calculateTotalPeople(node));
+
+    if(errors.length > 0){
+        result.innerHTML = `
+            <b>上傳結果</b><br>
+            <span class="resultSuccess">Excel 讀取成功</span><br>
+            <span class="resultWarn">資料提醒：</span><br>
+            ${errors.join("<br>")}
+        `;
+    }else{
+        result.innerHTML = `
+            <b>上傳結果</b><br>
+            <span class="resultSuccess">Excel 讀取成功</span><br>
+            資料檢查結果：目前無資料異常
+        `;
+    }
+
+    document.getElementById("summary").innerText =
+        "共讀取 " + allNodes.length + " 個節點，最上層節點 " + rootNodes.length + " 個。";
+}
+
+function sortNodes(nodes){
+    const mode = document.getElementById("sortMode")?.value || "default";
+
+    nodes.sort((a,b) => {
+        if(mode === "name"){
+            return String(a.row["部門全名"] || "")
+                .localeCompare(String(b.row["部門全名"] || ""), "zh-Hant");
+        }
+
+        if(mode === "code"){
+            return String(a.row["部門代碼"] || "")
+                .localeCompare(String(b.row["部門代碼"] || ""), "zh-Hant");
+        }
+
+        if(a.level !== b.level) return a.level - b.level;
+        return a.order - b.order;
+    });
+
+    nodes.forEach(node => sortNodes(node.children));
+}
+
+function applySortAndRender(){
+    sortNodes(rootNodes);
+    renderChart();
+}
+
+function parsePeople(value){
+    const num = Number(String(value).replace(/,/g, "").trim());
+    return isNaN(num) ? 0 : num;
+}
+
+function calculateTotalPeople(node){
+    let total = node.ownPeople;
+
+    node.children.forEach(child => {
+        total += calculateTotalPeople(child);
+    });
+
+    node.totalPeople = total;
+    return total;
+}
+
+function renderLevelFilters(){
+    const box = document.getElementById("levelFilters");
+    box.innerHTML = "";
+
+    const levels = [...new Set(allNodes.map(node => node.levelText))]
+        .sort((a,b) => {
+            if(a === "法人") return -1;
+            if(b === "法人") return 1;
+
+            const na = Number(a);
+            const nb = Number(b);
+
+            if(isNaN(na)) return 1;
+            if(isNaN(nb)) return -1;
+
+            return na - nb;
+        });
+
+    const title = document.createElement("div");
+    title.innerHTML = "<b>層級篩選：</b>";
+    box.appendChild(title);
+
+    levels.forEach(level => {
+        const label = document.createElement("label");
+
+        label.innerHTML = `
+            <input type="checkbox" value="${level}">
+            ${level === "法人" ? "法人" : "層級 " + level}
+        `;
+
+        const checkbox = label.querySelector("input");
+
+        checkbox.addEventListener("change", function(){
+            if(this.checked){
+                selectedLevels.add(this.value);
+            }else{
+                selectedLevels.delete(this.value);
+            }
+
+            expandAll();
+            renderChart();
+        });
+
+        box.appendChild(label);
+    });
+}
+
+function renderFieldFilters(){
+    const box = document.getElementById("fieldFilters");
+    box.innerHTML = "";
+
+    const title = document.createElement("div");
+    title.innerHTML = "<b>顯示資訊：</b>";
+    box.appendChild(title);
+
+    const fields = [
+        { key:"manager", label:"主管" },
+        { key:"level", label:"部門層級" },
+        { key:"deptCode", label:"部門代碼" },
+        { key:"costCode", label:"費用代碼" }
+    ];
+
+    fields.forEach(field => {
+        const label = document.createElement("label");
+
+        label.innerHTML = `
+            <input type="checkbox" value="${field.key}" checked>
+            ${field.label}
+        `;
+
+        const checkbox = label.querySelector("input");
+
+        checkbox.addEventListener("change", function(){
+            if(this.checked){
+                visibleFields.add(this.value);
+            }else{
+                visibleFields.delete(this.value);
+            }
+
+            renderChart();
+        });
+
+        box.appendChild(label);
+    });
+}
+
+function setViewMode(mode){
+    currentViewMode = mode;
+
+    document.getElementById("treeModeBtn").classList.toggle("inactive", mode !== "tree");
+    document.getElementById("orgModeBtn").classList.toggle("inactive", mode !== "org");
+
+    renderChart();
+}
+
+function renderChart(){
+    if(currentViewMode === "tree"){
+        renderTree();
+    }else{
+        renderOrgChart();
+    }
+
+    searchTree(false);
+}
+
+function renderTree(){
+    const tree = document.getElementById("tree");
+    const orgChart = document.getElementById("orgChart");
+
+    tree.classList.remove("hidden");
+    orgChart.classList.add("hidden");
+
+    tree.innerHTML = "";
+
+    const displayRoots = focusNodes.length > 0 ? focusNodes : rootNodes;
+
+    displayRoots.forEach(node => {
+        if(shouldShowNode(node)){
+            tree.appendChild(createTreeNodeElement(node));
+        }
+    });
+}
+
+function renderOrgChart(){
+    const tree = document.getElementById("tree");
+    const orgChart = document.getElementById("orgChart");
+
+    tree.classList.add("hidden");
+    orgChart.classList.remove("hidden");
+
+    orgChart.innerHTML = "";
+
+    const displayRoots = focusNodes.length > 0 ? focusNodes : rootNodes;
+
+    displayRoots.forEach(node => {
+        if(shouldShowNode(node)){
+            orgChart.appendChild(createOrgNodeElement(node));
+        }
+    });
+
+    requestAnimationFrame(updateOrgConnectorLines);
+}
+
+function shouldShowNode(node){
+    if(selectedLevels.size === 0){
+        return true;
+    }
+
+    if(selectedLevels.has(node.levelText)){
+        return true;
+    }
+
+    return node.children.some(child => shouldShowNode(child));
+}
+
+function isPathOnly(node){
+    if(selectedLevels.size === 0){
+        return false;
+    }
+
+    return !selectedLevels.has(node.levelText);
+}
+
+function renderNodeInfo(node){
+    const row = node.row;
+    const lines = [];
+
+    if(visibleFields.has("manager") && !node.isLegalEntity && !node.isVirtualRoot){
+        lines.push(`主管：${row["主管一姓名"] || "-"} / ${row["主管一職稱"] || "-"}`);
+    }
+
+    if(visibleFields.has("level")){
+        lines.push(`層級：${row["層級"] || "-"}`);
+    }
+
+    if(visibleFields.has("deptCode")){
+        lines.push(`部門代碼：${row["部門代碼"] || "-"}`);
+    }
+
+    if(visibleFields.has("costCode") && !node.isLegalEntity && !node.isVirtualRoot){
+        lines.push(`費用代碼：${row["費用代碼"] || "-"}`);
+    }
+
+    if(node.isLegalEntity || node.isVirtualRoot){
+        lines.push(`
+            <div class="totalPeople">
+                含轄下合計：${node.totalPeople} 人
+            </div>
+        `);
+    }else{
+        lines.push(`
+            <div class="totalPeople">
+                本單位人數：${node.ownPeople} 人<br>
+                含轄下合計：${node.totalPeople} 人
+            </div>
+        `);
+    }
+
+    return lines.join("<br>");
+}
+
+function getNodeTitle(node){
+    if(node.isVirtualRoot){
+        return node.row["部門全名"] || "-";
+    }
+
+    if(node.isLegalEntity){
+        return "法人：" + node.row["部門全名"];
+    }
+
+    return node.row["部門全名"] || "-";
+}
+
+function createTreeNodeElement(node){
+    const li = document.createElement("li");
+    const hasChildren = node.children.length > 0;
+
+    const nodeDiv = document.createElement("div");
+    nodeDiv.className = "node";
+
+    if(isPathOnly(node)){
+        nodeDiv.classList.add("pathOnly");
+    }
+
+    nodeDiv.dataset.search = getSearchText(node);
+
+    nodeDiv.innerHTML = `
+        <div class="nodeHeader">
+            ${
+                hasChildren
+                ? `<span class="toggle">${node.expanded ? "－" : "＋"}</span>`
+                : `<span class="emptyToggle"></span>`
+            }
+            <span class="deptName">${getNodeTitle(node)}</span>
+        </div>
+        <div class="nodeInfo">
+            ${renderNodeInfo(node)}
+        </div>
+    `;
+
+    if(hasChildren){
+        nodeDiv.addEventListener("click", function(e){
+            e.stopPropagation();
+            node.expanded = !node.expanded;
+            renderChart();
+        });
+    }
+
+    li.appendChild(nodeDiv);
+
+    if(hasChildren){
+        const ul = document.createElement("ul");
+
+        if(!node.expanded){
+            ul.className = "hidden";
+        }
+
+        node.children.forEach(child => {
+            if(shouldShowNode(child)){
+                ul.appendChild(createTreeNodeElement(child));
+            }
+        });
+
+        li.appendChild(ul);
+    }
+
+    return li;
+}
+
+function createOrgNodeElement(node){
+    const visibleChildren = node.children.filter(child => shouldShowNode(child));
+    const hasChildren = visibleChildren.length > 0;
+
+    const group = document.createElement("div");
+    group.className = "orgNodeGroup";
+
+    if(hasChildren){
+        group.classList.add("hasChildren");
+    }
+
+    const nodeDiv = document.createElement("div");
+    nodeDiv.className = "orgNode";
+
+    if(isPathOnly(node)){
+        nodeDiv.classList.add("pathOnly");
+    }
+
+    nodeDiv.dataset.search = getSearchText(node);
+
+    nodeDiv.innerHTML = `
+        <span class="deptName">${getNodeTitle(node)}</span>
+        <div class="nodeInfo">
+            ${renderNodeInfo(node)}
+        </div>
+    `;
+
+    group.appendChild(nodeDiv);
+
+    if(hasChildren){
+        const childrenBox = document.createElement("div");
+        childrenBox.className = "orgChildren";
+
+        if(visibleChildren.length > 1){
+            childrenBox.classList.add("hasMultiple");
+        }
+
+        visibleChildren.forEach(child => {
+            childrenBox.appendChild(createOrgNodeElement(child));
+        });
+
+        group.appendChild(childrenBox);
+    }
+
+    return group;
+}
+
+function updateOrgConnectorLines(){
+    document.querySelectorAll(".orgChildren").forEach(box => {
+        box.querySelectorAll(":scope > .orgConnectorLine").forEach(line => line.remove());
+
+        const groups = [...box.children].filter(el => el.classList.contains("orgNodeGroup"));
+
+        if(groups.length < 2) return;
+
+        const first = groups[0];
+        const last = groups[groups.length - 1];
+
+        const firstCenter = first.offsetLeft + first.offsetWidth / 2;
+        const lastCenter = last.offsetLeft + last.offsetWidth / 2;
+
+        const line = document.createElement("div");
+        line.className = "orgConnectorLine";
+        line.style.left = firstCenter + "px";
+        line.style.width = (lastCenter - firstCenter) + "px";
+
+        box.prepend(line);
+    });
+}
+
+function normalizeText(text){
+    return String(text || "")
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .replace(/　/g, "");
+}
+
+function getSearchText(node){
+    return normalizeText([
+        node.row["部門全名"],
+        node.row["主管一姓名"],
+        node.row["主管一職稱"],
+        node.row["部門代碼"],
+        node.row["費用代碼"],
+        node.row["公司代碼"]
+    ].join(" "));
+}
+
+function isFuzzyMatch(searchText, keyword){
+    const normalizedKeyword = normalizeText(keyword);
+
+    if(!normalizedKeyword) return false;
+
+    const keywords = String(keyword)
+        .trim()
+        .split(/\s+/)
+        .map(k => normalizeText(k))
+        .filter(Boolean);
+
+    if(searchText.includes(normalizedKeyword)){
+        return true;
+    }
+
+    if(keywords.length > 1){
+        return keywords.every(k => searchText.includes(k));
+    }
+
+    return false;
+}
+
+function getSpecialSearchType(keyword){
+    const k = normalizeText(keyword);
+
+    if(k === "*次集團"){
+        return "subGroup";
+    }
+
+    if(k === "*集團中央"){
+        return "group";
+    }
+
+    return "";
+}
+
+function getSpecialDisplayKeyword(keyword){
+    const type = getSpecialSearchType(keyword);
+
+    if(type === "subGroup") return "次集團";
+    if(type === "group") return "集團中央";
+
+    return keyword;
+}
+
+function isSubGroupNode(node){
+    const name = normalizeText(node.row["部門全名"]);
+    return name.includes("次集團") || name.includes("事業群");
+}
+
+function createVirtualNode(title, children){
+    const total = children.reduce((sum, node) => sum + node.totalPeople, 0);
+
+    return {
+        row:{
+            "公司代碼":"",
+            "層級":"虛擬法人",
+            "上級部門":"",
+            "部門代碼":title,
+            "費用代碼":"",
+            "部門全名":title,
+            "主管一姓名":"",
+            "主管一職稱":"",
+            "在職人數":0
+        },
+        deptCode:title,
+        parentCode:"",
+        levelText:"虛擬法人",
+        level:0,
+        order:-1,
+        ownPeople:0,
+        totalPeople:total,
+        children:children,
+        expanded:true,
+        isLegalEntity:false,
+        isVirtualRoot:true
+    };
+}
+
+function isUnderAnyNode(node, parentNodes){
+    return parentNodes.some(parent => {
+        return parent === node || isDescendantOf(node, parent);
+    });
+}
+
+function findSpecialMatchedNodes(type){
+    const subGroupRoots = filterTopMatchedNodes(
+        allNodes.filter(node => !node.isLegalEntity && isSubGroupNode(node))
+    );
+
+    if(type === "subGroup"){
+        return [
+            createVirtualNode("次集團", subGroupRoots)
+        ];
+    }
+
+    if(type === "group"){
+        const matched = allNodes.filter(node => {
+            return (
+                !node.isLegalEntity &&
+                !isSubGroupNode(node) &&
+                !isUnderAnyNode(node, subGroupRoots)
+            );
+        });
+
+        return [
+            createVirtualNode("集團中央", filterTopMatchedNodes(matched))
+        ];
+    }
+
+    return [];
+}
+
+function expandAll(){
+    allNodes.forEach(node => node.expanded = true);
+    focusNodes.forEach(node => node.expanded = true);
+    renderChart();
+}
+
+function collapseAll(){
+    allNodes.forEach(node => node.expanded = false);
+    focusNodes.forEach(node => node.expanded = false);
+    renderChart();
+}
+
+function searchTree(jumpToFirst = false){
+    const rawKeyword = document.getElementById("searchInput").value.trim();
+    const keyword = getSpecialDisplayKeyword(rawKeyword);
+    const specialType = getSpecialSearchType(rawKeyword);
+
+    setTimeout(() => {
+        const nodes = document.querySelectorAll(".node, .orgNode");
+        let firstMatch = null;
+
+        nodes.forEach(node => {
+            node.classList.remove("match");
+
+            if(keyword && isFuzzyMatch(node.dataset.search, keyword)){
+                node.classList.add("match");
+
+                if(!firstMatch){
+                    firstMatch = node;
+                }
+            }
+        });
+
+        if(jumpToFirst && firstMatch){
+            firstMatch.scrollIntoView({
+                behavior:"smooth",
+                block:"center",
+                inline:"center"
+            });
+        }
+
+        if(jumpToFirst && rawKeyword && !firstMatch && !specialType){
+            alert("找不到符合的部門、主管或代碼");
+        }
+    }, 0);
+}
+
+function findMatchedNodes(keyword){
+    if(!keyword) return [];
+
+    const matched = allNodes.filter(node => {
+        return isFuzzyMatch(getSearchText(node), keyword);
+    });
+
+    return filterTopMatchedNodes(matched);
+}
+
+function filterTopMatchedNodes(nodes){
+    return nodes.filter(node => {
+        return !nodes.some(other => {
+            return other !== node && isDescendantOf(node, other);
+        });
+    });
+}
+
+function isDescendantOf(node, possibleParent){
+    return possibleParent.children.some(child => {
+        return child === node || isDescendantOf(node, child);
+    });
+}
+
+function searchAndJump(){
+    const keyword = document.getElementById("searchInput").value.trim();
+    const focusChecked = document.getElementById("focusCheckbox").checked;
+    const specialType = getSpecialSearchType(keyword);
+
+    if(!keyword){
+        focusNodes = [];
+        renderChart();
+        return;
+    }
+
+    if(specialType){
+        focusNodes = findSpecialMatchedNodes(specialType);
+        allNodes.forEach(node => node.expanded = true);
+        focusNodes.forEach(node => node.expanded = true);
+        renderChart();
+
+        setTimeout(() => {
+            searchTree(true);
+        }, 0);
+
+        return;
+    }
+
+    if(focusChecked){
+        const matchedNodes = findMatchedNodes(keyword);
+
+        if(matchedNodes.length === 0){
+            alert("找不到符合的部門、主管或代碼");
+            return;
+        }
+
+        focusNodes = matchedNodes;
+        allNodes.forEach(node => node.expanded = true);
+        renderChart();
+
+        setTimeout(() => {
+            searchTree(true);
+        }, 0);
+    }else{
+        focusNodes = [];
+        allNodes.forEach(node => node.expanded = true);
+        renderChart();
+
+        setTimeout(() => {
+            searchTree(true);
+        }, 0);
+    }
+}
+
+async function exportPDF(){
+    const target = document.getElementById("zoomWrap");
+
+    if(!target || allNodes.length === 0){
+        alert("請先上傳 Excel 並產生組織圖");
+        return;
+    }
+
+    const originalTransform = target.style.transform;
+    target.style.transform = "scale(1)";
+
+    const canvas = await html2canvas(target, {
+        scale: 2,
+        backgroundColor: "#ffffff",
+        useCORS: true
+    });
+
+    target.style.transform = originalTransform;
+
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jspdf.jsPDF("l", "mm", "a4");
+
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgWidth = pageWidth - 20;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+
+    let heightLeft = imgHeight;
+    let position = 10;
+
+    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while(heightLeft > 0){
+        pdf.addPage();
+        position = heightLeft - imgHeight + 10;
+        pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+    }
+
+    pdf.save("組織圖_匯出.pdf");
+}
+
+function downloadTemplate(){
+    const templateData = [
+        {
+            "公司代碼":"HH",
+            "層級":1,
+            "上級部門":"HH",
+            "部門代碼":"DA10",
+            "費用代碼":"DA12345678",
+            "部門全名":"中央營運",
+            "主管一姓名":"林小明",
+            "主管一職稱":"營運長",
+            "在職人數":1
+        },
+        {
+            "公司代碼":"HH",
+            "層級":2,
+            "上級部門":"DA10",
+            "部門代碼":"DA110",
+            "費用代碼":"DA12345678",
+            "部門全名":"營運處",
+            "主管一姓名":"王一二",
+            "主管一職稱":"處長",
+            "在職人數":3
+        },
+        {
+            "公司代碼":"HH",
+            "層級":3,
+            "上級部門":"DA110",
+            "部門代碼":"DA1110",
+            "費用代碼":"DA12345678",
+            "部門全名":"營運一部",
+            "主管一姓名":"陳小華",
+            "主管一職稱":"部長",
+            "在職人數":8
+        }
+    ];
+
+    const worksheet = XLSX.utils.json_to_sheet(templateData);
+    const workbook = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, "組織圖上傳模板");
+    XLSX.writeFile(workbook, "組織圖上傳模板.xlsx");
+}
+</script>
+
+</body>
+</html>
