@@ -1,3 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>組織圖測試版</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f3f4f6;
+    margin:0;
+    padding:30px;
+    color:#111827;
+}
+
+h1{ margin-bottom:10px; }
+
+.desc{
+    color:#666;
+    margin-bottom:20px;
+}
+
+.topPanelHeader{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:10px;
+}
+
+.toggleTopBtn{
+    height:34px;
+    padding:0 14px;
+    border:0;
+    border-radius:8px;
+    background:#374151;
+    color:#fff;
+    font-weight:bold;
+    font-size:12px;
+    cursor:pointer;
+}
+
+.topPanel{ display:block; }
+.topPanel.collapsed{ display:none; }
+
+.topGrid{
+    display:flex;
+    gap:20px;
+    align-items:stretch;
+    margin-bottom:20px;
+}
+
+.topGrid > .uploadBox,
+.topGrid > .resultArea{
+    flex:0 0 calc(50% - 10px);
+    width:calc(50% - 10px);
+}
+
+.uploadBox,
+.resultArea{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:20px;
+    min-height:120px;
+    box-sizing:border-box;
+}
+
+.uploadBox{
+    max-height:260px;
+    overflow:auto;
+}
+
+.resultArea{
+    line-height:1.8;
+    color:#374151;
+    max-height:260px;
+    overflow:auto;
+}
+
+.uploadActions{
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+.uploadMain{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.uploadButtons{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.uploadHelp{
+    color:#6b7280;
+    font-size:13px;
+    line-height:1.7;
+    padding-top:4px;
+    min-width:280px;
+}
+
+.memoryInfo{
+    margin-top:10px;
+    color:#374151;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.templateBtn,
+.exportBtn,
+.clearMemoryBtn,
+.chartLeftActions button,
+.modeBtn{
+    height:36px;
+    padding:0 12px;
+    border:0;
+    border-radius:8px;
+    background:#1e3a8a;
+    color:#fff;
+    font-weight:bold;
+    font-size:12px;
+    cursor:pointer;
+    white-space:nowrap;
+    box-sizing:border-box;
+    line-height:36px;
+}
+
+.templateBtn:hover,
+.exportBtn:hover,
+.clearMemoryBtn:hover,
+.chartLeftActions button:hover,
+.modeBtn:hover{
+    opacity:.9;
+}
+
+.modeBtn.inactive{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.clearMemoryBtn{ background:#991b1b; }
+
+.sortSelect{
+    height:36px;
+    padding:0 10px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:13px;
+    background:#fff;
+    color:#374151;
+    box-sizing:border-box;
+}
+
+.resultSuccess{
+    color:#15803d;
+    font-weight:bold;
+}
+
+.resultError{
+    color:#b91c1c;
+    font-weight:bold;
+}
+
+.resultWarn{
+    color:#9a3412;
+    font-weight:bold;
+}
+
+.filterBar{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.dropdownFilter{
+    position:relative;
+    min-width:220px;
+}
+
+.dropdownBtn{
+    width:100%;
+    height:38px;
+    padding:0 12px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    background:#fff;
+    color:#374151;
+    font-size:13px;
+    text-align:left;
+    cursor:pointer;
+    box-sizing:border-box;
+}
+
+.dropdownBtn::after{
+    content:"▼";
+    float:right;
+    font-size:10px;
+    color:#6b7280;
+    margin-top:2px;
+}
+
+.dropdownMenu{
+    display:none;
+    position:absolute;
+    top:44px;
+    left:0;
+    width:100%;
+    max-height:260px;
+    overflow:auto;
+    background:#fff;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+    z-index:50;
+    padding:8px;
+    box-sizing:border-box;
+}
+
+.dropdownFilter.open .dropdownMenu{ display:block; }
+
+.dropdownMenu label{
+    display:block;
+    padding:7px 8px;
+    font-size:13px;
+    color:#374151;
+    cursor:pointer;
+    border-radius:6px;
+}
+
+.dropdownMenu label:hover{ background:#f3f4f6; }
+.dropdownMenu input{ margin-right:6px; }
+
+.selectAllLabel{
+    font-weight:bold;
+    border-bottom:1px solid #e5e7eb;
+    margin-bottom:4px;
+}
+
+.chartBox{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:20px;
+    overflow:auto;
+}
+
+.chartHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:16px;
+    flex-wrap:nowrap;
+}
+
+.chartLeftActions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:nowrap;
+    flex:1;
+    min-width:0;
+}
+
+.chartLeftActions input[type="text"]{
+    width:350px;
+    height:36px;
+    padding:0 12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:13px;
+    box-sizing:border-box;
+}
+
+.focusOption{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    height:36px;
+    padding:0 12px;
+    background:#fff;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:12px;
+    color:#374151;
+    cursor:pointer;
+    white-space:nowrap;
+    box-sizing:border-box;
+}
+
+.focusOption input{
+    width:15px;
+    height:15px;
+    margin:0;
+}
+
+.chartActions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:nowrap;
+    flex-shrink:0;
+}
+
+.viewModeControl,
+.zoomControl{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    min-height:36px;
+    padding:6px 12px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    white-space:nowrap;
+    box-sizing:border-box;
+}
+
+.viewModeControl b,
+.zoomControl b{ font-size:12px; }
+
+.zoomControl input{
+    width:110px;
+    height:auto;
+}
+
+.zoomWrap{ transform-origin:top left; }
+
+.summary{
+    color:#374151;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.tree{
+    list-style:none;
+    padding-left:0;
+    margin:0;
+}
+
+.tree ul{
+    list-style:none;
+    margin:8px 0 0 30px;
+    padding-left:18px;
+    border-left:1px dashed #cbd5e1;
+}
+
+.tree li{
+    margin:10px 0;
+    position:relative;
+}
+
+.node{
+    display:inline-block;
+    min-width:320px;
+    max-width:520px;
+    background:#ffffff;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    padding:12px 14px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    cursor:pointer;
+}
+
+.node:hover{ border-color:#1e3a8a; }
+
+.nodeHeader{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:6px;
+}
+
+.toggle{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#1e3a8a;
+    color:#fff;
+    font-size:14px;
+    line-height:22px;
+    text-align:center;
+    flex-shrink:0;
+}
+
+.emptyToggle{
+    width:22px;
+    height:22px;
+    flex-shrink:0;
+}
+
+.deptName{
+    font-weight:bold;
+    font-size:16px;
+    color:#111827;
+}
+
+.nodeInfo{
+    font-size:13px;
+    color:#374151;
+    line-height:1.6;
+    padding-left:30px;
+}
+
+.totalPeople{
+    margin-top:8px;
+    padding-top:8px;
+    border-top:1px dashed #cbd5e1;
+    font-weight:bold;
+    color:#1e3a8a;
+}
+
+.peopleLink{
+    color:#1e3a8a;
+    font-weight:bold;
+    text-decoration:underline;
+    cursor:pointer;
+}
+
+.hidden{ display:none !important; }
+
+.match{
+    border:2px solid #dc2626 !important;
+    background:#fff1f2 !important;
+}
+
+.pathOnly{ opacity:.45; }
+
+.orgChart{
+    display:flex;
+    justify-content:center;
+    padding:30px 20px 60px;
+    min-width:max-content;
+    overflow:visible;
+}
+
+.orgNodeGroup{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:relative;
+    flex-shrink:0;
+}
+
+.orgNode{
+    width:300px;
+    background:#fff;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    padding:12px 14px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    text-align:left;
+    position:relative;
+    box-sizing:border-box;
+    z-index:2;
+    cursor:pointer;
+}
+
+.orgNode:hover{ border-color:#1e3a8a; }
+
+.orgNode .deptName{
+    display:block;
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.orgChildren{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:44px;
+    margin-top:42px;
+    position:relative;
+    padding-top:0;
+}
+
+.orgNodeGroup.hasChildren > .orgNode::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-22px;
+    width:1px;
+    height:22px;
+    background:#94a3b8;
+    transform:translateX(-50%);
+}
+
+.orgChildren > .orgNodeGroup::before{
+    content:"";
+    position:absolute;
+    top:-21px;
+    left:50%;
+    width:1px;
+    height:21px;
+    background:#94a3b8;
+    transform:translateX(-50%);
+}
+
+.orgConnectorLine{
+    position:absolute;
+    top:-21px;
+    height:1px;
+    background:#94a3b8;
+    pointer-events:none;
+    z-index:1;
+}
+
+.personPanel{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:14px;
+    overflow:auto;
+}
+
+.personTable{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+}
+
+.personTable th{
+    background:#f3f4f6;
+    color:#374151;
+    text-align:left;
+    padding:10px;
+    border-bottom:1px solid #d1d5db;
+    white-space:nowrap;
+}
+
+.personTable td{
+    padding:10px;
+    border-bottom:1px solid #e5e7eb;
+    color:#374151;
+    white-space:nowrap;
+}
+
+.personTable tr:hover{ background:#f9fafb; }
+
+.noPerson{
+    color:#6b7280;
+    line-height:1.8;
+}
+
+@media(max-width:1300px){
+    .chartHeader{
+        align-items:flex-start;
+        flex-direction:column;
+        flex-wrap:wrap;
+    }
+
+    .chartLeftActions,
+    .chartActions{
+        flex-wrap:wrap;
+    }
+
+    .topGrid{
+        flex-direction:column;
+    }
+
+    .topGrid > .uploadBox,
+    .topGrid > .resultArea{
+        flex:0 0 100%;
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>組織圖測試版</h1>
+
+<div class="desc">
+上傳 Excel 後，系統會依「部門資訊」建立組織圖，並依「人員資訊」顯示部門人員。
+</div>
+
+<div class="topPanelHeader">
+    <button id="toggleTopPanelBtn" class="toggleTopBtn" onclick="toggleTopPanel()">
+        收合上方設定 ▲
+    </button>
+</div>
+
+<div id="topPanel" class="topPanel">
+    <div class="topGrid">
+        <div class="uploadBox">
+            <div class="uploadActions">
+                <div class="uploadMain">
+                    <input type="file" id="excelFile" accept=".xlsx,.xls">
+                    <div id="memoryInfo" class="memoryInfo"></div>
+                    <div class="uploadButtons">
+                        <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
+                        <button class="clearMemoryBtn" onclick="clearSavedDataWithPassword()">清除記憶資料</button>
+                    </div>
+                </div>
+
+                <div class="uploadHelp">
+                    Excel 請使用一個檔案，內含兩個分頁：<br>
+                    1. 部門資訊<br>
+                    2. 人員資訊
+                </div>
+            </div>
+        </div>
+
+        <div id="uploadResult" class="resultArea">
+            <b>上傳結果</b><br>
+            尚未上傳 Excel
+        </div>
+    </div>
+
+    <div class="filterBar">
+        <div id="levelFilters" class="dropdownFilter"></div>
+        <div id="fieldFilters" class="dropdownFilter"></div>
+        <div id="legalFilters" class="dropdownFilter"></div>
+    </div>
+</div>
+
+<div class="chartBox">
+    <div class="chartHeader">
+        <div class="chartLeftActions">
+            <select id="sortMode" class="sortSelect" onchange="applySortAndRender()">
+                <option value="default">原始順序</option>
+                <option value="name">依名稱排序</option>
+                <option value="code">依部門代碼排序</option>
+            </select>
+
+            <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
+
+            <label class="focusOption">
+                <input type="checkbox" id="focusCheckbox">
+                搜尋結果及轄下
+            </label>
+
+            <button onclick="searchAndJump()">搜尋</button>
+            <button onclick="expandAll()">全部展開</button>
+            <button onclick="collapseAll()">全部收合</button>
+        </div>
+
+        <div class="chartActions">
+            <div class="viewModeControl">
+                <b>呈現方式：</b>
+                <button id="treeModeBtn" class="modeBtn" onclick="setViewMode('tree')">樹狀清單</button>
+                <button id="orgModeBtn" class="modeBtn inactive" onclick="setViewMode('org')">組織圖</button>
+            </div>
+
+            <div class="zoomControl">
+                <b>縮放：</b>
+                <input type="range" id="zoomRange" min="50" max="150" value="100">
+                <span id="zoomValue">100%</span>
+            </div>
+
+            <button class="exportBtn" onclick="exportPDF()">匯出 PDF</button>
+        </div>
+    </div>
+
+    <div id="summary" class="summary"></div>
+
+    <div id="zoomWrap" class="zoomWrap">
+        <ul id="tree" class="tree"></ul>
+        <div id="orgChart" class="orgChart hidden"></div>
+    </div>
+</div>
+
+<div class="chartBox" style="margin-top:20px;">
+    <div class="chartHeader">
+        <div class="chartLeftActions">
+            <b>人員資訊</b>
+        </div>
+    </div>
+
+    <div id="personSummary" class="summary">
+        請點選部門人數查看人員資訊
+    </div>
+
+    <div id="personPanel" class="personPanel">
+        尚未選擇部門
+    </div>
+</div>
+
 <script>
 const requiredColumns = [
     "公司代碼","層級","上級部門","部門代碼","費用代碼",
@@ -32,41 +722,43 @@ let totalPeopleCountCache = new Map();
 
 let visibleFields = new Set(["level","deptCode","costCode","manager"]);
 
-loadSavedData();
+document.addEventListener("DOMContentLoaded", function(){
+    loadSavedData();
 
-document.getElementById("excelFile").addEventListener("change", handleFile);
+    document.getElementById("excelFile").addEventListener("change", handleFile);
 
-document.getElementById("searchInput").addEventListener("input", function(){
-    searchTree(false);
-});
+    document.getElementById("searchInput").addEventListener("input", function(){
+        searchTree(false);
+    });
 
-document.getElementById("searchInput").addEventListener("keydown", function(e){
-    if(e.key === "Enter"){
-        searchAndJump();
-    }
-});
+    document.getElementById("searchInput").addEventListener("keydown", function(e){
+        if(e.key === "Enter"){
+            searchAndJump();
+        }
+    });
 
-document.getElementById("focusCheckbox").addEventListener("change", function(){
-    if(!this.checked){
-        focusNodes = [];
-        renderChart();
-    }
-});
+    document.getElementById("focusCheckbox").addEventListener("change", function(){
+        if(!this.checked){
+            focusNodes = [];
+            renderChart();
+        }
+    });
 
-document.getElementById("zoomRange").addEventListener("input", function(){
-    const value = this.value;
-    document.getElementById("zoomValue").innerText = value + "%";
-    document.getElementById("zoomWrap").style.transform = `scale(${value / 100})`;
+    document.getElementById("zoomRange").addEventListener("input", function(){
+        const value = this.value;
+        document.getElementById("zoomValue").innerText = value + "%";
+        document.getElementById("zoomWrap").style.transform = `scale(${value / 100})`;
 
-    if(currentViewMode === "org"){
-        requestAnimationFrame(updateOrgConnectorLines);
-    }
-});
+        if(currentViewMode === "org"){
+            requestAnimationFrame(updateOrgConnectorLines);
+        }
+    });
 
-document.addEventListener("click", function(e){
-    if(!e.target.closest(".dropdownFilter")){
-        closeAllDropdowns();
-    }
+    document.addEventListener("click", function(e){
+        if(!e.target.closest(".dropdownFilter")){
+            closeAllDropdowns();
+        }
+    });
 });
 
 function getNowText(){
@@ -1484,3 +2176,6 @@ function downloadTemplate(){
     XLSX.writeFile(workbook, "組織圖上傳模板.xlsx");
 }
 </script>
+
+</body>
+</html>
