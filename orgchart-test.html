@@ -1486,6 +1486,12 @@ function renderOrgChart(){
 }
 
 function shouldShowNode(node){
+    // 虛擬節點，例如：集團中央、次集團，一律顯示
+    // 避免搜尋 *集團 時，因為層級篩選沒有「虛擬法人」而被隱藏
+    if(node.isVirtualRoot){
+        return true;
+    }
+
     if(selectedLevels.size === 0){
         return false;
     }
@@ -2001,6 +2007,7 @@ function searchTree(jumpToFirst = false){
     const rawKeyword = document.getElementById("searchInput").value.trim();
     const keyword = getSpecialDisplayKeyword(rawKeyword);
     const specialType = getSpecialSearchType(rawKeyword);
+    const focusChecked = document.getElementById("focusCheckbox").checked;
 
     setTimeout(() => {
         const nodes = document.querySelectorAll(".node, .orgNode");
@@ -2010,10 +2017,13 @@ function searchTree(jumpToFirst = false){
             node.classList.remove("match");
 
             if(keyword && isFuzzyMatch(node.dataset.search, keyword)){
-                node.classList.add("match");
-
                 if(!firstMatch){
                     firstMatch = node;
+                }
+
+                // 勾選「搜尋結果及轄下」時，只縮小範圍，不再標紅
+                if(!focusChecked){
+                    node.classList.add("match");
                 }
             }
         });
