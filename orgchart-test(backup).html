@@ -149,7 +149,8 @@ h1{ margin-bottom:10px; }
 
 .clearMemoryBtn{ background:#991b1b; }
 
-.sortSelect{
+.sortSelect,
+.depthSelect{
     height:36px;
     padding:0 10px;
     border:1px solid #cbd5e1;
@@ -268,7 +269,7 @@ h1{ margin-bottom:10px; }
     display:flex;
     align-items:center;
     gap:10px;
-    flex-wrap:nowrap;
+    flex-wrap:wrap;
     flex:1;
     min-width:0;
 }
@@ -451,6 +452,7 @@ h1{ margin-bottom:10px; }
     align-items:center;
     position:relative;
     flex-shrink:0;
+    margin-bottom:24px;
 }
 
 .orgNode{
@@ -480,10 +482,12 @@ h1{ margin-bottom:10px; }
     display:flex;
     justify-content:center;
     align-items:flex-start;
-    gap:32px;
+    gap:36px 32px;
     margin-top:42px;
     position:relative;
     padding-top:0;
+    flex-wrap:wrap;
+    max-width:1180px;
 }
 
 .orgNodeGroup.hasChildren > .orgNode::after{
@@ -668,6 +672,15 @@ h1{ margin-bottom:10px; }
                 <option value="code">依部門代碼排序</option>
             </select>
 
+            <select id="maxDisplayDepth" class="depthSelect" onchange="setMaxDisplayDepth(this.value)">
+                <option value="all">顯示層數：全部</option>
+                <option value="1">顯示層數：1層</option>
+                <option value="2">顯示層數：2層</option>
+                <option value="3" selected>顯示層數：3層</option>
+                <option value="4">顯示層數：4層</option>
+                <option value="5">顯示層數：5層</option>
+            </select>
+
             <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
 
             <label class="focusOption">
@@ -743,6 +756,7 @@ let selectedLevels = new Set();
 let selectedLegals = new Set();
 let currentViewMode = "tree";
 let focusNodes = [];
+let maxDisplayDepth = "3";
 
 let personRows = [];
 let personMapByDept = {};
@@ -1438,6 +1452,20 @@ function renderLegalFilters(){
     );
 }
 
+function setMaxDisplayDepth(value){
+    maxDisplayDepth = value || "all";
+    renderChart();
+}
+
+function getMaxDisplayDepth(){
+    if(maxDisplayDepth === "all"){
+        return Infinity;
+    }
+
+    const num = Number(maxDisplayDepth);
+    return isNaN(num) ? Infinity : num;
+}
+
 function setViewMode(mode){
     currentViewMode = mode;
 
@@ -1470,7 +1498,7 @@ function renderTree(){
 
     displayRoots.forEach(node => {
         if(shouldShowNode(node)){
-            tree.appendChild(createTreeNodeElement(node));
+            tree.appendChild(createTreeNodeElement(node, 1));
         }
     });
 }
@@ -1488,7 +1516,7 @@ function renderOrgChart(){
 
     displayRoots.forEach(node => {
         if(shouldShowNode(node)){
-            orgChart.appendChild(createOrgNodeElement(node));
+            orgChart.appendChild(createOrgNodeElement(node, 1));
         }
     });
 
@@ -1715,9 +1743,12 @@ function getNodeTitle(node){
     return node.row["部門全名"] || "-";
 }
 
-function createTreeNodeElement(node){
+function createTreeNodeElement(node, currentDepth = 1){
     const li = document.createElement("li");
-    const hasChildren = node.children.length > 0;
+    const maxDepth = getMaxDisplayDepth();
+    const visibleChildren = node.children.filter(child => shouldShowNode(child));
+    const canShowChildren = currentDepth < maxDepth;
+    const hasChildren = canShowChildren && visibleChildren.length > 0;
 
     const nodeDiv = document.createElement("div");
     nodeDiv.className = "node";
@@ -1766,10 +1797,8 @@ function createTreeNodeElement(node){
             ul.className = "hidden";
         }
 
-        node.children.forEach(child => {
-            if(shouldShowNode(child)){
-                ul.appendChild(createTreeNodeElement(child));
-            }
+        visibleChildren.forEach(child => {
+            ul.appendChild(createTreeNodeElement(child, currentDepth + 1));
         });
 
         li.appendChild(ul);
@@ -1778,9 +1807,11 @@ function createTreeNodeElement(node){
     return li;
 }
 
-function createOrgNodeElement(node){
+function createOrgNodeElement(node, currentDepth = 1){
+    const maxDepth = getMaxDisplayDepth();
     const visibleChildren = node.children.filter(child => shouldShowNode(child));
-    const hasChildren = visibleChildren.length > 0;
+    const canShowChildren = currentDepth < maxDepth;
+    const hasChildren = canShowChildren && visibleChildren.length > 0;
 
     const group = document.createElement("div");
     group.className = "orgNodeGroup";
@@ -1826,7 +1857,7 @@ function createOrgNodeElement(node){
         }
 
         visibleChildren.forEach(child => {
-            childrenBox.appendChild(createOrgNodeElement(child));
+            childrenBox.appendChild(createOrgNodeElement(child, currentDepth + 1));
         });
 
         group.appendChild(childrenBox);
@@ -1842,6 +1873,11 @@ function updateOrgConnectorLines(){
         const groups = [...box.children].filter(el => el.classList.contains("orgNodeGroup"));
 
         if(groups.length < 2) return;
+
+        const firstRowTop = groups[0].offsetTop;
+        const sameRow = groups.every(group => Math.abs(group.offsetTop - firstRowTop) < 5);
+
+        if(!sameRow) return;
 
         const first = groups[0];
         const last = groups[groups.length - 1];
