@@ -182,7 +182,18 @@ h1{ margin-bottom:10px; }
     gap:12px;
     align-items:center;
     margin-bottom:20px;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
+}
+
+.filterBar .sortSelect{
+    flex:0 0 220px;
+    width:220px;
+}
+
+.filterBar .dropdownFilter{
+    flex:0 0 280px;
+    width:280px;
+    min-width:280px;
 }
 
 .dropdownFilter{
@@ -658,6 +669,13 @@ h1{ margin-bottom:10px; }
     </div>
 
 
+<div class="filterBar">
+    <select id="sortMode" class="sortSelect" onchange="applySortAndRender()">
+        <option value="default">原始順序</option>
+        <option value="name">依名稱排序</option>
+        <option value="code">依部門代碼排序</option>
+    </select>
+
     <div id="levelFilters" class="dropdownFilter"></div>
     <div id="fieldFilters" class="dropdownFilter"></div>
     <div id="legalFilters" class="dropdownFilter"></div>
@@ -666,12 +684,6 @@ h1{ margin-bottom:10px; }
 <div class="chartBox">
     <div class="chartHeader">
         <div class="chartLeftActions">
-            <select id="sortMode" class="sortSelect" onchange="applySortAndRender()">
-                <option value="default">原始順序</option>
-                <option value="name">依名稱排序</option>
-                <option value="code">依部門代碼排序</option>
-            </select>
-
 
             <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
 
