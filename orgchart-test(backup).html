@@ -150,7 +150,8 @@ h1{ margin-bottom:10px; }
 .clearMemoryBtn{ background:#991b1b; }
 
 .sortSelect,
-.depthSelect{
+.depthSelect,
+.pdfModeSelect{
     height:36px;
     padding:0 10px;
     border:1px solid #cbd5e1;
@@ -310,7 +311,7 @@ h1{ margin-bottom:10px; }
     display:flex;
     align-items:center;
     gap:10px;
-    flex-wrap:nowrap;
+    flex-wrap:wrap;
     flex-shrink:0;
 }
 
@@ -688,6 +689,11 @@ h1{ margin-bottom:10px; }
                 搜尋結果及轄下
             </label>
 
+            <label class="focusOption">
+                <input type="checkbox" id="hideZeroTotalCheckbox" onchange="toggleHideZeroTotal(this.checked)">
+                隱藏含轄下合計：0 人
+            </label>
+
             <button onclick="searchAndJump()">搜尋</button>
             <button onclick="expandAll()">全部展開</button>
             <button onclick="collapseAll()">全部收合</button>
@@ -705,6 +711,12 @@ h1{ margin-bottom:10px; }
                 <input type="range" id="zoomRange" min="50" max="150" value="100">
                 <span id="zoomValue">100%</span>
             </div>
+
+            <select id="pdfExportMode" class="pdfModeSelect">
+                <option value="current">匯出模式：目前畫面</option>
+                <option value="fitOnePage">匯出模式：自動縮放一頁</option>
+                <option value="splitByFirstLevel">匯出模式：依第一層子部門分頁</option>
+            </select>
 
             <button class="exportBtn" onclick="exportPDF()">匯出 PDF</button>
         </div>
@@ -757,6 +769,7 @@ let selectedLegals = new Set();
 let currentViewMode = "tree";
 let focusNodes = [];
 let maxDisplayDepth = "3";
+let hideZeroTotal = false;
 
 let personRows = [];
 let personMapByDept = {};
@@ -1000,9 +1013,13 @@ function clearPageData(){
     totalPeopleCountCache = new Map();
     currentSelectedDeptCode = "";
     currentSelectedPersonType = "own";
+    hideZeroTotal = false;
 
     const focusCheckbox = document.getElementById("focusCheckbox");
     if(focusCheckbox) focusCheckbox.checked = false;
+
+    const hideZeroTotalCheckbox = document.getElementById("hideZeroTotalCheckbox");
+    if(hideZeroTotalCheckbox) hideZeroTotalCheckbox.checked = false;
 
     document.getElementById("levelFilters").innerHTML = "";
     document.getElementById("fieldFilters").innerHTML = "";
@@ -1466,6 +1483,15 @@ function getMaxDisplayDepth(){
     return isNaN(num) ? Infinity : num;
 }
 
+function toggleHideZeroTotal(checked){
+    hideZeroTotal = checked;
+    renderChart();
+
+    if(currentSelectedDeptCode){
+        showDepartmentPersons(currentSelectedDeptCode, currentSelectedPersonType);
+    }
+}
+
 function setViewMode(mode){
     currentViewMode = mode;
 
@@ -1524,6 +1550,10 @@ function renderOrgChart(){
 }
 
 function shouldShowNode(node){
+    if(hideZeroTotal && getTotalPeopleByLegal(node) <= 0){
+        return false;
+    }
+
     if(node.isVirtualRoot){
         return true;
     }
@@ -2215,25 +2245,19 @@ function getPdfUpdatedText(){
     return "更新日期：" + updatedAt;
 }
 
-async function exportPDF(){
+async function preparePdfCanvas(titleText){
     const target = document.getElementById("zoomWrap");
-
-    if(!target || allNodes.length === 0){
-        alert("請先上傳 Excel 並產生組織圖");
-        return;
-    }
 
     if(currentViewMode === "org"){
         updateOrgConnectorLines();
     }
 
-    const pdfTitle = getPdfChartTitle();
     const updatedText = getPdfUpdatedText();
-
     const originalTransform = target.style.transform;
+
     target.style.transform = "scale(1)";
 
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise(resolve => setTimeout(resolve, 250));
 
     const exportWrapper = document.createElement("div");
     exportWrapper.className = "pdfExportWrapper";
@@ -2247,7 +2271,7 @@ async function exportPDF(){
 
     const titleDiv = document.createElement("div");
     titleDiv.className = "pdfExportTitle";
-    titleDiv.innerText = pdfTitle;
+    titleDiv.innerText = titleText || getPdfChartTitle();
 
     const dateDiv = document.createElement("div");
     dateDiv.className = "pdfExportDate";
@@ -2275,8 +2299,11 @@ async function exportPDF(){
     document.body.removeChild(exportWrapper);
     target.style.transform = originalTransform;
 
+    return canvas;
+}
+
+function addCanvasMultiPage(pdf, canvas){
     const imgData = canvas.toDataURL("image/png");
-    const pdf = new jspdf.jsPDF("l", "mm", "a4");
 
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
@@ -2299,9 +2326,139 @@ async function exportPDF(){
         pdf.addImage(imgData, "PNG", marginX, position, imgWidth, imgHeight);
         heightLeft -= pageHeight - marginY * 2;
     }
+}
+
+function addCanvasFitOnePage(pdf, canvas, addNewPage){
+    if(addNewPage){
+        pdf.addPage();
+    }
+
+    const imgData = canvas.toDataURL("image/png");
+
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const marginX = 8;
+    const marginY = 8;
+
+    const availableWidth = pageWidth - marginX * 2;
+    const availableHeight = pageHeight - marginY * 2;
+
+    const canvasRatio = canvas.width / canvas.height;
+    const pageRatio = availableWidth / availableHeight;
+
+    let imgWidth;
+    let imgHeight;
+
+    if(pageRatio > canvasRatio){
+        imgHeight = availableHeight;
+        imgWidth = imgHeight * canvasRatio;
+    }else{
+        imgWidth = availableWidth;
+        imgHeight = imgWidth / canvasRatio;
+    }
+
+    const x = (pageWidth - imgWidth) / 2;
+    const y = (pageHeight - imgHeight) / 2;
+
+    pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
+}
+
+async function exportCurrentPdf(pdfTitle){
+    const canvas = await preparePdfCanvas(pdfTitle);
+    const pdf = new jspdf.jsPDF("l", "mm", "a4");
+    addCanvasMultiPage(pdf, canvas);
 
     const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
     pdf.save(safeFileName + ".pdf");
+}
+
+async function exportFitOnePagePdf(pdfTitle){
+    const canvas = await preparePdfCanvas(pdfTitle);
+    const pdf = new jspdf.jsPDF("l", "mm", "a4");
+    addCanvasFitOnePage(pdf, canvas, false);
+
+    const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
+    pdf.save(safeFileName + ".pdf");
+}
+
+function getSplitBaseNode(){
+    const displayRoots = focusNodes.length > 0 ? focusNodes : rootNodes;
+    if(!displayRoots || displayRoots.length === 0){
+        return null;
+    }
+    return displayRoots[0];
+}
+
+async function exportSplitByFirstLevelPdf(pdfTitle){
+    const baseNode = getSplitBaseNode();
+
+    if(!baseNode){
+        alert("目前沒有可分頁匯出的組織圖");
+        return;
+    }
+
+    const originalFocusNodes = focusNodes.slice();
+    const originalViewMode = currentViewMode;
+
+    const pdf = new jspdf.jsPDF("l", "mm", "a4");
+    let hasPage = false;
+
+    focusNodes = [baseNode];
+    renderChart();
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    const overviewCanvas = await preparePdfCanvas(pdfTitle);
+    addCanvasFitOnePage(pdf, overviewCanvas, false);
+    hasPage = true;
+
+    const children = baseNode.children.filter(child => shouldShowNode(child));
+
+    for(const child of children){
+        focusNodes = [child];
+        renderChart();
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        const childTitle = `${String(child.row["部門全名"] || child.deptCode || "子部門")}組織圖`;
+        const childCanvas = await preparePdfCanvas(childTitle);
+
+        addCanvasFitOnePage(pdf, childCanvas, hasPage);
+        hasPage = true;
+    }
+
+    focusNodes = originalFocusNodes;
+    currentViewMode = originalViewMode;
+    renderChart();
+
+    const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
+    pdf.save(safeFileName + "_分頁.pdf");
+}
+
+async function exportPDF(){
+    const target = document.getElementById("zoomWrap");
+
+    if(!target || allNodes.length === 0){
+        alert("請先上傳 Excel 並產生組織圖");
+        return;
+    }
+
+    const mode = document.getElementById("pdfExportMode")?.value || "current";
+    const pdfTitle = getPdfChartTitle();
+
+    if(mode === "current"){
+        await exportCurrentPdf(pdfTitle);
+        return;
+    }
+
+    if(mode === "fitOnePage"){
+        await exportFitOnePagePdf(pdfTitle);
+        return;
+    }
+
+    if(mode === "splitByFirstLevel"){
+        await exportSplitByFirstLevelPdf(pdfTitle);
+        return;
+    }
 }
 
 function downloadTemplate(){
