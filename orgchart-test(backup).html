@@ -407,10 +407,10 @@ h1{ margin-bottom:10px; }
 }
 
 .nodeInfo{
-    font-size:13px;
+    font-size:12px;
     color:#374151;
-    line-height:1.6;
-    padding-left:30px;
+    line-height:1.55;
+    padding-left:24px;
 }
 
 .totalPeople{
@@ -454,11 +454,11 @@ h1{ margin-bottom:10px; }
 }
 
 .orgNode{
-    width:300px;
+    width:260px;
     background:#fff;
     border:1px solid #cbd5e1;
     border-radius:12px;
-    padding:12px 14px;
+    padding:10px 12px;
     box-shadow:0 2px 8px rgba(0,0,0,0.08);
     text-align:left;
     position:relative;
@@ -472,14 +472,15 @@ h1{ margin-bottom:10px; }
 .orgNode .deptName{
     display:block;
     text-align:center;
-    margin-bottom:8px;
+    margin-bottom:6px;
+    font-size:15px;
 }
 
 .orgChildren{
     display:flex;
     justify-content:center;
     align-items:flex-start;
-    gap:44px;
+    gap:32px;
     margin-top:42px;
     position:relative;
     padding-top:0;
@@ -551,6 +552,28 @@ h1{ margin-bottom:10px; }
 .noPerson{
     color:#6b7280;
     line-height:1.8;
+}
+
+.pdfExportWrapper{
+    background:#ffffff;
+    padding:20px 20px 30px;
+    box-sizing:border-box;
+    width:max-content;
+}
+
+.pdfExportTitle{
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    color:#111827;
+    margin-bottom:6px;
+}
+
+.pdfExportDate{
+    text-align:center;
+    font-size:13px;
+    color:#374151;
+    margin-bottom:18px;
 }
 
 @media(max-width:1300px){
@@ -1864,12 +1887,16 @@ function isFuzzyMatch(searchText, keyword){
 function getSpecialSearchType(keyword){
     const k = normalizeText(keyword);
 
+    if(k === "*集團"){
+        return "allGroup";
+    }
+
     if(k === "*次集團"){
         return "subGroup";
     }
 
     if(k === "*集團中央"){
-        return "group";
+        return "groupCenter";
     }
 
     return "";
@@ -1878,8 +1905,9 @@ function getSpecialSearchType(keyword){
 function getSpecialDisplayKeyword(keyword){
     const type = getSpecialSearchType(keyword);
 
+    if(type === "allGroup") return "集團";
     if(type === "subGroup") return "次集團";
-    if(type === "group") return "集團中央";
+    if(type === "groupCenter") return "集團中央";
 
     return keyword;
 }
@@ -1929,20 +1957,29 @@ function findSpecialMatchedNodes(type){
         allNodes.filter(node => !node.isLegalEntity && isSubGroupNode(node))
     );
 
-    if(type === "subGroup"){
-        return [createVirtualNode("次集團", subGroupRoots)];
-    }
-
-    if(type === "group"){
-        const matched = allNodes.filter(node => {
+    const groupCenterRoots = filterTopMatchedNodes(
+        allNodes.filter(node => {
             return (
                 !node.isLegalEntity &&
                 !isSubGroupNode(node) &&
                 !isUnderAnyNode(node, subGroupRoots)
             );
-        });
+        })
+    );
 
-        return [createVirtualNode("集團中央", filterTopMatchedNodes(matched))];
+    if(type === "allGroup"){
+        return [
+            createVirtualNode("集團中央", groupCenterRoots),
+            createVirtualNode("次集團", subGroupRoots)
+        ];
+    }
+
+    if(type === "subGroup"){
+        return [createVirtualNode("次集團", subGroupRoots)];
+    }
+
+    if(type === "groupCenter"){
+        return [createVirtualNode("集團中央", groupCenterRoots)];
     }
 
     return [];
@@ -2063,6 +2100,43 @@ function searchAndJump(){
     }
 }
 
+function getPdfChartTitle(){
+    const displayRoots = focusNodes.length > 0 ? focusNodes : rootNodes;
+
+    if(!displayRoots || displayRoots.length === 0){
+        return "組織圖";
+    }
+
+    if(displayRoots.length === 2){
+        const names = displayRoots.map(node => String(node.row["部門全名"] || node.deptCode || ""));
+        if(names.includes("集團中央") && names.includes("次集團")){
+            return "集團組織圖";
+        }
+    }
+
+    let firstRoot = displayRoots[0];
+    let title = "";
+
+    if(firstRoot.isVirtualRoot){
+        title = firstRoot.row["部門全名"] || firstRoot.deptCode || "組織圖";
+    }else if(firstRoot.isLegalEntity && firstRoot.children && firstRoot.children.length === 1){
+        title = firstRoot.children[0].row["部門全名"] || firstRoot.children[0].deptCode || "組織圖";
+    }else if(firstRoot.isLegalEntity){
+        title = firstRoot.row["部門全名"] || firstRoot.deptCode || "組織圖";
+    }else{
+        title = firstRoot.row["部門全名"] || firstRoot.deptCode || "組織圖";
+    }
+
+    title = String(title).replace(/^法人：/, "").trim();
+
+    return title + "組織圖";
+}
+
+function getPdfUpdatedText(){
+    const updatedAt = localStorage.getItem(STORAGE_KEY_UPDATED_AT) || getNowText();
+    return "更新日期：" + updatedAt;
+}
+
 async function exportPDF(){
     const target = document.getElementById("zoomWrap");
 
@@ -2071,15 +2145,51 @@ async function exportPDF(){
         return;
     }
 
+    if(currentViewMode === "org"){
+        updateOrgConnectorLines();
+    }
+
+    const pdfTitle = getPdfChartTitle();
+    const updatedText = getPdfUpdatedText();
+
     const originalTransform = target.style.transform;
     target.style.transform = "scale(1)";
 
-    const canvas = await html2canvas(target, {
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    const exportWrapper = document.createElement("div");
+    exportWrapper.className = "pdfExportWrapper";
+    exportWrapper.style.position = "absolute";
+    exportWrapper.style.left = "-99999px";
+    exportWrapper.style.top = "0";
+    exportWrapper.style.zIndex = "-1";
+
+    const titleDiv = document.createElement("div");
+    titleDiv.className = "pdfExportTitle";
+    titleDiv.innerText = pdfTitle;
+
+    const dateDiv = document.createElement("div");
+    dateDiv.className = "pdfExportDate";
+    dateDiv.innerText = updatedText;
+
+    const clonedChart = target.cloneNode(true);
+    clonedChart.style.transform = "scale(1)";
+    clonedChart.style.transformOrigin = "top left";
+
+    exportWrapper.appendChild(titleDiv);
+    exportWrapper.appendChild(dateDiv);
+    exportWrapper.appendChild(clonedChart);
+    document.body.appendChild(exportWrapper);
+
+    const canvas = await html2canvas(exportWrapper, {
         scale: 2,
         backgroundColor: "#ffffff",
-        useCORS: true
+        useCORS: true,
+        scrollX: 0,
+        scrollY: 0
     });
 
+    document.body.removeChild(exportWrapper);
     target.style.transform = originalTransform;
 
     const imgData = canvas.toDataURL("image/png");
@@ -2088,23 +2198,27 @@ async function exportPDF(){
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
 
-    const imgWidth = pageWidth - 20;
+    const marginX = 8;
+    const marginY = 8;
+
+    const imgWidth = pageWidth - marginX * 2;
     const imgHeight = canvas.height * imgWidth / canvas.width;
 
     let heightLeft = imgHeight;
-    let position = 10;
+    let position = marginY;
 
-    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
+    pdf.addImage(imgData, "PNG", marginX, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight - marginY * 2;
 
     while(heightLeft > 0){
         pdf.addPage();
-        position = heightLeft - imgHeight + 10;
-        pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+        position = marginY - (imgHeight - heightLeft);
+        pdf.addImage(imgData, "PNG", marginX, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight - marginY * 2;
     }
 
-    pdf.save("組織圖_匯出.pdf");
+    const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
+    pdf.save(safeFileName + ".pdf");
 }
 
 function downloadTemplate(){
