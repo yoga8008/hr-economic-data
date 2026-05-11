@@ -160,43 +160,77 @@ h1{
     font-weight:bold;
 }
 
-.filterGrid{
+.filterBar{
     display:flex;
-    gap:20px;
-    align-items:stretch;
+    gap:12px;
+    align-items:center;
     margin-bottom:20px;
+    flex-wrap:wrap;
 }
 
-.filterGrid > .levelFilters,
-.filterGrid > .fieldFilters{
-    flex:0 0 calc(50% - 10px);
-    width:calc(50% - 10px);
-    margin:0;
+.dropdownFilter{
+    position:relative;
+    min-width:220px;
+}
+
+.dropdownBtn{
+    width:100%;
+    height:38px;
+    padding:0 12px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    background:#fff;
+    color:#374151;
+    font-size:13px;
+    text-align:left;
+    cursor:pointer;
     box-sizing:border-box;
 }
 
-.levelFilters,
-.fieldFilters{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:14px 18px;
-    align-items:center;
+.dropdownBtn::after{
+    content:"▼";
+    float:right;
+    font-size:10px;
+    color:#6b7280;
+    margin-top:2px;
 }
 
-.levelFilters label,
-.fieldFilters label{
-    font-size:14px;
+.dropdownMenu{
+    display:none;
+    position:absolute;
+    top:44px;
+    left:0;
+    width:100%;
+    max-height:260px;
+    overflow:auto;
+    background:#fff;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+    z-index:50;
+    padding:8px;
+    box-sizing:border-box;
+}
+
+.dropdownFilter.open .dropdownMenu{
+    display:block;
+}
+
+.dropdownMenu label{
+    display:block;
+    padding:7px 8px;
+    font-size:13px;
     color:#374151;
     cursor:pointer;
+    border-radius:6px;
 }
 
-.levelFilters input,
-.fieldFilters input{
-    margin-right:5px;
+.dropdownMenu label:hover{
+    background:#f3f4f6;
+}
+
+.dropdownMenu input{
+    margin-right:6px;
 }
 
 .chartBox{
@@ -379,6 +413,13 @@ h1{
     color:#1e3a8a;
 }
 
+.peopleLink{
+    color:#1e3a8a;
+    font-weight:bold;
+    text-decoration:underline;
+    cursor:pointer;
+}
+
 .hidden{
     display:none !important;
 }
@@ -392,7 +433,6 @@ h1{
     opacity:.45;
 }
 
-/* 組織圖模式 */
 .orgChart{
     display:flex;
     justify-content:center;
@@ -474,7 +514,6 @@ h1{
     z-index:1;
 }
 
-/* 人員資訊 */
 .personPanel{
     background:#fff;
     border:1px solid #e5e7eb;
@@ -526,15 +565,12 @@ h1{
         flex-wrap:wrap;
     }
 
-    .topGrid,
-    .filterGrid{
+    .topGrid{
         flex-direction:column;
     }
 
     .topGrid > .uploadBox,
-    .topGrid > .resultArea,
-    .filterGrid > .levelFilters,
-    .filterGrid > .fieldFilters{
+    .topGrid > .resultArea{
         flex:0 0 100%;
         width:100%;
     }
@@ -565,7 +601,7 @@ h1{
                 <button class="clearMemoryBtn" onclick="clearSavedDataWithPassword()">清除記憶資料</button>
             </div>
             <div style="margin-top:12px;color:#6b7280;font-size:13px;line-height:1.7;">
-                Excel 請使用兩個工作表：<br>
+                Excel 請使用一個檔案，內含兩個分頁：<br>
                 1. 部門資訊<br>
                 2. 人員資訊
             </div>
@@ -577,13 +613,10 @@ h1{
         </div>
     </div>
 
-    <div class="filterGrid">
-        <div id="levelFilters" class="levelFilters"></div>
-        <div id="fieldFilters" class="fieldFilters"></div>
-    </div>
-
-    <div class="filterGrid">
-        <div id="legalFilters" class="levelFilters" style="flex:0 0 100%;width:100%;"></div>
+    <div class="filterBar">
+        <div id="levelFilters" class="dropdownFilter"></div>
+        <div id="fieldFilters" class="dropdownFilter"></div>
+        <div id="legalFilters" class="dropdownFilter"></div>
     </div>
 </div>
 
@@ -641,7 +674,7 @@ h1{
     </div>
 
     <div id="personSummary" class="summary">
-        請點選部門查看人員資訊
+        請點選部門人數查看人員資訊
     </div>
 
     <div id="personPanel" class="personPanel">
@@ -688,6 +721,7 @@ let focusNodes = [];
 let personRows = [];
 let personMapByDept = {};
 let currentSelectedDeptCode = "";
+let currentSelectedPersonType = "own";
 
 let visibleFields = new Set([
     "level",
@@ -724,6 +758,12 @@ document.getElementById("zoomRange").addEventListener("input", function(){
 
     if(currentViewMode === "org"){
         requestAnimationFrame(updateOrgConnectorLines);
+    }
+});
+
+document.addEventListener("click", function(e){
+    if(!e.target.closest(".dropdownFilter")){
+        closeAllDropdowns();
     }
 });
 
@@ -922,6 +962,7 @@ function clearPageData(){
     personRows = [];
     personMapByDept = {};
     currentSelectedDeptCode = "";
+    currentSelectedPersonType = "own";
 
     const focusCheckbox = document.getElementById("focusCheckbox");
     if(focusCheckbox){
@@ -935,7 +976,7 @@ function clearPageData(){
     document.getElementById("tree").innerHTML = "";
     document.getElementById("orgChart").innerHTML = "";
 
-    document.getElementById("personSummary").innerText = "請點選部門查看人員資訊";
+    document.getElementById("personSummary").innerText = "請點選部門人數查看人員資訊";
     document.getElementById("personPanel").innerHTML = "尚未選擇部門";
 }
 
@@ -1014,6 +1055,7 @@ function buildTreeData(rows){
     selectedLegals.clear();
     focusNodes = [];
     currentSelectedDeptCode = "";
+    currentSelectedPersonType = "own";
 
     const focusCheckbox = document.getElementById("focusCheckbox");
     if(focusCheckbox){
@@ -1138,7 +1180,7 @@ function buildTreeData(rows){
     document.getElementById("summary").innerText =
         "共讀取 " + allNodes.length + " 個節點，最上層節點 " + rootNodes.length + " 個，人員資訊 " + personRows.length + " 筆。";
 
-    document.getElementById("personSummary").innerText = "請點選部門查看人員資訊";
+    document.getElementById("personSummary").innerText = "請點選部門人數查看人員資訊";
     document.getElementById("personPanel").innerHTML = "尚未選擇部門";
 }
 
@@ -1184,10 +1226,70 @@ function calculateTotalPeople(node){
     return total;
 }
 
-function renderLevelFilters(){
-    const box = document.getElementById("levelFilters");
+function closeAllDropdowns(exceptBox){
+    document.querySelectorAll(".dropdownFilter").forEach(box => {
+        if(box !== exceptBox){
+            box.classList.remove("open");
+        }
+    });
+}
+
+function createDropdownCheckbox(boxId, title, items, selectedSet, onChange, defaultText){
+    const box = document.getElementById(boxId);
     box.innerHTML = "";
 
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "dropdownBtn";
+
+    const menu = document.createElement("div");
+    menu.className = "dropdownMenu";
+
+    function updateBtnText(){
+        if(selectedSet.size === 0){
+            btn.innerText = defaultText || title;
+        }else{
+            btn.innerText = `${title}：${selectedSet.size} 項`;
+        }
+    }
+
+    btn.addEventListener("click", function(e){
+        e.stopPropagation();
+        const isOpen = box.classList.contains("open");
+        closeAllDropdowns(box);
+        box.classList.toggle("open", !isOpen);
+    });
+
+    items.forEach(item => {
+        const label = document.createElement("label");
+        label.innerHTML = `
+            <input type="checkbox" value="${item.value}" ${selectedSet.has(item.value) ? "checked" : ""}>
+            ${item.label}
+        `;
+
+        const checkbox = label.querySelector("input");
+
+        checkbox.addEventListener("change", function(){
+            if(this.checked){
+                selectedSet.add(this.value);
+            }else{
+                selectedSet.delete(this.value);
+            }
+
+            updateBtnText();
+            onChange();
+        });
+
+        menu.appendChild(label);
+    });
+
+    box.appendChild(btn);
+    box.appendChild(menu);
+
+    updateBtnText();
+}
+
+function renderLevelFilters(){
     const levels = [...new Set(allNodes.map(node => node.levelText))]
         .sort((a,b) => {
             if(a === "法人") return -1;
@@ -1200,119 +1302,73 @@ function renderLevelFilters(){
             if(isNaN(nb)) return -1;
 
             return na - nb;
-        });
+        })
+        .map(level => ({
+            value: level,
+            label: level === "法人" ? "法人" : "層級 " + level
+        }));
 
-    const title = document.createElement("div");
-    title.innerHTML = "<b>層級篩選：</b>";
-    box.appendChild(title);
-
-    levels.forEach(level => {
-        const label = document.createElement("label");
-
-        label.innerHTML = `
-            <input type="checkbox" value="${level}">
-            ${level === "法人" ? "法人" : "層級 " + level}
-        `;
-
-        const checkbox = label.querySelector("input");
-
-        checkbox.addEventListener("change", function(){
-            if(this.checked){
-                selectedLevels.add(this.value);
-            }else{
-                selectedLevels.delete(this.value);
-            }
-
+    createDropdownCheckbox(
+        "levelFilters",
+        "層級篩選",
+        levels,
+        selectedLevels,
+        function(){
             expandAll();
-            renderChart();
-        });
-
-        box.appendChild(label);
-    });
+        },
+        "層級篩選：全部"
+    );
 }
 
 function renderFieldFilters(){
-    const box = document.getElementById("fieldFilters");
-    box.innerHTML = "";
-
-    const title = document.createElement("div");
-    title.innerHTML = "<b>顯示資訊：</b>";
-    box.appendChild(title);
-
     const fields = [
-        { key:"manager", label:"主管" },
-        { key:"level", label:"部門層級" },
-        { key:"deptCode", label:"部門代碼" },
-        { key:"costCode", label:"費用代碼" }
+        { value:"manager", label:"主管" },
+        { value:"level", label:"部門層級" },
+        { value:"deptCode", label:"部門代碼" },
+        { value:"costCode", label:"費用代碼" }
     ];
 
-    fields.forEach(field => {
-        const label = document.createElement("label");
-
-        label.innerHTML = `
-            <input type="checkbox" value="${field.key}" checked>
-            ${field.label}
-        `;
-
-        const checkbox = label.querySelector("input");
-
-        checkbox.addEventListener("change", function(){
-            if(this.checked){
-                visibleFields.add(this.value);
-            }else{
-                visibleFields.delete(this.value);
-            }
-
+    createDropdownCheckbox(
+        "fieldFilters",
+        "顯示資訊",
+        fields,
+        visibleFields,
+        function(){
             renderChart();
-        });
-
-        box.appendChild(label);
-    });
+        },
+        "顯示資訊"
+    );
 }
 
 function renderLegalFilters(){
-    const box = document.getElementById("legalFilters");
-    box.innerHTML = "";
-
-    const title = document.createElement("div");
-    title.innerHTML = "<b>所屬法人篩選：</b>";
-    box.appendChild(title);
-
     const legals = [...new Set(personRows.map(row => String(row["所屬法人"] || "").trim()).filter(Boolean))]
-        .sort((a,b) => a.localeCompare(b, "zh-Hant"));
+        .sort((a,b) => a.localeCompare(b, "zh-Hant"))
+        .map(legal => ({
+            value: legal,
+            label: legal
+        }));
 
     if(legals.length === 0){
-        const empty = document.createElement("span");
-        empty.className = "noPerson";
-        empty.innerText = "尚無人員資訊資料";
-        box.appendChild(empty);
+        document.getElementById("legalFilters").innerHTML = `
+            <button type="button" class="dropdownBtn">所屬法人：無人員資料</button>
+        `;
         return;
     }
 
-    legals.forEach(legal => {
-        const label = document.createElement("label");
-
-        label.innerHTML = `
-            <input type="checkbox" value="${legal}">
-            ${legal}
-        `;
-
-        const checkbox = label.querySelector("input");
-
-        checkbox.addEventListener("change", function(){
-            if(this.checked){
-                selectedLegals.add(this.value);
-            }else{
-                selectedLegals.delete(this.value);
-            }
+    createDropdownCheckbox(
+        "legalFilters",
+        "所屬法人",
+        legals,
+        selectedLegals,
+        function(){
+            renderChart();
 
             if(currentSelectedDeptCode){
-                showDepartmentPersons(currentSelectedDeptCode);
+                showDepartmentPersons(currentSelectedDeptCode, currentSelectedPersonType);
             }
-        });
-
-        box.appendChild(label);
-    });
+        },
+        "所屬法人：全部"
+    );
 }
 
 function setViewMode(mode){
@@ -1392,6 +1448,41 @@ function isPathOnly(node){
     return !selectedLevels.has(node.levelText);
 }
 
+function getFilteredPersons(){
+    if(selectedLegals.size === 0){
+        return personRows;
+    }
+
+    return personRows.filter(person => {
+        const legal = String(person["所屬法人"] || "").trim();
+        return selectedLegals.has(legal);
+    });
+}
+
+function getOwnPeopleByLegal(node){
+    if(selectedLegals.size === 0){
+        return node.ownPeople;
+    }
+
+    return getFilteredPersons().filter(person => {
+        return String(person["部門代碼"] || "").trim() === node.deptCode;
+    }).length;
+}
+
+function getTotalPeopleByLegal(node){
+    if(selectedLegals.size === 0){
+        return node.totalPeople;
+    }
+
+    let total = getOwnPeopleByLegal(node);
+
+    node.children.forEach(child => {
+        total += getTotalPeopleByLegal(child);
+    });
+
+    return total;
+}
+
 function renderNodeInfo(node){
     const row = node.row;
     const lines = [];
@@ -1412,17 +1503,23 @@ function renderNodeInfo(node){
         lines.push(`費用代碼：${row["費用代碼"] || "-"}`);
     }
 
+    const ownPeople = getOwnPeopleByLegal(node);
+    const totalPeople = getTotalPeopleByLegal(node);
+
     if(node.isLegalEntity || node.isVirtualRoot){
         lines.push(`
             <div class="totalPeople">
-                含轄下合計：${node.totalPeople} 人
+                含轄下合計：
+                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
             </div>
         `);
     }else{
         lines.push(`
             <div class="totalPeople">
-                本單位人數：${node.ownPeople} 人<br>
-                含轄下合計：${node.totalPeople} 人
+                本單位人數：
+                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="own">${ownPeople} 人</span><br>
+                含轄下合計：
+                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
             </div>
         `);
     }
@@ -1430,31 +1527,88 @@ function renderNodeInfo(node){
     return lines.join("<br>");
 }
 
-function showDepartmentPersons(deptCode){
-    currentSelectedDeptCode = deptCode;
+function bindPeopleLinks(container){
+    container.querySelectorAll(".peopleLink").forEach(link => {
+        link.addEventListener("click", function(e){
+            e.stopPropagation();
 
-    const node = allNodes.find(n => n.deptCode === deptCode);
+            const deptCode = this.dataset.deptCode;
+            const type = this.dataset.type || "own";
+
+            showDepartmentPersons(deptCode, type);
+        });
+    });
+}
+
+function findNodeByDeptCode(deptCode){
+    const found = allNodes.find(n => n.deptCode === deptCode);
+    if(found) return found;
+
+    for(const root of focusNodes){
+        const result = findNodeInTree(root, deptCode);
+        if(result) return result;
+    }
+
+    return null;
+}
+
+function findNodeInTree(node, deptCode){
+    if(node.deptCode === deptCode){
+        return node;
+    }
+
+    for(const child of node.children){
+        const result = findNodeInTree(child, deptCode);
+        if(result) return result;
+    }
+
+    return null;
+}
+
+function getDescendantDeptCodes(node){
+    let codes = [node.deptCode];
+
+    node.children.forEach(child => {
+        codes = codes.concat(getDescendantDeptCodes(child));
+    });
+
+    return codes;
+}
+
+function showDepartmentPersons(deptCode, type = "own"){
+    currentSelectedDeptCode = deptCode;
+    currentSelectedPersonType = type;
+
+    const node = findNodeByDeptCode(deptCode);
     const deptName = node ? node.row["部門全名"] : deptCode;
 
-    let persons = personMapByDept[deptCode] || [];
+    let persons = getFilteredPersons();
 
-    if(selectedLegals.size > 0){
+    if(type === "total" && node){
+        const deptCodes = getDescendantDeptCodes(node);
+
         persons = persons.filter(person => {
-            const legal = String(person["所屬法人"] || "").trim();
-            return selectedLegals.has(legal);
+            const personDeptCode = String(person["部門代碼"] || "").trim();
+            return deptCodes.includes(personDeptCode);
+        });
+    }else{
+        persons = persons.filter(person => {
+            return String(person["部門代碼"] || "").trim() === deptCode;
         });
     }
 
     const summary = document.getElementById("personSummary");
     const panel = document.getElementById("personPanel");
 
-    summary.innerText = `${deptName}｜部門代碼：${deptCode}｜人員 ${persons.length} 人`;
+    const rangeText = type === "total" ? "含轄下" : "本單位";
+
+    summary.innerText = `${deptName}｜部門代碼：${deptCode}｜${rangeText}人員 ${persons.length} 人`;
 
     if(persons.length === 0){
         panel.innerHTML = `
             <div class="noPerson">
                 此部門目前查無符合條件的人員資訊。<br>
-                請確認「人員資訊」工作表的部門代碼是否與「部門資訊」一致。
+                請確認「人員資訊」分頁的部門代碼是否與「部門資訊」一致。
             </div>
         `;
         return;
@@ -1529,11 +1683,13 @@ function createTreeNodeElement(node){
         </div>
     `;
 
+    bindPeopleLinks(nodeDiv);
+
     nodeDiv.addEventListener("click", function(e){
         e.stopPropagation();
 
         if(!node.isLegalEntity && !node.isVirtualRoot){
-            showDepartmentPersons(node.deptCode);
+            showDepartmentPersons(node.deptCode, "own");
         }
 
         if(hasChildren){
@@ -1583,20 +1739,22 @@ function createOrgNodeElement(node){
 
     nodeDiv.dataset.search = getSearchText(node);
 
-    nodeDiv.addEventListener("click", function(e){
-        e.stopPropagation();
-
-        if(!node.isLegalEntity && !node.isVirtualRoot){
-            showDepartmentPersons(node.deptCode);
-        }
-    });
-
     nodeDiv.innerHTML = `
         <span class="deptName">${getNodeTitle(node)}</span>
         <div class="nodeInfo">
             ${renderNodeInfo(node)}
         </div>
     `;
+
+    bindPeopleLinks(nodeDiv);
+
+    nodeDiv.addEventListener("click", function(e){
+        e.stopPropagation();
+
+        if(!node.isLegalEntity && !node.isVirtualRoot){
+            showDepartmentPersons(node.deptCode, "own");
+        }
+    });
 
     group.appendChild(nodeDiv);
 
