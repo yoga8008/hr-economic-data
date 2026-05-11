@@ -1973,19 +1973,24 @@ function findSpecialMatchedNodes(type){
         })
     );
 
+    const groupCenterNode = createVirtualNode("集團中央", groupCenterRoots);
+    const subGroupNode = createVirtualNode("次集團", subGroupRoots);
+
     if(type === "allGroup"){
         return [
-            createVirtualNode("集團中央", groupCenterRoots),
-            createVirtualNode("次集團", subGroupRoots)
+            createVirtualNode("集團", [
+                groupCenterNode,
+                subGroupNode
+            ])
         ];
     }
 
     if(type === "subGroup"){
-        return [createVirtualNode("次集團", subGroupRoots)];
+        return [subGroupNode];
     }
 
     if(type === "groupCenter"){
-        return [createVirtualNode("集團中央", groupCenterRoots)];
+        return [groupCenterNode];
     }
 
     return [];
