@@ -17,9 +17,7 @@ body{
     color:#111827;
 }
 
-h1{
-    margin-bottom:10px;
-}
+h1{ margin-bottom:10px; }
 
 .desc{
     color:#666;
@@ -44,17 +42,8 @@ h1{
     cursor:pointer;
 }
 
-.toggleTopBtn:hover{
-    opacity:.9;
-}
-
-.topPanel{
-    display:block;
-}
-
-.topPanel.collapsed{
-    display:none;
-}
+.topPanel{ display:block; }
+.topPanel.collapsed{ display:none; }
 
 .topGrid{
     display:flex;
@@ -93,9 +82,37 @@ h1{
 
 .uploadActions{
     display:flex;
+    gap:16px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+.uploadMain{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.uploadButtons{
+    display:flex;
     gap:12px;
     align-items:center;
     flex-wrap:wrap;
+}
+
+.uploadHelp{
+    color:#6b7280;
+    font-size:13px;
+    line-height:1.7;
+    padding-top:4px;
+    min-width:280px;
+}
+
+.memoryInfo{
+    margin-top:10px;
+    color:#374151;
+    font-size:13px;
+    line-height:1.7;
 }
 
 .templateBtn,
@@ -130,9 +147,7 @@ h1{
     color:#374151;
 }
 
-.clearMemoryBtn{
-    background:#991b1b;
-}
+.clearMemoryBtn{ background:#991b1b; }
 
 .sortSelect{
     height:36px;
@@ -212,9 +227,7 @@ h1{
     box-sizing:border-box;
 }
 
-.dropdownFilter.open .dropdownMenu{
-    display:block;
-}
+.dropdownFilter.open .dropdownMenu{ display:block; }
 
 .dropdownMenu label{
     display:block;
@@ -225,12 +238,13 @@ h1{
     border-radius:6px;
 }
 
-.dropdownMenu label:hover{
-    background:#f3f4f6;
-}
+.dropdownMenu label:hover{ background:#f3f4f6; }
+.dropdownMenu input{ margin-right:6px; }
 
-.dropdownMenu input{
-    margin-right:6px;
+.selectAllLabel{
+    font-weight:bold;
+    border-bottom:1px solid #e5e7eb;
+    margin-bottom:4px;
 }
 
 .chartBox{
@@ -314,18 +328,14 @@ h1{
 }
 
 .viewModeControl b,
-.zoomControl b{
-    font-size:12px;
-}
+.zoomControl b{ font-size:12px; }
 
 .zoomControl input{
     width:110px;
     height:auto;
 }
 
-.zoomWrap{
-    transform-origin:top left;
-}
+.zoomWrap{ transform-origin:top left; }
 
 .summary{
     color:#374151;
@@ -363,9 +373,7 @@ h1{
     cursor:pointer;
 }
 
-.node:hover{
-    border-color:#1e3a8a;
-}
+.node:hover{ border-color:#1e3a8a; }
 
 .nodeHeader{
     display:flex;
@@ -420,18 +428,14 @@ h1{
     cursor:pointer;
 }
 
-.hidden{
-    display:none !important;
-}
+.hidden{ display:none !important; }
 
 .match{
     border:2px solid #dc2626 !important;
     background:#fff1f2 !important;
 }
 
-.pathOnly{
-    opacity:.45;
-}
+.pathOnly{ opacity:.45; }
 
 .orgChart{
     display:flex;
@@ -463,9 +467,7 @@ h1{
     cursor:pointer;
 }
 
-.orgNode:hover{
-    border-color:#1e3a8a;
-}
+.orgNode:hover{ border-color:#1e3a8a; }
 
 .orgNode .deptName{
     display:block;
@@ -544,9 +546,7 @@ h1{
     white-space:nowrap;
 }
 
-.personTable tr:hover{
-    background:#f9fafb;
-}
+.personTable tr:hover{ background:#f9fafb; }
 
 .noPerson{
     color:#6b7280;
@@ -596,14 +596,20 @@ h1{
     <div class="topGrid">
         <div class="uploadBox">
             <div class="uploadActions">
-                <input type="file" id="excelFile" accept=".xlsx,.xls">
-                <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
-                <button class="clearMemoryBtn" onclick="clearSavedDataWithPassword()">清除記憶資料</button>
-            </div>
-            <div style="margin-top:12px;color:#6b7280;font-size:13px;line-height:1.7;">
-                Excel 請使用一個檔案，內含兩個分頁：<br>
-                1. 部門資訊<br>
-                2. 人員資訊
+                <div class="uploadMain">
+                    <input type="file" id="excelFile" accept=".xlsx,.xls">
+                    <div id="memoryInfo" class="memoryInfo"></div>
+                    <div class="uploadButtons">
+                        <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
+                        <button class="clearMemoryBtn" onclick="clearSavedDataWithPassword()">清除記憶資料</button>
+                    </div>
+                </div>
+
+                <div class="uploadHelp">
+                    Excel 請使用一個檔案，內含兩個分頁：<br>
+                    1. 部門資訊<br>
+                    2. 人員資訊
+                </div>
             </div>
         </div>
 
@@ -684,25 +690,12 @@ h1{
 
 <script>
 const requiredColumns = [
-    "公司代碼",
-    "層級",
-    "上級部門",
-    "部門代碼",
-    "費用代碼",
-    "部門全名",
-    "主管一姓名",
-    "主管一職稱",
-    "在職人數"
+    "公司代碼","層級","上級部門","部門代碼","費用代碼",
+    "部門全名","主管一姓名","主管一職稱","在職人數"
 ];
 
 const requiredPersonColumns = [
-    "所屬法人",
-    "部門代碼",
-    "部門名稱",
-    "員工工號",
-    "員工姓名",
-    "職稱名稱",
-    "資位"
+    "所屬法人","部門代碼","部門名稱","員工工號","員工姓名","職稱名稱","資位"
 ];
 
 const STORAGE_KEY_ROWS = "orgChartSavedRows";
@@ -723,12 +716,7 @@ let personMapByDept = {};
 let currentSelectedDeptCode = "";
 let currentSelectedPersonType = "own";
 
-let visibleFields = new Set([
-    "level",
-    "deptCode",
-    "costCode",
-    "manager"
-]);
+let visibleFields = new Set(["level","deptCode","costCode","manager"]);
 
 loadSavedData();
 
@@ -829,11 +817,10 @@ function loadSavedData(){
 }
 
 function appendMemoryInfo(fileName, updatedAt, isNewUpload){
-    const result = document.getElementById("uploadResult");
+    const box = document.getElementById("memoryInfo");
     const status = isNewUpload ? "組織與人員資料已儲存" : "已自動載入上次儲存資料";
 
-    result.innerHTML += `
-        <hr style="border:0;border-top:1px solid #e5e7eb;margin:10px 0;">
+    box.innerHTML = `
         <span class="resultSuccess">${status}</span><br>
         最後更新日：${updatedAt}<br>
         來源檔案：${fileName}<br>
@@ -844,9 +831,7 @@ function appendMemoryInfo(fileName, updatedAt, isNewUpload){
 function clearSavedDataWithPassword(){
     const input = prompt("請輸入管理密碼，確認後將清除已儲存的組織圖資料：");
 
-    if(input === null){
-        return;
-    }
+    if(input === null) return;
 
     if(input !== ADMIN_PASSWORD){
         alert("密碼錯誤，無法清除資料。");
@@ -855,9 +840,7 @@ function clearSavedDataWithPassword(){
 
     const confirmClear = confirm("確認要清除所有記憶資料嗎？此動作無法復原。");
 
-    if(!confirmClear){
-        return;
-    }
+    if(!confirmClear) return;
 
     localStorage.removeItem(STORAGE_KEY_ROWS);
     localStorage.removeItem(STORAGE_KEY_PERSON_ROWS);
@@ -872,10 +855,10 @@ function clearSavedDataWithPassword(){
         尚未上傳 Excel
     `;
 
+    document.getElementById("memoryInfo").innerHTML = "";
+
     const excelFile = document.getElementById("excelFile");
-    if(excelFile){
-        excelFile.value = "";
-    }
+    if(excelFile) excelFile.value = "";
 }
 
 function toggleTopPanel(){
@@ -884,11 +867,9 @@ function toggleTopPanel(){
 
     panel.classList.toggle("collapsed");
 
-    if(panel.classList.contains("collapsed")){
-        btn.innerText = "展開上方設定 ▼";
-    }else{
-        btn.innerText = "收合上方設定 ▲";
-    }
+    btn.innerText = panel.classList.contains("collapsed")
+        ? "展開上方設定 ▼"
+        : "收合上方設定 ▲";
 }
 
 function handleFile(e){
@@ -965,9 +946,7 @@ function clearPageData(){
     currentSelectedPersonType = "own";
 
     const focusCheckbox = document.getElementById("focusCheckbox");
-    if(focusCheckbox){
-        focusCheckbox.checked = false;
-    }
+    if(focusCheckbox) focusCheckbox.checked = false;
 
     document.getElementById("levelFilters").innerHTML = "";
     document.getElementById("fieldFilters").innerHTML = "";
@@ -984,10 +963,7 @@ function checkColumns(rows){
     const result = document.getElementById("uploadResult");
 
     if(rows.length === 0){
-        result.innerHTML = `
-            <b>上傳結果</b><br>
-            <span class="resultError">部門資訊沒有資料</span>
-        `;
+        result.innerHTML = `<b>上傳結果</b><br><span class="resultError">部門資訊沒有資料</span>`;
         return false;
     }
 
@@ -995,18 +971,11 @@ function checkColumns(rows){
     const missing = requiredColumns.filter(col => !columns.includes(col));
 
     if(missing.length > 0){
-        result.innerHTML = `
-            <b>上傳結果</b><br>
-            <span class="resultError">部門資訊缺少欄位：${missing.join("、")}</span>
-        `;
+        result.innerHTML = `<b>上傳結果</b><br><span class="resultError">部門資訊缺少欄位：${missing.join("、")}</span>`;
         return false;
     }
 
-    result.innerHTML = `
-        <b>上傳結果</b><br>
-        <span class="resultSuccess">Excel 讀取成功</span><br>
-        資料檢查中...
-    `;
+    result.innerHTML = `<b>上傳結果</b><br><span class="resultSuccess">Excel 讀取成功</span><br>資料檢查中...`;
 
     return true;
 }
@@ -1014,18 +983,13 @@ function checkColumns(rows){
 function checkPersonColumns(rows){
     const result = document.getElementById("uploadResult");
 
-    if(rows.length === 0){
-        return true;
-    }
+    if(rows.length === 0) return true;
 
     const columns = Object.keys(rows[0]);
     const missing = requiredPersonColumns.filter(col => !columns.includes(col));
 
     if(missing.length > 0){
-        result.innerHTML = `
-            <b>上傳結果</b><br>
-            <span class="resultError">人員資訊缺少欄位：${missing.join("、")}</span>
-        `;
+        result.innerHTML = `<b>上傳結果</b><br><span class="resultError">人員資訊缺少欄位：${missing.join("、")}</span>`;
         return false;
     }
 
@@ -1058,9 +1022,7 @@ function buildTreeData(rows){
     currentSelectedPersonType = "own";
 
     const focusCheckbox = document.getElementById("focusCheckbox");
-    if(focusCheckbox){
-        focusCheckbox.checked = false;
-    }
+    if(focusCheckbox) focusCheckbox.checked = false;
 
     const deptMap = {};
     const legalMap = {};
@@ -1245,11 +1207,22 @@ function createDropdownCheckbox(boxId, title, items, selectedSet, onChange, defa
     const menu = document.createElement("div");
     menu.className = "dropdownMenu";
 
+    function isAllSelected(){
+        return items.length > 0 && selectedSet.size === items.length;
+    }
+
     function updateBtnText(){
-        if(selectedSet.size === 0){
+        if(isAllSelected()){
+            btn.innerText = `${title}：全選`;
+        }else if(selectedSet.size === 0){
             btn.innerText = defaultText || title;
         }else{
             btn.innerText = `${title}：${selectedSet.size} 項`;
+        }
+
+        const selectAll = menu.querySelector(".selectAllCheckbox");
+        if(selectAll){
+            selectAll.checked = isAllSelected();
         }
     }
 
@@ -1260,10 +1233,34 @@ function createDropdownCheckbox(boxId, title, items, selectedSet, onChange, defa
         box.classList.toggle("open", !isOpen);
     });
 
+    const allLabel = document.createElement("label");
+    allLabel.className = "selectAllLabel";
+    allLabel.innerHTML = `<input type="checkbox" class="selectAllCheckbox">全選`;
+
+    const allCheckbox = allLabel.querySelector("input");
+
+    allCheckbox.addEventListener("change", function(){
+        if(this.checked){
+            selectedSet.clear();
+            items.forEach(item => selectedSet.add(item.value));
+        }else{
+            selectedSet.clear();
+        }
+
+        menu.querySelectorAll("input.itemCheckbox").forEach(cb => {
+            cb.checked = selectedSet.has(cb.value);
+        });
+
+        updateBtnText();
+        onChange();
+    });
+
+    menu.appendChild(allLabel);
+
     items.forEach(item => {
         const label = document.createElement("label");
         label.innerHTML = `
-            <input type="checkbox" value="${item.value}" ${selectedSet.has(item.value) ? "checked" : ""}>
+            <input type="checkbox" class="itemCheckbox" value="${item.value}" ${selectedSet.has(item.value) ? "checked" : ""}>
             ${item.label}
         `;
 
@@ -1308,14 +1305,15 @@ function renderLevelFilters(){
             label: level === "法人" ? "法人" : "層級 " + level
         }));
 
+    selectedLevels.clear();
+    levels.forEach(item => selectedLevels.add(item.value));
+
     createDropdownCheckbox(
         "levelFilters",
         "層級篩選",
         levels,
         selectedLevels,
-        function(){
-            expandAll();
-        },
+        function(){ expandAll(); },
         "層級篩選：全部"
     );
 }
@@ -1333,9 +1331,7 @@ function renderFieldFilters(){
         "顯示資訊",
         fields,
         visibleFields,
-        function(){
-            renderChart();
-        },
+        function(){ renderChart(); },
         "顯示資訊"
     );
 }
@@ -1354,6 +1350,9 @@ function renderLegalFilters(){
         `;
         return;
     }
+
+    selectedLegals.clear();
+    legals.forEach(item => selectedLegals.add(item.value));
 
     createDropdownCheckbox(
         "legalFilters",
@@ -1430,7 +1429,7 @@ function renderOrgChart(){
 
 function shouldShowNode(node){
     if(selectedLevels.size === 0){
-        return true;
+        return false;
     }
 
     if(selectedLevels.has(node.levelText)){
@@ -1450,7 +1449,7 @@ function isPathOnly(node){
 
 function getFilteredPersons(){
     if(selectedLegals.size === 0){
-        return personRows;
+        return [];
     }
 
     return personRows.filter(person => {
@@ -1460,20 +1459,12 @@ function getFilteredPersons(){
 }
 
 function getOwnPeopleByLegal(node){
-    if(selectedLegals.size === 0){
-        return node.ownPeople;
-    }
-
     return getFilteredPersons().filter(person => {
         return String(person["部門代碼"] || "").trim() === node.deptCode;
     }).length;
 }
 
 function getTotalPeopleByLegal(node){
-    if(selectedLegals.size === 0){
-        return node.totalPeople;
-    }
-
     let total = getOwnPeopleByLegal(node);
 
     node.children.forEach(child => {
@@ -1868,7 +1859,7 @@ function isSubGroupNode(node){
 }
 
 function createVirtualNode(title, children){
-    const total = children.reduce((sum, node) => sum + node.totalPeople, 0);
+    const total = children.reduce((sum, node) => sum + getTotalPeopleByLegal(node), 0);
 
     return {
         row:{
@@ -1908,9 +1899,7 @@ function findSpecialMatchedNodes(type){
     );
 
     if(type === "subGroup"){
-        return [
-            createVirtualNode("次集團", subGroupRoots)
-        ];
+        return [createVirtualNode("次集團", subGroupRoots)];
     }
 
     if(type === "group"){
@@ -1922,9 +1911,7 @@ function findSpecialMatchedNodes(type){
             );
         });
 
-        return [
-            createVirtualNode("集團中央", filterTopMatchedNodes(matched))
-        ];
+        return [createVirtualNode("集團中央", filterTopMatchedNodes(matched))];
     }
 
     return [];
@@ -2018,9 +2005,7 @@ function searchAndJump(){
         focusNodes.forEach(node => node.expanded = true);
         renderChart();
 
-        setTimeout(() => {
-            searchTree(true);
-        }, 0);
+        setTimeout(() => searchTree(true), 0);
 
         return;
     }
@@ -2037,17 +2022,13 @@ function searchAndJump(){
         allNodes.forEach(node => node.expanded = true);
         renderChart();
 
-        setTimeout(() => {
-            searchTree(true);
-        }, 0);
+        setTimeout(() => searchTree(true), 0);
     }else{
         focusNodes = [];
         allNodes.forEach(node => node.expanded = true);
         renderChart();
 
-        setTimeout(() => {
-            searchTree(true);
-        }, 0);
+        setTimeout(() => searchTree(true), 0);
     }
 }
 
