@@ -561,19 +561,29 @@ h1{ margin-bottom:10px; }
     width:max-content;
 }
 
+.pdfExportHeader{
+    position:relative;
+    width:100%;
+    min-height:40px;
+    margin-bottom:18px;
+}
+
 .pdfExportTitle{
     text-align:center;
     font-size:22px;
     font-weight:bold;
     color:#111827;
-    margin-bottom:6px;
+    line-height:40px;
 }
 
 .pdfExportDate{
-    text-align:center;
+    position:absolute;
+    right:0;
+    top:11px;
+    text-align:right;
     font-size:13px;
     color:#374151;
-    margin-bottom:18px;
+    white-space:nowrap;
 }
 
 @media(max-width:1300px){
@@ -1486,8 +1496,6 @@ function renderOrgChart(){
 }
 
 function shouldShowNode(node){
-    // 虛擬節點，例如：集團中央、次集團，一律顯示
-    // 避免搜尋 *集團 時，因為層級篩選沒有「虛擬法人」而被隱藏
     if(node.isVirtualRoot){
         return true;
     }
@@ -1998,13 +2006,27 @@ function findSpecialMatchedNodes(type){
 
 function expandAll(){
     allNodes.forEach(node => node.expanded = true);
-    focusNodes.forEach(node => node.expanded = true);
+
+    function expandRecursive(node){
+        node.expanded = true;
+        node.children.forEach(child => expandRecursive(child));
+    }
+
+    focusNodes.forEach(node => expandRecursive(node));
+
     renderChart();
 }
 
 function collapseAll(){
     allNodes.forEach(node => node.expanded = false);
-    focusNodes.forEach(node => node.expanded = false);
+
+    function collapseRecursive(node){
+        node.expanded = false;
+        node.children.forEach(child => collapseRecursive(child));
+    }
+
+    focusNodes.forEach(node => collapseRecursive(node));
+
     renderChart();
 }
 
@@ -2026,7 +2048,6 @@ function searchTree(jumpToFirst = false){
                     firstMatch = node;
                 }
 
-                // 勾選「搜尋結果及轄下」時，只縮小範圍，不再標紅
                 if(!focusChecked){
                     node.classList.add("match");
                 }
@@ -2085,7 +2106,13 @@ function searchAndJump(){
     if(specialType){
         focusNodes = findSpecialMatchedNodes(specialType);
         allNodes.forEach(node => node.expanded = true);
-        focusNodes.forEach(node => node.expanded = true);
+
+        function expandRecursive(node){
+            node.expanded = true;
+            node.children.forEach(child => expandRecursive(child));
+        }
+
+        focusNodes.forEach(node => expandRecursive(node));
         renderChart();
 
         setTimeout(() => searchTree(true), 0);
@@ -2103,6 +2130,13 @@ function searchAndJump(){
 
         focusNodes = matchedNodes;
         allNodes.forEach(node => node.expanded = true);
+
+        function expandRecursive(node){
+            node.expanded = true;
+            node.children.forEach(child => expandRecursive(child));
+        }
+
+        focusNodes.forEach(node => expandRecursive(node));
         renderChart();
 
         setTimeout(() => searchTree(true), 0);
@@ -2120,13 +2154,6 @@ function getPdfChartTitle(){
 
     if(!displayRoots || displayRoots.length === 0){
         return "組織圖";
-    }
-
-    if(displayRoots.length === 2){
-        const names = displayRoots.map(node => String(node.row["部門全名"] || node.deptCode || ""));
-        if(names.includes("集團中央") && names.includes("次集團")){
-            return "集團組織圖";
-        }
     }
 
     let firstRoot = displayRoots[0];
@@ -2179,6 +2206,9 @@ async function exportPDF(){
     exportWrapper.style.top = "0";
     exportWrapper.style.zIndex = "-1";
 
+    const headerDiv = document.createElement("div");
+    headerDiv.className = "pdfExportHeader";
+
     const titleDiv = document.createElement("div");
     titleDiv.className = "pdfExportTitle";
     titleDiv.innerText = pdfTitle;
@@ -2187,12 +2217,14 @@ async function exportPDF(){
     dateDiv.className = "pdfExportDate";
     dateDiv.innerText = updatedText;
 
+    headerDiv.appendChild(titleDiv);
+    headerDiv.appendChild(dateDiv);
+
     const clonedChart = target.cloneNode(true);
     clonedChart.style.transform = "scale(1)";
     clonedChart.style.transformOrigin = "top left";
 
-    exportWrapper.appendChild(titleDiv);
-    exportWrapper.appendChild(dateDiv);
+    exportWrapper.appendChild(headerDiv);
     exportWrapper.appendChild(clonedChart);
     document.body.appendChild(exportWrapper);
 
