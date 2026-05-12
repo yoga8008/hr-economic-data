@@ -10,618 +10,446 @@
 
 <style>
 body{
-    font-family: Arial, sans-serif;
+    font-family: Arial, "Microsoft JhengHei", sans-serif;
     background:#f3f4f6;
     margin:0;
     padding:30px;
     color:#111827;
 }
 
-h1{ margin-bottom:10px; }
+h1{
+    margin:0 0 10px 0;
+}
 
 .desc{
-    color:#666;
+    color:#6b7280;
     margin-bottom:20px;
 }
-
-.topPanelHeader{
-    display:flex;
-    justify-content:flex-end;
-    margin-bottom:10px;
-}
-
-.toggleTopBtn{
-    height:34px;
-    padding:0 14px;
-    border:0;
-    border-radius:8px;
-    background:#374151;
-    color:#fff;
-    font-weight:bold;
-    font-size:12px;
-    cursor:pointer;
-}
-
-.topPanel{ display:block; }
-.topPanel.collapsed{ display:none; }
 
 .topGrid{
-    display:flex;
+    display:grid;
+    grid-template-columns:1fr 1fr;
     gap:20px;
-    align-items:stretch;
     margin-bottom:20px;
 }
 
-.topGrid > .uploadBox,
-.topGrid > .resultArea{
-    flex:0 0 calc(50% - 10px);
-    width:calc(50% - 10px);
+.card{
+    background:#ffffff;
+    border:1px solid #d1d5db;
+    border-radius:14px;
+    padding:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 
-.uploadBox,
-.resultArea{
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:20px;
-    min-height:120px;
-    box-sizing:border-box;
+.card h2{
+    margin:0 0 12px 0;
+    font-size:18px;
 }
 
-.uploadBox{
-    max-height:260px;
-    overflow:auto;
-}
-
-.resultArea{
-    line-height:1.8;
-    color:#374151;
-    max-height:260px;
-    overflow:auto;
-}
-
-.uploadActions{
-    display:flex;
-    gap:16px;
-    align-items:flex-start;
-    flex-wrap:wrap;
-}
-
-.uploadMain{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.uploadButtons{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    flex-wrap:wrap;
-}
-
-.uploadHelp{
-    color:#6b7280;
-    font-size:13px;
-    line-height:1.7;
-    padding-top:4px;
-    min-width:280px;
-}
-
-.memoryInfo{
-    margin-top:10px;
-    color:#374151;
-    font-size:13px;
-    line-height:1.7;
-}
-
-.templateBtn,
-.exportBtn,
-.clearMemoryBtn,
-.chartLeftActions button,
-.modeBtn{
-    height:36px;
-    padding:0 12px;
+button{
     border:0;
-    border-radius:8px;
     background:#1e3a8a;
     color:#fff;
+    border-radius:10px;
+    padding:10px 18px;
     font-weight:bold;
-    font-size:12px;
     cursor:pointer;
-    white-space:nowrap;
-    box-sizing:border-box;
-    line-height:36px;
+    font-size:15px;
 }
 
-.templateBtn:hover,
-.exportBtn:hover,
-.clearMemoryBtn:hover,
-.chartLeftActions button:hover,
-.modeBtn:hover{
+button:hover{
     opacity:.9;
 }
 
-.modeBtn.inactive{
+button.secondary{
     background:#e5e7eb;
-    color:#374151;
+    color:#111827;
 }
 
-.clearMemoryBtn{ background:#991b1b; }
+button.danger{
+    background:#991b1b;
+}
 
-.sortSelect,
-.depthSelect,
-.pdfModeSelect{
-    height:36px;
-    padding:0 10px;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    font-size:13px;
+input[type="file"],
+input[type="text"],
+input[type="password"],
+select{
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:15px;
     background:#fff;
-    color:#374151;
-    box-sizing:border-box;
 }
 
-.resultSuccess{
-    color:#15803d;
+input[type="text"]{
+    min-width:220px;
+}
+
+label{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.smallText{
+    color:#6b7280;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.message{
+    margin-top:10px;
+    color:#1e3a8a;
     font-weight:bold;
 }
 
-.resultError{
+.error{
     color:#b91c1c;
     font-weight:bold;
 }
 
-.resultWarn{
-    color:#9a3412;
+.success{
+    color:#047857;
     font-weight:bold;
 }
 
-.filterBar{
+.optionArea{
     display:flex;
-    gap:12px;
-    align-items:center;
-    margin-bottom:20px;
-    flex-wrap:nowrap;
-}
-
-.filterBar .sortSelect{
-    flex:0 0 220px;
-    width:220px;
-}
-
-.filterBar .dropdownFilter{
-    flex:0 0 280px;
-    width:280px;
-    min-width:280px;
-}
-
-.dropdownFilter{
-    position:relative;
-    min-width:220px;
-}
-
-.dropdownBtn{
-    width:100%;
-    height:38px;
-    padding:0 12px;
-    border:1px solid #cbd5e1;
-    border-radius:10px;
-    background:#fff;
-    color:#374151;
-    font-size:13px;
-    text-align:left;
-    cursor:pointer;
-    box-sizing:border-box;
-}
-
-.dropdownBtn::after{
-    content:"▼";
-    float:right;
-    font-size:10px;
-    color:#6b7280;
-    margin-top:2px;
-}
-
-.dropdownMenu{
-    display:none;
-    position:absolute;
-    top:44px;
-    left:0;
-    width:100%;
-    max-height:260px;
-    overflow:auto;
-    background:#fff;
-    border:1px solid #cbd5e1;
-    border-radius:10px;
-    box-shadow:0 8px 20px rgba(0,0,0,.12);
-    z-index:50;
-    padding:8px;
-    box-sizing:border-box;
-}
-
-.dropdownFilter.open .dropdownMenu{ display:block; }
-
-.dropdownMenu label{
-    display:block;
-    padding:7px 8px;
-    font-size:13px;
-    color:#374151;
-    cursor:pointer;
-    border-radius:6px;
-}
-
-.dropdownMenu label:hover{ background:#f3f4f6; }
-.dropdownMenu input{ margin-right:6px; }
-
-.selectAllLabel{
-    font-weight:bold;
-    border-bottom:1px solid #e5e7eb;
-    margin-bottom:4px;
-}
-
-.chartBox{
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:20px;
-    overflow:auto;
-}
-
-.chartHeader{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-    margin-bottom:16px;
-    flex-wrap:nowrap;
-}
-
-.chartLeftActions{
-    display:flex;
-    align-items:center;
-    gap:10px;
     flex-wrap:wrap;
-    flex:1;
-    min-width:0;
+    gap:10px;
+    margin-top:12px;
 }
 
-.chartLeftActions input[type="text"]{
-    width:350px;
-    height:36px;
-    padding:0 12px;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    font-size:13px;
-    box-sizing:border-box;
+.optionGroup{
+    margin-top:14px;
 }
 
-.focusOption{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    height:36px;
-    padding:0 12px;
-    background:#fff;
+.optionTitle{
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.checkboxPill{
+    background:#f9fafb;
     border:1px solid #d1d5db;
-    border-radius:8px;
-    font-size:12px;
-    color:#374151;
-    cursor:pointer;
-    white-space:nowrap;
-    box-sizing:border-box;
+    border-radius:10px;
+    padding:8px 10px;
 }
 
-.focusOption input{
-    width:15px;
-    height:15px;
-    margin:0;
+.mainArea{
+    margin-top:20px;
 }
 
-.chartActions{
+/* ===============================
+   組織圖區域
+================================ */
+.chartBox{
+    background:#ffffff;
+    border:1px solid #d1d5db;
+    border-radius:16px;
+    padding:0;
+    overflow:hidden;
+}
+
+/* 外層可水平捲動 */
+.chartScroll{
+    overflow:auto;
+    max-height:calc(100vh - 40px);
+    position:relative;
+    background:#ffffff;
+}
+
+/* ===============================
+   上方功能列：浮動固定
+================================ */
+.chartHeader{
+    position:sticky;
+    top:0;
+    left:0;
+    z-index:999;
+    background:#ffffff;
+    border-bottom:1px solid #e5e7eb;
+    padding:12px 14px;
+}
+
+/* 往右滑時仍固定在可視畫面左側 */
+.chartHeaderInner{
+    position:sticky;
+    left:0;
+    z-index:1000;
+
+    width:calc(100vw - 90px);
+    max-width:calc(100vw - 90px);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:nowrap;
+}
+
+.chartActions,
+.viewActions{
     display:flex;
     align-items:center;
     gap:10px;
-    flex-wrap:wrap;
-    flex-shrink:0;
+    flex-wrap:nowrap;
 }
 
-.viewModeControl,
-.zoomControl{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    min-height:36px;
-    padding:6px 12px;
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:12px;
+.chartHeader button,
+.chartHeader select,
+.chartHeader label,
+.chartHeader input{
     white-space:nowrap;
-    box-sizing:border-box;
 }
 
-.viewModeControl b,
-.zoomControl b{ font-size:12px; }
-
-.zoomControl input{
-    width:110px;
-    height:auto;
-}
-
-.zoomWrap{ transform-origin:top left; }
-
-.summary{
-    color:#374151;
-    font-size:14px;
-    margin-bottom:15px;
-}
-
-.tree{
-    list-style:none;
-    padding-left:0;
-    margin:0;
-}
-
-.tree ul{
-    list-style:none;
-    margin:8px 0 0 30px;
-    padding-left:18px;
-    border-left:1px dashed #cbd5e1;
-}
-
-.tree li{
-    margin:10px 0;
-    position:relative;
-}
-
-.node{
-    display:inline-block;
-    min-width:320px;
-    max-width:520px;
-    background:#ffffff;
-    border:1px solid #cbd5e1;
-    border-radius:12px;
-    padding:12px 14px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
-    cursor:pointer;
-}
-
-.node:hover{ border-color:#1e3a8a; }
-
-.nodeHeader{
-    display:flex;
+.segment{
+    display:inline-flex;
     align-items:center;
-    gap:8px;
-    margin-bottom:6px;
+    background:#f3f4f6;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:6px;
+    gap:4px;
 }
 
-.toggle{
-    width:22px;
-    height:22px;
-    border-radius:50%;
+.segment button{
+    background:transparent;
+    color:#374151;
+    padding:8px 14px;
+    border-radius:10px;
+}
+
+.segment button.active{
     background:#1e3a8a;
     color:#fff;
-    font-size:14px;
-    line-height:22px;
-    text-align:center;
-    flex-shrink:0;
 }
 
-.emptyToggle{
-    width:22px;
-    height:22px;
-    flex-shrink:0;
+.zoomBox{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:8px 14px;
 }
 
-.deptName{
-    font-weight:bold;
-    font-size:16px;
-    color:#111827;
+.zoomBox input[type="range"]{
+    width:140px;
 }
 
-.nodeInfo{
-    font-size:12px;
-    color:#374151;
-    line-height:1.55;
-    padding-left:24px;
+#zoomValue{
+    font-size:18px;
+    min-width:54px;
 }
 
-.totalPeople{
-    margin-top:8px;
-    padding-top:8px;
-    border-top:1px dashed #cbd5e1;
-    font-weight:bold;
-    color:#1e3a8a;
+/* ===============================
+   組織圖本體
+================================ */
+.chartBody{
+    padding:30px;
+    min-width:max-content;
 }
 
-.peopleLink{
-    color:#1e3a8a;
-    font-weight:bold;
-    text-decoration:underline;
-    cursor:pointer;
+.zoomWrap{
+    transform-origin:top center;
+    transition:.15s;
+    display:inline-block;
+    min-width:100%;
 }
-
-.hidden{ display:none !important; }
-
-.match{
-    border:2px solid #dc2626 !important;
-    background:#fff1f2 !important;
-}
-
-.pathOnly{ opacity:.45; }
 
 .orgChart{
     display:flex;
     justify-content:center;
-    padding:30px 20px 60px;
+    align-items:flex-start;
     min-width:max-content;
-    overflow:visible;
 }
 
-.orgNodeGroup{
+.orgNodeWrap{
     display:flex;
     flex-direction:column;
     align-items:center;
     position:relative;
-    flex-shrink:0;
-    margin-bottom:24px;
 }
 
 .orgNode{
     width:260px;
-    background:#fff;
+    min-height:128px;
+    background:#ffffff;
     border:1px solid #cbd5e1;
     border-radius:12px;
-    padding:10px 12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
-    text-align:left;
-    position:relative;
+    box-shadow:0 3px 8px rgba(0,0,0,.08);
+    padding:14px;
     box-sizing:border-box;
-    z-index:2;
     cursor:pointer;
 }
 
-.orgNode:hover{ border-color:#1e3a8a; }
-
-.orgNode .deptName{
-    display:block;
-    text-align:center;
-    margin-bottom:6px;
-    font-size:15px;
+.orgNode:hover{
+    border-color:#1e3a8a;
+    box-shadow:0 4px 12px rgba(30,58,138,.18);
 }
 
-.orgChildren{
+.orgTitle{
+    text-align:center;
+    font-weight:bold;
+    font-size:16px;
+    margin-bottom:10px;
+}
+
+.orgInfo{
+    font-size:13px;
+    line-height:1.6;
+    color:#374151;
+}
+
+.orgPeople{
+    border-top:1px dashed #cbd5e1;
+    margin-top:8px;
+    padding-top:8px;
+    font-size:13px;
+    color:#1e3a8a;
+    font-weight:bold;
+}
+
+.orgPeople a{
+    color:#1e3a8a;
+}
+
+.toggleMark{
+    font-size:12px;
+    color:#6b7280;
+    text-align:center;
+    margin-top:6px;
+}
+
+.children{
     display:flex;
+    flex-wrap:wrap;
     justify-content:center;
     align-items:flex-start;
-    gap:36px 32px;
+    gap:28px 32px;
     margin-top:42px;
     position:relative;
-    padding-top:0;
-    flex-wrap:wrap;
-    max-width:3000px;
 }
 
-.orgNodeGroup.hasChildren > .orgNode::after{
+.children.compact{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.children .orgNodeWrap{
+    flex:0 0 260px;
+}
+
+/* 父節點往下線 */
+.orgNodeWrap.hasChildren > .orgNode::after{
     content:"";
     position:absolute;
     left:50%;
-    bottom:-22px;
+    top:100%;
     width:1px;
     height:22px;
     background:#94a3b8;
-    transform:translateX(-50%);
 }
 
-.orgChildren > .orgNodeGroup::before{
+/* 子群組上方橫線 */
+.children::before{
     content:"";
     position:absolute;
-    top:-21px;
-    left:50%;
-    width:1px;
-    height:21px;
-    background:#94a3b8;
-    transform:translateX(-50%);
-}
-
-.orgConnectorLine{
-    position:absolute;
-    top:-21px;
+    top:-20px;
+    left:0;
+    right:0;
     height:1px;
     background:#94a3b8;
-    pointer-events:none;
-    z-index:1;
 }
 
-.personPanel{
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    padding:14px;
-    overflow:auto;
+/* 每個子節點往上線 */
+.children > .orgNodeWrap::before{
+    content:"";
+    position:absolute;
+    top:-20px;
+    left:50%;
+    width:1px;
+    height:20px;
+    background:#94a3b8;
 }
 
-.personTable{
-    width:100%;
-    border-collapse:collapse;
-    font-size:13px;
+.pathDim{
+    opacity:.25;
 }
 
-.personTable th{
-    background:#f3f4f6;
-    color:#374151;
-    text-align:left;
-    padding:10px;
-    border-bottom:1px solid #d1d5db;
-    white-space:nowrap;
+.hidden{
+    display:none !important;
 }
 
-.personTable td{
-    padding:10px;
-    border-bottom:1px solid #e5e7eb;
-    color:#374151;
-    white-space:nowrap;
-}
-
-.personTable tr:hover{ background:#f9fafb; }
-
-.noPerson{
-    color:#6b7280;
-    line-height:1.8;
-}
-
-.pdfExportWrapper{
+/* ===============================
+   樹狀清單
+================================ */
+.treeList{
     background:#ffffff;
-    padding:20px 20px 30px;
-    box-sizing:border-box;
-    width:max-content;
+    padding:20px;
+    min-width:900px;
 }
 
-.pdfExportHeader{
-    position:relative;
-    width:100%;
-    min-height:40px;
-    margin-bottom:18px;
+.treeItem{
+    border-left:3px solid #d1d5db;
+    margin:4px 0;
+    padding:8px 10px;
+    background:#f9fafb;
+    border-radius:8px;
+    font-size:14px;
 }
 
-.pdfExportTitle{
-    text-align:center;
-    font-size:22px;
+.treeTitle{
     font-weight:bold;
     color:#111827;
-    line-height:40px;
 }
 
-.pdfExportDate{
-    position:absolute;
-    right:0;
-    top:11px;
-    text-align:right;
+.treeMeta{
+    color:#4b5563;
     font-size:13px;
-    color:#374151;
-    white-space:nowrap;
+    margin-top:4px;
 }
 
-@media(max-width:1300px){
-    .chartHeader{
-        align-items:flex-start;
-        flex-direction:column;
-        flex-wrap:wrap;
-    }
+/* ===============================
+   匯出用
+================================ */
+.exporting .chartHeader{
+    display:none !important;
+}
 
-    .chartLeftActions,
-    .chartActions{
-        flex-wrap:wrap;
+.exporting .chartScroll{
+    overflow:visible !important;
+    max-height:none !important;
+}
+
+.exporting .chartBody{
+    padding:20px !important;
+}
+
+/* RWD */
+@media(max-width:900px){
+    body{
+        padding:16px;
     }
 
     .topGrid{
+        grid-template-columns:1fr;
+    }
+
+    .chartHeaderInner{
+        width:calc(100vw - 40px);
+        max-width:calc(100vw - 40px);
+        align-items:flex-start;
         flex-direction:column;
     }
 
-    .topGrid > .uploadBox,
-    .topGrid > .resultArea{
-        flex:0 0 100%;
-        width:100%;
+    .chartActions,
+    .viewActions{
+        flex-wrap:wrap;
     }
 }
 </style>
@@ -630,122 +458,127 @@ h1{ margin-bottom:10px; }
 <body>
 
 <h1>組織圖測試版</h1>
+<div class="desc">上傳 Excel 後，可查詢組織圖、樹狀清單、搜尋、篩選、縮放與匯出 PDF。</div>
 
-<div class="desc">
-上傳 Excel 後，系統會依「部門資訊」建立組織圖，並依「人員資訊」顯示部門人員。
+<div class="topGrid">
+
+    <div class="card">
+        <h2>一、上傳組織資料</h2>
+
+        <input type="file" id="excelFile" accept=".xlsx,.xls">
+        <button onclick="downloadTemplate()">下載上傳範本</button>
+        <button class="danger" onclick="clearSavedData()">清除記憶</button>
+
+        <div id="uploadMsg" class="message"></div>
+
+        <div class="smallText" style="margin-top:12px;">
+            必要欄位：公司代碼、層級、上級部門、部門代碼、費用代碼、部門全名、主管一姓名、主管一職稱、在職人數
+        </div>
+
+        <div id="savedInfo" class="smallText" style="margin-top:10px;"></div>
+    </div>
+
+    <div class="card">
+        <h2>二、上傳結果</h2>
+        <div id="resultArea" class="smallText">尚未上傳資料。</div>
+    </div>
+
 </div>
 
-<div class="topPanelHeader">
-    <button id="toggleTopPanelBtn" class="toggleTopBtn" onclick="toggleTopPanel()">
-        收合上方設定 ▲
-    </button>
+<div class="card">
+    <h2>三、篩選與顯示設定</h2>
+
+    <div class="optionGroup">
+        <div class="optionTitle">法人 / 公司代碼</div>
+        <div id="legalFilters" class="optionArea"></div>
+    </div>
+
+    <div class="optionGroup">
+        <div class="optionTitle">層級</div>
+        <div id="levelFilters" class="optionArea"></div>
+    </div>
+
+    <div class="optionGroup">
+        <div class="optionTitle">顯示資訊</div>
+        <div id="fieldFilters" class="optionArea">
+            <label class="checkboxPill"><input type="checkbox" value="supervisor" checked onchange="renderAll()"> 主管</label>
+            <label class="checkboxPill"><input type="checkbox" value="level" checked onchange="renderAll()"> 層級</label>
+            <label class="checkboxPill"><input type="checkbox" value="deptCode" checked onchange="renderAll()"> 部門代碼</label>
+            <label class="checkboxPill"><input type="checkbox" value="costCode" checked onchange="renderAll()"> 費用代碼</label>
+        </div>
+    </div>
+
+    <div class="optionGroup">
+        <div class="optionTitle">排序</div>
+        <select id="sortMode" onchange="renderAll()">
+            <option value="original">原始順序</option>
+            <option value="level">層級</option>
+            <option value="name">名稱</option>
+            <option value="deptCode">部門代碼</option>
+        </select>
+    </div>
 </div>
 
-<div id="topPanel" class="topPanel">
-    <div class="topGrid">
-        <div class="uploadBox">
-            <div class="uploadActions">
-                <div class="uploadMain">
-                    <input type="file" id="excelFile" accept=".xlsx,.xls">
-                    <div id="memoryInfo" class="memoryInfo"></div>
-                    <div class="uploadButtons">
-                        <button class="templateBtn" onclick="downloadTemplate()">下載上傳模板</button>
-                        <button class="clearMemoryBtn" onclick="clearSavedDataWithPassword()">清除記憶資料</button>
+<div class="mainArea">
+    <div class="chartBox">
+        <div class="chartScroll" id="chartScroll">
+
+            <div class="chartHeader">
+                <div class="chartHeaderInner">
+
+                    <div class="chartActions">
+                        <input type="text" id="searchInput" placeholder="搜尋部門 / 主管 / 代碼">
+
+                        <label class="checkboxPill">
+                            <input type="checkbox" id="includeChildren" onchange="renderAll()">
+                            搜尋結果及轄下
+                        </label>
+
+                        <label class="checkboxPill">
+                            <input type="checkbox" id="hideZero" onchange="renderAll()">
+                            隱藏含轄下合計：0 人
+                        </label>
+
+                        <button onclick="renderAll()">搜尋</button>
+                        <button onclick="expandAll()">全部展開</button>
+                        <button onclick="collapseAll()">全部收合</button>
                     </div>
+
+                    <div class="viewActions">
+
+                        <div class="segment">
+                            <span style="font-weight:bold;padding:0 8px;">呈現方式：</span>
+                            <button id="treeModeBtn" onclick="setViewMode('tree')">樹狀清單</button>
+                            <button id="chartModeBtn" onclick="setViewMode('chart')" class="active">組織圖</button>
+                        </div>
+
+                        <div class="zoomBox">
+                            <strong>縮放：</strong>
+                            <input type="range" id="zoomRange" min="50" max="150" value="100" oninput="updateZoom()">
+                            <span id="zoomValue">100%</span>
+                        </div>
+
+                        <select id="exportMode">
+                            <option value="current">匯出模式：目前畫面</option>
+                            <option value="fit">匯出模式：自動縮放一頁</option>
+                            <option value="long">匯出模式：長版 PDF</option>
+                            <option value="firstLevel">匯出模式：依第一層子部門分頁</option>
+                        </select>
+
+                        <button onclick="exportPDF()">匯出 PDF</button>
+                    </div>
+
                 </div>
+            </div>
 
-                <div class="uploadHelp">
-                    Excel 請使用一個檔案，內含兩個分頁：<br>
-                    1. 部門資訊<br>
-                    2. 人員資訊
+            <div class="chartBody" id="chartBody">
+                <div id="zoomWrap" class="zoomWrap">
+                    <div id="orgChart" class="orgChart"></div>
+                    <div id="treeList" class="treeList hidden"></div>
                 </div>
             </div>
+
         </div>
-
-        <div id="uploadResult" class="resultArea">
-            <b>上傳結果</b><br>
-            尚未上傳 Excel
-        </div>
-    </div>
-
-
-<div class="filterBar">
-    <select id="sortMode" class="sortSelect" onchange="applySortAndRender()">
-        <option value="default">原始順序</option>
-        <option value="name">依名稱排序</option>
-        <option value="code">依部門代碼排序</option>
-    </select>
-
-    <div id="levelFilters" class="dropdownFilter"></div>
-    <div id="fieldFilters" class="dropdownFilter"></div>
-    <div id="legalFilters" class="dropdownFilter"></div>
-</div>
-
-<div class="chartBox">
-    <div class="chartHeader">
-        <div class="chartLeftActions">
-
-            <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
-
-            <label class="focusOption">
-                <input type="checkbox" id="focusCheckbox">
-                搜尋結果及轄下
-            </label>
-
-            <label class="focusOption">
-                <input type="checkbox" id="hideZeroTotalCheckbox" onchange="toggleHideZeroTotal(this.checked)">
-                隱藏含轄下合計：0 人
-            </label>
-
-            <button onclick="searchAndJump()">搜尋</button>
-            <button onclick="expandAll()">全部展開</button>
-            <button onclick="collapseAll()">全部收合</button>
-        </div>
-
-        <div class="chartActions">
-            <div class="viewModeControl">
-                <b>呈現方式：</b>
-                <button id="treeModeBtn" class="modeBtn" onclick="setViewMode('tree')">樹狀清單</button>
-                <button id="orgModeBtn" class="modeBtn inactive" onclick="setViewMode('org')">組織圖</button>
-            </div>
-
-            <div class="zoomControl">
-                <b>縮放：</b>
-                <input type="range" id="zoomRange" min="50" max="150" value="100">
-                <span id="zoomValue">100%</span>
-            </div>
-
-            <select id="pdfExportMode" class="pdfModeSelect">
-                <option value="current">匯出模式：目前畫面</option>
-                <option value="fitOnePage">匯出模式：自動縮放一頁</option>
-                <option value="splitByFirstLevel">匯出模式：依第一層子部門分頁</option>
-            </select>
-
-            <button class="exportBtn" onclick="exportPDF()">匯出 PDF</button>
-        </div>
-    </div>
-
-    <div id="summary" class="summary"></div>
-
-    <div id="zoomWrap" class="zoomWrap">
-        <ul id="tree" class="tree"></ul>
-        <div id="orgChart" class="orgChart hidden"></div>
-    </div>
-</div>
-
-<div class="chartBox" style="margin-top:20px;">
-    <div class="chartHeader">
-        <div class="chartLeftActions">
-            <b>人員資訊</b>
-        </div>
-    </div>
-
-    <div id="personSummary" class="summary">
-        請點選部門人數查看人員資訊
-    </div>
-
-    <div id="personPanel" class="personPanel">
-        尚未選擇部門
     </div>
 </div>
 
@@ -755,1802 +588,830 @@ const requiredColumns = [
     "部門全名","主管一姓名","主管一職稱","在職人數"
 ];
 
-const requiredPersonColumns = [
-    "所屬法人","部門代碼","部門名稱","員工工號","員工姓名","職稱名稱","資位"
-];
-
 const STORAGE_KEY_ROWS = "orgChartSavedRows";
-const STORAGE_KEY_PERSON_ROWS = "orgChartSavedPersonRows";
 const STORAGE_KEY_FILE = "orgChartFileName";
 const STORAGE_KEY_UPDATED_AT = "orgChartUpdatedAt";
+const STORAGE_KEY_VIEW_MODE = "orgChartViewMode";
+
 const ADMIN_PASSWORD = "1234";
 
+let rawRows = [];
 let allNodes = [];
 let rootNodes = [];
-let selectedLevels = new Set();
-let selectedLegals = new Set();
-let currentViewMode = "tree";
-let focusNodes = [];
-let maxDisplayDepth = "3";
-let hideZeroTotal = false;
+let nodeMap = new Map();
+let expandedSet = new Set();
+let currentViewMode = localStorage.getItem(STORAGE_KEY_VIEW_MODE) || "chart";
 
-let personRows = [];
-let personMapByDept = {};
-let currentSelectedDeptCode = "";
-let currentSelectedPersonType = "own";
-
-let filteredPersonRows = [];
-let ownPeopleCountCache = {};
-let totalPeopleCountCache = new Map();
-
-let visibleFields = new Set(["level","deptCode","costCode","manager"]);
-
-document.addEventListener("DOMContentLoaded", function(){
-    loadSavedData();
-
-    document.getElementById("excelFile").addEventListener("change", handleFile);
-
-    document.getElementById("searchInput").addEventListener("input", function(){
-        searchTree(false);
-    });
-
-    document.getElementById("searchInput").addEventListener("keydown", function(e){
-        if(e.key === "Enter"){
-            searchAndJump();
-        }
-    });
-
-    document.getElementById("focusCheckbox").addEventListener("change", function(){
-        if(!this.checked){
-            focusNodes = [];
-            renderChart();
-        }
-    });
-
-    document.getElementById("zoomRange").addEventListener("input", function(){
-        const value = this.value;
-        document.getElementById("zoomValue").innerText = value + "%";
-        document.getElementById("zoomWrap").style.transform = `scale(${value / 100})`;
-
-        if(currentViewMode === "org"){
-            requestAnimationFrame(updateOrgConnectorLines);
-        }
-    });
-
-    document.addEventListener("click", function(e){
-        if(!e.target.closest(".dropdownFilter")){
-            closeAllDropdowns();
-        }
-    });
+document.getElementById("excelFile").addEventListener("change", handleExcelUpload);
+document.getElementById("searchInput").addEventListener("keydown", function(e){
+    if(e.key === "Enter") renderAll();
 });
 
-function getNowText(){
-    const d = new Date();
-    const yyyy = d.getFullYear();
-    const mm = String(d.getMonth() + 1).padStart(2, "0");
-    const dd = String(d.getDate()).padStart(2, "0");
-    const hh = String(d.getHours()).padStart(2, "0");
-    const mi = String(d.getMinutes()).padStart(2, "0");
+window.addEventListener("load", function(){
+    loadSavedData();
+    setViewMode(currentViewMode, false);
+});
 
-    return `${yyyy}/${mm}/${dd} ${hh}:${mi}`;
-}
-
-function saveOrgChartMemory(rows, persons, fileName, updatedAt){
-    try{
-        localStorage.setItem(STORAGE_KEY_ROWS, JSON.stringify(rows));
-        localStorage.setItem(STORAGE_KEY_PERSON_ROWS, JSON.stringify(persons || []));
-        localStorage.setItem(STORAGE_KEY_FILE, fileName || "未命名檔案");
-        localStorage.setItem(STORAGE_KEY_UPDATED_AT, updatedAt || getNowText());
-    }catch(err){
-        alert("資料已產生，但瀏覽器記憶空間不足，無法儲存本次上傳資料。");
-    }
-}
-
-function loadSavedData(){
-    const savedRows = localStorage.getItem(STORAGE_KEY_ROWS);
-
-    if(!savedRows){
-        return;
-    }
-
-    try{
-        const rows = JSON.parse(savedRows);
-        const persons = JSON.parse(localStorage.getItem(STORAGE_KEY_PERSON_ROWS) || "[]");
-        const fileName = localStorage.getItem(STORAGE_KEY_FILE) || "未命名檔案";
-        const updatedAt = localStorage.getItem(STORAGE_KEY_UPDATED_AT) || "未記錄";
-
-        if(!Array.isArray(rows) || rows.length === 0){
-            return;
-        }
-
-        personRows = Array.isArray(persons) ? persons : [];
-        buildPersonMap();
-
-        buildTreeData(rows);
-        renderLevelFilters();
-        renderFieldFilters();
-        renderLegalFilters();
-        renderChart();
-        appendMemoryInfo(fileName, updatedAt, false);
-    }catch(err){
-        localStorage.removeItem(STORAGE_KEY_ROWS);
-        localStorage.removeItem(STORAGE_KEY_PERSON_ROWS);
-        localStorage.removeItem(STORAGE_KEY_FILE);
-        localStorage.removeItem(STORAGE_KEY_UPDATED_AT);
-
-        document.getElementById("uploadResult").innerHTML = `
-            <b>上傳結果</b><br>
-            <span class="resultError">記憶資料讀取失敗，已清除舊資料</span>
-        `;
-    }
-}
-
-function appendMemoryInfo(fileName, updatedAt, isNewUpload){
-    const box = document.getElementById("memoryInfo");
-    const status = isNewUpload ? "組織與人員資料已儲存" : "已自動載入上次儲存資料";
-
-    box.innerHTML = `
-        <span class="resultSuccess">${status}</span><br>
-        最後更新日：${updatedAt}<br>
-        來源檔案：${fileName}<br>
-        人員資訊：${personRows.length} 筆
-    `;
-}
-
-function clearSavedDataWithPassword(){
-    const input = prompt("請輸入管理密碼，確認後將清除已儲存的組織圖資料：");
-
-    if(input === null) return;
-
-    if(input !== ADMIN_PASSWORD){
-        alert("密碼錯誤，無法清除資料。");
-        return;
-    }
-
-    const confirmClear = confirm("確認要清除所有記憶資料嗎？此動作無法復原。");
-
-    if(!confirmClear) return;
-
-    localStorage.removeItem(STORAGE_KEY_ROWS);
-    localStorage.removeItem(STORAGE_KEY_PERSON_ROWS);
-    localStorage.removeItem(STORAGE_KEY_FILE);
-    localStorage.removeItem(STORAGE_KEY_UPDATED_AT);
-
-    clearPageData();
-
-    document.getElementById("uploadResult").innerHTML = `
-        <b>上傳結果</b><br>
-        <span class="resultSuccess">已清除記憶資料</span><br>
-        尚未上傳 Excel
-    `;
-
-    document.getElementById("memoryInfo").innerHTML = "";
-
-    const excelFile = document.getElementById("excelFile");
-    if(excelFile) excelFile.value = "";
-}
-
-function toggleTopPanel(){
-    const panel = document.getElementById("topPanel");
-    const btn = document.getElementById("toggleTopPanelBtn");
-
-    panel.classList.toggle("collapsed");
-
-    btn.innerText = panel.classList.contains("collapsed")
-        ? "展開上方設定 ▼"
-        : "收合上方設定 ▲";
-}
-
-function handleFile(e){
+/* ===============================
+   Excel 上傳
+================================ */
+function handleExcelUpload(e){
     const file = e.target.files[0];
     if(!file) return;
 
     const reader = new FileReader();
 
-    reader.onload = function(event){
-        const data = new Uint8Array(event.target.result);
+    reader.onload = function(evt){
+        const data = new Uint8Array(evt.target.result);
         const workbook = XLSX.read(data, {type:"array"});
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const rows = XLSX.utils.sheet_to_json(sheet, {defval:""});
 
-        const deptSheetName = workbook.SheetNames.includes("部門資訊")
-            ? "部門資訊"
-            : workbook.SheetNames[0];
-
-        const personSheetName = workbook.SheetNames.includes("人員資訊")
-            ? "人員資訊"
-            : "";
-
-        const deptSheet = workbook.Sheets[deptSheetName];
-        const rows = XLSX.utils.sheet_to_json(deptSheet, {defval:""});
-
-        let persons = [];
-
-        if(personSheetName){
-            const personSheet = workbook.Sheets[personSheetName];
-            persons = XLSX.utils.sheet_to_json(personSheet, {defval:""});
-        }
-
-        const isValid = checkColumns(rows);
-
-        if(!isValid){
-            clearPageData();
+        if(!rows.length){
+            document.getElementById("uploadMsg").innerHTML = `<span class="error">Excel 沒有資料。</span>`;
             return;
         }
 
-        if(persons.length > 0){
-            const isPersonValid = checkPersonColumns(persons);
+        const missing = requiredColumns.filter(col => !(col in rows[0]));
 
-            if(!isPersonValid){
-                clearPageData();
-                return;
-            }
+        if(missing.length){
+            document.getElementById("uploadMsg").innerHTML =
+                `<span class="error">缺少欄位：${missing.join("、")}</span>`;
+            return;
         }
 
-        const updatedAt = getNowText();
+        rawRows = rows.map((r, index) => normalizeRow(r, index));
 
-        personRows = persons;
-        buildPersonMap();
+        localStorage.setItem(STORAGE_KEY_ROWS, JSON.stringify(rawRows));
+        localStorage.setItem(STORAGE_KEY_FILE, file.name);
+        localStorage.setItem(STORAGE_KEY_UPDATED_AT, new Date().toLocaleString("zh-TW"));
 
-        saveOrgChartMemory(rows, persons, file.name, updatedAt);
+        document.getElementById("uploadMsg").innerHTML =
+            `<span class="success">讀取成功：${rows.length} 筆</span>`;
 
-        buildTreeData(rows);
-        renderLevelFilters();
-        renderFieldFilters();
-        renderLegalFilters();
-        renderChart();
-        appendMemoryInfo(file.name, updatedAt, true);
+        buildData();
+        renderFilterOptions();
+        renderAll();
+        updateSavedInfo();
     };
 
     reader.readAsArrayBuffer(file);
 }
 
-function clearPageData(){
-    allNodes = [];
-    rootNodes = [];
-    selectedLevels.clear();
-    selectedLegals.clear();
-    focusNodes = [];
-    personRows = [];
-    personMapByDept = {};
-    filteredPersonRows = [];
-    ownPeopleCountCache = {};
-    totalPeopleCountCache = new Map();
-    currentSelectedDeptCode = "";
-    currentSelectedPersonType = "own";
-    hideZeroTotal = false;
-
-    const focusCheckbox = document.getElementById("focusCheckbox");
-    if(focusCheckbox) focusCheckbox.checked = false;
-
-    const hideZeroTotalCheckbox = document.getElementById("hideZeroTotalCheckbox");
-    if(hideZeroTotalCheckbox) hideZeroTotalCheckbox.checked = false;
-
-    document.getElementById("levelFilters").innerHTML = "";
-    document.getElementById("fieldFilters").innerHTML = "";
-    document.getElementById("legalFilters").innerHTML = "";
-    document.getElementById("summary").innerText = "";
-    document.getElementById("tree").innerHTML = "";
-    document.getElementById("orgChart").innerHTML = "";
-
-    document.getElementById("personSummary").innerText = "請點選部門人數查看人員資訊";
-    document.getElementById("personPanel").innerHTML = "尚未選擇部門";
+function normalizeRow(r, index){
+    return {
+        companyCode: String(r["公司代碼"] || "").trim(),
+        level: String(r["層級"] || "").trim(),
+        parentDept: String(r["上級部門"] || "").trim(),
+        deptCode: String(r["部門代碼"] || "").trim(),
+        costCode: String(r["費用代碼"] || "").trim(),
+        deptName: String(r["部門全名"] || "").trim(),
+        supervisorName: String(r["主管一姓名"] || "").trim(),
+        supervisorTitle: String(r["主管一職稱"] || "").trim(),
+        ownPeople: Number(r["在職人數"] || 0),
+        rowIndex:index
+    };
 }
 
-function checkColumns(rows){
-    const result = document.getElementById("uploadResult");
+/* ===============================
+   記憶功能
+================================ */
+function loadSavedData(){
+    const saved = localStorage.getItem(STORAGE_KEY_ROWS);
 
-    if(rows.length === 0){
-        result.innerHTML = `<b>上傳結果</b><br><span class="resultError">部門資訊沒有資料</span>`;
-        return false;
-    }
+    if(saved){
+        try{
+            rawRows = JSON.parse(saved);
+            buildData();
+            renderFilterOptions();
+            renderAll();
+            updateSavedInfo();
 
-    const columns = Object.keys(rows[0]);
-    const missing = requiredColumns.filter(col => !columns.includes(col));
-
-    if(missing.length > 0){
-        result.innerHTML = `<b>上傳結果</b><br><span class="resultError">部門資訊缺少欄位：${missing.join("、")}</span>`;
-        return false;
-    }
-
-    result.innerHTML = `<b>上傳結果</b><br><span class="resultSuccess">Excel 讀取成功</span><br>資料檢查中...`;
-
-    return true;
-}
-
-function checkPersonColumns(rows){
-    const result = document.getElementById("uploadResult");
-
-    if(rows.length === 0) return true;
-
-    const columns = Object.keys(rows[0]);
-    const missing = requiredPersonColumns.filter(col => !columns.includes(col));
-
-    if(missing.length > 0){
-        result.innerHTML = `<b>上傳結果</b><br><span class="resultError">人員資訊缺少欄位：${missing.join("、")}</span>`;
-        return false;
-    }
-
-    return true;
-}
-
-function buildPersonMap(){
-    personMapByDept = {};
-
-    personRows.forEach(person => {
-        const deptCode = String(person["部門代碼"] || "").trim();
-
-        if(!deptCode) return;
-
-        if(!personMapByDept[deptCode]){
-            personMapByDept[deptCode] = [];
+            document.getElementById("uploadMsg").innerHTML =
+                `<span class="success">已載入上次上傳資料。</span>`;
+        }catch(e){
+            console.error(e);
         }
-
-        personMapByDept[deptCode].push(person);
-    });
+    }
 }
 
-function rebuildPeopleCountCache(){
-    if(selectedLegals.size === 0){
-        filteredPersonRows = [];
+function updateSavedInfo(){
+    const fileName = localStorage.getItem(STORAGE_KEY_FILE);
+    const updatedAt = localStorage.getItem(STORAGE_KEY_UPDATED_AT);
+
+    if(fileName && updatedAt){
+        document.getElementById("savedInfo").innerHTML =
+            `目前記憶檔案：<b>${fileName}</b><br>更新日：<b>${updatedAt}</b>`;
     }else{
-        filteredPersonRows = personRows.filter(person => {
-            const legal = String(person["所屬法人"] || "").trim();
-            return selectedLegals.has(legal);
-        });
+        document.getElementById("savedInfo").innerHTML = "";
     }
-
-    ownPeopleCountCache = {};
-    totalPeopleCountCache = new Map();
-
-    filteredPersonRows.forEach(person => {
-        const deptCode = String(person["部門代碼"] || "").trim();
-        if(!deptCode) return;
-
-        ownPeopleCountCache[deptCode] = (ownPeopleCountCache[deptCode] || 0) + 1;
-    });
 }
 
-function buildTreeData(rows){
-    const result = document.getElementById("uploadResult");
-
-    selectedLevels.clear();
-    selectedLegals.clear();
-    focusNodes = [];
-    currentSelectedDeptCode = "";
-    currentSelectedPersonType = "own";
-
-    const focusCheckbox = document.getElementById("focusCheckbox");
-    if(focusCheckbox) focusCheckbox.checked = false;
-
-    const deptMap = {};
-    const legalMap = {};
-    const errors = [];
-
-    allNodes = [];
-    rootNodes = [];
-
-    rows.forEach((row) => {
-        const companyCode = String(row["公司代碼"]).trim();
-
-        if(!companyCode) return;
-
-        if(!legalMap[companyCode]){
-            const legalNode = {
-                row: {
-                    "公司代碼": companyCode,
-                    "層級": "法人",
-                    "上級部門": "",
-                    "部門代碼": companyCode,
-                    "費用代碼": "",
-                    "部門全名": companyCode,
-                    "主管一姓名": "",
-                    "主管一職稱": "",
-                    "在職人數": 0
-                },
-                deptCode: companyCode,
-                parentCode: "",
-                levelText: "法人",
-                level: 0,
-                order: -1,
-                ownPeople: 0,
-                totalPeople: 0,
-                children: [],
-                expanded: true,
-                isLegalEntity: true,
-                isVirtualRoot: false
-            };
-
-            legalMap[companyCode] = legalNode;
-            deptMap[companyCode] = legalNode;
-            allNodes.push(legalNode);
-        }
-    });
-
-    rows.forEach((row, index) => {
-        const deptCode = String(row["部門代碼"]).trim();
-
-        if(!deptCode) return;
-
-        if(deptMap[deptCode]){
-            errors.push("部門代碼重複：" + deptCode);
-        }
-
-        const levelText = String(row["層級"]).trim() || "未設定";
-
-        const node = {
-            row: row,
-            deptCode: deptCode,
-            parentCode: String(row["上級部門"]).trim(),
-            levelText: levelText,
-            level: Number(levelText) || 999,
-            order: index,
-            ownPeople: parsePeople(row["在職人數"]),
-            totalPeople: 0,
-            children: [],
-            expanded: true,
-            isLegalEntity: false,
-            isVirtualRoot: false
-        };
-
-        deptMap[deptCode] = node;
-        allNodes.push(node);
-    });
-
-    allNodes.forEach(node => {
-        if(node.isLegalEntity){
-            rootNodes.push(node);
-            return;
-        }
-
-        if(node.parentCode && deptMap[node.parentCode]){
-            deptMap[node.parentCode].children.push(node);
-        }else{
-            const companyCode = String(node.row["公司代碼"]).trim();
-
-            if(companyCode && legalMap[companyCode]){
-                legalMap[companyCode].children.push(node);
-            }else{
-                rootNodes.push(node);
-            }
-
-            if(node.parentCode && !deptMap[node.parentCode]){
-                errors.push("找不到上級部門：" + node.parentCode + "，部門：" + node.deptCode);
-            }
-        }
-    });
-
-    sortNodes(rootNodes);
-    rootNodes.forEach(node => calculateTotalPeople(node));
-
-    if(errors.length > 0){
-        result.innerHTML = `
-            <b>上傳結果</b><br>
-            <span class="resultSuccess">Excel 讀取成功</span><br>
-            <span class="resultWarn">異常訊息：</span><br>
-            ${errors.join("<br>")}
-        `;
-    }else{
-        result.innerHTML = `
-            <b>上傳結果</b><br>
-            <span class="resultSuccess">Excel 讀取成功</span><br>
-            資料檢查結果：目前無資料異常
-        `;
-    }
-
-    document.getElementById("summary").innerText =
-        "共讀取 " + allNodes.length + " 個節點，最上層節點 " + rootNodes.length + " 個，人員資訊 " + personRows.length + " 筆。";
-
-    document.getElementById("personSummary").innerText = "請點選部門人數查看人員資訊";
-    document.getElementById("personPanel").innerHTML = "尚未選擇部門";
-}
-
-function sortNodes(nodes){
-    const mode = document.getElementById("sortMode")?.value || "default";
-
-    nodes.sort((a,b) => {
-        if(mode === "name"){
-            return String(a.row["部門全名"] || "")
-                .localeCompare(String(b.row["部門全名"] || ""), "zh-Hant");
-        }
-
-        if(mode === "code"){
-            return String(a.row["部門代碼"] || "")
-                .localeCompare(String(b.row["部門代碼"] || ""), "zh-Hant");
-        }
-
-        if(a.level !== b.level) return a.level - b.level;
-        return a.order - b.order;
-    });
-
-    nodes.forEach(node => sortNodes(node.children));
-}
-
-function applySortAndRender(){
-    sortNodes(rootNodes);
-    renderChart();
-}
-
-function parsePeople(value){
-    const num = Number(String(value).replace(/,/g, "").trim());
-    return isNaN(num) ? 0 : num;
-}
-
-function calculateTotalPeople(node){
-    let total = node.ownPeople;
-
-    node.children.forEach(child => {
-        total += calculateTotalPeople(child);
-    });
-
-    node.totalPeople = total;
-    return total;
-}
-
-function closeAllDropdowns(exceptBox){
-    document.querySelectorAll(".dropdownFilter").forEach(box => {
-        if(box !== exceptBox){
-            box.classList.remove("open");
-        }
-    });
-}
-
-function createDropdownCheckbox(boxId, title, items, selectedSet, onChange, defaultText){
-    const box = document.getElementById(boxId);
-    box.innerHTML = "";
-
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "dropdownBtn";
-
-    const menu = document.createElement("div");
-    menu.className = "dropdownMenu";
-
-    function isAllSelected(){
-        return items.length > 0 && selectedSet.size === items.length;
-    }
-
-    function updateBtnText(){
-        if(isAllSelected()){
-            btn.innerText = `${title}：全選`;
-        }else if(selectedSet.size === 0){
-            btn.innerText = defaultText || title;
-        }else{
-            btn.innerText = `${title}：${selectedSet.size} 項`;
-        }
-
-        const selectAll = menu.querySelector(".selectAllCheckbox");
-        if(selectAll){
-            selectAll.checked = isAllSelected();
-        }
-    }
-
-    btn.addEventListener("click", function(e){
-        e.stopPropagation();
-        const isOpen = box.classList.contains("open");
-        closeAllDropdowns(box);
-        box.classList.toggle("open", !isOpen);
-    });
-
-    const allLabel = document.createElement("label");
-    allLabel.className = "selectAllLabel";
-    allLabel.innerHTML = `<input type="checkbox" class="selectAllCheckbox">全選`;
-
-    const allCheckbox = allLabel.querySelector("input");
-
-    allCheckbox.addEventListener("change", function(){
-        if(this.checked){
-            selectedSet.clear();
-            items.forEach(item => selectedSet.add(item.value));
-        }else{
-            selectedSet.clear();
-        }
-
-        menu.querySelectorAll("input.itemCheckbox").forEach(cb => {
-            cb.checked = selectedSet.has(cb.value);
-        });
-
-        updateBtnText();
-        onChange();
-    });
-
-    menu.appendChild(allLabel);
-
-    items.forEach(item => {
-        const label = document.createElement("label");
-        label.innerHTML = `
-            <input type="checkbox" class="itemCheckbox" value="${item.value}" ${selectedSet.has(item.value) ? "checked" : ""}>
-            ${item.label}
-        `;
-
-        const checkbox = label.querySelector("input");
-
-        checkbox.addEventListener("change", function(){
-            if(this.checked){
-                selectedSet.add(this.value);
-            }else{
-                selectedSet.delete(this.value);
-            }
-
-            updateBtnText();
-            onChange();
-        });
-
-        menu.appendChild(label);
-    });
-
-    box.appendChild(btn);
-    box.appendChild(menu);
-
-    updateBtnText();
-}
-
-function renderLevelFilters(){
-    const levels = [...new Set(allNodes.map(node => node.levelText))]
-        .sort((a,b) => {
-            if(a === "法人") return -1;
-            if(b === "法人") return 1;
-
-            const na = Number(a);
-            const nb = Number(b);
-
-            if(isNaN(na)) return 1;
-            if(isNaN(nb)) return -1;
-
-            return na - nb;
-        })
-        .map(level => ({
-            value: level,
-            label: level === "法人" ? "法人" : "層級 " + level
-        }));
-
-    selectedLevels.clear();
-    levels.forEach(item => selectedLevels.add(item.value));
-
-    createDropdownCheckbox(
-        "levelFilters",
-        "層級篩選",
-        levels,
-        selectedLevels,
-        function(){ expandAll(); },
-        "層級篩選：全部"
-    );
-}
-
-function renderFieldFilters(){
-    const fields = [
-        { value:"manager", label:"主管" },
-        { value:"level", label:"部門層級" },
-        { value:"deptCode", label:"部門代碼" },
-        { value:"costCode", label:"費用代碼" }
-    ];
-
-    createDropdownCheckbox(
-        "fieldFilters",
-        "顯示資訊",
-        fields,
-        visibleFields,
-        function(){ renderChart(); },
-        "顯示資訊"
-    );
-}
-
-function renderLegalFilters(){
-    const legals = [...new Set(personRows.map(row => String(row["所屬法人"] || "").trim()).filter(Boolean))]
-        .sort((a,b) => a.localeCompare(b, "zh-Hant"))
-        .map(legal => ({
-            value: legal,
-            label: legal
-        }));
-
-    if(legals.length === 0){
-        selectedLegals.clear();
-        rebuildPeopleCountCache();
-
-        document.getElementById("legalFilters").innerHTML = `
-            <button type="button" class="dropdownBtn">所屬法人：無人員資料</button>
-        `;
+function clearSavedData(){
+    const pwd = prompt("請輸入清除密碼");
+
+    if(pwd !== ADMIN_PASSWORD){
+        alert("密碼錯誤");
         return;
     }
 
-    selectedLegals.clear();
-    legals.forEach(item => selectedLegals.add(item.value));
-    rebuildPeopleCountCache();
+    localStorage.removeItem(STORAGE_KEY_ROWS);
+    localStorage.removeItem(STORAGE_KEY_FILE);
+    localStorage.removeItem(STORAGE_KEY_UPDATED_AT);
 
-    createDropdownCheckbox(
-        "legalFilters",
-        "所屬法人",
-        legals,
-        selectedLegals,
-        function(){
-            rebuildPeopleCountCache();
-            renderChart();
+    rawRows = [];
+    allNodes = [];
+    rootNodes = [];
+    nodeMap.clear();
+    expandedSet.clear();
 
-            if(currentSelectedDeptCode){
-                showDepartmentPersons(currentSelectedDeptCode, currentSelectedPersonType);
-            }
-        },
-        "所屬法人：全部"
-    );
+    document.getElementById("orgChart").innerHTML = "";
+    document.getElementById("treeList").innerHTML = "";
+    document.getElementById("levelFilters").innerHTML = "";
+    document.getElementById("legalFilters").innerHTML = "";
+    document.getElementById("resultArea").innerHTML = "尚未上傳資料。";
+    document.getElementById("savedInfo").innerHTML = "";
+    document.getElementById("uploadMsg").innerHTML = `<span class="success">已清除記憶。</span>`;
 }
 
-function setMaxDisplayDepth(value){
-    maxDisplayDepth = value || "all";
-    renderChart();
+/* ===============================
+   建資料
+================================ */
+function buildData(){
+    nodeMap = new Map();
+    allNodes = [];
+    rootNodes = [];
+    expandedSet = new Set();
+
+    rawRows.forEach(row => {
+        const node = {
+            ...row,
+            children:[],
+            parent:null,
+            totalPeople:0
+        };
+
+        allNodes.push(node);
+
+        if(node.deptCode){
+            nodeMap.set(node.deptCode, node);
+        }
+    });
+
+    allNodes.forEach(node => {
+        const parentKey = node.parentDept;
+        const parent = nodeMap.get(parentKey);
+
+        if(parent && parent !== node){
+            node.parent = parent;
+            parent.children.push(node);
+        }else{
+            rootNodes.push(node);
+        }
+    });
+
+    sortChildren(rootNodes);
+    calcTotalPeople(rootNodes);
+
+    allNodes.forEach(n => expandedSet.add(n.deptCode));
+
+    checkData();
 }
 
-function getMaxDisplayDepth(){
-    if(maxDisplayDepth === "all"){
-        return Infinity;
+function sortChildren(nodes){
+    const sortMode = document.getElementById("sortMode")?.value || "original";
+
+    nodes.sort((a,b) => {
+        if(sortMode === "name"){
+            return a.deptName.localeCompare(b.deptName, "zh-Hant");
+        }
+
+        if(sortMode === "deptCode"){
+            return a.deptCode.localeCompare(b.deptCode);
+        }
+
+        if(sortMode === "level"){
+            return Number(a.level || 0) - Number(b.level || 0) || a.rowIndex - b.rowIndex;
+        }
+
+        return a.rowIndex - b.rowIndex;
+    });
+
+    nodes.forEach(n => sortChildren(n.children));
+}
+
+function calcTotalPeople(nodes){
+    nodes.forEach(node => {
+        node.totalPeople = node.ownPeople + calcChildrenPeople(node);
+    });
+}
+
+function calcChildrenPeople(node){
+    let total = 0;
+
+    node.children.forEach(child => {
+        total += child.ownPeople + calcChildrenPeople(child);
+    });
+
+    return total;
+}
+
+function checkData(){
+    const messages = [];
+
+    const codeCount = {};
+    rawRows.forEach(r => {
+        if(!r.deptCode) messages.push(`第 ${r.rowIndex + 2} 列缺少部門代碼`);
+        codeCount[r.deptCode] = (codeCount[r.deptCode] || 0) + 1;
+    });
+
+    Object.keys(codeCount).forEach(code => {
+        if(code && codeCount[code] > 1){
+            messages.push(`部門代碼重複：${code}`);
+        }
+    });
+
+    rawRows.forEach(r => {
+        if(r.parentDept && r.parentDept !== "HH" && !nodeMap.has(r.parentDept)){
+            messages.push(`找不到上級部門：${r.deptName} / 上級部門 ${r.parentDept}`);
+        }
+    });
+
+    let html = "";
+    html += `資料筆數：<b>${rawRows.length}</b><br>`;
+    html += `根節點數：<b>${rootNodes.length}</b><br>`;
+
+    if(messages.length){
+        html += `<br><span class="error">資料提醒：</span><br>`;
+        html += messages.map(m => `・${m}`).join("<br>");
+    }else{
+        html += `<br><span class="success">資料檢查無明顯異常。</span>`;
     }
 
-    const num = Number(maxDisplayDepth);
-    return isNaN(num) ? Infinity : num;
+    document.getElementById("resultArea").innerHTML = html;
 }
 
-function toggleHideZeroTotal(checked){
-    hideZeroTotal = checked;
-    renderChart();
-
-    if(currentSelectedDeptCode){
-        showDepartmentPersons(currentSelectedDeptCode, currentSelectedPersonType);
-    }
+/* ===============================
+   篩選選項
+================================ */
+function renderFilterOptions(){
+    renderLegalFilters();
+    renderLevelFilters();
 }
 
-function setViewMode(mode){
-    currentViewMode = mode;
+function renderLegalFilters(){
+    const box = document.getElementById("legalFilters");
+    box.innerHTML = "";
 
-    document.getElementById("treeModeBtn").classList.toggle("inactive", mode !== "tree");
-    document.getElementById("orgModeBtn").classList.toggle("inactive", mode !== "org");
+    const values = [...new Set(rawRows.map(r => r.companyCode).filter(Boolean))];
 
-    renderChart();
+    values.forEach(v => {
+        const label = document.createElement("label");
+        label.className = "checkboxPill";
+        label.innerHTML = `<input type="checkbox" value="${escapeHtml(v)}" checked onchange="renderAll()"> ${escapeHtml(v)}`;
+        box.appendChild(label);
+    });
 }
 
-function renderChart(){
+function renderLevelFilters(){
+    const box = document.getElementById("levelFilters");
+    box.innerHTML = "";
+
+    const values = [...new Set(rawRows.map(r => r.level).filter(Boolean))]
+        .sort((a,b) => Number(a) - Number(b));
+
+    values.forEach(v => {
+        const label = document.createElement("label");
+        label.className = "checkboxPill";
+        label.innerHTML = `<input type="checkbox" value="${escapeHtml(v)}" checked onchange="renderAll()"> 層級 ${escapeHtml(v)}`;
+        box.appendChild(label);
+    });
+}
+
+/* ===============================
+   顯示設定
+================================ */
+function getCheckedValues(containerId){
+    return [...document.querySelectorAll(`#${containerId} input[type="checkbox"]:checked`)]
+        .map(i => i.value);
+}
+
+function getVisibleFields(){
+    return getCheckedValues("fieldFilters");
+}
+
+function getSelectedLegals(){
+    return getCheckedValues("legalFilters");
+}
+
+function getSelectedLevels(){
+    return getCheckedValues("levelFilters");
+}
+
+/* ===============================
+   主要渲染
+================================ */
+function renderAll(){
+    if(!rawRows.length) return;
+
+    sortChildren(rootNodes);
+    calcTotalPeople(rootNodes);
+
     if(currentViewMode === "tree"){
-        renderTree();
+        renderTreeList();
     }else{
         renderOrgChart();
     }
 
-    searchTree(false);
+    updateModeButtons();
 }
 
-function renderTree(){
-    const tree = document.getElementById("tree");
-    const orgChart = document.getElementById("orgChart");
+function nodePassBasicFilter(node){
+    const legals = getSelectedLegals();
+    const levels = getSelectedLevels();
+    const hideZero = document.getElementById("hideZero").checked;
 
-    tree.classList.remove("hidden");
-    orgChart.classList.add("hidden");
+    if(legals.length && !legals.includes(node.companyCode)) return false;
+    if(levels.length && !levels.includes(node.level)) return false;
+    if(hideZero && node.totalPeople === 0) return false;
 
-    tree.innerHTML = "";
+    return true;
+}
 
-    const displayRoots = focusNodes.length > 0 ? focusNodes : rootNodes;
+function getSearchText(){
+    return document.getElementById("searchInput").value.trim().toLowerCase();
+}
 
-    displayRoots.forEach(node => {
-        if(shouldShowNode(node)){
-            tree.appendChild(createTreeNodeElement(node, 1));
-        }
+function nodeMatchesSearch(node, keyword){
+    if(!keyword) return true;
+
+    const text = [
+        node.companyCode,
+        node.level,
+        node.parentDept,
+        node.deptCode,
+        node.costCode,
+        node.deptName,
+        node.supervisorName,
+        node.supervisorTitle
+    ].join(" ").toLowerCase();
+
+    return text.includes(keyword);
+}
+
+function hasMatchedDescendant(node, keyword){
+    return node.children.some(child => {
+        return nodeMatchesSearch(child, keyword) || hasMatchedDescendant(child, keyword);
     });
 }
 
-function renderOrgChart(){
-    const tree = document.getElementById("tree");
-    const orgChart = document.getElementById("orgChart");
-
-    tree.classList.add("hidden");
-    orgChart.classList.remove("hidden");
-
-    orgChart.innerHTML = "";
-
-    const displayRoots = focusNodes.length > 0 ? focusNodes : rootNodes;
-
-    displayRoots.forEach(node => {
-        if(shouldShowNode(node)){
-            orgChart.appendChild(createOrgNodeElement(node, 1));
-        }
-    });
-
-    requestAnimationFrame(updateOrgConnectorLines);
-}
-
-function shouldShowNode(node){
-    if(hideZeroTotal && getTotalPeopleByLegal(node) <= 0){
-        return false;
-    }
-
-    if(node.isVirtualRoot){
-        return true;
-    }
-
-    if(selectedLevels.size === 0){
-        return false;
-    }
-
-    if(selectedLevels.has(node.levelText)){
-        return true;
-    }
-
-    return node.children.some(child => shouldShowNode(child));
-}
-
-function isPathOnly(node){
-    if(selectedLevels.size === 0){
-        return false;
-    }
-
-    return !selectedLevels.has(node.levelText);
-}
-
-function getFilteredPersons(){
-    return filteredPersonRows;
-}
-
-function getOwnPeopleByLegal(node){
-    return ownPeopleCountCache[node.deptCode] || 0;
-}
-
-function getTotalPeopleByLegal(node){
-    if(totalPeopleCountCache.has(node.deptCode)){
-        return totalPeopleCountCache.get(node.deptCode);
-    }
-
-    let total = getOwnPeopleByLegal(node);
-
-    node.children.forEach(child => {
-        total += getTotalPeopleByLegal(child);
-    });
-
-    totalPeopleCountCache.set(node.deptCode, total);
-    return total;
-}
-
-function renderNodeInfo(node){
-    const row = node.row;
-    const lines = [];
-
-    if(visibleFields.has("manager") && !node.isLegalEntity && !node.isVirtualRoot){
-        lines.push(`主管：${row["主管一姓名"] || "-"} / ${row["主管一職稱"] || "-"}`);
-    }
-
-    if(visibleFields.has("level")){
-        lines.push(`層級：${row["層級"] || "-"}`);
-    }
-
-    if(visibleFields.has("deptCode")){
-        lines.push(`部門代碼：${row["部門代碼"] || "-"}`);
-    }
-
-    if(visibleFields.has("costCode") && !node.isLegalEntity && !node.isVirtualRoot){
-        lines.push(`費用代碼：${row["費用代碼"] || "-"}`);
-    }
-
-    const ownPeople = getOwnPeopleByLegal(node);
-    const totalPeople = getTotalPeopleByLegal(node);
-
-    if(node.isLegalEntity || node.isVirtualRoot){
-        lines.push(`
-            <div class="totalPeople">
-                含轄下合計：
-                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
-            </div>
-        `);
-    }else{
-        lines.push(`
-            <div class="totalPeople">
-                本單位人數：
-                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="own">${ownPeople} 人</span><br>
-                含轄下合計：
-                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
-            </div>
-        `);
-    }
-
-    return lines.join("<br>");
-}
-
-function bindPeopleLinks(container){
-    container.querySelectorAll(".peopleLink").forEach(link => {
-        link.addEventListener("click", function(e){
-            e.stopPropagation();
-
-            const deptCode = this.dataset.deptCode;
-            const type = this.dataset.type || "own";
-
-            showDepartmentPersons(deptCode, type);
-        });
-    });
-}
-
-function findNodeByDeptCode(deptCode){
-    const found = allNodes.find(n => n.deptCode === deptCode);
-    if(found) return found;
-
-    for(const root of focusNodes){
-        const result = findNodeInTree(root, deptCode);
-        if(result) return result;
-    }
-
-    return null;
-}
-
-function findNodeInTree(node, deptCode){
-    if(node.deptCode === deptCode){
-        return node;
-    }
-
-    for(const child of node.children){
-        const result = findNodeInTree(child, deptCode);
-        if(result) return result;
-    }
-
-    return null;
-}
-
-function getDescendantDeptCodes(node){
-    let codes = [node.deptCode];
-
-    node.children.forEach(child => {
-        codes = codes.concat(getDescendantDeptCodes(child));
-    });
-
-    return codes;
-}
-
-function showDepartmentPersons(deptCode, type = "own"){
-    currentSelectedDeptCode = deptCode;
-    currentSelectedPersonType = type;
-
-    const node = findNodeByDeptCode(deptCode);
-    const deptName = node ? node.row["部門全名"] : deptCode;
-
-    let persons = getFilteredPersons();
-
-    if(type === "total" && node){
-        const deptCodes = getDescendantDeptCodes(node);
-
-        persons = persons.filter(person => {
-            const personDeptCode = String(person["部門代碼"] || "").trim();
-            return deptCodes.includes(personDeptCode);
-        });
-    }else{
-        persons = persons.filter(person => {
-            return String(person["部門代碼"] || "").trim() === deptCode;
-        });
-    }
-
-    const summary = document.getElementById("personSummary");
-    const panel = document.getElementById("personPanel");
-
-    const rangeText = type === "total" ? "含轄下" : "本單位";
-
-    summary.innerText = `${deptName}｜部門代碼：${deptCode}｜${rangeText}人員 ${persons.length} 人`;
-
-    if(persons.length === 0){
-        panel.innerHTML = `
-            <div class="noPerson">
-                此部門目前查無符合條件的人員資訊。<br>
-                請確認「人員資訊」分頁的部門代碼是否與「部門資訊」一致。
-            </div>
-        `;
-        return;
-    }
-
-    panel.innerHTML = `
-        <table class="personTable">
-            <thead>
-                <tr>
-                    <th>所屬法人</th>
-                    <th>部門代碼</th>
-                    <th>部門名稱</th>
-                    <th>員工工號</th>
-                    <th>員工姓名</th>
-                    <th>職稱名稱</th>
-                    <th>資位</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${persons.map(person => `
-                    <tr>
-                        <td>${person["所屬法人"] || ""}</td>
-                        <td>${person["部門代碼"] || ""}</td>
-                        <td>${person["部門名稱"] || ""}</td>
-                        <td>${person["員工工號"] || ""}</td>
-                        <td>${person["員工姓名"] || ""}</td>
-                        <td>${person["職稱名稱"] || ""}</td>
-                        <td>${person["資位"] || ""}</td>
-                    </tr>
-                `).join("")}
-            </tbody>
-        </table>
-    `;
-}
-
-function getNodeTitle(node){
-    if(node.isVirtualRoot){
-        return node.row["部門全名"] || "-";
-    }
-
-    if(node.isLegalEntity){
-        return "法人：" + node.row["部門全名"];
-    }
-
-    return node.row["部門全名"] || "-";
-}
-
-function createTreeNodeElement(node, currentDepth = 1){
-    const li = document.createElement("li");
-    const maxDepth = getMaxDisplayDepth();
-    const visibleChildren = node.children.filter(child => shouldShowNode(child));
-    const canShowChildren = currentDepth < maxDepth;
-    const hasChildren = canShowChildren && visibleChildren.length > 0;
-
-    const nodeDiv = document.createElement("div");
-    nodeDiv.className = "node";
-
-    if(isPathOnly(node)){
-        nodeDiv.classList.add("pathOnly");
-    }
-
-    nodeDiv.dataset.search = getSearchText(node);
-
-    nodeDiv.innerHTML = `
-        <div class="nodeHeader">
-            ${
-                hasChildren
-                ? `<span class="toggle">${node.expanded ? "－" : "＋"}</span>`
-                : `<span class="emptyToggle"></span>`
-            }
-            <span class="deptName">${getNodeTitle(node)}</span>
-        </div>
-        <div class="nodeInfo">
-            ${renderNodeInfo(node)}
-        </div>
-    `;
-
-    bindPeopleLinks(nodeDiv);
-
-    nodeDiv.addEventListener("click", function(e){
-        e.stopPropagation();
-
-        if(!node.isLegalEntity && !node.isVirtualRoot){
-            showDepartmentPersons(node.deptCode, "own");
-        }
-
-        if(hasChildren){
-            node.expanded = !node.expanded;
-            renderChart();
-        }
-    });
-
-    li.appendChild(nodeDiv);
-
-    if(hasChildren){
-        const ul = document.createElement("ul");
-
-        if(!node.expanded){
-            ul.className = "hidden";
-        }
-
-        visibleChildren.forEach(child => {
-            ul.appendChild(createTreeNodeElement(child, currentDepth + 1));
-        });
-
-        li.appendChild(ul);
-    }
-
-    return li;
-}
-
-function createOrgNodeElement(node, currentDepth = 1){
-    const maxDepth = getMaxDisplayDepth();
-    const visibleChildren = node.children.filter(child => shouldShowNode(child));
-    const canShowChildren = currentDepth < maxDepth;
-    const hasChildren = canShowChildren && visibleChildren.length > 0;
-
-    const group = document.createElement("div");
-    group.className = "orgNodeGroup";
-
-    if(hasChildren){
-        group.classList.add("hasChildren");
-    }
-
-    const nodeDiv = document.createElement("div");
-    nodeDiv.className = "orgNode";
-
-    if(isPathOnly(node)){
-        nodeDiv.classList.add("pathOnly");
-    }
-
-    nodeDiv.dataset.search = getSearchText(node);
-
-    nodeDiv.innerHTML = `
-        <span class="deptName">${getNodeTitle(node)}</span>
-        <div class="nodeInfo">
-            ${renderNodeInfo(node)}
-        </div>
-    `;
-
-    bindPeopleLinks(nodeDiv);
-
-    nodeDiv.addEventListener("click", function(e){
-        e.stopPropagation();
-
-        if(!node.isLegalEntity && !node.isVirtualRoot){
-            showDepartmentPersons(node.deptCode, "own");
-        }
-    });
-
-    group.appendChild(nodeDiv);
-
-    if(hasChildren){
-        const childrenBox = document.createElement("div");
-        childrenBox.className = "orgChildren";
-
-        if(visibleChildren.length > 1){
-            childrenBox.classList.add("hasMultiple");
-        }
-
-        visibleChildren.forEach(child => {
-            childrenBox.appendChild(createOrgNodeElement(child, currentDepth + 1));
-        });
-
-        group.appendChild(childrenBox);
-    }
-
-    return group;
-}
-
-function updateOrgConnectorLines(){
-    document.querySelectorAll(".orgChildren").forEach(box => {
-        box.querySelectorAll(":scope > .orgConnectorLine").forEach(line => line.remove());
-
-        const groups = [...box.children].filter(el => el.classList.contains("orgNodeGroup"));
-
-        if(groups.length < 2) return;
-
-        const firstRowTop = groups[0].offsetTop;
-        const sameRow = groups.every(group => Math.abs(group.offsetTop - firstRowTop) < 5);
-
-        if(!sameRow) return;
-
-        const first = groups[0];
-        const last = groups[groups.length - 1];
-
-        const firstCenter = first.offsetLeft + first.offsetWidth / 2;
-        const lastCenter = last.offsetLeft + last.offsetWidth / 2;
-
-        const line = document.createElement("div");
-        line.className = "orgConnectorLine";
-        line.style.left = firstCenter + "px";
-        line.style.width = (lastCenter - firstCenter) + "px";
-
-        box.prepend(line);
-    });
-}
-
-function normalizeText(text){
-    return String(text || "")
-        .toLowerCase()
-        .replace(/\s+/g, "")
-        .replace(/　/g, "");
-}
-
-function getSearchText(node){
-    return normalizeText([
-        node.row["部門全名"],
-        node.row["主管一姓名"],
-        node.row["主管一職稱"],
-        node.row["部門代碼"],
-        node.row["費用代碼"],
-        node.row["公司代碼"]
-    ].join(" "));
-}
-
-function isFuzzyMatch(searchText, keyword){
-    const normalizedKeyword = normalizeText(keyword);
-
-    if(!normalizedKeyword) return false;
-
-    const keywords = String(keyword)
-        .trim()
-        .split(/\s+/)
-        .map(k => normalizeText(k))
-        .filter(Boolean);
-
-    if(searchText.includes(normalizedKeyword)){
-        return true;
-    }
-
-    if(keywords.length > 1){
-        return keywords.every(k => searchText.includes(k));
+function isDescendantOfMatched(node, keyword){
+    let p = node.parent;
+
+    while(p){
+        if(nodeMatchesSearch(p, keyword)) return true;
+        p = p.parent;
     }
 
     return false;
 }
 
-function getSpecialSearchType(keyword){
-    const k = normalizeText(keyword);
+function shouldShowNode(node){
+    const keyword = getSearchText();
+    const includeChildren = document.getElementById("includeChildren").checked;
 
-    if(k === "*集團"){
-        return "allGroup";
+    if(!nodePassBasicFilter(node)) return false;
+
+    if(!keyword) return true;
+
+    if(nodeMatchesSearch(node, keyword)) return true;
+
+    if(includeChildren && isDescendantOfMatched(node, keyword)) return true;
+
+    if(hasMatchedDescendant(node, keyword)) return true;
+
+    return false;
+}
+
+/* ===============================
+   子部門欄數規則
+================================ */
+function getBestColumnCount(count){
+    if(count <= 4) return count;
+
+    if(count === 5) return 3;
+    if(count === 6) return 3;
+    if(count === 7) return 4;
+    if(count === 8) return 4;
+    if(count === 9) return 5;
+    if(count === 10) return 5;
+
+    return 5;
+}
+
+/* ===============================
+   組織圖
+================================ */
+function renderOrgChart(){
+    const org = document.getElementById("orgChart");
+    const tree = document.getElementById("treeList");
+
+    org.classList.remove("hidden");
+    tree.classList.add("hidden");
+
+    org.innerHTML = "";
+
+    const visibleRoots = rootNodes.filter(n => shouldShowNode(n));
+
+    if(!visibleRoots.length){
+        org.innerHTML = `<div class="smallText">查無符合資料。</div>`;
+        return;
     }
 
-    if(k === "*次集團"){
-        return "subGroup";
-    }
-
-    if(k === "*集團中央"){
-        return "groupCenter";
-    }
-
-    return "";
-}
-
-function getSpecialDisplayKeyword(keyword){
-    const type = getSpecialSearchType(keyword);
-
-    if(type === "allGroup") return "集團";
-    if(type === "subGroup") return "次集團";
-    if(type === "groupCenter") return "集團中央";
-
-    return keyword;
-}
-
-function isSubGroupNode(node){
-    const name = normalizeText(node.row["部門全名"]);
-    return name.includes("次集團") || name.includes("事業群");
-}
-
-function createVirtualNode(title, children){
-    const total = children.reduce((sum, node) => sum + getTotalPeopleByLegal(node), 0);
-
-    return {
-        row:{
-            "公司代碼":"",
-            "層級":"虛擬法人",
-            "上級部門":"",
-            "部門代碼":title,
-            "費用代碼":"",
-            "部門全名":title,
-            "主管一姓名":"",
-            "主管一職稱":"",
-            "在職人數":0
-        },
-        deptCode:title,
-        parentCode:"",
-        levelText:"虛擬法人",
-        level:0,
-        order:-1,
-        ownPeople:0,
-        totalPeople:total,
-        children:children,
-        expanded:true,
-        isLegalEntity:false,
-        isVirtualRoot:true
-    };
-}
-
-function isUnderAnyNode(node, parentNodes){
-    return parentNodes.some(parent => {
-        return parent === node || isDescendantOf(node, parent);
+    visibleRoots.forEach(root => {
+        org.appendChild(renderOrgNode(root));
     });
 }
 
-function findSpecialMatchedNodes(type){
-    const subGroupRoots = filterTopMatchedNodes(
-        allNodes.filter(node => !node.isLegalEntity && isSubGroupNode(node))
-    );
+function renderOrgNode(node){
+    const wrap = document.createElement("div");
+    wrap.className = "orgNodeWrap";
 
-    const groupCenterRoots = filterTopMatchedNodes(
-        allNodes.filter(node => {
-            return (
-                !node.isLegalEntity &&
-                !isSubGroupNode(node) &&
-                !isUnderAnyNode(node, subGroupRoots)
-            );
-        })
-    );
+    const visibleChildren = node.children.filter(child => shouldShowNode(child));
 
-    const groupCenterNode = createVirtualNode("集團中央", groupCenterRoots);
-    const subGroupNode = createVirtualNode("次集團", subGroupRoots);
-
-    if(type === "allGroup"){
-        return [
-            createVirtualNode("集團", [
-                groupCenterNode,
-                subGroupNode
-            ])
-        ];
+    if(visibleChildren.length){
+        wrap.classList.add("hasChildren");
     }
 
-    if(type === "subGroup"){
-        return [subGroupNode];
+    const card = document.createElement("div");
+    card.className = "orgNode";
+    card.onclick = function(e){
+        e.stopPropagation();
+        toggleNode(node);
+    };
+
+    card.innerHTML = buildNodeHtml(node);
+    wrap.appendChild(card);
+
+    if(node.children.length){
+        const mark = document.createElement("div");
+        mark.className = "toggleMark";
+        mark.innerText = expandedSet.has(node.deptCode) ? "點擊收合" : "點擊展開";
+        wrap.appendChild(mark);
     }
 
-    if(type === "groupCenter"){
-        return [groupCenterNode];
+    if(visibleChildren.length && expandedSet.has(node.deptCode)){
+        const childrenDiv = document.createElement("div");
+        childrenDiv.className = "children compact";
+
+        const childCount = visibleChildren.length;
+        const cols = getBestColumnCount(childCount);
+
+        childrenDiv.style.maxWidth = (cols * 292) + "px";
+
+        visibleChildren.forEach(child => {
+            childrenDiv.appendChild(renderOrgNode(child));
+        });
+
+        wrap.appendChild(childrenDiv);
     }
 
-    return [];
+    return wrap;
 }
 
-function expandAll(){
-    allNodes.forEach(node => node.expanded = true);
+function buildNodeHtml(node){
+    const fields = getVisibleFields();
 
-    function expandRecursive(node){
-        node.expanded = true;
-        node.children.forEach(child => expandRecursive(child));
+    let html = "";
+    html += `<div class="orgTitle">${escapeHtml(node.deptName || "-")}</div>`;
+    html += `<div class="orgInfo">`;
+
+    if(fields.includes("supervisor")){
+        const supervisor = node.supervisorName || "-";
+        const title = node.supervisorTitle || "-";
+        html += `主管：${escapeHtml(supervisor)} / ${escapeHtml(title)}<br>`;
     }
 
-    focusNodes.forEach(node => expandRecursive(node));
+    if(fields.includes("level")){
+        html += `層級：${escapeHtml(node.level || "-")}<br>`;
+    }
 
-    renderChart();
+    if(fields.includes("deptCode")){
+        html += `部門代碼：${escapeHtml(node.deptCode || "-")}<br>`;
+    }
+
+    if(fields.includes("costCode")){
+        html += `費用代碼：${escapeHtml(node.costCode || "-")}<br>`;
+    }
+
+    html += `</div>`;
+
+    html += `
+        <div class="orgPeople">
+            本單位人數：<a href="javascript:void(0)">${node.ownPeople || 0} 人</a><br>
+            含轄下合計：<a href="javascript:void(0)">${node.totalPeople || 0} 人</a>
+        </div>
+    `;
+
+    return html;
+}
+
+function toggleNode(node){
+    if(!node.deptCode) return;
+
+    if(expandedSet.has(node.deptCode)){
+        expandedSet.delete(node.deptCode);
+    }else{
+        expandedSet.add(node.deptCode);
+    }
+
+    renderAll();
+}
+
+/* ===============================
+   樹狀清單
+================================ */
+function renderTreeList(){
+    const org = document.getElementById("orgChart");
+    const tree = document.getElementById("treeList");
+
+    org.classList.add("hidden");
+    tree.classList.remove("hidden");
+
+    tree.innerHTML = "";
+
+    const visibleRoots = rootNodes.filter(n => shouldShowNode(n));
+
+    if(!visibleRoots.length){
+        tree.innerHTML = `<div class="smallText">查無符合資料。</div>`;
+        return;
+    }
+
+    visibleRoots.forEach(root => {
+        renderTreeNode(root, tree, 0);
+    });
+}
+
+function renderTreeNode(node, container, depth){
+    if(!shouldShowNode(node)) return;
+
+    const item = document.createElement("div");
+    item.className = "treeItem";
+    item.style.marginLeft = `${depth * 28}px`;
+
+    item.innerHTML = `
+        <div class="treeTitle">${escapeHtml(node.deptName || "-")}</div>
+        <div class="treeMeta">
+            公司代碼：${escapeHtml(node.companyCode || "-")}
+            ｜層級：${escapeHtml(node.level || "-")}
+            ｜部門代碼：${escapeHtml(node.deptCode || "-")}
+            ｜費用代碼：${escapeHtml(node.costCode || "-")}
+            ｜主管：${escapeHtml(node.supervisorName || "-")} / ${escapeHtml(node.supervisorTitle || "-")}
+            ｜本單位：${node.ownPeople || 0} 人
+            ｜含轄下：${node.totalPeople || 0} 人
+        </div>
+    `;
+
+    container.appendChild(item);
+
+    if(expandedSet.has(node.deptCode)){
+        node.children.forEach(child => renderTreeNode(child, container, depth + 1));
+    }
+}
+
+/* ===============================
+   展開 / 收合
+================================ */
+function expandAll(){
+    allNodes.forEach(n => {
+        if(n.deptCode) expandedSet.add(n.deptCode);
+    });
+
+    renderAll();
 }
 
 function collapseAll(){
-    allNodes.forEach(node => node.expanded = false);
+    expandedSet.clear();
 
-    function collapseRecursive(node){
-        node.expanded = false;
-        node.children.forEach(child => collapseRecursive(child));
-    }
-
-    focusNodes.forEach(node => collapseRecursive(node));
-
-    renderChart();
-}
-
-function searchTree(jumpToFirst = false){
-    const rawKeyword = document.getElementById("searchInput").value.trim();
-    const keyword = getSpecialDisplayKeyword(rawKeyword);
-    const specialType = getSpecialSearchType(rawKeyword);
-    const focusChecked = document.getElementById("focusCheckbox").checked;
-
-    setTimeout(() => {
-        const nodes = document.querySelectorAll(".node, .orgNode");
-        let firstMatch = null;
-
-        nodes.forEach(node => {
-            node.classList.remove("match");
-
-            if(keyword && isFuzzyMatch(node.dataset.search, keyword)){
-                if(!firstMatch){
-                    firstMatch = node;
-                }
-
-                if(!focusChecked){
-                    node.classList.add("match");
-                }
-            }
-        });
-
-        if(jumpToFirst && firstMatch){
-            firstMatch.scrollIntoView({
-                behavior:"smooth",
-                block:"center",
-                inline:"center"
-            });
-        }
-
-        if(jumpToFirst && rawKeyword && !firstMatch && !specialType){
-            alert("找不到符合的部門、主管或代碼");
-        }
-    }, 0);
-}
-
-function findMatchedNodes(keyword){
-    if(!keyword) return [];
-
-    const matched = allNodes.filter(node => {
-        return isFuzzyMatch(getSearchText(node), keyword);
+    rootNodes.forEach(n => {
+        if(n.deptCode) expandedSet.add(n.deptCode);
     });
 
-    return filterTopMatchedNodes(matched);
+    renderAll();
 }
 
-function filterTopMatchedNodes(nodes){
-    return nodes.filter(node => {
-        return !nodes.some(other => {
-            return other !== node && isDescendantOf(node, other);
-        });
-    });
-}
+/* ===============================
+   呈現模式
+================================ */
+function setViewMode(mode, needRender = true){
+    currentViewMode = mode;
+    localStorage.setItem(STORAGE_KEY_VIEW_MODE, mode);
 
-function isDescendantOf(node, possibleParent){
-    return possibleParent.children.some(child => {
-        return child === node || isDescendantOf(node, child);
-    });
-}
+    updateModeButtons();
 
-function searchAndJump(){
-    const keyword = document.getElementById("searchInput").value.trim();
-    const focusChecked = document.getElementById("focusCheckbox").checked;
-    const specialType = getSpecialSearchType(keyword);
-
-    if(!keyword){
-        focusNodes = [];
-        renderChart();
-        return;
-    }
-
-    if(specialType){
-        focusNodes = findSpecialMatchedNodes(specialType);
-        allNodes.forEach(node => node.expanded = true);
-
-        function expandRecursive(node){
-            node.expanded = true;
-            node.children.forEach(child => expandRecursive(child));
-        }
-
-        focusNodes.forEach(node => expandRecursive(node));
-        renderChart();
-
-        setTimeout(() => searchTree(true), 0);
-
-        return;
-    }
-
-    if(focusChecked){
-        const matchedNodes = findMatchedNodes(keyword);
-
-        if(matchedNodes.length === 0){
-            alert("找不到符合的部門、主管或代碼");
-            return;
-        }
-
-        focusNodes = matchedNodes;
-        allNodes.forEach(node => node.expanded = true);
-
-        function expandRecursive(node){
-            node.expanded = true;
-            node.children.forEach(child => expandRecursive(child));
-        }
-
-        focusNodes.forEach(node => expandRecursive(node));
-        renderChart();
-
-        setTimeout(() => searchTree(true), 0);
-    }else{
-        focusNodes = [];
-        allNodes.forEach(node => node.expanded = true);
-        renderChart();
-
-        setTimeout(() => searchTree(true), 0);
+    if(needRender){
+        renderAll();
     }
 }
 
-function getPdfChartTitle(){
-    const displayRoots = focusNodes.length > 0 ? focusNodes : rootNodes;
+function updateModeButtons(){
+    const treeBtn = document.getElementById("treeModeBtn");
+    const chartBtn = document.getElementById("chartModeBtn");
 
-    if(!displayRoots || displayRoots.length === 0){
-        return "組織圖";
-    }
-
-    let firstRoot = displayRoots[0];
-    let title = "";
-
-    if(firstRoot.isVirtualRoot){
-        title = firstRoot.row["部門全名"] || firstRoot.deptCode || "組織圖";
-    }else if(firstRoot.isLegalEntity && firstRoot.children && firstRoot.children.length === 1){
-        title = firstRoot.children[0].row["部門全名"] || firstRoot.children[0].deptCode || "組織圖";
-    }else if(firstRoot.isLegalEntity){
-        title = firstRoot.row["部門全名"] || firstRoot.deptCode || "組織圖";
-    }else{
-        title = firstRoot.row["部門全名"] || firstRoot.deptCode || "組織圖";
-    }
-
-    title = String(title).replace(/^法人：/, "").trim();
-
-    return title + "組織圖";
+    treeBtn.classList.toggle("active", currentViewMode === "tree");
+    chartBtn.classList.toggle("active", currentViewMode === "chart");
 }
 
-function getPdfUpdatedText(){
-    const updatedAt = localStorage.getItem(STORAGE_KEY_UPDATED_AT) || getNowText();
-    return "更新日期：" + updatedAt;
+/* ===============================
+   縮放
+================================ */
+function updateZoom(){
+    const value = document.getElementById("zoomRange").value;
+    document.getElementById("zoomValue").innerText = value + "%";
+    document.getElementById("zoomWrap").style.transform = `scale(${value / 100})`;
 }
 
-async function preparePdfCanvas(titleText){
-    const target = document.getElementById("zoomWrap");
-
-    if(currentViewMode === "org"){
-        updateOrgConnectorLines();
-    }
-
-    const updatedText = getPdfUpdatedText();
-    const originalTransform = target.style.transform;
-
-    target.style.transform = "scale(1)";
-
-    await new Promise(resolve => setTimeout(resolve, 250));
-
-    const exportWrapper = document.createElement("div");
-    exportWrapper.className = "pdfExportWrapper";
-    exportWrapper.style.position = "absolute";
-    exportWrapper.style.left = "-99999px";
-    exportWrapper.style.top = "0";
-    exportWrapper.style.zIndex = "-1";
-
-    const headerDiv = document.createElement("div");
-    headerDiv.className = "pdfExportHeader";
-
-    const titleDiv = document.createElement("div");
-    titleDiv.className = "pdfExportTitle";
-    titleDiv.innerText = titleText || getPdfChartTitle();
-
-    const dateDiv = document.createElement("div");
-    dateDiv.className = "pdfExportDate";
-    dateDiv.innerText = updatedText;
-
-    headerDiv.appendChild(titleDiv);
-    headerDiv.appendChild(dateDiv);
-
-    const clonedChart = target.cloneNode(true);
-    clonedChart.style.transform = "scale(1)";
-    clonedChart.style.transformOrigin = "top left";
-
-    exportWrapper.appendChild(headerDiv);
-    exportWrapper.appendChild(clonedChart);
-    document.body.appendChild(exportWrapper);
-
-    const canvas = await html2canvas(exportWrapper, {
-        scale: 2,
-        backgroundColor: "#ffffff",
-        useCORS: true,
-        scrollX: 0,
-        scrollY: 0
-    });
-
-    document.body.removeChild(exportWrapper);
-    target.style.transform = originalTransform;
-
-    return canvas;
-}
-function saveCanvasAsOneLongPdf(canvas, pdfTitle){
-    const imgData = canvas.toDataURL("image/png");
-
-    const canvasRatio = canvas.height / canvas.width;
-
-    let pdfWidth = 1200;
-    let pdfHeight = pdfWidth * canvasRatio;
-
-    if(pdfHeight < 210){
-        pdfHeight = 210;
-    }
-
-    const pdf = new jspdf.jsPDF({
-        orientation: pdfWidth >= pdfHeight ? "l" : "p",
-        unit: "mm",
-        format: [pdfWidth, pdfHeight]
-    });
-
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-    const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
-    pdf.save(safeFileName + ".pdf");
-}
-function addCanvasMultiPage(pdf, canvas){
-    const imgData = canvas.toDataURL("image/png");
-
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-
-    const marginX = 8;
-    const marginY = 8;
-
-    const imgWidth = pageWidth - marginX * 2;
-    const imgHeight = canvas.height * imgWidth / canvas.width;
-
-    let heightLeft = imgHeight;
-    let position = marginY;
-
-    pdf.addImage(imgData, "PNG", marginX, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight - marginY * 2;
-
-    while(heightLeft > 0){
-        pdf.addPage();
-        position = marginY - (imgHeight - heightLeft);
-        pdf.addImage(imgData, "PNG", marginX, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight - marginY * 2;
-    }
-}
-
-function addCanvasFitOnePage(pdf, canvas, addNewPage){
-    if(addNewPage){
-        pdf.addPage();
-    }
-
-    const imgData = canvas.toDataURL("image/png");
-
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-
-    const marginX = 8;
-    const marginY = 8;
-
-    const availableWidth = pageWidth - marginX * 2;
-    const availableHeight = pageHeight - marginY * 2;
-
-    const canvasRatio = canvas.width / canvas.height;
-    const pageRatio = availableWidth / availableHeight;
-
-    let imgWidth;
-    let imgHeight;
-
-    if(pageRatio > canvasRatio){
-        imgHeight = availableHeight;
-        imgWidth = imgHeight * canvasRatio;
-    }else{
-        imgWidth = availableWidth;
-        imgHeight = imgWidth / canvasRatio;
-    }
-
-    const x = (pageWidth - imgWidth) / 2;
-    const y = (pageHeight - imgHeight) / 2;
-
-    pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
-}
-
-async function exportCurrentPdf(pdfTitle){
-    const canvas = await preparePdfCanvas(pdfTitle);
-
-    // 目前畫面：長版 PDF，不切頁、不切斷組織框
-    saveCanvasAsOneLongPdf(canvas, pdfTitle);
-}
-
-async function exportFitOnePagePdf(pdfTitle){
-    const canvas = await preparePdfCanvas(pdfTitle);
-    const pdf = new jspdf.jsPDF("l", "mm", "a4");
-    addCanvasFitOnePage(pdf, canvas, false);
-
-    const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
-    pdf.save(safeFileName + ".pdf");
-}
-
-function getSplitBaseNode(){
-    const displayRoots = focusNodes.length > 0 ? focusNodes : rootNodes;
-    if(!displayRoots || displayRoots.length === 0){
-        return null;
-    }
-    return displayRoots[0];
-}
-
-async function exportSplitByFirstLevelPdf(pdfTitle){
-    const baseNode = getSplitBaseNode();
-
-    if(!baseNode){
-        alert("目前沒有可分頁匯出的組織圖");
-        return;
-    }
-
-    const originalFocusNodes = focusNodes.slice();
-    const originalViewMode = currentViewMode;
-
-    const pdf = new jspdf.jsPDF("l", "mm", "a4");
-    let hasPage = false;
-
-    focusNodes = [baseNode];
-    renderChart();
-    await new Promise(resolve => setTimeout(resolve, 300));
-
-    const overviewCanvas = await preparePdfCanvas(pdfTitle);
-    addCanvasFitOnePage(pdf, overviewCanvas, false);
-    hasPage = true;
-
-    const children = baseNode.children.filter(child => shouldShowNode(child));
-
-    for(const child of children){
-        focusNodes = [child];
-        renderChart();
-        await new Promise(resolve => setTimeout(resolve, 300));
-
-        const childTitle = `${String(child.row["部門全名"] || child.deptCode || "子部門")}組織圖`;
-        const childCanvas = await preparePdfCanvas(childTitle);
-
-        addCanvasFitOnePage(pdf, childCanvas, hasPage);
-        hasPage = true;
-    }
-
-    focusNodes = originalFocusNodes;
-    currentViewMode = originalViewMode;
-    renderChart();
-
-    const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
-    pdf.save(safeFileName + "_分頁.pdf");
-}
-
+/* ===============================
+   PDF 匯出
+================================ */
 async function exportPDF(){
-    const target = document.getElementById("zoomWrap");
+    const mode = document.getElementById("exportMode").value;
 
-    if(!target || allNodes.length === 0){
-        alert("請先上傳 Excel 並產生組織圖");
+    if(mode === "firstLevel"){
+        await exportByFirstLevel();
         return;
     }
 
-    const mode = document.getElementById("pdfExportMode")?.value || "current";
-    const pdfTitle = getPdfChartTitle();
-
-    if(mode === "current"){
-        await exportCurrentPdf(pdfTitle);
-        return;
-    }
-
-    if(mode === "fitOnePage"){
-        await exportFitOnePagePdf(pdfTitle);
-        return;
-    }
-
-    if(mode === "splitByFirstLevel"){
-        await exportSplitByFirstLevelPdf(pdfTitle);
-        return;
-    }
+    await exportSinglePDF(mode);
 }
 
+async function exportSinglePDF(mode){
+    const { jsPDF } = window.jspdf;
+    const target = document.getElementById("chartBody");
+    const oldZoom = document.getElementById("zoomWrap").style.transform;
+
+    document.body.classList.add("exporting");
+
+    if(mode === "fit" || mode === "long"){
+        document.getElementById("zoomWrap").style.transform = "scale(1)";
+    }
+
+    await delay(300);
+
+    const canvas = await html2canvas(target, {
+        scale:2,
+        useCORS:true,
+        backgroundColor:"#ffffff"
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+
+    let pdf;
+
+    if(mode === "long"){
+        const pdfWidth = 297;
+        const pdfHeight = canvas.height * pdfWidth / canvas.width;
+        pdf = new jsPDF("l", "mm", [pdfWidth, pdfHeight]);
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    }else{
+        pdf = new jsPDF("l", "mm", "a4");
+
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+
+        let imgWidth = pageWidth;
+        let imgHeight = canvas.height * imgWidth / canvas.width;
+
+        if(mode === "fit"){
+            if(imgHeight > pageHeight){
+                imgHeight = pageHeight;
+                imgWidth = canvas.width * imgHeight / canvas.height;
+            }
+        }
+
+        const x = (pageWidth - imgWidth) / 2;
+        const y = 10;
+
+        pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
+    }
+
+    pdf.save("組織圖.pdf");
+
+    document.getElementById("zoomWrap").style.transform = oldZoom;
+    document.body.classList.remove("exporting");
+}
+
+async function exportByFirstLevel(){
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("l", "mm", "a4");
+    const target = document.getElementById("chartBody");
+
+    if(!rootNodes.length){
+        alert("沒有資料可匯出");
+        return;
+    }
+
+    const originalRootNodes = [...rootNodes];
+    const originalMode = currentViewMode;
+
+    document.body.classList.add("exporting");
+    setViewMode("chart", false);
+
+    let pageIndex = 0;
+
+    for(const root of originalRootNodes){
+        for(const child of root.children){
+            document.getElementById("orgChart").innerHTML = "";
+            document.getElementById("orgChart").appendChild(renderOrgNode(child));
+
+            await delay(300);
+
+            const canvas = await html2canvas(target, {
+                scale:2,
+                useCORS:true,
+                backgroundColor:"#ffffff"
+            });
+
+            const imgData = canvas.toDataURL("image/png");
+
+            if(pageIndex > 0) pdf.addPage();
+
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+
+            let imgWidth = pageWidth;
+            let imgHeight = canvas.height * imgWidth / canvas.width;
+
+            if(imgHeight > pageHeight){
+                imgHeight = pageHeight;
+                imgWidth = canvas.width * imgHeight / canvas.height;
+            }
+
+            const x = (pageWidth - imgWidth) / 2;
+            const y = 10;
+
+            pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
+            pageIndex++;
+        }
+    }
+
+    pdf.save("組織圖_依第一層子部門分頁.pdf");
+
+    document.body.classList.remove("exporting");
+    setViewMode(originalMode, true);
+}
+
+/* ===============================
+   下載範本
+================================ */
 function downloadTemplate(){
-    const deptTemplateData = [
+    const sample = [
         {
             "公司代碼":"HH",
-            "層級":1,
+            "層級":"1",
             "上級部門":"HH",
-            "部門代碼":"DA10",
-            "費用代碼":"DA12345678",
-            "部門全名":"中央營運",
-            "主管一姓名":"林小明",
-            "主管一職稱":"營運長",
+            "部門代碼":"DA60",
+            "費用代碼":"DA611700H7",
+            "部門全名":"中央人資",
+            "主管一姓名":"王小明",
+            "主管一職稱":"人資長",
             "在職人數":1
         },
         {
             "公司代碼":"HH",
-            "層級":2,
-            "上級部門":"DA10",
-            "部門代碼":"DA110",
-            "費用代碼":"DA12345678",
-            "部門全名":"營運處",
-            "主管一姓名":"王一二",
-            "主管一職稱":"處長",
-            "在職人數":3
-        },
-        {
-            "公司代碼":"HH",
-            "層級":3,
-            "上級部門":"DA110",
-            "部門代碼":"DA1110",
-            "費用代碼":"DA12345678",
-            "部門全名":"營運一部",
-            "主管一姓名":"陳小華",
-            "主管一職稱":"部長",
-            "在職人數":8
+            "層級":"2",
+            "上級部門":"DA60",
+            "部門代碼":"DA6001",
+            "費用代碼":"DA611700H7",
+            "部門全名":"人資營運效能處",
+            "主管一姓名":"",
+            "主管一職稱":"",
+            "在職人數":0
         }
     ];
 
-    const personTemplateData = [
-        {
-            "所屬法人":"HH",
-            "部門代碼":"DA1110",
-            "部門名稱":"營運一部",
-            "員工工號":"A123456",
-            "員工姓名":"張小美",
-            "職稱名稱":"管理師",
-            "資位":"師三"
-        },
-        {
-            "所屬法人":"HH",
-            "部門代碼":"DA1110",
-            "部門名稱":"營運一部",
-            "員工工號":"A123457",
-            "員工姓名":"李小華",
-            "職稱名稱":"高級管理師",
-            "資位":"師四"
-        }
-    ];
+    const ws = XLSX.utils.json_to_sheet(sample);
+    const wb = XLSX.utils.book_new();
 
-    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "組織資料");
+    XLSX.writeFile(wb, "組織圖上傳範本.xlsx");
+}
 
-    const deptSheet = XLSX.utils.json_to_sheet(deptTemplateData);
-    const personSheet = XLSX.utils.json_to_sheet(personTemplateData);
+/* ===============================
+   工具
+================================ */
+function escapeHtml(text){
+    return String(text ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
 
-    XLSX.utils.book_append_sheet(workbook, deptSheet, "部門資訊");
-    XLSX.utils.book_append_sheet(workbook, personSheet, "人員資訊");
-
-    XLSX.writeFile(workbook, "組織圖上傳模板.xlsx");
+function delay(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 </script>
 
