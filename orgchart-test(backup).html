@@ -151,6 +151,7 @@ h1{ margin-bottom:10px; }
 
 .sortSelect,
 .depthSelect,
+pdfModeSelect,
 .pdfModeSelect{
     height:36px;
     padding:0 10px;
@@ -434,6 +435,63 @@ h1{ margin-bottom:10px; }
     color:#1e3a8a;
 }
 
+/* ===============================
+   樹狀清單：長條資訊列
+   只影響樹狀清單，不影響組織圖
+================================ */
+.tree .node{
+    display:block;
+    width:100%;
+    min-width:1100px;
+    max-width:none;
+    padding:9px 12px;
+    border-radius:8px;
+    box-shadow:none;
+    background:#ffffff;
+    box-sizing:border-box;
+}
+
+.tree .nodeHeader{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:0;
+    vertical-align:middle;
+}
+
+.tree .deptName{
+    font-size:15px;
+    font-weight:bold;
+    color:#111827;
+}
+
+.tree .nodeInfo{
+    display:inline;
+    padding-left:8px;
+    font-size:13px;
+    color:#374151;
+    line-height:1.6;
+}
+
+.tree .totalPeople{
+    display:inline;
+    margin-top:0;
+    padding-top:0;
+    border-top:0;
+    color:#1e3a8a;
+    font-weight:bold;
+}
+
+.tree ul{
+    margin:6px 0 0 28px;
+    padding-left:18px;
+    border-left:1px dashed #cbd5e1;
+}
+
+.tree li{
+    margin:6px 0;
+}
+
 .peopleLink{
     color:#1e3a8a;
     font-weight:bold;
@@ -669,6 +727,8 @@ h1{ margin-bottom:10px; }
     </div>
 
 
+</div>
+
 <div class="filterBar">
     <select id="sortMode" class="sortSelect" onchange="applySortAndRender()">
         <option value="default">原始順序</option>
@@ -771,7 +831,7 @@ let selectedLevels = new Set();
 let selectedLegals = new Set();
 let currentViewMode = "tree";
 let focusNodes = [];
-let maxDisplayDepth = "3";
+let maxDisplayDepth = "all";
 let hideZeroTotal = false;
 
 let personRows = [];
@@ -1647,6 +1707,49 @@ function renderNodeInfo(node){
     return lines.join("<br>");
 }
 
+function renderTreeNodeInfo(node){
+    const row = node.row;
+    const parts = [];
+
+    if(visibleFields.has("manager") && !node.isLegalEntity && !node.isVirtualRoot){
+        parts.push(`主管：${row["主管一姓名"] || "-"} / ${row["主管一職稱"] || "-"}`);
+    }
+
+    if(visibleFields.has("level")){
+        parts.push(`層級：${row["層級"] || "-"}`);
+    }
+
+    if(visibleFields.has("deptCode")){
+        parts.push(`部門代碼：${row["部門代碼"] || "-"}`);
+    }
+
+    if(visibleFields.has("costCode") && !node.isLegalEntity && !node.isVirtualRoot){
+        parts.push(`費用代碼：${row["費用代碼"] || "-"}`);
+    }
+
+    const ownPeople = getOwnPeopleByLegal(node);
+    const totalPeople = getTotalPeopleByLegal(node);
+
+    if(node.isLegalEntity || node.isVirtualRoot){
+        parts.push(`
+            含轄下合計：
+            <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
+        `);
+    }else{
+        parts.push(`
+            本單位人數：
+            <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="own">${ownPeople} 人</span>
+        `);
+
+        parts.push(`
+            含轄下合計：
+            <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
+        `);
+    }
+
+    return parts.join(" ／ ");
+}
+
 function bindPeopleLinks(container){
     container.querySelectorAll(".peopleLink").forEach(link => {
         link.addEventListener("click", function(e){
@@ -1802,7 +1905,7 @@ function createTreeNodeElement(node, currentDepth = 1){
             <span class="deptName">${getNodeTitle(node)}</span>
         </div>
         <div class="nodeInfo">
-            ${renderNodeInfo(node)}
+            ／ ${renderTreeNodeInfo(node)}
         </div>
     `;
 
@@ -1907,6 +2010,7 @@ function createOrgNodeElement(node, currentDepth = 1){
 
     return group;
 }
+
 function updateOrgConnectorLines(){
     document.querySelectorAll(".orgChildren").forEach(box => {
         box.querySelectorAll(":scope > .orgConnectorLine").forEach(line => line.remove());
@@ -2312,6 +2416,7 @@ async function preparePdfCanvas(titleText){
 
     return canvas;
 }
+
 function saveCanvasAsOneLongPdf(canvas, pdfTitle){
     const imgData = canvas.toDataURL("image/png");
 
@@ -2335,6 +2440,7 @@ function saveCanvasAsOneLongPdf(canvas, pdfTitle){
     const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
     pdf.save(safeFileName + ".pdf");
 }
+
 function addCanvasMultiPage(pdf, canvas){
     const imgData = canvas.toDataURL("image/png");
 
@@ -2400,7 +2506,6 @@ function addCanvasFitOnePage(pdf, canvas, addNewPage){
 async function exportCurrentPdf(pdfTitle){
     const canvas = await preparePdfCanvas(pdfTitle);
 
-    // 目前畫面：長版 PDF，不切頁、不切斷組織框
     saveCanvasAsOneLongPdf(canvas, pdfTitle);
 }
 
