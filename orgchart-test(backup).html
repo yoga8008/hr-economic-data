@@ -182,7 +182,18 @@ h1{ margin-bottom:10px; }
     gap:12px;
     align-items:center;
     margin-bottom:20px;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
+}
+
+.filterBar .sortSelect{
+    flex:0 0 220px;
+    width:220px;
+}
+
+.filterBar .dropdownFilter{
+    flex:0 0 280px;
+    width:280px;
+    min-width:280px;
 }
 
 .dropdownFilter{
@@ -488,7 +499,7 @@ h1{ margin-bottom:10px; }
     position:relative;
     padding-top:0;
     flex-wrap:wrap;
-    max-width:1180px;
+    max-width:3000px;
 }
 
 .orgNodeGroup.hasChildren > .orgNode::after{
@@ -657,30 +668,22 @@ h1{ margin-bottom:10px; }
         </div>
     </div>
 
-    <div class="filterBar">
-        <div id="levelFilters" class="dropdownFilter"></div>
-        <div id="fieldFilters" class="dropdownFilter"></div>
-        <div id="legalFilters" class="dropdownFilter"></div>
-    </div>
+
+<div class="filterBar">
+    <select id="sortMode" class="sortSelect" onchange="applySortAndRender()">
+        <option value="default">原始順序</option>
+        <option value="name">依名稱排序</option>
+        <option value="code">依部門代碼排序</option>
+    </select>
+
+    <div id="levelFilters" class="dropdownFilter"></div>
+    <div id="fieldFilters" class="dropdownFilter"></div>
+    <div id="legalFilters" class="dropdownFilter"></div>
 </div>
 
 <div class="chartBox">
     <div class="chartHeader">
         <div class="chartLeftActions">
-            <select id="sortMode" class="sortSelect" onchange="applySortAndRender()">
-                <option value="default">原始順序</option>
-                <option value="name">依名稱排序</option>
-                <option value="code">依部門代碼排序</option>
-            </select>
-
-            <select id="maxDisplayDepth" class="depthSelect" onchange="setMaxDisplayDepth(this.value)">
-                <option value="all">顯示層數：全部</option>
-                <option value="1">顯示層數：1層</option>
-                <option value="2">顯示層數：2層</option>
-                <option value="3" selected>顯示層數：3層</option>
-                <option value="4">顯示層數：4層</option>
-                <option value="5">顯示層數：5層</option>
-            </select>
 
             <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
 
@@ -2301,7 +2304,29 @@ async function preparePdfCanvas(titleText){
 
     return canvas;
 }
+function saveCanvasAsOneLongPdf(canvas, pdfTitle){
+    const imgData = canvas.toDataURL("image/png");
 
+    const canvasRatio = canvas.height / canvas.width;
+
+    let pdfWidth = 1200;
+    let pdfHeight = pdfWidth * canvasRatio;
+
+    if(pdfHeight < 210){
+        pdfHeight = 210;
+    }
+
+    const pdf = new jspdf.jsPDF({
+        orientation: pdfWidth >= pdfHeight ? "l" : "p",
+        unit: "mm",
+        format: [pdfWidth, pdfHeight]
+    });
+
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+    const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
+    pdf.save(safeFileName + ".pdf");
+}
 function addCanvasMultiPage(pdf, canvas){
     const imgData = canvas.toDataURL("image/png");
 
@@ -2366,11 +2391,9 @@ function addCanvasFitOnePage(pdf, canvas, addNewPage){
 
 async function exportCurrentPdf(pdfTitle){
     const canvas = await preparePdfCanvas(pdfTitle);
-    const pdf = new jspdf.jsPDF("l", "mm", "a4");
-    addCanvasMultiPage(pdf, canvas);
 
-    const safeFileName = pdfTitle.replace(/[\\/:*?"<>|]/g, "_");
-    pdf.save(safeFileName + ".pdf");
+    // 目前畫面：長版 PDF，不切頁、不切斷組織框
+    saveCanvasAsOneLongPdf(canvas, pdfTitle);
 }
 
 async function exportFitOnePagePdf(pdfTitle){
