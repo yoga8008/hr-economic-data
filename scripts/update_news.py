@@ -250,16 +250,16 @@ for rss_url in rss_urls:
         except Exception:
             published = datetime.now().strftime("%Y/%m/%d")
 
-        if (
-            any(k in title for k in keywords)
-            and any(m in title for m in major_keywords)
-        ):
+        if any(k in title for k in keywords):
+            is_major = any(m in title for m in major_keywords)
+
             all_insight_news.append({
-                "日期": published,
-                "來源": source,
-                "標題": title,
-                "連結": link
-            })
+            "日期": published,
+            "來源": source,
+            "標題": title,
+            "連結": link,
+            "重要": is_major
+    })
 
 old_news = []
 
