@@ -288,7 +288,7 @@ pdfModeSelect,
 }
 
 .chartLeftActions input[type="text"]{
-    width:350px;
+    width:420px;
     height:36px;
     padding:0 12px;
     border:1px solid #cbd5e1;
@@ -437,7 +437,6 @@ pdfModeSelect,
 
 /* ===============================
    樹狀清單：長條資訊列
-   只影響樹狀清單，不影響組織圖
 ================================ */
 .tree .node{
     display:block;
@@ -725,8 +724,6 @@ pdfModeSelect,
             尚未上傳 Excel
         </div>
     </div>
-
-
 </div>
 
 <div class="filterBar">
@@ -745,7 +742,7 @@ pdfModeSelect,
     <div class="chartHeader">
         <div class="chartLeftActions">
 
-            <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼">
+            <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼；輸入 *人名 或 *工號 查所屬組織">
 
             <label class="focusOption">
                 <input type="checkbox" id="focusCheckbox">
@@ -843,6 +840,8 @@ let filteredPersonRows = [];
 let ownPeopleCountCache = {};
 let totalPeopleCountCache = new Map();
 
+let currentPersonSearchDeptCodes = new Set();
+
 let visibleFields = new Set(["level","deptCode","costCode","manager"]);
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -863,6 +862,7 @@ document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("focusCheckbox").addEventListener("change", function(){
         if(!this.checked){
             focusNodes = [];
+            currentPersonSearchDeptCodes = new Set();
             renderChart();
         }
     });
@@ -1069,6 +1069,7 @@ function clearPageData(){
     selectedLevels.clear();
     selectedLegals.clear();
     focusNodes = [];
+    currentPersonSearchDeptCodes = new Set();
     personRows = [];
     personMapByDept = {};
     filteredPersonRows = [];
@@ -1175,6 +1176,7 @@ function buildTreeData(rows){
     selectedLevels.clear();
     selectedLegals.clear();
     focusNodes = [];
+    currentPersonSearchDeptCodes = new Set();
     currentSelectedDeptCode = "";
     currentSelectedPersonType = "own";
 
@@ -1326,6 +1328,7 @@ function sortNodes(nodes){
 
 function applySortAndRender(){
     sortNodes(rootNodes);
+    sortNodes(focusNodes);
     renderChart();
 }
 
@@ -1648,18 +1651,24 @@ function getOwnPeopleByLegal(node){
     return ownPeopleCountCache[node.deptCode] || 0;
 }
 
+function getOriginalNodeByDeptCode(deptCode){
+    return allNodes.find(node => node.deptCode === deptCode) || null;
+}
+
 function getTotalPeopleByLegal(node){
-    if(totalPeopleCountCache.has(node.deptCode)){
-        return totalPeopleCountCache.get(node.deptCode);
+    const originalNode = getOriginalNodeByDeptCode(node.deptCode) || node;
+
+    if(totalPeopleCountCache.has(originalNode.deptCode)){
+        return totalPeopleCountCache.get(originalNode.deptCode);
     }
 
-    let total = getOwnPeopleByLegal(node);
+    let total = getOwnPeopleByLegal(originalNode);
 
-    node.children.forEach(child => {
+    originalNode.children.forEach(child => {
         total += getTotalPeopleByLegal(child);
     });
 
-    totalPeopleCountCache.set(node.deptCode, total);
+    totalPeopleCountCache.set(originalNode.deptCode, total);
     return total;
 }
 
@@ -1789,13 +1798,45 @@ function findNodeInTree(node, deptCode){
 }
 
 function getDescendantDeptCodes(node){
-    let codes = [node.deptCode];
+    const originalNode = getOriginalNodeByDeptCode(node.deptCode) || node;
+    let codes = [originalNode.deptCode];
 
-    node.children.forEach(child => {
+    originalNode.children.forEach(child => {
         codes = codes.concat(getDescendantDeptCodes(child));
     });
 
     return codes;
+}
+
+function renderPersonTable(persons){
+    return `
+        <table class="personTable">
+            <thead>
+                <tr>
+                    <th>所屬法人</th>
+                    <th>部門代碼</th>
+                    <th>部門名稱</th>
+                    <th>員工工號</th>
+                    <th>員工姓名</th>
+                    <th>職稱名稱</th>
+                    <th>資位</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${persons.map(person => `
+                    <tr>
+                        <td>${person["所屬法人"] || ""}</td>
+                        <td>${person["部門代碼"] || ""}</td>
+                        <td>${person["部門名稱"] || ""}</td>
+                        <td>${person["員工工號"] || ""}</td>
+                        <td>${person["員工姓名"] || ""}</td>
+                        <td>${person["職稱名稱"] || ""}</td>
+                        <td>${person["資位"] || ""}</td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>
+    `;
 }
 
 function showDepartmentPersons(deptCode, type = "own"){
@@ -1837,34 +1878,25 @@ function showDepartmentPersons(deptCode, type = "own"){
         return;
     }
 
-    panel.innerHTML = `
-        <table class="personTable">
-            <thead>
-                <tr>
-                    <th>所屬法人</th>
-                    <th>部門代碼</th>
-                    <th>部門名稱</th>
-                    <th>員工工號</th>
-                    <th>員工姓名</th>
-                    <th>職稱名稱</th>
-                    <th>資位</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${persons.map(person => `
-                    <tr>
-                        <td>${person["所屬法人"] || ""}</td>
-                        <td>${person["部門代碼"] || ""}</td>
-                        <td>${person["部門名稱"] || ""}</td>
-                        <td>${person["員工工號"] || ""}</td>
-                        <td>${person["員工姓名"] || ""}</td>
-                        <td>${person["職稱名稱"] || ""}</td>
-                        <td>${person["資位"] || ""}</td>
-                    </tr>
-                `).join("")}
-            </tbody>
-        </table>
-    `;
+    panel.innerHTML = renderPersonTable(persons);
+}
+
+function showPersonSearchResults(persons, keyword){
+    const summary = document.getElementById("personSummary");
+    const panel = document.getElementById("personPanel");
+
+    summary.innerText = `人員搜尋：${keyword}｜找到 ${persons.length} 人，已顯示所屬組織`;
+
+    if(persons.length === 0){
+        panel.innerHTML = `
+            <div class="noPerson">
+                查無符合的人員資料。
+            </div>
+        `;
+        return;
+    }
+
+    panel.innerHTML = renderPersonTable(persons);
 }
 
 function getNodeTitle(node){
@@ -1894,6 +1926,7 @@ function createTreeNodeElement(node, currentDepth = 1){
     }
 
     nodeDiv.dataset.search = getSearchText(node);
+    nodeDiv.dataset.deptCode = node.deptCode;
 
     nodeDiv.innerHTML = `
         <div class="nodeHeader">
@@ -1964,6 +1997,7 @@ function createOrgNodeElement(node, currentDepth = 1){
     }
 
     nodeDiv.dataset.search = getSearchText(node);
+    nodeDiv.dataset.deptCode = node.deptCode;
 
     nodeDiv.innerHTML = `
         <span class="deptName">${getNodeTitle(node)}</span>
@@ -2057,6 +2091,13 @@ function getSearchText(node){
     ].join(" "));
 }
 
+function getPersonSearchText(person){
+    return normalizeText([
+        person["員工姓名"],
+        person["員工工號"]
+    ].join(" "));
+}
+
 function isFuzzyMatch(searchText, keyword){
     const normalizedKeyword = normalizeText(keyword);
 
@@ -2105,6 +2146,30 @@ function getSpecialDisplayKeyword(keyword){
     if(type === "groupCenter") return "集團中央";
 
     return keyword;
+}
+
+function getPersonSearchKeyword(rawKeyword){
+    const specialType = getSpecialSearchType(rawKeyword);
+
+    if(specialType){
+        return "";
+    }
+
+    const trimmed = String(rawKeyword || "").trim();
+
+    if(!trimmed.startsWith("*")){
+        return "";
+    }
+
+    return trimmed.slice(1).trim();
+}
+
+function findMatchedPersons(keyword){
+    if(!keyword) return [];
+
+    return filteredPersonRows.filter(person => {
+        return isFuzzyMatch(getPersonSearchText(person), keyword);
+    });
 }
 
 function isSubGroupNode(node){
@@ -2185,6 +2250,106 @@ function findSpecialMatchedNodes(type){
     return [];
 }
 
+function findPathToDeptCode(targetDeptCode){
+    const path = [];
+
+    function dfs(node){
+        path.push(node);
+
+        if(node.deptCode === targetDeptCode){
+            return true;
+        }
+
+        for(const child of node.children){
+            if(dfs(child)){
+                return true;
+            }
+        }
+
+        path.pop();
+        return false;
+    }
+
+    for(const root of rootNodes){
+        if(dfs(root)){
+            return path.slice();
+        }
+    }
+
+    return [];
+}
+
+function cloneFocusNode(node){
+    return {
+        ...node,
+        children: [],
+        expanded: true
+    };
+}
+
+function cloneFullSubtree(node){
+    const clone = cloneFocusNode(node);
+    clone.children = node.children.map(child => cloneFullSubtree(child));
+    return clone;
+}
+
+function ensureChildClone(parentClone, childOriginal){
+    let childClone = parentClone.children.find(child => child.deptCode === childOriginal.deptCode);
+
+    if(!childClone){
+        childClone = cloneFocusNode(childOriginal);
+        parentClone.children.push(childClone);
+    }
+
+    return childClone;
+}
+
+function mergeFullChildren(targetClone, targetOriginal){
+    targetOriginal.children.forEach(originalChild => {
+        let existingChild = targetClone.children.find(child => child.deptCode === originalChild.deptCode);
+
+        if(existingChild){
+            mergeFullChildren(existingChild, originalChild);
+        }else{
+            targetClone.children.push(cloneFullSubtree(originalChild));
+        }
+    });
+}
+
+function buildPersonFocusNodes(deptNodes){
+    const rootMap = new Map();
+
+    deptNodes.forEach(deptNode => {
+        const path = findPathToDeptCode(deptNode.deptCode);
+
+        if(path.length === 0){
+            return;
+        }
+
+        let currentClone = null;
+
+        path.forEach((originalNode, index) => {
+            if(index === 0){
+                if(!rootMap.has(originalNode.deptCode)){
+                    rootMap.set(originalNode.deptCode, cloneFocusNode(originalNode));
+                }
+
+                currentClone = rootMap.get(originalNode.deptCode);
+            }else{
+                currentClone = ensureChildClone(currentClone, originalNode);
+            }
+
+            if(index === path.length - 1){
+                mergeFullChildren(currentClone, originalNode);
+            }
+        });
+    });
+
+    const result = [...rootMap.values()];
+    sortNodes(result);
+    return result;
+}
+
 function expandAll(){
     allNodes.forEach(node => node.expanded = true);
 
@@ -2215,6 +2380,7 @@ function searchTree(jumpToFirst = false){
     const rawKeyword = document.getElementById("searchInput").value.trim();
     const keyword = getSpecialDisplayKeyword(rawKeyword);
     const specialType = getSpecialSearchType(rawKeyword);
+    const personKeyword = getPersonSearchKeyword(rawKeyword);
     const focusChecked = document.getElementById("focusCheckbox").checked;
 
     setTimeout(() => {
@@ -2223,6 +2389,18 @@ function searchTree(jumpToFirst = false){
 
         nodes.forEach(node => {
             node.classList.remove("match");
+
+            if(personKeyword){
+                if(currentPersonSearchDeptCodes.has(node.dataset.deptCode)){
+                    if(!firstMatch){
+                        firstMatch = node;
+                    }
+
+                    node.classList.add("match");
+                }
+
+                return;
+            }
 
             if(keyword && isFuzzyMatch(node.dataset.search, keyword)){
                 if(!firstMatch){
@@ -2243,7 +2421,7 @@ function searchTree(jumpToFirst = false){
             });
         }
 
-        if(jumpToFirst && rawKeyword && !firstMatch && !specialType){
+        if(jumpToFirst && rawKeyword && !firstMatch && !specialType && !personKeyword){
             alert("找不到符合的部門、主管或代碼");
         }
     }, 0);
@@ -2274,18 +2452,26 @@ function isDescendantOf(node, possibleParent){
 }
 
 function searchAndJump(){
-    const keyword = document.getElementById("searchInput").value.trim();
+    const rawKeyword = document.getElementById("searchInput").value.trim();
     const focusChecked = document.getElementById("focusCheckbox").checked;
-    const specialType = getSpecialSearchType(keyword);
+    const specialType = getSpecialSearchType(rawKeyword);
+    const personKeyword = getPersonSearchKeyword(rawKeyword);
 
-    if(!keyword){
+    if(!rawKeyword){
         focusNodes = [];
+        currentPersonSearchDeptCodes = new Set();
         renderChart();
+        return;
+    }
+
+    if(rawKeyword.startsWith("*") && !specialType && !personKeyword){
+        alert("請在 * 後輸入人員姓名或員工工號");
         return;
     }
 
     if(specialType){
         focusNodes = findSpecialMatchedNodes(specialType);
+        currentPersonSearchDeptCodes = new Set();
         allNodes.forEach(node => node.expanded = true);
 
         function expandRecursive(node){
@@ -2301,8 +2487,52 @@ function searchAndJump(){
         return;
     }
 
+    if(personKeyword){
+        const matchedPersons = findMatchedPersons(personKeyword);
+
+        if(matchedPersons.length === 0){
+            alert("找不到符合目前法人篩選的人員姓名或工號");
+            return;
+        }
+
+        const matchedDeptCodes = [...new Set(
+            matchedPersons
+                .map(person => String(person["部門代碼"] || "").trim())
+                .filter(Boolean)
+        )];
+
+        const matchedDeptNodes = matchedDeptCodes
+            .map(code => findNodeByDeptCode(code))
+            .filter(Boolean);
+
+        if(matchedDeptNodes.length === 0){
+            showPersonSearchResults(matchedPersons, personKeyword);
+            alert("找到人員資料，但部門代碼未對應到組織圖節點");
+            return;
+        }
+
+        currentPersonSearchDeptCodes = new Set(matchedDeptNodes.map(node => node.deptCode));
+        focusNodes = buildPersonFocusNodes(matchedDeptNodes);
+
+        function expandRecursive(node){
+            node.expanded = true;
+            node.children.forEach(child => expandRecursive(child));
+        }
+
+        focusNodes.forEach(node => expandRecursive(node));
+
+        renderChart();
+        showPersonSearchResults(matchedPersons, personKeyword);
+
+        setTimeout(() => searchTree(true), 0);
+
+        return;
+    }
+
+    currentPersonSearchDeptCodes = new Set();
+
     if(focusChecked){
-        const matchedNodes = findMatchedNodes(keyword);
+        const matchedNodes = findMatchedNodes(rawKeyword);
 
         if(matchedNodes.length === 0){
             alert("找不到符合的部門、主管或代碼");
@@ -2441,32 +2671,6 @@ function saveCanvasAsOneLongPdf(canvas, pdfTitle){
     pdf.save(safeFileName + ".pdf");
 }
 
-function addCanvasMultiPage(pdf, canvas){
-    const imgData = canvas.toDataURL("image/png");
-
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-
-    const marginX = 8;
-    const marginY = 8;
-
-    const imgWidth = pageWidth - marginX * 2;
-    const imgHeight = canvas.height * imgWidth / canvas.width;
-
-    let heightLeft = imgHeight;
-    let position = marginY;
-
-    pdf.addImage(imgData, "PNG", marginX, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight - marginY * 2;
-
-    while(heightLeft > 0){
-        pdf.addPage();
-        position = marginY - (imgHeight - heightLeft);
-        pdf.addImage(imgData, "PNG", marginX, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight - marginY * 2;
-    }
-}
-
 function addCanvasFitOnePage(pdf, canvas, addNewPage){
     if(addNewPage){
         pdf.addPage();
@@ -2505,7 +2709,6 @@ function addCanvasFitOnePage(pdf, canvas, addNewPage){
 
 async function exportCurrentPdf(pdfTitle){
     const canvas = await preparePdfCanvas(pdfTitle);
-
     saveCanvasAsOneLongPdf(canvas, pdfTitle);
 }
 
