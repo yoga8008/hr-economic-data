@@ -1849,7 +1849,7 @@ function createOrgNodeElement(node, currentDepth = 1){
     const group = document.createElement("div");
     group.className = "orgNodeGroup";
 
-    if(hasChildren){
+    if(hasChildren && node.expanded){
         group.classList.add("hasChildren");
     }
 
@@ -1877,11 +1877,20 @@ function createOrgNodeElement(node, currentDepth = 1){
         if(!node.isLegalEntity && !node.isVirtualRoot){
             showDepartmentPersons(node.deptCode, "own");
         }
+
+        if(hasChildren){
+            node.expanded = !node.expanded;
+            renderChart();
+
+            if(currentViewMode === "org"){
+                requestAnimationFrame(updateOrgConnectorLines);
+            }
+        }
     });
 
     group.appendChild(nodeDiv);
 
-    if(hasChildren){
+    if(hasChildren && node.expanded){
         const childrenBox = document.createElement("div");
         childrenBox.className = "orgChildren";
 
@@ -1898,7 +1907,6 @@ function createOrgNodeElement(node, currentDepth = 1){
 
     return group;
 }
-
 function updateOrgConnectorLines(){
     document.querySelectorAll(".orgChildren").forEach(box => {
         box.querySelectorAll(":scope > .orgConnectorLine").forEach(line => line.remove());
