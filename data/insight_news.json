@@ -45,7 +45,7 @@
     "日期": "2026/05/13",
     "來源": "moea.gov.tw",
     "標題": "經濟部「僑外生在臺就業媒合會」熱烈登場 助力企業媒合國際人才 - moea.gov.tw",
-    "連結": "https://news.google.com/rss/articles/CBMijAFBVV95cUxONW1IWFo1ZFhHbXFBQ3ZCRno1Z3F0d1Zzd2h6QnN4NHM0dUpmREE3cG1GSm5RcnE4V3FKeWc3YjNFNDV1VXNhRFQzcEdDVzJWajBjR2puY2NHNmw5dGtuQVk5M2ppaFhkYzhZc3h2dElGMlRiVjVTXzY5elhYNjRjX1ZCejFZZFEzWHNvaA?oc=5",
+    "連結": "https://news.google.com/rss/articles/CBMijAFBVV95cUxORnBRTzg0MVlIMm1WOG1ndWx2R0FWdG5lMEhzdnR5d0hDTUFYMVZGYzdSUWcxcVlHdEd5d00tQk9wWkpGd1drYUc4SktHQll4LXhSM3MxaURybHhwX3ZjUXBsWTk2UVVvQ0J1U0s5WVVpU3lyOTZzRjlEVlB6NG5FaGRlc3ZTVnFDWlA2VA?oc=5",
     "重要": true
   },
   {
@@ -57,9 +57,23 @@
   },
   {
     "日期": "2026/05/13",
+    "來源": "electrify.tw",
+    "標題": "立委質詢自駕法規落後：台灣做 AI 晶片，卻用不到自駕科技？ - electrify.tw",
+    "連結": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFA1V1NtVl9zLXJOdWNGUW1QZXRpdGJYVWw5OXVvam11UjhoYUtQcmZkcEE4dnc2MHVfOUt5R051emVmZ3hlcnBGZE5DY3FvUndVMGFadEJQX0xfMDhHdUEyQmVPQQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
     "來源": "北美智權",
     "標題": "台灣半導體新突破！清大團隊開發高速傳收機 28奈米製程媲美國外頂尖7奈米 - 北美智權",
     "連結": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5HMUE3TXBIQTZtTXR4aUFNTXlpT1pybnJzcXlMQVpZYmRORlI2c0thMS1HZ1JwU1VfR3pZcEg4S1lvOFFxSzhwZQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
+    "來源": "風傳媒",
+    "標題": "台灣「這塊消費市場」比中國還大！國際半導體協會最新報告出爐台灣連16年奪第一| 張大任| 新聞 - 風傳媒",
+    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFAyaERLbXE3NEp4ZFY1LTFlaWVyb3IwR3ExSWpYc1doOVhwd3BXNllTc3JhdWVoNUNwcU52YmUzalhNazlkWFdkMnRSeEdUZw?oc=5",
     "重要": true
   },
   {
@@ -85,9 +99,16 @@
   },
   {
     "日期": "2026/05/13",
-    "來源": "風傳媒",
-    "標題": "AI、HBM需求爆發！SEMI：2025全球半導體材料市場達732億美元創新高，台灣連16年居冠， 晶圓製造與封裝同步成長 - 風傳媒",
-    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9WMHgyTFBOcVh0bnQ4ZkRLY0xKYzhrN1RFSHlNajZQbzBzZmoxWkMyZFZRcHJWb2plX2pUNGlqbHZ4TVZhQm82aTdJN2RXQQ?oc=5",
+    "來源": "自由財經",
+    "標題": "2025年全球半導體材料產值創新高 台灣蟬聯第一 - 自由財經",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5fV0hmbnhLYUVQTE82bjBNdFk2N0wyZlB6ZzhpS3UxM2YtLXVzeVgxaUdvaUFoZXdmZTRpbVU0UlYwSlNzNFRab3lkRjgtUUVwSEhhRUUtbk94YnhtS2pV0gFkQVVfeXFMT2FYU0t1NVVvQlp0bjgzM0E2eE1Va0RWNWRIM1N1b1NUMndJSElxV0Nuc0NYNmI3MlhYemRiem9JcVB2RGhrb2dVSnlVUjNXbkJ5NUlSRF9CWi1pbHBXeS1tQjAxcQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
+    "來源": "財訊",
+    "標題": "「從此一頭栽進IC設計」 一場工研院參訪，讓林鴻明42年沒離開半導體 - 財訊",
+    "連結": "https://news.google.com/rss/articles/CBMie0FVX3lxTE01YU9VdHNSMEVLSmJLYUF4aV9vYXQyQUdmMm9JQXF3dTd0RkY2SG51bzk2WVlfSjJ2WHk4c1ltWmFaa0pqT0c5UGdaTWI3R0ZaQThEX1VhYTRScWZ4LURzRnVNa3dvRHdxTWItdVA5Q19XTTNLci04ZjkxZw?oc=5",
     "重要": true
   },
   {
@@ -95,6 +116,13 @@
     "來源": "news.cnyes.com",
     "標題": "SEMI：2025年全球半導體材料市場營收達732億美元 創歷史新高 - news.cnyes.com",
     "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE4xQ0d3Q1JWYkQ3YmJIS3hTNVBnaVlnNFY4eGxCMHVmQWoxS2JWQzd4UndIX1IzZnhoTDNMUEVXTW5WbS1aejhlZnJTV0JOZk0?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
+    "來源": "中華新聞雲／中華日報",
+    "標題": "半導體科技交流 產官學對話 - 中華新聞雲／中華日報",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBQOHpOMElqWG1WVnR0dFZ5aDRZN3UwUjF0UmlLdHlMSlZUTDFMcGJoY2pKUGg0TDRfNmVoM3UweWljNVBFMG50bmt2blVMNUh5dnc?oc=5",
     "重要": true
   },
   {
@@ -113,9 +141,9 @@
   },
   {
     "日期": "2026/05/13",
-    "來源": "自由時報",
-    "標題": "國科會主委吳誠文參訪成大晶體研究中心 聚焦次世代半導體布局 - 自由時報",
-    "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9NdE1uSm5lR2pkYmlEeVZnXzNlMHd4MDlJRkJlaFhpOXo2YTdPX3JkODlBS2RVSnMySkdlZTFCc1drZlJGbGRiUjZsOGxPakxueWMtZlRQN2s?oc=5",
+    "來源": "LINE TODAY",
+    "標題": "半導體材料廠崇越科技卡位四維樞紐， 重塑AI 時代戰略價值| 科技新報 - LINE TODAY",
+    "連結": "https://news.google.com/rss/articles/CBMidEFVX3lxTE85UzRCTExZQ2o0Q3k1Q2xiaFczYWRObTNqNUdxN2VoOVZwNnJjZ081UFdHTnpuVzRJdmZiQ2RqT3ktWXEtS1FGT191X0pMcEVhT0dJU3d2NzgzMFNQT25kbHNacWo1UlhneWVaT3g3bV9FMml5?oc=5",
     "重要": true
   },
   {
@@ -127,6 +155,34 @@
   },
   {
     "日期": "2026/05/13",
+    "來源": "風傳媒",
+    "標題": "AI、HBM需求爆發！SEMI：2025全球半導體材料市場達732億美元創新高，台灣連16年居冠， 晶圓製造與封裝同步成長 - 風傳媒",
+    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9WMHgyTFBOcVh0bnQ4ZkRLY0xKYzhrN1RFSHlNajZQbzBzZmoxWkMyZFZRcHJWb2plX2pUNGlqbHZ4TVZhQm82aTdJN2RXQQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
+    "來源": "CMoney投資網誌",
+    "標題": "AI帶動半導體鏈躍升：晶圓代工與記憶體齊揚-財經焦點情報站 - CMoney投資網誌",
+    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTm45dlh3XzNuVUV3SzFwQnl0eWNqWDFiSDBsN2VTQmxrTzh4SmRlRVlhWktCMTVrcjdlZzNtYV9tWjBBR2J5MjVXWGlvZi01a0NjcHRZNFUtY0xoQ0VaOFdzTkpJb3gtc05xS0I1UkhrM2MwWnRVY0JUcHIyV3F1X2VB?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
+    "來源": "自由時報",
+    "標題": "國科會主委吳誠文參訪成大晶體研究中心 聚焦次世代半導體布局 - 自由時報",
+    "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9NdE1uSm5lR2pkYmlEeVZnXzNlMHd4MDlJRkJlaFhpOXo2YTdPX3JkODlBS2RVSnMySkdlZTFCc1drZlJGbGRiUjZsOGxPakxueWMtZlRQN2s?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
+    "來源": "CMoney投資網誌",
+    "標題": "半導體迎大單！先進製程與晶片廠獲利狂飆-財經焦點情報站 - CMoney投資網誌",
+    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQRkkzRi1ocU9yS1BZNWlZY0FTLWhpUFJDVHQ5ZWRfb01IQ0kwZFpxU3VaWnNOd0Y5ekFhc3lwWVdObm9ndjU1SEEwbjNlNUVTWlp5TGRRcnRVd0VJRkNKS0VLSWM0VHNyWEhab0NTOFFEODBHSGdiN0I3SjhwVU9DTVFB?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
     "來源": "科技島",
     "標題": "不只拚晶片算力！清大團隊PAM-4傳輸機讓AI資料像搭高鐵 - 科技島",
     "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBCYlB2aVhFdkxEcHFTWDF6UFFERElrU0FoVVo5enVMX1VDSmtDYjR2dkltUThFdDFiUF8tcy1Ib2djSEFqdGRhdjZYRTVQSGpPYXAxVmNDTzA5NjBnMjc4?oc=5",
@@ -134,23 +190,16 @@
   },
   {
     "日期": "2026/05/13",
-    "來源": "理財周刊",
-    "標題": "半導體材料新雙雄崛起！聯友金屬漲幅近3 倍，創鉅材料掛牌即衝破千元，市場看好股價上看2,800 元 - 理財周刊",
-    "連結": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBxbWRGWXVXZjc2d050WFl4X0l2Z3NHNW92QVF1c3N2UVpGa1pfTkhpRmxXZTlCTmNrUzltc21NTnE4elpKZEZvNXNYMTNVZEh0TWVQUzFRdmh3S0x2UjhNMnZpalM3azFhNmxpeVZ1WQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/13",
-    "來源": "TechNews 科技新報",
-    "標題": "半導體材料廠崇越科技卡位四維樞紐， 重塑 AI 時代戰略價值 - TechNews 科技新報",
-    "連結": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPSGdCSXVIR25XNHdLRWZPTG5jTXZ4U3FZVW0xT0lMbFkteWlVLXE4YWJiRmVrdUN2SDZyZFp5ZzllemdJUHNhXzU5NjRyUy11azEydHFCTVpJTHhsc1lWWjltMFBzWTQ0SkFVc0w2WmdJVnJGR2ozYWtCVUQyX2h2b3N1YkhEc1FEdmF5aFB4VWtTZWQ3SFZTbW5McFJOWUhSaUZvZmx4TUNBbEc2VWxza2xxaTFja3VROVoxS0pZX3RrdVZUdVNOWjhEX29YZw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/13",
     "來源": "科技島",
     "標題": "製造與封裝雙邊成長 2025半導體材料市場營收達732億美元新高 - 科技島",
     "連結": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9xODVoVUs4Y3VXcHlhMXgwX1k2cGhiRF91Q00wTDJ5aUlyRm15RDh2Rlpsa21CUUx6dUtCRThkSWZCeUxlTldXYzlsWndRNWUxQ1B4R0FrS3lmU2tfbUtYWVV5QlJJNlU2?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
+    "來源": "理財周刊",
+    "標題": "半導體材料新雙雄崛起！聯友金屬漲幅近3 倍，創鉅材料掛牌即衝破千元，市場看好股價上看2,800 元 - 理財周刊",
+    "連結": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBxbWRGWXVXZjc2d050WFl4X0l2Z3NHNW92QVF1c3N2UVpGa1pfTkhpRmxXZTlCTmNrUzltc21NTnE4elpKZEZvNXNYMTNVZEh0TWVQUzFRdmh3S0x2UjhNMnZpalM3azFhNmxpeVZ1WQ?oc=5",
     "重要": true
   },
   {
@@ -183,16 +232,16 @@
   },
   {
     "日期": "2026/05/13",
-    "來源": "SET iNEWS",
-    "標題": "南韓拋「AI利潤全民分紅」！這兩家企業或貢獻2兆稅收 - SET iNEWS",
-    "連結": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE50YmMyWmNSM0VLT1VJMWJlSTRiOWNBektCNjdmTUNOb1pfTTJCb0laZjM1aGNaMzg4Nlpxamk2cjR2ZmI2R1NMbFZfQQ?oc=5",
+    "來源": "鏡週刊Mirror Media",
+    "標題": "韓拋AI利潤全民分紅！稅收至少2兆起跳 - 鏡週刊Mirror Media",
+    "連結": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1jM1pYSE1QaHpuUGVhMk1EYS1mNXFiT2Q0UkY0RVhVZkprSXJpd010UlRXVWh3eGUydFRNY1dqWTJEak5KVTZubXBHcm1VSjFUV3NwbDBqaHphRU1SMjhRSkZn0gFiQVVfeXFMTWMzWlhITVBoem5QZWEyTURhLWY1cWJPZDRSRjRFWFVmSmtJcml3TXRSVFdVaHd4ZTJ0VE1jV2pZMkRqTkpVNm5tcEdybVVKMVRXc3BsMGpoemFFTVIyOFFKRmc?oc=5",
     "重要": true
   },
   {
     "日期": "2026/05/13",
-    "來源": "鏡週刊Mirror Media",
-    "標題": "韓拋AI利潤全民分紅！稅收至少2兆起跳 - 鏡週刊Mirror Media",
-    "連結": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1oLWFaaWNfMzhTX1ZienB3UjdKSE91T1pmSlE5MER1OFNIQWFOMXp6UnItSXV1OG5hNXpRS0RwbHRfRk1uOC00VTk0c09rRnMtQ3FyVjlxNG5wTWZf0gFiQVVfeXFMTWMzWlhITVBoem5QZWEyTURhLWY1cWJPZDRSRjRFWFVmSmtJcml3TXRSVFdVaHd4ZTJ0VE1jV2pZMkRqTkpVNm5tcEdybVVKMVRXc3BsMGpoemFFTVIyOFFKRmc?oc=5",
+    "來源": "三立新聞網SETN.com",
+    "標題": "南韓拋「AI利潤全民分紅」！這兩家企業或貢獻2兆稅收 - 三立新聞網SETN.com",
+    "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBycnhSSGtvOEp3WTBzQ0xWLUlnV3JhbnNvVzY2OEpKWk9JdzdXdjhfbkxZVDRxN1MzYU1xTnl4YjJqVG9uekl6eTk3VjN2UjUwSnRfTm5yaWfSAV9BVV95cUxPQXBHTUFLZkcxOUgyU1ZiVGRGendKQW5rV2VKVVNlV0wyd2dOYlNqN1JLT3hET3lNSDJCbW9CcDVPMUE0YXFzal9MdXBZUjJaX2NVUVZJdE9DMXVqRkZYRQ?oc=5",
     "重要": true
   },
   {
@@ -200,6 +249,20 @@
     "來源": "DIGITIMES",
     "標題": "歐盟評估加入矽盛世宣言 強化AI與半導體供應鏈安全布局 - DIGITIMES",
     "連結": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPWmFjUVdfZ1ZrZ2U5cnFwT1J4ellMcGtya2JuZFpjUmI5QXVaLWJCVUl2NHBPOEowdm93SE93amljbk53UXBDM2MzaFZmWmlNWnI4XzVBb3lWSEV1cFQ2NXd1b2xvQ2MxWFE5cWxlOEM5RUZGTkNPblNxaTNOcERyTDZCd0NCTnZ3ZUhSWTVn?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
+    "來源": "TechNews 科技新報",
+    "標題": "半導體材料廠崇越科技卡位四維樞紐， 重塑 AI 時代戰略價值 - TechNews 科技新報",
+    "連結": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPSGdCSXVIR25XNHdLRWZPTG5jTXZ4U3FZVW0xT0lMbFkteWlVLXE4YWJiRmVrdUN2SDZyZFp5ZzllemdJUHNhXzU5NjRyUy11azEydHFCTVpJTHhsc1lWWjltMFBzWTQ0SkFVc0w2WmdJVnJGR2ozYWtCVUQyX2h2b3N1YkhEc1FEdmF5aFB4VWtTZWQ3SFZTbW5McFJOWUhSaUZvZmx4TUNBbEc2VWxza2xxaTFja3VROVoxS0pZX3RrdVZUdVNOWjhEX29YZw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/13",
+    "來源": "SET iNEWS",
+    "標題": "南韓拋「AI利潤全民分紅」！這兩家企業或貢獻2兆稅收 - SET iNEWS",
+    "連結": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE50YmMyWmNSM0VLT1VJMWJlSTRiOWNBektCNjdmTUNOb1pfTTJCb0laZjM1aGNaMzg4Nlpxamk2cjR2ZmI2R1NMbFZfQQ?oc=5",
     "重要": true
   },
   {
@@ -309,23 +372,16 @@
   },
   {
     "日期": "2026/05/12",
+    "來源": "勁報",
+    "標題": "助普利司通被資遣勞工再就業 竹北就業中心5/15徵才陪伴勞工順利轉職 - 勁報",
+    "連結": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1DU0xvYmRsLTFlQWN1dzhhN0cxRTRPRUUxRHV0cWlFdEFyOUdPZW9BTElLckVibUZmdXV0ZmNZNERkYWJZall3SE5CdnM4dWMyeTNOdVptZnN4QVhWbGhPMg?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/12",
     "來源": "中華新聞雲／中華日報",
     "標題": "桃竹苗分署15日辦理徵才活動 協助普利司通被資遣勞工再就業 - 中華新聞雲／中華日報",
     "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9INWtERGkwbDZHSG02M0M3bUJWcUpqSnRFd1pfRnFsMkoxVXVpbFRicEd2NXQxbHFwcnN3UXBSVTQ1S2g4SVRKcTZmaTNja1ZtSlE?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/12",
-    "來源": "南蓮社區發展協會",
-    "標題": "桃竹苗分署啟動就業轉銜機制助普利司通被資遣勞工再就業5/15攜手13家廠商提供逾480個多元職缺 - 南蓮社區發展協會",
-    "連結": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1MYVlSOUFKb2hkckVhT3NsZGNNRUNQeHFEa3RuUVp0NHFZeVRsRUd3RWxtNXVqaHRJajZNR1dBV1RaRnpNVkpVOTRGMG5JbXl1VDVNbE1DaGJWLWczNHY4SE1XVG4tSmxmSUhpYUt3?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/12",
-    "來源": "Yahoo新聞",
-    "標題": "花蓮就業校園徵才博覽會 協助新鮮人勇敢追夢 - Yahoo新聞",
-    "連結": "https://news.google.com/rss/articles/CBMixAJBVV95cUxOVWRmV0tfNDVidkR4U2gxSWYxYndtdmxydGNyekQ3ZzNFY3BTNTdPcVZaTjdHcEVpUXFvcm8wUHNlNHZlMU1nLUtOamxtbVZmMG5YNk1FRThCcG9JTGprdmVDWkg5VmZJMXY3OWtPWEJzc1IybFliTlVmS0VVNmVSNXcxbmlHN1VmckxTUkhkaDFuYnVGejlnM3Z1QW11NlR4V2I1ZWJISjhwTnlTb3paVFdlbmRZeG5RUU9ucTlzWTR6MUhUNmwyNWZEU1RDTExmeDVVeHBWT2RVRERaMUdETl93NXlKNlhWRWduSzhtdVBBSHR4S1ZDXzNrOElscWVSZl9NNEZ0aGI3MHoxR0E5dENtQ05nLS03OWtRVHJmejJtQjI5T25nWS1QSFoyd1NmemRYTmwtcU1NRDRqZ3dOLUJ0Z0w?oc=5",
     "重要": true
   },
   {
@@ -344,16 +400,16 @@
   },
   {
     "日期": "2026/05/12",
-    "來源": "優分析UAnalyze",
-    "標題": "先進封裝設備廠TOWA：AI帶動先進封裝擴產 PLP下半年將迎量產投資潮 - 優分析UAnalyze",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5vcENFcnJlMjhVS2N2eEtBTjlob3NxWWxzSldRRjBwWXRZTjM2REE0UW1uYjNkQjRhY1pjaWlWakdqZlZ2SmlsVVlQb2RueFJQXzljWUJ3?oc=5",
+    "來源": "news.cnyes.com",
+    "標題": "專業CCL廠Q1獲利表現台光電最佳 各廠對泰、馬擴廠方向一致 - news.cnyes.com",
+    "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBOelhqSXE0TzRNMU1RbDAwYnJsT2pNSm5yUzB1UHFWYnJwMHFDZVNPSWhxSXdzTWFKSEcyN1NfNm9Pb0Fqd3Z0bDNjLXowM2c?oc=5",
     "重要": true
   },
   {
     "日期": "2026/05/12",
-    "來源": "news.cnyes.com",
-    "標題": "專業CCL廠Q1獲利表現台光電最佳 各廠對泰、馬擴廠方向一致 - news.cnyes.com",
-    "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBOelhqSXE0TzRNMU1RbDAwYnJsT2pNSm5yUzB1UHFWYnJwMHFDZVNPSWhxSXdzTWFKSEcyN1NfNm9Pb0Fqd3Z0bDNjLXowM2c?oc=5",
+    "來源": "優分析UAnalyze",
+    "標題": "先進封裝設備廠TOWA：AI帶動先進封裝擴產 PLP下半年將迎量產投資潮 - 優分析UAnalyze",
+    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5vcENFcnJlMjhVS2N2eEtBTjlob3NxWWxzSldRRjBwWXRZTjM2REE0UW1uYjNkQjRhY1pjaWlWakdqZlZ2SmlsVVlQb2RueFJQXzljWUJ3?oc=5",
     "重要": true
   },
   {
@@ -368,13 +424,6 @@
     "來源": "工商時報",
     "標題": "產業是根，金融是葉！彭淮南談台灣半導體崛起與護國神山之路- 書房 - 工商時報",
     "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE11VTBjZzNkX3F4U28yQngzNjBjQTMxV1VjNGZ4c3hSYXBWclFXMTZqNWpodm5CNkNmdXMyV2tFRDFjNmVxNjRGc1BpSnJDd1FOcW45NENHNlNjQmRqSzBZ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/12",
-    "來源": "自由時報",
-    "標題": "2025年全球半導體材料產值創新高 台灣蟬聯第一 - 自由時報",
-    "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBaQWZIcVpuS3RYMkNVRDdlYVE1aVpmRU5LRGtOblVETUNzRGlFZHZVa0hWYnhETFlTOUJUVjlPX3V3ZVB6dDMzYWdaSFN2ZjBycDJQbFVUZjY?oc=5",
     "重要": true
   },
   {
@@ -401,13 +450,6 @@
   {
     "日期": "2026/05/12",
     "來源": "CMoney投資網誌",
-    "標題": "先進封裝需求大增！半導體廠首季獲利創高-財經焦點情報站 - CMoney投資網誌",
-    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPRzk0cWx0NTBjTHpaRFUxQVdNdll4aEU3RFBBd3lINWExVlRnNl9raDR5T2NMS1l0UVdLZEtzY0FwLXBPaC1nWS1ITURIczU4WVB5YkxhaExJYW9UM3hKcktvWlpjYTl1QV9BV0ZFLTZoMXN2MjhLZU44U2ZUNFlHV0JR?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/12",
-    "來源": "CMoney投資網誌",
     "標題": "AI先進封裝發威！台半導體廠首季獲利狂飆-財經焦點情報站 - CMoney投資網誌",
     "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPMWFHaXd3YzBibHpWSExuV0RGNkgzOGd1V0NDb0YwT2hIRUU2NnNrOXpVVjY4YThQcm5WOVY5OXNKR0dwdmxhQWt2V2FQeXpJYnMxU1pwVUZST1ItRWFKQ05OUDVESjl6dno3U0liMjBZclBlUUhtNWg4T2RDRzF3ZXB3?oc=5",
     "重要": true
@@ -415,15 +457,8 @@
   {
     "日期": "2026/05/12",
     "來源": "CMoney投資網誌",
-    "標題": "台積電配息七元創高，半導體與封測廠營運報喜-財經焦點情報站 - CMoney投資網誌",
-    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNRkoyWE5Lck5UTkZuWW12TndrNEttVDZMRmQ1cXY1dmh3M0MtOU5HNGNnNTVYVnU5aUtoZDJiLTJvRUdWVUpjeUdmZ01Eak1HRS0xc05qVjhDaEZUUWVPdTg1ZzJ4T0d0czBra1h6dS0yS0dvbVdJU0JCeXNSTzNWREtB?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/12",
-    "來源": "rti.org.tw",
-    "標題": "川習會 專家：半導體是台灣最大籌碼 - rti.org.tw",
-    "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9hMGw3dm1NYUgxSmFyY2xBQm90Qk5rU1otSW9sRGdPdFNycnlMTWZlbE11UzFWV2thb2VTd1d4Q2RzQk9POWZzcnB5VVJfVExhZkRkNFpPQQ?oc=5",
+    "標題": "先進封裝需求大增！半導體廠首季獲利創高-財經焦點情報站 - CMoney投資網誌",
+    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPRzk0cWx0NTBjTHpaRFUxQVdNdll4aEU3RFBBd3lINWExVlRnNl9raDR5T2NMS1l0UVdLZEtzY0FwLXBPaC1nWS1ITURIczU4WVB5YkxhaExJYW9UM3hKcktvWlpjYTl1QV9BV0ZFLTZoMXN2MjhLZU44U2ZUNFlHV0JR?oc=5",
     "重要": true
   },
   {
@@ -431,6 +466,13 @@
     "來源": "風傳媒",
     "標題": "2030年半導體產值翻倍！外媒點名「台灣1企業」是唯一買進首選，理由全曝光 | 魏甫丞 | 風生活 - 風傳媒",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBubld5c01zd2ZtOS1mZmo4TXVOODNHYTc1YkU3X1JmZXpUanhBMnlpb3E1aHB1bFYwN3ZPMktVSFdGTmxjWm85VDZEMEVhbkVM?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/12",
+    "來源": "CMoney投資網誌",
+    "標題": "台積電配息七元創高，半導體與封測廠營運報喜-財經焦點情報站 - CMoney投資網誌",
+    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNRkoyWE5Lck5UTkZuWW12TndrNEttVDZMRmQ1cXY1dmh3M0MtOU5HNGNnNTVYVnU5aUtoZDJiLTJvRUdWVUpjeUdmZ01Eak1HRS0xc05qVjhDaEZUUWVPdTg1ZzJ4T0d0czBra1h6dS0yS0dvbVdJU0JCeXNSTzNWREtB?oc=5",
     "重要": true
   },
   {
@@ -463,16 +505,16 @@
   },
   {
     "日期": "2026/05/12",
-    "來源": "富聯網",
-    "標題": "個股：安瑞-KY(3664)董事會通過總經理職務由黃建喬接任 - 富聯網",
-    "連結": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNW9IS2p5czFHRTZTbnZXZ3Z2MmNxVzg5XzhMZTZXRG12WEd4U0ZNQUNqX1otemQ0azBFWjlpQ005MVZFNVNDbVNMMEdlNWp6MWdpUGRlRE01c21ZbHl4VU10bDdKVWZaSFlqamVDU0hHQkFNdlRLZnFxRDZLdXViNnZUeTliRE10?oc=5",
+    "來源": "自由財經",
+    "標題": "承億集團董事長由戴俊郎胞姊接任 遺孀將擔任承億文旅董事長 - 自由財經",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB6SlJwUEw2MzJ2S3czaFoyUHRHWUdaTkhadEVyOUJPbXhNOG1XMm4wZUZHYTFNZkxoWmh2UVN0LWxBUGp6bFIxQm1XU015YUtFUG4xWjRVYW01Yzl5Qk9n0gFkQVVfeXFMTWNxdllib254NHQxZkZUdGV3c2JUcDJNc25tb2JiVnhmRmVPNUpCcEhnSWZJaWw1VVlUUWVIVmVwOU1rX1RlQzg2eTJxMGdoUlRVUV9VZmpLTlhzQXk5dkF1RnNpSA?oc=5",
     "重要": true
   },
   {
     "日期": "2026/05/12",
-    "來源": "idn.com.tw",
-    "標題": "麗豐-KY1Q 1.41元 趙承佑接任董事長 - idn.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNellVR2NmMmVQcExNRmkyd3d2WmV1a0twdkM5dmJNVXBvaFlneXRKOXVjSEZpR20zWEh1a3B3MlgyUk5QUUxSV2JmTlRzbnlmY21heWFWU1Q3a2VKX25OTlJOUGdPNHpMMXVPY0QtMU9BdXdnalRyMFppREJ6TUN2WXZXVlZ5WEpxNV9CcU55MU9DQ2k5LTNETFFCNA?oc=5",
+    "來源": "富聯網",
+    "標題": "個股：安瑞-KY(3664)董事會通過總經理職務由黃建喬接任 - 富聯網",
+    "連結": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNW9IS2p5czFHRTZTbnZXZ3Z2MmNxVzg5XzhMZTZXRG12WEd4U0ZNQUNqX1otemQ0azBFWjlpQ005MVZFNVNDbVNMMEdlNWp6MWdpUGRlRE01c21ZbHl4VU10bDdKVWZaSFlqamVDU0hHQkFNdlRLZnFxRDZLdXViNnZUeTliRE10?oc=5",
     "重要": true
   },
   {
@@ -484,16 +526,16 @@
   },
   {
     "日期": "2026/05/12",
-    "來源": "UDN",
-    "標題": "承億集團新人事布局出爐 戴淑玲接任承億集團董事長 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFA4czVxSzY3ZUFubFlIQmZpYkpESFZ1S3pPdFlSbU4xaWN5ejd6OEt5UE5BQ250YkNoaTd2c2wzRDJUdW91MS0tMS1JWTRGa1Rs0gFWQVVfeXFMTzB4anZmRGZ1TFNMbkZzODZXOC01clZuZnNsMS1fX3ctLXdSQkpjM0hZaE1WTDExUVJhc3EzclZfdmhaVnBKd2JyZk5RVjhXZ3k3bHZ2Z3c?oc=5",
+    "來源": "idn.com.tw",
+    "標題": "麗豐-KY1Q 1.41元 趙承佑接任董事長 - idn.com.tw",
+    "連結": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNellVR2NmMmVQcExNRmkyd3d2WmV1a0twdkM5dmJNVXBvaFlneXRKOXVjSEZpR20zWEh1a3B3MlgyUk5QUUxSV2JmTlRzbnlmY21heWFWU1Q3a2VKX25OTlJOUGdPNHpMMXVPY0QtMU9BdXdnalRyMFppREJ6TUN2WXZXVlZ5WEpxNV9CcU55MU9DQ2k5LTNETFFCNA?oc=5",
     "重要": true
   },
   {
     "日期": "2026/05/12",
-    "來源": "自由財經",
-    "標題": "承億集團董事長由戴俊郎胞姊接任 遺孀將擔任承億文旅董事長 - 自由財經",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB6SlJwUEw2MzJ2S3czaFoyUHRHWUdaTkhadEVyOUJPbXhNOG1XMm4wZUZHYTFNZkxoWmh2UVN0LWxBUGp6bFIxQm1XU015YUtFUG4xWjRVYW01Yzl5Qk9n0gFkQVVfeXFMTWNxdllib254NHQxZkZUdGV3c2JUcDJNc25tb2JiVnhmRmVPNUpCcEhnSWZJaWw1VVlUUWVIVmVwOU1rX1RlQzg2eTJxMGdoUlRVUV9VZmpLTlhzQXk5dkF1RnNpSA?oc=5",
+    "來源": "UDN",
+    "標題": "承億集團新人事布局出爐 戴淑玲接任承億集團董事長 - UDN",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFA4czVxSzY3ZUFubFlIQmZpYkpESFZ1S3pPdFlSbU4xaWN5ejd6OEt5UE5BQ250YkNoaTd2c2wzRDJUdW91MS0tMS1JWTRGa1Rs0gFWQVVfeXFMTzB4anZmRGZ1TFNMbkZzODZXOC01clZuZnNsMS1fX3ctLXdSQkpjM0hZaE1WTDExUVJhc3EzclZfdmhaVnBKd2JyZk5RVjhXZ3k3bHZ2Z3c?oc=5",
     "重要": true
   },
   {
@@ -540,6 +582,34 @@
   },
   {
     "日期": "2026/05/12",
+    "來源": "南蓮社區發展協會",
+    "標題": "桃竹苗分署啟動就業轉銜機制助普利司通被資遣勞工再就業5/15攜手13家廠商提供逾480個多元職缺 - 南蓮社區發展協會",
+    "連結": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1MYVlSOUFKb2hkckVhT3NsZGNNRUNQeHFEa3RuUVp0NHFZeVRsRUd3RWxtNXVqaHRJajZNR1dBV1RaRnpNVkpVOTRGMG5JbXl1VDVNbE1DaGJWLWczNHY4SE1XVG4tSmxmSUhpYUt3?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/12",
+    "來源": "Yahoo新聞",
+    "標題": "花蓮就業校園徵才博覽會 協助新鮮人勇敢追夢 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMixAJBVV95cUxOVWRmV0tfNDVidkR4U2gxSWYxYndtdmxydGNyekQ3ZzNFY3BTNTdPcVZaTjdHcEVpUXFvcm8wUHNlNHZlMU1nLUtOamxtbVZmMG5YNk1FRThCcG9JTGprdmVDWkg5VmZJMXY3OWtPWEJzc1IybFliTlVmS0VVNmVSNXcxbmlHN1VmckxTUkhkaDFuYnVGejlnM3Z1QW11NlR4V2I1ZWJISjhwTnlTb3paVFdlbmRZeG5RUU9ucTlzWTR6MUhUNmwyNWZEU1RDTExmeDVVeHBWT2RVRERaMUdETl93NXlKNlhWRWduSzhtdVBBSHR4S1ZDXzNrOElscWVSZl9NNEZ0aGI3MHoxR0E5dENtQ05nLS03OWtRVHJmejJtQjI5T25nWS1QSFoyd1NmemRYTmwtcU1NRDRqZ3dOLUJ0Z0w?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/12",
+    "來源": "自由時報",
+    "標題": "2025年全球半導體材料產值創新高 台灣蟬聯第一 - 自由時報",
+    "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBaQWZIcVpuS3RYMkNVRDdlYVE1aVpmRU5LRGtOblVETUNzRGlFZHZVa0hWYnhETFlTOUJUVjlPX3V3ZVB6dDMzYWdaSFN2ZjBycDJQbFVUZjY?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/12",
+    "來源": "rti.org.tw",
+    "標題": "川習會 專家：半導體是台灣最大籌碼 - rti.org.tw",
+    "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9hMGw3dm1NYUgxSmFyY2xBQm90Qk5rU1otSW9sRGdPdFNycnlMTWZlbE11UzFWV2thb2VTd1d4Q2RzQk9POWZzcnB5VVJfVExhZkRkNFpPQQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/12",
     "來源": "LINE TODAY",
     "標題": "界霖衝刺AI布局 明年營收占比挑戰逾1成 | MoneyDJ理財網 - LINE TODAY",
     "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBob0dPdGJjbnF2UXJDMm0td2t0NjhJQm5QVVV2TkdhWm85aTV5Vk1EZE9RbUl5U1FSWHNZUjhhRXdCQ01tdi1OY1BycXViVmZtS2Z6RDRB?oc=5",
@@ -565,13 +635,6 @@
     "標題": "薪水多28 萬、每天早一小時下班 中華電、台灣大薪資工時曝光 - 聯合新聞網",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFA1cGFtazRWRC1iWkhqS2hIRUZNd3BlcnNEQjJCYnUxbmJKUXFPcDdaX1Fic1EyUHQzNnNSb2pzd3VWcGhQY1hMNnVWdnFXemoy0gFWQVVfeXFMT2M2NjZVVWhtVXM3dnJjRm81MTVzSXA0VWVoQ21ZSWx1cklXNWVaY0JJUTY5bUdRdG1lT3VZUUFQcy13MjNobUJsTE9OeEx2enU5eGlwR2c?oc=5",
     "重要": false
-  },
-  {
-    "日期": "2026/05/12",
-    "來源": "勁報",
-    "標題": "助普利司通被資遣勞工再就業 竹北就業中心5/15徵才陪伴勞工順利轉職 - 勁報",
-    "連結": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1DU0xvYmRsLTFlQWN1dzhhN0cxRTRPRUUxRHV0cWlFdEFyOUdPZW9BTElLckVibUZmdXV0ZmNZNERkYWJZall3SE5CdnM4dWMyeTNOdVptZnN4QVhWbGhPMg?oc=5",
-    "重要": true
   },
   {
     "日期": "2026/05/12",
@@ -634,69 +697,6 @@
     "來源": "台灣民眾電子報",
     "標題": "竹北就業中心5/15徵才活動協助普利司通被資遣勞工再就業 - 台灣民眾電子報",
     "連結": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1weHNkdDJzWW9jamJOaldJMDhrM3d1Q0UwY0lDYjZ4OTJKcUlrZ0ttYU0wMUhMTGpKVDR3bWVpVTRCemFkS21hNA?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/12",
-    "來源": "LINE TODAY",
-    "標題": "台灣半導體前進歐洲徐佳青訪德深化台德戰略夥伴關係| 中央廣播電臺 - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1jX2xSNDhnRnUxejVsZkRwNDRicDZXREp3YXc0Zng1SE9yVDNMZjJMa2xvTzQyOHRkQ0FtcFg2OEhXX0J0T0lGSDdVbEV1SkpfS19IeVV3?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/12",
-    "來源": "聯合新聞網",
-    "標題": "薪水多28 萬、每天早一小時下班中華電、台灣大薪資工時曝光| 科技產業| 產經 - 聯合新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFA1cGFtazRWRC1iWkhqS2hIRUZNd3BlcnNEQjJCYnUxbmJKUXFPcDdaX1Fic1EyUHQzNnNSb2pzd3VWcGhQY1hMNnVWdnFXemoy?oc=5",
-    "重要": false
-  },
-  {
-    "日期": "2026/05/11",
-    "來源": "中央社 CNA",
-    "標題": "重視人才發展 資誠調升新鮮人起薪 審計部門平均調薪上看9% - 中央社 CNA",
-    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB4bVJnaFlDZEhta0p0d1FKbVhJNE83VlotYVJpVEowelBXX2phX05YRXVJYnNlVzI1TzgyQ002Sk8wQngxajNwaGUtem5zaHNOR0tzbFhQSExTZw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/11",
-    "來源": "新新聞",
-    "標題": "台積電漲、千萬勞工退休金跟著漲 護國神山與台灣社會的命運共同體 - 新新聞",
-    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFB5bFlER3dfa2VUMEJVcDZhZFhEdkdSU3lWTnB6TFBOYTlaX3BDLURQTmtsT2M5WVdxZDlPaGFPOGlvWlFINjF3RXJ4TDVsUQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/11",
-    "來源": "自由財經",
-    "標題": "普利司通湖口廠關廠衝擊本勞360人 勞動部力挺工會呼籲資方多給一點 - 自由財經",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE16Y3B3QnFsNW9nYklkRkUwQ28yMW5Sazc5MjVabFRjOGUwaExwR1RLcVdoUkRBN3pwN0F1RjFHU0dIWVprOXRadDBUQVZ5R1RrcjBVUUxWTW5iXzJrTFhJ0gFkQVVfeXFMUFYxLXhIUGVLWlBTeS1Ual9hV0ZxaTJaLWpmVlBGek1DLVFmb1FTd2hZWnRyV3I5LUFHVGd0YVNKM1dFU1ppeHNlUVBxMmVZWFBwTC1WcXU1VVljWUlteUV2bWJ6TQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/11",
-    "來源": "風傳媒",
-    "標題": "台灣40年「知名大廠」大裁員！超過500人被資遣失業，勞工處/業者證實： 已停工停產 - 風傳媒",
-    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFB3MXFFRnlnbm56THU1MFhMUVdQVkRTZ0hYSEMyb3FJRFd4dmJnVEh3bm4tUDU3S0RJZGtOV3FDN1VhTTRuRC0tbmU1dm1yZnE2?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/11",
-    "來源": "地球黃金線",
-    "標題": "台灣普利司通新竹廠關廠「逾550名員工無預警失業」！國產胎未來轉全進口供應 - 地球黃金線",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9aXzY3MWdMenNUWWRaSVFqTGtaN21VaHJGelczZUtUZzY4dnZRREZ3OVVJXzMxclBDLWdGRC05RWVxZFRFdE1qVF9WOHdpbHVuM1E?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/11",
-    "來源": "聯合新聞網",
-    "標題": "撤出在台生產線 台灣普利司通營運轉型 祭優於法規資遣方案裁員551名 - 聯合新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB1cW9CS2xUTUVtU2dKbmhtUEVaSzZFU2U4WkdjSndILW95WHU4Zm9kVk9VcjUxRFYzYlp6dFJOWEVhZlYzbmFUclE2OWRTVHFRcDB4Z0xZRjZKQdIBX0FVX3lxTFB5bk1OQWNCRThaaE1TSVZlekhvUGZ2RndxSXJFWWJuY3hIZnNNR0ZqeE42MEdkY3VSN09XakJXdGpERDd3bkpQRkhaeXlmelNZbDdPdHJkcG9objRKUlFF?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/11",
-    "來源": "自由時報",
-    "標題": "普利司通新竹廠爆大量裁員！新竹縣府證實業者已報備 - 自由時報",
-    "連結": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1jaXJGYVVaX3k5N1lmNndjV2ZQQ1RmbmxfeDFTbENqa05XSV9sWGdIOTFKRTRNZlkxTFRMUldsbFBTMUFTRWotQ2thSi1BWWlsQ3U2ZTFwa0Nfb1p5bnI4X0VTRDLSAWpBVV95cUxOZ3VMTmpEZ1ZsWEs3M3BEbThIOHY5TG1XLTJhRElQdzJNclBWc1VBeGx1Wms5QVRBRTJWNEhlUm91OFd0RnFaRnlVWW5SaFBPbno1NTFjZ1FLcThrWDQ4em84Zjd3WHpxMXdR?oc=5",
     "重要": true
   }
 ]
