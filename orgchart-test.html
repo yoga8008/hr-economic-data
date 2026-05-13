@@ -742,7 +742,7 @@ pdfModeSelect,
     <div class="chartHeader">
         <div class="chartLeftActions">
 
-            <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼；輸入 *人名 或 *工號 查所屬組織">
+            <input type="text" id="searchInput" placeholder="搜尋部門、主管、部門代碼；*人名 / *工號查組織，多筆請用 +，最多5筆">
 
             <label class="focusOption">
                 <input type="checkbox" id="focusCheckbox">
@@ -2135,6 +2135,10 @@ function getSpecialSearchType(keyword){
         return "groupCenter";
     }
 
+    if(k === "*其它"){
+        return "otherGroup";
+    }
+
     return "";
 }
 
@@ -2144,36 +2148,128 @@ function getSpecialDisplayKeyword(keyword){
     if(type === "allGroup") return "集團";
     if(type === "subGroup") return "次集團";
     if(type === "groupCenter") return "集團中央";
+    if(type === "otherGroup") return "其它";
 
     return keyword;
 }
 
-function getPersonSearchKeyword(rawKeyword){
+function parsePersonSearchKeywords(rawKeyword){
     const specialType = getSpecialSearchType(rawKeyword);
 
     if(specialType){
-        return "";
+        return {
+            isPersonSearch:false,
+            keywords:[],
+            error:""
+        };
     }
 
     const trimmed = String(rawKeyword || "").trim();
 
     if(!trimmed.startsWith("*")){
-        return "";
+        return {
+            isPersonSearch:false,
+            keywords:[],
+            error:""
+        };
     }
 
-    return trimmed.slice(1).trim();
+    const items = trimmed
+        .split("+")
+        .map(item => item.trim())
+        .filter(Boolean);
+
+    if(items.length === 0){
+        return {
+            isPersonSearch:true,
+            keywords:[],
+            error:"請在 * 後輸入人員姓名或員工工號"
+        };
+    }
+
+    if(items.length > 5){
+        return {
+            isPersonSearch:true,
+            keywords:[],
+            error:"人員搜尋比對最多 5 筆，請刪減後再搜尋"
+        };
+    }
+
+    const keywords = [];
+
+    for(const item of items){
+        if(!item.startsWith("*")){
+            return {
+                isPersonSearch:true,
+                keywords:[],
+                error:"多筆人員搜尋請使用：*人名 + *工號"
+            };
+        }
+
+        const keyword = item.slice(1).trim();
+
+        if(!keyword){
+            return {
+                isPersonSearch:true,
+                keywords:[],
+                error:"請在每個 * 後輸入人員姓名或員工工號"
+            };
+        }
+
+        keywords.push(keyword);
+    }
+
+    return {
+        isPersonSearch:true,
+        keywords:keywords,
+        error:""
+    };
 }
 
-function findMatchedPersons(keyword){
-    if(!keyword) return [];
+function findMatchedPersonsByKeywords(keywords){
+    const matchedMap = new Map();
+    const unmatchedKeywords = [];
 
-    return filteredPersonRows.filter(person => {
-        return isFuzzyMatch(getPersonSearchText(person), keyword);
+    keywords.forEach(keyword => {
+        const matchedForKeyword = filteredPersonRows.filter(person => {
+            return isFuzzyMatch(getPersonSearchText(person), keyword);
+        });
+
+        if(matchedForKeyword.length === 0){
+            unmatchedKeywords.push(keyword);
+        }
+
+        matchedForKeyword.forEach(person => {
+            const key = [
+                String(person["員工工號"] || "").trim(),
+                String(person["員工姓名"] || "").trim(),
+                String(person["部門代碼"] || "").trim()
+            ].join("||");
+
+            if(!matchedMap.has(key)){
+                matchedMap.set(key, person);
+            }
+        });
     });
+
+    return {
+        persons:[...matchedMap.values()],
+        unmatchedKeywords:unmatchedKeywords
+    };
+}
+
+function isOtherGroupNode(node){
+    const name = normalizeText(node.row["部門全名"]);
+    return name.includes("fit事業群");
 }
 
 function isSubGroupNode(node){
     const name = normalizeText(node.row["部門全名"]);
+
+    if(isOtherGroupNode(node)){
+        return false;
+    }
+
     return name.includes("次集團") || name.includes("事業群");
 }
 
@@ -2213,28 +2309,42 @@ function isUnderAnyNode(node, parentNodes){
 }
 
 function findSpecialMatchedNodes(type){
+    const otherRoots = filterTopMatchedNodes(
+        allNodes.filter(node => !node.isLegalEntity && isOtherGroupNode(node))
+    );
+
     const subGroupRoots = filterTopMatchedNodes(
-        allNodes.filter(node => !node.isLegalEntity && isSubGroupNode(node))
+        allNodes.filter(node => {
+            return (
+                !node.isLegalEntity &&
+                isSubGroupNode(node) &&
+                !isUnderAnyNode(node, otherRoots)
+            );
+        })
     );
 
     const groupCenterRoots = filterTopMatchedNodes(
         allNodes.filter(node => {
             return (
                 !node.isLegalEntity &&
+                !isOtherGroupNode(node) &&
                 !isSubGroupNode(node) &&
-                !isUnderAnyNode(node, subGroupRoots)
+                !isUnderAnyNode(node, subGroupRoots) &&
+                !isUnderAnyNode(node, otherRoots)
             );
         })
     );
 
     const groupCenterNode = createVirtualNode("集團中央", groupCenterRoots);
     const subGroupNode = createVirtualNode("次集團", subGroupRoots);
+    const otherNode = createVirtualNode("其它", otherRoots);
 
     if(type === "allGroup"){
         return [
             createVirtualNode("集團", [
                 groupCenterNode,
-                subGroupNode
+                subGroupNode,
+                otherNode
             ])
         ];
     }
@@ -2245,6 +2355,10 @@ function findSpecialMatchedNodes(type){
 
     if(type === "groupCenter"){
         return [groupCenterNode];
+    }
+
+    if(type === "otherGroup"){
+        return [otherNode];
     }
 
     return [];
@@ -2380,7 +2494,8 @@ function searchTree(jumpToFirst = false){
     const rawKeyword = document.getElementById("searchInput").value.trim();
     const keyword = getSpecialDisplayKeyword(rawKeyword);
     const specialType = getSpecialSearchType(rawKeyword);
-    const personKeyword = getPersonSearchKeyword(rawKeyword);
+    const personSearch = parsePersonSearchKeywords(rawKeyword);
+    const hasPersonSearch = personSearch.isPersonSearch && personSearch.keywords.length > 0;
     const focusChecked = document.getElementById("focusCheckbox").checked;
 
     setTimeout(() => {
@@ -2390,7 +2505,7 @@ function searchTree(jumpToFirst = false){
         nodes.forEach(node => {
             node.classList.remove("match");
 
-            if(personKeyword){
+            if(hasPersonSearch){
                 if(currentPersonSearchDeptCodes.has(node.dataset.deptCode)){
                     if(!firstMatch){
                         firstMatch = node;
@@ -2421,7 +2536,7 @@ function searchTree(jumpToFirst = false){
             });
         }
 
-        if(jumpToFirst && rawKeyword && !firstMatch && !specialType && !personKeyword){
+        if(jumpToFirst && rawKeyword && !firstMatch && !specialType && !hasPersonSearch){
             alert("找不到符合的部門、主管或代碼");
         }
     }, 0);
@@ -2455,7 +2570,7 @@ function searchAndJump(){
     const rawKeyword = document.getElementById("searchInput").value.trim();
     const focusChecked = document.getElementById("focusCheckbox").checked;
     const specialType = getSpecialSearchType(rawKeyword);
-    const personKeyword = getPersonSearchKeyword(rawKeyword);
+    const personSearch = parsePersonSearchKeywords(rawKeyword);
 
     if(!rawKeyword){
         focusNodes = [];
@@ -2464,8 +2579,8 @@ function searchAndJump(){
         return;
     }
 
-    if(rawKeyword.startsWith("*") && !specialType && !personKeyword){
-        alert("請在 * 後輸入人員姓名或員工工號");
+    if(personSearch.error){
+        alert(personSearch.error);
         return;
     }
 
@@ -2487,8 +2602,10 @@ function searchAndJump(){
         return;
     }
 
-    if(personKeyword){
-        const matchedPersons = findMatchedPersons(personKeyword);
+    if(personSearch.isPersonSearch){
+        const result = findMatchedPersonsByKeywords(personSearch.keywords);
+        const matchedPersons = result.persons;
+        const unmatchedKeywords = result.unmatchedKeywords;
 
         if(matchedPersons.length === 0){
             alert("找不到符合目前法人篩選的人員姓名或工號");
@@ -2506,7 +2623,7 @@ function searchAndJump(){
             .filter(Boolean);
 
         if(matchedDeptNodes.length === 0){
-            showPersonSearchResults(matchedPersons, personKeyword);
+            showPersonSearchResults(matchedPersons, personSearch.keywords.join(" + "));
             alert("找到人員資料，但部門代碼未對應到組織圖節點");
             return;
         }
@@ -2522,7 +2639,11 @@ function searchAndJump(){
         focusNodes.forEach(node => expandRecursive(node));
 
         renderChart();
-        showPersonSearchResults(matchedPersons, personKeyword);
+        showPersonSearchResults(matchedPersons, personSearch.keywords.join(" + "));
+
+        if(unmatchedKeywords.length > 0){
+            alert("以下條件查無符合人員：" + unmatchedKeywords.join("、"));
+        }
 
         setTimeout(() => searchTree(true), 0);
 
