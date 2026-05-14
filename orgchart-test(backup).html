@@ -510,7 +510,7 @@ pdfModeSelect,
 .orgChart{
     display:flex;
     justify-content:center;
-    padding:40px 40px 80px;
+    padding:30px 20px 60px;
     min-width:max-content;
     overflow:visible;
 }
@@ -521,7 +521,7 @@ pdfModeSelect,
     align-items:center;
     position:relative;
     flex-shrink:0;
-    margin-bottom:40px;
+    margin-bottom:24px;
 }
 
 .orgNode{
@@ -551,26 +551,21 @@ pdfModeSelect,
     display:flex;
     justify-content:center;
     align-items:flex-start;
-
-    /* 原本較擠，這裡拉開 */
-    gap:56px 56px;
-
-    /* 父層與子層距離拉開 */
-    margin-top:58px;
-
+    gap:36px 32px;
+    margin-top:42px;
     position:relative;
     padding-top:0;
     flex-wrap:wrap;
-    max-width:3600px;
+    max-width:3000px;
 }
 
 .orgNodeGroup.hasChildren > .orgNode::after{
     content:"";
     position:absolute;
     left:50%;
-    bottom:-30px;
+    bottom:-22px;
     width:1px;
-    height:30px;
+    height:22px;
     background:#94a3b8;
     transform:translateX(-50%);
 }
@@ -578,22 +573,23 @@ pdfModeSelect,
 .orgChildren > .orgNodeGroup::before{
     content:"";
     position:absolute;
-    top:-29px;
+    top:-21px;
     left:50%;
     width:1px;
-    height:29px;
+    height:21px;
     background:#94a3b8;
     transform:translateX(-50%);
 }
 
 .orgConnectorLine{
     position:absolute;
-    top:-29px;
+    top:-21px;
     height:1px;
     background:#94a3b8;
     pointer-events:none;
     z-index:1;
 }
+
 .personPanel{
     background:#fff;
     border:1px solid #e5e7eb;
