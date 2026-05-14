@@ -1636,6 +1636,14 @@ function shouldShowNode(node){
 }
 
 function isPathOnly(node){
+    const rawKeyword = document.getElementById("searchInput")?.value.trim() || "";
+    const specialType = getSpecialSearchType(rawKeyword);
+
+    // 特殊查詢：*集團、*次集團、*集團中央、*其它，不要顏色變淡
+    if(specialType){
+        return false;
+    }
+
     if(selectedLevels.size === 0){
         return false;
     }
