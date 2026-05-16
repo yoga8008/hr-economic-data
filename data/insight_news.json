@@ -1,13 +1,6 @@
 [
   {
     "日期": "2026/05/16",
-    "來源": "台灣民眾電子報",
-    "標題": "台南市勞工局職場大小事講座分享運用AI工具一鍵生成精美簡報訣竅 - 台灣民眾電子報",
-    "連結": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE5FS2JXVEFocnlXMnRmQmZhcWYzekdVWmdIbG9UWE10bkI3MDhUYkVWaTRwRE9oSGt1OFNLNnlBMTBhbTQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/16",
     "來源": "工商時報",
     "標題": "退休不退場！台灣65歲以上就業者飆破50萬 10年暴增84％ - 工商時報",
     "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5jMDM4RjVSMlJHQ3JIcFFXNFRLc0c2RkdqZ2l6dUJJYTZhanBwUTFuY0U1QklPbVNhTENtNjVCMUZJdmRNYWlISjYwdFcyWmJxMTNNYk1ya0pYdFdVRTRz?oc=5",
@@ -60,6 +53,13 @@
     "來源": "LINE TODAY",
     "標題": "華宏Q1每股賺0.4元；佈局AI/半導體材料拚轉型| MoneyDJ理財網 - LINE TODAY",
     "連結": "https://news.google.com/rss/articles/CBMihwFBVV95cUxORWM0Nk5hS2N4cnJkYjVfRVYtdmxJQWJYajRWWGtKeWhDOTNYcWtveFkyWmV0d1lEcVFkWHVNeFZNV1B0Sk02UmdrejJXTURHS2M2SjdHXzAzSWJBLWtVQjFTbHdOVWtkYml4VkRuSXFWaW4zNGFVdXNpeUtNSzZTZmZwcFlBMjA?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/16",
+    "來源": "台灣民眾電子報",
+    "標題": "台南市勞工局職場大小事講座分享運用AI工具一鍵生成精美簡報訣竅 - 台灣民眾電子報",
+    "連結": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE5FS2JXVEFocnlXMnRmQmZhcWYzekdVWmdIbG9UWE10bkI3MDhUYkVWaTRwRE9oSGt1OFNLNnlBMTBhbTQ?oc=5",
     "重要": true
   },
   {
@@ -183,13 +183,6 @@
   },
   {
     "日期": "2026/05/15",
-    "來源": "CMoney投資網誌",
-    "標題": "半導體代工動能強勁，指標台廠獲利創新高-財經焦點情報站 - CMoney投資網誌",
-    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQYTFHdDdoa180T3dYQmlXVy1iMl85cEdEaUpfUnRYcmpfbk1pblRpejhRanA0bS1vMlQtR1Z4Z1JTWHBnZmJITS1XMnhJRTBRRWdrU1RlZzFQcS1ETU5EWHVja2d1bGt4SGJiMXNPM2lKSGg5VnhtTzZxbko0RHY0SlVn?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/15",
     "來源": "蕃新聞",
     "標題": "日經平均指數突破6萬3千點 半導體領漲野村證券稱非泡沫 - 蕃新聞",
     "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5CVTU1T1E1aENGZk8wT0hQYVpqenFZaHEyWUZucW9YQlhVbzBVWk5QWUo4QmYwMFNYNnhsM2lVMzBJVi0tWHhZWTNpNDkzZUx3dmc?oc=5",
@@ -207,6 +200,13 @@
     "來源": "DIGITIMES",
     "標題": "切入FOPLP、BBU與散熱 華宏轉型攻AI與半導體 - DIGITIMES",
     "連結": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPTFZaX2xJX1g2LTJrWmJIcURpSDRvdXJ5MkRnUGtvbDgxRm1uNS1zNzVCUEJyNnhZcEg4RzFad1dLRF9LT25ONzRQSGlkN0hBa05IQkhlbHRGU2kzX083bVRsemtiaHVFQVlCYVhTNjhkSzJ3VER1YWxWOWxCb1MzZmJOU3k3NWRES2R5Tmx3?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/15",
+    "來源": "CMoney投資網誌",
+    "標題": "半導體代工動能強勁，指標台廠獲利創新高-財經焦點情報站 - CMoney投資網誌",
+    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQYTFHdDdoa180T3dYQmlXVy1iMl85cEdEaUpfUnRYcmpfbk1pblRpejhRanA0bS1vMlQtR1Z4Z1JTWHBnZmJITS1XMnhJRTBRRWdrU1RlZzFQcS1ETU5EWHVja2d1bGt4SGJiMXNPM2lKSGg5VnhtTzZxbko0RHY0SlVn?oc=5",
     "重要": true
   },
   {
@@ -351,6 +351,13 @@
   },
   {
     "日期": "2026/05/14",
+    "來源": "economic.taichung.gov.tw",
+    "標題": "單一招商服務窗口、訪廠及投資關懷 - economic.taichung.gov.tw",
+    "連結": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNaXNqZU9lUEFpOUQzQ3VIQlAtM29OV29FSE1acUF1ZUJDcEU4YldKMFdmdzN3WHNsNlc2NkIzQ2pPWmdETnBDalhSWGMxUHpvYjRiMlFIVFY0VF9PWHMyemNtU1dfbXBRSUVkMDNNamlHRHZyYXRTS0dXRlNpY3FqNFZmVzg1UHhxUDN3Y2xsZWUzM01qYTdZ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/14",
     "來源": "Yahoo - 汽機車",
     "標題": "2025 年七月台灣電動車銷售排行榜：特斯拉 Model Y 銷量再破千、蟬聯最熱賣純電車寶座 - Yahoo - 汽機車",
     "連結": "https://news.google.com/rss/articles/CBMirgJBVV95cUxOczFKcmpPbXE1UTdYUHpCUmxyS2UtSmFSZ2I4TGhPZkZ0RWxyVE9NeHVNZFpieEprTWFYWjJvc0xmbTNVOHFJckE1OW9xMjl4MTRjUUVoRzVkVTBJMUVfTFpVOHlydXZQcDZOcGdJY2Q3OWRTWGd4SVN2RUhEdGJRdXF6LUNodmpnWUNhQmZxeXdlUzB2THJpTFJURHlLdF9qUHl1OVJ3cFEtamZRSjBpVDRYbUlJRjl0MHBIaWZ4Y0JEMkJFS2p4M3RBc2dqdEtTQTFNSnhKbGRrWkl4ODY0bFVhM2VscmFLRHZ2bGxweHJRS0diYS1PUTNwMDZDeGN3Qm1fckNabkNqS2MwNEU1VTZGTW80ajFTVFVtenZaMU1zYXdwbGtTakl1eWZodw?oc=5",
@@ -421,16 +428,16 @@
   },
   {
     "日期": "2026/05/14",
-    "來源": "UDN",
-    "標題": "IEK 估台灣半導體產值今年破8.4兆元創新高 記憶體晶圓代工優於產業 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFAwS2kySXNNS1pzNkVRQWVPMzY5dm9kZ19FRndsQVp2Yll0UmxobDRDYV9UMk53cDVGV3NQeGFCWkZIXzlFWm5ZYXNzdm5rRDk40gFWQVVfeXFMTkIwdVRIVW9ENEFRLVgxRzNGaUVBV0dHRVdQLVJTajNacnpLTkg4RUJTT2xYU08tREVweHVJSVJOZ3BqaFVzSW5LQXo4VzV4TUk2TS1hOXc?oc=5",
+    "來源": "自由財經",
+    "標題": "年增29.5％！台灣半導體業2026年產值上修破8兆元 - 自由財經",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA5MGNOYmlnOTgydV9kTk1KODdsMHZwOGJtenlTd281MV9CS041WURTN08wb1BYbEZWRHgwS3RLWkRSQWJWLWpKZE5hcFdjclp1d0hkYUQtSXl1WGVGanVR0gFkQVVfeXFMT1U5cWFZQnVfa2ctQUtQUTNvdlVkV2tORHMtblFUS3VYWWtBdk9YZm1DdnQxaUZXS1JrVHMyaGR4TGJHQWFiUHczcVlWUm1FMnFFd2RBQXhJZlBENDFHLXVrNmwzSw?oc=5",
     "重要": true
   },
   {
     "日期": "2026/05/14",
-    "來源": "自由財經",
-    "標題": "年增29.5％！台灣半導體業2026年產值上修破8兆元 - 自由財經",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA5MGNOYmlnOTgydV9kTk1KODdsMHZwOGJtenlTd281MV9CS041WURTN08wb1BYbEZWRHgwS3RLWkRSQWJWLWpKZE5hcFdjclp1d0hkYUQtSXl1WGVGanVR0gFkQVVfeXFMT1U5cWFZQnVfa2ctQUtQUTNvdlVkV2tORHMtblFUS3VYWWtBdk9YZm1DdnQxaUZXS1JrVHMyaGR4TGJHQWFiUHczcVlWUm1FMnFFd2RBQXhJZlBENDFHLXVrNmwzSw?oc=5",
+    "來源": "UDN",
+    "標題": "IEK 估台灣半導體產值今年破8.4兆元創新高 記憶體晶圓代工優於產業 - UDN",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFAwS2kySXNNS1pzNkVRQWVPMzY5dm9kZ19FRndsQVp2Yll0UmxobDRDYV9UMk53cDVGV3NQeGFCWkZIXzlFWm5ZYXNzdm5rRDk40gFWQVVfeXFMTkIwdVRIVW9ENEFRLVgxRzNGaUVBV0dHRVdQLVJTajNacnpLTkg4RUJTT2xYU08tREVweHVJSVJOZ3BqaFVzSW5LQXo4VzV4TUk2TS1hOXc?oc=5",
     "重要": true
   },
   {
@@ -484,6 +491,13 @@
   },
   {
     "日期": "2026/05/14",
+    "來源": "工商時報",
+    "標題": "台積電技術論壇》半導體新戰局！台積十年AI藍圖 「從2奈米到全光互連」6大重點一次看- 產業 - 工商時報",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5Fd2Y5S2M5c1hKZzZJVnp2Skt5TUJxQWlfdjBFRUxKU2lkZlNiSFpsNzEyUjR2ckxpZGJwZnFNWHVERUFvcFctQ1RjdEExWmZCWlJiWkhZSGJBbTJLWnpV?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/14",
     "來源": "經濟日報",
     "標題": "台灣超車大陸成 MSCI 新興市場一哥 大摩點名半導體成關鍵引擎 - 經濟日報",
     "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0xWmctTjFyUEJRZEdnRXNjX1dWcmM4em5YNVlwcUp3SUUxU3A4V29hTnRXMWVRbnlqemJYNHpVYnpSVTNjUWtCYW9wQzBGRmpINkFpaGxzRjB3Z9IBX0FVX3lxTE95Yzl2NENGZ2lZUHJXalF4ZTlWY2NhZng0YU1mZ2JmTjRwWmVGZlBhdUFTV3I0SGVWYzdtdHotSWpGNGJiOGg4b1ZLNHN0MFI5LU96OXRUN1Z1cW95b3VR?oc=5",
@@ -508,6 +522,13 @@
     "來源": "CMoney投資網誌",
     "標題": "半導體與代工廠產能擴增，首季財報表現亮眼-財經焦點情報站 - CMoney投資網誌",
     "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPTUlVamtfeFM0blhDRU9PVnVXMUtKM1lhRVhnR1BvanNFVE1keXRMbEFkRm5xV0pNR0xZdGtJTzdQVUlPZlRiVTVhOEVzMWloY3VFaHlYVzN3U1NPTUw3Nm1zYmFkd29lbHRwNXdSdlE3MjlTTFFKZXhpUUxuSnRTNFhR?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/14",
+    "來源": "自由財經",
+    "標題": "台積電技術論壇》張曉強：台灣是全世界驕傲 擁有最強及全面的AI生態 - 自由財經",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1DY1U3eEpmM0wwajVxZ1cteHZEb2Uxd1ViNENpS1IxYXRKNVJEU1NiWFc3TlcteFFSOEppaS1wOE1iemRJMElhSmVhZjF0dFBjRFRBVDkyMXF2b0F4a0dj0gFkQVVfeXFMTTE4MUw0WkREcTJKTW1nVUF5bFhwUGhWUDVFZDdZdlMtWGt1dzkzeGFLRWwyZE1rQk9MQ2R1Z052RmJTcTBzSzlIN3NRTnVxRENlcEpLTE5NQm9mTEFDbGJxcGZIcQ?oc=5",
     "重要": true
   },
   {
@@ -570,7 +591,7 @@
     "日期": "2026/05/14",
     "來源": "DIGITIMES",
     "標題": "聚焦實體AI落地 凌華機器人、醫療、半導體三箭齊發 - DIGITIMES",
-    "連結": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQN2h1UndOWHE0czU0M0tXSUtxbDEzOEtranFxb09zem5tMW1hdTJlOEhaZlVpdVJtd2lXWVlsNjlMclpsM0J3UHhRS3dGQk1GOWpZVXRyeHhrUjZGYUpmLTU4dmVQSFZzU3hBdDF6UThtVkViU0RvRVhneW5GTlJ2TmJlaFlCWG5RTThmUHcyQmE5QU95ZFAw?oc=5",
+    "連結": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNdm0tRGFGbzAyamtzbGRMOGNDaHlEaDB4YmZwbkoydE5uWGV1bngwaGtoSVVpOWQydWpnTTZBU1ZKQlducC1OUzBvdXhJaU54ck1TbEJfUFB5LVNrZm8xdEtFenQ1R0N1WWhWVHJFb2Jsd1A5X1ljeTd5YjBLSGNwb0VpdXhZeEd2b3IxRzhn?oc=5",
     "重要": true
   },
   {
@@ -582,30 +603,9 @@
   },
   {
     "日期": "2026/05/14",
-    "來源": "economic.taichung.gov.tw",
-    "標題": "單一招商服務窗口、訪廠及投資關懷 - economic.taichung.gov.tw",
-    "連結": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNaXNqZU9lUEFpOUQzQ3VIQlAtM29OV29FSE1acUF1ZUJDcEU4YldKMFdmdzN3WHNsNlc2NkIzQ2pPWmdETnBDalhSWGMxUHpvYjRiMlFIVFY0VF9PWHMyemNtU1dfbXBRSUVkMDNNamlHRHZyYXRTS0dXRlNpY3FqNFZmVzg1UHhxUDN3Y2xsZWUzM01qYTdZ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/14",
     "來源": "Yahoo - 汽機車",
     "標題": "Tesla Model Y蟬聯6、7、8月台灣電動車銷量冠軍！本季末在台交付將突破5500輛 - Yahoo - 汽機車",
     "連結": "https://news.google.com/rss/articles/CBMigwJBVV95cUxPLWR2aG1MVENpemVfN3dYZkRWTlRFeE9KR2x6UE9jaDlNVEx0N3FNeWhCT1ExNGtDYTVlbktfLUhwS3RCa21yOEtHX1NsUTlrMG1PcGJLTDR3M2VSTDVMOW1Zbk1xUWNMQVB6RWxnRnU5NDAwcVNHNXJ1ajZYVTBpeU54Y0FnVFpLWnE2bkZTY0JnQnBXaXlUc2Vrd1ViYjJTb1RfcE1HUm5mNDBQNldWengtbFlFYS0zVkl3VDRCdG9NZnFaVXVQNjZfZVpzUXlNYVFTenM1MThVRmdCQktUNmx1djVUN2pMaWZBRlQ5R09ULXlTX29iM09tcnVtYmxJd2c0?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/14",
-    "來源": "工商時報",
-    "標題": "台積電技術論壇》半導體新戰局！台積十年AI藍圖 「從2奈米到全光互連」6大重點一次看- 產業 - 工商時報",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5Fd2Y5S2M5c1hKZzZJVnp2Skt5TUJxQWlfdjBFRUxKU2lkZlNiSFpsNzEyUjR2ckxpZGJwZnFNWHVERUFvcFctQ1RjdEExWmZCWlJiWkhZSGJBbTJLWnpV?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/14",
-    "來源": "自由財經",
-    "標題": "台積電技術論壇》張曉強：台灣是全世界驕傲 擁有最強及全面的AI生態 - 自由財經",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1DY1U3eEpmM0wwajVxZ1cteHZEb2Uxd1ViNENpS1IxYXRKNVJEU1NiWFc3TlcteFFSOEppaS1wOE1iemRJMElhSmVhZjF0dFBjRFRBVDkyMXF2b0F4a0dj0gFkQVVfeXFMTTE4MUw0WkREcTJKTW1nVUF5bFhwUGhWUDVFZDdZdlMtWGt1dzkzeGFLRWwyZE1rQk9MQ2R1Z052RmJTcTBzSzlIN3NRTnVxRENlcEpLTE5NQm9mTEFDbGJxcGZIcQ?oc=5",
     "重要": true
   },
   {
