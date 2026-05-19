@@ -782,7 +782,6 @@ pdfModeSelect,
         </div>
     </div>
 
-    <div id="summary" class="summary"></div>
 
     <div id="zoomWrap" class="zoomWrap">
         <ul id="tree" class="tree"></ul>
@@ -1095,7 +1094,6 @@ function clearPageData(){
     document.getElementById("levelFilters").innerHTML = "";
     document.getElementById("fieldFilters").innerHTML = "";
     document.getElementById("legalFilters").innerHTML = "";
-    document.getElementById("summary").innerText = "";
     document.getElementById("tree").innerHTML = "";
     document.getElementById("orgChart").innerHTML = "";
 
@@ -1305,8 +1303,6 @@ function buildTreeData(rows){
         `;
     }
 
-    document.getElementById("summary").innerText =
-        "共讀取 " + allNodes.length + " 個節點，最上層節點 " + rootNodes.length + " 個，人員資訊 " + personRows.length + " 筆。";
 
     document.getElementById("personSummary").innerText = "請點選部門人數查看人員資訊";
     document.getElementById("personPanel").innerHTML = "尚未選擇部門";
