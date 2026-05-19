@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>組織圖查詢</title>
+<title>組織圖測試版</title>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -686,7 +686,7 @@ pdfModeSelect,
 
 <body>
 
-<h1>組織圖查詢</h1>
+<h1>組織圖測試版</h1>
 
 <div class="desc">
 上傳 Excel 後，系統會依「部門資訊」建立組織圖，並依「人員資訊」顯示部門人員。
@@ -782,7 +782,6 @@ pdfModeSelect,
         </div>
     </div>
 
-    <div id="summary" class="summary"></div>
 
     <div id="zoomWrap" class="zoomWrap">
         <ul id="tree" class="tree"></ul>
@@ -1095,7 +1094,6 @@ function clearPageData(){
     document.getElementById("levelFilters").innerHTML = "";
     document.getElementById("fieldFilters").innerHTML = "";
     document.getElementById("legalFilters").innerHTML = "";
-    document.getElementById("summary").innerText = "";
     document.getElementById("tree").innerHTML = "";
     document.getElementById("orgChart").innerHTML = "";
 
@@ -1305,8 +1303,6 @@ function buildTreeData(rows){
         `;
     }
 
-    document.getElementById("summary").innerText =
-        "共讀取 " + allNodes.length + " 個節點，最上層節點 " + rootNodes.length + " 個，人員資訊 " + personRows.length + " 筆。";
 
     document.getElementById("personSummary").innerText = "請點選部門人數查看人員資訊";
     document.getElementById("personPanel").innerHTML = "尚未選擇部門";
