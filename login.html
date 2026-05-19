@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>組織圖查詢系統登入</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f3f4f6;
+    color:#111827;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.loginCard{
+    width:400px;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:38px 36px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.10);
+    box-sizing:border-box;
+}
+
+.loginTitle{
+    font-size:26px;
+    font-weight:bold;
+    color:#111827;
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.loginDesc{
+    font-size:14px;
+    color:#6b7280;
+    text-align:center;
+    line-height:1.7;
+    margin-bottom:28px;
+}
+
+.formGroup{
+    margin-bottom:16px;
+}
+
+.formGroup label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    color:#374151;
+    margin-bottom:8px;
+}
+
+.formGroup input{
+    width:100%;
+    height:44px;
+    padding:0 12px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    font-size:14px;
+    box-sizing:border-box;
+}
+
+.formGroup input:focus{
+    outline:none;
+    border-color:#1e3a8a;
+}
+
+.loginBtn{
+    width:100%;
+    height:46px;
+    border:0;
+    border-radius:10px;
+    background:#1e3a8a;
+    color:#ffffff;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:8px;
+}
+
+.loginBtn:hover{
+    opacity:.92;
+}
+
+.loginBtn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.message{
+    min-height:22px;
+    margin-top:18px;
+    text-align:center;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.error{
+    color:#b91c1c;
+}
+
+.success{
+    color:#15803d;
+}
+</style>
+</head>
+
+<body>
+
+<div class="loginCard">
+    <div class="loginTitle">組織圖查詢系統</div>
+    <div class="loginDesc">
+        請輸入帳號與密碼登入
+    </div>
+
+    <div class="formGroup">
+        <label for="email">帳號</label>
+        <input type="email" id="email" placeholder="請輸入 Email">
+    </div>
+
+    <div class="formGroup">
+        <label for="password">密碼</label>
+        <input type="password" id="password" placeholder="請輸入密碼">
+    </div>
+
+    <button id="loginBtn" class="loginBtn" onclick="login()">登入</button>
+
+    <div id="message" class="message"></div>
+</div>
+
+<script>
+const SUPABASE_URL = "貼你的 Project URL";
+const SUPABASE_KEY = "貼你的 Publishable key";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+document.addEventListener("DOMContentLoaded", async function(){
+    const { data } = await supabaseClient.auth.getSession();
+
+    if(data.session){
+        window.location.href = "orgchart-test.html";
+    }
+
+    document.getElementById("password").addEventListener("keydown", function(e){
+        if(e.key === "Enter"){
+            login();
+        }
+    });
+});
+
+async function login(){
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const message = document.getElementById("message");
+    const loginBtn = document.getElementById("loginBtn");
+
+    message.className = "message";
+    message.innerText = "";
+
+    if(!email || !password){
+        message.classList.add("error");
+        message.innerText = "請輸入帳號與密碼。";
+        return;
+    }
+
+    loginBtn.disabled = true;
+    loginBtn.innerText = "登入中...";
+
+    const { error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
+
+    if(error){
+        message.classList.add("error");
+        message.innerText = "登入失敗，請確認帳號或密碼。";
+
+        loginBtn.disabled = false;
+        loginBtn.innerText = "登入";
+        return;
+    }
+
+    message.classList.add("success");
+    message.innerText = "登入成功，正在進入系統...";
+
+    setTimeout(function(){
+        window.location.href = "orgchart-test.html";
+    }, 500);
+}
+</script>
+
+</body>
+</html>
