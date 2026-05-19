@@ -2878,20 +2878,33 @@ async function exportSplitByFirstLevelPdf(pdfTitle){
     const pdf = new jspdf.jsPDF("l", "mm", "a4");
     let hasPage = false;
 
+    async function waitForRender(){
+        await new Promise(resolve => requestAnimationFrame(resolve));
+        await new Promise(resolve => requestAnimationFrame(resolve));
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        if(currentViewMode === "org"){
+            updateOrgConnectorLines();
+            await new Promise(resolve => setTimeout(resolve, 200));
+        }
+    }
+
+    // 第 1 頁：目前查詢主節點總覽
     focusNodes = [baseNode];
     renderChart();
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await waitForRender();
 
     const overviewCanvas = await preparePdfCanvas(pdfTitle);
     addCanvasFitOnePage(pdf, overviewCanvas, false);
     hasPage = true;
 
+    // 後續頁：依第一層子部門分頁
     const children = baseNode.children.filter(child => shouldShowNode(child));
 
     for(const child of children){
         focusNodes = [child];
         renderChart();
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await waitForRender();
 
         const childTitle = `${String(child.row["部門全名"] || child.deptCode || "子部門")}組織圖`;
         const childCanvas = await preparePdfCanvas(childTitle);
@@ -2900,6 +2913,7 @@ async function exportSplitByFirstLevelPdf(pdfTitle){
         hasPage = true;
     }
 
+    // 還原畫面
     focusNodes = originalFocusNodes;
     currentViewMode = originalViewMode;
     renderChart();
