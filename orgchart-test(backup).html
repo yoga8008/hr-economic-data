@@ -510,7 +510,7 @@ pdfModeSelect,
 .orgChart{
     display:flex;
     justify-content:center;
-    padding:30px 20px 60px;
+    padding:40px 40px 80px;
     min-width:max-content;
     overflow:visible;
 }
@@ -521,7 +521,7 @@ pdfModeSelect,
     align-items:center;
     position:relative;
     flex-shrink:0;
-    margin-bottom:24px;
+    margin-bottom:40px;
 }
 
 .orgNode{
@@ -551,21 +551,21 @@ pdfModeSelect,
     display:flex;
     justify-content:center;
     align-items:flex-start;
-    gap:36px 32px;
-    margin-top:42px;
+    gap:56px 56px;
+    margin-top:58px;
     position:relative;
     padding-top:0;
     flex-wrap:wrap;
-    max-width:3000px;
+    max-width:3600px;
 }
 
 .orgNodeGroup.hasChildren > .orgNode::after{
     content:"";
     position:absolute;
     left:50%;
-    bottom:-22px;
+    bottom:-30px;
     width:1px;
-    height:22px;
+    height:30px;
     background:#94a3b8;
     transform:translateX(-50%);
 }
@@ -573,17 +573,17 @@ pdfModeSelect,
 .orgChildren > .orgNodeGroup::before{
     content:"";
     position:absolute;
-    top:-21px;
+    top:-29px;
     left:50%;
     width:1px;
-    height:21px;
+    height:29px;
     background:#94a3b8;
     transform:translateX(-50%);
 }
 
 .orgConnectorLine{
     position:absolute;
-    top:-21px;
+    top:-29px;
     height:1px;
     background:#94a3b8;
     pointer-events:none;
@@ -842,7 +842,14 @@ let totalPeopleCountCache = new Map();
 
 let currentPersonSearchDeptCodes = new Set();
 
-let visibleFields = new Set(["level","deptCode","costCode","manager"]);
+let visibleFields = new Set([
+    "level",
+    "deptCode",
+    "costCode",
+    "manager",
+    "ownPeople",
+    "totalPeople"
+]);
 
 document.addEventListener("DOMContentLoaded", function(){
     loadSavedData();
@@ -1483,7 +1490,9 @@ function renderFieldFilters(){
         { value:"manager", label:"主管" },
         { value:"level", label:"部門層級" },
         { value:"deptCode", label:"部門代碼" },
-        { value:"costCode", label:"費用代碼" }
+        { value:"costCode", label:"費用代碼" },
+        { value:"ownPeople", label:"本單位人數" },
+        { value:"totalPeople", label:"含轄下合計" }
     ];
 
     createDropdownCheckbox(
@@ -1639,7 +1648,6 @@ function isPathOnly(node){
     const rawKeyword = document.getElementById("searchInput")?.value.trim() || "";
     const specialType = getSpecialSearchType(rawKeyword);
 
-    // 特殊查詢：*集團、*次集團、*集團中央、*其它，不要顏色變淡
     if(specialType){
         return false;
     }
@@ -1702,21 +1710,26 @@ function renderNodeInfo(node){
 
     const ownPeople = getOwnPeopleByLegal(node);
     const totalPeople = getTotalPeopleByLegal(node);
+    const peopleLines = [];
 
-    if(node.isLegalEntity || node.isVirtualRoot){
-        lines.push(`
-            <div class="totalPeople">
-                含轄下合計：
-                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
-            </div>
+    if(!node.isLegalEntity && !node.isVirtualRoot && visibleFields.has("ownPeople")){
+        peopleLines.push(`
+            本單位人數：
+            <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="own">${ownPeople} 人</span>
         `);
-    }else{
+    }
+
+    if(visibleFields.has("totalPeople")){
+        peopleLines.push(`
+            含轄下合計：
+            <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
+        `);
+    }
+
+    if(peopleLines.length > 0){
         lines.push(`
             <div class="totalPeople">
-                本單位人數：
-                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="own">${ownPeople} 人</span><br>
-                含轄下合計：
-                <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
+                ${peopleLines.join("<br>")}
             </div>
         `);
     }
@@ -1747,17 +1760,14 @@ function renderTreeNodeInfo(node){
     const ownPeople = getOwnPeopleByLegal(node);
     const totalPeople = getTotalPeopleByLegal(node);
 
-    if(node.isLegalEntity || node.isVirtualRoot){
-        parts.push(`
-            含轄下合計：
-            <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
-        `);
-    }else{
+    if(!node.isLegalEntity && !node.isVirtualRoot && visibleFields.has("ownPeople")){
         parts.push(`
             本單位人數：
             <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="own">${ownPeople} 人</span>
         `);
+    }
 
+    if(visibleFields.has("totalPeople")){
         parts.push(`
             含轄下合計：
             <span class="peopleLink" data-dept-code="${node.deptCode}" data-type="total">${totalPeople} 人</span>
