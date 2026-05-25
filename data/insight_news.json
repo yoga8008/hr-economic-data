@@ -1,16 +1,23 @@
 [
   {
     "日期": "2026/05/25",
-    "來源": "UDN",
-    "標題": "日資公司片面降低勞動條件 勞團：台日友好蒙陰影 - UDN",
+    "來源": "udn",
+    "標題": "日資公司片面降低勞動條件 勞團：台日友好蒙陰影 - udn",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE51bFhwZ0Rwc3pPeHFyNXYzMFBjQmdQd25lcE5YS3NyTDlNVFE3YjRac05aT2t1TVh1TEtqLWk2ZklzVUt2S0tjWTVGMnJlRWZm0gFWQVVfeXFMUGVibjVlc0FJREh6MDNSc3ZMLUtGdU1YTGRvY3pudVk1bTVab3dIWjhveHNCZkpjMFRsSmoxbWV0SzNtcEZBV3otQVY2c2JaazlwQzBXakE?oc=5",
     "重要": false
   },
   {
     "日期": "2026/05/25",
-    "來源": "風傳媒",
-    "標題": "別只看北科大、雲科大！台灣最強科技大學是它：就業即戰力強、企業超愛用， 畢業不怕找不到工作 - 風傳媒",
+    "來源": "Storm.mg",
+    "標題": "別只看北科大、雲科大！台灣最強科技大學是它：就業即戰力強、企業超愛用， 畢業不怕找不到工作 - Storm.mg",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE4yT240ZDJuT2RtWEkybDBhdjVqc3B6VUxSU3NPSjBudTN6RG81ZkZvMFJ5QzFIWEZKTDBXMVRDcDA0NUF6TWFYZkNsY3hHYUps?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/25",
+    "來源": "自由時報",
+    "標題": "台積狂潮複製到日本！三井熊本科學園區 跨海招攬台灣半導體赴日設廠 - 自由時報",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE03c2JSVFhBRWV5OVhfQ3h5d3haSUd6a1o2OGpZU2JlR09aT1NsVEFrQW1SWm9RQ0p1UkVVMXJhRldfWTFsWjJraHRTSC1CQjJ0?oc=5",
     "重要": true
   },
   {
@@ -36,8 +43,8 @@
   },
   {
     "日期": "2026/05/25",
-    "來源": "風傳媒",
-    "標題": "賓士、特斯拉都輸了！台灣電動車4月銷量霸主換人當，車主大讚：平順好開、 不會一踩電門就猛衝 - 風傳媒",
+    "來源": "Storm.mg",
+    "標題": "賓士、特斯拉都輸了！台灣電動車4月銷量霸主換人當，車主大讚：平順好開、 不會一踩電門就猛衝 - Storm.mg",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9lUldCOGZuTmJvYU5VQjhRTHlkdy1qNmVZbUFFM0l0MTNScXQwQWRyQ2lIdHVhc00xcHRQWF85NkhCTUhnRWN5akF1enZObDJh?oc=5",
     "重要": true
   },
@@ -78,9 +85,16 @@
   },
   {
     "日期": "2026/05/25",
-    "來源": "TechNews 科技新報",
-    "標題": "ASML 規劃 AI 時代半導體藍圖，台灣總經理揭密最新 EUV 技術與在地佈局 - TechNews 科技新報",
-    "連結": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOazRtbWZ4QUxFQlk1cmpwdVlWQnBGU3dJaU10NUdLNWpOVHJDeWhUcm5LUkVpTkZLM2YyM2g4TTh0UEVSQTM0MGoyUG4yV2FOOXZwZnFiNmdVLVdqZ3NWbW1sQzgzbHpINUNTa1ZmUkltck52UUdPcTBIdFRpdC1Qay1iS2g1TFF6TjlyOEtOcXBKekJ1QUJqTUY0YklCMTJReWhkTEdJNUV4VHBjNVBv?oc=5",
+    "來源": "rti.org.tw",
+    "標題": "ASML：今年擴大在台徵才1000人 因應客戶需求成長 - rti.org.tw",
+    "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBPdDBYXzlfek1POUxGZC1sOGwwZnZpYlhWRzJ0YkwtZEg2dzZsRFdVV29tbEFtSGNaTjlOWVhKLTN0eUg5RWtfNmtNQ1ZDVzl2bjI1TVFMVQ?oc=5",
+    "重要": false
+  },
+  {
+    "日期": "2026/05/25",
+    "來源": "台灣民眾電子報",
+    "標題": "瞄準3奈米供應鏈！三井不動產舉辦「熊本科學園區」新竹、台中、台南辦招商說明會打造台日半導體合作新平台 - 台灣民眾電子報",
+    "連結": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1VdWRqSjB2WGZyN3VScXhLSXRoNGlyb1Z5bndXcGJ0cy1GcVU0enl3aTRnYUJ1STJnU3gtQWNrdlBjTmJtNmFUNQ?oc=5",
     "重要": true
   },
   {
@@ -92,9 +106,23 @@
   },
   {
     "日期": "2026/05/25",
+    "來源": "TechNews 科技新報",
+    "標題": "ASML 規劃 AI 時代半導體藍圖，台灣總經理揭密最新 EUV 技術與在地佈局 - TechNews 科技新報",
+    "連結": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOWkpfQXVMZl9nOXEzTDZpbGdjLV9YUUo3SjZGQ1ZUeTZzN0EtOHBEazlqVFVaQ0xHS28zQ0FfS24wWGNPMmdzT2I3ZVhVWUd2NW9lNDZpUm5wTmJvVURyRnhEMVNFYVVISTRPek91T3JTbW9xVVBpYWFmNldRcW10VTdNLVM1eFJwWHJmdjZtR2Y4SlRzMFFQZ1h0TnNvRWw5Z0N6RjJUN3VuUlhKdFhWcmhuMVA4YloxYnc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/25",
     "來源": "墨新聞-MORE News",
     "標題": "半導體人才戰提前開打 台灣學聯攜手南山中學、亞利桑那大學 接軌全球人才供應鏈 - 墨新聞-MORE News",
     "連結": "https://news.google.com/rss/articles/CBMiQkFVX3lxTFB5OThRc0dvdmhOM01QbTBRUzF1MUIwa0xxMW43VkpUV1oxTHFXdWtNOWVWMkRyVU5QZnJtSkNjSTBpQQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/25",
+    "來源": "網路資訊雜誌",
+    "標題": "ASML：AI 時代半導體競爭力不只看算力，也要看能源效率 - 網路資訊雜誌",
+    "連結": "https://news.google.com/rss/articles/CBMickFVX3lxTFBRNFFKLWhtTzNyWVhLT1pSVmt2OGQxTm9RS0VCa2k3ZURWUC1iVi1KdmxVU0ROUUtQSkpfZl9KTk9TdWxpdnZzQlVsSUJVbDNpM2RwMW44Si0yMERPbHBSQ01tZW5MdGtpVXlKVE9VdWVKdw?oc=5",
     "重要": true
   },
   {
@@ -109,27 +137,6 @@
     "來源": "台灣好報",
     "標題": "清交進駐高雄對接半導體人才 陳其邁：聚焦AI與先進製程打造產業新核心 - 台灣好報",
     "連結": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5wR08zSk03aEVMaWVDX0wwSm4xbndKdDRZUXpCYWhsd1A4UkRrNGh5VEI2VHBPZi03VVdUOWlUdzFLdFFua29PSEUxVDNTU3VMXy04?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/25",
-    "來源": "科技島",
-    "標題": "不只進台積電！台科大化工近半畢業生投入半導體 AI製程、綠能材料都是下一站 - 科技島",
-    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE54bm4wUTRBWGo1NXZ1VVJEWERjQUc2SHFsdDRYTkxjSldFWTFlVHdVZUptMklla0dKQTlENm1ENUQ5LUFBeDAxSEFhY0FGNTBjQ1UycGh4Tkh6Zw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/25",
-    "來源": "LINE TODAY",
-    "標題": "卓揆接見加國代表 盼深化AI、半導體及國防供應鏈合作 | 中央廣播電臺 - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9oeHoya3pXaV9udjJGSHpTbmtQaExqVzJmTll5d3FRVl9JbDMxYkRMeUlITndqb2hCZktpclZlM3k5eGtlQVFtN0VGa2JXQzNoS0hDanNn?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/25",
-    "來源": "工商時報",
-    "標題": "三井不動產引領台日半導體新契機「熊本科學園區」招商說明會登場- 房市 - 工商時報",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE82WHQycDlDRFV4OXlvWjBhSFlEYTNQZTk1TmF3WGJPaG4wOW1kQUdBVzlFUjRvTk9YRm1NNnNiYTZXamh2WEV2NTg3OENrdzJBWHUxSk5BbnM0LTdmd2dR?oc=5",
     "重要": true
   },
   {
@@ -156,22 +163,36 @@
   {
     "日期": "2026/05/25",
     "來源": "LINE TODAY",
+    "標題": "卓揆接見加國代表 盼深化AI、半導體及國防供應鏈合作 | 中央廣播電臺 - LINE TODAY",
+    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9oeHoya3pXaV9udjJGSHpTbmtQaExqVzJmTll5d3FRVl9JbDMxYkRMeUlITndqb2hCZktpclZlM3k5eGtlQVFtN0VGa2JXQzNoS0hDanNn?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/25",
+    "來源": "科技島",
+    "標題": "不只進台積電！台科大化工近半畢業生投入半導體 AI製程、綠能材料都是下一站 - 科技島",
+    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE54bm4wUTRBWGo1NXZ1VVJEWERjQUc2SHFsdDRYTkxjSldFWTFlVHdVZUptMklla0dKQTlENm1ENUQ5LUFBeDAxSEFhY0FGNTBjQ1UycGh4Tkh6Zw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/25",
+    "來源": "LINE TODAY",
     "標題": "接見加拿大駐台代表 卓榮泰：盼台加深化AI、半導體及國防供應鏈合作 | 三立新聞網 - LINE TODAY",
     "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE00Y0Y2Z0M4TlNMTjR5ZmhCRWZYbWs2VUdXQ1NvWDVwdHFTU29WdEo2cHNCSDhQYlpMTUlOYmJNbFozd3l6VG5JdnVfTkhYU0FYQkZSc3F3?oc=5",
     "重要": true
   },
   {
     "日期": "2026/05/25",
-    "來源": "UDN",
-    "標題": "接見加拿大駐台代表 卓榮泰盼展開AI半導體及國防工業合作 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5JX2hEa1RBQ0R1RG9tQko2WmxqX2gyRWRVeWdNTXY3VGM1UkZEbG55NGcxSmdzVzNRaEJ6dGIydTVQRm1UcGZqTjhuT2Q0bDY50gFWQVVfeXFMTk1TRkU2YU05MnVoRHBadmtCSTdJRUo2alN6cnFkZTBiTmg2ZmQxSVgzVmxJQUZ1SHhuR1FZRUdvRzZiOWhuVzZrQlhsQTBQT2xNQnZLM0E?oc=5",
+    "來源": "工商時報",
+    "標題": "三井不動產引領台日半導體新契機「熊本科學園區」招商說明會登場- 房市 - 工商時報",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE82WHQycDlDRFV4OXlvWjBhSFlEYTNQZTk1TmF3WGJPaG4wOW1kQUdBVzlFUjRvTk9YRm1NNnNiYTZXamh2WEV2NTg3OENrdzJBWHUxSk5BbnM0LTdmd2dR?oc=5",
     "重要": true
   },
   {
     "日期": "2026/05/25",
-    "來源": "風傳媒",
-    "標題": "三井不動產啟動「熊本科學園區」招商瞄準3奈米供應鏈打造台日半導體合作新平台| 徐炳文 | 地方新聞 - 風傳媒",
-    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBaa21kNmtOVThIdFExQkppMTFFZjlZWGd4R2dyZlhweTVlUXlTMWhudWx1ZkpyZzc1aFdkeGp2cXc0c2NwMkdxaHlJYktPQQ?oc=5",
+    "來源": "udn",
+    "標題": "接見加拿大駐台代表 卓榮泰盼展開AI半導體及國防工業合作 - udn",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5JX2hEa1RBQ0R1RG9tQko2WmxqX2gyRWRVeWdNTXY3VGM1UkZEbG55NGcxSmdzVzNRaEJ6dGIydTVQRm1UcGZqTjhuT2Q0bDY50gFWQVVfeXFMTk1TRkU2YU05MnVoRHBadmtCSTdJRUo2alN6cnFkZTBiTmg2ZmQxSVgzVmxJQUZ1SHhuR1FZRUdvRzZiOWhuVzZrQlhsQTBQT2xNQnZLM0E?oc=5",
     "重要": true
   },
   {
@@ -183,9 +204,9 @@
   },
   {
     "日期": "2026/05/25",
-    "來源": "FTNN 新聞網",
-    "標題": "黃仁勳訪台固樁AI鏈！半導體ETF買氣爆棚 00904衝破41元歷史新高 - FTNN 新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5GaEI5Q1M5eEJPNk4xLWxabV9oYnN6OG5Na05jV3cwOHoyTndJRXJYc0gxQlB0eDZzWlBHNFpoQ0dENTdXRXFyVDNNRQ?oc=5",
+    "來源": "Storm.mg",
+    "標題": "三井不動產啟動「熊本科學園區」招商瞄準3奈米供應鏈打造台日半導體合作新平台| 徐炳文 | 地方新聞 - Storm.mg",
+    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBaa21kNmtOVThIdFExQkppMTFFZjlZWGd4R2dyZlhweTVlUXlTMWhudWx1ZkpyZzc1aFdkeGp2cXc0c2NwMkdxaHlJYktPQQ?oc=5",
     "重要": true
   },
   {
@@ -197,9 +218,23 @@
   },
   {
     "日期": "2026/05/25",
+    "來源": "FTNN 新聞網",
+    "標題": "黃仁勳訪台固樁AI鏈！半導體ETF買氣爆棚 00904衝破41元歷史新高 - FTNN 新聞網",
+    "連結": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5GaEI5Q1M5eEJPNk4xLWxabV9oYnN6OG5Na05jV3cwOHoyTndJRXJYc0gxQlB0eDZzWlBHNFpoQ0dENTdXRXFyVDNNRQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/25",
     "來源": "科技島",
     "標題": "高通股價飆漲75% 華爾街重新押注AI裝置浪潮 - 科技島",
     "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9LeWo0TXYxUlcwOU4tbi10UHl0SXdfX0hlaG16Rko4dVIwQS1UeHZ0cDVDRkxuU19LRVJvcEVkb1IxWUxieXR1QlZ2YnZsNG5NelJGT1g1WlBTTVltZEtj?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/25",
+    "來源": "蕃新聞",
+    "標題": "三星勞資協議恐扼殺創新 韓媒憂衝擊半導體業 - 蕃新聞",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBybkgxZFB3bkkwb1lNQVNIYUZNOWgxZElWYVVNTkpGbHRpTC1xVS1CaWlNMGNSUTAzc1ZsRmFqckhZbjRWWmRnYjZLZlFQYzl5b2c?oc=5",
     "重要": true
   },
   {
@@ -239,10 +274,38 @@
   },
   {
     "日期": "2026/05/25",
-    "來源": "rti.org.tw",
-    "標題": "ASML：今年擴大在台徵才1000人 因應客戶需求成長 - rti.org.tw",
-    "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBPdDBYXzlfek1POUxGZC1sOGwwZnZpYlhWRzJ0YkwtZEg2dzZsRFdVV29tbEFtSGNaTjlOWVhKLTN0eUg5RWtfNmtNQ1ZDVzl2bjI1TVFMVQ?oc=5",
+    "來源": "UDN",
+    "標題": "日資公司片面降低勞動條件 勞團：台日友好蒙陰影 - UDN",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE51bFhwZ0Rwc3pPeHFyNXYzMFBjQmdQd25lcE5YS3NyTDlNVFE3YjRac05aT2t1TVh1TEtqLWk2ZklzVUt2S0tjWTVGMnJlRWZm0gFWQVVfeXFMUGVibjVlc0FJREh6MDNSc3ZMLUtGdU1YTGRvY3pudVk1bTVab3dIWjhveHNCZkpjMFRsSmoxbWV0SzNtcEZBV3otQVY2c2JaazlwQzBXakE?oc=5",
     "重要": false
+  },
+  {
+    "日期": "2026/05/25",
+    "來源": "風傳媒",
+    "標題": "別只看北科大、雲科大！台灣最強科技大學是它：就業即戰力強、企業超愛用， 畢業不怕找不到工作 - 風傳媒",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE4yT240ZDJuT2RtWEkybDBhdjVqc3B6VUxSU3NPSjBudTN6RG81ZkZvMFJ5QzFIWEZKTDBXMVRDcDA0NUF6TWFYZkNsY3hHYUps?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/25",
+    "來源": "風傳媒",
+    "標題": "賓士、特斯拉都輸了！台灣電動車4月銷量霸主換人當，車主大讚：平順好開、 不會一踩電門就猛衝 - 風傳媒",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9lUldCOGZuTmJvYU5VQjhRTHlkdy1qNmVZbUFFM0l0MTNScXQwQWRyQ2lIdHVhc00xcHRQWF85NkhCTUhnRWN5akF1enZObDJh?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/25",
+    "來源": "UDN",
+    "標題": "接見加拿大駐台代表 卓榮泰盼展開AI半導體及國防工業合作 - UDN",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5JX2hEa1RBQ0R1RG9tQko2WmxqX2gyRWRVeWdNTXY3VGM1UkZEbG55NGcxSmdzVzNRaEJ6dGIydTVQRm1UcGZqTjhuT2Q0bDY50gFWQVVfeXFMTk1TRkU2YU05MnVoRHBadmtCSTdJRUo2alN6cnFkZTBiTmg2ZmQxSVgzVmxJQUZ1SHhuR1FZRUdvRzZiOWhuVzZrQlhsQTBQT2xNQnZLM0E?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/25",
+    "來源": "風傳媒",
+    "標題": "三井不動產啟動「熊本科學園區」招商瞄準3奈米供應鏈打造台日半導體合作新平台| 徐炳文 | 地方新聞 - 風傳媒",
+    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBaa21kNmtOVThIdFExQkppMTFFZjlZWGd4R2dyZlhweTVlUXlTMWhudWx1ZkpyZzc1aFdkeGp2cXc0c2NwMkdxaHlJYktPQQ?oc=5",
+    "重要": true
   },
   {
     "日期": "2026/05/25",
@@ -267,20 +330,6 @@
   },
   {
     "日期": "2026/05/24",
-    "來源": "經濟日報",
-    "標題": "鴻華先進台灣、紐澳與歐盟三路並進 今年電動車出貨量看旺 - 經濟日報",
-    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBZSnZsZzUtQXZDNUJRVHZ6TXNtUFZqZllRcTlSOV94Z19McG9IT3cwbVJZcHdwQjhqR1Y1ZjJucHloX2pnQ3FYb2h5Tk9HVzFaOXdIbWNEUkNRQdIBX0FVX3lxTE5tUlhNOUR2NWVIQ0JnSGcxVS1oMmJwMVRtRkZpQ1ItbklvQWN2WVNlUzBQeXd4LXlxVkNCdDdPUUQ3OV9yeFkyX3FvRENuUTZVY2ZONjZmQXROVXJFOHE4?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/24",
-    "來源": "Yahoo新聞",
-    "標題": "台灣半導體產業發源地「小欣欣零食店」 25日將設紀念牌 - Yahoo新聞",
-    "連結": "https://news.google.com/rss/articles/CBMi4AJBVV95cUxNMENObUY5MzdnSWFhR2hiOFY2amlzUXJuaTEwOThIN3VZT3doX29tUnJCOGdieS1ZbE9JakdyRDhLZzB6d2Vxc1RvZkFFZ2h0WE81dlpwY3Y1amhiUWJBX19qc1pJQm10Y1JSZVJCZkRYQjhNSW1UZ2JUb0NocmdpMnBrdF9fRC1TSzZhMWlKMXVDZU9zeVZsQlJNZktGTU5sVG1Qb3FlRnhRRnhqTHoyM2lDc2t2SjNxeU55UG1vcWt6MS00ak1qdnRnSGpKVzBneWpSYjhjVUJMbWpJQk1FTDZLN2VHbUUxSGFQQXBpX0paSURscDVlLU1WNFJtM0p3ZFRwNUs4S09Lc0puUVQ3VVJzRmZGdXJJYW1PZVVyQ21aZkZEZmNvaFZ4dGZTNnRtV05PZlVUY3RxaVcxVWFrYy0tdXEwQ2RWUnd6Vi01VEowWTlaTkgwYkx1aVEydFRs?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/24",
     "來源": "美洲台灣日報",
     "標題": "數字台灣-半導體新賽局 台灣手握王牌 0524 - 美洲台灣日報",
     "連結": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBicEJwSFpYWTNPRXZCdW9ZVURzVjJGQlNxQ0tfWEF4V25FOHNoUDRJVjUwczF2eTg2TkpCU05Vc3dmbHAyNUpQM2VEeEI3a2xqUHpyLU9YSXY3b0pGaVRmWDFvVUtTVnEzV0owSVdkYWlBQzZxQjJz?oc=5",
@@ -295,10 +344,17 @@
   },
   {
     "日期": "2026/05/24",
-    "來源": "中時新聞網",
-    "標題": "台灣半導體產業發源地「小欣欣零食店」 25日將設紀念牌 - 中時新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1yclc0Y0FjU21YZjBPVU50djdrcjVqdGpZUldqSkdwYTBUZmk1V09SWGRpMHBSQlNoT2tGVFhOVzRXV3BDSFZLbHlvdVlsREdnMVM4SmtYMUR3WVNSb2JkLXU1Tk5YLUZKcmpKZ2tB?oc=5",
+    "來源": "Yahoo新聞",
+    "標題": "台灣半導體產業發源地「小欣欣零食店」 25日將設紀念牌 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMi4AJBVV95cUxNMENObUY5MzdnSWFhR2hiOFY2amlzUXJuaTEwOThIN3VZT3doX29tUnJCOGdieS1ZbE9JakdyRDhLZzB6d2Vxc1RvZkFFZ2h0WE81dlpwY3Y1amhiUWJBX19qc1pJQm10Y1JSZVJCZkRYQjhNSW1UZ2JUb0NocmdpMnBrdF9fRC1TSzZhMWlKMXVDZU9zeVZsQlJNZktGTU5sVG1Qb3FlRnhRRnhqTHoyM2lDc2t2SjNxeU55UG1vcWt6MS00ak1qdnRnSGpKVzBneWpSYjhjVUJMbWpJQk1FTDZLN2VHbUUxSGFQQXBpX0paSURscDVlLU1WNFJtM0p3ZFRwNUs4S09Lc0puUVQ3VVJzRmZGdXJJYW1PZVVyQ21aZkZEZmNvaFZ4dGZTNnRtV05PZlVUY3RxaVcxVWFrYy0tdXEwQ2RWUnd6Vi01VEowWTlaTkgwYkx1aVEydFRs?oc=5",
     "重要": true
+  },
+  {
+    "日期": "2026/05/24",
+    "來源": "sinotrade.com.tw",
+    "標題": "ASML擴大台灣布局 今年預計在台招募1,000名員工｜新聞快訊｜豐雲學堂 - sinotrade.com.tw",
+    "連結": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5yemphdGN0d3pOS1Q0elZLWHdBTjI3REdRek80QmIxUnFaRWtlZE9zeE5rem5XOHR1TTZsWVdXVFlOQnVLQXdCR1ZDZC1QdHNnSFRiNDJqTEEzckFkRm1NUzdwZXo5cU9fRUkxWThfaV9VblQzU3c?oc=5",
+    "重要": false
   },
   {
     "日期": "2026/05/24",
@@ -309,9 +365,23 @@
   },
   {
     "日期": "2026/05/24",
+    "來源": "中時新聞網",
+    "標題": "台灣半導體產業發源地「小欣欣零食店」 25日將設紀念牌 - 中時新聞網",
+    "連結": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1yclc0Y0FjU21YZjBPVU50djdrcjVqdGpZUldqSkdwYTBUZmk1V09SWGRpMHBSQlNoT2tGVFhOVzRXV3BDSFZLbHlvdVlsREdnMVM4SmtYMUR3WVNSb2JkLXU1Tk5YLUZKcmpKZ2tB?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/24",
     "來源": "CMoney",
     "標題": "2330 台積電 - 半導體老將：台灣掌握AI晶片王牌 美、韓難複製護城河 台灣...-股市爆料同學會 - CMoney",
     "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBKek5NUk95Zml3LWlRWUdtZ1dUN2tKYS1IY2lLNXdQSldFUzU3VG4taUZBS1BvTk5fQXFsWFY5VFBYV3FyRS1qcGFjUXU0QzE3TDZmOGdNa1Y?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/24",
+    "來源": "經濟日報",
+    "標題": "鴻華先進台灣、紐澳與歐盟三路並進 今年電動車出貨量看旺 - 經濟日報",
+    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBZSnZsZzUtQXZDNUJRVHZ6TXNtUFZqZllRcTlSOV94Z19McG9IT3cwbVJZcHdwQjhqR1Y1ZjJucHloX2pnQ3FYb2h5Tk9HVzFaOXdIbWNEUkNRQdIBX0FVX3lxTE5tUlhNOUR2NWVIQ0JnSGcxVS1oMmJwMVRtRkZpQ1ItbklvQWN2WVNlUzBQeXd4LXlxVkNCdDdPUUQ3OV9yeFkyX3FvRENuUTZVY2ZONjZmQXROVXJFOHE4?oc=5",
     "重要": true
   },
   {
@@ -365,13 +435,6 @@
   },
   {
     "日期": "2026/05/23",
-    "來源": "MSN",
-    "標題": "Meta大裁員!「台灣Threads隊長」也掰了 他親曝2遺憾： 來不及做 - MSN",
-    "連結": "https://news.google.com/rss/articles/CBMiiwNBVV95cUxOWUpmTms1UTFvLXdDMHhRUl9xQUtKQUJETW44Z2szNWhveU5sYVgyUE5PaEp1elI3OUlCYl9Db3NFZTROZjY1UWRwbGliTEN6X24xTm9RNENBWGlTM1NkWm1Nd0xoVWZBY0dmdE9JbERSMWdUVGE1bHZkWTZxX1hGNWt4N1lQTmtkZDVQNVR0cTR0TDZCV0ZEQzBVRmRfaExTR3NTN21ISU8tU2FiNG9kUkpsN2ozRzliWEdWc3J2VG45dVFFekczQm9fRFFOTHRweE1kM0lsRzE1aHJNZTFKQ2FJZnFoVGVoT1R5Z1dXWV9hWFpmRlpJNEFNY3NmWGR1SmpPX2NtQUx2U3dfalFKOHNJcVRnbG5OV2tWeHRjU0ktbGU3UEhKRVdhU3pvcXNpN0JLR0JMNFp1T01OS0lUa042MlpRaTJOUVpBRm5pTnVzOHVzY0RNSWNtanRtSW9PUFFmNlNpMTA3OWlpS2JKSHZOYi1IT3BmRnhwOVRWUVJnR2lrN0U5a0l2MA?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
     "來源": "Taiwan News",
     "標題": "閎康3度加碼投資台灣 擬投7億建AI檢測增208名就業機會 - Taiwan News",
     "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBzNnI5V3ZDY3NpSGFONDRBMHdfYWNFUEhCcVBmQnB1ME1XcG5DenFzZ1Mza0luZFQtU2RWMXVfZG5xWDhxVS1aWmZxZUtpa0dFX3hYOU8zcUI?oc=5",
@@ -401,15 +464,15 @@
   {
     "日期": "2026/05/23",
     "來源": "Yahoo - 汽機車",
-    "標題": "2026 年一月台灣電動車銷售排行榜：Toyota bZ4X 奪銷售龍頭、Luxgen n7 仍在前三 - Yahoo - 汽機車",
-    "連結": "https://news.google.com/rss/articles/CBMigwJBVV95cUxOVzNfSE10aEFKY1lPcHBGVVM3QlpHMGJqbS1EQXR4S1BlcFR3MVVNQTh6SkM2amdYYzBxazVwR1c0Qjk1Wld4N3hJN0oxd3hoZkE1V3ZJOTg3MG9iVlFVdlgzWm9vbnZYNlZxalRvTnFzTXprYjcwVktaT29COTlQc3lIbF9BUnQzZE1ueXJVdzM3NGUzaWVYMmlNWDBMbW95V29oSXpIYkZkUkViZWo5SGZVTDkzZl8tcnZ3QTMwanNMTWlreWs2Tzk4TUQ4R3JjMW9zWXdhaXV2V0tpM3hUREtnT0cwV1EwcGlxU0FaR0Z0eEl4T2F2eVFwUTNCS3pwQ2Yw?oc=5",
+    "標題": "2026 年二月台灣電動車銷售排行榜：Toyota bZ4X 連霸、Foxtron Bria 空降亞軍 - Yahoo - 汽機車",
+    "連結": "https://news.google.com/rss/articles/CBMipwJBVV95cUxORUtvVVN2SUt6SXdqQ05xV3NOa3NhUHZUdF9vZzVxdHNpX2hlTHhUSVVVYTE1TXRuWDVabTI2Vi0zMElNWmpzRERaZVE3Y0tYbVZPZTJGRHFFeWhFVzFNSkYtZ3VZYTRNbHZtek02UVdOczZCVEFwYUxyTjVWV0pHR3JxcFNDZDc4ei13RU4wSm9mV1NWMmd3bHRIcjJ4TkxWNVlFdTlfMWN3ZmJDbVB3dlVvU0d2dngzTmpNUXZGYUxtR2twRjhIT1BkbjJwRHZLb1VwNVdGX2VVaUxKUlpuWUhEeXREVW9yMFRNUms4OG5ZblpjV1BqQnhEOElHd1hsaHhoTDVzZUdqaGVQdG9RYkFZMUV3OExscUxSdmlma2RPeEtaSGpB?oc=5",
     "重要": true
   },
   {
     "日期": "2026/05/23",
     "來源": "Yahoo - 汽機車",
-    "標題": "2026 年二月台灣電動車銷售排行榜：Toyota bZ4X 連霸、Foxtron Bria 空降亞軍 - Yahoo - 汽機車",
-    "連結": "https://news.google.com/rss/articles/CBMipwJBVV95cUxORUtvVVN2SUt6SXdqQ05xV3NOa3NhUHZUdF9vZzVxdHNpX2hlTHhUSVVVYTE1TXRuWDVabTI2Vi0zMElNWmpzRERaZVE3Y0tYbVZPZTJGRHFFeWhFVzFNSkYtZ3VZYTRNbHZtek02UVdOczZCVEFwYUxyTjVWV0pHR3JxcFNDZDc4ei13RU4wSm9mV1NWMmd3bHRIcjJ4TkxWNVlFdTlfMWN3ZmJDbVB3dlVvU0d2dngzTmpNUXZGYUxtR2twRjhIT1BkbjJwRHZLb1VwNVdGX2VVaUxKUlpuWUhEeXREVW9yMFRNUms4OG5ZblpjV1BqQnhEOElHd1hsaHhoTDVzZUdqaGVQdG9RYkFZMUV3OExscUxSdmlma2RPeEtaSGpB?oc=5",
+    "標題": "2026 年三月台灣電動車銷售排行榜：特斯拉 Model Y 狂賣 4,540 輛、Toyota bZ4X 力保前三 - Yahoo - 汽機車",
+    "連結": "https://news.google.com/rss/articles/CBMirgJBVV95cUxQOGl1bG1XdTNxenZqYnBHb2lGTUhQSWJXZEY4OUdZbkQxaGlYUVp0U01YR05TMlVkdWt2U0kyMDBkSWx1LW8tcDl6Y244RWR6TVN4djdGX3dNZjBuQnhCWjZOX01pcE82Vk51eF8wSlpUYnZNQjBTTGZqN0J2MHZyMm0zSUd3NndTemxMem5qcmE3MUNlWUFBQzUwN1JDQ0pqSXB5ZEJKSDBtTjA1eUlHTDh1aFd3MVVzWGlHZ09fV0JJT09BajNuUEltbzY5MUhJbVdkNjRCVDBTT2lnT3p0QzBTbVIyclhTUm1ESENEUUZfNkhSZzZxUHJHTHUxUXhJX0ZuQ3JzYTZnSVIweDJ4M1ZNcXZxOUtVRDR0SFU2eEpMZ0Y5OGFRTzhuaFpnUQ?oc=5",
     "重要": true
   },
   {
@@ -443,6 +506,13 @@
   {
     "日期": "2026/05/23",
     "來源": "Yahoo - 汽機車",
+    "標題": "電動車橫掃Euro NCAP 2025榜單！這 3 款台灣也買得到 - Yahoo - 汽機車",
+    "連結": "https://news.google.com/rss/articles/CBMisgJBVV95cUxORFhUNW5Vb3pvZTNROWIxak1uZVRuanVsNWUxdThVUlVQU29HNGR2YThjS3dSd0RqTXg4dXFPbE85ZGZRanJnakJadlRmT0JGRjVJWF9JdWY1TFNzX3hYWEpmQ2FZQ1lTRC1icktKR1pOMXRqVGdzSk5zejk5WTlBdXgyd0c5QTF0d0QwcHdPTmZtOE1BZFdyZXF4UjFEWVhBSkhGN1N5TWtnbkc4RjZjNXVtVTZLcnFrdHBacGpFVnc1Q0ZYR2NXQklOb2xBTU5kZnVBSXBwNTlXN1pwaEFIWk14RVYwOEh6V0dqaFBSVXZLVmRmLTVaVDF2NTA5MWNURGZ1eDNORFdTZFpROGlHLVV2MjNWNjM1WmkyaEtSWnBDUzdaWmVzQ0laMjRKLTdIbkE?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "Yahoo - 汽機車",
     "標題": "2026 台灣電動車充電總體檢：站點突破四千大關，為何還排隊？充電體驗下一個決勝點是軟體生態圈？ - Yahoo - 汽機車",
     "連結": "https://news.google.com/rss/articles/CBMitgNBVV95cUxNejBWUGVNUC00NDJDOTRYMXM0bko2T3VqeE84eERMeXBFb0RtQWFRV0xCbWpvM3dHRElHNk9GRDBUVW94cC10aC1tQmdnV2I4dmZsRUdrVXBCMzkxcEN3eU9wbXpGU0Z1UjZGQWItT2MxbS12Q0pySVdNWlg2SFVNbGlCVkRqaEh6Z1lLRkV3cmJzZmd0X0pSYWZfWjNaTk1Ia3JtallBWko3VmdCclFfZGNUc2QwQmM1YzNiZGNzN2FzUXpnX2RneGFYdWNzRGVFMXltVjQxWDlGX2xGYWJteUdRTFJKU1JjS0VGa3NoY1BPNklLeG5MRkNNN2xiY2JJbmlKTC00TUxqMzFYMndncUx0ekdVSnNWQ0ZxajFVdzJya1JpN2JickQ5Y2FtbDZNOTgwQkktY1V2RTBQYzZ2UlNYM0tYWUJXNmNHTUdXNHk4dEFXOHRPTHctTGJldE1jcDlDZlYxMUJBUUtNOFdraGhSdFhmeWlZYjh5RkxQYktaRUUwaVlkOHlSZU1mUlZJYnhBOFpndER3RGRIY3I5ZU1IZnZYTVRjNTNqNjY0U09Cc2JoVnc?oc=5",
     "重要": true
@@ -450,8 +520,15 @@
   {
     "日期": "2026/05/23",
     "來源": "Yahoo - 汽機車",
-    "標題": "賓士Mercedes-Benz電動車因港口庫存壓力大不得不降價！台灣呢？ - Yahoo - 汽機車",
-    "連結": "https://news.google.com/rss/articles/CBMi6gJBVV95cUxPWlVudURJYURicVJyZnhyX3Q5Rl9MVHhTamExYjJHTE5qMnAyZmlIN01ocEl0MFotSGpEcTcxQmNlMzZNZEM3MHNLSGhUcnhMQkxVODN1aXVtaWRVak1qZ2xmVTlHSDRsMXlFd3FRR09WMmZDUHltblBrQnMzMGpWYmhieF9vYWVGTm1SeGU3N2x4ZExVRXJyTHNjM2pYcTJ1WDVyUFBtaHl0ekhEdEY3bkVtN2hwb3ZWcWtiQUxEUkk0bGhTenBibnM3a3gyeHQ3cG9Sa0JjSHhNTjlSWXFORTdrQmxUN1ozbU8taDk3a2o5Nk56WjV6VHQ0NzZrSDhocDRGREVOaHhITUVrbHhPVHNnTjFjMnVOZXZ2MDFVbWFEamYyUzN6SnQ1QmV0UHJhUi13aGhMRDR0SU1za1RyY3JjZ3J5YVB2TEk3X2ZINk9QYmZqNE5WZlBJUlQzbFR3QTZIR3VjVlB3dw?oc=5",
+    "標題": "台灣先賣舊Mercedes-Benz賓士CLA電動車？支援400V充電的新版車型明年才會有 - Yahoo - 汽機車",
+    "連結": "https://news.google.com/rss/articles/CBMilwNBVV95cUxQYk4xcEtaSzg4VG05bWhROG95Q3lycldlc1hTRDFkM1EyWEl0ZDNLWlZ2M19kSGRmQkhlUHR4R0UyNnRMUUJhbnJuT2g4OGRFQnJKLTNzVXNXNFRaajMyQkJzZlFrZV9VdmJfb2RUNG5HdHhJZlZHQnphMHQwZjV5RXpXOTh0OWYzdVlsdnlHQWxoT1RxNVV6X0Z4YzlhR2c1ZXVORU9QQlRyVmJWYTNJR3l5TVlnOWxMMk8zcTU5b3J1VEhueEgzNlQyZjUwVmxILWxxSHlGSVFfMkRvU1ZGazVXaDFTSS15X1FUcXpPa0stM2JBejF0OXROdWpBbi04V1kzUUxuNk0xYktZSi1jVTQ4dDRpdE9sNmdiaDZpalBVT3pFck5aQ2dLeGs4N3k3YWZ4VUpCb3RoaGdNM1ZfYy13ZUpXQS1SdERPTk11WFRHSWlSZDhIU2tuV01xRXhxNE90QUptdmlVaW5VdU5BX1Zjd3VKd08wUDc5Zkl0U2Q1dk5lUlZ0eUJVaVFzRDBUc0dsR0FYVQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "Yahoo - 汽機車",
+    "標題": "家裡沒充電樁適合買電動車嗎？新手購車必看攻略│汽車小學堂 - Yahoo - 汽機車",
+    "連結": "https://news.google.com/rss/articles/CBMiqwNBVV95cUxQZGQ4ZTBnMGY3dWZ0V0JET3lkUkt3YkRwWGY5M0ZjOFprVHpzc0ZOZElTNlZhMXoxdTBOSEpmZzNHRTVLYWVvZzRNZlNkNlZQRXhWTmgxWGdUcTRYbnNaYzlyOEhUSl9KaElsYVFTWVlJSHZ3RElSV1BVZmVGZHhrWDdqSjFtTERIUExMeWdwaXdKTDB0U2ZOWjM3bEdKZDg3SEFlMUV1SGdmQ0RvSzVyTDk2QUI3QS1RQW96SV9wbmhHWUgwQzI4QS1nbGVkdTFDNHJoMlEwaGtYUU5Yd2o4M3N1a3Q5MmotR2VVcE1URnE2Y0RyZDltTV9ybHdFcmx5ZGlrbUkyYVNXNkR2aExia1pMXzIwY01Dd2huSFhLanhMSXRDMUVpdHRBaUxEMDdhaVJIak1xZTAzNFdlYnJEYXFob2NzdmIyR2pKWXZ2RG1NVUhYU3RLQzByZFJIY01ldVNUaFMwb2tMcVVPOXR2N3RtcldzQlVVaHVZQm5ZLXBVN25RazJzWFlfeG5mYXVlZk80MTlnRVl2QW5od0twV2FNdFhvNWdqcnZN?oc=5",
     "重要": true
   },
   {
@@ -463,8 +540,22 @@
   },
   {
     "日期": "2026/05/23",
-    "來源": "風傳媒",
-    "標題": "台灣半導體優勢只剩18個月？ 丁學文示警全球碎片化 ：別再陷入賣鏟子迷思 | 黃芊昀 | 新聞 - 風傳媒",
+    "來源": "Yahoo - 汽機車",
+    "標題": "電動車補助最高50萬！ 誰符合資格？關鍵條件曝光 - Yahoo - 汽機車",
+    "連結": "https://news.google.com/rss/articles/CBMi2wJBVV95cUxOVXpPY1lnSUhYb1dzZUs1Wk1yOWROLXNvVlRvcnFabkdfc1VNdnY0R2kzS0pGcVJjS2JpUW9seWE3LWozUlhwd0xxT2tyQ21Ka3dHa3k1U2EzQVctOG9ZdzByZDN6TllDSE1LN19vU0h5OWZTaGNYTW9XR3JjOWxIa1RxdFYyR0c4cUVLdnpUZDhMQjEzTkd1bUFyOGdLLS1fOExuUzYzUnlFT1JnbEV2SFh3N1BjZ2NnUE52RDdfLTBMN0NrOVItWllYdFV3RXppZzFmYWlIY0ZNWHJkUHAzOXhVRF9raXpMUWlfWE9YTThJS21ZenRLZVNqb3oyaEp0SmNLV0dUUzhobG16ZS1JT1Z2dEV1M2VWMlRWbHRFdHQxYUpvakUxUFlEWWlNbVA2eW5kNUdvT0lxVVNobnhTclczdjJ0ZVZVS1pfNk9YYWs4bXd4elBIVG53aw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "Yahoo - 汽機車",
+    "標題": "2025 年一月台灣電動車銷售排行榜：n7 反超 Model Y、Macan Electric 開始大量掛牌 - Yahoo - 汽機車",
+    "連結": "https://news.google.com/rss/articles/CBMikAJBVV95cUxNeHFoRGQwTDF1Qmh2Ul9RbUlkc1Z5VGxUVGpPRlJMN29Wa2p6Uk91alA0bGdUd0ZmRDdMd3I4bkhXSWNLSGkyZzQxclNmTndpX3pHSEpMMmZXM29xYlJNLW9KTWVzX3RqeVJCWUlIVmJUSzNZcHJpMXdHcWpqU043eVg0dXE1cWRpa1hXQVA3aWN1Rm1uZV9XV1g4Ql8xNHNKZzBIdC1sSHNyM1hZaTk3eERXcUFITDg4S1l5ZUFzQUpoWEJweVpRVWozbWFSeXAxdVJVbmRkT1dUNzc5TDVWY0FNUk5NbUg2NEhhY01aZUc3TWhFVDhvTlBRQ3hGbU5CYXlxQ2d6SjFyQkJmTVJfdw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "Storm.mg",
+    "標題": "台灣半導體優勢只剩18個月？ 丁學文示警全球碎片化 ：別再陷入賣鏟子迷思 | 黃芊昀 | 新聞 - Storm.mg",
     "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1PNUlRdnNIenhONm5Ubm4wOGlSVDVXRk5tOVNHMUtnd0dfWEtUcHZJQkhxMTdDTnh5S3dkN2FLTENNZWF4V1BxdDREam1YUQ?oc=5",
     "重要": true
   },
@@ -491,6 +582,69 @@
   },
   {
     "日期": "2026/05/23",
+    "來源": "Storm.mg",
+    "標題": "突破論壇》台灣邁入超高齡社會！半導體與照護人力雙重告急，專家示警：得人才者得天下| 林庭瑤 | 新聞 - Storm.mg",
+    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBmazVYdlM0TW9UVklfUmRKbU44cnlBSlN5eXlqTVJ4N19ybFJnSGMxM3RJU0hwYXNZcF92a1RkZGdKMUtuNjR4VWhaVE83QQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "udn",
+    "標題": "川普兩度提起台灣偷走晶片業 美貿易代表談半導體關稅這麼說 - udn",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5ZdGtVRkNfS19NODdfSzN2dnFxSC1ZcFN3WjdlTjVzUWYzdXpHY0g5UWE4VWJMSldQMF80b0ZWbjBwNHhDSWljRTc4QmNfRkxX0gFWQVVfeXFMUEFtaTJlcDQxNlFDOHlDU2hMS2N4UUtnVUpKUUd3OGY5dV93aU1YMjhXNTlOWlJqNFpEUmFkckJ4RFNtek9IbGY0RG1odkQwamhOOURPVGc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "今周刊",
+    "標題": "川普連2次點名台灣偷走晶片產業，半導體關稅公佈時間近了？美國貿易代表給「一理由」親解何時才上路 - 今周刊",
+    "連結": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPZHQ2SXdpSTJWb3NYTFN0czhMVFpwQ09SR2V0Sk5MYmlDXzVwNmt0NXlOdDUxelFrWVdad0FVd0VwRzlNaE1qVS1uc1RNT2UxNzBYTUN1TkFNV3RhYk5oV1RWWjBVQ3JkYlRQX1FaVzJRWms5TDFENTg5MmpOS1pLdg?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "CMoney投資網誌",
+    "標題": "AI算力引爆硬體需求，半導體零組件迎成長-財經焦點情報站 - CMoney投資網誌",
+    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNTm5aMzU5OUYxb1dtaVJ6aTA3TjFCX09ONkotanUxNllTT0FIQmtmTHVWRE9WU3dFY01XTC1xcC1Cb1JHVGpoM0F4S0pjQ19ERmNmZzlGMnotV3VFd1R3MWtKVWlpQkNyUmVLdVlZSnhiSlRFamNaa3BLZGtOaDFlV1VB?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "udn",
+    "標題": "現任總經理白崑榮申請退休後由誰接任？ - udn",
+    "連結": "https://news.google.com/rss/articles/CBMimgFBVV95cUxObmplTHk4Y3VIRXZxcWo3QmpOTHMwd0l2ZnhIM1hkczlJRmktS0xJMnExdnduYmJqTmN1S0M1SC1QLW5OWlc4VHNuT0RnYXdfOWxEX2N0cjVmeTVPVUFYakxZcjByYlNZY1oxbGl5aUJGQnlUdHdSWDc2ZmlDdTV1UndCTnhHMlAtaFdzdlc2eXk4a2hTS1hnUFd3?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "LINE TODAY",
+    "標題": "國銀AI運用加速發展 遠銀董：取代人力非做不可 | 中央廣播電臺 - LINE TODAY",
+    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA1V3E0RHZ1R2JENHcybHFVTTM5M1duYmIyYW5YM2hzT2xBMUlWTXNzR2ZMdjAyQzY1UHVzU1Z1QUowT0ZMcVlNU2hXOFNldUFzeFBMUkN3?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "MSN",
+    "標題": "Meta大裁員!「台灣Threads隊長」也掰了 他親曝2遺憾： 來不及做 - MSN",
+    "連結": "https://news.google.com/rss/articles/CBMiiwNBVV95cUxOWUpmTms1UTFvLXdDMHhRUl9xQUtKQUJETW44Z2szNWhveU5sYVgyUE5PaEp1elI3OUlCYl9Db3NFZTROZjY1UWRwbGliTEN6X24xTm9RNENBWGlTM1NkWm1Nd0xoVWZBY0dmdE9JbERSMWdUVGE1bHZkWTZxX1hGNWt4N1lQTmtkZDVQNVR0cTR0TDZCV0ZEQzBVRmRfaExTR3NTN21ISU8tU2FiNG9kUkpsN2ozRzliWEdWc3J2VG45dVFFekczQm9fRFFOTHRweE1kM0lsRzE1aHJNZTFKQ2FJZnFoVGVoT1R5Z1dXWV9hWFpmRlpJNEFNY3NmWGR1SmpPX2NtQUx2U3dfalFKOHNJcVRnbG5OV2tWeHRjU0ktbGU3UEhKRVdhU3pvcXNpN0JLR0JMNFp1T01OS0lUa042MlpRaTJOUVpBRm5pTnVzOHVzY0RNSWNtanRtSW9PUFFmNlNpMTA3OWlpS2JKSHZOYi1IT3BmRnhwOVRWUVJnR2lrN0U5a0l2MA?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "Yahoo - 汽機車",
+    "標題": "賓士Mercedes-Benz電動車因港口庫存壓力大不得不降價！台灣呢？ - Yahoo - 汽機車",
+    "連結": "https://news.google.com/rss/articles/CBMi6gJBVV95cUxPWlVudURJYURicVJyZnhyX3Q5Rl9MVHhTamExYjJHTE5qMnAyZmlIN01ocEl0MFotSGpEcTcxQmNlMzZNZEM3MHNLSGhUcnhMQkxVODN1aXVtaWRVak1qZ2xmVTlHSDRsMXlFd3FRR09WMmZDUHltblBrQnMzMGpWYmhieF9vYWVGTm1SeGU3N2x4ZExVRXJyTHNjM2pYcTJ1WDVyUFBtaHl0ekhEdEY3bkVtN2hwb3ZWcWtiQUxEUkk0bGhTenBibnM3a3gyeHQ3cG9Sa0JjSHhNTjlSWXFORTdrQmxUN1ozbU8taDk3a2o5Nk56WjV6VHQ0NzZrSDhocDRGREVOaHhITUVrbHhPVHNnTjFjMnVOZXZ2MDFVbWFEamYyUzN6SnQ1QmV0UHJhUi13aGhMRDR0SU1za1RyY3JjZ3J5YVB2TEk3X2ZINk9QYmZqNE5WZlBJUlQzbFR3QTZIR3VjVlB3dw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
+    "來源": "風傳媒",
+    "標題": "台灣半導體優勢只剩18個月？ 丁學文示警全球碎片化 ：別再陷入賣鏟子迷思 | 黃芊昀 | 新聞 - 風傳媒",
+    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1PNUlRdnNIenhONm5Ubm4wOGlSVDVXRk5tOVNHMUtnd0dfWEtUcHZJQkhxMTdDTnh5S3dkN2FLTENNZWF4V1BxdDREam1YUQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/05/23",
     "來源": "風傳媒",
     "標題": "突破論壇》台灣邁入超高齡社會！半導體與照護人力雙重告急，專家示警：得人才者得天下| 林庭瑤 | 新聞 - 風傳媒",
     "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBmazVYdlM0TW9UVklfUmRKbU44cnlBSlN5eXlqTVJ4N19ybFJnSGMxM3RJU0hwYXNZcF92a1RkZGdKMUtuNjR4VWhaVE83QQ?oc=5",
@@ -501,13 +655,6 @@
     "來源": "UDN",
     "標題": "川普兩度提起台灣偷走晶片業 美貿易代表談半導體關稅這麼說 - UDN",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5ZdGtVRkNfS19NODdfSzN2dnFxSC1ZcFN3WjdlTjVzUWYzdXpHY0g5UWE4VWJMSldQMF80b0ZWbjBwNHhDSWljRTc4QmNfRkxX0gFWQVVfeXFMUEFtaTJlcDQxNlFDOHlDU2hMS2N4UUtnVUpKUUd3OGY5dV93aU1YMjhXNTlOWlJqNFpEUmFkckJ4RFNtek9IbGY0RG1odkQwamhOOURPVGc?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "今周刊",
-    "標題": "川普連2次點名台灣偷走晶片產業，半導體關稅公佈時間近了？美國貿易代表給「一理由」親解何時才上路 - 今周刊",
-    "連結": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPZHQ2SXdpSTJWb3NYTFN0czhMVFpwQ09SR2V0Sk5MYmlDXzVwNmt0NXlOdDUxelFrWVdad0FVd0VwRzlNaE1qVS1uc1RNT2UxNzBYTUN1TkFNV3RhYk5oV1RWWjBVQ3JkYlRQX1FaVzJRWms5TDFENTg5MmpOS1pLdg?oc=5",
     "重要": true
   },
   {
@@ -533,27 +680,6 @@
   },
   {
     "日期": "2026/05/23",
-    "來源": "Yahoo - 汽機車",
-    "標題": "家裡沒充電樁適合買電動車嗎？新手購車必看攻略│汽車小學堂 - Yahoo - 汽機車",
-    "連結": "https://news.google.com/rss/articles/CBMiqwNBVV95cUxQZGQ4ZTBnMGY3dWZ0V0JET3lkUkt3YkRwWGY5M0ZjOFprVHpzc0ZOZElTNlZhMXoxdTBOSEpmZzNHRTVLYWVvZzRNZlNkNlZQRXhWTmgxWGdUcTRYbnNaYzlyOEhUSl9KaElsYVFTWVlJSHZ3RElSV1BVZmVGZHhrWDdqSjFtTERIUExMeWdwaXdKTDB0U2ZOWjM3bEdKZDg3SEFlMUV1SGdmQ0RvSzVyTDk2QUI3QS1RQW96SV9wbmhHWUgwQzI4QS1nbGVkdTFDNHJoMlEwaGtYUU5Yd2o4M3N1a3Q5MmotR2VVcE1URnE2Y0RyZDltTV9ybHdFcmx5ZGlrbUkyYVNXNkR2aExia1pMXzIwY01Dd2huSFhLanhMSXRDMUVpdHRBaUxEMDdhaVJIak1xZTAzNFdlYnJEYXFob2NzdmIyR2pKWXZ2RG1NVUhYU3RLQzByZFJIY01ldVNUaFMwb2tMcVVPOXR2N3RtcldzQlVVaHVZQm5ZLXBVN25RazJzWFlfeG5mYXVlZk80MTlnRVl2QW5od0twV2FNdFhvNWdqcnZN?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "Yahoo - 汽機車",
-    "標題": "電動車補助最高50萬！ 誰符合資格？關鍵條件曝光 - Yahoo - 汽機車",
-    "連結": "https://news.google.com/rss/articles/CBMi2wJBVV95cUxOVXpPY1lnSUhYb1dzZUs1Wk1yOWROLXNvVlRvcnFabkdfc1VNdnY0R2kzS0pGcVJjS2JpUW9seWE3LWozUlhwd0xxT2tyQ21Ka3dHa3k1U2EzQVctOG9ZdzByZDN6TllDSE1LN19vU0h5OWZTaGNYTW9XR3JjOWxIa1RxdFYyR0c4cUVLdnpUZDhMQjEzTkd1bUFyOGdLLS1fOExuUzYzUnlFT1JnbEV2SFh3N1BjZ2NnUE52RDdfLTBMN0NrOVItWllYdFV3RXppZzFmYWlIY0ZNWHJkUHAzOXhVRF9raXpMUWlfWE9YTThJS21ZenRLZVNqb3oyaEp0SmNLV0dUUzhobG16ZS1JT1Z2dEV1M2VWMlRWbHRFdHQxYUpvakUxUFlEWWlNbVA2eW5kNUdvT0lxVVNobnhTclczdjJ0ZVZVS1pfNk9YYWs4bXd4elBIVG53aw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "CMoney投資網誌",
-    "標題": "AI算力引爆硬體需求，半導體零組件迎成長-財經焦點情報站 - CMoney投資網誌",
-    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNTm5aMzU5OUYxb1dtaVJ6aTA3TjFCX09ONkotanUxNllTT0FIQmtmTHVWRE9WU3dFY01XTC1xcC1Cb1JHVGpoM0F4S0pjQ19ERmNmZzlGMnotV3VFd1R3MWtKVWlpQkNyUmVLdVlZSnhiSlRFamNaa3BLZGtOaDFlV1VB?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
     "來源": "世界新聞網",
     "標題": "科技大佬紛訪台 蘇姿丰：AI浪潮 才到棒球賽第3局 - 世界新聞網",
     "連結": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1rQlJUUnJRR2Nsa194aERzY2tNanVoM1ZiT3FzeG95STFUUUxmeHJBemw2WDUwVmFMRXM0alR0c2xia0w4MzhzemNXMjhqeDdZUzIzVnBKcW4zamd2dkRkYXlyalp0dmvSAWdBVV95cUxNa0JSVFJyUUdjbGtfeGhEc2NrTWp1aDNWYk9xc3hveUkxVFFMZnhyQXpsNlg1MFZhTEVzNGpUdHNsYmtMODM4c3pjVzI4ang3WVMyM1ZwSnFuM2pndnZEZGF5cmpadHZr?oc=5",
@@ -571,132 +697,6 @@
     "來源": "經濟日報",
     "標題": "今日最夯 ETF／受惠聯發科、日月光等半導體股大漲 00892 量增攻高後市看旺 - 經濟日報",
     "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFAzMXpRRTI2X3hzYU5OSFppU0VxS0pXdGJUN09MQkR4WmJvZ2FtRnRacGRsMENlS1VzZ29SRFJMcWEtTUVTZjVCd1U0dHlKcDRjMG5tQ3V3eG1BZ9IBX0FVX3lxTE84UVF5dkJsc3hmLWxUYUVTQXZ6Rm1XN0R0bldrNzdrUGlrMU5OdHZCSXp4NVhZQzdQODd6UHQ2SGVYM2RJWFZ0QW5uSzhTQ2hqME9FRm5leTM4YUd6Z1U4?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "經濟日報",
-    "標題": "川普兩度提起台灣偷走晶片業 美貿易代表談半導體關稅這麼說 - 經濟日報",
-    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5LWlVzcXdENmJMV2JVaHJxQXdzS1lhT1RfTFFhcFY3dzZHc0JEMXF1TUloOWdpWWhDX1lkMklZV1hFbTRTZUdHbjA1ZHFKZU9LT01xMFpxVE5id9IBX0FVX3lxTE1jT1F4eGxjblFJY2s0dUlJTWtreDhOLW1qcU1HUlJodWVCQTVpVVBxSFdpNVpMaVl5MUp4SUZMUzZqWEVMN24wUEJ6eFV0NXR6T2lPcDJ2bUh3QVN3N1ZZ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "經濟日報",
-    "標題": "AI 重塑半導體結構3／先進封裝抬頭 需求年增20% - 經濟日報",
-    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0tU2RpWTZablFIRTR1VHI0eU9sZUxxekJFaXczR0RVZ0FINzVLUEsxQmp1TWtES3duT2lBZkcxUGNXSTJzTTY0N3RGelczUEZKaGRoUjZJTUo4d9IBX0FVX3lxTE1pMlRNYzNBNVJVSWFQWDBFUlB2RUttZEpQMUkzV2s0bHBEaXctUEhfY2lOVUx6Mzg3cE5CU3BWOWp1VFAyaGMycEF0elBFVUZ1djZVdWdBUHlIcE4xdnhB?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "中華新聞雲／中華日報",
-    "標題": "美暫無新徵半導體關稅計畫 - 中華新聞雲／中華日報",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9CakpVcERkMnUxOE8wNzV0dWpwZE5HZktzdU9DcmNxenA0YXRYdTRDWTBqdmtSSU1KYlhQU1Z6S1VTVEZJcEU5Sk1EVHVBUjRUbmc?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "自由財經",
-    "標題": "現在不是立即開徵時機！ 美貿易代表曝「半導體關稅」進度 - 自由財經",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5Wc1Z3bTBpVm9rQ3BJbGJsYzNzcGd0VElSQzZZZ3gxbFFTQ21SUXhsWjlMSzFxdllhX2JJMjRDMWE1bnJfTktsX2VfYnZnSjU2ejJidEQ4empIYVhNVlZV0gFkQVVfeXFMUFNyekQ3Tzh3R1NxWThOQi1hZ1c1Mnk4TjNxalFScUlVVFVHZm5oRFV6OGJSTS1CaTk1VTJyRDdITWJQQ0twbi11c3EtQXY4U2lnR2xFUENQQVpTTDRwMTlVWVlfWg?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "人間福報電子報",
-    "標題": "超微、三星來台 布局AI、半導體產業 - 人間福報電子報",
-    "連結": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE4yQ1NrYjFENkRSOXJlMWMtVDVOMWRFamFNQkRmZnE0XzJEYzVoUUs1TnJkN1laMmlaczdQRDF4a3c4N1ZjOTZoaTdId2tyQ2d5NURCRGxSZTRpZTRaeTRJdTNfOWZsRVE?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "CMoney投資網誌",
-    "標題": "輝達推AI新平台，半導體設備與檢測廠擴產-財經焦點情報站 - CMoney投資網誌",
-    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNMXVELU1lZmRnTFhEc0hiQl9aY3I2VFFDUjNLWDRQRGgwSEZ5azZiT0pFQVZjTzN3Wnd5UjZjdndORnNCMXFFTWJtR3B3XzNmbGp0RTczYURCSWZmcm4zU0VPMnRJd0pBaVlrRUFuYTJOU0tTN0VMUzhvVERNYWhPZVVB?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "蕃新聞",
-    "標題": "川普一週兩度稱台灣「偷」晶片 美國貿易代表稱暫時沒有新的半導體關稅措施 - 蕃新聞",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5HTzVMVHh3QkZJSUZGV19FdVg2UEVELTNCQVhhTk44anRjRTl5NTZrczE5Mkx6a0tnZHRwOEg2M3UzdW1KY0dVTUNKYk5fYV9tbHc?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "CMoney投資網誌",
-    "標題": "輝達黃仁勳登台！半導體與零組件供應鏈迎爆發-財經焦點情報站 - CMoney投資網誌",
-    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQSWZIb1JLbkxQOTBvTnRBNU94amJOV1J1OG9fUGI0Rl9PcDdseklicWpaQmI1MTNOM1ZrVDBJM1hyWTViMURYQ3haZ1hfMElWQm5GTGl2UWU2bkFTNk95VHM3NlA3NER6cEFmM1BnMTROdktXOVhnaDRJblV0YXRjM3pR?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "LINE TODAY",
-    "標題": "美暫無新徵半導體關稅計畫 | 中華日報 - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5MWUo0RGl2dlNOWUE0b25PV0tNTXVzZmY5bVNVaVZwZmhTWWlWLXl3NG9qbVdGMEIxR0lHMXlNNHk3TkpHV0RWSWhHYXhkcjZGNkVkQk1n?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "中天新聞網",
-    "標題": "川普批台灣偷走晶片產業 美貿易代表：暫不會對半導體徵新關稅 - 中天新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9jazdfdlhZRkVjUXdnYi1DWWxyZjRabTc5WS1WQ1N6Smx6bW81bVl5cWd1Ujh4eVVYTU1Pck5JZV9ENXB4VEhzOF9KQnJTaUdfSWRr?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "ETtoday新聞雲",
-    "標題": "川普2度點名台灣偷晶片！　美貿易代表曝「半導體關稅」進度 - ETtoday新聞雲",
-    "連結": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9LbUxTYnJ0dHZfcUZPTEx6UVJCazFKNFhwUzVYbV92VER1bm5sVllZVktsc0tmc3JfVlpsTEg1N3k5MEllZ2xWT2p4TkRjc29lU3N1anJsRmQxV1U0RVHSAWhBVV95cUxOUF9lSUpHam90WXdiNFEyMklkRkhtVXJZY3piLWl1dE1rYk1zRUJRT21NSm0wRFB4d01qVlg4Nk9Wb29fdmVnZm81Ni01X3ZYenN3S1lyRVpmNTZaVnN3WG9lZnNkbGNYbg?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "三立新聞網SETN.com",
-    "標題": "川普稱處理台灣問題！駐美代表喊「中國才是」：台能成美國半導體業解方 - 三立新聞網SETN.com",
-    "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE8tSFJLTkJ3TmpRNEpzdlM4aWY1NEw5cGZwRklaUXFmYzQ1ZmdzVTZiMlJwUFdPMkVjRDA0dXpZdm5MZW9nNVI5OVFRZnVuOGxaMTlQb2NFc2_SAV9BVV95cUxOOEEwOXJub3dXZUZ4V004YXh2Y2wySDRGeUZZZWRpa0NUME5ZUGhBQnBjRjRkZDRrbUU1Xzk4VHJJOHpJSk84M29aWHZkVVpsSF9EZGx1cWtzOTN1N0JTVQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "LINE TODAY",
-    "標題": "台韓鬆口氣？美貿易代表：目前不會立刻對半導體課徵關稅 | 太報 - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1CdDB2UGxnQmpqVEJ5dFlPVzEydWdfaFViUkU1aUVMTFpnNU9ZSkdZX01VaFo2WFJFeWxhbzFybVU5UzJzQkttTzRzNDBVY2VFck9UZXFR?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "LINE TODAY",
-    "標題": "桃市榮服處辦理就學、就業、職訓說明會 助退除役官兵提升職場競爭力 | 台灣好新聞 - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5xdGF2NExIWnJHWjNlZjVlbmFMTUlUazZqaEZ1YXl6UlhvQVhvX2FMdFlKLXFmZk5CdXRhbjFhV1g0VjB1Q0V2Q21HNFB6TlRhRkU2cVhR?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "Yahoo新聞",
-    "標題": "台灣半導體優勢只剩18個月？ 丁學文示警全球碎片化 ：別再陷入賣鏟子迷思 - Yahoo新聞",
-    "連結": "https://news.google.com/rss/articles/CBMiwANBVV95cUxOYkdFeUpvd3dJX0YzQ3FPb2pQemhWTUlueUsyblppZjY3T2RuNUJrZVNWQndqYjZSRzFOb3pGU2Jld0kyOXVDRFpBUW15RUFOaDhIVDEyU0RwcXViNTN3Z21zSW1pVGZ4ZTktb1dMV2FIVjNIZm1VV1M4SGxiYmU5UkFOWHI0ZFJYb1lLeU1ZMWlMbHl3SWl6SmJTSUxQQXFpUXliS0pHalo1ekRwZVB4NmNvQUM4TzJoMFF5dWNFcmYtTnlCNHNKQTF1Z0thQ1R6ME5OWnFDOUlXLTBYQmJOZXBBeFJmU19PanhkOG1KX2ZXTlRaNjBxc2l5WDNPNkdIY1NWSE1RMXZlYXpFTEs0SzJOcmYwcmoxMkFqOUJoWVVteUZPLXJ0ZUJOTkhtdzk4QklrWVhEUm1nNTJSdHBDVWlsUUQ1dUdjdGEwQ09jRk5uc05LdDFBSHRZN0Zmc1RoOTd6QWpYS0dBdHlBWXFaS0lBVWtKdXpGWlhTZDFocmVBQ1NmN0ZUaVZZUWtDLUFQZ0dFb0pOVl9iOHpMMFJfZjJ4R3NpTklUSnhzSTlKQnp3QkE1emIzWlg3cm1oYXBp?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "商傳媒",
-    "標題": "AI助聯合健康集團谷底翻身 Facebook公司大舉裁員轉型 - 商傳媒",
-    "連結": "https://news.google.com/rss/articles/CBMi2AJBVV95cUxNY0V0TjRFLVhvenVjdTJXaDgtamlCY3pzMGlLU1lwQkVOVGFrc3lxSjI4V2otWWkzSlc0U28tbUdaNnZQNXNpYjU4cmg1RE1wM0JxcHhFenNfQnd4cWQ1am9nTmFhY3hOTG9XRWVWazRRV0pTZi1FRlE2Rmh2LU1LX2lqN0ZkVFJadVAya2hwdnFUcWdLN3I3bHI3aXhTNGE1dVItSWZJUjlBUG5PTXV3OXpyU05vMXExdk0yajZoc2NKdUwtd1hSZlN3dTdEM01xVVdDR0NmRkVkVVl1aXdjWXQ0SzE3WnRseERqcTRacEV0QmFYVDV2LTZQaGxoSXhTV2tpQm9SeEFpQ21WYTRJeW9XT0d0eWgwODJ6YUE4dGE1U0N3ZmV1QXJQRDVQVExkcF9MSnctVEFqeW5lbTNXWEdoNzJpZFhseDl4S2RvM1lDU1ZYb2FCbA?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "sinotrade.com.tw",
-    "標題": "黃仁勳 528 兆元宴 聚集科技五巨頭，輝達次世代 AI 平台推進，台積電先進製程與鴻海一體化機櫃進入量產部署｜股市話題 - sinotrade.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMiwgVBVV95cUxQdTk1QllDbkxkeTZDbUt6RHd4LWwzcTVFTzBTLWJraHNzdVZhRzZ5Tm55cm9FX0NDMU5QV1VsZHlmLTZqWkNQdUh3RkpuNDR6SDRkV2pMU0JMVWtyX0NXeGNieW5DZWstelFySEZDcFhpWFZoMUo1ZEZBejRyT0Z5eTA0MzV4VXFRdlQyRTh2SExYaXFMRlcwUExOanJqajRpZFV0MGtZU2hmRi16c0w0Yzc1QXVIRkJqUzduWFVfcWNSWHh2eTR5dm9vZFpQRmZMOUYzOGZQUkpKWGVnT0l4anVXOWU3NDNMS3kzTTdpUmcxUXE0STJmdmdLSXZEeGRyRTFORFpwVzR1VlQ0X0h3blZSRVgzWlhRZWRlVjc0bExXSGg0ejQtRHpmQkNhVFBaVG5GSloweFotV21CanZzVUFrblc5SERXeDdoZDBCVGU3aWpZdHhob1h6OXdnSzlwV1FVX01iVzhQLUh6MF8yZEMtUWl4NkZpd3J3a0NyRlFYZm1GWmVlWVN1RDVfd0k0R3B0aEtzcHoyc1hnSmFnX0o2bzlab3d2MFlPTlV0S0g3SHZoN25lX0xJOUJCQXYwMUszME1TZHkzSHhSMWNkeFZsWDBHVElkbjYta1hYR2RWcmI0a1MxR01LSE5KSW5KT2hqcnFycjk0bkxhU01nZHBmUmMzanNkanB4RHI0ajBMS1pwOFBEcV83T1Q0RGZmUjlpSE1ERGc0clZTRTlEdDNCRGdnX255aDZZdWUyMkI5Sk0xa0RzenRROGVtdDlEbFppOWNWSTN4eTJWRnR3Y21SbXZkU3REdUZzLUF1bG1RZ3g2QXJRelJsN1d1ZGdrMkY1WGZFeEp1b3lXMEx5X1ZNQm9QY3c1X1lRTUpGSjlXY3Rla21ZVE5KN3d6dnpmYUJGNnpIcVVrZVdXNDBoNE1R?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/05/23",
-    "來源": "自由財經",
-    "標題": "台灣半導體關稅警報暫解除！美貿易代表說「這1點」很重要 - 自由財經",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5RX1BOQll6YUJITjdZVk5tTmNEdGFGTmNoQkVIdEhGeEdOdHhjRk4zSC1LOW9reVRxMDNoRWlBOGViUmZGVjlDSVhBUjFtUWxCSWR6b1Y1elA5LUpmbFdB0gFkQVVfeXFMT0pTXy1wTF9MTjJtbktBVG5Gc1Itd0lsSzBOOGl2ZmxsR2JTZnhTTlBVTV9mNFZzR1RYcm1RSWhDQmpIblFRakxlTUNJSHphTXF3ZFBBMW9ScFltUkdKaHhCUDdFaw?oc=5",
     "重要": true
   }
 ]
