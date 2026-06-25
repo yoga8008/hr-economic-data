@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>常用網站</title>
+<title>Global HR Hub</title>
 
 <style>
 .navbar{
@@ -1188,19 +1188,112 @@ h1{
     }
 }
 
+
+
+/* ===== Auto HR update source link ===== */
+.globalUpdateLink{
+    display:inline-flex;
+    align-items:center;
+    margin-top:8px;
+    color:#1d4ed8;
+    font-size:13px;
+    font-weight:700;
+    text-decoration:none;
+}
+.globalUpdateLink:hover{ text-decoration:underline; }
+
+
+
+/* =====================================================
+   Global HR Hub v2.2 - header separator line
+===================================================== */
+.worldTimeCard .worldTimeHeader{
+    border-bottom:1px solid #d1d5db;
+    margin-bottom:18px;
+}
+.worldTimeCard .worldTimeSubtitle{
+    margin-bottom:12px;
+}
+/* Clean Global HR Hub header: subtitle only */
+.worldTimeCard .worldTimeHeader{
+    padding:18px 24px 14px 24px;
+}
+.worldTimeCard .worldTimeSubtitle{
+    margin:0;
+    font-size:14px;
+    font-weight:600;
+    color:#64748b;
+}
+
+
+/* Compact Global HR Hub layout - reduce blank space */
+.navbar{
+    margin:20px auto 24px auto;
+}
+
+h1.pageTitle{
+    max-width:1200px;
+    margin:0 auto 14px auto;
+    padding:0 20px;
+    box-sizing:border-box;
+    font-size:30px;
+    line-height:1.2;
+    color:#111827;
+    font-weight:700;
+}
+
+.card.worldTimeCard{
+    margin-bottom:22px;
+}
+
+.worldTimeCard .worldTimeHeader{
+    padding:12px 22px 10px 22px;
+    margin-bottom:10px;
+    min-height:0;
+}
+
+.worldTimeCard .worldTimeSubtitle{
+    margin:0;
+    line-height:1.4;
+}
+
+.worldMapWrap{
+    margin:12px 18px 20px 18px;
+    height:430px;
+}
+
+@media(max-width:768px){
+    .navbar{
+        margin:16px auto 22px auto;
+    }
+    h1.pageTitle{
+        font-size:26px;
+        margin-bottom:12px;
+    }
+    .worldTimeCard .worldTimeHeader{
+        padding:10px 16px 8px 16px;
+        margin-bottom:8px;
+    }
+    .worldMapWrap{
+        margin:10px 12px 16px 12px;
+        height:360px;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="navbar">
-    <a href="index.html">首頁</a>
+    <a href="index.html">Global HR Hub</a>
+    <a href="links.html">常用網站</a>
     <a href="indicators.html">經社指標</a>
     <a href="tools.html">HR工具</a>
     <a href="insight.html">輿情觀察</a>
 </div>
 
-<h1>常用網站</h1>
+<h1 class="pageTitle">Global HR Hub</h1>
 
 <div class="layout">
 <div class="leftPanel">
@@ -1208,8 +1301,7 @@ h1{
 
     <div class="card worldTimeCard">
         <div class="worldTimeHeader">
-            <h2 class="sectionTitle"> Global HR Hub</h2>
-
+            <p class="worldTimeSubtitle">Global Sites • Local Time • HR Updates</p>
         </div>
 
         <div class="worldMapWrap" id="worldMapWrap">
@@ -1226,51 +1318,6 @@ h1{
             <div id="worldClockLayer"></div>
         </div>
     </div>
-
-    <div class="card">
-        <h2 class="sectionTitle">政府法規</h2>
-
-        <div class="linkGrid">
-            <a class="linkCard" href="https://www.mol.gov.tw/" target="_blank">⚖️<span>勞動部</span></a>
-            <a class="linkCard" href="https://laws.mol.gov.tw/" target="_blank">📚<span>勞動法令查詢</span></a>
-            <a class="linkCard" href="https://www.wda.gov.tw/" target="_blank">🧰<span>勞動力發展署</span></a>
-            <a class="linkCard" href="https://www.osha.gov.tw/" target="_blank">🦺<span>職業安全衛生署</span></a>
-            <a class="linkCard" href="https://www.bli.gov.tw/" target="_blank">🛡️<span>勞工保險局</span></a>
-            <a class="linkCard" href="https://www.nhi.gov.tw/" target="_blank">🏥<span>健保署</span></a>
-            <a class="linkCard" href="https://ilabor.ntpc.gov.tw/" target="_blank">🏛️<span>新北勞工局</span></a>
-            <a class="linkCard" href="https://www.ntbna.gov.tw/" target="_blank">💰<span>國稅局</span></a>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2 class="sectionTitle">統計資料</h2>
-
-        <div class="linkGrid">
-            <a class="linkCard" href="https://www.stat.gov.tw/" target="_blank">📊<span>行政院主計總處</span></a>
-            <a class="linkCard" href="https://mops.twse.com.tw/" target="_blank">📈<span>公開資訊觀測站</span></a>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2 class="sectionTitle">招募網站</h2>
-
-        <div class="linkGrid">
-            <a class="linkCard" href="https://www.104.com.tw/" target="_blank">👔<span>104人力銀行</span></a>
-            <a class="linkCard" href="https://www.1111.com.tw/" target="_blank">💼<span>1111人力銀行</span></a>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2 class="sectionTitle">人資咖啡站</h2>
-
-        <div class="linkGrid">
-            <a class="linkCard" href="https://www.hr.org.tw/" target="_blank">☕<span>中華人事主管協會</span></a>
-            <a class="linkCard" href="https://www.chrma.net/Template/Index.aspx" target="_blank">📘<span>中華人力資源管理協會</span></a>
-            <a class="linkCard" href="https://hrlearning.com.tw/" target="_blank">🌿<span>人資小周末</span></a>
-            <a class="linkCard" href="https://hiproficiency.com/forum/%e4%ba%ba%e5%8a%9b%e8%b3%87%e6%ba%90%e8%ab%96%e5%a3%87/" target="_blank">🚶<span>HRJOURNEY</span></a>
-        </div>
-    </div>
-
 </div>
 </div>
 
@@ -1337,114 +1384,155 @@ h1{
 
 const worldClockZones = [
     {
-        key: "tzUnitedStates",
-        flag: "🇺🇸",
-        city: "Wisconsin",
-        country: "United States",
-        timeZone: "America/Chicago",
-        dotX: 20,
-        dotY: 34,
-        cardX: 7,
-        cardY: 18,
-        updates: [
-            { type:"Government Notice", title:"HR update placeholder", desc:"Use this area to maintain local labour, payroll, tax, social insurance or government notice items.", date:"Manual update" }
-        ]
+        "key": "tzUnitedStates",
+        "flag": "🇺🇸",
+        "city": "Wisconsin",
+        "country": "United States",
+        "timeZone": "America/Chicago",
+        "dotX": 20,
+        "dotY": 34,
+        "cardX": 7,
+        "cardY": 18,
+        "updates": []
     },
     {
-        key: "tzMexico",
-        flag: "🇲🇽",
-        city: "Tijuana",
-        country: "Mexico",
-        timeZone: "America/Tijuana",
-        dotX: 16,
-        dotY: 45,
-        cardX: 13,
-        cardY: 52,
-        updates: [
-            { type:"Minimum Wage", title:"HR update placeholder", desc:"Maintain effective date, scope, source link and HR impact here.", date:"Manual update" }
-        ]
+        "key": "tzMexico",
+        "flag": "🇲🇽",
+        "city": "Tijuana",
+        "country": "Mexico",
+        "timeZone": "America/Tijuana",
+        "dotX": 16,
+        "dotY": 45,
+        "cardX": 13,
+        "cardY": 52,
+        "updates": []
     },
     {
-        key: "tzCzech",
-        flag: "🇨🇿",
-        city: "Kutná Hora",
-        country: "Czech Republic",
-        timeZone: "Europe/Prague",
-        dotX: 53,
-        dotY: 27,
-        cardX: 43,
-        cardY: 11,
-        updates: [
-            { type:"Labour Law", title:"HR update placeholder", desc:"Maintain Czech Republic HR compliance updates here.", date:"Manual update" }
-        ]
+        "key": "tzCzech",
+        "flag": "🇨🇿",
+        "city": "Kutná Hora",
+        "country": "Czech Republic",
+        "timeZone": "Europe/Prague",
+        "dotX": 53,
+        "dotY": 27,
+        "cardX": 43,
+        "cardY": 11,
+        "updates": []
     },
     {
-        key: "tzChina",
-        flag: "🇨🇳",
-        city: "Zhengzhou",
-        country: "China",
-        timeZone: "Asia/Shanghai",
-        dotX: 77,
-        dotY: 37,
-        cardX: 65,
-        cardY: 17,
-        updates: [
-            { type:"Social Insurance", title:"HR update placeholder", desc:"Maintain local social insurance, payroll or government notice items here.", date:"Manual update" }
-        ]
+        "key": "tzChina",
+        "flag": "🇨🇳",
+        "city": "Zhengzhou",
+        "country": "China",
+        "timeZone": "Asia/Shanghai",
+        "dotX": 77,
+        "dotY": 37,
+        "cardX": 65,
+        "cardY": 17,
+        "updates": []
     },
     {
-        key: "tzTaiwan",
-        flag: "🇹🇼",
-        city: "Taipei",
-        country: "Taiwan",
-        timeZone: "Asia/Taipei",
-        dotX: 84,
-        dotY: 42,
-        cardX: 81,
-        cardY: 34,
-        updates: []
+        "key": "tzTaiwan",
+        "flag": "🇹🇼",
+        "city": "Taipei",
+        "country": "Taiwan",
+        "timeZone": "Asia/Taipei",
+        "dotX": 84,
+        "dotY": 42,
+        "cardX": 81,
+        "cardY": 34,
+        "updates": []
     },
     {
-        key: "tzVietnam",
-        flag: "🇻🇳",
-        city: "Bac Ninh",
-        country: "Vietnam",
-        timeZone: "Asia/Ho_Chi_Minh",
-        dotX: 78,
-        dotY: 50,
-        cardX: 65,
-        cardY: 47,
-        updates: [
-            { type:"Government Notice", title:"HR update placeholder", desc:"Maintain Vietnam labour, minimum wage, social insurance or government notice items here.", date:"Manual update" }
-        ]
+        "key": "tzVietnam",
+        "flag": "🇻🇳",
+        "city": "Bac Ninh",
+        "country": "Vietnam",
+        "timeZone": "Asia/Ho_Chi_Minh",
+        "dotX": 78,
+        "dotY": 50,
+        "cardX": 65,
+        "cardY": 47,
+        "updates": []
     },
     {
-        key: "tzIndia",
-        flag: "🇮🇳",
-        city: "New Delhi",
-        country: "India",
-        timeZone: "Asia/Kolkata",
-        dotX: 68,
-        dotY: 47,
-        cardX: 52,
-        cardY: 57,
-        updates: [
-            { type:"EPF / Payroll", title:"HR update placeholder", desc:"Maintain EPF, ESIC, payroll, tax or labour compliance updates here.", date:"Manual update" }
-        ]
+        "key": "tzIndia",
+        "flag": "🇮🇳",
+        "city": "New Delhi",
+        "country": "India",
+        "timeZone": "Asia/Kolkata",
+        "dotX": 68,
+        "dotY": 47,
+        "cardX": 52,
+        "cardY": 57,
+        "updates": []
     },
     {
-        key: "tzSingapore",
-        flag: "🇸🇬",
-        city: "Singapore",
-        country: "Singapore",
-        timeZone: "Asia/Singapore",
-        dotX: 80,
-        dotY: 58,
-        cardX: 80,
-        cardY: 62,
-        updates: []
+        "key": "tzSingapore",
+        "flag": "🇸🇬",
+        "city": "Singapore",
+        "country": "Singapore",
+        "timeZone": "Asia/Singapore",
+        "dotX": 80,
+        "dotY": 58,
+        "cardX": 80,
+        "cardY": 62,
+        "updates": []
     }
 ];
+
+let globalHrUpdatesMeta = null;
+
+
+function normalizeGlobalHrUpdate(item){
+    return {
+        type: item.type || item.category || "Government Notices",
+        title: item.title || "Untitled update",
+        desc: item.desc || item.summary || item.source || "Official HR-related update detected by the scheduled watcher.",
+        date: item.date || item.publishedAt || "",
+        url: item.url || item.link || "",
+        source: item.source || "Official source",
+        isNew: item.isNew !== false
+    };
+}
+
+function findGlobalHrUpdatesForZone(payload, zone){
+    const sites = payload && payload.sites ? payload.sites : {};
+    const candidates = [
+        zone.country,
+        zone.key,
+        zone.country.toLowerCase(),
+        zone.country.toLowerCase().replace(/\s+/g, "-"),
+        zone.country.toLowerCase().replace(/\s+/g, "")
+    ];
+
+    for(const key of candidates){
+        if(Array.isArray(sites[key])) return sites[key];
+    }
+    return [];
+}
+
+async function loadGlobalHrUpdates(){
+    renderWorldClock();
+
+    try{
+        const res = await fetch("./data/hr-updates.json?ts=" + Date.now(), { cache: "no-store" });
+        if(!res.ok) throw new Error("Unable to load hr-updates.json");
+        const payload = await res.json();
+        globalHrUpdatesMeta = payload;
+
+        worldClockZones.forEach(zone => {
+            zone.updates = findGlobalHrUpdatesForZone(payload, zone)
+                .map(normalizeGlobalHrUpdate)
+                .filter(item => item.isNew !== false)
+                .slice(0, 8);
+        });
+
+        renderWorldClock();
+    }catch(err){
+        console.warn("Global HR updates unavailable:", err);
+    }
+}
 
 function getOffsetMinutesByZone(timeZone, date){
     const parts = new Intl.DateTimeFormat("en-US", {
@@ -1652,7 +1740,7 @@ if(window.innerWidth <= 768){
         if(idx > 1) card.classList.add('collapsed');
     });
 }
-renderWorldClock();
+loadGlobalHrUpdates();
 setInterval(updateWorldClock, 1000);
 
 
@@ -1682,6 +1770,20 @@ fetch("./data/taiwan_news.json")
     renderNewsGroup(news,"勞動力發展署","newsWda");
     renderNewsGroup(news,"勞保局","newsBli");
 });
+
+function getGlobalHrSourceStatus(country){
+    const status = globalHrUpdatesMeta && globalHrUpdatesMeta.sourceStatus ? globalHrUpdatesMeta.sourceStatus : {};
+    return status[country] || null;
+}
+
+function formatGlobalHrStatus(status){
+    if(!status) return "Source status: Not loaded";
+    const checked = status.lastCheckedAt ? new Date(status.lastCheckedAt).toLocaleString("zh-TW", { hour12:false }) : "Not checked";
+    const success = status.lastSuccessAt ? new Date(status.lastSuccessAt).toLocaleString("zh-TW", { hour12:false }) : "No successful run yet";
+    const label = status.ok ? "Updated / checked" : "Fetch failed; previous data kept";
+    const message = status.message ? `｜${escapeHtml(status.message)}` : "";
+    return `Source status: ${label}${message}<br>Last checked: ${checked}<br>Last successful update: ${success}`;
+}
 
 function showTaiwanNewsPanel(){
     const title = document.getElementById("newsDrawerTitle");
@@ -1726,28 +1828,45 @@ function openGlobalHrDrawer(index){
     globalPanel.style.display = "block";
 
     const updates = Array.isArray(zone.updates) ? zone.updates : [];
+    const generatedAt = globalHrUpdatesMeta && globalHrUpdatesMeta.generatedAt
+        ? new Date(globalHrUpdatesMeta.generatedAt).toLocaleString("zh-TW", { hour12:false })
+        : "Not loaded";
+
+    const sourceStatus = getGlobalHrSourceStatus(zone.country);
 
     globalPanel.innerHTML = `
         <div class="globalDrawerMeta">
             <b>${zone.country}｜${zone.city}</b><br>
-            Local time, labour law, minimum wage, social insurance, tax and government notice updates can be maintained here.
+            Auto-updated by GitHub Actions. Last generated: ${generatedAt}<br>
+            ${formatGlobalHrStatus(sourceStatus)}<br>
+            Categories: Labor Law, Minimum Wage, Social Insurance / EPF / ESIC, Tax / Payroll, Government Notices.
         </div>
         ${updates.length ? updates.map(item => `
             <div class="globalUpdateItem">
                 <div class="globalUpdateTag">📢 ${item.type}</div>
-                <div class="globalUpdateTitle">${item.title}</div>
-                <div class="globalUpdateDesc">${item.desc}</div>
-                <div class="globalUpdateDate">${item.date}</div>
+                <div class="globalUpdateTitle">${escapeHtml(item.title)}</div>
+                <div class="globalUpdateDesc">${escapeHtml(item.desc || item.source || "Official HR-related update detected.")}</div>
+                <div class="globalUpdateDate">${escapeHtml(item.date || "")}${item.source ? "｜" + escapeHtml(item.source) : ""}</div>
+                ${item.url ? `<a class="globalUpdateLink" href="${item.url}" target="_blank" rel="noopener">Open source</a>` : ""}
             </div>
         `).join("") : `
             <div class="globalNoUpdate">
-                No HR update is currently maintained for this location.<br>
-                Add items in <b>worldClockZones[index].updates</b> when there is a new labour law, minimum wage, social insurance, tax or government announcement update.
+                No new HR update was detected in the current watch window.<br>
+                The scheduled watcher will continue checking official and government-related sources automatically.
             </div>
         `}
     `;
 
     drawer.classList.add("open");
+}
+
+function escapeHtml(value){
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 function renderNewsGroup(news, unitName, elementId){
