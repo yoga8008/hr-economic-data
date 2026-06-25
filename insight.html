@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -76,18 +77,38 @@ h1{
 .summaryTime{
     font-size:13px;
     color:#666;
-    margin-bottom:12px;
+    margin-bottom:14px;
 }
 
 .summaryList{
     margin:0;
-    padding-left:22px;
+    padding:0;
+    list-style:none;
 }
 
-.summaryList li{
-    margin-bottom:10px;
-    line-height:1.7;
+.summaryItem{
+    padding:14px 16px;
+    margin-bottom:12px;
+    border-left:4px solid #1e3a8a;
+    background:#f8fafc;
+    border-radius:8px;
+}
+
+.summaryItem:last-child{
+    margin-bottom:0;
+}
+
+.summaryTitle{
+    font-size:16px;
+    font-weight:bold;
+    color:#1e3a8a;
+    margin-bottom:8px;
+}
+
+.summaryDesc{
     font-size:15px;
+    line-height:1.8;
+    color:#374151;
 }
 
 .toolbar{
@@ -226,6 +247,18 @@ td a:hover{ text-decoration:underline; }
         flex-direction:column;
         align-items:flex-start;
     }
+
+    .summaryItem{
+        padding:12px 14px;
+    }
+
+    .summaryTitle{
+        font-size:15px;
+    }
+
+    .summaryDesc{
+        font-size:14px;
+    }
 }
 </style>
 </head>
@@ -301,7 +334,16 @@ td a:hover{ text-decoration:underline; }
 let insightNews = [];
 let currentPage = 1;
 
-fetch("./data/insight_summary.json")
+function escapeHTML(text){
+    return String(text || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+fetch("./data/insight_summary.json?v=" + new Date().getTime())
 .then(res => res.json())
 .then(data => {
     const box = document.getElementById("aiSummary");
@@ -313,11 +355,27 @@ fetch("./data/insight_summary.json")
 
     box.innerHTML = `
         <div class="summaryTime">
-            更新時間：${data.更新時間 || ""}
+            更新時間：${escapeHTML(data.更新時間 || "")}
         </div>
 
         <ol class="summaryList">
-            ${data.摘要.map(x => `<li>${x}</li>`).join("")}
+            ${data.摘要.map(item => {
+                // 相容舊版摘要：如果還是純文字，也可以正常顯示
+                if(typeof item === "string"){
+                    return `
+                        <li class="summaryItem">
+                            <div class="summaryDesc">${escapeHTML(item)}</div>
+                        </li>
+                    `;
+                }
+
+                return `
+                    <li class="summaryItem">
+                        <div class="summaryTitle">${escapeHTML(item.標題 || "")}</div>
+                        <div class="summaryDesc">${escapeHTML(item.說明 || "")}</div>
+                    </li>
+                `;
+            }).join("")}
         </ol>
     `;
 })
@@ -326,7 +384,7 @@ fetch("./data/insight_summary.json")
         "摘要載入失敗，請確認 data/insight_summary.json 是否存在。";
 });
 
-fetch("./data/insight_news.json")
+fetch("./data/insight_news.json?v=" + new Date().getTime())
 .then(res => res.json())
 .then(news => {
     insightNews = news || [];
@@ -373,11 +431,11 @@ function renderInsightTable(){
 
     tbody.innerHTML = news.map(item => `
         <tr>
-            <td class="newsDate">${item.日期 || ""}</td>
-            <td class="newsSource">${item.來源 || ""}</td>
+            <td class="newsDate">${escapeHTML(item.日期 || "")}</td>
+            <td class="newsSource">${escapeHTML(item.來源 || "")}</td>
             <td>
-                <a href="${item.連結}" target="_blank">
-                    ${item.標題 || ""}
+                <a href="${escapeHTML(item.連結 || "#")}" target="_blank">
+                    ${escapeHTML(item.標題 || "")}
                 </a>
             </td>
         </tr>
@@ -422,3 +480,4 @@ function changePageSize(){
 
 </body>
 </html>
+```
