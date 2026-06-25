@@ -977,6 +977,217 @@ h1{
     }
 }
 
+
+
+/* =====================================================
+   Global HR Hub v2.0 - override only world time section
+===================================================== */
+.worldTimeHeader{
+    padding:22px 24px 10px 24px;
+}
+.worldTimeHeader .sectionTitle{
+    margin-bottom:6px;
+    border-bottom:none;
+    padding-bottom:2px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+.worldTimeSubtitle{
+    margin:0 0 8px 0;
+    color:#64748b;
+    font-size:13px;
+    letter-spacing:.2px;
+}
+.worldMapWrap{
+    background:
+        radial-gradient(circle at 18% 22%, rgba(37,99,235,.11), transparent 30%),
+        radial-gradient(circle at 78% 28%, rgba(14,165,233,.13), transparent 34%),
+        linear-gradient(180deg,#f8fbff 0%,#eef5fb 100%);
+}
+.worldMapWrap::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,rgba(255,255,255,.36),rgba(255,255,255,.08));
+    pointer-events:none;
+    z-index:1;
+}
+.worldMapSvg{ z-index:0; }
+#worldClockLayer{ z-index:2; }
+.tzDot{
+    width:10px;
+    height:10px;
+    background:#1e3a8a;
+    box-shadow:0 0 0 5px rgba(37,99,235,.14), 0 0 18px rgba(37,99,235,.35);
+}
+.tzDot.active,
+.tzDot:hover{
+    background:#dc2626;
+    box-shadow:0 0 0 6px rgba(220,38,38,.16), 0 0 20px rgba(220,38,38,.35);
+}
+.tzBubble{
+    width:150px;
+    min-height:86px;
+    border-radius:14px;
+    color:#0f172a;
+    background:rgba(255,255,255,.68);
+    border:1px solid rgba(255,255,255,.78);
+    box-shadow:0 10px 24px rgba(15,23,42,.12);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    opacity:.72;
+    cursor:pointer;
+    transition:transform .22s ease, opacity .22s ease, box-shadow .22s ease, background .22s ease;
+}
+.tzBubbleBody{
+    background:transparent !important;
+    color:#0f172a;
+    padding:10px 11px;
+    font-size:12px;
+    line-height:1.35;
+}
+.tzBubble:hover,
+.tzBubble.active{
+    opacity:1;
+    background:rgba(255,255,255,.92);
+    transform:translateY(-4px) scale(1.05);
+    box-shadow:0 18px 34px rgba(15,23,42,.18);
+    z-index:8;
+}
+.tzTopLine{
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:7px;
+}
+.tzTimeStrong{
+    color:#0f172a;
+    font-size:18px;
+    letter-spacing:.2px;
+}
+.tzDateWeek{
+    color:#64748b;
+    font-size:10px;
+    line-height:1.25;
+    text-align:right;
+}
+.tzLocation{
+    margin-bottom:2px;
+    white-space:normal;
+}
+.tzLocationCountry{
+    display:block;
+    color:#111827;
+    font-weight:800;
+    font-size:12px;
+}
+.tzLocationCity{
+    display:block;
+    color:#475569;
+    font-size:11px;
+    font-weight:600;
+    margin-top:1px;
+}
+.tzCompare{
+    color:#64748b;
+    font-size:10px;
+    white-space:normal;
+    margin-top:4px;
+}
+.tzUpdateBadge{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    margin-top:7px;
+    padding:4px 8px;
+    border-radius:999px;
+    background:rgba(220,38,38,.10);
+    color:#b91c1c;
+    font-size:10px;
+    font-weight:800;
+    white-space:nowrap;
+}
+.tzBubble:not(.hasHrUpdate) .tzUpdateBadge{ display:none; }
+.globalDrawerMeta{
+    margin:0 0 16px 0;
+    padding:12px 14px;
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    color:#475569;
+    font-size:13px;
+    line-height:1.6;
+}
+.globalUpdateItem{
+    margin-bottom:14px;
+    padding:14px;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    background:#ffffff;
+    box-shadow:0 6px 16px rgba(15,23,42,.04);
+}
+.globalUpdateTag{
+    display:inline-flex;
+    margin-bottom:8px;
+    padding:4px 9px;
+    border-radius:999px;
+    background:#eff6ff;
+    color:#1d4ed8;
+    font-size:12px;
+    font-weight:800;
+}
+.globalUpdateTitle{
+    font-size:15px;
+    font-weight:800;
+    color:#111827;
+    line-height:1.5;
+    margin-bottom:5px;
+}
+.globalUpdateDesc{
+    font-size:13px;
+    color:#475569;
+    line-height:1.65;
+}
+.globalUpdateDate{
+    margin-top:8px;
+    color:#94a3b8;
+    font-size:12px;
+}
+.globalNoUpdate{
+    padding:16px;
+    border-radius:14px;
+    background:#f8fafc;
+    border:1px dashed #cbd5e1;
+    color:#64748b;
+    line-height:1.7;
+    font-size:13px;
+}
+@media(max-width:768px){
+    .worldTimeSubtitle{
+        margin-bottom:4px;
+        font-size:12px;
+    }
+    .tzBubble{
+        width:100%;
+        opacity:.86;
+        border-radius:12px;
+        background:#ffffff;
+    }
+    .tzBubbleBody{
+        padding:10px;
+    }
+    .tzBubble:hover,
+    .tzBubble.active{
+        opacity:1;
+        transform:none !important;
+    }
+    .tzLocationCountry,
+    .tzLocationCity,
+    .tzCompare{
+        white-space:normal;
+    }
+}
+
 </style>
 </head>
 
@@ -997,8 +1208,8 @@ h1{
 
     <div class="card worldTimeCard">
         <div class="worldTimeHeader">
-            <h2 class="sectionTitle">跨時區時間</h2>
-
+            <h2 class="sectionTitle"> Global HR Hub</h2>
+            <p class="worldTimeSubtitle">Global Sites • Local Time • HR Updates</p>
         </div>
 
         <div class="worldMapWrap" id="worldMapWrap">
@@ -1092,25 +1303,29 @@ h1{
 
 <div class="newsDrawer" id="newsDrawer">
     <div class="newsDrawerHeader">
-        <span>重要公告彙整</span>
-        <button onclick="toggleNewsPanel()">✕</button>
+        <span id="newsDrawerTitle">重要公告彙整</span>
+        <button onclick="toggleNewsPanel(false)">✕</button>
     </div>
 
-    <div class="newsDrawerContent">
-        <div class="newsGroup">
-            <h3>勞動部</h3>
-            <div id="newsMol">載入中...</div>
+    <div class="newsDrawerContent" id="newsDrawerContent">
+        <div id="taiwanNewsPanel">
+            <div class="newsGroup">
+                <h3>勞動部</h3>
+                <div id="newsMol">載入中...</div>
+            </div>
+
+            <div class="newsGroup">
+                <h3>勞動力發展署</h3>
+                <div id="newsWda">載入中...</div>
+            </div>
+
+            <div class="newsGroup">
+                <h3>勞保局</h3>
+                <div id="newsBli">載入中...</div>
+            </div>
         </div>
 
-        <div class="newsGroup">
-            <h3>勞動力發展署</h3>
-            <div id="newsWda">載入中...</div>
-        </div>
-
-        <div class="newsGroup">
-            <h3>勞保局</h3>
-            <div id="newsBli">載入中...</div>
-        </div>
+        <div id="globalHrUpdatePanel" style="display:none;"></div>
     </div>
 </div>
 
@@ -1122,64 +1337,112 @@ h1{
 
 const worldClockZones = [
     {
-        key: "tzTaiwan",
-        city: "台北",
-        country: "台灣",
-        timeZone: "Asia/Taipei",
-        dotX: 84,
-        dotY: 36,
-        cardX: 78,
-        cardY: 33
-    },
-    {
-        key: "tzVietnam",
-        city: "胡志明市",
-        country: "越南",
-        timeZone: "Asia/Ho_Chi_Minh",
-        dotX: 79,
-        dotY: 46,
-        cardX: 69,
-        cardY: 48
-    },
-    {
-        key: "tzIndia",
-        city: "清奈 / 班加羅爾",
-        country: "印度",
-        timeZone: "Asia/Kolkata",
-        dotX: 72,
-        dotY: 44,
-        cardX: 57,
-        cardY: 54
-    },
-    {
-        key: "tzCzech",
-        city: "布拉格",
-        country: "捷克",
-        timeZone: "Europe/Prague",
-        dotX: 54,
-        dotY: 25,
-        cardX: 45,
-        cardY: 10
-    },
-    {
-        key: "tzBrazil",
-        city: "聖保羅",
-        country: "巴西",
-        timeZone: "America/Sao_Paulo",
-        dotX: 37,
-        dotY: 63,
-        cardX: 30,
-        cardY: 58
+        key: "tzUnitedStates",
+        flag: "🇺🇸",
+        city: "Wisconsin",
+        country: "United States",
+        timeZone: "America/Chicago",
+        dotX: 20,
+        dotY: 34,
+        cardX: 7,
+        cardY: 18,
+        updates: [
+            { type:"Government Notice", title:"HR update placeholder", desc:"Use this area to maintain local labour, payroll, tax, social insurance or government notice items.", date:"Manual update" }
+        ]
     },
     {
         key: "tzMexico",
-        city: "墨西哥市",
-        country: "墨西哥",
-        timeZone: "America/Mexico_City",
-        dotX: 23,
-        dotY: 39,
-        cardX: 9,
-        cardY: 25
+        flag: "🇲🇽",
+        city: "Tijuana",
+        country: "Mexico",
+        timeZone: "America/Tijuana",
+        dotX: 16,
+        dotY: 45,
+        cardX: 13,
+        cardY: 52,
+        updates: [
+            { type:"Minimum Wage", title:"HR update placeholder", desc:"Maintain effective date, scope, source link and HR impact here.", date:"Manual update" }
+        ]
+    },
+    {
+        key: "tzCzech",
+        flag: "🇨🇿",
+        city: "Kutná Hora",
+        country: "Czech Republic",
+        timeZone: "Europe/Prague",
+        dotX: 53,
+        dotY: 27,
+        cardX: 43,
+        cardY: 11,
+        updates: [
+            { type:"Labour Law", title:"HR update placeholder", desc:"Maintain Czech Republic HR compliance updates here.", date:"Manual update" }
+        ]
+    },
+    {
+        key: "tzChina",
+        flag: "🇨🇳",
+        city: "Zhengzhou",
+        country: "China",
+        timeZone: "Asia/Shanghai",
+        dotX: 77,
+        dotY: 37,
+        cardX: 65,
+        cardY: 17,
+        updates: [
+            { type:"Social Insurance", title:"HR update placeholder", desc:"Maintain local social insurance, payroll or government notice items here.", date:"Manual update" }
+        ]
+    },
+    {
+        key: "tzTaiwan",
+        flag: "🇹🇼",
+        city: "Taipei",
+        country: "Taiwan",
+        timeZone: "Asia/Taipei",
+        dotX: 84,
+        dotY: 42,
+        cardX: 81,
+        cardY: 34,
+        updates: []
+    },
+    {
+        key: "tzVietnam",
+        flag: "🇻🇳",
+        city: "Bac Ninh",
+        country: "Vietnam",
+        timeZone: "Asia/Ho_Chi_Minh",
+        dotX: 78,
+        dotY: 50,
+        cardX: 65,
+        cardY: 47,
+        updates: [
+            { type:"Government Notice", title:"HR update placeholder", desc:"Maintain Vietnam labour, minimum wage, social insurance or government notice items here.", date:"Manual update" }
+        ]
+    },
+    {
+        key: "tzIndia",
+        flag: "🇮🇳",
+        city: "New Delhi",
+        country: "India",
+        timeZone: "Asia/Kolkata",
+        dotX: 68,
+        dotY: 47,
+        cardX: 52,
+        cardY: 57,
+        updates: [
+            { type:"EPF / Payroll", title:"HR update placeholder", desc:"Maintain EPF, ESIC, payroll, tax or labour compliance updates here.", date:"Manual update" }
+        ]
+    },
+    {
+        key: "tzSingapore",
+        flag: "🇸🇬",
+        city: "Singapore",
+        country: "Singapore",
+        timeZone: "Asia/Singapore",
+        dotX: 80,
+        dotY: 58,
+        cardX: 80,
+        cardY: 62,
+        updates: []
     }
 ];
 
@@ -1217,14 +1480,16 @@ function formatTaiwanDiff(zoneTimeZone, now){
     const zoneOffset = getOffsetMinutesByZone(zoneTimeZone, now);
     const diffMinutes = zoneOffset - taiwanOffset;
 
-    if(diffMinutes === 0) return "與台灣相同";
+    if(diffMinutes === 0) return "Same as Taiwan";
 
     const absMinutes = Math.abs(diffMinutes);
     const hours = Math.floor(absMinutes / 60);
     const minutes = absMinutes % 60;
-    const timeText = minutes === 0 ? `${hours} 小時` : `${hours} 小時 ${minutes} 分`;
+    const hourText = hours > 0 ? `${hours}h` : "";
+    const minuteText = minutes > 0 ? `${minutes}m` : "";
+    const timeText = [hourText, minuteText].filter(Boolean).join(" ");
 
-    return diffMinutes > 0 ? `較台灣早 ${timeText}` : `較台灣晚 ${timeText}`;
+    return diffMinutes > 0 ? `${timeText} ahead of Taiwan` : `${timeText} behind Taiwan`;
 }
 
 function renderWorldClock(){
@@ -1234,29 +1499,33 @@ function renderWorldClock(){
     layer.style.position = "absolute";
     layer.style.inset = "0";
 
-    layer.innerHTML = worldClockZones.map((zone, index) => `
+    layer.innerHTML = worldClockZones.map((zone, index) => {
+        const hasUpdate = Array.isArray(zone.updates) && zone.updates.length > 0;
+        return `
         <div class="tzDot" data-index="${index}" tabindex="0" aria-label="${zone.country} ${zone.city}" style="left:${zone.dotX}%;top:${zone.dotY}%;"></div>
-        <div class="tzBubble ${zone.key}" data-index="${index}" tabindex="0" style="left:${zone.cardX}%;top:${zone.cardY}%;">
+        <div class="tzBubble ${zone.key} ${hasUpdate ? 'hasHrUpdate' : ''}" data-index="${index}" tabindex="0" role="button" aria-label="Open ${zone.country} HR information" style="left:${zone.cardX}%;top:${zone.cardY}%;">
             <div class="tzBubbleBody">
                 <div class="tzTopLine">
                     <span class="tzTimeStrong" id="worldClockTime${index}">--:--</span>
                     <span class="tzDateWeek">
-                        <span id="worldClockDate${index}">載入中</span>
+                        <span id="worldClockDate${index}">Loading</span><br>
                         <span id="worldClockWeek${index}">--</span>
                     </span>
                 </div>
-                <div class="tzLocation">${zone.country}｜${zone.city}</div>
+                <div class="tzLocation">
+                    <span class="tzLocationCountry">${zone.flag} ${zone.country}</span>
+                    <span class="tzLocationCity">${zone.city}</span>
+                </div>
                 <div class="tzCompare" id="worldClockDiff${index}"></div>
+                ${hasUpdate ? '<div class="tzUpdateBadge">📢 HR Update</div>' : ''}
             </div>
         </div>
-    `).join("");
+    `}).join("");
 
     updateWorldClock();
     bindWorldClockInteractions();
-    setActiveWorldClock(0);
+    setActiveWorldClock(4);
 }
-
-
 
 function setActiveWorldClock(index){
     document.querySelectorAll('#worldClockLayer .tzBubble').forEach(el => {
@@ -1271,12 +1540,16 @@ function bindWorldClockInteractions(){
     document.querySelectorAll('#worldClockLayer .tzBubble, #worldClockLayer .tzDot').forEach(el => {
         const index = Number(el.dataset.index);
         el.addEventListener('mouseenter', () => setActiveWorldClock(index));
-        el.addEventListener('click', () => setActiveWorldClock(index));
+        el.addEventListener('click', () => {
+            setActiveWorldClock(index);
+            openGlobalHrDrawer(index);
+        });
         el.addEventListener('focus', () => setActiveWorldClock(index));
         el.addEventListener('keydown', (e) => {
             if(e.key === 'Enter' || e.key === ' '){
                 e.preventDefault();
                 setActiveWorldClock(index);
+                openGlobalHrDrawer(index);
             }
         });
     });
@@ -1286,16 +1559,15 @@ function bindWorldClockInteractions(){
 function updateWorldClock(){
     const now = new Date();
     worldClockZones.forEach((zone, index) => {
-        const timeText = new Intl.DateTimeFormat("zh-TW", {
+        const timeText = new Intl.DateTimeFormat("en-US", {
             timeZone: zone.timeZone,
             hour: "2-digit",
             minute: "2-digit",
             hour12: false
         }).format(now);
 
-        const localDateParts = new Intl.DateTimeFormat("zh-TW", {
+        const localDateParts = new Intl.DateTimeFormat("en-US", {
             timeZone: zone.timeZone,
-            year: "numeric",
             month: "2-digit",
             day: "2-digit",
             weekday: "short"
@@ -1306,13 +1578,18 @@ function updateWorldClock(){
             if(part.type !== "literal") localDateMap[part.type] = part.value;
         });
 
-        const dateText = `${localDateMap.year}/${localDateMap.month}/${localDateMap.day}`;
+        const dateText = `${localDateMap.month}/${localDateMap.day}`;
         const weekText = `${localDateMap.weekday}`;
 
-        document.getElementById(`worldClockTime${index}`).textContent = timeText;
-        document.getElementById(`worldClockDate${index}`).textContent = dateText;
-        document.getElementById(`worldClockWeek${index}`).textContent = weekText;
-        document.getElementById(`worldClockDiff${index}`).textContent = formatTaiwanDiff(zone.timeZone, now);
+        const timeEl = document.getElementById(`worldClockTime${index}`);
+        const dateEl = document.getElementById(`worldClockDate${index}`);
+        const weekEl = document.getElementById(`worldClockWeek${index}`);
+        const diffEl = document.getElementById(`worldClockDiff${index}`);
+
+        if(timeEl) timeEl.textContent = timeText;
+        if(dateEl) dateEl.textContent = dateText;
+        if(weekEl) weekEl.textContent = weekText;
+        if(diffEl) diffEl.textContent = formatTaiwanDiff(zone.timeZone, now);
     });
 }
 
@@ -1406,8 +1683,71 @@ fetch("./data/taiwan_news.json")
     renderNewsGroup(news,"勞保局","newsBli");
 });
 
-function toggleNewsPanel(){
-    document.getElementById("newsDrawer").classList.toggle("open");
+function showTaiwanNewsPanel(){
+    const title = document.getElementById("newsDrawerTitle");
+    const taiwanPanel = document.getElementById("taiwanNewsPanel");
+    const globalPanel = document.getElementById("globalHrUpdatePanel");
+
+    if(title) title.textContent = "🇹🇼 Taiwan｜Important Announcements";
+    if(taiwanPanel) taiwanPanel.style.display = "block";
+    if(globalPanel) globalPanel.style.display = "none";
+}
+
+function toggleNewsPanel(forceOpen){
+    const drawer = document.getElementById("newsDrawer");
+    if(!drawer) return;
+
+    showTaiwanNewsPanel();
+
+    if(typeof forceOpen === "boolean"){
+        drawer.classList.toggle("open", forceOpen);
+    }else{
+        drawer.classList.toggle("open");
+    }
+}
+
+function openGlobalHrDrawer(index){
+    const zone = worldClockZones[index];
+    const drawer = document.getElementById("newsDrawer");
+    const title = document.getElementById("newsDrawerTitle");
+    const taiwanPanel = document.getElementById("taiwanNewsPanel");
+    const globalPanel = document.getElementById("globalHrUpdatePanel");
+
+    if(!zone || !drawer || !title || !taiwanPanel || !globalPanel) return;
+
+    if(zone.country === "Taiwan"){
+        showTaiwanNewsPanel();
+        drawer.classList.add("open");
+        return;
+    }
+
+    title.textContent = `${zone.flag} ${zone.country}｜HR Updates`;
+    taiwanPanel.style.display = "none";
+    globalPanel.style.display = "block";
+
+    const updates = Array.isArray(zone.updates) ? zone.updates : [];
+
+    globalPanel.innerHTML = `
+        <div class="globalDrawerMeta">
+            <b>${zone.country}｜${zone.city}</b><br>
+            Local time, labour law, minimum wage, social insurance, tax and government notice updates can be maintained here.
+        </div>
+        ${updates.length ? updates.map(item => `
+            <div class="globalUpdateItem">
+                <div class="globalUpdateTag">📢 ${item.type}</div>
+                <div class="globalUpdateTitle">${item.title}</div>
+                <div class="globalUpdateDesc">${item.desc}</div>
+                <div class="globalUpdateDate">${item.date}</div>
+            </div>
+        `).join("") : `
+            <div class="globalNoUpdate">
+                No HR update is currently maintained for this location.<br>
+                Add items in <b>worldClockZones[index].updates</b> when there is a new labour law, minimum wage, social insurance, tax or government announcement update.
+            </div>
+        `}
+    `;
+
+    drawer.classList.add("open");
 }
 
 function renderNewsGroup(news, unitName, elementId){
@@ -1566,6 +1906,7 @@ function recommendSite(){
 document.addEventListener("keydown", function(e){
     if(e.key === "Escape"){
         toggleAiAssistant(false);
+        toggleNewsPanel(false);
     }
 
     const input = document.getElementById("siteQuestion");
