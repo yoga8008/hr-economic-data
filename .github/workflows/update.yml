@@ -23,7 +23,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install packages
-        run: pip install pandas openpyxl requests beautifulsoup4 lxml feedparser
+        run: pip install pandas openpyxl xlrd requests beautifulsoup4 lxml feedparser
 
       - name: Run update
         run: |
