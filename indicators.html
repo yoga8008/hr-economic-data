@@ -377,7 +377,7 @@ let allData = [];
 let gdpData = [];
 let gdpChart, cpiChart, unemploymentChart;
 
-fetch("./data/taiwan_cpi_unemployment.json")
+fetch("./data/taiwan_cpi_unemployment.json?v=" + new Date().getTime())
 .then(res => res.json())
 .then(data => {
     allData = data;
@@ -385,7 +385,7 @@ fetch("./data/taiwan_cpi_unemployment.json")
     filterData();
 });
 
-fetch("./data/taiwan_gdp.json")
+fetch("./data/taiwan_gdp.json?v=" + new Date().getTime())
 .then(res => res.json())
 .then(data => {
     gdpData = data;
