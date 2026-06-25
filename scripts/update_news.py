@@ -357,180 +357,146 @@ with open("data/insight_news.json", "w", encoding="utf-8") as f:
 
 
 # =====================================================
-# 三、AI 今日重點摘要：改為高風險與 HR 優先
+# 三、AI 今日重點摘要：HR 風險優先短版
 # =====================================================
 
-def clean_news_headline(title):
-    """
-    Google News 標題常見格式：
-    標題 - 媒體名稱
-    這裡只保留前面的新聞標題，讓摘要更清楚。
-    """
-    title = re.sub(r"\s+-\s+.+$", "", title).strip()
-    return title
-
-
-def shorten(text, max_len=42):
-    if not text:
-        return ""
-    return text if len(text) <= max_len else text[:max_len - 1] + "…"
-
-
 def has_any(text, words):
-    return any(k in text for k in words)
+    return any(word in text for word in words)
 
 
-def pick_title(titles, words):
-    for title in titles:
-        if any(k in title for k in words):
-            return shorten(clean_news_headline(title))
-    return ""
+def find_items(news, words, limit=3):
+    matched = []
+
+    for item in news:
+        title = item.get("標題", "")
+        if has_any(title, words):
+            matched.append(item)
+
+    return matched[:limit]
 
 
-recent_titles = [n["標題"] for n in unique_insight_news[:50]]
-titles_text = " ".join(recent_titles)
+def add_summary(summary_list, label, items, message):
+    """
+    統一摘要格式：
+    【主題】今日出現X則相關訊號，後面接 HR 觀察重點。
+    不帶代表新聞標題，避免摘要過長。
+    """
+    if not items:
+        return
+
+    count_text = f"{len(items)}則" if len(items) > 1 else "1則"
+
+    summary_list.append(
+        f"【{label}】今日出現{count_text}相關訊號，{message}"
+    )
+
+
+# 優先看最新日期，避免舊新聞混入今日摘要
+latest_date = unique_insight_news[0]["日期"] if unique_insight_news else datetime.now().strftime("%Y/%m/%d")
+
+today_news = [
+    n for n in unique_insight_news
+    if n.get("日期") == latest_date
+]
+
+# 若最新日期新聞太少，才補最近資料，避免摘要空白
+if len(today_news) < 5:
+    today_news = unique_insight_news[:30]
+
+
+risk_categories = [
+    {
+        "label": "勞動法規與政策變動",
+        "words": [
+            "新法", "修法", "新制", "上路", "勞動部", "法規",
+            "罰則", "勞基法", "職場霸凌防治", "防治法", "政策"
+        ],
+        "message": "建議優先確認是否涉及公司內規、申訴流程、主管管理責任或法遵作業調整。"
+    },
+    {
+        "label": "職場管理風險",
+        "words": [
+            "職場霸凌", "霸凌", "性騷", "申訴", "職災",
+            "職安", "勞資爭議", "罷工"
+        ],
+        "message": "需留意員工關係、申訴處理、調查機制及現場管理風險。"
+    },
+    {
+        "label": "人力供需與缺工",
+        "words": [
+            "缺工", "移工", "外籍移工", "徵才", "招募",
+            "職缺", "人力", "人才"
+        ],
+        "message": "反映基層人力、招募穩定性與用工供給仍需持續觀察。"
+    },
+    {
+        "label": "就業市場變化",
+        "words": [
+            "失業", "失業率", "青年失業", "就業市場",
+            "就業機會", "薪資", "加薪", "調薪"
+        ],
+        "message": "可作為人才市場溫度、薪資競爭與招募策略調整的參考。"
+    },
+    {
+        "label": "企業人力調整",
+        "words": [
+            "裁員", "裁撤", "資遣", "關廠", "停工",
+            "減班", "離職", "辭職"
+        ],
+        "message": "需關注後續是否擴大為產業性人力調整或勞資爭議。"
+    },
+    {
+        "label": "高階主管與組織異動",
+        "words": [
+            "董事長", "總經理", "執行長", "CEO",
+            "接班", "聘任", "高階異動", "異動"
+        ],
+        "message": "可作為企業治理、組織調整與經營方向變化的觀察訊號。"
+    },
+    {
+        "label": "產業投資與海外布局",
+        "words": [
+            "設廠", "擴廠", "投資", "印度", "越南",
+            "海外", "併購"
+        ],
+        "message": "後續可觀察對區域人力需求、派駐支援與招募量能的影響。"
+    },
+    {
+        "label": "科技產業動態",
+        "words": [
+            "半導體", "AI", "電動車", "台積電", "三星",
+            "特斯拉", "先進封裝", "供應鏈"
+        ],
+        "message": "可觀察對人才需求、技能配置與組織資源分配的影響。"
+    }
+]
 
 summary = []
+used_labels = set()
 
-# 關鍵字群組
-bullying_words = ["職場霸凌", "霸凌"]
-law_words = ["新法", "修法", "上路", "勞動部", "罰則", "法規", "新制", "政策"]
-workplace_risk_words = ["性騷", "申訴", "職災", "勞資爭議", "罷工", "職安"]
-labor_supply_words = ["缺工", "移工", "外籍移工", "徵才", "招募", "職缺", "人力"]
-employment_words = ["失業率", "青年失業", "失業", "就業市場", "就業機會"]
-layoff_words = ["裁員", "裁撤", "關廠", "資遣", "停工", "減班"]
-investment_words = ["設廠", "擴廠", "投資", "印度", "越南", "海外"]
-tech_words = ["半導體", "電動車", "AI", "台積電", "三星", "特斯拉", "先進封裝"]
-executive_words = ["董事長", "總經理", "CEO", "接任", "異動", "聘任", "高階異動"]
+for category in risk_categories:
+    matched_items = find_items(today_news, category["words"], limit=3)
 
-# 1. 職場霸凌／法規：最高優先
-bullying_hit = has_any(titles_text, bullying_words)
-law_hit = has_any(titles_text, law_words)
+    if matched_items and category["label"] not in used_labels:
+        add_summary(
+            summary,
+            category["label"],
+            matched_items,
+            category["message"]
+        )
+        used_labels.add(category["label"])
 
-if bullying_hit and law_hit:
-    title = pick_title(recent_titles, bullying_words + law_words)
-    if title:
-        summary.append(
-            f"職場霸凌與勞動法規議題為今日高優先輿情，代表新聞為「{title}」，企業應關注申訴處理、調查流程、主管管理責任及內部制度調整。"
-        )
-    else:
-        summary.append(
-            "職場霸凌與勞動法規議題為今日高優先輿情，企業應關注申訴處理、調查流程、主管管理責任及內部制度調整。"
-        )
-
-elif bullying_hit:
-    title = pick_title(recent_titles, bullying_words)
-    if title:
-        summary.append(
-            f"今日出現職場霸凌相關新聞，代表新聞為「{title}」，企業應留意員工關係、申訴管道與管理責任。"
-        )
-    else:
-        summary.append(
-            "今日出現職場霸凌相關新聞，企業應留意員工關係、申訴管道與管理責任。"
-        )
-
-elif law_hit:
-    title = pick_title(recent_titles, law_words)
-    if title:
-        summary.append(
-            f"今日新聞涉及勞動法規或政策變動，代表新聞為「{title}」，建議持續追蹤對公司人資制度、內部管理與法遵作業的影響。"
-        )
-    else:
-        summary.append(
-            "今日新聞涉及勞動法規或政策變動，建議持續追蹤對公司人資制度、內部管理與法遵作業的影響。"
-        )
-
-# 2. 職場管理風險
-if has_any(titles_text, workplace_risk_words):
-    title = pick_title(recent_titles, workplace_risk_words)
-    if title:
-        summary.append(
-            f"職場管理風險相關新聞增加，代表新聞為「{title}」，需留意申訴、職災、勞資爭議或罷工等後續風險。"
-        )
-    else:
-        summary.append(
-            "職場管理風險相關新聞增加，需留意申訴、職災、勞資爭議或罷工等後續風險。"
-        )
-
-# 3. 人力供需風險
-if has_any(titles_text, labor_supply_words):
-    title = pick_title(recent_titles, labor_supply_words)
-    if title:
-        summary.append(
-            f"缺工、移工與徵才相關議題持續受到關注，代表新聞為「{title}」，顯示基層人力供需與招募穩定性仍需觀察。"
-        )
-    else:
-        summary.append(
-            "缺工、移工與徵才相關議題持續受到關注，顯示基層人力供需與招募穩定性仍需觀察。"
-        )
-
-if has_any(titles_text, employment_words):
-    title = pick_title(recent_titles, employment_words)
-    if title:
-        summary.append(
-            f"就業市場相關數據受到關注，代表新聞為「{title}」，青年失業與整體人才供需狀況仍是後續觀察重點。"
-        )
-    else:
-        summary.append(
-            "就業市場相關數據受到關注，青年失業與整體人才供需狀況仍是後續觀察重點。"
-        )
-
-# 4. 企業營運異動
-if has_any(titles_text, layoff_words):
-    title = pick_title(recent_titles, layoff_words)
-    if title:
-        summary.append(
-            f"部分企業出現裁員、關廠或人力調整訊號，代表新聞為「{title}」，需留意後續就業市場變化與勞資風險。"
-        )
-    else:
-        summary.append(
-            "部分企業出現裁員、關廠或人力調整訊號，需留意後續就業市場變化與勞資風險。"
-        )
-
-if has_any(titles_text, investment_words):
-    title = pick_title(recent_titles, investment_words)
-    if title:
-        summary.append(
-            f"投資、設廠或海外布局仍有相關消息，代表新聞為「{title}」，印度、越南等區域可持續作為產業與人力需求觀察重點。"
-        )
-    else:
-        summary.append(
-            "投資、設廠或海外布局仍有相關消息，印度、越南等區域可持續作為產業與人力需求觀察重點。"
-        )
-
-# 5. 科技產業趨勢
-if has_any(titles_text, tech_words):
-    title = pick_title(recent_titles, tech_words)
-    if title:
-        summary.append(
-            f"半導體、AI 與電動車相關產業動態仍是科技業輿情重點，代表新聞為「{title}」，後續可觀察對人才需求與組織配置的影響。"
-        )
-    else:
-        summary.append(
-            "半導體、AI 與電動車相關產業動態仍是科技業輿情重點，後續可觀察對人才需求與組織配置的影響。"
-        )
-
-# 6. 高階異動
-if has_any(titles_text, executive_words):
-    title = pick_title(recent_titles, executive_words)
-    if title:
-        summary.append(
-            f"近期有高階主管異動或接班相關新聞，代表新聞為「{title}」，可作為企業治理與組織變動觀察指標。"
-        )
-    else:
-        summary.append(
-            "近期有高階主管異動或接班相關新聞，可作為企業治理與組織變動觀察指標。"
-        )
+    if len(summary) >= 5:
+        break
 
 if not summary:
-    summary.append("目前已抓取最新 HR 與產業相關新聞，尚未出現明顯集中或高風險議題。")
-
-# 最多顯示 5 點，避免摘要過長
-summary = summary[:5]
+    summary.append(
+        "【今日輿情概況】今日已更新 HR 與產業相關新聞，目前未出現高度集中或高風險勞動議題。"
+    )
 
 summary_data = {
-    "更新時間": datetime.now().strftime("%Y/%m/%d"),
-    "摘要": summary
+    "更新時間": latest_date,
+    "摘要": summary[:5]
 }
 
 with open("data/insight_summary.json", "w", encoding="utf-8") as f:
