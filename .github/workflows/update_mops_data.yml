@@ -2,23 +2,15 @@ name: Update MOPS HR Disclosure Data
 
 on:
   workflow_dispatch:
-    inputs:
-      target:
-        description: "Run target"
-        required: true
-        default: "all"
-        type: choice
-        options:
-          - all
-          - salary
-          - welfare
+
   schedule:
-    # A. 非主管全時員工薪資資訊：每年 6/25～7/25 每天跑一次
-    # GitHub cron uses UTC; 01:10 UTC = 09:10 Taiwan time.
-    # Cron cannot express 6/25～7/25 across two months cleanly, so the job runs in Jun/Jul and the shell guard below filters dates.
-    - cron: "10 1 * 6,7 *"
-    # B. 員工福利政策及權益維護措施：每月 1 次
-    # 01:40 UTC = 09:40 Taiwan time on the first day of each month.
+    # A. 每年 6/25～7/25 每天 09:10 台灣時間跑薪資資料
+    # UTC 01:10 = 台灣 09:10
+    - cron: "10 1 25-30 6 *"
+    - cron: "10 1 1-25 7 *"
+
+    # B. 每月 1 日 09:40 台灣時間跑福利資料
+    # UTC 01:40 = 台灣 09:40
     - cron: "40 1 1 * *"
 
 permissions:
@@ -27,75 +19,65 @@ permissions:
 jobs:
   update:
     runs-on: self-hosted
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
       - name: Install dependencies
+        shell: powershell
         run: |
-          python -m pip install --upgrade pip
-          pip install -r scripts/requirements.txt
+          py -3.11 -m pip install --upgrade pip
+          py -3.11 -m pip install -r scripts/requirements.txt
 
       - name: Decide update target
-        id: decide
-        shell: python
+        shell: powershell
         run: |
-          import os
-          from datetime import datetime, timezone, timedelta
+          $today = Get-Date
+          $month = [int]$today.ToString("MM")
+          $day = [int]$today.ToString("dd")
 
-          target = "${{ github.event.inputs.target || '' }}"
-          schedule = "${{ github.event.schedule || '' }}"
-          today = datetime.now(timezone(timedelta(hours=8))).strftime("%m-%d")
+          $runSalary = "false"
+          $runWelfare = "false"
 
-          run_salary = "false"
-          run_welfare = "false"
+          if (($month -eq 6 -and $day -ge 25) -or ($month -eq 7 -and $day -le 25)) {
+            $runSalary = "true"
+          }
 
-          if target == "all":
-              run_salary = "true"
-              run_welfare = "true"
-          elif target == "salary":
-              run_salary = "true"
-          elif target == "welfare":
-              run_welfare = "true"
-          elif schedule == "10 1 * 6,7 *":
-              # A: 6/25～7/25 Taiwan date window
-              if "06-24" < today < "07-26":
-                  run_salary = "true"
-          elif schedule == "40 1 1 * *":
-              # B: monthly
-              run_welfare = "true"
+          if ($day -eq 1) {
+            $runWelfare = "true"
+          }
 
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
-              fh.write(f"run_salary={run_salary}\n")
-              fh.write(f"run_welfare={run_welfare}\n")
+          if ("${{ github.event_name }}" -eq "workflow_dispatch") {
+            $runSalary = "true"
+            $runWelfare = "true"
+          }
 
-          print(f"Taiwan date: {today}")
-          print(f"Run salary: {run_salary}")
-          print(f"Run welfare: {run_welfare}")
+          "RUN_SALARY=$runSalary" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "RUN_WELFARE=$runWelfare" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Update salary disclosure JSON
-        if: steps.decide.outputs.run_salary == 'true'
-        run: python scripts/update_employee_salary.py
+        if: env.RUN_SALARY == 'true'
+        shell: powershell
+        run: py -3.11 scripts/update_employee_salary.py
 
       - name: Update welfare disclosure JSON
-        if: steps.decide.outputs.run_welfare == 'true'
-        run: python scripts/update_employee_welfare.py
+        if: env.RUN_WELFARE == 'true'
+        shell: powershell
+        run: py -3.11 scripts/update_employee_welfare.py
 
-      - name: Commit updated JSON
-        shell: bash
+      - name: Commit updated data
+        shell: powershell
         run: |
-          set -e
-          if git diff --quiet -- data/*.json; then
-            echo "No JSON changes."
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add data/employee_salary_disclosure.json data/employee_welfare_disclosure.json
+
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "No data changes to commit."
             exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/*.json
+          }
+
           git commit -m "Update MOPS HR disclosure data"
           git push
