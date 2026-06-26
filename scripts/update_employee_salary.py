@@ -8,10 +8,10 @@ from mops_common import (
     DATA_DIR,
     MopsBrowser,
     clean_text,
-    default_report_year,
     find_col,
     flatten_columns,
     read_tables,
+    report_year_candidates,
     safe_int,
     sleep_polite,
     to_salary_wan,
@@ -21,26 +21,17 @@ from mops_common import (
 OUT = DATA_DIR / "employee_salary_disclosure.json"
 
 
-def get_salary_html(browser: MopsBrowser, typek: str, year: str) -> str:
-    # TYPEK: sii = listed, otc = OTC. The front end does not distinguish them;
-    # this script merges both into one JSON.
-    payload = {
-        "step": "1",
-        "firstin": "1",
-        "TYPEK": typek,
-        "RYEAR": year,
-        "code": "",
-        "isnew": "false",
-    }
-    return browser.post("t100sb15", "ajax_t100sb15", payload)
-
-
 def pick_main_table(tables: list[pd.DataFrame]) -> pd.DataFrame | None:
+    candidates: list[pd.DataFrame] = []
     for df in tables:
         cols = " ".join(flatten_columns(df))
-        if "公司代號" in cols and "公司名稱" in cols and ("員工" in cols or "薪資" in cols):
-            return df
-    return tables[0] if tables else None
+        body = " ".join(clean_text(x) for x in df.astype(str).head(3).to_numpy().ravel())
+        haystack = cols + " " + body
+        if "公司代號" in haystack and "公司名稱" in haystack and ("員工" in haystack or "薪資" in haystack):
+            candidates.append(df)
+    if candidates:
+        return max(candidates, key=lambda x: len(x))
+    return max(tables, key=lambda x: len(x)) if tables else None
 
 
 def parse_salary_table(df: pd.DataFrame, year: str, market: str) -> list[dict[str, Any]]:
@@ -48,10 +39,10 @@ def parse_salary_table(df: pd.DataFrame, year: str, market: str) -> list[dict[st
     df.columns = flatten_columns(df)
     cols = list(df.columns)
 
-    industry_col = find_col(cols, ["產業"], []) or cols[0]
-    code_col = find_col(cols, ["公司代號"], [])
-    name_col = find_col(cols, ["公司名稱"], [])
-    employees_col = find_col(cols, ["員工", "人數"], [])
+    industry_col = find_col(cols, ["產業"], []) or find_col(cols, ["類別"], []) or cols[0]
+    code_col = find_col(cols, ["公司代號"], []) or find_col(cols, ["代號"], [])
+    name_col = find_col(cols, ["公司名稱"], []) or find_col(cols, ["名稱"], [])
+    employees_col = find_col(cols, ["員工", "人數"], []) or find_col(cols, ["人數"], [])
 
     avg_latest_col = (
         find_col(cols, ["平均"], ["同業", "前一", "較前", "減少", "低於", "中位"])
@@ -68,14 +59,16 @@ def parse_salary_table(df: pd.DataFrame, year: str, market: str) -> list[dict[st
         industry = clean_text(row.get(industry_col, "")) if industry_col else ""
         if not code or not company or "公司代號" in code or "公司名稱" in company:
             continue
-        if not code.isdigit():
+        # Sometimes code comes as 2330.0 after pandas parsing.
+        code_num = code.replace(".0", "")
+        if not code_num.isdigit() or len(code_num) < 4:
             continue
 
         rows.append({
             "年度": year,
             "市場別": market,
             "產業別": industry,
-            "公司代號": code,
+            "公司代號": code_num,
             "統一編號": "",
             "公司名稱": company,
             "員工人數": safe_int(row.get(employees_col, "")) if employees_col else "—",
@@ -87,33 +80,78 @@ def parse_salary_table(df: pd.DataFrame, year: str, market: str) -> list[dict[st
     return rows
 
 
-def main() -> None:
-    year = default_report_year()
+def run_visible_query(browser: MopsBrowser, year: str, market: str | None) -> str:
+    browser.open_page("t100sb15")
+    # Fill year and leave company blank.
+    browser.fill_near_label(["年度", "申報年度", "查詢年度", "RYEAR"], year)
+    browser.fill_near_label(["公司", "公司代號", "證券代號", "代號", "code"], "")
+    # Try to select market and all industries; if the page has no such field, continue.
+    if market:
+        browser.select_option_by_text(["市場", "市場別", "上市櫃", "市場類別", "TYPEK"], market)
+    browser.select_option_by_text(["產業", "產業別", "產業類別"], "全部")
+    if not browser.click_query():
+        browser.dump_debug(f"salary_no_query_button_{year}_{market or 'default'}")
+        raise RuntimeError("找不到薪資資訊頁面的查詢按鈕")
+    browser.ensure_not_security(f"salary_security_{year}_{market or 'default'}")
+    html = browser.combined_html()
+    if "公司代號" not in html and "公司名稱" not in html:
+        browser.dump_debug(f"salary_no_table_{year}_{market or 'default'}")
+    return html
+
+
+def fetch_salary_rows_for_year(year: str) -> list[dict[str, Any]]:
     all_rows: list[dict[str, Any]] = []
+    seen_codes: set[str] = set()
 
     with MopsBrowser() as browser:
-        for typek, market in [("sii", "上市"), ("otc", "上櫃")]:
-            html = get_salary_html(browser, typek, year)
-            tables = read_tables(html)
-            table = pick_main_table(tables)
-            if table is None:
-                print(f"No salary table found for {market} {year}")
-                print(html[:1000])
-                continue
-            rows = parse_salary_table(table, year, market)
-            print(f"{market} {year}: {len(rows)} rows")
-            all_rows.extend(rows)
-            sleep_polite(1.5)
+        # Try both listed and OTC by UI.  If the page default already returns all,
+        # de-duplication by company code prevents duplicate rows.
+        for market in ["上市", "上櫃", None]:
+            try:
+                html = run_visible_query(browser, year, market)
+                tables = read_tables(html)
+                table = pick_main_table(tables)
+                if table is None:
+                    print(f"No salary table found for {market or 'default'} {year}")
+                    continue
+                rows = parse_salary_table(table, year, market or "未區分")
+                fresh = []
+                for row in rows:
+                    code = row.get("公司代號", "")
+                    if code and code not in seen_codes:
+                        seen_codes.add(code)
+                        fresh.append(row)
+                print(f"{market or 'default'} {year}: {len(fresh)} new rows")
+                all_rows.extend(fresh)
+                sleep_polite(1.0)
+            except Exception as exc:
+                print(f"Skip {market or 'default'} {year}: {exc}")
+                sleep_polite(1.0)
 
-    if not all_rows:
-        raise RuntimeError("No salary disclosure rows were fetched. Check MOPS payload/page structure.")
+    return all_rows
+
+
+def main() -> None:
+    final_rows: list[dict[str, Any]] = []
+    final_year = ""
+    for year in report_year_candidates():
+        print(f"Try salary disclosure year: {year}")
+        rows = fetch_salary_rows_for_year(year)
+        if rows:
+            final_rows = rows
+            final_year = year
+            break
+        print(f"No rows for year {year}; try next candidate if available.")
+
+    if not final_rows:
+        raise RuntimeError("No salary disclosure rows were fetched by visible UI operation. See _mops_debug artifact for screenshot/HTML.")
 
     write_json(
         OUT,
-        all_rows,
-        f"MOPS 非擔任主管職務之全時員工薪資資訊，瀏覽器模式自動更新年度 {year}",
+        final_rows,
+        f"MOPS 非擔任主管職務之全時員工薪資資訊，純畫面操作自動更新年度 {final_year}",
     )
-    print(f"Wrote {len(all_rows)} rows to {OUT}")
+    print(f"Wrote {len(final_rows)} rows to {OUT}")
 
 
 if __name__ == "__main__":
