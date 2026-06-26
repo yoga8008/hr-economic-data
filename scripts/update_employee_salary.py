@@ -6,13 +6,14 @@ import pandas as pd
 
 from mops_common import (
     DATA_DIR,
+    MopsBrowser,
     clean_text,
     default_report_year,
     find_col,
     flatten_columns,
     read_tables,
-    request_post,
     safe_int,
+    sleep_polite,
     to_salary_wan,
     write_json,
 )
@@ -20,7 +21,7 @@ from mops_common import (
 OUT = DATA_DIR / "employee_salary_disclosure.json"
 
 
-def get_salary_html(typek: str, year: str) -> str:
+def get_salary_html(browser: MopsBrowser, typek: str, year: str) -> str:
     # TYPEK: sii = listed, otc = OTC. The front end does not distinguish them;
     # this script merges both into one JSON.
     payload = {
@@ -31,7 +32,7 @@ def get_salary_html(typek: str, year: str) -> str:
         "code": "",
         "isnew": "false",
     }
-    return request_post("ajax_t100sb15", payload)
+    return browser.post("t100sb15", "ajax_t100sb15", payload)
 
 
 def pick_main_table(tables: list[pd.DataFrame]) -> pd.DataFrame | None:
@@ -53,7 +54,7 @@ def parse_salary_table(df: pd.DataFrame, year: str, market: str) -> list[dict[st
     employees_col = find_col(cols, ["員工", "人數"], [])
 
     avg_latest_col = (
-        find_col(cols, ["薪資", "平均"], ["同業", "前一", "較前", "減少", "低於"])
+        find_col(cols, ["平均"], ["同業", "前一", "較前", "減少", "低於", "中位"])
         or find_col(cols, ["平均數"], ["同業", "前一", "較前", "減少", "低於"])
     )
     avg_previous_col = find_col(cols, ["平均", "前"], ["同業"])
@@ -66,6 +67,8 @@ def parse_salary_table(df: pd.DataFrame, year: str, market: str) -> list[dict[st
         company = clean_text(row.get(name_col, "")) if name_col else ""
         industry = clean_text(row.get(industry_col, "")) if industry_col else ""
         if not code or not company or "公司代號" in code or "公司名稱" in company:
+            continue
+        if not code.isdigit():
             continue
 
         rows.append({
@@ -88,24 +91,27 @@ def main() -> None:
     year = default_report_year()
     all_rows: list[dict[str, Any]] = []
 
-    for typek, market in [("sii", "上市"), ("otc", "上櫃")]:
-        html = get_salary_html(typek, year)
-        tables = read_tables(html)
-        table = pick_main_table(tables)
-        if table is None:
-            print(f"No salary table found for {market} {year}")
-            continue
-        rows = parse_salary_table(table, year, market)
-        print(f"{market} {year}: {len(rows)} rows")
-        all_rows.extend(rows)
+    with MopsBrowser() as browser:
+        for typek, market in [("sii", "上市"), ("otc", "上櫃")]:
+            html = get_salary_html(browser, typek, year)
+            tables = read_tables(html)
+            table = pick_main_table(tables)
+            if table is None:
+                print(f"No salary table found for {market} {year}")
+                print(html[:1000])
+                continue
+            rows = parse_salary_table(table, year, market)
+            print(f"{market} {year}: {len(rows)} rows")
+            all_rows.extend(rows)
+            sleep_polite(1.5)
 
     if not all_rows:
-        raise RuntimeError("No salary disclosure rows were fetched. Check MOPS payload or page structure.")
+        raise RuntimeError("No salary disclosure rows were fetched. Check MOPS payload/page structure.")
 
     write_json(
         OUT,
         all_rows,
-        f"MOPS 非擔任主管職務之全時員工薪資資訊，自動更新年度 {year}",
+        f"MOPS 非擔任主管職務之全時員工薪資資訊，瀏覽器模式自動更新年度 {year}",
     )
     print(f"Wrote {len(all_rows)} rows to {OUT}")
 
