@@ -2,18 +2,25 @@ name: Update MOPS HR Disclosure Data
 
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: "Run target"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - salary
+          - welfare
 
   schedule:
-    # A. 非主管全時員工薪資資訊
-    # 每年 6/25～6/30，每天 09:10 台灣時間執行
+    # A. 非主管全時員工薪資資訊：每年 6/25～6/30，每天 09:10 台灣時間執行
     - cron: "10 1 25-30 6 *"
 
-    # A. 非主管全時員工薪資資訊
-    # 每年 7/1～7/25，每天 09:10 台灣時間執行
+    # A. 非主管全時員工薪資資訊：每年 7/1～7/25，每天 09:10 台灣時間執行
     - cron: "10 1 1-25 7 *"
 
-    # B. 員工福利政策及權益維護措施
-    # 每月 1 日 09:40 台灣時間執行
+    # B. 員工福利政策及權益維護措施：每月 1 日 09:40 台灣時間執行
     - cron: "40 1 1 * *"
 
 permissions:
@@ -44,6 +51,7 @@ jobs:
       - name: Decide update target
         shell: powershell
         run: |
+          $target = "${{ github.event.inputs.target }}"
           $eventName = "${{ github.event_name }}"
           $schedule = "${{ github.event.schedule }}"
 
@@ -51,8 +59,12 @@ jobs:
           $runWelfare = "false"
 
           if ($eventName -eq "workflow_dispatch") {
-            $runSalary = "true"
-            $runWelfare = "true"
+            if ($target -eq "all" -or $target -eq "salary") {
+              $runSalary = "true"
+            }
+            if ($target -eq "all" -or $target -eq "welfare") {
+              $runWelfare = "true"
+            }
           }
           elseif ($schedule -eq "10 1 25-30 6 *" -or $schedule -eq "10 1 1-25 7 *") {
             $runSalary = "true"
