@@ -219,6 +219,207 @@ td a:hover{ text-decoration:underline; }
     color:#555;
 }
 
+
+
+/* ===== 區域關鍵字聲量 ===== */
+.collapsibleCard{
+    overflow:hidden;
+}
+
+.cardHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    padding-bottom:12px;
+    margin-bottom:16px;
+    border-bottom:1px solid #ddd;
+    cursor:pointer;
+    user-select:none;
+}
+
+.cardHeaderText h2{
+    margin:0 0 6px 0;
+    color:#1e3a8a;
+    font-size:22px;
+}
+
+.cardHeaderText p{
+    margin:0;
+    color:#64748b;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.collapseButton{
+    border:1px solid #dbe3ea;
+    background:#f8fafc;
+    color:#1e3a8a;
+    border-radius:999px;
+    padding:7px 12px;
+    font-weight:bold;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.collapseBody{
+    max-height:1200px;
+    opacity:1;
+    overflow:hidden;
+    transition:max-height .25s ease, opacity .2s ease;
+}
+
+.collapsibleCard.collapsed .collapseBody{
+    max-height:0;
+    opacity:0;
+}
+
+.voiceTabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:14px;
+}
+
+.voiceTabs button{
+    border:1px solid #dbe3ea;
+    background:#ffffff;
+    color:#334155;
+    border-radius:999px;
+    padding:8px 14px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.voiceTabs button:hover,
+.voiceTabs button.active{
+    background:#1e3a8a;
+    color:#ffffff;
+    border-color:#1e3a8a;
+}
+
+.voiceLayout{
+    display:grid;
+    grid-template-columns:minmax(260px,.75fr) minmax(0,1.75fr);
+    gap:18px;
+    align-items:stretch;
+}
+
+.wordCloudPanel,
+.keywordPanel{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:16px;
+    box-sizing:border-box;
+}
+
+.wordCloudToolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+}
+
+.wordCloudHint{
+    color:#64748b;
+    font-size:13px;
+}
+
+.zoomButtons{
+    display:flex;
+    gap:8px;
+}
+
+.zoomButtons button{
+    border:1px solid #dbe3ea;
+    background:#ffffff;
+    color:#1e3a8a;
+    border-radius:8px;
+    padding:7px 10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.wordCloudViewport{
+    height:420px;
+    border:1px solid #dbe3ea;
+    border-radius:14px;
+    background:#ffffff;
+    overflow:hidden;
+    position:relative;
+    cursor:grab;
+}
+
+.wordCloudViewport.dragging{
+    cursor:grabbing;
+}
+
+.wordCloudInner{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:960px;
+    height:380px;
+    transform-origin:center center;
+    transition:transform .05s linear;
+}
+
+.cloudWord{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    font-weight:800;
+    line-height:1;
+    white-space:nowrap;
+    user-select:none;
+}
+
+.keywordPanel h3{
+    margin:0 0 12px 0;
+    color:#1e3a8a;
+    font-size:18px;
+}
+
+.keywordList{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+.keywordList li{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    padding:10px 0;
+    border-bottom:1px solid #e5e7eb;
+    font-size:14px;
+}
+
+.keywordList li:last-child{ border-bottom:none; }
+.keywordName{ font-weight:bold; color:#334155; }
+.keywordCount{ color:#1e3a8a; font-weight:bold; }
+
+.voiceNote{
+    margin-top:12px;
+    color:#64748b;
+    font-size:13px;
+    line-height:1.6;
+}
+
+@media(max-width:900px){
+    .voiceLayout{
+        grid-template-columns:1fr;
+    }
+
+    .wordCloudViewport{
+        height:300px;
+    }
+}
+
 @media(max-width:768px){
     .navbar{
         width:calc(100% - 32px);
@@ -331,6 +532,43 @@ td a:hover{ text-decoration:underline; }
         </div>
 
     </div>
+
+    <div class="card collapsibleCard" id="voiceCloudCard">
+        <div class="cardHeader" onclick="toggleVoiceCloud(event)">
+            <div class="cardHeaderText">
+                <h2>區域關鍵字聲量</h2>
+                <p>切換區域查看近期熱門討論詞，可使用滑鼠滾輪或按鈕縮放，拖曳移動詞雲。</p>
+            </div>
+            <button class="collapseButton" type="button" id="voiceCollapseBtn">收合 ▾</button>
+        </div>
+
+        <div class="collapseBody">
+            <div class="voiceTabs" id="voiceTabs"></div>
+
+            <div class="voiceLayout">
+                <div class="keywordPanel">
+                    <h3>熱門關鍵字 Top 10</h3>
+                    <ol class="keywordList" id="keywordList"></ol>
+                    <div class="voiceNote">左側保留 Top 10；右側詞雲顯示更多延伸關鍵字，後續可接新聞資料自動統計聲量。</div>
+                </div>
+
+                <div class="wordCloudPanel">
+                    <div class="wordCloudToolbar">
+                        <div class="wordCloudHint">詞雲顯示更多關鍵字｜滑鼠滾輪縮放｜拖曳移動｜雙擊重設</div>
+                        <div class="zoomButtons">
+                            <button type="button" onclick="zoomVoiceCloud(0.12)">＋ 放大</button>
+                            <button type="button" onclick="zoomVoiceCloud(-0.12)">－ 縮小</button>
+                            <button type="button" onclick="resetVoiceCloud()">重設</button>
+                        </div>
+                    </div>
+                    <div class="wordCloudViewport" id="wordCloudViewport">
+                        <div class="wordCloudInner" id="wordCloudInner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 
@@ -480,6 +718,218 @@ function changePageSize(){
     currentPage = 1;
     renderInsightTable();
 }
+
+/* ===== 區域關鍵字聲量：示意資料與互動 ===== */
+const voiceData = {
+    "台灣": [
+        ["霸凌",132],["缺工",118],["調薪",96],["最低工資",86],["半導體",80],
+        ["AI",75],["加班",62],["招募",58],["離職",44],["職安",40],
+        ["工會",32],["遠距",30],["留才",28],["薪資透明",27],["勞基法",26],
+        ["職場安全",25],["移工",24],["派遣",23],["福利",22],["工時",21],
+        ["人才短缺",20],["年終",19],["裁員",18],["青年就業",17],["育嬰留停",16],
+        ["勞檢",15],["職災",14],["職場申訴",13],["通膨",12],["服務業",11],
+        ["製造業",10],["高齡就業",9],["彈性工時",8],["心理健康",7],["教育訓練",6]
+    ],
+    "中國": [
+        ["社保",126],["薪資",104],["勞動合同",92],["招聘",86],["個稅",76],
+        ["工時",66],["最低工資",60],["製造業",54],["裁員",42],["用工",38],
+        ["公積金",34],["青年就業",32],["靈活用工",30],["勞務派遣",28],["加班",27],
+        ["就業形勢",26],["工傷",24],["養老保險",23],["醫療保險",22],["生育保險",21],
+        ["失業保險",20],["勞動仲裁",19],["人才政策",18],["補貼",17],["畢業生",16],
+        ["新質生產力",15],["人力成本",14],["降本增效",13],["智能製造",12],["合規",11],
+        ["招聘平台",10],["離職補償",9],["工作簽證",8],["績效",7],["培訓",6]
+    ],
+    "印度": [
+        ["EPF",135],["ESIC",104],["Payroll",96],["Labor Code",88],["Tax",72],
+        ["Hiring",68],["Gratuity",58],["Minimum Wage",50],["Leave",42],["Compliance",38],
+        ["CTC",34],["Onboarding",32],["PF UAN",30],["ESI Registration",29],["TDS",28],
+        ["Professional Tax",26],["Bonus Act",25],["Factories Act",24],["Shops Act",23],["Contract Labour",22],
+        ["Maternity Benefit",21],["Working Hours",20],["Overtime",19],["Attrition",18],["Skill Hiring",17],
+        ["Chennai",16],["Bangalore",15],["Delhi",14],["Notice Period",13],["Background Check",12],
+        ["Salary Structure",11],["LTA",10],["HRA",9],["Canteen",8],["Mediclaim",7]
+    ],
+    "越南": [
+        ["最低工資",116],["社保",100],["加班",86],["勞動法",78],["工會",68],
+        ["製造業",62],["招聘",58],["外資",45],["薪資",42],["離職",34],
+        ["北寧",30],["缺工",28],["外籍員工",27],["工作許可",26],["個人所得稅",25],
+        ["保險費率",24],["產假",23],["年假",22],["工時",21],["勞動合約",20],
+        ["工業區",19],["河內",18],["胡志明",17],["海防",16],["最低區域工資",15],
+        ["加班上限",14],["社會保險局",13],["薪資表",12],["招募困難",11],["人才流動",10],
+        ["罷工",9],["安全衛生",8],["績效獎金",7],["派遣",6],["培訓",5]
+    ],
+    "美國": [
+        ["Hiring",112],["Minimum Wage",96],["Overtime",88],["Union",76],["Layoff",68],
+        ["AI",60],["Remote Work",54],["IRS",42],["Benefits",38],["DOL",34],
+        ["Safety",30],["Payroll",28],["FLSA",27],["EEOC",26],["401k",25],
+        ["Health Insurance",24],["Paid Leave",23],["Wage Theft",22],["Gig Work",21],["Immigration",20],
+        ["Work Visa",19],["H-1B",18],["Talent Market",17],["DEI",16],["RTO",15],
+        ["Severance",14],["WARN Act",13],["OSHA",12],["Contractor",11],["Tax Withholding",10],
+        ["Employee Relations",9],["Skills Gap",8],["Manufacturing",7],["Noncompete",6],["Compliance",5]
+    ],
+    "墨西哥": [
+        ["IMSS",120],["Minimum Wage",96],["STPS",86],["Payroll",70],["Tax",62],
+        ["Union",56],["Nearshoring",50],["Hiring",44],["Benefits",38],["Labor Reform",32],
+        ["SAT",28],["Social Security",26],["Profit Sharing",25],["PTU",24],["Work Hours",23],
+        ["Overtime",22],["Vacation",21],["Aguinaldo",20],["Severance",19],["Maquiladora",18],
+        ["T-MEC",17],["Manufacturing",16],["Talent Shortage",15],["Border Region",14],["Compliance",13],
+        ["Payroll Tax",12],["Remote Work",11],["Safety",10],["Training",9],["Resignation",8],
+        ["Collective Bargaining",7],["Recruitment",6],["Employer Cost",5]
+    ],
+    "捷克": [
+        ["Labor Code",98],["Minimum Wage",90],["Social Insurance",80],["Tax",70],["MPSV",62],
+        ["Payroll",56],["Hiring",46],["Benefits",40],["Work Permit",36],["Leave",30],
+        ["CzechInvest",24],["Manufacturing",22],["Health Insurance",21],["Pension",20],["Sickness Insurance",19],
+        ["Overtime",18],["Working Time",17],["Collective Agreement",16],["Foreign Workers",15],["EU Directive",14],
+        ["Severance",13],["Probation",12],["Wage Growth",11],["Inflation",10],["Automotive",9],
+        ["Talent Shortage",8],["Blue Card",7],["Tax Relief",6],["Payroll Reporting",5]
+    ],
+    "新加坡": [
+        ["CPF",130],["MOM",112],["Payroll",86],["Work Pass",78],["Tax",68],
+        ["Hiring",60],["IRAS",54],["Skills",44],["Benefits",38],["Compliance",32],
+        ["Leave",26],["Flexible Work",24],["EP Pass",23],["S Pass",22],["Foreign Worker Levy",21],
+        ["Retirement Age",20],["Re-employment",19],["Tripartite",18],["Progressive Wage",17],["SkillsFuture",16],
+        ["Overtime",15],["CPF Ceiling",14],["Payroll Submission",13],["Personal Tax",12],["Work Injury",11],
+        ["Employment Act",10],["Maternity Leave",9],["Talent Attraction",8],["Hybrid Work",7],["HR Tech",6],
+        ["Training Grant",5]
+    ]
+};
+
+const wordColors = ["#1e3a8a", "#0f766e", "#dc2626", "#7c3aed", "#ea580c", "#0891b2", "#16a34a", "#be123c"];
+let currentVoiceRegion = "台灣";
+let cloudScale = 1;
+let cloudX = 0;
+let cloudY = 0;
+let isDraggingCloud = false;
+let dragStart = {x:0, y:0};
+let cloudStart = {x:0, y:0};
+
+function initVoiceCloud(){
+    const tabs = document.getElementById("voiceTabs");
+    if(!tabs) return;
+
+    tabs.innerHTML = Object.keys(voiceData).map(region => `
+        <button type="button" class="${region === currentVoiceRegion ? "active" : ""}" onclick="setVoiceRegion('${region}')">
+            ${region}
+        </button>
+    `).join("");
+
+    renderVoiceCloud();
+    bindVoiceCloudEvents();
+}
+
+function setVoiceRegion(region){
+    currentVoiceRegion = region;
+    cloudScale = 1;
+    cloudX = 0;
+    cloudY = 0;
+    initVoiceCloud();
+}
+
+function renderVoiceCloud(){
+    const inner = document.getElementById("wordCloudInner");
+    const list = document.getElementById("keywordList");
+    if(!inner || !list) return;
+
+    const words = voiceData[currentVoiceRegion] || [];
+    const max = Math.max(...words.map(w => w[1]), 1);
+
+    inner.innerHTML = words.map(([word,count], index) => {
+        const size = Math.round(12 + (count / max) * 40);
+        const [left, top] = getCloudPosition(index, words.length);
+        const color = wordColors[index % wordColors.length];
+        const rotate = index > 9 && index % 7 === 0 ? -10 : (index > 12 && index % 8 === 0 ? 8 : 0);
+        return `<span class="cloudWord" style="left:${left}%;top:${top}%;font-size:${size}px;color:${color};transform:translate(-50%,-50%) rotate(${rotate}deg);">${escapeHTML(word)}</span>`;
+    }).join("");
+
+    list.innerHTML = words.slice(0,10).map(([word,count], index) => `
+        <li>
+            <span class="keywordName">${index + 1}. ${escapeHTML(word)}</span>
+            <span class="keywordCount">${count}</span>
+        </li>
+    `).join("");
+
+    applyCloudTransform();
+}
+
+
+function getCloudPosition(index, total){
+    if(index === 0) return [50,50];
+    const angle = index * 137.508 * Math.PI / 180;
+    const ring = Math.sqrt(index / Math.max(total - 1, 1));
+    const radiusX = 43 * ring;
+    const radiusY = 38 * ring;
+    const jitterX = ((index * 17) % 9) - 4;
+    const jitterY = ((index * 23) % 7) - 3;
+    const left = Math.min(92, Math.max(8, 50 + Math.cos(angle) * radiusX + jitterX));
+    const top = Math.min(90, Math.max(10, 50 + Math.sin(angle) * radiusY + jitterY));
+    return [left.toFixed(1), top.toFixed(1)];
+}
+
+function applyCloudTransform(){
+    const inner = document.getElementById("wordCloudInner");
+    if(!inner) return;
+    inner.style.transform = `translate(calc(-50% + ${cloudX}px), calc(-50% + ${cloudY}px)) scale(${cloudScale})`;
+}
+
+function zoomVoiceCloud(delta){
+    cloudScale = Math.min(2.4, Math.max(0.65, cloudScale + delta));
+    applyCloudTransform();
+}
+
+function resetVoiceCloud(){
+    cloudScale = 1;
+    cloudX = 0;
+    cloudY = 0;
+    applyCloudTransform();
+}
+
+function bindVoiceCloudEvents(){
+    const viewport = document.getElementById("wordCloudViewport");
+    if(!viewport || viewport.dataset.bound === "1") return;
+    viewport.dataset.bound = "1";
+
+    viewport.addEventListener("wheel", event => {
+        event.preventDefault();
+        zoomVoiceCloud(event.deltaY < 0 ? 0.1 : -0.1);
+    }, {passive:false});
+
+    viewport.addEventListener("pointerdown", event => {
+        isDraggingCloud = true;
+        viewport.classList.add("dragging");
+        dragStart = {x:event.clientX, y:event.clientY};
+        cloudStart = {x:cloudX, y:cloudY};
+        viewport.setPointerCapture(event.pointerId);
+    });
+
+    viewport.addEventListener("pointermove", event => {
+        if(!isDraggingCloud) return;
+        cloudX = cloudStart.x + event.clientX - dragStart.x;
+        cloudY = cloudStart.y + event.clientY - dragStart.y;
+        applyCloudTransform();
+    });
+
+    viewport.addEventListener("pointerup", () => {
+        isDraggingCloud = false;
+        viewport.classList.remove("dragging");
+    });
+
+    viewport.addEventListener("dblclick", resetVoiceCloud);
+}
+
+function toggleVoiceCloud(event){
+    if(event.target.tagName === "BUTTON"){
+        event.stopPropagation();
+    }
+    const card = document.getElementById("voiceCloudCard");
+    const btn = document.getElementById("voiceCollapseBtn");
+    if(!card || !btn) return;
+
+    card.classList.toggle("collapsed");
+    btn.textContent = card.classList.contains("collapsed") ? "展開 ▸" : "收合 ▾";
+}
+
+initVoiceCloud();
+
 </script>
 
 </body>
