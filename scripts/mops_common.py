@@ -16,8 +16,12 @@ MOPS_BASE = "https://mopsov.twse.com.tw/mops/web"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                   "(KHTML, like Gecko) Chrome/125.0 Safari/537.36",
-    "Referer": "https://mopsov.twse.com.tw/mops/web/index",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.8",
+    "Connection": "keep-alive",
 }
+SESSION = requests.Session()
+SESSION.headers.update(HEADERS)
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
@@ -37,12 +41,40 @@ def default_report_year() -> str:
     return str(current_minguo_year() - 1)
 
 
+def _page_for_ajax(path: str) -> str:
+    if path.startswith("ajax_"):
+        return path.replace("ajax_", "", 1)
+    return path
+
+
+def _is_security_page(text: str) -> bool:
+    return "FOR SECURITY REASONS" in text or "頁面無法呈現" in text or "SECURITY REASONS" in text
+
+
 def request_post(path: str, payload: dict[str, Any], timeout: int = 30, sleep_sec: float = 0.8) -> str:
-    url = f"{MOPS_BASE}/{path}"
+    ajax_url = f"{MOPS_BASE}/{path}"
+    page = _page_for_ajax(path)
+    page_url = f"{MOPS_BASE}/{page}"
+
+    # Warm up the normal page first so MOPS can issue cookies/session state.
     time.sleep(sleep_sec)
-    res = requests.post(url, data=payload, headers=HEADERS, timeout=timeout)
+    warmup = SESSION.get(page_url, timeout=timeout)
+    warmup.encoding = "utf-8"
+
+    headers = dict(HEADERS)
+    headers["Referer"] = page_url
+    headers["Origin"] = "https://mopsov.twse.com.tw"
+    headers["X-Requested-With"] = "XMLHttpRequest"
+
+    time.sleep(sleep_sec)
+    res = SESSION.post(ajax_url, data=payload, headers=headers, timeout=timeout)
     res.raise_for_status()
     res.encoding = "utf-8"
+    if _is_security_page(res.text):
+        raise RuntimeError(
+            "MOPS returned a security-block page. "
+            "GitHub-hosted runners are often blocked; use a self-hosted runner from a normal Taiwan network/IP."
+        )
     return res.text
 
 
