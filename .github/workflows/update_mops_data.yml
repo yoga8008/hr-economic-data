@@ -14,17 +14,14 @@ on:
           - welfare
 
   schedule:
-    # A. 非主管全時員工薪資資訊
-    # 每年 6/25～6/30，每天 09:10 台灣時間執行
+    # A. 非主管全時員工薪資資訊：每年 6/25～6/30，每天 09:10 台灣時間執行
     # GitHub cron 使用 UTC，UTC 01:10 = 台灣 09:10
     - cron: "10 1 25-30 6 *"
 
-    # A. 非主管全時員工薪資資訊
-    # 每年 7/1～7/25，每天 09:10 台灣時間執行
+    # A. 非主管全時員工薪資資訊：每年 7/1～7/25，每天 09:10 台灣時間執行
     - cron: "10 1 1-25 7 *"
 
-    # B. 員工福利政策及權益維護措施
-    # 每月 1 日 09:40 台灣時間執行
+    # B. 員工福利政策及權益維護措施：每月 1 日 09:40 台灣時間執行
     - cron: "40 1 1 * *"
 
 permissions:
@@ -36,6 +33,7 @@ jobs:
 
     env:
       MOPS_HEADLESS: "false"
+      MOPS_BROWSER_CHANNEL: "msedge"
 
     steps:
       - name: Checkout repository
@@ -109,6 +107,14 @@ jobs:
         run: |
           $python = "C:\Python311\python.exe"
           & $python scripts/update_employee_welfare.py
+
+      - name: Upload MOPS debug files
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mops-debug
+          path: _mops_debug
+          if-no-files-found: ignore
 
       - name: Commit updated data
         shell: powershell
