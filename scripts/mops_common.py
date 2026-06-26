@@ -12,13 +12,12 @@ import requests
 from bs4 import BeautifulSoup
 
 TAIPEI_TZ = timezone(timedelta(hours=8))
-MOPS_BASE = "https://mopsov.twse.com.tw/mops/web"
+MOPS_BASE = "https://mops.twse.com.tw/mops/web"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                   "(KHTML, like Gecko) Chrome/125.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.8",
-    "Connection": "keep-alive",
+    "Referer": "https://mops.twse.com.tw/mops/web/t100sb15",
+    "Origin": "https://mops.twse.com.tw",
 }
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
