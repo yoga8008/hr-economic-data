@@ -1304,6 +1304,222 @@ h1.pageTitle{
     }
 }
 
+
+
+/* =====================================================
+   Global HR Hub cards under map
+===================================================== */
+.globalHrDashboard{
+    margin:0 18px 22px 18px;
+    display:grid;
+    grid-template-columns:minmax(260px,.8fr) minmax(0,1.6fr);
+    gap:14px;
+    box-sizing:border-box;
+}
+.globalHrPanel{
+    padding:16px 18px 18px 18px;
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    box-sizing:border-box;
+}
+.globalHrPanelHeader{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:14px;
+    margin-bottom:12px;
+}
+.globalHrPanelTitle{
+    color:#1e3a8a;
+    font-weight:800;
+    font-size:16px;
+    line-height:1.4;
+}
+.globalHrPanelHint{
+    margin-top:3px;
+    color:#64748b;
+    font-size:12px;
+    line-height:1.5;
+}
+.globalHrUpdatedBadge{
+    flex:0 0 auto;
+    color:#64748b;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:999px;
+    padding:6px 10px;
+    font-size:12px;
+    line-height:1.2;
+    white-space:nowrap;
+}
+.globalHrMetricGrid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+}
+.globalHrMetricCard{
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:12px 12px;
+    min-height:62px;
+    box-sizing:border-box;
+}
+.globalHrMetricLabel{
+    color:#64748b;
+    font-size:12px;
+    line-height:1.3;
+    margin-bottom:6px;
+}
+.globalHrMetricValue{
+    color:#111827;
+    font-weight:800;
+    font-size:18px;
+    line-height:1.2;
+}
+.globalHrMetricNote{
+    color:#64748b;
+    font-size:11px;
+    line-height:1.4;
+    margin-top:8px;
+}
+.globalHrSummaryTableWrap{
+    overflow-x:auto;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    background:#ffffff;
+}
+.globalHrSummaryTable{
+    width:100%;
+    min-width:720px;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+.globalHrSummaryTable th,
+.globalHrSummaryTable td{
+    padding:11px 12px;
+    border-bottom:1px solid #eef2f7;
+    text-align:left;
+    vertical-align:top;
+    font-size:13px;
+    line-height:1.5;
+}
+.globalHrSummaryTable th{
+    background:#f1f5f9;
+    color:#334155;
+    font-weight:800;
+    white-space:nowrap;
+}
+.globalHrSummaryTable tr:last-child td{
+    border-bottom:none;
+}
+.globalHrSummaryDate{
+    color:#475569;
+    white-space:nowrap;
+}
+.globalHrSummaryRegion{
+    color:#111827;
+    font-weight:700;
+}
+.globalHrSummarySource{
+    color:#475569;
+}
+.globalHrSummaryContent a{
+    color:#1d4ed8;
+    text-decoration:none;
+    font-weight:700;
+}
+.globalHrSummaryContent a:hover{
+    text-decoration:underline;
+}
+.globalHrSummaryEmpty{
+    color:#64748b;
+    text-align:center !important;
+    padding:18px !important;
+}
+@media(max-width:900px){
+    .globalHrDashboard{
+        grid-template-columns:1fr;
+    }
+}
+@media(max-width:768px){
+    .globalHrDashboard{
+        margin:0 12px 16px 12px;
+        gap:12px;
+    }
+    .globalHrPanel{
+        padding:14px;
+    }
+    .globalHrPanelHeader{
+        flex-direction:column;
+        gap:8px;
+    }
+    .globalHrUpdatedBadge{
+        white-space:normal;
+    }
+    .globalHrSummaryTable{
+        min-width:660px;
+    }
+}
+@media(max-width:420px){
+    .globalHrMetricGrid{
+        grid-template-columns:1fr;
+    }
+}
+
+
+/* =====================================================
+   Global HR Hub separate blocks under map
+===================================================== */
+.globalHrCard{
+    padding:20px 22px;
+    margin-bottom:22px;
+}
+.globalHrCardIntro{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    margin-bottom:14px;
+}
+.globalHrCardIntro .globalHrPanelHint{
+    margin:0;
+}
+.globalHrOverviewCard .globalHrMetricGrid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.globalHrCard .globalHrMetricCard{
+    background:#f8fafc;
+}
+.globalHrInfoCard .globalHrSummaryTableWrap{
+    margin-top:4px;
+}
+@media(max-width:900px){
+    .globalHrOverviewCard .globalHrMetricGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+@media(max-width:768px){
+    .globalHrCard{
+        padding:14px;
+        margin-bottom:14px;
+    }
+    .globalHrCardIntro{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+    }
+    .globalHrOverviewCard .globalHrMetricGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+@media(max-width:420px){
+    .globalHrOverviewCard .globalHrMetricGrid{
+        grid-template-columns:1fr;
+    }
+}
+
 </style>
 </head>
 
@@ -1323,8 +1539,9 @@ h1.pageTitle{
 <div class="leftPanel">
 
 
-    <div class="card worldTimeCard">
+    <div class="card worldTimeCard" aria-label="全球動態">
         <div class="worldTimeHeader">
+            <h2 class="sectionTitle">全球動態</h2>
             <p class="worldTimeSubtitle">Global Sites • Local Time • HR Updates</p>
         </div>
 
@@ -1340,6 +1557,31 @@ h1.pageTitle{
                 <path class="landLight" d="M408,86 C428,66 470,68 487,91 C500,109 482,130 452,128 C423,126 389,107 408,86 Z"/>
             </svg>
             <div id="worldClockLayer"></div>
+        </div>
+
+    </div>
+
+
+    <div class="card globalHrCard globalHrInfoCard" aria-label="最新資訊">
+        <h2 class="sectionTitle">最新資訊</h2>
+        <div class="globalHrCardIntro">
+            <p class="globalHrPanelHint">依更新日排序，點選內容可開啟來源。</p>
+            <div class="globalHrUpdatedBadge" id="globalHrSummaryUpdated">載入中...</div>
+        </div>
+        <div class="globalHrSummaryTableWrap">
+            <table class="globalHrSummaryTable" aria-label="最新資訊">
+                <thead>
+                    <tr>
+                        <th style="width:110px;">更新日</th>
+                        <th style="width:150px;">區域</th>
+                        <th style="width:150px;">來源</th>
+                        <th>內容</th>
+                    </tr>
+                </thead>
+                <tbody id="globalHrSummaryBody">
+                    <tr><td colspan="4" class="globalHrSummaryEmpty">載入中...</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -1536,6 +1778,106 @@ function findGlobalHrUpdatesForZone(payload, zone){
     return [];
 }
 
+
+function formatGlobalHrDate(value){
+    if(!value) return "-";
+    if(/^\d{4}-\d{2}-\d{2}$/.test(String(value))) return String(value).replaceAll("-", "/");
+    const date = new Date(value);
+    if(Number.isNaN(date.getTime())) return String(value);
+    return date.toLocaleDateString("zh-TW", { year:"numeric", month:"2-digit", day:"2-digit" });
+}
+
+function formatGlobalHrDateTime(value){
+    if(!value) return "-";
+    const date = new Date(value);
+    if(Number.isNaN(date.getTime())) return String(value);
+    return date.toLocaleString("zh-TW", { hour12:false });
+}
+
+function getGlobalHrZoneLabel(country){
+    const zone = worldClockZones.find(item => item.country === country);
+    return zone ? `${zone.country}｜${zone.city}` : country;
+}
+
+function getGlobalHrCategories(country){
+    const base = ["勞動法規", "最低工資", "社會保險", "稅務／薪資", "政府公告"];
+    if(country === "India") return ["勞動法規", "最低工資", "社會保險／EPF／ESIC", "稅務／薪資", "政府公告"];
+    return base;
+}
+
+function collectGlobalHrSummaryRows(payload){
+    const rows = [];
+    worldClockZones.forEach(zone => {
+        const items = findGlobalHrUpdatesForZone(payload, zone)
+            .map(normalizeGlobalHrUpdate)
+            .filter(item => item.isNew !== false);
+        items.forEach(item => {
+            const status = getGlobalHrSourceStatus(zone.country);
+            rows.push({
+                date: item.date || (status && (status.lastSuccessAt || status.lastCheckedAt)) || (payload && payload.generatedAt) || "",
+                sortDate: item.date || (status && (status.lastSuccessAt || status.lastCheckedAt)) || (payload && payload.generatedAt) || "",
+                region: `${zone.flag} ${zone.country}｜${zone.city}`,
+                source: item.source || "Official source",
+                title: item.title || "Official HR update",
+                url: item.url || ""
+            });
+        });
+    });
+
+    rows.sort((a,b) => String(b.sortDate || "").localeCompare(String(a.sortDate || "")));
+    return rows;
+}
+
+function renderGlobalHrSummary(payload){
+    const tbody = document.getElementById("globalHrSummaryBody");
+    const tableUpdated = document.getElementById("globalHrSummaryUpdated");
+    const overviewUpdated = document.getElementById("globalHrOverviewUpdated");
+    const regionCount = document.getElementById("globalHrRegionCount");
+    const updatedRegionCount = document.getElementById("globalHrUpdatedRegionCount");
+    const updateCount = document.getElementById("globalHrUpdateCount");
+    const sourceStatus = document.getElementById("globalHrSourceStatus");
+    if(!tbody) return;
+
+    const generatedText = payload && payload.generatedAt
+        ? `最後更新：${formatGlobalHrDateTime(payload.generatedAt)}`
+        : "尚未取得更新時間";
+
+    if(tableUpdated) tableUpdated.textContent = generatedText;
+    if(overviewUpdated) overviewUpdated.textContent = generatedText;
+
+    const rows = collectGlobalHrSummaryRows(payload || {});
+    const latestRows = rows.slice(0, 10);
+    const updatedRegions = worldClockZones.filter(zone => {
+        return findGlobalHrUpdatesForZone(payload || {}, zone)
+            .map(normalizeGlobalHrUpdate)
+            .filter(item => item.isNew !== false).length > 0;
+    }).length;
+
+    const statuses = globalHrUpdatesMeta && globalHrUpdatesMeta.sourceStatus ? globalHrUpdatesMeta.sourceStatus : {};
+    const failedCount = Object.values(statuses).filter(item => item && item.ok === false).length;
+
+    if(regionCount) regionCount.textContent = `${worldClockZones.length} 區`;
+    if(updatedRegionCount) updatedRegionCount.textContent = `${updatedRegions} 區`;
+    if(updateCount) updateCount.textContent = `${rows.length} 筆`;
+    if(sourceStatus) sourceStatus.textContent = failedCount ? `${failedCount} 區異常` : "已更新";
+
+    if(!latestRows.length){
+        tbody.innerHTML = `<tr><td colspan="4" class="globalHrSummaryEmpty">目前尚無新的 HR 更新資料。</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = latestRows.map(row => `
+        <tr>
+            <td class="globalHrSummaryDate">${escapeHtml(formatGlobalHrDate(row.date))}</td>
+            <td class="globalHrSummaryRegion">${escapeHtml(row.region)}</td>
+            <td class="globalHrSummarySource">${escapeHtml(row.source)}</td>
+            <td class="globalHrSummaryContent">
+                ${row.url ? `<a href="${escapeHtml(row.url)}" target="_blank" rel="noopener">${escapeHtml(row.title)}</a>` : escapeHtml(row.title)}
+            </td>
+        </tr>
+    `).join("");
+}
+
 async function loadGlobalHrUpdates(){
     renderWorldClock();
 
@@ -1553,8 +1895,10 @@ async function loadGlobalHrUpdates(){
         });
 
         renderWorldClock();
+        renderGlobalHrSummary(payload);
     }catch(err){
         console.warn("Global HR updates unavailable:", err);
+        renderGlobalHrSummary(null);
     }
 }
 
@@ -1852,18 +2196,16 @@ function openGlobalHrDrawer(index){
     globalPanel.style.display = "block";
 
     const updates = Array.isArray(zone.updates) ? zone.updates : [];
-    const generatedAt = globalHrUpdatesMeta && globalHrUpdatesMeta.generatedAt
-        ? new Date(globalHrUpdatesMeta.generatedAt).toLocaleString("zh-TW", { hour12:false })
-        : "Not loaded";
-
     const sourceStatus = getGlobalHrSourceStatus(zone.country);
+    const lastUpdated = sourceStatus && (sourceStatus.lastSuccessAt || sourceStatus.lastCheckedAt)
+        ? sourceStatus.lastSuccessAt || sourceStatus.lastCheckedAt
+        : (globalHrUpdatesMeta && globalHrUpdatesMeta.generatedAt ? globalHrUpdatesMeta.generatedAt : "");
 
     globalPanel.innerHTML = `
         <div class="globalDrawerMeta">
             <b>${zone.country}｜${zone.city}</b><br>
-            Auto-updated by GitHub Actions. Last generated: ${generatedAt}<br>
-            ${formatGlobalHrStatus(sourceStatus)}<br>
-            Categories: Labor Law, Minimum Wage, Social Insurance / EPF / ESIC, Tax / Payroll, Government Notices.
+            最後更新時間：${formatGlobalHrDateTime(lastUpdated)}<br>
+            分類：${getGlobalHrCategories(zone.country).join("、")}
         </div>
         ${updates.length ? updates.map(item => `
             <div class="globalUpdateItem">
