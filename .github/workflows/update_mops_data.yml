@@ -26,7 +26,7 @@ permissions:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -43,38 +43,40 @@ jobs:
 
       - name: Decide update target
         id: decide
-        shell: bash
+        shell: python
         run: |
-          set -e
-          TARGET="${{ github.event.inputs.target || '' }}"
-          SCHEDULE="${{ github.event.schedule || '' }}"
-          TODAY=$(TZ='Asia/Taipei' date +'%m-%d')
+          import os
+          from datetime import datetime, timezone, timedelta
 
-          RUN_SALARY="false"
-          RUN_WELFARE="false"
+          target = "${{ github.event.inputs.target || '' }}"
+          schedule = "${{ github.event.schedule || '' }}"
+          today = datetime.now(timezone(timedelta(hours=8))).strftime("%m-%d")
 
-          if [ "$TARGET" = "all" ]; then
-            RUN_SALARY="true"
-            RUN_WELFARE="true"
-          elif [ "$TARGET" = "salary" ]; then
-            RUN_SALARY="true"
-          elif [ "$TARGET" = "welfare" ]; then
-            RUN_WELFARE="true"
-          elif [ "$SCHEDULE" = "10 1 * 6,7 *" ]; then
-            # A: 6/25～7/25 Taiwan date window
-            if [[ "$TODAY" > "06-24" && "$TODAY" < "07-26" ]]; then
-              RUN_SALARY="true"
-            fi
-          elif [ "$SCHEDULE" = "40 1 1 * *" ]; then
-            # B: monthly
-            RUN_WELFARE="true"
-          fi
+          run_salary = "false"
+          run_welfare = "false"
 
-          echo "run_salary=$RUN_SALARY" >> "$GITHUB_OUTPUT"
-          echo "run_welfare=$RUN_WELFARE" >> "$GITHUB_OUTPUT"
-          echo "Taiwan date: $TODAY"
-          echo "Run salary: $RUN_SALARY"
-          echo "Run welfare: $RUN_WELFARE"
+          if target == "all":
+              run_salary = "true"
+              run_welfare = "true"
+          elif target == "salary":
+              run_salary = "true"
+          elif target == "welfare":
+              run_welfare = "true"
+          elif schedule == "10 1 * 6,7 *":
+              # A: 6/25～7/25 Taiwan date window
+              if "06-24" < today < "07-26":
+                  run_salary = "true"
+          elif schedule == "40 1 1 * *":
+              # B: monthly
+              run_welfare = "true"
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+              fh.write(f"run_salary={run_salary}\n")
+              fh.write(f"run_welfare={run_welfare}\n")
+
+          print(f"Taiwan date: {today}")
+          print(f"Run salary: {run_salary}")
+          print(f"Run welfare: {run_welfare}")
 
       - name: Update salary disclosure JSON
         if: steps.decide.outputs.run_salary == 'true'
