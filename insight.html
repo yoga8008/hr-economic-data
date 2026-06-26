@@ -252,18 +252,25 @@ td a:hover{ text-decoration:underline; }
 }
 
 .collapseButton{
-    border:1px solid #dbe3ea;
-    background:#f8fafc;
-    color:#1e3a8a;
-    border-radius:999px;
-    padding:7px 12px;
+    border:none;
+    background:transparent;
+    color:#64748b;
+    font-size:16px;
     font-weight:bold;
     cursor:pointer;
-    white-space:nowrap;
+    width:32px;
+    height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    flex:0 0 auto;
 }
 
+.collapseButton:hover{ background:#f1f5f9; }
+
 .collapseBody{
-    max-height:1200px;
+    max-height:5000px;
     opacity:1;
     overflow:hidden;
     transition:max-height .25s ease, opacity .2s ease;
@@ -481,65 +488,76 @@ td a:hover{ text-decoration:underline; }
 
     <h1>輿情觀察</h1>
 
-    <div class="card">
-        <h2 class="sectionTitle">AI 今日重點摘要</h2>
-        <div id="aiSummary">載入中...</div>
+    <div class="card collapsibleCard" id="summaryCard">
+        <div class="cardHeader" onclick="toggleCard('summaryCard')">
+            <div class="cardHeaderText">
+                <h2>AI 今日重點摘要</h2>
+            </div>
+            <button class="collapseButton" type="button" onclick="toggleCard('summaryCard'); event.stopPropagation();">▾</button>
+        </div>
+        <div class="collapseBody">
+            <div id="aiSummary">載入中...</div>
+        </div>
     </div>
 
-    <div class="card">
-
-        <div class="toolbar">
-            <div class="toolbarLeft">
-                <h2 style="margin:0;">最新輿情資訊</h2>
+    <div class="card collapsibleCard" id="newsCard">
+        <div class="cardHeader" onclick="toggleCard('newsCard')">
+            <div class="cardHeaderText">
+                <h2>最新輿情資訊</h2>
             </div>
-
-            <div class="toolbarRight">
-                最多保留 100 則歷史輿情
-            </div>
+            <button class="collapseButton" type="button" onclick="toggleCard('newsCard'); event.stopPropagation();">▾</button>
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th style="width:140px;">更新日</th>
-                    <th style="width:180px;">來源</th>
-                    <th>標題</th>
-                </tr>
-            </thead>
+        <div class="collapseBody">
+            <div class="toolbar">
+                <div class="toolbarLeft"></div>
 
-            <tbody id="insightTable">
-                <tr>
-                    <td colspan="3">載入中...</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="paginationArea">
-            <div class="pageSizeBox">
-                每頁顯示：
-                <select id="displayCount" onchange="changePageSize()">
-                    <option value="20">20則</option>
-                    <option value="30">30則</option>
-                    <option value="50">50則</option>
-                </select>
+                <div class="toolbarRight">
+                    最多保留 100 則歷史輿情
+                </div>
             </div>
 
-            <div class="paginationButtons">
-                <button id="prevBtn" onclick="prevPage()">上一頁</button>
-                <span id="pageInfo"></span>
-                <button id="nextBtn" onclick="nextPage()">下一頁</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:140px;">更新日</th>
+                        <th style="width:180px;">來源</th>
+                        <th>標題</th>
+                    </tr>
+                </thead>
+
+                <tbody id="insightTable">
+                    <tr>
+                        <td colspan="3">載入中...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="paginationArea">
+                <div class="pageSizeBox">
+                    每頁顯示：
+                    <select id="displayCount" onchange="changePageSize()">
+                        <option value="20">20則</option>
+                        <option value="30">30則</option>
+                        <option value="50">50則</option>
+                    </select>
+                </div>
+
+                <div class="paginationButtons">
+                    <button id="prevBtn" onclick="prevPage()">上一頁</button>
+                    <span id="pageInfo"></span>
+                    <button id="nextBtn" onclick="nextPage()">下一頁</button>
+                </div>
             </div>
         </div>
-
     </div>
 
     <div class="card collapsibleCard" id="voiceCloudCard">
-        <div class="cardHeader" onclick="toggleVoiceCloud(event)">
+        <div class="cardHeader" onclick="toggleCard('voiceCloudCard')">
             <div class="cardHeaderText">
                 <h2>區域關鍵字聲量</h2>
-                <p>切換區域查看近期熱門討論詞，可使用滑鼠滾輪或按鈕縮放，拖曳移動詞雲。</p>
             </div>
-            <button class="collapseButton" type="button" id="voiceCollapseBtn">收合 ▾</button>
+            <button class="collapseButton" type="button" onclick="toggleCard('voiceCloudCard'); event.stopPropagation();">▾</button>
         </div>
 
         <div class="collapseBody">
@@ -549,12 +567,11 @@ td a:hover{ text-decoration:underline; }
                 <div class="keywordPanel">
                     <h3>熱門關鍵字 Top 10</h3>
                     <ol class="keywordList" id="keywordList"></ol>
-                    <div class="voiceNote">左側保留 Top 10；右側詞雲顯示更多延伸關鍵字，後續可接新聞資料自動統計聲量。</div>
                 </div>
 
                 <div class="wordCloudPanel">
                     <div class="wordCloudToolbar">
-                        <div class="wordCloudHint">詞雲顯示更多關鍵字｜滑鼠滾輪縮放｜拖曳移動｜雙擊重設</div>
+                        <div></div>
                         <div class="zoomButtons">
                             <button type="button" onclick="zoomVoiceCloud(0.12)">＋ 放大</button>
                             <button type="button" onclick="zoomVoiceCloud(-0.12)">－ 縮小</button>
@@ -728,7 +745,8 @@ const voiceData = {
         ["職場安全",25],["移工",24],["派遣",23],["福利",22],["工時",21],
         ["人才短缺",20],["年終",19],["裁員",18],["青年就業",17],["育嬰留停",16],
         ["勞檢",15],["職災",14],["職場申訴",13],["通膨",12],["服務業",11],
-        ["製造業",10],["高齡就業",9],["彈性工時",8],["心理健康",7],["教育訓練",6]
+        ["製造業",10],["高齡就業",9],["彈性工時",8],["心理健康",7],["教育訓練",6],
+        ["勞資爭議",5],["通勤",5],["員工關係",5],["職場霸凌",5],["心理諮商",5],["工讀生",5],["勞退",5],["健保",5],["就業保險",5],["人力銀行",5],["薪資中位數",5],["產業外移",5]
     ],
     "中國": [
         ["社保",126],["薪資",104],["勞動合同",92],["招聘",86],["個稅",76],
@@ -737,7 +755,8 @@ const voiceData = {
         ["就業形勢",26],["工傷",24],["養老保險",23],["醫療保險",22],["生育保險",21],
         ["失業保險",20],["勞動仲裁",19],["人才政策",18],["補貼",17],["畢業生",16],
         ["新質生產力",15],["人力成本",14],["降本增效",13],["智能製造",12],["合規",11],
-        ["招聘平台",10],["離職補償",9],["工作簽證",8],["績效",7],["培訓",6]
+        ["招聘平台",10],["離職補償",9],["工作簽證",8],["績效",7],["培訓",6],
+        ["校園招聘",5],["社保基數",5],["薪資調整",5],["勞動監察",5],["失業率",5],["人事外包",5],["五險一金",5],["就業補助",5],["人才引進",5],["用工風險",5],["工時管理",5],["假勤制度",5]
     ],
     "印度": [
         ["EPF",135],["ESIC",104],["Payroll",96],["Labor Code",88],["Tax",72],
@@ -746,7 +765,8 @@ const voiceData = {
         ["Professional Tax",26],["Bonus Act",25],["Factories Act",24],["Shops Act",23],["Contract Labour",22],
         ["Maternity Benefit",21],["Working Hours",20],["Overtime",19],["Attrition",18],["Skill Hiring",17],
         ["Chennai",16],["Bangalore",15],["Delhi",14],["Notice Period",13],["Background Check",12],
-        ["Salary Structure",11],["LTA",10],["HRA",9],["Canteen",8],["Mediclaim",7]
+        ["Salary Structure",11],["LTA",10],["HRA",9],["Canteen",8],["Mediclaim",7],
+        ["Wage Code",6],["Social Security Code",6],["Industrial Relations",6],["Occupational Safety",6],["Shift Allowance",6],["Attendance",6],["Payslip",6],["Bank Account",6],["Aadhaar",6],["PAN",6],["Offer Letter",6],["Appointment Letter",6]
     ],
     "越南": [
         ["最低工資",116],["社保",100],["加班",86],["勞動法",78],["工會",68],
@@ -755,7 +775,8 @@ const voiceData = {
         ["保險費率",24],["產假",23],["年假",22],["工時",21],["勞動合約",20],
         ["工業區",19],["河內",18],["胡志明",17],["海防",16],["最低區域工資",15],
         ["加班上限",14],["社會保險局",13],["薪資表",12],["招募困難",11],["人才流動",10],
-        ["罷工",9],["安全衛生",8],["績效獎金",7],["派遣",6],["培訓",5]
+        ["罷工",9],["安全衛生",8],["績效獎金",7],["派遣",6],["培訓",5],
+        ["勞動紀律",5],["試用期",5],["薪資調整",5],["社保基數",5],["醫療保險",5],["失業保險",5],["外包",5],["人力派遣",5],["招聘平台",5],["工廠擴產",5],["供應鏈",5],["員工福利",5]
     ],
     "美國": [
         ["Hiring",112],["Minimum Wage",96],["Overtime",88],["Union",76],["Layoff",68],
@@ -764,7 +785,8 @@ const voiceData = {
         ["Health Insurance",24],["Paid Leave",23],["Wage Theft",22],["Gig Work",21],["Immigration",20],
         ["Work Visa",19],["H-1B",18],["Talent Market",17],["DEI",16],["RTO",15],
         ["Severance",14],["WARN Act",13],["OSHA",12],["Contractor",11],["Tax Withholding",10],
-        ["Employee Relations",9],["Skills Gap",8],["Manufacturing",7],["Noncompete",6],["Compliance",5]
+        ["Employee Relations",9],["Skills Gap",8],["Manufacturing",7],["Noncompete",6],["Compliance",5],
+        ["Pay Transparency",5],["Minimum Salary",5],["Exempt Employee",5],["Pay Equity",5],["Employee Handbook",5],["Labor Market",5],["Manufacturing Jobs",5],["Worker Safety",5],["Healthcare Cost",5],["Payroll Tax",5],["Paid Sick Leave",5],["Employee Benefits",5]
     ],
     "墨西哥": [
         ["IMSS",120],["Minimum Wage",96],["STPS",86],["Payroll",70],["Tax",62],
@@ -773,7 +795,8 @@ const voiceData = {
         ["Overtime",22],["Vacation",21],["Aguinaldo",20],["Severance",19],["Maquiladora",18],
         ["T-MEC",17],["Manufacturing",16],["Talent Shortage",15],["Border Region",14],["Compliance",13],
         ["Payroll Tax",12],["Remote Work",11],["Safety",10],["Training",9],["Resignation",8],
-        ["Collective Bargaining",7],["Recruitment",6],["Employer Cost",5]
+        ["Collective Bargaining",7],["Recruitment",6],["Employer Cost",5],
+        ["Social Contribution",5],["Employment Contract",5],["Outsourcing",5],["Labor Inspection",5],["Recruiting",5],["Retention",5],["Attendance",5],["Shift Work",5],["Safety Training",5],["Wage Increase",5],["Plant Expansion",5],["HR Compliance",5]
     ],
     "捷克": [
         ["Labor Code",98],["Minimum Wage",90],["Social Insurance",80],["Tax",70],["MPSV",62],
@@ -781,7 +804,8 @@ const voiceData = {
         ["CzechInvest",24],["Manufacturing",22],["Health Insurance",21],["Pension",20],["Sickness Insurance",19],
         ["Overtime",18],["Working Time",17],["Collective Agreement",16],["Foreign Workers",15],["EU Directive",14],
         ["Severance",13],["Probation",12],["Wage Growth",11],["Inflation",10],["Automotive",9],
-        ["Talent Shortage",8],["Blue Card",7],["Tax Relief",6],["Payroll Reporting",5]
+        ["Talent Shortage",8],["Blue Card",7],["Tax Relief",6],["Payroll Reporting",5],
+        ["Employment Contract",5],["Payroll Tax",5],["Minimum Salary",5],["Labor Inspection",5],["Immigration",5],["Recruitment",5],["Retention",5],["Shift Work",5],["HR Compliance",5],["Benefits Package",5],["Wage Indexation",5],["Employer Cost",5]
     ],
     "新加坡": [
         ["CPF",130],["MOM",112],["Payroll",86],["Work Pass",78],["Tax",68],
@@ -790,7 +814,8 @@ const voiceData = {
         ["Retirement Age",20],["Re-employment",19],["Tripartite",18],["Progressive Wage",17],["SkillsFuture",16],
         ["Overtime",15],["CPF Ceiling",14],["Payroll Submission",13],["Personal Tax",12],["Work Injury",11],
         ["Employment Act",10],["Maternity Leave",9],["Talent Attraction",8],["Hybrid Work",7],["HR Tech",6],
-        ["Training Grant",5]
+        ["Training Grant",5],
+        ["Fair Employment",5],["Workplace Fairness",5],["Salary Benchmark",5],["Payroll Cycle",5],["Leave Policy",5],["HR Compliance",5],["Foreign Hiring",5],["Manpower Planning",5],["Employee Wellness",5],["Training",5],["Talent Retention",5],["Wage Guidelines",5]
     ]
 };
 
@@ -916,16 +941,15 @@ function bindVoiceCloudEvents(){
     viewport.addEventListener("dblclick", resetVoiceCloud);
 }
 
-function toggleVoiceCloud(event){
-    if(event.target.tagName === "BUTTON"){
-        event.stopPropagation();
-    }
-    const card = document.getElementById("voiceCloudCard");
-    const btn = document.getElementById("voiceCollapseBtn");
-    if(!card || !btn) return;
+function toggleCard(cardId){
+    const card = document.getElementById(cardId);
+    if(!card) return;
 
     card.classList.toggle("collapsed");
-    btn.textContent = card.classList.contains("collapsed") ? "展開 ▸" : "收合 ▾";
+    const btn = card.querySelector(".collapseButton");
+    if(btn){
+        btn.textContent = card.classList.contains("collapsed") ? "▸" : "▾";
+    }
 }
 
 initVoiceCloud();
