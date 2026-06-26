@@ -122,10 +122,23 @@ label{
 }
 
 .source{
-    margin-top:40px;
-    font-size:14px;
-    color:#666;
-    padding-bottom:40px;
+    max-width:1200px;
+    margin:8px auto 0 auto;
+    padding:18px 4px 44px 4px;
+    border-top:1px solid #e5e7eb;
+    color:#6b7280;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.source a{
+    color:#1a5fb4;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.source a:hover{
+    text-decoration:underline;
 }
 
 /* 公告浮動按鈕 */
@@ -221,6 +234,62 @@ label{
     text-decoration:underline;
 }
 
+
+/* 薪資與保險費率方塊 */
+.laborIndicatorCard{
+    padding:20px;
+}
+
+.laborMetricGrid{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:16px;
+    margin-top:18px;
+}
+
+.laborMetricBox{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-height:128px;
+    padding:16px 14px 15px 14px;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    background:#f8fafc;
+    text-decoration:none;
+    color:#111827;
+    box-sizing:border-box;
+    transition:.2s;
+}
+
+.laborMetricBox:hover{
+    transform:translateY(-2px);
+    background:#eff6ff;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.laborMetricLabel{
+    font-size:15px;
+    font-weight:bold;
+    color:#1e3a8a;
+    margin-bottom:10px;
+}
+
+.laborMetricValue{
+    font-size:25px;
+    font-weight:800;
+    color:#111827;
+    margin-bottom:8px;
+    line-height:1.2;
+}
+
+.laborMetricSub{
+    font-size:13px;
+    line-height:1.55;
+    color:#4b5563;
+}
+
+
 @media(max-width:768px){
 
     .navbar{
@@ -260,6 +329,25 @@ label{
         width:100%;
         right:-100%;
     }
+
+    .laborMetricGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+    }
+
+    .laborMetricBox{
+        min-height:118px;
+        padding:14px;
+    }
+
+    .laborMetricValue{
+        font-size:22px;
+    }
+
+    .laborMetricSub{
+        font-size:12px;
+    }
+
 }
 </style>
 </head>
@@ -277,6 +365,78 @@ label{
 
 <div class="layout">
 <div class="leftPanel">
+
+
+    <div class="card laborIndicatorCard">
+        <h2 class="sectionTitle">薪資與保險費率</h2>
+        <div class="desc">說明：整理 HR 常用之基本工資、勞保、健保與就保費率，供薪資與人事作業快速參考。</div>
+
+        <div class="laborMetricGrid">
+            <a class="laborMetricBox" href="https://service.moea.gov.tw/EE521/common/Common.aspx?code=J&no=2" target="_blank" rel="noopener">
+                <div>
+                    <div class="laborMetricLabel">基本工資｜月薪</div>
+                    <div class="laborMetricValue">29,500</div>
+                    <div class="laborMetricSub">NT$29,500／月<br>2026/01/01 起適用</div>
+                </div>
+            </a>
+
+            <a class="laborMetricBox" href="https://service.moea.gov.tw/EE521/common/Common.aspx?code=J&no=2" target="_blank" rel="noopener">
+                <div>
+                    <div class="laborMetricLabel">基本工資｜時薪</div>
+                    <div class="laborMetricValue">196</div>
+                    <div class="laborMetricSub">NT$196／時<br>2026/01/01 起適用</div>
+                </div>
+            </a>
+
+            <a class="laborMetricBox" href="https://www.bli.gov.tw/0108700.html" target="_blank" rel="noopener">
+                <div>
+                    <div class="laborMetricLabel">勞保費率</div>
+                    <div class="laborMetricValue">11.5%</div>
+                    <div class="laborMetricSub">普通事故保險費率<br>不含就業保險</div>
+                </div>
+            </a>
+
+            <a class="laborMetricBox" href="https://www.bli.gov.tw/0108700.html" target="_blank" rel="noopener">
+                <div>
+                    <div class="laborMetricLabel">就保費率</div>
+                    <div class="laborMetricValue">1%</div>
+                    <div class="laborMetricSub">就業保險費率<br>與勞保合併申報</div>
+                </div>
+            </a>
+
+            <a class="laborMetricBox" href="https://www.nhi.gov.tw/" target="_blank" rel="noopener">
+                <div>
+                    <div class="laborMetricLabel">健保費率</div>
+                    <div class="laborMetricValue">5.17%</div>
+                    <div class="laborMetricSub">全民健康保險<br>一般保險費率</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="sectionTitle">失業率</h2>
+        <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
+        <canvas id="unemploymentChart"></canvas>
+    </div>
+    <div class="card">
+        <h2 class="sectionTitle">消費者物價指數年增率(CPI)</h2>
+        <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
+
+        <div class="filter">
+            起：<select id="startMonth"></select>
+            迄：<select id="endMonth"></select>
+
+            <label>
+                <input type="checkbox" id="compareMode">
+                同期比較
+            </label>
+
+            <button onclick="filterData()">查詢</button>
+        </div>
+
+        <canvas id="cpiChart"></canvas>
+    </div>
 
     <div class="card">
         <h2 class="sectionTitle">GDP 經濟成長率</h2>
@@ -305,36 +465,12 @@ label{
         <canvas id="gdpChart"></canvas>
     </div>
 
-    <div class="card">
-        <h2 class="sectionTitle">消費者物價指數年增率(CPI)</h2>
-        <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
-
-        <div class="filter">
-            起：<select id="startMonth"></select>
-            迄：<select id="endMonth"></select>
-
-            <label>
-                <input type="checkbox" id="compareMode">
-                同期比較
-            </label>
-
-            <button onclick="filterData()">查詢</button>
-        </div>
-
-        <canvas id="cpiChart"></canvas>
-    </div>
-
-    <div class="card">
-        <h2 class="sectionTitle">失業率</h2>
-        <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
-        <canvas id="unemploymentChart"></canvas>
-    </div>
-
     <div class="source">
         資料來源：
-        <a href="https://www.stat.gov.tw/" target="_blank">
-            中華民國統計資訊網 / 主計總處
-        </a>
+        <a href="https://service.moea.gov.tw/EE521/common/Common.aspx?code=J&no=2" target="_blank" rel="noopener">經濟部經濟統計資料</a>、
+        <a href="https://www.mol.gov.tw/" target="_blank" rel="noopener">勞動部</a>、
+        <a href="https://www.bli.gov.tw/0108700.html" target="_blank" rel="noopener">勞保局</a>、
+        <a href="https://www.nhi.gov.tw/" target="_blank" rel="noopener">健保署</a>
     </div>
 
 </div>
