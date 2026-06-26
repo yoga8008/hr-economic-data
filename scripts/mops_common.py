@@ -17,7 +17,9 @@ MOPS_SPA_BASE = f"{MOPS_ORIGIN}/mops/#/web"
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
+DEBUG_DIR = ROOT / "_mops_debug"
 DATA_DIR.mkdir(exist_ok=True)
+DEBUG_DIR.mkdir(exist_ok=True)
 
 
 def taipei_now() -> datetime:
@@ -28,9 +30,21 @@ def current_minguo_year() -> int:
     return taipei_now().year - 1911
 
 
+def report_year_candidates() -> list[str]:
+    """Try configured year first; otherwise try latest likely disclosure year and previous year.
+
+    Example: in 2026, try 114 first, then 113.  This avoids hard failure before the
+    newest annual disclosure is released.
+    """
+    configured = os.getenv("MOPS_REPORT_YEAR")
+    if configured:
+        return [configured]
+    latest = current_minguo_year() - 1
+    return [str(latest), str(latest - 1)]
+
+
 def default_report_year() -> str:
-    # 年度揭露通常查前一年度（例：2026 年查 114 年或依 MOPS 實際揭示年度調整）
-    return os.getenv("MOPS_REPORT_YEAR") or str(current_minguo_year() - 1)
+    return report_year_candidates()[0]
 
 
 def clean_text(value: Any) -> str:
@@ -110,18 +124,30 @@ def is_security_page(text: str) -> bool:
         "SECURITY REASONS",
         "頁面無法呈現",
         "因為安全性考量",
+        "YOU COULD GO",
     ])
 
 
+def sleep_polite(seconds: float = 1.2) -> None:
+    time.sleep(seconds)
+
+
 class MopsBrowser:
-    """Use a real browser context so MOPS sees normal browser traffic."""
+    """Use real visible browser UI and avoid direct ajax calls.
+
+    This version does not POST directly to ajax_t100sb15/ajax_t100sb12.  It opens
+    the MOPS web page, fills fields, clicks the visible query button, waits for
+    the page's own JavaScript to load data, then reads the rendered table.
+    """
 
     def __init__(self) -> None:
-        # 預設用 headless；若 MOPS 還是擋，可在 runner 環境變數設 MOPS_HEADLESS=false。
-        self.headless = os.getenv("MOPS_HEADLESS", "true").lower() not in {"0", "false", "no"}
+        self.headless = os.getenv("MOPS_HEADLESS", "false").lower() in {"1", "true", "yes"}
         self.channel_pref = os.getenv("MOPS_BROWSER_CHANNEL", "msedge")
+        self.user_data_dir = os.getenv(
+            "MOPS_BROWSER_PROFILE",
+            str(ROOT / ".mops-browser-profile"),
+        )
         self._pw = None
-        self.browser = None
         self.context = None
         self.page = None
 
@@ -135,80 +161,230 @@ class MopsBrowser:
         last_error: Exception | None = None
         for channel in channels:
             try:
-                kwargs = {
+                kwargs: dict[str, Any] = {
                     "headless": self.headless,
-                    "args": ["--disable-blink-features=AutomationControlled"],
+                    "args": [
+                        "--disable-blink-features=AutomationControlled",
+                        "--disable-web-security",
+                        "--disable-features=IsolateOrigins,site-per-process",
+                    ],
+                    "locale": "zh-TW",
+                    "timezone_id": "Asia/Taipei",
+                    "viewport": {"width": 1600, "height": 1000},
+                    "user_agent": (
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/125.0.0.0 Safari/537.36"
+                    ),
+                    "ignore_https_errors": True,
                 }
                 if channel:
                     kwargs["channel"] = channel
-                self.browser = self._pw.chromium.launch(**kwargs)
-                print(f"Browser launched: {channel or 'bundled chromium'}, headless={self.headless}")
+                self.context = self._pw.chromium.launch_persistent_context(
+                    user_data_dir=self.user_data_dir,
+                    **kwargs,
+                )
+                print(f"Browser launched: {channel or 'bundled chromium'}, headless={self.headless}, UI-only=True")
                 break
             except Exception as exc:  # pragma: no cover
                 last_error = exc
                 print(f"Browser launch failed: {channel or 'bundled chromium'}: {exc}")
 
-        if not self.browser:
+        if not self.context:
             raise RuntimeError(f"Cannot launch browser. Last error: {last_error}")
 
-        self.context = self.browser.new_context(
-            locale="zh-TW",
-            timezone_id="Asia/Taipei",
-            user_agent=(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/125.0.0.0 Safari/537.36"
-            ),
-            viewport={"width": 1366, "height": 900},
+        self.context.add_init_script(
+            """
+            Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+            window.chrome = window.chrome || { runtime: {} };
+            """
         )
-        self.page = self.context.new_page()
+        self.page = self.context.pages[0] if self.context.pages else self.context.new_page()
         return self
 
     def __exit__(self, exc_type, exc, tb) -> None:
         if self.context:
             self.context.close()
-        if self.browser:
-            self.browser.close()
         if self._pw:
             self._pw.stop()
 
-    def warmup(self, page_code: str) -> None:
+    def open_page(self, page_code: str) -> None:
         assert self.page is not None
         url = f"{MOPS_SPA_BASE}/{page_code}"
         print(f"Open MOPS page: {url}")
-        try:
-            self.page.goto(url, wait_until="domcontentloaded", timeout=45000)
-            self.page.wait_for_timeout(2500)
-        except PlaywrightTimeoutError:
-            print("MOPS page load timeout; continue to try ajax fetch")
+        self.page.goto(url, wait_until="domcontentloaded", timeout=60000)
+        self.page.wait_for_timeout(4500)
+        self.dismiss_popups()
 
-    def post(self, page_code: str, ajax_code: str, payload: dict[str, Any]) -> str:
+    def dismiss_popups(self) -> None:
         assert self.page is not None
-        self.warmup(page_code)
-        html = self.page.evaluate(
-            """async ({ajaxCode, payload}) => {
-                const params = new URLSearchParams();
-                for (const [key, value] of Object.entries(payload)) {
-                    params.append(key, value == null ? '' : String(value));
-                }
-                const response = await fetch(`/mops/web/${ajaxCode}`, {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'Accept': 'text/html, */*; q=0.01'
-                    },
-                    body: params.toString()
-                });
-                return await response.text();
-            }""",
-            {"ajaxCode": ajax_code, "payload": payload},
-        )
+        for text in ["同意", "確認", "確定", "關閉", "我知道了", "OK", "close"]:
+            try:
+                loc = self.page.get_by_text(text, exact=False).first
+                if loc.is_visible(timeout=800):
+                    loc.click(timeout=1500)
+                    self.page.wait_for_timeout(500)
+            except Exception:
+                pass
+
+    def frames(self):
+        assert self.page is not None
+        # page.frames includes main frame; keep unique by url/name.
+        frames = []
+        seen = set()
+        for frame in self.page.frames:
+            key = (frame.url, frame.name)
+            if key not in seen:
+                seen.add(key)
+                frames.append(frame)
+        return frames
+
+    def dump_debug(self, name: str) -> None:
+        assert self.page is not None
+        stamp = taipei_now().strftime("%Y%m%d_%H%M%S")
+        html_path = DEBUG_DIR / f"{stamp}_{name}.html"
+        png_path = DEBUG_DIR / f"{stamp}_{name}.png"
+        try:
+            html_path.write_text(self.page.content(), encoding="utf-8")
+            print(f"Debug HTML: {html_path}")
+        except Exception as exc:
+            print(f"Cannot save debug HTML: {exc}")
+        try:
+            self.page.screenshot(path=str(png_path), full_page=True)
+            print(f"Debug screenshot: {png_path}")
+        except Exception as exc:
+            print(f"Cannot save debug screenshot: {exc}")
+
+    def fill_near_label(self, keywords: list[str], value: str) -> bool:
+        """Fill native input/select controls whose nearby text matches keywords."""
+        script = r"""
+        ({keywords, value}) => {
+          const kws = keywords.map(k => String(k).toLowerCase());
+          const visible = el => {
+            const style = window.getComputedStyle(el);
+            const rect = el.getBoundingClientRect();
+            return style && style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+          };
+          const txt = el => (el && (el.innerText || el.textContent || '') || '').replace(/\s+/g, ' ').trim();
+          const nearbyText = el => {
+            let out = [el.getAttribute('aria-label'), el.getAttribute('placeholder'), el.getAttribute('name'), el.getAttribute('id'), el.getAttribute('title')].filter(Boolean).join(' ');
+            if (el.id) {
+              const lab = document.querySelector(`label[for="${CSS.escape(el.id)}"]`);
+              if (lab) out += ' ' + txt(lab);
+            }
+            let p = el;
+            for (let i = 0; i < 4 && p; i++, p = p.parentElement) out += ' ' + txt(p);
+            const prev = el.previousElementSibling;
+            const next = el.nextElementSibling;
+            if (prev) out += ' ' + txt(prev);
+            if (next) out += ' ' + txt(next);
+            return out.toLowerCase();
+          };
+          const setNativeValue = (el, val) => {
+            const setter = Object.getOwnPropertyDescriptor(el.__proto__, 'value')?.set;
+            if (setter) setter.call(el, val); else el.value = val;
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+            el.dispatchEvent(new Event('blur', { bubbles: true }));
+          };
+          const controls = Array.from(document.querySelectorAll('input:not([type="hidden"]), textarea, select')).filter(visible);
+          for (const el of controls) {
+            const context = nearbyText(el);
+            if (!kws.some(k => context.includes(k))) continue;
+            if (el.tagName.toLowerCase() === 'select') {
+              const options = Array.from(el.options || []);
+              let opt = options.find(o => txt(o).includes(value) || String(o.value).includes(value));
+              if (!opt && (value === '' || value === '全部')) opt = options.find(o => txt(o).includes('全部') || txt(o).includes('全'));
+              if (opt) {
+                el.value = opt.value;
+                el.dispatchEvent(new Event('input', { bubbles: true }));
+                el.dispatchEvent(new Event('change', { bubbles: true }));
+                return true;
+              }
+            } else {
+              setNativeValue(el, value);
+              return true;
+            }
+          }
+          return false;
+        }
+        """
+        for frame in self.frames():
+            try:
+                if frame.evaluate(script, {"keywords": keywords, "value": value}):
+                    return True
+            except Exception:
+                continue
+        return False
+
+    def select_option_by_text(self, keywords: list[str], option_text: str) -> bool:
+        """Select native select option near a label; fallback to visible custom dropdown text."""
+        if self.fill_near_label(keywords, option_text):
+            return True
+        # Custom select fallback: click a field near label, then click option text.
+        assert self.page is not None
+        for kw in keywords:
+            try:
+                self.page.get_by_text(kw, exact=False).first.click(timeout=1200)
+                self.page.wait_for_timeout(300)
+                self.page.get_by_text(option_text, exact=False).first.click(timeout=1800)
+                self.page.wait_for_timeout(500)
+                return True
+            except Exception:
+                pass
+        return False
+
+    def click_query(self) -> bool:
+        """Click a visible 查詢/search button."""
+        script = r"""
+        () => {
+          const visible = el => {
+            const style = window.getComputedStyle(el);
+            const rect = el.getBoundingClientRect();
+            return style && style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+          };
+          const text = el => [el.innerText, el.textContent, el.value, el.getAttribute('aria-label'), el.getAttribute('title')]
+            .filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+          const candidates = Array.from(document.querySelectorAll('button, a, input[type="button"], input[type="submit"], [role="button"], .btn, .button'));
+          for (const el of candidates) {
+            if (!visible(el)) continue;
+            const t = text(el);
+            if (/查詢|搜尋|送出|Query|Search/i.test(t)) {
+              el.scrollIntoView({block:'center', inline:'center'});
+              el.click();
+              return true;
+            }
+          }
+          return false;
+        }
+        """
+        for frame in self.frames():
+            try:
+                if frame.evaluate(script):
+                    assert self.page is not None
+                    self.page.wait_for_timeout(4500)
+                    try:
+                        self.page.wait_for_load_state("networkidle", timeout=12000)
+                    except Exception:
+                        pass
+                    self.page.wait_for_timeout(2500)
+                    return True
+            except Exception:
+                continue
+        return False
+
+    def combined_html(self) -> str:
+        assert self.page is not None
+        parts = []
+        for frame in self.frames():
+            try:
+                parts.append(frame.content())
+            except Exception:
+                pass
+        return "\n".join(parts)
+
+    def ensure_not_security(self, name: str) -> None:
+        html = self.combined_html()
         if is_security_page(html):
-            raise RuntimeError("MOPS returned a security-block page even in browser mode. Try MOPS_HEADLESS=false or use another Taiwan network.")
-        return html
-
-
-def sleep_polite(seconds: float = 1.2) -> None:
-    time.sleep(seconds)
+            self.dump_debug(name)
+            raise RuntimeError("MOPS returned a security-block page during UI operation.")
