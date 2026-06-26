@@ -4,13 +4,17 @@ on:
   workflow_dispatch:
 
   schedule:
-    # A. 每年 6/25～7/25 每天 09:10 台灣時間跑薪資資料
-    # UTC 01:10 = 台灣 09:10
+    # A. 非主管全時員工薪資資訊
+    # 每年 6/25～6/30，每天 09:10 台灣時間執行
+    # GitHub cron 使用 UTC，UTC 01:10 = 台灣 09:10
     - cron: "10 1 25-30 6 *"
+
+    # A. 非主管全時員工薪資資訊
+    # 每年 7/1～7/25，每天 09:10 台灣時間執行
     - cron: "10 1 1-25 7 *"
 
-    # B. 每月 1 日 09:40 台灣時間跑福利資料
-    # UTC 01:40 = 台灣 09:40
+    # B. 員工福利政策及權益維護措施
+    # 每月 1 日 09:40 台灣時間執行
     - cron: "40 1 1 * *"
 
 permissions:
@@ -24,6 +28,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Check Python
+        shell: powershell
+        run: |
+          py -3.11 --version
+          py -3.11 -m pip --version
+
       - name: Install dependencies
         shell: powershell
         run: |
@@ -33,44 +43,47 @@ jobs:
       - name: Decide update target
         shell: powershell
         run: |
-          $today = Get-Date
-          $month = [int]$today.ToString("MM")
-          $day = [int]$today.ToString("dd")
+          $eventName = "${{ github.event_name }}"
+          $schedule = "${{ github.event.schedule }}"
 
           $runSalary = "false"
           $runWelfare = "false"
 
-          if (($month -eq 6 -and $day -ge 25) -or ($month -eq 7 -and $day -le 25)) {
+          if ($eventName -eq "workflow_dispatch") {
             $runSalary = "true"
-          }
-
-          if ($day -eq 1) {
             $runWelfare = "true"
           }
-
-          if ("${{ github.event_name }}" -eq "workflow_dispatch") {
+          elseif ($schedule -eq "10 1 25-30 6 *" -or $schedule -eq "10 1 1-25 7 *") {
             $runSalary = "true"
+          }
+          elseif ($schedule -eq "40 1 1 * *") {
             $runWelfare = "true"
           }
 
           "RUN_SALARY=$runSalary" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           "RUN_WELFARE=$runWelfare" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
+          Write-Host "RUN_SALARY=$runSalary"
+          Write-Host "RUN_WELFARE=$runWelfare"
+
       - name: Update salary disclosure JSON
         if: env.RUN_SALARY == 'true'
         shell: powershell
-        run: py -3.11 scripts/update_employee_salary.py
+        run: |
+          py -3.11 scripts/update_employee_salary.py
 
       - name: Update welfare disclosure JSON
         if: env.RUN_WELFARE == 'true'
         shell: powershell
-        run: py -3.11 scripts/update_employee_welfare.py
+        run: |
+          py -3.11 scripts/update_employee_welfare.py
 
       - name: Commit updated data
         shell: powershell
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+
           git add data/employee_salary_disclosure.json data/employee_welfare_disclosure.json
 
           git diff --cached --quiet
