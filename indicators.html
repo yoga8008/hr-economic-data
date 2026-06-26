@@ -104,6 +104,50 @@ h1{
     padding-bottom:10px;
     margin-bottom:20px;
     border-bottom:1px solid #ddd;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    cursor:pointer;
+}
+
+.sectionContent{
+    display:block;
+}
+
+.collapseBtn{
+    border:none;
+    background:none;
+    color:#64748b;
+    font-size:18px;
+    font-weight:bold;
+    line-height:1;
+    margin:0;
+    margin-right:0;
+    padding:0;
+    cursor:pointer;
+    flex:0 0 auto;
+    transition:transform .2s ease, color .2s ease;
+}
+
+.sectionTitle:hover .collapseBtn{
+    color:#1e3a8a;
+}
+
+.card.collapsed .collapseBtn{
+    transform:rotate(-90deg);
+}
+
+.card.collapsed{
+    padding-bottom:10px;
+}
+
+.card.collapsed .sectionContent{
+    display:none;
+}
+
+.card.collapsed .sectionTitle{
+    margin-bottom:0;
 }
 
 canvas{
@@ -290,6 +334,211 @@ label{
 }
 
 
+/* 員工薪資福利揭露查詢 */
+.salaryDisclosureToolbar{
+    display:grid;
+    grid-template-columns:minmax(120px,.9fr) minmax(150px,1fr) minmax(180px,1.25fr) minmax(170px,1.15fr) minmax(140px,1fr) auto;
+    gap:12px;
+    margin:18px 0 16px 0;
+    align-items:end;
+}
+
+.welfareToolbar{
+    grid-template-columns:minmax(120px,.8fr) minmax(260px,2fr) auto;
+}
+
+.queryField{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-size:13px;
+    color:#4b5563;
+    font-weight:bold;
+    margin-right:0;
+}
+
+.queryField input,
+.queryField select{
+    width:100%;
+    height:38px;
+    box-sizing:border-box;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    padding:6px 10px;
+    margin:0;
+    background:#fff;
+    color:#111827;
+}
+
+.salaryActionRow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:8px 0 16px 0;
+}
+
+.salaryActionRow.inlineActions{
+    flex-wrap:nowrap;
+    margin:0;
+    align-self:end;
+}
+
+.actionBtn{
+    height:38px;
+    padding:0 14px;
+    border-radius:8px;
+    border:1px solid #1e3a8a;
+    background:#1e3a8a;
+    color:#fff;
+    font-weight:bold;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-sizing:border-box;
+    margin:0;
+}
+
+.actionBtn.secondary{
+    background:#fff;
+    color:#1e3a8a;
+}
+
+.actionBtn:hover{
+    filter:brightness(.96);
+}
+
+.salaryStatus{
+    font-size:13px;
+    color:#6b7280;
+    margin:6px 0 12px 0;
+}
+
+.subSection{
+    margin-top:16px;
+    padding:18px;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    background:#f8fafc;
+}
+
+.subSectionTitle{
+    font-size:18px;
+    font-weight:800;
+    color:#1e3a8a;
+    margin:0 0 8px 0;
+}
+
+.subSectionDesc{
+    font-size:14px;
+    color:#4b5563;
+    line-height:1.7;
+    margin-bottom:12px;
+}
+
+.welfareWideField{
+    grid-column:auto;
+}
+
+.tableWrap{
+    width:100%;
+    overflow-x:auto;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+}
+
+.disclosureTable{
+    width:100%;
+    border-collapse:collapse;
+    min-width:920px;
+    background:#fff;
+    font-size:13px;
+}
+
+.disclosureTable th{
+    background:#f1f5f9;
+    color:#1e3a8a;
+    text-align:left;
+    padding:11px 10px;
+    border-bottom:1px solid #e5e7eb;
+    white-space:nowrap;
+}
+
+.disclosureTable td{
+    padding:10px;
+    border-bottom:1px solid #eef2f7;
+    color:#111827;
+    vertical-align:middle;
+}
+
+.disclosureTable tr:last-child td{
+    border-bottom:none;
+}
+
+.disclosureTable td.num{
+    text-align:right;
+    font-variant-numeric:tabular-nums;
+}
+
+.disclosureTable td.center{
+    text-align:center;
+}
+
+.welfareCardList{
+    display:grid;
+    gap:12px;
+    margin-top:10px;
+}
+
+.welfareCard{
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    background:#fff;
+    padding:14px;
+}
+
+.welfareCardHeader{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 12px;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.welfareCompanyName{
+    font-size:16px;
+    font-weight:800;
+    color:#1e3a8a;
+}
+
+.welfareMeta{
+    font-size:13px;
+    color:#6b7280;
+}
+
+.welfareBlock{
+    margin-top:8px;
+}
+
+.welfareBlockTitle{
+    font-size:13px;
+    font-weight:bold;
+    color:#334155;
+    margin-bottom:4px;
+}
+
+.welfareBlockContent{
+    font-size:13px;
+    color:#111827;
+    line-height:1.7;
+    white-space:pre-line;
+}
+
+.inlineMuted{
+    font-size:12px;
+    color:#9ca3af;
+}
+
 @media(max-width:768px){
 
     .navbar{
@@ -348,6 +597,27 @@ label{
         font-size:12px;
     }
 
+
+    .salaryDisclosureToolbar,
+    .welfareToolbar{
+        grid-template-columns:1fr;
+        gap:10px;
+    }
+
+    .welfareWideField{
+        grid-column:auto;
+    }
+
+    .salaryActionRow,
+    .salaryActionRow.inlineActions{
+        flex-direction:column;
+        align-self:stretch;
+    }
+
+    .actionBtn{
+        width:100%;
+    }
+
 }
 </style>
 </head>
@@ -368,101 +638,219 @@ label{
 
 
     <div class="card laborIndicatorCard">
-        <h2 class="sectionTitle">薪資與保險費率</h2>
-        <div class="desc">說明：整理 HR 常用之基本工資、勞保、健保與就保費率，供薪資與人事作業快速參考。</div>
+        <h2 class="sectionTitle" onclick="toggleCard(this)">
+            <span>薪資與保險費率</span>
+            <button class="collapseBtn" type="button" aria-label="收放區塊">▼</button>
+        </h2>
+        <div class="sectionContent">
+            <div class="desc">說明：整理 HR 常用之基本工資、勞保、健保與就保費率，供薪資與人事作業快速參考。</div>
 
-        <div class="laborMetricGrid">
-            <a class="laborMetricBox" href="https://service.moea.gov.tw/EE521/common/Common.aspx?code=J&no=2" target="_blank" rel="noopener">
-                <div>
-                    <div class="laborMetricLabel">基本工資｜月薪</div>
-                    <div class="laborMetricValue">29,500</div>
-                    <div class="laborMetricSub">NT$29,500／月<br>2026/01/01 起適用</div>
-                </div>
-            </a>
+            <div class="laborMetricGrid">
+                <a class="laborMetricBox" href="https://service.moea.gov.tw/EE521/common/Common.aspx?code=J&no=2" target="_blank" rel="noopener">
+                    <div>
+                        <div class="laborMetricLabel">基本工資｜月薪</div>
+                        <div class="laborMetricValue">29,500</div>
+                        <div class="laborMetricSub">NT$29,500／月<br>2026/01/01 起適用</div>
+                    </div>
+                </a>
 
-            <a class="laborMetricBox" href="https://service.moea.gov.tw/EE521/common/Common.aspx?code=J&no=2" target="_blank" rel="noopener">
-                <div>
-                    <div class="laborMetricLabel">基本工資｜時薪</div>
-                    <div class="laborMetricValue">196</div>
-                    <div class="laborMetricSub">NT$196／時<br>2026/01/01 起適用</div>
-                </div>
-            </a>
+                <a class="laborMetricBox" href="https://service.moea.gov.tw/EE521/common/Common.aspx?code=J&no=2" target="_blank" rel="noopener">
+                    <div>
+                        <div class="laborMetricLabel">基本工資｜時薪</div>
+                        <div class="laborMetricValue">196</div>
+                        <div class="laborMetricSub">NT$196／時<br>2026/01/01 起適用</div>
+                    </div>
+                </a>
 
-            <a class="laborMetricBox" href="https://www.bli.gov.tw/0108700.html" target="_blank" rel="noopener">
-                <div>
-                    <div class="laborMetricLabel">勞保費率</div>
-                    <div class="laborMetricValue">11.5%</div>
-                    <div class="laborMetricSub">普通事故保險費率<br>不含就業保險</div>
-                </div>
-            </a>
+                <a class="laborMetricBox" href="https://www.bli.gov.tw/0108700.html" target="_blank" rel="noopener">
+                    <div>
+                        <div class="laborMetricLabel">勞保費率</div>
+                        <div class="laborMetricValue">11.5%</div>
+                        <div class="laborMetricSub">普通事故保險費率<br>不含就業保險</div>
+                    </div>
+                </a>
 
-            <a class="laborMetricBox" href="https://www.bli.gov.tw/0108700.html" target="_blank" rel="noopener">
-                <div>
-                    <div class="laborMetricLabel">就保費率</div>
-                    <div class="laborMetricValue">1%</div>
-                    <div class="laborMetricSub">就業保險費率<br>與勞保合併申報</div>
-                </div>
-            </a>
+                <a class="laborMetricBox" href="https://www.bli.gov.tw/0108700.html" target="_blank" rel="noopener">
+                    <div>
+                        <div class="laborMetricLabel">就保費率</div>
+                        <div class="laborMetricValue">1%</div>
+                        <div class="laborMetricSub">就業保險費率<br>與勞保合併申報</div>
+                    </div>
+                </a>
 
-            <a class="laborMetricBox" href="https://www.nhi.gov.tw/" target="_blank" rel="noopener">
-                <div>
-                    <div class="laborMetricLabel">健保費率</div>
-                    <div class="laborMetricValue">5.17%</div>
-                    <div class="laborMetricSub">全民健康保險<br>一般保險費率</div>
+                <a class="laborMetricBox" href="https://www.nhi.gov.tw/" target="_blank" rel="noopener">
+                    <div>
+                        <div class="laborMetricLabel">健保費率</div>
+                        <div class="laborMetricValue">5.17%</div>
+                        <div class="laborMetricSub">全民健康保險<br>一般保險費率</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card salaryDisclosureCard">
+        <h2 class="sectionTitle" onclick="toggleCard(this)">
+            <span>員工薪資福利揭露查詢</span>
+            <button class="collapseBtn" type="button" aria-label="收放區塊">▼</button>
+        </h2>
+        <div class="sectionContent">
+            <div class="subSection">
+                <div class="subSectionTitle">A. 非主管全時員工薪資資訊</div>
+                <div class="subSectionDesc">可查年度、產業、公司代號、統編或公司名稱；預設顯示 TOP 10，上市櫃不另行區分。</div>
+
+                <div class="salaryDisclosureToolbar">
+                    <label class="queryField">
+                        查詢年度
+                        <select id="salaryYear" onchange="filterSalaryDisclosure()"></select>
+                    </label>
+
+                    <label class="queryField">
+                        產業別
+                        <select id="salaryIndustry" onchange="filterSalaryDisclosure()"></select>
+                    </label>
+
+                    <label class="queryField">
+                        公司／統編／代號
+                        <input id="salaryCompany" type="text" placeholder="例：鴻海、2317、統編" oninput="filterSalaryDisclosure()">
+                    </label>
+
+                    <label class="queryField">
+                        排序欄位
+                        <select id="salaryRankBy" onchange="filterSalaryDisclosure()">
+                            <option value="medianLatest">薪資中位數｜最近一年</option>
+                            <option value="avgLatest">平均薪資｜最近一年</option>
+                        </select>
+                    </label>
+
+                    <label class="queryField">
+                        顯示筆數
+                        <select id="salaryLimit" onchange="filterSalaryDisclosure()">
+                            <option value="10">TOP 10</option>
+                            <option value="20">TOP 20</option>
+                            <option value="50">TOP 50</option>
+                        </select>
+                    </label>
+
+                    <div class="salaryActionRow inlineActions">
+                        <button class="actionBtn" type="button" onclick="filterSalaryDisclosure()">查詢</button>
+                        <button class="actionBtn secondary" type="button" onclick="resetSalaryDisclosure()">重設</button>
+                    </div>
                 </div>
-            </a>
+
+                <div class="tableWrap">
+                    <table class="disclosureTable">
+                        <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>年度</th>
+                                <th>產業別</th>
+                                <th>公司名稱</th>
+                                <th>員工人數</th>
+                                <th>平均薪資｜最近一年</th>
+                                <th>平均薪資｜前一年</th>
+                                <th>薪資中位數｜最近一年</th>
+                                <th>薪資中位數｜前一年</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salaryDisclosureBody">
+                            <tr><td colspan="9" class="center">資料載入中...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="subSection">
+                <div class="subSectionTitle">B. 員工福利政策及權益維護措施</div>
+                <div class="subSectionDesc">可依年度與公司代號／統編／名稱查詢個別公司揭露內容，結果直接顯示於本頁，不另開新視窗；預設不帶公司、不顯示清單。</div>
+
+                <div class="salaryDisclosureToolbar welfareToolbar">
+                    <label class="queryField">
+                        查詢年度
+                        <select id="welfareYear" onchange="filterWelfareDisclosure()"></select>
+                    </label>
+
+                    <label class="queryField welfareWideField">
+                        公司／統編／代號
+                        <input id="welfareCompany" type="text" placeholder="例：鴻海、2317、統編" oninput="filterWelfareDisclosure()">
+                    </label>
+
+                    <div class="salaryActionRow inlineActions">
+                        <button class="actionBtn" type="button" onclick="filterWelfareDisclosure()">查詢</button>
+                        <button class="actionBtn secondary" type="button" onclick="resetWelfareDisclosure()">重設</button>
+                    </div>
+                </div>
+                <div class="welfareCardList" id="welfareDisclosureBody">
+                    <div class="welfareCard">資料載入中...</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="card">
-        <h2 class="sectionTitle">失業率</h2>
-        <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
-        <canvas id="unemploymentChart"></canvas>
+        <h2 class="sectionTitle" onclick="toggleCard(this)">
+            <span>失業率</span>
+            <button class="collapseBtn" type="button" aria-label="收放區塊">▼</button>
+        </h2>
+        <div class="sectionContent">
+            <div class="desc">說明：「想工作卻找不到工作的人」占勞動力的比例。</div>
+            <canvas id="unemploymentChart"></canvas>
+        </div>
     </div>
     <div class="card">
-        <h2 class="sectionTitle">消費者物價指數年增率(CPI)</h2>
-        <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
+        <h2 class="sectionTitle" onclick="toggleCard(this)">
+            <span>消費者物價指數年增率(CPI)</span>
+            <button class="collapseBtn" type="button" aria-label="收放區塊">▼</button>
+        </h2>
+        <div class="sectionContent">
+            <div class="desc">說明：民眾日常生活物價上漲或下跌的指標。﹝基期年2021年﹞</div>
 
-        <div class="filter">
-            起：<select id="startMonth"></select>
-            迄：<select id="endMonth"></select>
+            <div class="filter">
+                起：<select id="startMonth"></select>
+                迄：<select id="endMonth"></select>
 
-            <label>
-                <input type="checkbox" id="compareMode">
-                同期比較
-            </label>
+                <label>
+                    <input type="checkbox" id="compareMode">
+                    同期比較
+                </label>
 
-            <button onclick="filterData()">查詢</button>
+                <button onclick="filterData()">查詢</button>
+            </div>
+
+            <canvas id="cpiChart"></canvas>
         </div>
-
-        <canvas id="cpiChart"></canvas>
     </div>
 
     <div class="card">
-        <h2 class="sectionTitle">GDP 經濟成長率</h2>
-        <div class="desc">說明：國內生產毛額（GDP）成長率，反映整體經濟成長情況。</div>
+        <h2 class="sectionTitle" onclick="toggleCard(this)">
+            <span>GDP 經濟成長率</span>
+            <button class="collapseBtn" type="button" aria-label="收放區塊">▼</button>
+        </h2>
+        <div class="sectionContent">
+            <div class="desc">說明：國內生產毛額（GDP）成長率，反映整體經濟成長情況。</div>
 
-        <div class="filter">
-            年度：<select id="gdpYear"></select>
+            <div class="filter">
+                年度：<select id="gdpYear"></select>
 
-            季度：
-            <select id="gdpQuarter">
-                <option value="">全部季度</option>
-                <option value="Q1">第一季</option>
-                <option value="Q2">第二季</option>
-                <option value="Q3">第三季</option>
-                <option value="Q4">第四季</option>
-            </select>
+                季度：
+                <select id="gdpQuarter">
+                    <option value="">全部季度</option>
+                    <option value="Q1">第一季</option>
+                    <option value="Q2">第二季</option>
+                    <option value="Q3">第三季</option>
+                    <option value="Q4">第四季</option>
+                </select>
 
-            <label>
-                <input type="checkbox" id="gdpCompare">
-                同期比較
-            </label>
+                <label>
+                    <input type="checkbox" id="gdpCompare">
+                    同期比較
+                </label>
 
-            <button onclick="drawGDP()">查詢</button>
+                <button onclick="drawGDP()">查詢</button>
+            </div>
+
+            <canvas id="gdpChart"></canvas>
         </div>
-
-        <canvas id="gdpChart"></canvas>
     </div>
 
     <div class="source">
@@ -470,7 +858,9 @@ label{
         <a href="https://service.moea.gov.tw/EE521/common/Common.aspx?code=J&no=2" target="_blank" rel="noopener">經濟部經濟統計資料</a>、
         <a href="https://www.mol.gov.tw/" target="_blank" rel="noopener">勞動部</a>、
         <a href="https://www.bli.gov.tw/0108700.html" target="_blank" rel="noopener">勞保局</a>、
-        <a href="https://www.nhi.gov.tw/" target="_blank" rel="noopener">健保署</a>
+        <a href="https://www.nhi.gov.tw/" target="_blank" rel="noopener">健保署</a>、
+        <a href="https://mopsov.twse.com.tw/mops/web/t100sb15" target="_blank" rel="noopener">公開資訊觀測站｜非主管全時員工薪資資訊</a>、
+        <a href="https://mopsov.twse.com.tw/mops/web/t100sb12" target="_blank" rel="noopener">公開資訊觀測站｜員工福利政策及權益維護措施</a>
     </div>
 
 </div>
@@ -517,6 +907,10 @@ Chart.register(ChartDataLabels);
 let allData = [];
 let gdpData = [];
 let gdpChart, cpiChart, unemploymentChart;
+let salaryDisclosureData = [];
+let salaryDisclosureSource = "內建示範資料";
+let welfareDisclosureData = [];
+let welfareDisclosureSource = "內建示範資料";
 
 fetch("./data/taiwan_cpi_unemployment.json?v=" + new Date().getTime())
 .then(res => res.json())
@@ -543,8 +937,259 @@ fetch("./data/taiwan_news.json?v=" + new Date().getTime())
     renderNewsGroup(news,"勞保局","newsBli");
 });
 
+
+const defaultSalaryDisclosureData = [
+    {年度:"113", 產業別:"半導體業", 公司代號:"5274", 統一編號:"", 公司名稱:"信驊", 員工人數:"—", 平均薪資最近一年:471.5, 平均薪資前一年:"—", 薪資中位數最近一年:400.4, 薪資中位數前一年:"—"},
+    {年度:"113", 產業別:"半導體業", 公司代號:"2454", 統一編號:"", 公司名稱:"聯發科", 員工人數:"—", 平均薪資最近一年:431.0, 平均薪資前一年:"—", 薪資中位數最近一年:343.8, 薪資中位數前一年:"—"},
+    {年度:"113", 產業別:"半導體業", 公司代號:"2379", 統一編號:"", 公司名稱:"瑞昱", 員工人數:"—", 平均薪資最近一年:391.5, 平均薪資前一年:"—", 薪資中位數最近一年:324.6, 薪資中位數前一年:"—"},
+    {年度:"113", 產業別:"半導體業", 公司代號:"6526", 統一編號:"", 公司名稱:"達發", 員工人數:"—", 平均薪資最近一年:357.1, 平均薪資前一年:"—", 薪資中位數最近一年:304.9, 薪資中位數前一年:"—"},
+    {年度:"113", 產業別:"半導體業", 公司代號:"3034", 統一編號:"", 公司名稱:"聯詠", 員工人數:"—", 平均薪資最近一年:352.1, 平均薪資前一年:"—", 薪資中位數最近一年:286.5, 薪資中位數前一年:"—"},
+    {年度:"113", 產業別:"半導體業", 公司代號:"3227", 統一編號:"", 公司名稱:"原相", 員工人數:"—", 平均薪資最近一年:302.9, 平均薪資前一年:"—", 薪資中位數最近一年:286.4, 薪資中位數前一年:"—"},
+    {年度:"113", 產業別:"半導體業", 公司代號:"3529", 統一編號:"", 公司名稱:"力旺", 員工人數:"—", 平均薪資最近一年:313.3, 平均薪資前一年:"—", 薪資中位數最近一年:271.8, 薪資中位數前一年:"—"},
+    {年度:"113", 產業別:"半導體業", 公司代號:"2330", 統一編號:"", 公司名稱:"台積電", 員工人數:"—", 平均薪資最近一年:339.1, 平均薪資前一年:"—", 薪資中位數最近一年:264.5, 薪資中位數前一年:"—"},
+    {年度:"113", 產業別:"半導體業", 公司代號:"3592", 統一編號:"", 公司名稱:"瑞鼎", 員工人數:"—", 平均薪資最近一年:341.3, 平均薪資前一年:"—", 薪資中位數最近一年:261.2, 薪資中位數前一年:"—"},
+    {年度:"113", 產業別:"數位雲端", 公司代號:"3293", 統一編號:"", 公司名稱:"鈊象", 員工人數:"—", 平均薪資最近一年:356.1, 平均薪資前一年:"—", 薪資中位數最近一年:258.5, 薪資中位數前一年:"—"}
+];
+
+const defaultWelfareDisclosureData = [
+    {年度:"113", 公司代號:"2317", 統一編號:"04541302", 公司名稱:"鴻海", 福利政策:"提供團體保險、員工持股信託、健康檢查、育兒與生活關懷等福利措施。", 權益維護措施:"設有申訴與溝通管道、職安衛管理、教育訓練與性騷擾防治機制。"},
+    {年度:"113", 公司代號:"2330", 統一編號:"22099131", 公司名稱:"台積電", 福利政策:"提供具競爭力的薪酬、員工認股、健康促進、彈性假勤與多元照顧方案。", 權益維護措施:"重視職場平等、勞資溝通、職安管理與員工意見回饋機制。"},
+    {年度:"113", 公司代號:"2454", 統一編號:"84149961", 公司名稱:"聯發科", 福利政策:"提供完整保險、健康檢查、節慶補助、員工活動及家庭照顧方案。", 權益維護措施:"設有申訴制度、道德規範宣導、教育訓練及多元共融推動措施。"}
+];
+
+loadSalaryDisclosureData();
+loadWelfareDisclosureData();
+
+function loadSalaryDisclosureData(){
+    fetch("./data/employee_salary_disclosure.json?v=" + new Date().getTime())
+    .then(res => {
+        if(!res.ok) throw new Error("no local salary disclosure data");
+        return res.json();
+    })
+    .then(data => {
+        salaryDisclosureData = normalizeSalaryDisclosureData(Array.isArray(data) ? data : (data.data || []));
+        salaryDisclosureSource = Array.isArray(data) ? "data/employee_salary_disclosure.json" : (data.source || "data/employee_salary_disclosure.json");
+        initSalaryDisclosureFilters();
+        filterSalaryDisclosure();
+    })
+    .catch(() => {
+        salaryDisclosureData = normalizeSalaryDisclosureData(defaultSalaryDisclosureData);
+        salaryDisclosureSource = "內建示範資料；請放置 data/employee_salary_disclosure.json 以啟用正式自動更新";
+        initSalaryDisclosureFilters();
+        filterSalaryDisclosure();
+    });
+}
+
+function normalizeSalaryDisclosureData(rows){
+    return rows.map(row => ({
+        year:String(row.年度 ?? row.year ?? ""),
+        industry:String(row.產業別 ?? row.industry ?? ""),
+        code:String(row.公司代號 ?? row.code ?? ""),
+        taxId:String(row.統一編號 ?? row.taxId ?? ""),
+        company:String(row.公司名稱 ?? row.company ?? ""),
+        employees:row.員工人數 ?? row.employees ?? "—",
+        avgLatest:toNumber(row.平均薪資最近一年 ?? row.avgLatest),
+        avgPrevious:row.平均薪資前一年 ?? row.avgPrevious ?? "—",
+        medianLatest:toNumber(row.薪資中位數最近一年 ?? row.medianLatest),
+        medianPrevious:row.薪資中位數前一年 ?? row.medianPrevious ?? "—"
+    })).filter(row => row.year && row.company);
+}
+
+function toNumber(value){
+    if(value === null || value === undefined || value === "" || value === "—") return null;
+    const cleaned = String(value).replace(/[,萬元\s]/g, "");
+    const num = Number(cleaned);
+    return Number.isFinite(num) ? num : null;
+}
+
+function initSalaryDisclosureFilters(){
+    const yearSelect = document.getElementById("salaryYear");
+    const industrySelect = document.getElementById("salaryIndustry");
+    if(!yearSelect || !industrySelect) return;
+
+    const years = [...new Set(salaryDisclosureData.map(row => row.year))].sort((a,b)=>Number(b)-Number(a));
+    const industries = [...new Set(salaryDisclosureData.map(row => row.industry).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"zh-Hant"));
+
+    yearSelect.innerHTML = `<option value="">全部年度</option>` + years.map(y => `<option value="${escapeHtml(y)}">${escapeHtml(y)}</option>`).join("");
+    industrySelect.innerHTML = `<option value="">全部產業</option>` + industries.map(x => `<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+
+    if(years.length) yearSelect.value = years[0];
+}
+
+function filterSalaryDisclosure(){
+    const year = document.getElementById("salaryYear")?.value || "";
+    const industry = document.getElementById("salaryIndustry")?.value || "";
+    const keyword = (document.getElementById("salaryCompany")?.value || "").trim().toLowerCase();
+    const rankBy = document.getElementById("salaryRankBy")?.value || "medianLatest";
+    const limit = Number(document.getElementById("salaryLimit")?.value || 10);
+
+    let rows = salaryDisclosureData.filter(row => {
+        const companyText = `${row.company} ${row.code} ${row.taxId}`.toLowerCase();
+        return (!year || row.year === year) &&
+               (!industry || row.industry === industry) &&
+               (!keyword || companyText.includes(keyword));
+    });
+
+    rows.sort((a,b) => (b[rankBy] ?? -1) - (a[rankBy] ?? -1));
+    renderSalaryDisclosureTable(rows.slice(0, limit));
+
+}
+
+function resetSalaryDisclosure(){
+    const yearSelect = document.getElementById("salaryYear");
+    const firstYear = yearSelect?.querySelector("option:nth-child(2)")?.value || "";
+    if(yearSelect) yearSelect.value = firstYear;
+    const industrySelect = document.getElementById("salaryIndustry");
+    if(industrySelect) industrySelect.value = "";
+    const companyInput = document.getElementById("salaryCompany");
+    if(companyInput) companyInput.value = "";
+    const rankSelect = document.getElementById("salaryRankBy");
+    if(rankSelect) rankSelect.value = "medianLatest";
+    const limitSelect = document.getElementById("salaryLimit");
+    if(limitSelect) limitSelect.value = "10";
+    filterSalaryDisclosure();
+}
+
+function renderSalaryDisclosureTable(rows){
+    const tbody = document.getElementById("salaryDisclosureBody");
+    if(!tbody) return;
+
+    if(rows.length === 0){
+        tbody.innerHTML = `<tr><td colspan="9" class="center">查無符合條件資料</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = rows.map((row, index) => `
+        <tr>
+            <td class="center">${index + 1}</td>
+            <td>${escapeHtml(row.year)}</td>
+            <td>${escapeHtml(row.industry || "—")}</td>
+            <td>${escapeHtml(row.company)}${row.code ? `（${escapeHtml(row.code)}）` : ""}</td>
+            <td class="num">${formatValue(row.employees, "")}</td>
+            <td class="num">${formatValue(row.avgLatest, " 萬元")}</td>
+            <td class="num">${formatValue(row.avgPrevious, " 萬元")}</td>
+            <td class="num">${formatValue(row.medianLatest, " 萬元")}</td>
+            <td class="num">${formatValue(row.medianPrevious, " 萬元")}</td>
+        </tr>
+    `).join("");
+}
+
+function formatValue(value, suffix){
+    if(value === null || value === undefined || value === "" || value === "—") return "—";
+    if(typeof value === "number") return value.toLocaleString("zh-TW", {maximumFractionDigits:1}) + suffix;
+    return escapeHtml(String(value));
+}
+
+function escapeHtml(value){
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function loadWelfareDisclosureData(){
+    fetch("./data/employee_welfare_disclosure.json?v=" + new Date().getTime())
+    .then(res => {
+        if(!res.ok) throw new Error("no local welfare disclosure data");
+        return res.json();
+    })
+    .then(data => {
+        welfareDisclosureData = normalizeWelfareDisclosureData(Array.isArray(data) ? data : (data.data || []));
+        welfareDisclosureSource = Array.isArray(data) ? "data/employee_welfare_disclosure.json" : (data.source || "data/employee_welfare_disclosure.json");
+        initWelfareDisclosureFilters();
+        filterWelfareDisclosure();
+    })
+    .catch(() => {
+        welfareDisclosureData = normalizeWelfareDisclosureData(defaultWelfareDisclosureData);
+        welfareDisclosureSource = "內建示範資料；請放置 data/employee_welfare_disclosure.json 以啟用正式自動更新";
+        initWelfareDisclosureFilters();
+        filterWelfareDisclosure();
+    });
+}
+
+function normalizeWelfareDisclosureData(rows){
+    return rows.map(row => ({
+        year:String(row.年度 ?? row.year ?? ""),
+        code:String(row.公司代號 ?? row.code ?? ""),
+        taxId:String(row.統一編號 ?? row.taxId ?? ""),
+        company:String(row.公司名稱 ?? row.company ?? ""),
+        welfarePolicy:String(row.福利政策 ?? row.welfarePolicy ?? row.policy ?? ""),
+        rightsProtection:String(row.權益維護措施 ?? row.rightsProtection ?? row.rights ?? ""),
+        notes:String(row.備註 ?? row.notes ?? "")
+    })).filter(row => row.company);
+}
+
+function initWelfareDisclosureFilters(){
+    const yearSelect = document.getElementById("welfareYear");
+    if(!yearSelect) return;
+    const years = [...new Set(welfareDisclosureData.map(row => row.year).filter(Boolean))].sort((a,b)=>Number(b)-Number(a));
+    yearSelect.innerHTML = `<option value="">全部年度</option>` + years.map(y => `<option value="${escapeHtml(y)}">${escapeHtml(y)}</option>`).join("");
+    yearSelect.value = "";
+}
+
+function filterWelfareDisclosure(){
+    const year = document.getElementById("welfareYear")?.value || "";
+    const keyword = (document.getElementById("welfareCompany")?.value || "").trim().toLowerCase();
+
+    if(!keyword){
+        renderWelfareDisclosure([],{emptyMessage:"請輸入公司名稱、公司代號或統編後查詢"});
+        return;
+    }
+
+    const rows = welfareDisclosureData.filter(row => {
+        const companyText = `${row.company} ${row.code} ${row.taxId}`.toLowerCase();
+        return (!year || row.year === year) && companyText.includes(keyword);
+    });
+    renderWelfareDisclosure(rows);
+}
+
+function resetWelfareDisclosure(){
+    const yearSelect = document.getElementById("welfareYear");
+    if(yearSelect) yearSelect.value = "";
+    const companyInput = document.getElementById("welfareCompany");
+    if(companyInput) companyInput.value = "";
+    filterWelfareDisclosure();
+}
+
+function renderWelfareDisclosure(rows, options={}){
+    const box = document.getElementById("welfareDisclosureBody");
+    if(!box) return;
+    if(rows.length === 0){
+        box.innerHTML = `<div class="welfareCard">${escapeHtml(options.emptyMessage || "查無符合條件資料")}</div>`;
+        return;
+    }
+    box.innerHTML = rows.map(row => `
+        <div class="welfareCard">
+            <div class="welfareCardHeader">
+                <div class="welfareCompanyName">${escapeHtml(row.company)}${row.code ? `（${escapeHtml(row.code)}）` : ""}</div>
+                <div class="welfareMeta">年度：${escapeHtml(row.year || "—")}</div>
+                ${row.taxId ? `<div class="welfareMeta">統編：${escapeHtml(row.taxId)}</div>` : ""}
+            </div>
+            <div class="welfareBlock">
+                <div class="welfareBlockTitle">福利政策</div>
+                <div class="welfareBlockContent">${escapeHtml(row.welfarePolicy || "—")}</div>
+            </div>
+            <div class="welfareBlock">
+                <div class="welfareBlockTitle">權益維護措施</div>
+                <div class="welfareBlockContent">${escapeHtml(row.rightsProtection || "—")}</div>
+            </div>
+            ${row.notes ? `<div class="welfareBlock"><div class="welfareBlockTitle">備註</div><div class="welfareBlockContent">${escapeHtml(row.notes)}</div></div>` : ""}
+        </div>
+    `).join("");
+}
+
 function toggleNewsPanel(){
     document.getElementById("newsDrawer").classList.toggle("open");
+}
+
+function toggleCard(titleElement){
+    const title = titleElement.classList && titleElement.classList.contains("sectionTitle")
+        ? titleElement
+        : titleElement.closest(".sectionTitle");
+    const card = title.closest(".card");
+    card.classList.toggle("collapsed");
 }
 
 function renderNewsGroup(news, unitName, elementId){
