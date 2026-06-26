@@ -1,20 +1,20 @@
 from __future__ import annotations
 
 import json
+import os
 import re
-from pathlib import Path
 from typing import Any
 
 from bs4 import BeautifulSoup
 
-from mops_common import DATA_DIR, clean_text, default_report_year, read_tables, request_post, write_json
+from mops_common import DATA_DIR, MopsBrowser, clean_text, default_report_year, read_tables, sleep_polite, write_json
 
 SALARY_JSON = DATA_DIR / "employee_salary_disclosure.json"
 WELFARE_JSON = DATA_DIR / "employee_welfare_disclosure.json"
 
 
 def load_company_list() -> list[dict[str, str]]:
-    """Use the salary disclosure JSON as the company universe, so welfare scraping is automatic."""
+    """Use salary disclosure JSON as company universe, so welfare scraping is automatic."""
     if not SALARY_JSON.exists():
         return []
     payload = json.loads(SALARY_JSON.read_text(encoding="utf-8"))
@@ -28,11 +28,15 @@ def load_company_list() -> list[dict[str, str]]:
             continue
         seen.add(code)
         companies.append({"公司代號": code, "公司名稱": company})
+
+    # 可用環境變數限制測試筆數，例如 MOPS_WELFARE_LIMIT=30
+    limit = os.getenv("MOPS_WELFARE_LIMIT")
+    if limit and limit.isdigit():
+        return companies[: int(limit)]
     return companies
 
 
-def fetch_welfare_html(code: str, year: str) -> str:
-    # MOPS forms sometimes use slightly different keys. Try the common combinations.
+def fetch_welfare_html(browser: MopsBrowser, code: str, year: str) -> str:
     candidate_payloads = [
         {"step": "1", "firstin": "1", "co_id": code, "year": year, "TYPEK": "all"},
         {"step": "1", "firstin": "1", "co_id": code, "RYEAR": year, "TYPEK": "all"},
@@ -41,11 +45,12 @@ def fetch_welfare_html(code: str, year: str) -> str:
     ]
     last_html = ""
     for payload in candidate_payloads:
-        html = request_post("ajax_t100sb12", payload, sleep_sec=1.2)
+        html = browser.post("t100sb12", "ajax_t100sb12", payload)
         last_html = html
         text = clean_text(BeautifulSoup(html, "html.parser").get_text(" "))
-        if code in text and len(text) > 200 and "查無" not in text:
+        if code in text and len(text) > 100 and "查無" not in text and "無資料" not in text:
             return html
+        sleep_polite(0.6)
     return last_html
 
 
@@ -59,7 +64,6 @@ def parse_welfare_html(html: str, code: str, company: str, year: str) -> dict[st
     rights_protection = ""
 
     tables = read_tables(html)
-    # First try table-style extraction.
     for df in tables:
         for _, row in df.iterrows():
             row_text = clean_text(" ".join(clean_text(x) for x in row.tolist()))
@@ -70,7 +74,6 @@ def parse_welfare_html(html: str, code: str, company: str, year: str) -> dict[st
             if any(k in row_text for k in ["權益維護", "員工權益", "人權", "職業安全", "申訴"]):
                 rights_protection += ("\n" if rights_protection else "") + row_text
 
-    # Fallback: split the whole page text into two broad sections.
     if not welfare_policy and not rights_protection:
         parts = re.split(r"(權益維護措施|員工權益|人權政策|職業安全)", text, maxsplit=1)
         if len(parts) >= 3:
@@ -96,25 +99,27 @@ def main() -> None:
         raise RuntimeError("No company list found. Run update_employee_salary.py first so welfare update can use the company universe.")
 
     results: list[dict[str, Any]] = []
-    for i, item in enumerate(companies, start=1):
-        code = item["公司代號"]
-        company = item["公司名稱"]
-        print(f"[{i}/{len(companies)}] {code} {company}")
-        try:
-            html = fetch_welfare_html(code, year)
-            parsed = parse_welfare_html(html, code, company, year)
-            if parsed:
-                results.append(parsed)
-        except Exception as exc:
-            print(f"Skip {code} {company}: {exc}")
+    with MopsBrowser() as browser:
+        for i, item in enumerate(companies, start=1):
+            code = item["公司代號"]
+            company = item["公司名稱"]
+            print(f"[{i}/{len(companies)}] {code} {company}")
+            try:
+                html = fetch_welfare_html(browser, code, year)
+                parsed = parse_welfare_html(html, code, company, year)
+                if parsed:
+                    results.append(parsed)
+            except Exception as exc:
+                print(f"Skip {code} {company}: {exc}")
+            sleep_polite(1.2)
 
     if not results:
-        raise RuntimeError("No welfare disclosure rows were fetched. Check MOPS payload or page structure.")
+        raise RuntimeError("No welfare disclosure rows were fetched. Check MOPS payload/page structure.")
 
     write_json(
         WELFARE_JSON,
         results,
-        f"MOPS 員工福利政策及權益維護措施，自動更新年度 {year}",
+        f"MOPS 員工福利政策及權益維護措施，瀏覽器模式自動更新年度 {year}",
     )
     print(f"Wrote {len(results)} rows to {WELFARE_JSON}")
 
