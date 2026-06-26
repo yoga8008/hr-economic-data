@@ -27,19 +27,44 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check Python
+      - name: Locate Python
         shell: powershell
         run: |
-          $python = "C:\Users\youji\AppData\Local\Python\pythoncore-3.11-64\python.exe"
+          $paths = @(
+            "C:\Users\youji\AppData\Local\Python\pythoncore-3.11-64\python.exe",
+            "C:\Users\youji\AppData\Local\Python\PythonCore-3.11-64\python.exe",
+            "C:\Users\youji\AppData\Local\Programs\Python\Python311\python.exe",
+            "C:\Program Files\Python311\python.exe",
+            "C:\Python311\python.exe"
+          )
+
+          $python = $paths | Where-Object { Test-Path $_ } | Select-Object -First 1
+
+          if (-not $python) {
+            $python = Get-ChildItem `
+              -Path "C:\Users\youji\AppData\Local\Python", "C:\Users\youji\AppData\Local\Programs\Python", "C:\Program Files" `
+              -Filter python.exe `
+              -Recurse `
+              -ErrorAction SilentlyContinue |
+              Where-Object { $_.FullName -match "3\.11|Python311|pythoncore" } |
+              Select-Object -First 1 -ExpandProperty FullName
+          }
+
+          if (-not $python) {
+            throw "找不到 Python 3.11 的 python.exe"
+          }
+
+          Write-Host "Python path: $python"
+          "PYTHON_EXE=$python" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
           & $python --version
           & $python -m pip --version
 
       - name: Install dependencies
         shell: powershell
         run: |
-          $python = "C:\Users\youji\AppData\Local\Python\pythoncore-3.11-64\python.exe"
-          & $python -m pip install --upgrade pip
-          & $python -m pip install -r scripts/requirements.txt
+          & $env:PYTHON_EXE -m pip install --upgrade pip
+          & $env:PYTHON_EXE -m pip install -r scripts/requirements.txt
 
       - name: Decide update target
         shell: powershell
@@ -71,15 +96,13 @@ jobs:
         if: env.RUN_SALARY == 'true'
         shell: powershell
         run: |
-          $python = "C:\Users\youji\AppData\Local\Python\pythoncore-3.11-64\python.exe"
-          & $python scripts/update_employee_salary.py
+          & $env:PYTHON_EXE scripts/update_employee_salary.py
 
       - name: Update welfare disclosure JSON
         if: env.RUN_WELFARE == 'true'
         shell: powershell
         run: |
-          $python = "C:\Users\youji\AppData\Local\Python\pythoncore-3.11-64\python.exe"
-          & $python scripts/update_employee_welfare.py
+          & $env:PYTHON_EXE scripts/update_employee_welfare.py
 
       - name: Commit updated data
         shell: powershell
