@@ -6,7 +6,6 @@ on:
   schedule:
     # A. 非主管全時員工薪資資訊
     # 每年 6/25～6/30，每天 09:10 台灣時間執行
-    # GitHub cron 使用 UTC，UTC 01:10 = 台灣 09:10
     - cron: "10 1 25-30 6 *"
 
     # A. 非主管全時員工薪資資訊
@@ -31,14 +30,16 @@ jobs:
       - name: Check Python
         shell: powershell
         run: |
-          py -3.11 --version
-          py -3.11 -m pip --version
+          $python = "C:\Users\youji\AppData\Local\Python\pythoncore-3.11-64\python.exe"
+          & $python --version
+          & $python -m pip --version
 
       - name: Install dependencies
         shell: powershell
         run: |
-          py -3.11 -m pip install --upgrade pip
-          py -3.11 -m pip install -r scripts/requirements.txt
+          $python = "C:\Users\youji\AppData\Local\Python\pythoncore-3.11-64\python.exe"
+          & $python -m pip install --upgrade pip
+          & $python -m pip install -r scripts/requirements.txt
 
       - name: Decide update target
         shell: powershell
@@ -70,13 +71,15 @@ jobs:
         if: env.RUN_SALARY == 'true'
         shell: powershell
         run: |
-          py -3.11 scripts/update_employee_salary.py
+          $python = "C:\Users\youji\AppData\Local\Python\pythoncore-3.11-64\python.exe"
+          & $python scripts/update_employee_salary.py
 
       - name: Update welfare disclosure JSON
         if: env.RUN_WELFARE == 'true'
         shell: powershell
         run: |
-          py -3.11 scripts/update_employee_welfare.py
+          $python = "C:\Users\youji\AppData\Local\Python\pythoncore-3.11-64\python.exe"
+          & $python scripts/update_employee_welfare.py
 
       - name: Commit updated data
         shell: powershell
