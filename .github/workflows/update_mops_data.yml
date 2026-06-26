@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       target:
-        description: "Run target"
+        description: "要更新的資料"
         required: true
         default: "all"
         type: choice
@@ -14,13 +14,17 @@ on:
           - welfare
 
   schedule:
-    # A. 非主管全時員工薪資資訊：每年 6/25～6/30，每天 09:10 台灣時間執行
+    # A. 非主管全時員工薪資資訊
+    # 每年 6/25～6/30，每天 09:10 台灣時間執行
+    # GitHub cron 使用 UTC，UTC 01:10 = 台灣 09:10
     - cron: "10 1 25-30 6 *"
 
-    # A. 非主管全時員工薪資資訊：每年 7/1～7/25，每天 09:10 台灣時間執行
+    # A. 非主管全時員工薪資資訊
+    # 每年 7/1～7/25，每天 09:10 台灣時間執行
     - cron: "10 1 1-25 7 *"
 
-    # B. 員工福利政策及權益維護措施：每月 1 日 09:40 台灣時間執行
+    # B. 員工福利政策及權益維護措施
+    # 每月 1 日 09:40 台灣時間執行
     - cron: "40 1 1 * *"
 
 permissions:
@@ -29,6 +33,9 @@ permissions:
 jobs:
   update:
     runs-on: self-hosted
+
+    env:
+      MOPS_HEADLESS: "false"
 
     steps:
       - name: Checkout repository
@@ -48,21 +55,31 @@ jobs:
           & $python -m pip install --upgrade pip
           & $python -m pip install -r scripts/requirements.txt
 
+      - name: Install Playwright browser support
+        shell: powershell
+        run: |
+          $python = "C:\Python311\python.exe"
+          & $python -m playwright install
+
       - name: Decide update target
         shell: powershell
         run: |
-          $target = "${{ github.event.inputs.target }}"
           $eventName = "${{ github.event_name }}"
           $schedule = "${{ github.event.schedule }}"
+          $target = "${{ github.event.inputs.target }}"
 
           $runSalary = "false"
           $runWelfare = "false"
 
           if ($eventName -eq "workflow_dispatch") {
-            if ($target -eq "all" -or $target -eq "salary") {
+            if ($target -eq "all") {
+              $runSalary = "true"
+              $runWelfare = "true"
+            }
+            elseif ($target -eq "salary") {
               $runSalary = "true"
             }
-            if ($target -eq "all" -or $target -eq "welfare") {
+            elseif ($target -eq "welfare") {
               $runWelfare = "true"
             }
           }
