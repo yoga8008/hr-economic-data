@@ -13,7 +13,7 @@ from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeo
 
 TAIPEI_TZ = timezone(timedelta(hours=8))
 MOPS_ORIGIN = "https://mops.twse.com.tw"
-MOPS_SPA_BASE = "https://mopsov.twse.com.tw/mops/web"
+MOPS_SPA_BASE = "https://mops.twse.com.tw/mops/web"
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
@@ -211,7 +211,7 @@ class MopsBrowser:
     def open_page(self, page_code: str) -> None:
         assert self.page is not None
         url = f"{MOPS_SPA_BASE}/{page_code}"
-        print(f"Open legacy MOPS page: {url}")
+        print(f"Open MOPS web page: {url}")
         self.page.goto(url, wait_until="domcontentloaded", timeout=60000)
         self.page.wait_for_timeout(5000)
         self.dismiss_popups()
