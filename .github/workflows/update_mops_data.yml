@@ -34,6 +34,8 @@ jobs:
     env:
       MOPS_HEADLESS: "false"
       MOPS_BROWSER_CHANNEL: "msedge"
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: "utf-8"
 
     steps:
       - name: Checkout repository
@@ -42,6 +44,9 @@ jobs:
       - name: Check Python
         shell: powershell
         run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
           $python = "C:\Python311\python.exe"
           & $python --version
           & $python -m pip --version
@@ -49,6 +54,9 @@ jobs:
       - name: Install dependencies
         shell: powershell
         run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
           $python = "C:\Python311\python.exe"
           & $python -m pip install --upgrade pip
           & $python -m pip install -r scripts/requirements.txt
@@ -56,12 +64,18 @@ jobs:
       - name: Install Playwright browser support
         shell: powershell
         run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
           $python = "C:\Python311\python.exe"
           & $python -m playwright install
 
       - name: Decide update target
         shell: powershell
         run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
           $eventName = "${{ github.event_name }}"
           $schedule = "${{ github.event.schedule }}"
           $target = "${{ github.event.inputs.target }}"
@@ -98,6 +112,9 @@ jobs:
         if: env.RUN_SALARY == 'true'
         shell: powershell
         run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
           $python = "C:\Python311\python.exe"
           & $python scripts/update_employee_salary.py
 
@@ -105,6 +122,9 @@ jobs:
         if: env.RUN_WELFARE == 'true'
         shell: powershell
         run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
           $python = "C:\Python311\python.exe"
           & $python scripts/update_employee_welfare.py
 
@@ -119,6 +139,9 @@ jobs:
       - name: Commit updated data
         shell: powershell
         run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
