@@ -372,6 +372,141 @@ class MopsBrowser:
                 pass
         return False
 
+
+    def fill_salary_query_form(self, year: str, market: str | None = None, industry: str = "全部產業") -> bool:
+        """Fill the new MOPS t100sb15 query form by visible control order.
+
+        The t100sb15 SPA page uses ordinary visible controls:
+        市場別 select、產業別 select、年度 input、查詢 button.  The older generic
+        helper may accidentally match the global search bar/menu, so this method
+        deliberately ignores the top keyword search input and targets the query
+        condition form.
+        """
+        script = r"""
+        ({year, market, industry}) => {
+          const visible = el => {
+            const style = window.getComputedStyle(el);
+            const rect = el.getBoundingClientRect();
+            return style && style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+          };
+          const txt = el => (el && (el.innerText || el.textContent || '') || '').replace(/[\s\u00a0\u3000]+/g, ' ').trim();
+          const compactText = el => (el && (el.innerText || el.textContent || el.value || '') || '').replace(/[\s\u00a0\u3000]+/g, '').trim();
+          const rectTop = el => el.getBoundingClientRect().top;
+          const nearbyText = el => {
+            let out = [el.getAttribute('aria-label'), el.getAttribute('placeholder'), el.getAttribute('name'), el.getAttribute('id'), el.getAttribute('title')].filter(Boolean).join(' ');
+            if (el.id) {
+              try {
+                const lab = document.querySelector(`label[for="${CSS.escape(el.id)}"]`);
+                if (lab) out += ' ' + txt(lab);
+              } catch(e) {}
+            }
+            let p = el;
+            for (let i = 0; i < 5 && p; i++, p = p.parentElement) out += ' ' + txt(p);
+            return out;
+          };
+          const setNativeValue = (el, val) => {
+            const proto = Object.getPrototypeOf(el);
+            const setter = Object.getOwnPropertyDescriptor(proto, 'value')?.set;
+            if (setter) setter.call(el, val); else el.value = val;
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+            el.dispatchEvent(new Event('blur', { bubbles: true }));
+          };
+          const chooseSelect = (sel, wanted) => {
+            if (!sel) return false;
+            const want = String(wanted || '').replace(/[\s\u00a0\u3000]+/g, '');
+            const opts = Array.from(sel.options || []);
+            let opt = opts.find(o => compactText(o).includes(want) || String(o.value).replace(/[\s\u00a0\u3000]+/g, '').includes(want));
+            if (!opt && (want.includes('全部') || want === '')) opt = opts.find(o => compactText(o).includes('全部') || compactText(o).includes('全'));
+            if (!opt) return false;
+            setNativeValue(sel, opt.value);
+            return true;
+          };
+
+          const selects = Array.from(document.querySelectorAll('select')).filter(visible).sort((a,b) => rectTop(a) - rectTop(b));
+          const inputs = Array.from(document.querySelectorAll('input:not([type="hidden"]), textarea')).filter(visible).sort((a,b) => rectTop(a) - rectTop(b));
+
+          const marketSelect = selects.find(s => /市場|市場別|上市|上櫃|TYPEK/i.test(nearbyText(s))) || selects[0];
+          const industrySelect = selects.find(s => /產業|產業別|產業類別/i.test(nearbyText(s)) && s !== marketSelect) || selects.find(s => s !== marketSelect) || selects[1];
+          const yearInput = inputs.find(i => /年度|申報年度|查詢年度|RYEAR|101/.test(nearbyText(i)) && !/searchInfo|搜尋|關鍵字|公司代號\/名稱\/關鍵字/i.test(nearbyText(i)))
+            || inputs.find(i => !/searchInfo|搜尋|關鍵字|公司代號\/名稱\/關鍵字/i.test(nearbyText(i)));
+
+          const marketSet = market ? chooseSelect(marketSelect, market) : true;
+          const industrySet = chooseSelect(industrySelect, industry) || chooseSelect(industrySelect, '全部') || true;
+          const yearSet = yearInput ? (setNativeValue(yearInput, String(year)), true) : false;
+
+          return {
+            marketSet,
+            industrySet,
+            yearSet,
+            selectCount: selects.length,
+            inputCount: inputs.length,
+            marketOptions: marketSelect ? Array.from(marketSelect.options || []).map(o => txt(o)).join('|') : '',
+            industryOptions: industrySelect ? Array.from(industrySelect.options || []).slice(0,10).map(o => txt(o)).join('|') : '',
+            yearPlaceholder: yearInput ? (yearInput.getAttribute('placeholder') || '') : '',
+            yearValue: yearInput ? yearInput.value : ''
+          };
+        }
+        """
+        for frame in self.frames():
+            try:
+                result = frame.evaluate(script, {"year": year, "market": market, "industry": industry})
+                if isinstance(result, dict) and result.get("yearSet"):
+                    print(f"Filled salary form: {result}")
+                    self.page.wait_for_timeout(800)  # type: ignore[union-attr]
+                    return True
+            except Exception as exc:
+                print(f"Fill salary form failed in frame: {exc}")
+                continue
+        return False
+
+    def click_salary_query_button(self) -> bool:
+        """Click the real bottom-right query button on t100sb15.
+
+        Avoid matching the global search icon or navigation links.  The query button
+        has visible text exactly 查詢 and appears after the query-condition controls.
+        """
+        script = r"""
+        () => {
+          const visible = el => {
+            const style = window.getComputedStyle(el);
+            const rect = el.getBoundingClientRect();
+            return style && style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+          };
+          const rawText = el => [el.innerText, el.textContent, el.value, el.getAttribute('aria-label'), el.getAttribute('title')].filter(Boolean).join(' ');
+          const compact = el => rawText(el).replace(/[\s\u00a0\u3000]+/g, '').trim();
+          const candidates = Array.from(document.querySelectorAll('button, input[type="button"], input[type="submit"], a[role="button"], [role="button"]')).filter(visible);
+          const exact = candidates.filter(el => compact(el) === '查詢' || compact(el).toLowerCase() === 'query' || compact(el).toLowerCase() === 'search');
+          const pool = exact.length ? exact : candidates.filter(el => /查詢/.test(compact(el)));
+          if (!pool.length) return { clicked:false, candidates:candidates.map(el => compact(el)).slice(0,20) };
+          // Prefer the lowest visible query button, which is the form action row.
+          pool.sort((a,b) => b.getBoundingClientRect().top - a.getBoundingClientRect().top);
+          const btn = pool[0];
+          btn.scrollIntoView({block:'center', inline:'center'});
+          btn.click();
+          return { clicked:true, text:compact(btn), top:btn.getBoundingClientRect().top };
+        }
+        """
+        for frame in self.frames():
+            try:
+                result = frame.evaluate(script)
+                if isinstance(result, dict) and result.get("clicked"):
+                    print(f"Clicked salary query button: {result}")
+                    assert self.page is not None
+                    self.page.wait_for_timeout(8000)
+                    try:
+                        self.page.wait_for_load_state("networkidle", timeout=20000)
+                    except Exception:
+                        pass
+                    self.page.wait_for_timeout(4000)
+                    return True
+                elif isinstance(result, dict):
+                    print(f"No salary query button candidates: {result}")
+            except Exception as exc:
+                print(f"Click salary query failed in frame: {exc}")
+                continue
+        return False
+
     def click_query(self) -> bool:
         """Click a visible 查詢/search button.
 
