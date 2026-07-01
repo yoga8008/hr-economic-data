@@ -585,6 +585,19 @@ class MopsBrowser:
                 pass
         return "\n".join(parts)
 
+
+    def visible_body_text(self) -> str:
+        assert self.page is not None
+        texts = []
+        for frame in self.frames():
+            try:
+                txt = frame.locator("body").inner_text(timeout=3000)
+                if txt:
+                    texts.append(txt)
+            except Exception:
+                pass
+        return "\n".join(texts)
+
     def ensure_not_security(self, name: str) -> None:
         html = self.combined_html()
         if is_security_page(html):
