@@ -374,14 +374,155 @@ class MopsBrowser:
 
 
     def fill_salary_query_form(self, year: str, market: str | None = None, industry: str = "全部產業") -> bool:
-        """Fill the new MOPS t100sb15 query form by visible control order.
+        """Fill t100sb15 form with real Playwright UI operations.
 
-        The t100sb15 SPA page uses ordinary visible controls:
-        市場別 select、產業別 select、年度 input、查詢 button.  The older generic
-        helper may accidentally match the global search bar/menu, so this method
-        deliberately ignores the top keyword search input and targets the query
-        condition form.
+        The MOPS Vue page uses visible controls.  Earlier DOM value setting could
+        appear successful but not update Vue state, so this method uses click/fill/
+        select_option first, and only falls back to DOM events when necessary.
         """
+        assert self.page is not None
+        page = self.page
+        self.dismiss_popups()
+
+        # Wait until the real query component is mounted.
+        mounted = False
+        for _ in range(30):
+            try:
+                if page.get_by_text("查詢條件", exact=False).count() or page.locator("input[placeholder*='101']").count():
+                    mounted = True
+                    break
+            except Exception:
+                pass
+            page.wait_for_timeout(1000)
+        if not mounted:
+            print("Salary form not mounted yet; continue with fallback selectors")
+
+        def is_bad_global_input(loc) -> bool:
+            try:
+                meta = loc.evaluate("el => [el.id, el.name, el.placeholder, el.getAttribute('aria-label')].filter(Boolean).join(' ')")
+                return bool(re.search(r"searchInfo|搜尋|關鍵字|公司代號/名稱/關鍵字", str(meta), re.I))
+            except Exception:
+                return False
+
+        def fill_year_with_locator(frame) -> tuple[bool, str]:
+            selectors = [
+                "input[placeholder*='101']",
+                "input[placeholder*='年']",
+                "input[placeholder*='請輸入']",
+                "input:not([type='hidden'])",
+            ]
+            tried = []
+            for selector in selectors:
+                try:
+                    locs = frame.locator(selector)
+                    count = min(locs.count(), 10)
+                except Exception:
+                    continue
+                for idx in range(count):
+                    loc = locs.nth(idx)
+                    try:
+                        if not loc.is_visible(timeout=800):
+                            continue
+                        if is_bad_global_input(loc):
+                            continue
+                        meta = loc.evaluate("el => [el.id, el.name, el.placeholder, el.className].filter(Boolean).join('|')")
+                        tried.append(str(meta))
+                        loc.scroll_into_view_if_needed(timeout=3000)
+                        loc.click(timeout=3000)
+                        # Clear using keyboard; this triggers framework listeners better than raw JS.
+                        loc.press("Control+A", timeout=2000)
+                        loc.press("Backspace", timeout=2000)
+                        loc.type(str(year), delay=60, timeout=5000)
+                        loc.press("Tab", timeout=2000)
+                        page.wait_for_timeout(500)
+                        val = loc.input_value(timeout=2000)
+                        if str(year) in str(val):
+                            return True, f"{selector}[{idx}]={meta}, value={val}"
+                        # Last resort: native setter plus events.
+                        loc.evaluate(
+                            """
+                            (el, val) => {
+                              const setter = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(el), 'value')?.set;
+                              if (setter) setter.call(el, val); else el.value = val;
+                              for (const evt of ['input','change','keyup','blur']) el.dispatchEvent(new Event(evt, {bubbles:true}));
+                            }
+                            """,
+                            str(year),
+                        )
+                        page.wait_for_timeout(500)
+                        val = loc.input_value(timeout=2000)
+                        if str(year) in str(val):
+                            return True, f"{selector}[{idx}]={meta}, value={val}, js-set"
+                    except Exception as exc:
+                        tried.append(f"{selector}[{idx}] error={exc}")
+                        continue
+            return False, "; ".join(tried[-8:])
+
+        def select_native(frame, nth: int, wanted: str) -> tuple[bool, str]:
+            try:
+                locs = frame.locator("select")
+                if locs.count() <= nth:
+                    return False, f"select count={locs.count()}"
+                loc = locs.nth(nth)
+                if not loc.is_visible(timeout=1000):
+                    return False, f"select {nth} not visible"
+                opts = loc.evaluate("el => Array.from(el.options || []).map(o => ({label:o.textContent.trim(), value:o.value}))")
+                # Prefer exact/contains label or value.
+                target = None
+                for opt in opts:
+                    label = str(opt.get('label','')).replace(' ', '').replace('\u3000','')
+                    value = str(opt.get('value','')).replace(' ', '').replace('\u3000','')
+                    want = str(wanted).replace(' ', '').replace('\u3000','')
+                    if want and (want in label or want in value):
+                        target = opt
+                        break
+                if not target and ('全部' in wanted or wanted == ''):
+                    for opt in opts:
+                        if '全部' in str(opt.get('label','')) or '全' == str(opt.get('label','')).strip():
+                            target = opt
+                            break
+                if not target:
+                    return False, f"no option {wanted}; options={opts[:8]}"
+                loc.select_option(value=str(target['value']), timeout=5000)
+                loc.dispatch_event("change")
+                return True, f"select{nth}={target}"
+            except Exception as exc:
+                return False, f"select{nth} error={exc}"
+
+        result = {
+            "marketSet": False,
+            "industrySet": False,
+            "yearSet": False,
+            "details": [],
+        }
+
+        for frame in self.frames():
+            try:
+                # The t100sb15 form currently has market select first and industry select second.
+                if market:
+                    ok, detail = select_native(frame, 0, market)
+                    result["marketSet"] = result["marketSet"] or ok
+                    result["details"].append(detail)
+                else:
+                    result["marketSet"] = True
+
+                ok, detail = select_native(frame, 1, industry)
+                result["industrySet"] = result["industrySet"] or ok or True
+                result["details"].append(detail)
+
+                ok, detail = fill_year_with_locator(frame)
+                result["yearSet"] = result["yearSet"] or ok
+                result["details"].append(detail)
+
+                if result["yearSet"]:
+                    print(f"Filled salary form by UI: {result}")
+                    page.wait_for_timeout(1000)
+                    return True
+            except Exception as exc:
+                print(f"Fill salary form UI failed in frame: {exc}")
+                continue
+
+        # DOM fallback, keeping the previous generic logic for unexpected layouts.
         script = r"""
         ({year, market, industry}) => {
           const visible = el => {
@@ -390,82 +531,77 @@ class MopsBrowser:
             return style && style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
           };
           const txt = el => (el && (el.innerText || el.textContent || '') || '').replace(/[\s\u00a0\u3000]+/g, ' ').trim();
-          const compactText = el => (el && (el.innerText || el.textContent || el.value || '') || '').replace(/[\s\u00a0\u3000]+/g, '').trim();
-          const rectTop = el => el.getBoundingClientRect().top;
-          const nearbyText = el => {
-            let out = [el.getAttribute('aria-label'), el.getAttribute('placeholder'), el.getAttribute('name'), el.getAttribute('id'), el.getAttribute('title')].filter(Boolean).join(' ');
-            if (el.id) {
-              try {
-                const lab = document.querySelector(`label[for="${CSS.escape(el.id)}"]`);
-                if (lab) out += ' ' + txt(lab);
-              } catch(e) {}
-            }
-            let p = el;
-            for (let i = 0; i < 5 && p; i++, p = p.parentElement) out += ' ' + txt(p);
-            return out;
-          };
           const setNativeValue = (el, val) => {
-            const proto = Object.getPrototypeOf(el);
-            const setter = Object.getOwnPropertyDescriptor(proto, 'value')?.set;
+            const setter = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(el), 'value')?.set;
             if (setter) setter.call(el, val); else el.value = val;
-            el.dispatchEvent(new Event('input', { bubbles: true }));
-            el.dispatchEvent(new Event('change', { bubbles: true }));
-            el.dispatchEvent(new Event('blur', { bubbles: true }));
+            for (const evt of ['input','change','keyup','blur']) el.dispatchEvent(new Event(evt, { bubbles: true }));
           };
-          const chooseSelect = (sel, wanted) => {
-            if (!sel) return false;
-            const want = String(wanted || '').replace(/[\s\u00a0\u3000]+/g, '');
-            const opts = Array.from(sel.options || []);
-            let opt = opts.find(o => compactText(o).includes(want) || String(o.value).replace(/[\s\u00a0\u3000]+/g, '').includes(want));
-            if (!opt && (want.includes('全部') || want === '')) opt = opts.find(o => compactText(o).includes('全部') || compactText(o).includes('全'));
-            if (!opt) return false;
-            setNativeValue(sel, opt.value);
-            return true;
-          };
-
-          const selects = Array.from(document.querySelectorAll('select')).filter(visible).sort((a,b) => rectTop(a) - rectTop(b));
-          const inputs = Array.from(document.querySelectorAll('input:not([type="hidden"]), textarea')).filter(visible).sort((a,b) => rectTop(a) - rectTop(b));
-
-          const marketSelect = selects.find(s => /市場|市場別|上市|上櫃|TYPEK/i.test(nearbyText(s))) || selects[0];
-          const industrySelect = selects.find(s => /產業|產業別|產業類別/i.test(nearbyText(s)) && s !== marketSelect) || selects.find(s => s !== marketSelect) || selects[1];
-          const yearInput = inputs.find(i => /年度|申報年度|查詢年度|RYEAR|101/.test(nearbyText(i)) && !/searchInfo|搜尋|關鍵字|公司代號\/名稱\/關鍵字/i.test(nearbyText(i)))
-            || inputs.find(i => !/searchInfo|搜尋|關鍵字|公司代號\/名稱\/關鍵字/i.test(nearbyText(i)));
-
-          const marketSet = market ? chooseSelect(marketSelect, market) : true;
-          const industrySet = chooseSelect(industrySelect, industry) || chooseSelect(industrySelect, '全部') || true;
-          const yearSet = yearInput ? (setNativeValue(yearInput, String(year)), true) : false;
-
-          return {
-            marketSet,
-            industrySet,
-            yearSet,
-            selectCount: selects.length,
-            inputCount: inputs.length,
-            marketOptions: marketSelect ? Array.from(marketSelect.options || []).map(o => txt(o)).join('|') : '',
-            industryOptions: industrySelect ? Array.from(industrySelect.options || []).slice(0,10).map(o => txt(o)).join('|') : '',
-            yearPlaceholder: yearInput ? (yearInput.getAttribute('placeholder') || '') : '',
-            yearValue: yearInput ? yearInput.value : ''
-          };
+          const selects = Array.from(document.querySelectorAll('select')).filter(visible);
+          const inputs = Array.from(document.querySelectorAll('input:not([type="hidden"]), textarea')).filter(visible)
+            .filter(i => !/searchInfo|搜尋|關鍵字/.test([i.id,i.name,i.placeholder].filter(Boolean).join(' ')));
+          if (market && selects[0]) {
+            const want = String(market).replace(/[\s\u00a0\u3000]+/g, '');
+            const opt = Array.from(selects[0].options || []).find(o => (o.textContent || o.value || '').replace(/[\s\u00a0\u3000]+/g, '').includes(want));
+            if (opt) { selects[0].value = opt.value; selects[0].dispatchEvent(new Event('change', {bubbles:true})); }
+          }
+          if (selects[1]) {
+            const opt = Array.from(selects[1].options || []).find(o => (o.textContent || '').includes('全部'));
+            if (opt) { selects[1].value = opt.value; selects[1].dispatchEvent(new Event('change', {bubbles:true})); }
+          }
+          const yearInput = inputs.find(i => /101|年|請輸入|年度/.test([i.placeholder,i.id,i.name,txt(i.parentElement)].filter(Boolean).join(' '))) || inputs[0];
+          if (yearInput) setNativeValue(yearInput, String(year));
+          return {yearSet: !!yearInput, inputValue: yearInput ? yearInput.value : '', inputCount: inputs.length, selectCount: selects.length};
         }
         """
         for frame in self.frames():
             try:
-                result = frame.evaluate(script, {"year": year, "market": market, "industry": industry})
-                if isinstance(result, dict) and result.get("yearSet"):
-                    print(f"Filled salary form: {result}")
-                    self.page.wait_for_timeout(800)  # type: ignore[union-attr]
+                fallback = frame.evaluate(script, {"year": year, "market": market, "industry": industry})
+                if isinstance(fallback, dict) and fallback.get("yearSet"):
+                    print(f"Filled salary form by fallback DOM: {fallback}")
+                    page.wait_for_timeout(1000)
                     return True
             except Exception as exc:
-                print(f"Fill salary form failed in frame: {exc}")
-                continue
+                print(f"Fill salary fallback failed in frame: {exc}")
+        print(f"Fill salary form failed: {result}")
         return False
 
     def click_salary_query_button(self) -> bool:
-        """Click the real bottom-right query button on t100sb15.
+        """Click the real bottom-right query button on t100sb15."""
+        assert self.page is not None
+        page = self.page
 
-        Avoid matching the global search icon or navigation links.  The query button
-        has visible text exactly 查詢 and appears after the query-condition controls.
-        """
+        # Try Playwright locators first.
+        for frame in self.frames():
+            try:
+                locs = frame.locator("button:has-text('查詢'), input[type='button'][value*='查詢'], input[type='submit'][value*='查詢']")
+                visible_locs = []
+                for i in range(min(locs.count(), 20)):
+                    loc = locs.nth(i)
+                    try:
+                        if loc.is_visible(timeout=800):
+                            box = loc.bounding_box(timeout=1000)
+                            text = loc.inner_text(timeout=1000) if loc.evaluate("el => el.tagName.toLowerCase() !== 'input'") else loc.get_attribute('value')
+                            visible_locs.append((loc, box, text))
+                    except Exception:
+                        continue
+                if visible_locs:
+                    # lowest button is the form action button in this page.
+                    visible_locs.sort(key=lambda x: (x[1] or {}).get('y', 0), reverse=True)
+                    loc, box, label = visible_locs[0]
+                    loc.scroll_into_view_if_needed(timeout=3000)
+                    loc.click(timeout=5000)
+                    print(f"Clicked salary query button by locator: text={label}, box={box}")
+                    page.wait_for_timeout(12000)
+                    try:
+                        page.wait_for_load_state("networkidle", timeout=25000)
+                    except Exception:
+                        pass
+                    page.wait_for_timeout(4000)
+                    return True
+            except Exception as exc:
+                print(f"Click salary query locator failed in frame: {exc}")
+
+        # JS fallback.
         script = r"""
         () => {
           const visible = el => {
@@ -478,8 +614,7 @@ class MopsBrowser:
           const candidates = Array.from(document.querySelectorAll('button, input[type="button"], input[type="submit"], a[role="button"], [role="button"]')).filter(visible);
           const exact = candidates.filter(el => compact(el) === '查詢' || compact(el).toLowerCase() === 'query' || compact(el).toLowerCase() === 'search');
           const pool = exact.length ? exact : candidates.filter(el => /查詢/.test(compact(el)));
-          if (!pool.length) return { clicked:false, candidates:candidates.map(el => compact(el)).slice(0,20) };
-          // Prefer the lowest visible query button, which is the form action row.
+          if (!pool.length) return { clicked:false, candidates:candidates.map(el => compact(el)).slice(0,30) };
           pool.sort((a,b) => b.getBoundingClientRect().top - a.getBoundingClientRect().top);
           const btn = pool[0];
           btn.scrollIntoView({block:'center', inline:'center'});
@@ -491,20 +626,18 @@ class MopsBrowser:
             try:
                 result = frame.evaluate(script)
                 if isinstance(result, dict) and result.get("clicked"):
-                    print(f"Clicked salary query button: {result}")
-                    assert self.page is not None
-                    self.page.wait_for_timeout(8000)
+                    print(f"Clicked salary query button by JS: {result}")
+                    page.wait_for_timeout(12000)
                     try:
-                        self.page.wait_for_load_state("networkidle", timeout=20000)
+                        page.wait_for_load_state("networkidle", timeout=25000)
                     except Exception:
                         pass
-                    self.page.wait_for_timeout(4000)
+                    page.wait_for_timeout(4000)
                     return True
                 elif isinstance(result, dict):
                     print(f"No salary query button candidates: {result}")
             except Exception as exc:
-                print(f"Click salary query failed in frame: {exc}")
-                continue
+                print(f"Click salary query JS failed in frame: {exc}")
         return False
 
     def click_query(self) -> bool:
