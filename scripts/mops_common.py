@@ -157,6 +157,8 @@ class MopsBrowser:
         self._pw = None
         self.context = None
         self.page = None
+        self._captured_responses: list[dict[str, str]] = []
+        self._capture_active = False
 
     def __enter__(self) -> "MopsBrowser":
         self._pw = sync_playwright().start()
@@ -207,6 +209,10 @@ class MopsBrowser:
             """
         )
         self.page = self.context.pages[0] if self.context.pages else self.context.new_page()
+        try:
+            self.page.on("response", self._capture_mops_response)
+        except Exception:
+            pass
         return self
 
     def __exit__(self, exc_type, exc, tb) -> None:
@@ -253,6 +259,54 @@ class MopsBrowser:
             print(f"Current URL: {self.page.url}")
         except Exception:
             pass
+
+    def start_response_capture(self) -> None:
+        """Start capturing MOPS query responses after the form is submitted."""
+        self._captured_responses = []
+        self._capture_active = True
+
+    def stop_response_capture(self) -> None:
+        self._capture_active = False
+
+    def _capture_mops_response(self, response) -> None:
+        """Capture MOPS XHR/HTML responses so data can be parsed even when Vue does not render a table."""
+        if not getattr(self, "_capture_active", False):
+            return
+        try:
+            url = response.url or ""
+            if "mops" not in url:
+                return
+            lower_url = url.lower()
+            if any(skip in lower_url for skip in ["/assets/", ".js", ".css", ".png", ".jpg", ".gif", "googletagmanager", "google-analytics"]):
+                return
+            headers = response.headers or {}
+            ctype = (headers.get("content-type") or headers.get("Content-Type") or "").lower()
+            if not any(x in ctype for x in ["text", "html", "json", "javascript", "plain", "xml"]):
+                return
+            body = response.text()
+            if not body:
+                return
+            # Keep only potentially useful response bodies.
+            useful = any(k in body for k in ["公司代號", "公司名稱", "薪資", "員工", "查無資料", "RYEAR", "t100sb15", "資料庫"])
+            useful = useful or any(k in lower_url for k in ["t100sb15", "ajax", "api", "query"])
+            if not useful:
+                return
+            if len(body) > 1500000:
+                body = body[:1500000]
+            self._captured_responses.append({"url": url, "content_type": ctype, "body": body})
+            print(f"Captured MOPS response: {url} ({len(body)} chars)")
+        except Exception as exc:
+            try:
+                print(f"Capture response skipped: {exc}")
+            except Exception:
+                pass
+
+    def captured_response_text(self) -> str:
+        parts = []
+        for item in getattr(self, "_captured_responses", []):
+            parts.append(f"\n<!-- MOPS_CAPTURED_RESPONSE url={item.get('url','')} content_type={item.get('content_type','')} -->\n")
+            parts.append(item.get("body", ""))
+        return "\n".join(parts)
 
     def dismiss_popups(self) -> None:
         assert self.page is not None
@@ -570,6 +624,21 @@ class MopsBrowser:
         assert self.page is not None
         page = self.page
 
+        try:
+            state = page.evaluate(r"""
+            () => Array.from(document.querySelectorAll('select, input:not([type=hidden])')).filter(el => {
+              const r = el.getBoundingClientRect();
+              const st = getComputedStyle(el);
+              return r.width > 0 && r.height > 0 && st.visibility !== 'hidden' && st.display !== 'none';
+            }).map((el, idx) => ({
+              idx, tag: el.tagName, id: el.id, name: el.name, placeholder: el.getAttribute('placeholder'), value: el.value,
+              text: el.tagName === 'SELECT' ? Array.from(el.options || []).find(o => o.selected)?.textContent?.trim() : ''
+            })).slice(0, 10)
+            """)
+            print(f"Salary form state before query: {state}")
+        except Exception as exc:
+            print(f"Cannot print salary form state before query: {exc}")
+
         # Try Playwright locators first.
         for frame in self.frames():
             try:
@@ -596,7 +665,11 @@ class MopsBrowser:
                         page.wait_for_load_state("networkidle", timeout=25000)
                     except Exception:
                         pass
-                    page.wait_for_timeout(4000)
+                    page.wait_for_timeout(6000)
+                    try:
+                        print(f"Captured response count after query: {len(getattr(self, '_captured_responses', []))}")
+                    except Exception:
+                        pass
                     return True
             except Exception as exc:
                 print(f"Click salary query locator failed in frame: {exc}")
@@ -632,7 +705,11 @@ class MopsBrowser:
                         page.wait_for_load_state("networkidle", timeout=25000)
                     except Exception:
                         pass
-                    page.wait_for_timeout(4000)
+                    page.wait_for_timeout(6000)
+                    try:
+                        print(f"Captured response count after query: {len(getattr(self, '_captured_responses', []))}")
+                    except Exception:
+                        pass
                     return True
                 elif isinstance(result, dict):
                     print(f"No salary query button candidates: {result}")
@@ -716,6 +793,9 @@ class MopsBrowser:
                 parts.append(frame.content())
             except Exception:
                 pass
+        captured = self.captured_response_text()
+        if captured:
+            parts.append(captured)
         return "\n".join(parts)
 
 
