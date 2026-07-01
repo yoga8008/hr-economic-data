@@ -1,157 +1,163 @@
-from __future__ import annotations
+name: Update MOPS HR Disclosure Data
 
-from typing import Any
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "要更新的資料"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - salary
+          - welfare
 
-import pandas as pd
+  schedule:
+    # A. 非主管全時員工薪資資訊
+    # 每年 6/25～6/30，每天 09:10 台灣時間執行
+    # GitHub cron 使用 UTC，UTC 01:10 = 台灣 09:10
+    - cron: "10 1 25-30 6 *"
 
-from mops_common import (
-    DATA_DIR,
-    MopsBrowser,
-    clean_text,
-    find_col,
-    flatten_columns,
-    read_tables,
-    report_year_candidates,
-    safe_int,
-    sleep_polite,
-    to_salary_wan,
-    write_json,
-)
+    # A. 非主管全時員工薪資資訊
+    # 每年 7/1～7/25，每天 09:10 台灣時間執行
+    - cron: "10 1 1-25 7 *"
 
-OUT = DATA_DIR / "employee_salary_disclosure.json"
+    # B. 員工福利政策及權益維護措施
+    # 每月 1 日 09:40 台灣時間執行
+    - cron: "40 1 1 * *"
 
+permissions:
+  contents: write
 
-def pick_main_table(tables: list[pd.DataFrame]) -> pd.DataFrame | None:
-    candidates: list[pd.DataFrame] = []
-    for df in tables:
-        cols = " ".join(flatten_columns(df))
-        body = " ".join(clean_text(x) for x in df.astype(str).head(3).to_numpy().ravel())
-        haystack = cols + " " + body
-        if "公司代號" in haystack and "公司名稱" in haystack and ("員工" in haystack or "薪資" in haystack):
-            candidates.append(df)
-    if candidates:
-        return max(candidates, key=lambda x: len(x))
-    return max(tables, key=lambda x: len(x)) if tables else None
+jobs:
+  update:
+    runs-on: self-hosted
 
+    env:
+      MOPS_HEADLESS: "false"
+      MOPS_BROWSER_CHANNEL: "msedge"
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: "utf-8"
 
-def parse_salary_table(df: pd.DataFrame, year: str, market: str) -> list[dict[str, Any]]:
-    df = df.copy()
-    df.columns = flatten_columns(df)
-    cols = list(df.columns)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    industry_col = find_col(cols, ["產業"], []) or find_col(cols, ["類別"], []) or cols[0]
-    code_col = find_col(cols, ["公司代號"], []) or find_col(cols, ["代號"], [])
-    name_col = find_col(cols, ["公司名稱"], []) or find_col(cols, ["名稱"], [])
-    employees_col = find_col(cols, ["員工", "人數"], []) or find_col(cols, ["人數"], [])
+      - name: Check Python
+        shell: powershell
+        run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
+          $python = "C:\Python311\python.exe"
+          & $python --version
+          & $python -m pip --version
 
-    avg_latest_col = (
-        find_col(cols, ["平均"], ["同業", "前一", "較前", "減少", "低於", "中位"])
-        or find_col(cols, ["平均數"], ["同業", "前一", "較前", "減少", "低於"])
-    )
-    avg_previous_col = find_col(cols, ["平均", "前"], ["同業"])
-    median_latest_col = find_col(cols, ["中位數"], ["前一", "較前"])
-    median_previous_col = find_col(cols, ["中位數", "前"], [])
+      - name: Install dependencies
+        shell: powershell
+        run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
+          $python = "C:\Python311\python.exe"
+          & $python -m pip install --upgrade pip
+          & $python -m pip install -r scripts/requirements.txt
 
-    rows: list[dict[str, Any]] = []
-    for _, row in df.iterrows():
-        code = clean_text(row.get(code_col, "")) if code_col else ""
-        company = clean_text(row.get(name_col, "")) if name_col else ""
-        industry = clean_text(row.get(industry_col, "")) if industry_col else ""
-        if not code or not company or "公司代號" in code or "公司名稱" in company:
-            continue
-        # Sometimes code comes as 2330.0 after pandas parsing.
-        code_num = code.replace(".0", "")
-        if not code_num.isdigit() or len(code_num) < 4:
-            continue
+      - name: Install Playwright browser support
+        shell: powershell
+        run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
+          $python = "C:\Python311\python.exe"
+          & $python -m playwright install
 
-        rows.append({
-            "年度": year,
-            "市場別": market,
-            "產業別": industry,
-            "公司代號": code_num,
-            "統一編號": "",
-            "公司名稱": company,
-            "員工人數": safe_int(row.get(employees_col, "")) if employees_col else "—",
-            "平均薪資最近一年": to_salary_wan(row.get(avg_latest_col, "")) if avg_latest_col else None,
-            "平均薪資前一年": to_salary_wan(row.get(avg_previous_col, "")) if avg_previous_col else None,
-            "薪資中位數最近一年": to_salary_wan(row.get(median_latest_col, "")) if median_latest_col else None,
-            "薪資中位數前一年": to_salary_wan(row.get(median_previous_col, "")) if median_previous_col else None,
-        })
-    return rows
+      - name: Decide update target
+        shell: powershell
+        run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
 
+          $eventName = "${{ github.event_name }}"
+          $schedule = "${{ github.event.schedule }}"
+          $target = "${{ github.event.inputs.target }}"
 
-def run_visible_query(browser: MopsBrowser, year: str, market: str | None) -> str:
-    browser.open_page("t100sb15")
+          $runSalary = "false"
+          $runWelfare = "false"
 
-    if not browser.fill_salary_query_form(year=year, market=market or "上市", industry="全部產業"):
-        browser.dump_debug(f"salary_fill_failed_{year}_{market or 'default'}")
-        raise RuntimeError("找不到薪資資訊頁面的年度／市場欄位")
+          if ($eventName -eq "workflow_dispatch") {
+            if ($target -eq "all") {
+              $runSalary = "true"
+              $runWelfare = "true"
+            }
+            elseif ($target -eq "salary") {
+              $runSalary = "true"
+            }
+            elseif ($target -eq "welfare") {
+              $runWelfare = "true"
+            }
+          }
+          elseif ($schedule -eq "10 1 25-30 6 *" -or $schedule -eq "10 1 1-25 7 *") {
+            $runSalary = "true"
+          }
+          elseif ($schedule -eq "40 1 1 * *") {
+            $runWelfare = "true"
+          }
 
-    if not browser.click_salary_query_button():
-        browser.dump_debug(f"salary_no_query_button_{year}_{market or 'default'}")
-        raise RuntimeError("找不到薪資資訊頁面的查詢按鈕")
+          "RUN_SALARY=$runSalary" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "RUN_WELFARE=$runWelfare" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
-    browser.ensure_not_security(f"salary_security_{year}_{market or 'default'}")
-    html = browser.combined_html()
-    if "公司代號" not in html and "公司名稱" not in html:
-        browser.dump_debug(f"salary_no_table_{year}_{market or 'default'}")
-    return html
+          Write-Host "RUN_SALARY=$runSalary"
+          Write-Host "RUN_WELFARE=$runWelfare"
 
+      - name: Update salary disclosure JSON
+        if: env.RUN_SALARY == 'true'
+        shell: powershell
+        run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
+          $python = "C:\Python311\python.exe"
+          & $python scripts/update_employee_salary.py
 
-def fetch_salary_rows_for_year(year: str) -> list[dict[str, Any]]:
-    all_rows: list[dict[str, Any]] = []
-    seen_codes: set[str] = set()
+      - name: Update welfare disclosure JSON
+        if: env.RUN_WELFARE == 'true'
+        shell: powershell
+        run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
+          $python = "C:\Python311\python.exe"
+          & $python scripts/update_employee_welfare.py
 
-    with MopsBrowser() as browser:
-        # Try both listed and OTC by UI.  If the page default already returns all,
-        # de-duplication by company code prevents duplicate rows.
-        for market in ["上市", "上櫃", None]:
-            try:
-                html = run_visible_query(browser, year, market)
-                tables = read_tables(html)
-                table = pick_main_table(tables)
-                if table is None:
-                    print(f"No salary table found for {market or 'default'} {year}")
-                    continue
-                rows = parse_salary_table(table, year, market or "未區分")
-                fresh = []
-                for row in rows:
-                    code = row.get("公司代號", "")
-                    if code and code not in seen_codes:
-                        seen_codes.add(code)
-                        fresh.append(row)
-                print(f"{market or 'default'} {year}: {len(fresh)} new rows")
-                all_rows.extend(fresh)
-                sleep_polite(1.0)
-            except Exception as exc:
-                print(f"Skip {market or 'default'} {year}: {exc}")
-                sleep_polite(1.0)
+      - name: Upload MOPS debug artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mops-debug
+          path: _mops_debug/
+          if-no-files-found: ignore
+          retention-days: 7
 
-    return all_rows
+      - name: Commit updated data
+        shell: powershell
+        run: |
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          chcp 65001
 
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
-def main() -> None:
-    final_rows: list[dict[str, Any]] = []
-    final_year = ""
-    for year in report_year_candidates():
-        print(f"Try salary disclosure year: {year}")
-        rows = fetch_salary_rows_for_year(year)
-        if rows:
-            final_rows = rows
-            final_year = year
-            break
-        print(f"No rows for year {year}; try next candidate if available.")
+          git add data/employee_salary_disclosure.json data/employee_welfare_disclosure.json
 
-    if not final_rows:
-        raise RuntimeError("No salary disclosure rows were fetched by visible UI operation. See _mops_debug artifact for screenshot/HTML.")
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "No data changes to commit."
+            exit 0
+          }
 
-    write_json(
-        OUT,
-        final_rows,
-        f"MOPS 非擔任主管職務之全時員工薪資資訊，純畫面操作自動更新年度 {final_year}",
-    )
-    print(f"Wrote {len(final_rows)} rows to {OUT}")
-
-
-if __name__ == "__main__":
-    main()
+          git commit -m "Update MOPS HR disclosure data"
+          git push
