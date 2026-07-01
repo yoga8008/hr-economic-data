@@ -335,7 +335,13 @@ class MopsBrowser:
         return False
 
     def click_query(self) -> bool:
-        """Click a visible 查詢/search button."""
+        """Click a visible 查詢/search button.
+
+        MOPS buttons may render as "查 詢" or "查　詢" with spaces between
+        Chinese characters.  Match both normal and compact text.  If a visible
+        button still cannot be found, submit the nearest form as a final UI
+        fallback instead of calling ajax endpoints directly.
+        """
         script = r"""
         () => {
           const visible = el => {
@@ -343,15 +349,38 @@ class MopsBrowser:
             const rect = el.getBoundingClientRect();
             return style && style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
           };
-          const text = el => [el.innerText, el.textContent, el.value, el.getAttribute('aria-label'), el.getAttribute('title')]
-            .filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
-          const candidates = Array.from(document.querySelectorAll('button, a, input[type="button"], input[type="submit"], [role="button"], .btn, .button'));
+          const rawText = el => [
+              el.innerText,
+              el.textContent,
+              el.value,
+              el.getAttribute('aria-label'),
+              el.getAttribute('title'),
+              el.getAttribute('alt'),
+              el.getAttribute('name'),
+              el.getAttribute('id')
+            ].filter(Boolean).join(' ');
+          const normalized = el => rawText(el).replace(/[\s\u00a0\u3000]+/g, ' ').trim();
+          const compact = el => rawText(el).replace(/[\s\u00a0\u3000]+/g, '').trim();
+          const candidates = Array.from(document.querySelectorAll('button, a, input[type="button"], input[type="submit"], input[type="image"], [role="button"], .btn, .button'));
           for (const el of candidates) {
             if (!visible(el)) continue;
-            const t = text(el);
-            if (/查詢|搜尋|送出|Query|Search/i.test(t)) {
+            const t = normalized(el);
+            const c = compact(el);
+            const onclick = String(el.getAttribute('onclick') || '');
+            if (/查詢|搜尋|送出|Query|Search|query|submit/i.test(t) || /查詢|搜尋|送出/.test(c) || /query|search|submit|ajax/i.test(onclick)) {
               el.scrollIntoView({block:'center', inline:'center'});
               el.click();
+              return true;
+            }
+          }
+
+          // Final UI fallback: submit a visible form containing RYEAR/year fields.
+          const forms = Array.from(document.querySelectorAll('form')).filter(visible);
+          for (const form of forms) {
+            const formText = (form.innerText || form.textContent || form.outerHTML || '').replace(/[\s\u00a0\u3000]+/g, '');
+            if (/年度|RYEAR|公司代號|產業/.test(formText)) {
+              form.dispatchEvent(new Event('submit', {bubbles:true, cancelable:true}));
+              if (typeof form.submit === 'function') form.submit();
               return true;
             }
           }
