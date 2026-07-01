@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any
+import re
 
 import pandas as pd
 
@@ -80,18 +81,84 @@ def parse_salary_table(df: pd.DataFrame, year: str, market: str) -> list[dict[st
     return rows
 
 
+
+
+def parse_salary_text(text: str, year: str, market: str) -> list[dict[str, Any]]:
+    """Fallback parser for Vue-rendered tables that are not HTML <table> elements.
+
+    It scans visible body text, finds 4-digit company codes, and uses neighboring
+    tokens as industry/company/salary fields. This is intentionally conservative:
+    rows without a 4-digit company code and enough following numeric values are skipped.
+    """
+    text = clean_text(text)
+    if "公司代號" not in text or "公司名稱" not in text:
+        return []
+
+    tokens = [t for t in re.split(r"\s+", text) if t]
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+
+    header_words = {"市場別", "產業別", "年度", "查詢", "清除設定", "公司代號", "公司名稱", "員工人數"}
+
+    for i, tok in enumerate(tokens):
+        code = tok.replace(".0", "")
+        if not re.fullmatch(r"\d{4}", code):
+            continue
+        if code in seen:
+            continue
+
+        prev = tokens[i - 1] if i >= 1 else ""
+        nxt = tokens[i + 1] if i + 1 < len(tokens) else ""
+        if not nxt or nxt in header_words:
+            continue
+        # Avoid menu links / examples such as "例：101年請輸入101".
+        if prev in header_words or "例" in prev or "輸入" in prev:
+            continue
+
+        # Collect numeric fields after company name until next company code.
+        j = i + 2
+        nums: list[str] = []
+        while j < len(tokens):
+            t = tokens[j]
+            if re.fullmatch(r"\d{4}", t.replace(".0", "")) and len(nums) >= 2:
+                break
+            if re.search(r"\d", t) and not re.search(r"年|%|：|:", t):
+                nums.append(t)
+            if len(nums) >= 8:
+                break
+            j += 1
+
+        if len(nums) < 3:
+            continue
+
+        rows.append({
+            "年度": year,
+            "市場別": market,
+            "產業別": prev,
+            "公司代號": code,
+            "統一編號": "",
+            "公司名稱": nxt,
+            "員工人數": safe_int(nums[0]),
+            "平均薪資最近一年": to_salary_wan(nums[1]) if len(nums) > 1 else None,
+            "平均薪資前一年": to_salary_wan(nums[2]) if len(nums) > 2 else None,
+            "薪資中位數最近一年": to_salary_wan(nums[3]) if len(nums) > 3 else None,
+            "薪資中位數前一年": to_salary_wan(nums[4]) if len(nums) > 4 else None,
+        })
+        seen.add(code)
+
+    return rows
+
 def run_visible_query(browser: MopsBrowser, year: str, market: str | None) -> str:
     browser.open_page("t100sb15")
-    # Fill year and leave company blank.
-    browser.fill_near_label(["年度", "申報年度", "查詢年度", "RYEAR"], year)
-    browser.fill_near_label(["公司", "公司代號", "證券代號", "代號", "code"], "")
-    # Try to select market and all industries; if the page has no such field, continue.
-    if market:
-        browser.select_option_by_text(["市場", "市場別", "上市櫃", "市場類別", "TYPEK"], market)
-    browser.select_option_by_text(["產業", "產業別", "產業類別"], "全部")
-    if not browser.click_query():
+
+    if not browser.fill_salary_query_form(year=year, market=market or "上市", industry="全部產業"):
+        browser.dump_debug(f"salary_fill_failed_{year}_{market or 'default'}")
+        raise RuntimeError("找不到薪資資訊頁面的年度／市場欄位")
+
+    if not browser.click_salary_query_button():
         browser.dump_debug(f"salary_no_query_button_{year}_{market or 'default'}")
         raise RuntimeError("找不到薪資資訊頁面的查詢按鈕")
+
     browser.ensure_not_security(f"salary_security_{year}_{market or 'default'}")
     html = browser.combined_html()
     if "公司代號" not in html and "公司名稱" not in html:
@@ -111,10 +178,19 @@ def fetch_salary_rows_for_year(year: str) -> list[dict[str, Any]]:
                 html = run_visible_query(browser, year, market)
                 tables = read_tables(html)
                 table = pick_main_table(tables)
+                rows = []
                 if table is None:
-                    print(f"No salary table found for {market or 'default'} {year}")
+                    print(f"No HTML salary table found for {market or 'default'} {year}; try visible text fallback")
+                    rows = parse_salary_text(browser.visible_body_text(), year, market or "未區分")
+                else:
+                    rows = parse_salary_table(table, year, market or "未區分")
+                    if not rows:
+                        print(f"HTML table parsed 0 rows for {market or 'default'} {year}; try visible text fallback")
+                        rows = parse_salary_text(browser.visible_body_text(), year, market or "未區分")
+                if not rows:
+                    print(f"No salary rows parsed for {market or 'default'} {year}")
+                    browser.dump_debug(f"salary_no_rows_{year}_{market or 'default'}")
                     continue
-                rows = parse_salary_table(table, year, market or "未區分")
                 fresh = []
                 for row in rows:
                     code = row.get("公司代號", "")
