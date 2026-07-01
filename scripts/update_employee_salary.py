@@ -1,7 +1,9 @@
+# version: salary network response capture + strict UI fill - 2026-07-01
 from __future__ import annotations
 
 from typing import Any
 import re
+import json
 
 import pandas as pd
 
@@ -148,6 +150,79 @@ def parse_salary_text(text: str, year: str, market: str) -> list[dict[str, Any]]
 
     return rows
 
+
+def _find_value_by_keywords(d: dict[str, Any], keywords: list[str]) -> Any:
+    for k, v in d.items():
+        ks = clean_text(k)
+        if any(word in ks for word in keywords):
+            return v
+    return ""
+
+
+def _walk_json_records(obj: Any) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    if isinstance(obj, dict):
+        # A row usually has at least a company code/name and salary/employee fields.
+        joined_keys = " ".join(clean_text(k) for k in obj.keys())
+        joined_vals = " ".join(clean_text(v) for v in obj.values() if not isinstance(v, (dict, list)))
+        if ("公司代號" in joined_keys or re.search(r"\b\d{4}\b", joined_vals)) and ("公司名稱" in joined_keys or "公司" in joined_keys):
+            records.append(obj)
+        for v in obj.values():
+            records.extend(_walk_json_records(v))
+    elif isinstance(obj, list):
+        for item in obj:
+            records.extend(_walk_json_records(item))
+    return records
+
+
+def parse_salary_json_payload(text: str, year: str, market: str) -> list[dict[str, Any]]:
+    """Parse JSON payloads captured from MOPS XHR if the Vue page does not render a HTML table."""
+    payloads: list[str] = []
+    # Try full text first, then individual captured response blocks.
+    payloads.append(text)
+    payloads.extend(re.findall(r"<!-- MOPS_CAPTURED_RESPONSE[^>]*-->\s*(.*?)(?=\n<!-- MOPS_CAPTURED_RESPONSE|\Z)", text, flags=re.S))
+
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for payload in payloads:
+        payload = payload.strip()
+        if not payload or not (payload.startswith("{") or payload.startswith("[")):
+            continue
+        try:
+            obj = json.loads(payload)
+        except Exception:
+            continue
+        for rec in _walk_json_records(obj):
+            code = clean_text(_find_value_by_keywords(rec, ["公司代號", "代號", "code", "co_id", "公司代碼"]))
+            name = clean_text(_find_value_by_keywords(rec, ["公司名稱", "名稱", "name", "公司"]))
+            if not code:
+                # fallback: first 4-digit value in the row
+                joined = " ".join(clean_text(v) for v in rec.values() if not isinstance(v, (dict, list)))
+                m = re.search(r"\b\d{4}\b", joined)
+                code = m.group(0) if m else ""
+            code = code.replace(".0", "")
+            if not re.fullmatch(r"\d{4}", code) or code in seen:
+                continue
+            seen.add(code)
+            industry = clean_text(_find_value_by_keywords(rec, ["產業", "類別", "industry"]))
+            employees = _find_value_by_keywords(rec, ["員工人數", "人數", "employee"])
+            avg_latest = _find_value_by_keywords(rec, ["平均", "avg"])
+            median_latest = _find_value_by_keywords(rec, ["中位", "median"])
+            rows.append({
+                "年度": year,
+                "市場別": market,
+                "產業別": industry,
+                "公司代號": code,
+                "統一編號": "",
+                "公司名稱": name,
+                "員工人數": safe_int(employees),
+                "平均薪資最近一年": to_salary_wan(avg_latest),
+                "平均薪資前一年": None,
+                "薪資中位數最近一年": to_salary_wan(median_latest),
+                "薪資中位數前一年": None,
+            })
+    return rows
+
 def run_visible_query(browser: MopsBrowser, year: str, market: str | None) -> str:
     browser.open_page("t100sb15")
 
@@ -155,10 +230,12 @@ def run_visible_query(browser: MopsBrowser, year: str, market: str | None) -> st
         browser.dump_debug(f"salary_fill_failed_{year}_{market or 'default'}")
         raise RuntimeError("找不到薪資資訊頁面的年度／市場欄位")
 
+    browser.start_response_capture()
     if not browser.click_salary_query_button():
         browser.dump_debug(f"salary_no_query_button_{year}_{market or 'default'}")
         raise RuntimeError("找不到薪資資訊頁面的查詢按鈕")
 
+    browser.stop_response_capture()
     browser.ensure_not_security(f"salary_security_{year}_{market or 'default'}")
     html = browser.combined_html()
     if "公司代號" not in html and "公司名稱" not in html:
@@ -180,13 +257,19 @@ def fetch_salary_rows_for_year(year: str) -> list[dict[str, Any]]:
                 table = pick_main_table(tables)
                 rows = []
                 if table is None:
-                    print(f"No HTML salary table found for {market or 'default'} {year}; try visible text fallback")
-                    rows = parse_salary_text(browser.visible_body_text(), year, market or "未區分")
+                    print(f"No HTML salary table found for {market or 'default'} {year}; try captured JSON/text fallback")
+                    combined_text = html + "\n" + browser.visible_body_text() + "\n" + browser.captured_response_text()
+                    rows = parse_salary_json_payload(combined_text, year, market or "未區分")
+                    if not rows:
+                        rows = parse_salary_text(combined_text, year, market or "未區分")
                 else:
                     rows = parse_salary_table(table, year, market or "未區分")
                     if not rows:
-                        print(f"HTML table parsed 0 rows for {market or 'default'} {year}; try visible text fallback")
-                        rows = parse_salary_text(browser.visible_body_text(), year, market or "未區分")
+                        print(f"HTML table parsed 0 rows for {market or 'default'} {year}; try captured JSON/text fallback")
+                        combined_text = html + "\n" + browser.visible_body_text() + "\n" + browser.captured_response_text()
+                        rows = parse_salary_json_payload(combined_text, year, market or "未區分")
+                        if not rows:
+                            rows = parse_salary_text(combined_text, year, market or "未區分")
                 if not rows:
                     print(f"No salary rows parsed for {market or 'default'} {year}")
                     browser.dump_debug(f"salary_no_rows_{year}_{market or 'default'}")
