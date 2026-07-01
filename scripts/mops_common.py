@@ -4,6 +4,7 @@ import json
 import os
 import re
 import time
+from io import StringIO
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Any, Iterable
@@ -13,7 +14,7 @@ from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeo
 
 TAIPEI_TZ = timezone(timedelta(hours=8))
 MOPS_ORIGIN = "https://mops.twse.com.tw"
-MOPS_SPA_BASE = "https://mops.twse.com.tw/mops/web"
+MOPS_SPA_BASE = f"{MOPS_ORIGIN}/mops/#/web"
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
@@ -93,9 +94,15 @@ def flatten_columns(df: pd.DataFrame) -> list[str]:
 
 
 def read_tables(html: str) -> list[pd.DataFrame]:
+    """Read HTML tables from an HTML string.
+
+    On Windows / newer pandas combinations, passing a raw HTML string can be
+    interpreted as a file path and raise: [Errno 2] No such file or directory:
+    <!DOCTYPE html>...  Wrapping with StringIO forces pandas to parse content.
+    """
     try:
-        return pd.read_html(html)
-    except ValueError:
+        return pd.read_html(StringIO(html))
+    except (ValueError, OSError):
         return []
 
 
@@ -211,12 +218,39 @@ class MopsBrowser:
     def open_page(self, page_code: str) -> None:
         assert self.page is not None
         url = f"{MOPS_SPA_BASE}/{page_code}"
-        print(f"Open MOPS web page: {url}")
+        print(f"Open MOPS page: {url}")
         self.page.goto(url, wait_until="domcontentloaded", timeout=60000)
-        self.page.wait_for_timeout(5000)
+        self.page.wait_for_timeout(3000)
+        self.dismiss_popups()
+
+        # The new MOPS is a Vue SPA.  Direct /mops/web/t100sb15 may render only
+        # the home/menu shell; use the hash route and, if needed, click the
+        # matching in-page route link so the real query component is mounted.
+        try:
+            self.page.evaluate("code => { if (!location.hash.includes(code)) location.hash = '/web/' + code; }", page_code)
+            self.page.wait_for_timeout(4500)
+        except Exception:
+            pass
+
+        for selector in [f'a[href="#/web/{page_code}"]', f'a[href="/mops/#/web/{page_code}"]']:
+            try:
+                loc = self.page.locator(selector).first
+                if loc.count() and loc.is_visible(timeout=1000):
+                    loc.click(timeout=2500)
+                    self.page.wait_for_timeout(5000)
+                    break
+            except Exception:
+                pass
+
+        try:
+            self.page.wait_for_load_state("networkidle", timeout=15000)
+        except Exception:
+            pass
+        self.page.wait_for_timeout(3000)
         self.dismiss_popups()
         try:
             print(f"Page title: {self.page.title()}")
+            print(f"Current URL: {self.page.url}")
         except Exception:
             pass
 
