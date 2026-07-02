@@ -1,4 +1,4 @@
-# version: salary browser AJAX old-endpoint fallback - 2026-07-01
+# version: salary old-domain ajax/form fallback - 2026-07-02
 from __future__ import annotations
 
 from typing import Any
@@ -245,11 +245,11 @@ def run_browser_ajax_query(browser: MopsBrowser, year: str, market: str) -> str:
     print(f"POST old MOPS ajax_t100sb15 via browser session: market={market}, TYPEK={typek}, RYEAR={year}")
     html = browser.fetch_salary_ajax_html(year=year, typek=typek)
     if "FOR SECURITY REASONS" in html or "SECURITY REASONS" in html or "因為安全性考量" in html:
-        browser.dump_debug(f"salary_ajax_security_{year}_{market}")
+        browser.dump_text_debug(f"salary_ajax_security_{year}_{market}", html)
         raise RuntimeError("MOPS AJAX returned security page")
     if not html or ("公司代號" not in html and "公司名稱" not in html and "查無" not in html):
-        browser.dump_debug(f"salary_ajax_unexpected_{year}_{market}")
-        preview = clean_text(html[:300])
+        browser.dump_text_debug(f"salary_ajax_unexpected_{year}_{market}", html or "")
+        preview = clean_text((html or "")[:300])
         raise RuntimeError(f"MOPS AJAX response did not contain salary table keywords: {preview}")
     return html
 
