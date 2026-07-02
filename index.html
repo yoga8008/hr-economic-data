@@ -1688,6 +1688,28 @@ h1.pageTitle{
     color:#ffffff;
 }
 
+
+.officialType.labor{
+    background:#fff7ed;
+    color:#c2410c;
+    border-color:#fed7aa;
+}
+.officialType.tax{
+    background:#ecfdf5;
+    color:#047857;
+    border-color:#a7f3d0;
+}
+.officialType.social{
+    background:#ecfdf5;
+    color:#047857;
+    border-color:#a7f3d0;
+}
+.officialType.recruit{
+    background:#f5f3ff;
+    color:#6d28d9;
+    border-color:#ddd6fe;
+}
+
 </style>
 </head>
 
@@ -1818,7 +1840,7 @@ h1.pageTitle{
 
                 <div class="officialFilterBar">
                     <div class="officialFilterTitle">官方來源聚焦</div>
-                    <div class="officialFilterDesc">欄位先維持：更新日、國家、分類、來源、內容。</div>
+                    <div class="officialFilterDesc">欄位先維持：更新日、國家、分類、來源、內容；內容欄保留中文摘要。</div>
                     <div class="officialTabs">
                         <button class="active">全部</button>
                         <button>勞動法規</button>
@@ -1842,52 +1864,89 @@ h1.pageTitle{
                     <tbody>
                         <tr>
                             <td>2026/06/30</td>
-                            <td>United States</td>
-                            <td><span class="officialType">勞動法規</span></td>
-                            <td>Department of Labor OIG</td>
+                            <td><strong>United States</strong></td>
+                            <td><span class="officialType labor">勞動法規</span></td>
+                            <td><a href="https://www.oig.dol.gov/public/PressReleases.htm" target="_blank" rel="noopener noreferrer">Department of Labor OIG</a></td>
                             <td>
-                                <a href="javascript:void(0)">Press Releases - Department of Labor Office of Inspector General</a>
+                                <a href="https://www.oig.dol.gov/public/PressReleases.htm" target="_blank" rel="noopener noreferrer">Press Releases - Department of Labor Office of Inspector General</a>
                                 <div class="officialNote">與勞動稽核、僱用合規及雇主責任相關。</div>
                             </td>
                         </tr>
+
                         <tr>
                             <td>2026/06/30</td>
-                            <td>United States</td>
-                            <td><span class="officialType">薪資稅務</span></td>
-                            <td>IRS</td>
+                            <td><strong>United States</strong></td>
+                            <td><span class="officialType tax">稅務社保</span></td>
+                            <td><a href="https://www.irs.gov/businesses/gig-economy-tax-center" target="_blank" rel="noopener noreferrer">IRS</a></td>
                             <td>
-                                <a href="javascript:void(0)">Taxes for gig work - IRS</a>
+                                <a href="https://www.irs.gov/businesses/gig-economy-tax-center" target="_blank" rel="noopener noreferrer">Taxes for gig work - IRS</a>
                                 <div class="officialNote">適用零工、承攬與非典型工作者稅務分類追蹤。</div>
                             </td>
                         </tr>
+
                         <tr>
                             <td>2026/06/30</td>
-                            <td>Mexico</td>
-                            <td><span class="officialType">社保保險</span></td>
-                            <td>IMSS</td>
+                            <td><strong>United States</strong></td>
+                            <td><span class="officialType tax">稅務社保</span></td>
+                            <td><a href="https://www.irs.gov/businesses/small-businesses-self-employed/manage-taxes-for-your-gig-work" target="_blank" rel="noopener noreferrer">IRS</a></td>
                             <td>
-                                <a href="javascript:void(0)">Prensa - IMSS</a>
+                                <a href="https://www.irs.gov/businesses/small-businesses-self-employed/manage-taxes-for-your-gig-work" target="_blank" rel="noopener noreferrer">Gig economy - IRS</a>
+                                <div class="officialNote">作為非典型用工與薪資扣繳制度參考。</div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2026/06/30</td>
+                            <td><strong>Mexico</strong></td>
+                            <td><span class="officialType social">社保稅務</span></td>
+                            <td><a href="https://www.imss.gob.mx/prensa" target="_blank" rel="noopener noreferrer">IMSS</a></td>
+                            <td>
+                                <a href="https://www.imss.gob.mx/prensa" target="_blank" rel="noopener noreferrer">Prensa - IMSS</a>
                                 <div class="officialNote">墨西哥社保制度、員工醫療及保險相關更新。</div>
                             </td>
                         </tr>
+
                         <tr>
                             <td>2026/06/30</td>
-                            <td>Mexico</td>
-                            <td><span class="officialType">薪資稅務</span></td>
-                            <td>SAT</td>
+                            <td><strong>Mexico</strong></td>
+                            <td><span class="officialType social">社保稅務</span></td>
+                            <td><a href="https://www.sat.gob.mx/" target="_blank" rel="noopener noreferrer">SAT</a></td>
                             <td>
-                                <a href="javascript:void(0)">SAT Autenticación - SAT</a>
+                                <a href="https://www.sat.gob.mx/" target="_blank" rel="noopener noreferrer">SAT Autenticación - SAT</a>
                                 <div class="officialNote">薪資稅務、公司申報與官方帳號驗證相關。</div>
                             </td>
                         </tr>
+
                         <tr>
                             <td>2026/06/30</td>
-                            <td>China</td>
-                            <td><span class="officialType">就業招募</span></td>
-                            <td>chinajob.mohrss.gov.cn</td>
+                            <td><strong>China</strong></td>
+                            <td><span class="officialType tax">稅務社保</span></td>
+                            <td><a href="https://etax.hainan.chinatax.gov.cn/" target="_blank" rel="noopener noreferrer">etax.hainan.chinatax.gov.cn</a></td>
                             <td>
-                                <a href="javascript:void(0)">河南錦繡：「安薪守護」行動顯成效 築牢民生保障防線</a>
+                                <a href="https://etax.hainan.chinatax.gov.cn/" target="_blank" rel="noopener noreferrer">海南 - etax.hainan.chinatax.gov.cn</a>
+                                <div class="officialNote">地方稅務服務與申報系統資訊。</div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2026/06/30</td>
+                            <td><strong>China</strong></td>
+                            <td><span class="officialType recruit">就業招募</span></td>
+                            <td><a href="https://chinajob.mohrss.gov.cn/" target="_blank" rel="noopener noreferrer">chinajob.mohrss.gov.cn</a></td>
+                            <td>
+                                <a href="https://chinajob.mohrss.gov.cn/" target="_blank" rel="noopener noreferrer">河南錦繡：「安薪守護」行動顯成效 築牢民生保障防線</a>
                                 <div class="officialNote">涉及欠薪治理、薪資保障與地方人社政策。</div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2026/06/30</td>
+                            <td><strong>China</strong></td>
+                            <td><span class="officialType recruit">就業招募</span></td>
+                            <td><a href="https://chinajob.mohrss.gov.cn/" target="_blank" rel="noopener noreferrer">chinajob.mohrss.gov.cn</a></td>
+                            <td>
+                                <a href="https://chinajob.mohrss.gov.cn/" target="_blank" rel="noopener noreferrer">安徽亳州：社保保障卡惠民服務活動全面啟動</a>
+                                <div class="officialNote">涉及社保服務、員工保障與地方行政服務。</div>
                             </td>
                         </tr>
                     </tbody>
