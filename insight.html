@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>輿情觀察</title>
+  <title>輿情觀察｜台灣 HR 關聯圖譜預覽</title>
   <style>
     :root{
       --blue:#173a86;
@@ -51,7 +51,7 @@
     .section-title{height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 18px;border-bottom:1px solid #d7dde7;font-weight:900;color:#0d3b7c;font-size:20px;background:#fff;}
     .section-title .left{display:flex;align-items:center;gap:0}
     .section-title .dot{display:none;}
-    .section-title button{border:1px solid #cfe0f3;background:#fff;color:#0d3b7c;border-radius:6px;width:24px;height:24px;padding:0;font-weight:800;cursor:pointer;line-height:20px;font-size:12px;}
+    .section-title button{border:0;background:transparent;color:#6b7b93;border-radius:0;width:auto;height:auto;padding:0 2px;font-weight:900;cursor:pointer;line-height:1;font-size:12px;box-shadow:none;}
     .section-body{padding:18px 22px 22px;}
     .collapsed .section-body{display:none}
     .collapsed .section-title{border-bottom:0}
@@ -187,7 +187,7 @@
     </div>
 
     <section class="section" id="summary-section">
-      <div class="section-title"><div class="left"><span class="dot"></span>AI 今日重點摘要</div><button onclick="toggleSection('summary-section')">⌄</button></div>
+      <div class="section-title"><div class="left"><span class="dot"></span>AI 今日重點摘要</div><button onclick="toggleSection('summary-section')">▾</button></div>
       <div class="section-body">
         <div class="summary-grid">
           <div class="summary-card">
@@ -207,7 +207,7 @@
     </section>
 
     <section class="section" id="buzz-section">
-      <div class="section-title"><div class="left"><span class="dot"></span>HR 聲量圖</div><button onclick="toggleSection('buzz-section')">⌄</button></div>
+      <div class="section-title"><div class="left"><span class="dot"></span>HR 聲量圖</div><button onclick="toggleSection('buzz-section')">▾</button></div>
       <div class="section-body">
         <div class="buzz-wrap">
           <div class="top10">
@@ -244,7 +244,7 @@
     </section>
 
     <section class="section" id="graph-section">
-      <div class="section-title"><div class="left"><span class="dot"></span>全球 HR 輿情雷達：台灣 HR 影響關聯圖譜</div><button onclick="toggleSection('graph-section')">⌄</button></div>
+      <div class="section-title"><div class="left"><span class="dot"></span>全球 HR 輿情雷達：台灣 HR 影響關聯圖譜</div><button onclick="toggleSection('graph-section')">▾</button></div>
       <div class="section-body">
         <div class="graph-toolbar">
           <div class="legend">
@@ -300,7 +300,7 @@
     </section>
 
     <section class="section" id="news-section">
-      <div class="section-title"><div class="left"><span class="dot"></span>最新輿情資訊</div><button onclick="toggleSection('news-section')">⌄</button></div>
+      <div class="section-title"><div class="left"><span class="dot"></span>最新輿情資訊</div><button onclick="toggleSection('news-section')">▾</button></div>
       <div class="section-body">
         <div class="news-table-wrap">
           <div class="news-meta">最多保留 100 則歷史輿情</div>
