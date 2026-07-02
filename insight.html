@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>輿情觀察｜台灣 HR 關聯圖譜預覽</title>
+  <title>輿情觀察</title>
   <style>
     :root{
       --blue:#173a86;
@@ -38,9 +38,10 @@
       border-left:1px solid rgba(255,255,255,.18);letter-spacing:.2px;text-decoration:none;
     }
     .nav-item:hover{background:rgba(255,255,255,.10);}
-    .nav-item:first-child{border-left:0;flex:1.35;}
     .nav-item.active{background:rgba(255,255,255,.15)}
-    .nav-item.blank{flex:1.55;background:#213f91;pointer-events:none;}
+    .nav-item.blank{background:#213f91;pointer-events:none;}
+    .nav-item.blank.left{flex:1.45;border-left:0;}
+    .nav-item.blank.right{flex:1.45;}
 
     .page{width:1080px;margin:38px auto 56px;}
     .page-head{display:flex;align-items:flex-end;justify-content:space-between;margin:0 0 18px 20px;}
@@ -172,12 +173,13 @@
 <body>
   <div class="top-wrap">
     <nav class="nav-pill" aria-label="main navigation">
+      <div class="nav-item blank left"></div>
       <a class="nav-item" href="./index.html">Global HR Hub</a>
       <a class="nav-item" href="./links.html">常用網站</a>
       <a class="nav-item" href="./indicators.html">經社指標</a>
       <a class="nav-item" href="./tools.html">HR工具</a>
       <a class="nav-item active" href="./insight.html">輿情觀察</a>
-      <div class="nav-item blank"></div>
+      <div class="nav-item blank right"></div>
     </nav>
   </div>
 
