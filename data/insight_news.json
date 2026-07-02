@@ -43,6 +43,13 @@
   },
   {
     "日期": "2026/07/02",
+    "來源": "news.cnyes.com",
+    "標題": "政院拍板！明年軍公教調薪5.88%至11.56% 委任1職等起薪破3.8萬元 - news.cnyes.com",
+    "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE53c1Zpb19RWlhDZld6Z3BqQ0Ztbng0V3dELUhQWjhLOFIxZUdLSjkyNUxDSzlJV01kWm00SHZnLXd0bTZqZ0JlT0UtM0pwWFk?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/02",
     "來源": "蕃新聞",
     "標題": "勞動部澎湖中心「支援青年就業計畫」成返鄉求職者最強後盾 - 蕃新聞",
     "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBuQWZaU2hoenVONnJmeDNZRXU2MHFfYm5IUTZCMzJGTVNGdGJsRTVkNzZjWUFtZnNITy0tWk1lSXZRNUNyM2MtMkdmaElMR0xNSHc?oc=5",
@@ -53,13 +60,6 @@
     "來源": "LINE TODAY",
     "標題": "台南就業中心7月3場聯合徵才 最高薪上看6萬元 | 台灣好新聞 - LINE TODAY",
     "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE11NEZBVHpYZnJWRzRhMlhfdEZEV1dZR0Z3VDFDeE9KcVMxS1pGM1VrenhEd1hNMnJKZmU1ZDZnU1hsc242T0NrcC0zZm9ERzluVmQtOExR?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/02",
-    "來源": "MSN",
-    "標題": "雲嘉南區「台灣就業通」就博會 7/26成大登場 - MSN",
-    "連結": "https://news.google.com/rss/articles/CBMiwANBVV95cUxPcVlYRlhVeWpfTXRseUFieGQxUzViWmtYeEZTVVh2bWFoTkZaZ2ktNVRYVDVwbXVVQ2N1X1MydTNnNFUwRE5ZN2lqSnBDeUE5UzJmMk03RkVESTBOVHhHMkUwRUg4WjlJVGI3Ykpyd1J5XzUyc0lQb19uV3M0OUM1QU9XenBTUzlsOTlZSjJGcms5bFNCMkkxZHJjLWpBbFBkdzRxQXFCN2g1WGZaQ1hnajdMMVpxcHN5MW9GT1NxVzRNSXItQzliSE00SS1LWEhTbHdGYzFISm5NWVdGVktWWUxGQ3RwYkp2X0lLZ2liVkMxeXpTRHpqYUVmRU1xcGZneXpSWExFWG9QUVNiQmtES0I1UXc4aS02dmVSQWs2cDlLR1M3YmZYZFJFZUhUcmN1ME0wR1pmcUthak42Y0dwRU1PWjd5RXR2emFoUXlpTVFaRFBvY25rNjIxVV9nZ3hXNFJfamtIdHMyczdTYzVudWl1SFliVGY5eVpGdS1QN1BqOXZzRDhOTEpXdUM3dW5feEc2WDhTVHdPbWlIcGZlWHE0SEpLdXU3ak42Wjc1NkQzM2NxdlN4dEhZaWVNREho?oc=5",
     "重要": true
   },
   {
@@ -113,16 +113,30 @@
   },
   {
     "日期": "2026/07/02",
-    "來源": "工商時報",
-    "標題": "職場霸凌新法上路企業不可忽視的法律風險- 日報 - 工商時報",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1TXzJzR1ZHN0hXNGtPdEF2Sngyc3VwMUF6QXhzX2hYakFFNUdyemVHXzNJcVJCaVZmb2lXMTR6VEpaVW1UNVdESGRXSzRZN2tkN29ZaGRheFdwVVhGa01Z?oc=5",
+    "來源": "MSN",
+    "標題": "職場霸凌納法律規範! 律師整理5大要件 最高罰450萬 - MSN",
+    "連結": "https://news.google.com/rss/articles/CBMi8ANBVV95cUxPc2U5MDE2cGY0eW1hanllSC01NlBkRzFtNDZ1X2pwQlBnYTBuU0NkZ0lZTE5UZnZ6YjlnRTNvTmFMUV9SQ2pFQnAteFdKbm9NX05hdlBRUmJnT3NZMWlhY0o3eU5TOTJjRGZYZ1VROWZSWFRfZjNhbEpvLWRETEhpUnk1VTZkMWlCOE5qNmlvaHdjd2tnVGNWV2dpZHI3SEVVcFI4djJ4UEk5M3pxR1U4TU5UR1FWVnJJejAwRlhycjJlVjQwS1B4eXVqaFMzRlBDelB2YWo3cS0zc1JGYl9IeVFtRXA5c2pNX0VhM0dvX0hYQVAtN0hoQ0ZpRnU5V2hQSS1mNFFaS0VhR04wX0plSTgzNlhQLVJHVFVLdmNESWowZ2xrLTVhakY0SDhKR1RlYnV1TWxZSlBmcXpzdFV0Q2NKMWFySzQ0ZTktcnh5ZnVPNUI2cHdZT3hfeE5tSTRsZEhPeHpRZ0VtRTRmMllOaFpHcVNPVHFXS0NzWTVaRHFLUE03ZWwxNFppUHNlbVBVc1RNTGYwZlliNTNJaXBraFA5b1JnSW9KRmZxUHk4cTBwR1U2WlFfdko3eklna3FSODhnd3F5eWlkT1BFdWVFVzVIUFJvNEhOUUEzdnJWQnlrbC1NbmFJdHRnV1VIalpa?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/02",
+    "來源": "中時新聞網",
+    "標題": "法律觀點－職場霸凌新法上路企業不可忽視的法律風險- 產業特刊- 工商時報 - 中時新聞網",
+    "連結": "https://news.google.com/rss/articles/CBMia0FVX3lxTE8tMHFnN3V2SW1ELVRmcmYwUkh0YjlkM19kTTVZY3MyOF9PZ1lSemlZekphNlRiUWlHYXRBcUF0cHVHNWtDUk5tbkZWS0d0cDg5a0N1U3k0bm0zRDlHaENWeHVpRFFVdk1IaGZR?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/02",
     "來源": "UDN",
     "標題": "川普又點名台灣：台積電亞利桑納設廠規模將翻倍| 全球財經| 全球 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1UbVJ0dFBhNEl3Ql9LdUY2YTJ6M3FLbjFSOTAtMEVPTGwwVFp6Ul94ZnhENlVyWHVNTmxabHl6TmZjd241a0dCNmdyZEhmV3NQSDFQMDdZT1Y2VFZfcFIwY1hOWXVBQU9PRDdFeDE3dmJiUnM?oc=5",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5lMXAxVFBCX1Zkb29tMThldExIMUR3YVlib1N1QkVGU1Q4SE5kT3B5eGtKWmRaLWFsUG5BRE1VQTJ0dmIzOFBUR1dBQ091LUxS?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/02",
+    "來源": "世界新聞網",
+    "標題": "川普又點名台灣：台積電亞利桑納設廠規模將翻倍 - 世界新聞網",
+    "連結": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8xSW1pUmdjWWVDY1gwZmVLdFhGNk5DWXlsb29scC1Ya25kNjRJNE9NRjA2N3BTdkl3SzFaN0p2TGs2RlR4NGMtVkd2WWdFaGpkbVdlS2lOUXdkOVVxa3lUal9hTVBJWjTSAWdBVV95cUxPMUltaVJnY1llQ2NYMGZlS3RYRjZOQ1l5bG9vbHAtWGtuZDY0STRPTUYwNjdwU3ZJd0sxWjdKdkxrNkZUeDRjLVZHdllnRWhqZG1XZUtpTlF3ZDlVcWt5VGpfYU1QSVo0?oc=5",
     "重要": true
   },
   {
@@ -171,7 +185,14 @@
     "日期": "2026/07/02",
     "來源": "UDN",
     "標題": "川普指台積電擴廠規模翻倍 曾獻瑩：半導體應成台灣「戰略籌碼」 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA4cTZsczRSU01jVWhlZFRBUEg3U2hYZERLMDAyU0t5bWxmVlV2MWJTS0ZmM3NscUtxWm55aks2SUJHRzU3VUU0dkRzVHJYeVoyNThyd0ZB0gFWQVVfeXFMUDhxNmxzNFJTTWNVaGVkVEFQSDdTaFhkREswMDJTS3ltbGZWVXYxYlNLRmYzc2xxS3FabnlqSzZJQkdHNTdVRTR2RHNUclh5WjI1OHJ3RkE?oc=5",
+    "連結": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5OU3AxU1pESHN1aEpPZlFGUG9adUxqb3hfSmEwX3k4c3lqUTQxZmJvblJJcUZwZk43UUFpSmRtYXIydHlZbVhZOWsxdURlN1BEN19IS1BEVWdGcXltbnRBckp6T25YaWo1SWRIS0dnRnpmbGM?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/02",
+    "來源": "Yahoo新聞",
+    "標題": "川普指台積電擴廠規模翻倍 曾獻瑩示警半導體「骨牌效應」 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMi9gJBVV95cUxNejhQZ3J0OEJjNGlQNHVPRFc4Skc4V0VnSnJxNC0xanZoVEYyU1Z2RVg5UllLaXRQVnlYdC1NVUVIc0x3bDM5Vi04V21VRVJuUzlUM01HbjFRWV9RSHVYVFN5bUFNNXlvanM1VW40RWpnWFRvbExXZGtlZ0ZLMWI0NFU0WFUzb0pmVmhRUEc2ekZqSU80TlNnMVVQaXQybEN2RmpXaEdISm9MSk1FSkFFWEdLTGozejJwMC1mbEF0VW01NW9rWXVQakpfR2ZjaFBWVzBKa2RaQ19jT2s4aTNiYWF3aUpQUWR2dFJKdG5PX09zZ0Y0MVJuVFhSWTRUbW5VMnVibVpqY3VSVkNndG9pdmUxRmMzZHBHYmxCWG9OMGw2Ym5fNVM5RHJUZjExRDUxY3RIQXRoTDdXZmt5M1NoTnZUQU4yU0h2MU42eGlzd3lnbGRpSHhJc0RmVTNrTlh2YVlBdmxyd2tIUk1lVjVBYS1xenBTUQ?oc=5",
     "重要": true
   },
   {
@@ -198,15 +219,15 @@
   {
     "日期": "2026/07/02",
     "來源": "Yahoo - 汽機車",
-    "標題": "2025 年十二月台灣電動車銷售排行榜：特斯拉 Model Y 強勢回歸，爆量交車破五千台 - Yahoo - 汽機車",
-    "連結": "https://news.google.com/rss/articles/CBMiugJBVV95cUxOSXlXZTlvYkhxaDlZalhDVVluMnk1RkVrU2lzMDhaUUhsT25RVUM3MnRZbW05YWx6c1NaVVNEcjRjLWp1d1QzaURvSUZJZlRodzdMZERDQ2ZwblFXN2RHVTJZem5YOEZpaVpRTTNYSm53dzBaczNYdmZJdFB3cVFJWlViSWpad2c4TXl3cnNHNFNSV2FYMVNQNXpoUG04aWhHVFByYno1cEhxRzk1aGRlTEZyZGhYZV96YmtkRUN6WFk5VE44WUJuVTI0SEljdGlKaElnR29BQ19kN2hyVlc0akpueGNzNm16YnFoOHRtRDd6aUdWaFlpSzhnaFRZQlF6MUJCSWlpVWlTLWxvRkY1SnV4RER3U0ZKTnVUTE5rZ1dJSGEwYllGS0Rxb1JoelFiYWJGc2NNRVlBZw?oc=5",
+    "標題": "2026 年六月台灣電動車銷售排行榜：熱銷前三特斯拉 Model Y、Model 3、Model X 全包了 - Yahoo - 汽機車",
+    "連結": "https://news.google.com/rss/articles/CBMiuANBVV95cUxPYnRvLTd4UzRXUjBMSDg0UGZuWGt3SS04N1hXNGRsLTdjRDlBZmVrYWRweWN0Y1NDRVR2U2Y1Z1o2UTZZTnhGVUhVQm1HLWhfOFB3UVROWmExQjIwSEVkeW8tZXVhaDFjTUV5TjdFTV96b2VMWWtTQXdEdDVoaWJ2MUxNUXYxdF9neGhoa25KQlhlSU1HdFNoZ1hZWUNyNWlsX1JaSUxPUDNzRUhOSHcxRE5DeW9uTTEyMVBFX0E4cmtGbm9fRFhBaTB1VzNQaTBuU2ZqeWFEM0FEWkNZRXctSFdrWXJWSlpZWGRWRlJCSzAtX3JQYVAxWDVDMTdGMWs4ODNYNDZ6X2ViNWVUWXJ3eXRKWmNQVm5nUWdRVExkSDJzXzN0ZjZYOERaQVJBVEpUamZYMXYxei11THQwN2E5WGNLSm95MVpNX1BVaUhBenh3YzFzckw0eW9UQ2VyUUZXTTBwdWdHTTR3UmJnamlSRGtfVWM0NE1ONE5ESmJJWUs2SWhldkMzbUZHcnpSeVRfdmV1OU1HNjJ5SkdLZXdmUGllSVZYVklTcUQ3bUF5TEo3Nk1jQnphdg?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/02",
     "來源": "Yahoo - 汽機車",
-    "標題": "2026 年六月台灣電動車銷售排行榜：熱銷前三特斯拉 Model Y、Model 3、Model X 全包了 - Yahoo - 汽機車",
-    "連結": "https://news.google.com/rss/articles/CBMiuANBVV95cUxPYnRvLTd4UzRXUjBMSDg0UGZuWGt3SS04N1hXNGRsLTdjRDlBZmVrYWRweWN0Y1NDRVR2U2Y1Z1o2UTZZTnhGVUhVQm1HLWhfOFB3UVROWmExQjIwSEVkeW8tZXVhaDFjTUV5TjdFTV96b2VMWWtTQXdEdDVoaWJ2MUxNUXYxdF9neGhoa25KQlhlSU1HdFNoZ1hZWUNyNWlsX1JaSUxPUDNzRUhOSHcxRE5DeW9uTTEyMVBFX0E4cmtGbm9fRFhBaTB1VzNQaTBuU2ZqeWFEM0FEWkNZRXctSFdrWXJWSlpZWGRWRlJCSzAtX3JQYVAxWDVDMTdGMWs4ODNYNDZ6X2ViNWVUWXJ3eXRKWmNQVm5nUWdRVExkSDJzXzN0ZjZYOERaQVJBVEpUamZYMXYxei11THQwN2E5WGNLSm95MVpNX1BVaUhBenh3YzFzckw0eW9UQ2VyUUZXTTBwdWdHTTR3UmJnamlSRGtfVWM0NE1ONE5ESmJJWUs2SWhldkMzbUZHcnpSeVRfdmV1OU1HNjJ5SkdLZXdmUGllSVZYVklTcUQ3bUF5TEo3Nk1jQnphdg?oc=5",
+    "標題": "2025 年十二月台灣電動車銷售排行榜：特斯拉 Model Y 強勢回歸，爆量交車破五千台 - Yahoo - 汽機車",
+    "連結": "https://news.google.com/rss/articles/CBMiugJBVV95cUxOSXlXZTlvYkhxaDlZalhDVVluMnk1RkVrU2lzMDhaUUhsT25RVUM3MnRZbW05YWx6c1NaVVNEcjRjLWp1d1QzaURvSUZJZlRodzdMZERDQ2ZwblFXN2RHVTJZem5YOEZpaVpRTTNYSm53dzBaczNYdmZJdFB3cVFJWlViSWpad2c4TXl3cnNHNFNSV2FYMVNQNXpoUG04aWhHVFByYno1cEhxRzk1aGRlTEZyZGhYZV96YmtkRUN6WFk5VE44WUJuVTI0SEljdGlKaElnR29BQ19kN2hyVlc0akpueGNzNm16YnFoOHRtRDd6aUdWaFlpSzhnaFRZQlF6MUJCSWlpVWlTLWxvRkY1SnV4RER3U0ZKTnVUTE5rZ1dJSGEwYllGS0Rxb1JoelFiYWJGc2NNRVlBZw?oc=5",
     "重要": true
   },
   {
@@ -316,13 +337,6 @@
   },
   {
     "日期": "2026/07/02",
-    "來源": "UDN",
-    "標題": "旭化成傳將在台建設半導體基板材料新工廠投資額約20億日圓| 全球財經| 全球 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE4ycjc0WjkybmllRU84QlNta0dQZTN2RmJyLTBHTU9INGdkemEwbWgyTlh5YnctRVlSTGk0WnRrd2pDcC11SEhIelNDeXZxaGJ2?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/02",
     "來源": "工商時報",
     "標題": "發揮AI半導體優勢賴清德：和民主國家加強合作提升經濟韌性- 要聞 - 工商時報",
     "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1WQ0VDQzN4N1NnRGxlUTQ4QUQtV0xETXhjLUNHY3BpeGw0bDdYQ21fVEJJSU9RcWZkZE9zdnBLWmNNTnZUZkMzeHhCTjhTTDlUdWo1bFkxNFpLOXJ0Mkww?oc=5",
@@ -428,6 +442,27 @@
   },
   {
     "日期": "2026/07/02",
+    "來源": "MSN",
+    "標題": "雲嘉南區「台灣就業通」就博會 7/26成大登場 - MSN",
+    "連結": "https://news.google.com/rss/articles/CBMiwANBVV95cUxPcVlYRlhVeWpfTXRseUFieGQxUzViWmtYeEZTVVh2bWFoTkZaZ2ktNVRYVDVwbXVVQ2N1X1MydTNnNFUwRE5ZN2lqSnBDeUE5UzJmMk03RkVESTBOVHhHMkUwRUg4WjlJVGI3Ykpyd1J5XzUyc0lQb19uV3M0OUM1QU9XenBTUzlsOTlZSjJGcms5bFNCMkkxZHJjLWpBbFBkdzRxQXFCN2g1WGZaQ1hnajdMMVpxcHN5MW9GT1NxVzRNSXItQzliSE00SS1LWEhTbHdGYzFISm5NWVdGVktWWUxGQ3RwYkp2X0lLZ2liVkMxeXpTRHpqYUVmRU1xcGZneXpSWExFWG9QUVNiQmtES0I1UXc4aS02dmVSQWs2cDlLR1M3YmZYZFJFZUhUcmN1ME0wR1pmcUthak42Y0dwRU1PWjd5RXR2emFoUXlpTVFaRFBvY25rNjIxVV9nZ3hXNFJfamtIdHMyczdTYzVudWl1SFliVGY5eVpGdS1QN1BqOXZzRDhOTEpXdUM3dW5feEc2WDhTVHdPbWlIcGZlWHE0SEpLdXU3ak42Wjc1NkQzM2NxdlN4dEhZaWVNREho?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/02",
+    "來源": "工商時報",
+    "標題": "職場霸凌新法上路企業不可忽視的法律風險- 日報 - 工商時報",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1TXzJzR1ZHN0hXNGtPdEF2Sngyc3VwMUF6QXhzX2hYakFFNUdyemVHXzNJcVJCaVZmb2lXMTR6VEpaVW1UNVdESGRXSzRZN2tkN29ZaGRheFdwVVhGa01Z?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/02",
+    "來源": "UDN",
+    "標題": "旭化成傳將在台建設半導體基板材料新工廠投資額約20億日圓| 全球財經| 全球 - UDN",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE4ycjc0WjkybmllRU84QlNta0dQZTN2RmJyLTBHTU9INGdkemEwbWgyTlh5YnctRVlSTGk0WnRrd2pDcC11SEhIelNDeXZxaGJ2?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/02",
     "來源": "信報網站",
     "標題": "富邦台灣半導體(03076) 月報表 - 信報網站",
     "連結": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxNLXBxSDVnSm4zM2k2aHNaQTRTb3o5TlVSa3FCQlloRzNBVWlpUlZYOVVKcDZ3YnBsVnNTTVN5SGY5cVo4djVWcDI5S2M4d3NuMHgxS2pTZlhUVjdwM19PV2pVUzJVc2VfMWp3TlFZMFdWLUtMNVpoUHluN2I0RVlacHlVdU0wZlFVdk9mWTg3bExYMFUyelotdkdfWVg4QjNvVkFrV2Z0dEk5WmdhdzAtQ0JpYk1zenB6VkpHUUlqOWhCWTBBYXg3VEtZUk81Zk10Q0M1aV9hS3NQUEhGMmlVc3ZsemZHUXExenQ4eA?oc=5",
@@ -452,13 +487,6 @@
     "來源": "東南亞財經新聞",
     "標題": "暑假照顧空窗遇社福缺工 愛奇兒家庭陷困境 - 東南亞財經新聞",
     "連結": "https://news.google.com/rss/articles/CBMiqAJBVV95cUxNNWNDdW5ZVXpQNUxkbjJ6QkpfbE1hYmRyVmhSeThQWVN1QTJEdGxBZHpsOF95Q3lPWVNKc1l6azVhVUhxVVpDRHlrVzR1WTF5MXhtTUw3Y0pESVpHTlNocG5ibmdTaXR5cTN4OHNRdWpSNUpTTlRCUEZpd0NRckozb0lQbGJFaVNueUNoYXZ2b3hNeTQ4Mzd1aFRqbGVMa1d5OGJZS2FCcTR6QXZ3TVYxc2RYU3NBVlJ4LURoci1FTTJscWhPS3hoT2dxNzVBXzVDZFVwbVJfaEdfdWFleEJIcGw5NVBBdHYtNVpMU3MxdGtlZ01SQjFic295Y0U5QlhVS28wSTY0c2tZYUJQM1lib3Awc0RGT0VVd1g5NGllT1p1b1YzMHBrUg?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/02",
-    "來源": "news.cnyes.com",
-    "標題": "政院拍板！明年軍公教調薪5.88%至11.56% 委任1職等起薪破3.8萬元 - news.cnyes.com",
-    "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE53c1Zpb19RWlhDZld6Z3BqQ0Ztbng0V3dELUhQWjhLOFIxZUdLSjkyNUxDSzlJV01kWm00SHZnLXd0bTZqZ0JlT0UtM0pwWFk?oc=5",
     "重要": true
   },
   {
@@ -554,13 +582,6 @@
   },
   {
     "日期": "2026/07/02",
-    "來源": "世界新聞網",
-    "標題": "川普又點名台灣：台積電亞利桑納設廠規模將翻倍 - 世界新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE4wajY2aFU1Q3l1N3Z3TUxiSXdwYVdTczNTcHBKYXQtWnoxQmF6MnVBUllzSURWZDd3RWtPQ25GZlRfYWRJR0kzNzdTU1E0N0pBM0RUeVU4WVBJcV9LOXpSenpR0gFnQVVfeXFMTzFJbWlSZ2NZZUNjWDBmZUt0WEY2TkNZeWxvb2xwLVhrbmQ2NEk0T01GMDY3cFN2SXdLMVo3SnZMazZGVHg0Yy1WR3ZZZ0VoamRtV2VLaU5Rd2Q5VXFreVRqX2FNUElaNA?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/02",
     "來源": "鏡報",
     "標題": "川普稱台灣倍增亞利桑那晶圓廠規模 台積電加碼投資 - 鏡報",
     "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE92Z2lkNTZkSTAwVVozT2hGU1pBSXlKd1ZYY2hGV1NuaVVCd1lJYThkTnVtWGNJMy1hd0szZl9Ob3l1bUo1T0I1X2p4YU1ZdkdWUkE?oc=5",
@@ -589,6 +610,13 @@
   },
   {
     "日期": "2026/07/01",
+    "來源": "天下雜誌",
+    "標題": "55歲後只能等退休？台灣中高齡友善職缺不到三成 「企業喊缺工，但不願意改」 - 天下雜誌",
+    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE94cFVnZDR6LTV1OG5nUk5IbzRuVFNfVGJJWHd1NEpqcnVwcE0xeGpqbmFWTHM2UXJPMWhZMjZzMFowcWdOeGJteEhXOVNkUQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/01",
     "來源": "LINE TODAY",
     "標題": "暑假勞檢違法率逼近25％ 勞動部：加強稽核、違反最低工資重罰 | 太報 - LINE TODAY",
     "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5GT3RfbktQZ3lUcnc5bTlSVVBqWGdzcXFqeVhfS0FlT3daUHJuX0ROOW1lUXJqR2VwSkpFVWdRSEQ0X3p6bG9Lekh1UzZxdUlqNFRwS0lR?oc=5",
@@ -606,13 +634,6 @@
     "來源": "Yahoo - 汽機車",
     "標題": "這個年．．．不好過囉 福斯大裁員、中國車反超，德國車的時代過去了？ - Yahoo - 汽機車",
     "連結": "https://news.google.com/rss/articles/CBMi3ANBVV95cUxNaUNzc3d0WVB5Z2VDWmlDM0lxTHBMRzVWTF93NDZtemtGTzF3ZW1WR2ZiSFZiSkpWMzBXOE1lRlFhVW4yTFBveXI3dFQzVzktV2dUTXpCOTZLODhBZ2tvSV9sZGgxdWtyMUJnZXoxZnlZcnctRzlCNXlYVnBQT05MbGREb3dLXzRLbWpGbDh0WDNzQk9GYWZra0dUU3U5ZGp6SnJaczcxejdzQUx2Mm1aQzVIUWxYZ1JsSHExMHhHN1JSRmk4dzR6SjR5djBHZk10U0JySlhxZzhBeDZlbDdKT2FFSGs2bXQ1SzI3MDYxX0xnd1dFLU5uUW0zcnRneTByVzhPT1pJMzloczQzZENHdGczLVV4eE1lQkFDd1lidjRfU2wtaTJzWFp4Y1dDdldBNW1FVmpHdWxzaks4WFZQWjBieVBfZ0FlbjFrOXRDencwT25GWTdWR0V1NFZGX2o5bzNkZkREa3NVMXkwYlF3Nl94SlM1NkNiQzlXZkZYOWEyb3B5UXl1N2VUUHhlcjNkZkxxRWdXa1V0Zy0tOTg5VEVLTUJ0TDA0U0pXQWN5LUdnUHpXQ3NyYXVid0pnRnZUdXZlbGRiNmhieHBubkEtTXIyejhxZW5LSjFCTA?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/01",
-    "來源": "天下雜誌",
-    "標題": "55歲後只能等退休？台灣中高齡友善職缺不到三成 「企業喊缺工，但不願意改」 - 天下雜誌",
-    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE94cFVnZDR6LTV1OG5nUk5IbzRuVFNfVGJJWHd1NEpqcnVwcE0xeGpqbmFWTHM2UXJPMWhZMjZzMFowcWdOeGJteEhXOVNkUQ?oc=5",
     "重要": true
   },
   {
@@ -666,13 +687,6 @@
   },
   {
     "日期": "2026/07/01",
-    "來源": "Yahoo新聞",
-    "標題": "別把一直忍當敬業 醫談職場霸凌：上班族更該學會適度「耍廢」 - Yahoo新聞",
-    "連結": "https://news.google.com/rss/articles/CBMi-AJBVV95cUxQcHZKRFI5UWlKMWVmWEl1UVE5RFpmTm9Vemo4QnY2ZXBRdVFfZ1JGTGxyOHlYZUx6NHNNdjNqRHVrQ1lxaUhqOVl2azdMV1J6RXZRbGdZTGtYandXaW1DWjFCMWhRekZhbUltVUpZR0VWUDVEREc3M1p6NV85X2lrWFd0QURjRGx2eVBobnB0RGtUR3l0aUVPN0YxcnQ1MkVYNjZGVERWNzVGY2tPUEZ6VDFZUVhJSFZYTE9CVHBHR0phTjZHeFN5azhORUtWRS1XZEFfYkt2RktWQzFWVnBKU0p4N0t2bzhWR0lhQ3NZZjVqU1o5Y3RmRDBWVEg4OWttdThwTG1iSWZCRmkxWVRRZWtpbGxvWU8zT2JGazRaUEpNTFBWd0FuS2VTTEJ0OXRDdmVLc255bDRlNWVGTmU1M3dXMWRpU3lsMEk1VVJCMzBIN3VXTktfTi1LdzBua1pzd3ZCRlRGUlMtcmlteVZ2TTR5eFpOa3J2?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/01",
     "來源": "1111人力銀行",
     "標題": "[職場霸凌新制7月上路五大重點一次看] - 1111人力銀行",
     "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9UcW8xTmM1dzg4bVpHekFfS1VqOEdNRGRwbHlxTFJ3NVQwaFlwcG1GZ2pDYzlNSFZPR0JzcFMzYzFsM0lSTk1fWnZxRVRwb1k1NWfSAVJBVV95cUxPVHFvMU5jNXc4OG1aR3pBX0tVajhHTURkcGx5cUxSdzVUMGhZcHBtRmdqQ2M5TUhWT0dCc3BTM2MxbDNJUk5NX1p2cUVUcG9ZNTVn?oc=5",
@@ -680,23 +694,9 @@
   },
   {
     "日期": "2026/07/01",
-    "來源": "獨家報導",
-    "標題": "新北職場霸凌教育訓練秒殺 加開300名額即起報名 - 獨家報導",
-    "連結": "https://news.google.com/rss/articles/CBMiywJBVV95cUxPVVlwUDBJX1ZKbEdfV0lMUW5TRksxekM0cUdidGFaQVZYeS1mY2w3ZnpONjl3cVZtUFNETmc0S2hfY0RwdHViRm9rUEhvZHZ1R1hrYjRaWTNPbzNnSnlhaWNfUkxSODVVTFlmaVdwOGJOSlBVVV9CaFVwRnZvMXNPZi1YRExwamduakIzekpzek5EcjM4Mm1qWXlDNDFXU1lCWFYwdjhaQW1CcDkyZWhNNXBaUHUyWjhsblFkcEYwZ0lHem0wMWo2b3NoX1VCRkMzMGNxYkZ2T0p2Ukt5R2drVGxKY3JnaW5RS1ZEekY5ZlBVRUFsSjBGa205Y2dGemRLV1Q5ZmdIZnNyaUhxZ0V0SUlEQk1aWHVsbU8wSllRU2QxRGJVc1pTcmFYOU9JMEZoRDUwYlFSVEtrQkM2ZXItOG82M2c4bGJ1VUE4?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/01",
-    "來源": "mol.gov.tw",
-    "標題": "職安法新修條文與11部子法7月1日同步上路！聚焦源頭防災及友善職場新制度 - mol.gov.tw",
-    "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1ydm5jZDhaR2lqN1VUb2h0MW45UjFCbW5EcFdzSlBEWTlPRDlMX1AwNEpubGg3TzNlUGZ0WVduR0E2V3ItbUJITV9RTUJnT1dSWWJvdmhRWQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/01",
-    "來源": "UDN",
-    "標題": "川普：台積電宣布赴美設廠規模將翻倍 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9LZjBCUHE3eTJ5SGhuNFREMjVYTHpwaENHZm8yZWVVaWRNOU9MaEZya29mdFkwS1FUYjBIbjFVb1ViZWltUXN1dUdXaFY5UU1q0gFWQVVfeXFMT3FwYmNZbk0wbTBMSkZ6VmtTNFFvR3dhT0s4eFF3RFNSUGE4dnBIUmxWZl9ZeWtjNUxoamtUSG5lSUttVjNVb3M1emRuSEdkY3IyQzJsd2c?oc=5",
+    "來源": "Yahoo新聞",
+    "標題": "別把一直忍當敬業 醫談職場霸凌：上班族更該學會適度「耍廢」 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMi-AJBVV95cUxQcHZKRFI5UWlKMWVmWEl1UVE5RFpmTm9Vemo4QnY2ZXBRdVFfZ1JGTGxyOHlYZUx6NHNNdjNqRHVrQ1lxaUhqOVl2azdMV1J6RXZRbGdZTGtYandXaW1DWjFCMWhRekZhbUltVUpZR0VWUDVEREc3M1p6NV85X2lrWFd0QURjRGx2eVBobnB0RGtUR3l0aUVPN0YxcnQ1MkVYNjZGVERWNzVGY2tPUEZ6VDFZUVhJSFZYTE9CVHBHR0phTjZHeFN5azhORUtWRS1XZEFfYkt2RktWQzFWVnBKU0p4N0t2bzhWR0lhQ3NZZjVqU1o5Y3RmRDBWVEg4OWttdThwTG1iSWZCRmkxWVRRZWtpbGxvWU8zT2JGazRaUEpNTFBWd0FuS2VTTEJ0OXRDdmVLc255bDRlNWVGTmU1M3dXMWRpU3lsMEk1VVJCMzBIN3VXTktfTi1LdzBua1pzd3ZCRlRGUlMtcmlteVZ2TTR5eFpOa3J2?oc=5",
     "重要": true
   }
 ]
