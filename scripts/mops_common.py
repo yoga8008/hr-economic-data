@@ -799,6 +799,46 @@ class MopsBrowser:
         return "\n".join(parts)
 
 
+    def fetch_salary_ajax_html(self, year: str, typek: str) -> str:
+        """Fetch t100sb15 old MOPS AJAX HTML through the already-open browser session.
+
+        The new Vue page submits to /mops/api/redirectToOld, which only returns a
+        short redirect instruction.  The actual salary data is still served by the
+        old ajax_t100sb15 endpoint.  Calling it from page.evaluate keeps the same
+        browser cookies/user-agent and avoids the GitHub-runner security block.
+        """
+        assert self.page is not None
+        page = self.page
+        script = r"""
+        async ({year, typek}) => {
+          const params = new URLSearchParams();
+          params.set('encodeURIComponent', '1');
+          params.set('step', '1');
+          params.set('firstin', '1');
+          params.set('TYPEK', typek);
+          params.set('RYEAR', String(year));
+          params.set('code', '');
+          const resp = await fetch('/mops/web/ajax_t100sb15', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+              'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: params.toString()
+          });
+          const text = await resp.text();
+          return { status: resp.status, url: resp.url, text };
+        }
+        """
+        result = page.evaluate(script, {"year": str(year), "typek": str(typek)})
+        status = result.get("status") if isinstance(result, dict) else "?"
+        url = result.get("url") if isinstance(result, dict) else "?"
+        text = result.get("text") if isinstance(result, dict) else ""
+        print(f"Browser AJAX salary response: TYPEK={typek}, RYEAR={year}, status={status}, url={url}, length={len(text)}")
+        return text or ""
+
+
     def visible_body_text(self) -> str:
         assert self.page is not None
         texts = []
