@@ -1,4 +1,4 @@
-# version: salary network response capture + strict UI fill - 2026-07-01
+# version: salary browser AJAX old-endpoint fallback - 2026-07-01
 from __future__ import annotations
 
 from typing import Any
@@ -223,6 +223,36 @@ def parse_salary_json_payload(text: str, year: str, market: str) -> list[dict[st
             })
     return rows
 
+
+
+def parse_salary_html(html: str, year: str, market: str) -> list[dict[str, Any]]:
+    tables = read_tables(html)
+    table = pick_main_table(tables)
+    rows: list[dict[str, Any]] = []
+    if table is not None:
+        rows = parse_salary_table(table, year, market)
+    if not rows:
+        rows = parse_salary_json_payload(html, year, market)
+    if not rows:
+        rows = parse_salary_text(html, year, market)
+    return rows
+
+
+def run_browser_ajax_query(browser: MopsBrowser, year: str, market: str) -> str:
+    typek_map = {"上市": "sii", "上櫃": "otc"}
+    typek = typek_map.get(market, "sii")
+    browser.open_page("t100sb15")
+    print(f"POST old MOPS ajax_t100sb15 via browser session: market={market}, TYPEK={typek}, RYEAR={year}")
+    html = browser.fetch_salary_ajax_html(year=year, typek=typek)
+    if "FOR SECURITY REASONS" in html or "SECURITY REASONS" in html or "因為安全性考量" in html:
+        browser.dump_debug(f"salary_ajax_security_{year}_{market}")
+        raise RuntimeError("MOPS AJAX returned security page")
+    if not html or ("公司代號" not in html and "公司名稱" not in html and "查無" not in html):
+        browser.dump_debug(f"salary_ajax_unexpected_{year}_{market}")
+        preview = clean_text(html[:300])
+        raise RuntimeError(f"MOPS AJAX response did not contain salary table keywords: {preview}")
+    return html
+
 def run_visible_query(browser: MopsBrowser, year: str, market: str | None) -> str:
     browser.open_page("t100sb15")
 
@@ -245,50 +275,49 @@ def run_visible_query(browser: MopsBrowser, year: str, market: str | None) -> st
 
 def fetch_salary_rows_for_year(year: str) -> list[dict[str, Any]]:
     all_rows: list[dict[str, Any]] = []
-    seen_codes: set[str] = set()
+    seen_keys: set[str] = set()
 
     with MopsBrowser() as browser:
-        # Try both listed and OTC by UI.  If the page default already returns all,
-        # de-duplication by company code prevents duplicate rows.
-        for market in ["上市", "上櫃", None]:
+        # The actual data is on the old ajax endpoint.  We still open the SPA page
+        # first to establish a normal browser session/cookies, then POST through
+        # that browser context.
+        for market in ["上市", "上櫃"]:
+            rows: list[dict[str, Any]] = []
             try:
-                html = run_visible_query(browser, year, market)
-                tables = read_tables(html)
-                table = pick_main_table(tables)
-                rows = []
-                if table is None:
-                    print(f"No HTML salary table found for {market or 'default'} {year}; try captured JSON/text fallback")
-                    combined_text = html + "\n" + browser.visible_body_text() + "\n" + browser.captured_response_text()
-                    rows = parse_salary_json_payload(combined_text, year, market or "未區分")
-                    if not rows:
-                        rows = parse_salary_text(combined_text, year, market or "未區分")
+                html = run_browser_ajax_query(browser, year, market)
+                rows = parse_salary_html(html, year, market)
+                if rows:
+                    print(f"Browser AJAX parsed {market} {year}: {len(rows)} rows")
                 else:
-                    rows = parse_salary_table(table, year, market or "未區分")
-                    if not rows:
-                        print(f"HTML table parsed 0 rows for {market or 'default'} {year}; try captured JSON/text fallback")
-                        combined_text = html + "\n" + browser.visible_body_text() + "\n" + browser.captured_response_text()
-                        rows = parse_salary_json_payload(combined_text, year, market or "未區分")
-                        if not rows:
-                            rows = parse_salary_text(combined_text, year, market or "未區分")
-                if not rows:
-                    print(f"No salary rows parsed for {market or 'default'} {year}")
-                    browser.dump_debug(f"salary_no_rows_{year}_{market or 'default'}")
-                    continue
-                fresh = []
-                for row in rows:
-                    code = row.get("公司代號", "")
-                    if code and code not in seen_codes:
-                        seen_codes.add(code)
-                        fresh.append(row)
-                print(f"{market or 'default'} {year}: {len(fresh)} new rows")
-                all_rows.extend(fresh)
-                sleep_polite(1.0)
+                    print(f"Browser AJAX returned no parsed salary rows for {market} {year}; fallback to visible UI")
             except Exception as exc:
-                print(f"Skip {market or 'default'} {year}: {exc}")
+                print(f"Browser AJAX failed for {market} {year}: {exc}; fallback to visible UI")
+
+            if not rows:
+                try:
+                    html = run_visible_query(browser, year, market)
+                    rows = parse_salary_html(html + "\n" + browser.visible_body_text() + "\n" + browser.captured_response_text(), year, market)
+                except Exception as exc:
+                    print(f"Visible UI fallback failed for {market} {year}: {exc}")
+
+            if not rows:
+                print(f"No salary rows parsed for {market} {year}")
+                browser.dump_debug(f"salary_no_rows_{year}_{market}")
                 sleep_polite(1.0)
+                continue
+
+            fresh = []
+            for row in rows:
+                code = clean_text(row.get("公司代號", ""))
+                key = f"{market}:{code}"
+                if code and key not in seen_keys:
+                    seen_keys.add(key)
+                    fresh.append(row)
+            print(f"{market} {year}: {len(fresh)} new rows")
+            all_rows.extend(fresh)
+            sleep_polite(1.0)
 
     return all_rows
-
 
 def main() -> None:
     final_rows: list[dict[str, Any]] = []
