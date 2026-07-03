@@ -1569,6 +1569,92 @@ h1.pageTitle{
     }
 }
 
+
+/* ===== 最新資訊表格修正版：避免欄位壓扁、補國家/分類/中文摘要 ===== */
+.globalHrSummaryTable{
+    width:100%;
+    min-width:980px;
+    table-layout:auto !important;
+}
+.globalHrSummaryTable th,
+.globalHrSummaryTable td{
+    padding:12px 14px;
+}
+.globalHrSummaryTable th:nth-child(1),
+.globalHrSummaryTable td:nth-child(1){
+    width:115px;
+    white-space:nowrap;
+}
+.globalHrSummaryTable th:nth-child(2),
+.globalHrSummaryTable td:nth-child(2){
+    width:130px;
+    white-space:nowrap;
+}
+.globalHrSummaryTable th:nth-child(3),
+.globalHrSummaryTable td:nth-child(3){
+    width:120px;
+    white-space:nowrap;
+}
+.globalHrSummaryTable th:nth-child(4),
+.globalHrSummaryTable td:nth-child(4){
+    width:190px;
+}
+.globalHrSummaryTable th:nth-child(5),
+.globalHrSummaryTable td:nth-child(5){
+    width:auto;
+}
+.globalHrSummaryCountry{
+    color:#111827;
+    font-weight:800;
+}
+.globalHrSummaryType{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    padding:4px 9px;
+    font-size:11px;
+    font-weight:900;
+    line-height:1;
+    white-space:nowrap;
+    border:1px solid transparent;
+}
+.globalHrSummaryType.labor{
+    background:#fff7ed;
+    color:#c2410c;
+    border-color:#fed7aa;
+}
+.globalHrSummaryType.tax,
+.globalHrSummaryType.social{
+    background:#ecfdf5;
+    color:#047857;
+    border-color:#a7f3d0;
+}
+.globalHrSummaryType.recruit{
+    background:#f5f3ff;
+    color:#6d28d9;
+    border-color:#ddd6fe;
+}
+.globalHrSummaryType.general{
+    background:#eef2ff;
+    color:#4338ca;
+    border-color:#c7d2fe;
+}
+.globalHrSummaryContent a{
+    color:#0057d9;
+    font-weight:900;
+    text-decoration:none;
+}
+.globalHrSummaryContent a:hover{
+    text-decoration:underline;
+}
+.globalHrSummaryDesc{
+    margin-top:5px;
+    color:#64748b;
+    font-size:12px;
+    line-height:1.5;
+}
+
 </style>
 </head>
 
@@ -1621,10 +1707,10 @@ h1.pageTitle{
             <table class="globalHrSummaryTable" aria-label="最新資訊">
                 <thead>
                     <tr>
-                        <th style="width:110px;">更新日</th>
-                        <th style="width:130px;">國家</th>
-                        <th style="width:110px;">分類</th>
-                        <th style="width:150px;">來源</th>
+                        <th>更新日</th>
+                        <th>國家</th>
+                        <th>分類</th>
+                        <th>來源</th>
                         <th>內容</th>
                     </tr>
                 </thead>
@@ -1855,6 +1941,7 @@ function getGlobalHrCategories(country){
     return base;
 }
 
+
 function getGlobalHrSummaryType(zone, item){
     const source = String(item.source || "").toLowerCase();
     const title = String(item.title || "").toLowerCase();
@@ -1928,7 +2015,6 @@ function getGlobalHrChineseSummary(zone, item, typeInfo){
     if(source.toLowerCase().includes("chinajob") || source.toLowerCase().includes("mohrss")){
         return "中國人社就業官方資訊，適合追蹤就業招募、社保服務、欠薪治理與地方人社政策。";
     }
-
     if(typeInfo.label === "勞動法規") return "此則與勞動法規、就業議題或勞動市場資訊有關，可作為 HR 合規與制度參考。";
     if(typeInfo.label === "稅務社保") return "此則與薪資稅務、報酬申報或社會保險制度有關，可作為 HR 稅務作業參考。";
     if(typeInfo.label === "社保稅務") return "此則與社會保險、醫療保險或稅務行政作業有關，可作為員工保險與申報作業參考。";
@@ -1997,21 +2083,24 @@ function renderGlobalHrSummary(payload){
     if(sourceStatus) sourceStatus.textContent = failedCount ? `${failedCount} 區異常` : "已更新";
 
     if(!latestRows.length){
-        tbody.innerHTML = `<tr><td colspan="4" class="globalHrSummaryEmpty">目前尚無新的 HR 更新資料。</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="globalHrSummaryEmpty">目前尚無新的 HR 更新資料。</td></tr>`;
         return;
     }
 
     tbody.innerHTML = latestRows.map(row => `
         <tr>
             <td class="globalHrSummaryDate">${escapeHtml(formatGlobalHrDate(row.date))}</td>
-            <td class="globalHrSummaryRegion">${escapeHtml(row.region)}</td>
+            <td class="globalHrSummaryCountry">${escapeHtml(row.country)}</td>
+            <td><span class="globalHrSummaryType ${escapeHtml(row.typeClass)}">${escapeHtml(row.typeLabel)}</span></td>
             <td class="globalHrSummarySource">${escapeHtml(row.source)}</td>
             <td class="globalHrSummaryContent">
                 ${row.url ? `<a href="${escapeHtml(row.url)}" target="_blank" rel="noopener">${escapeHtml(row.title)}</a>` : escapeHtml(row.title)}
+                <div class="globalHrSummaryDesc">${escapeHtml(row.summary)}</div>
             </td>
         </tr>
     `).join("");
 }
+
 
 async function loadGlobalHrUpdates(){
     renderWorldClock();
