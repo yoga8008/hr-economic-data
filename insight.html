@@ -164,8 +164,9 @@
     .page-size select{height:34px;border:1px solid #cfd9e8;border-radius:7px;background:#fff;padding:0 28px 0 12px;font-weight:700;color:#111;}
     .page-nav{display:flex;align-items:center;gap:10px;}
     .page-nav button{height:34px;border:0;border-radius:7px;padding:0 14px;font-weight:900;cursor:pointer;}
-    .page-nav button.prev{background:#d6e1ec;color:#fff;cursor:not-allowed;}
+    .page-nav button.prev{background:#203f91;color:#fff;}
     .page-nav button.next{background:#203f91;color:#fff;}
+    .page-nav button:disabled{background:#d6e1ec;color:#fff;cursor:not-allowed;}
     .page-nav .page-status{color:#2b3546;font-size:14px;}
 
     .note{font-size:12px;color:#73849b;margin-top:10px;line-height:1.7;}
@@ -312,32 +313,23 @@
             <thead>
               <tr><th class="col-date">更新日</th><th class="col-source">來源</th><th>標題</th></tr>
             </thead>
-            <tbody>
-              <tr><td class="col-date">2026/07/01</td><td class="col-source">台灣好報</td><td><a class="news-link" href="https://newstaiwan.net/2026/07/01/454353/" target="_blank" rel="noopener noreferrer">AI翻轉創業思維 勞工大學帶領斜槓族打造品牌新競爭力</a></td></tr>
-              <tr><td class="col-date">2026/07/01</td><td class="col-source">太報</td><td><a class="news-link" href="https://www.taisounds.com/news/content/77/265151" target="_blank" rel="noopener noreferrer">暑假勞檢違法率逼近25％ 勞動部：加強稽核、違反最低工資重罰</a></td></tr>
-              <tr><td class="col-date">2026/07/01</td><td class="col-source">匯流新聞網</td><td><a class="news-link" href="https://life.tw/article/%E7%AB%8B%E5%A7%94%E6%86%82%E6%9A%91%E6%9C%9F%E5%B7%A5%E8%AE%80%E7%94%9F%E8%B8%A9%E9%9B%B7-%E5%8B%9E%E5%8B%95%E9%83%A8%E6%8E%A8%E6%A0%A1%E5%9C%92%E5%8B%9E%E6%AC%8A%E6%95%99%E8%82%B2-1955%E7%94%B3%E8%A8%B4-3079802" target="_blank" rel="noopener noreferrer">立委憂暑期工讀生踩雷 勞動部推校園勞權教育、1955申訴</a></td></tr>
-              <tr><td class="col-date">2026/07/01</td><td class="col-source">天下雜誌</td><td><a class="news-link" href="https://www.cw.com.tw/article/5141828" target="_blank" rel="noopener noreferrer">55歲後只能等退休？台灣中高齡友善職缺不到三成「企業喊缺工，但不願意改」</a></td></tr>
-              <tr><td class="col-date">2026/07/01</td><td class="col-source">臺中市政府</td><td><a class="news-link" href="https://www.taichung.gov.tw/8868/8872/9962/3310038" target="_blank" rel="noopener noreferrer">「富市台中 就業成功」中市勞工局7月邀60家企業釋出逾2,000個職缺</a></td></tr>
-              <tr><td class="col-date">2026/07/01</td><td class="col-source">ELLE</td><td><a class="news-link" href="https://www.elle.com/tw/life/hot-news/g71790357/workplace-bully-law/" target="_blank" rel="noopener noreferrer">職場霸凌新制7/1上路！哪些行為算霸凌？5大認定要件、申訴流程一次看</a></td></tr>
-              <tr><td class="col-date">2026/07/01</td><td class="col-source">CSRone 永續智庫</td><td><a class="news-link" href="https://csrone.com/topics/9994" target="_blank" rel="noopener noreferrer">人資必看！7月1日起職場霸凌新法上路，主管一句話恐罰450萬</a></td></tr>
-              <tr><td class="col-date">2026/07/01</td><td class="col-source">Cheers快樂工作人</td><td><a class="news-link" href="https://www.cheers.com.tw/talent/article.action?id=5105748" target="_blank" rel="noopener noreferrer">【職場霸凌防治新法上路】專訪勞動部長洪申翰：怎樣算是職場霸凌？</a></td></tr>
-              <tr><td class="col-date">2026/07/01</td><td class="col-source">天下雜誌</td><td><a class="news-link" href="https://www.cw.com.tw/article/5141826" target="_blank" rel="noopener noreferrer">洪申翰專訪》職安法新制上路！訂雞排不揪、交辦困難任務算霸凌？注意事項一文看懂</a></td></tr>
-              <tr><td class="col-date">2026/07/01</td><td class="col-source">1111人力銀行</td><td><a class="news-link" href="https://www.1111.com.tw/news/166489/amp/" target="_blank" rel="noopener noreferrer">職場霸凌新制7月上路！不分公司大小都適用 五大重點解析</a></td></tr>
+            <tbody id="insightTable">
+              <tr><td colspan="3" style="text-align:center;color:#6f8098;">載入中...</td></tr>
             </tbody>
           </table>
           <div class="news-pagination">
             <div class="page-size">
               <span>每頁顯示：</span>
-              <select aria-label="每頁顯示筆數">
-                <option selected>20則</option>
-                <option>50則</option>
-                <option>100則</option>
+              <select id="displayCount" aria-label="每頁顯示筆數" onchange="changePageSize()">
+                <option value="20" selected>20則</option>
+                <option value="50">50則</option>
+                <option value="100">100則</option>
               </select>
             </div>
             <div class="page-nav">
-              <button class="prev" disabled>上一頁</button>
-              <span class="page-status">第 1 / 5 頁</span>
-              <button class="next">下一頁</button>
+              <button id="prevBtn" class="prev" onclick="prevPage()" disabled>上一頁</button>
+              <span id="pageInfo" class="page-status">第 1 / 1 頁</span>
+              <button id="nextBtn" class="next" onclick="nextPage()" disabled>下一頁</button>
             </div>
           </div>
         </div>
@@ -452,6 +444,115 @@
       btn.addEventListener('click', () => setBuzzRegion(btn.textContent.trim()));
     });
   }
+
+
+  let insightNews = [];
+  let currentPage = 1;
+
+  function escapeHTML(text){
+    return String(text || '')
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'",'&#039;');
+  }
+
+  function normalizeInsightNews(raw){
+    if(Array.isArray(raw)) return raw;
+    if(raw && Array.isArray(raw.news)) return raw.news;
+    if(raw && Array.isArray(raw.items)) return raw.items;
+    if(raw && Array.isArray(raw.新聞)) return raw.新聞;
+    if(raw && Array.isArray(raw.資料)) return raw.資料;
+    return [];
+  }
+
+  function getNewsField(item, keys){
+    for(const k of keys){
+      if(item && item[k] !== undefined && item[k] !== null && item[k] !== '') return item[k];
+    }
+    return '';
+  }
+
+  function renderInsightTable(){
+    const tbody = document.getElementById('insightTable');
+    const display = document.getElementById('displayCount');
+    if(!tbody || !display) return;
+
+    const count = Number(display.value || 20);
+    const totalPages = Math.max(1, Math.ceil(insightNews.length / count));
+    if(currentPage > totalPages) currentPage = totalPages;
+
+    const start = (currentPage - 1) * count;
+    const pageRows = insightNews.slice(start, start + count);
+
+    if(pageRows.length === 0){
+      tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#6f8098;">目前沒有資料</td></tr>';
+      updatePagination(totalPages);
+      return;
+    }
+
+    tbody.innerHTML = pageRows.map(item => {
+      const date = getNewsField(item, ['日期','更新日','date','published','published_at']);
+      const source = getNewsField(item, ['來源','source','publisher']);
+      const title = getNewsField(item, ['標題','title','headline']);
+      const url = getNewsField(item, ['連結','url','link','href']) || '#';
+      return `<tr>
+        <td class="col-date">${escapeHTML(date)}</td>
+        <td class="col-source">${escapeHTML(source)}</td>
+        <td><a class="news-link" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(title)}</a></td>
+      </tr>`;
+    }).join('');
+
+    updatePagination(totalPages);
+  }
+
+  function updatePagination(totalPages){
+    const pageInfo = document.getElementById('pageInfo');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    if(pageInfo) pageInfo.innerText = `第 ${currentPage} / ${totalPages} 頁`;
+    if(prevBtn) prevBtn.disabled = currentPage <= 1;
+    if(nextBtn) nextBtn.disabled = currentPage >= totalPages;
+  }
+
+  function nextPage(){
+    const count = Number(document.getElementById('displayCount')?.value || 20);
+    const totalPages = Math.max(1, Math.ceil(insightNews.length / count));
+    if(currentPage < totalPages){
+      currentPage++;
+      renderInsightTable();
+    }
+  }
+
+  function prevPage(){
+    if(currentPage > 1){
+      currentPage--;
+      renderInsightTable();
+    }
+  }
+
+  function changePageSize(){
+    currentPage = 1;
+    renderInsightTable();
+  }
+
+  fetch('./data/insight_news.json?v=' + Date.now(), { cache:'no-store' })
+    .then(res => {
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(raw => {
+      insightNews = normalizeInsightNews(raw).slice(0, 100);
+      renderInsightTable();
+    })
+    .catch(() => {
+      const tbody = document.getElementById('insightTable');
+      if(tbody){
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#6f8098;">資料載入失敗，請確認 data/insight_news.json 是否存在或已更新。</td></tr>';
+      }
+      updatePagination(1);
+    });
 
   let graphScale = .96;
   function applyGraphTransform(){ document.getElementById('graphInner').style.transform = `scale(${graphScale})`; }
