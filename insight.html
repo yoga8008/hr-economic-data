@@ -352,6 +352,107 @@
   function zoomCloud(v){ cloudScale = Math.max(.65, Math.min(1.6, cloudScale * v)); document.getElementById('wordCloud').style.transform = `scale(${cloudScale})`; }
   function resetCloud(){ cloudScale = 1; document.getElementById('wordCloud').style.transform = 'scale(1)'; }
 
+
+  const buzzData = {
+    '台灣': {
+      top10: [
+        ['職場霸凌',94],['缺工',88],['AI 轉型',81],['薪酬壓力',76],['勞資爭議',70],['遠距工作',63],['DEI',58],['學習發展',53],['法規變動',48],['雇主品牌',42]
+      ],
+      words: ['職場霸凌','缺工','AI轉型','薪酬壓力','勞資爭議','遠距工作','DEI','學習發展','法規變動','雇主品牌','調薪','加班','最低工資','半導體','AI','職安','招聘','勞基法','工時','移工','派遣','福利','薪資透明','產業外移','職場申訴','薪資中位數','通勤','勞檢','電保','中高齡就業','暑期工讀','心理安全','申訴流程','主管責任','人才留任','教育訓練','混合辦公','數位轉型','人力需求','職缺','產業投資','勞權教育','職涯發展','員工體驗','人資科技','離職率','缺才','勞動市場']
+    },
+    '中國': {
+      top10: [
+        ['社會保險',90],['最低工資',86],['勞動合同',82],['加班工時',78],['招聘需求',72],['製造業用工',68],['住房公積金',63],['個人所得稅',59],['勞務派遣',54],['工傷保險',49]
+      ],
+      words: ['社會保險','最低工資','勞動合同','加班工時','招聘需求','製造業用工','住房公積金','個人所得稅','勞務派遣','工傷保險','鄭州','河南','人才引進','用工合規','高溫津貼','靈活用工','平台用工','社保基數','薪資調整','離職補償','工會','就業補貼','畢業生就業','職業教育','勞動仲裁','工資支付','休假制度','夜班津貼','人力成本','勞動監察','企業裁員','產線招募','宿舍管理','員工關係','勞動爭議','外包用工','五險一金','生育保險','醫療保險','養老保險','失業保險','工時管理','人事檔案','入離職管理','合規稽核','薪酬制度','績效考核','員工安置']
+    },
+    '印度': {
+      top10: [
+        ['EPF',92],['ESIC',87],['CTC',83],['Payroll',79],['Gratuity',74],['Labour Codes',69],['Minimum Wage',65],['TDS',60],['Shops Act',55],['Professional Tax',50]
+      ],
+      words: ['EPF','ESIC','CTC','Payroll','Gratuity','Labour Codes','Minimum Wage','TDS','Shops Act','Professional Tax','PF UAN','Form 11','Form 16','Bonus Act','Leave Policy','Maternity Benefit','Offer Letter','Appointment Letter','Chennai','Bangalore','New Delhi','Karnataka','Tamil Nadu','Delhi','Payroll Vendor','Compliance','Statutory Register','Factory Act','Labour Welfare Fund','Income Tax','PAN','Aadhaar','Bank KYC','Notice Period','Probation','Background Check','Onboarding','Exit Formality','Separation','Full and Final','Attendance','Overtime','Holiday List','Insurance','Group Mediclaim','Canteen','Transport','HR Policy','Employee Handbook']
+    },
+    '越南': {
+      top10: [
+        ['社會保險',91],['最低工資',85],['勞動合約',80],['工會',75],['加班',71],['個人所得稅',66],['工廠招募',62],['外籍員工',57],['產假',51],['離職補償',46]
+      ],
+      words: ['社會保險','最低工資','勞動合約','工會','加班','個人所得稅','工廠招募','外籍員工','產假','離職補償','MOLISA','VSS','Bac Ninh','Hanoi','Ho Chi Minh','工時','試用期','薪資表','區域最低工資','勞動法','年假','病假','工作許可','簽證','勞動紀律','工傷','健康檢查','薪資扣繳','福利','宿舍','膳食','班車','夜班津貼','工會費','社保基數','個稅申報','勞動稽核','人力供給','產線缺工','招募活動','離職率','員工關係','教育訓練','合規','薪資調整','績效獎金','勞資溝通','安全衛生']
+    },
+    '美國': {
+      top10: [
+        ['Overtime',89],['Minimum Wage',84],['FMLA',78],['OSHA',73],['Union',69],['Layoff',64],['Pay Transparency',59],['Discrimination',54],['Remote Work',49],['Benefits',44]
+      ],
+      words: ['Overtime','Minimum Wage','FMLA','OSHA','Union','Layoff','Pay Transparency','Discrimination','Remote Work','Benefits','DOL','IRS','FLSA','EEOC','Workers Compensation','W-2','I-9','Payroll Tax','Health Insurance','401k','Paid Leave','Sick Leave','WARN Act','Wisconsin','California','New York','Employment Law','Harassment','DEI','Talent Shortage','Recruiting','Retention','Severance','Noncompete','Workplace Safety','Contractor','Exempt','Non-exempt','Salary Threshold','Wage and Hour','Immigration','H-1B','Hybrid Work','Employee Relations','Training','HR Compliance','Labor Market','Job Opening']
+    },
+    '墨西哥': {
+      top10: [
+        ['IMSS',90],['Minimum Wage',86],['PTU',81],['Payroll Tax',76],['Labor Reform',71],['INFONAVIT',66],['Union',61],['Outsourcing',56],['Aguinaldo',51],['Severance',46]
+      ],
+      words: ['IMSS','Minimum Wage','PTU','Payroll Tax','Labor Reform','INFONAVIT','Union','Outsourcing','Aguinaldo','Severance','STPS','SAT','Social Security','RFC','CURP','Vacaciones','Prima Vacacional','Working Hours','Overtime','Profit Sharing','Nearshoring','Manufacturing','Tijuana','Border Region','Hiring','Employee Benefits','Labor Inspection','Employment Contract','Collective Bargaining','Resignation','Termination','Seniority Premium','Payroll Vendor','Tax Withholding','Attendance','Shift Work','Transport','Canteen','Housing Credit','Workplace Safety','Risk Premium','Compliance','Union Negotiation','Salary Adjustment','Talent Market','Factory Labor','HR Policy','Employee Relations']
+    },
+    '捷克': {
+      top10: [
+        ['Minimum Wage',88],['Social Insurance',83],['Health Insurance',79],['Labour Code',74],['Payroll',69],['Sick Leave',63],['Pension',58],['Holiday',53],['Tax',48],['Work Permit',43]
+      ],
+      words: ['Minimum Wage','Social Insurance','Health Insurance','Labour Code','Payroll','Sick Leave','Pension','Holiday','Tax','Work Permit','Czech Republic','Kutná Hora','Prague','MPSV','CSSZ','Income Tax','Employee Benefits','Working Time','Overtime','Annual Leave','Meal Voucher','Probation','Notice Period','Termination','Collective Agreement','Recruitment','Manufacturing','Shift Work','Attendance','Payroll Calculation','Tax Relief','Insurance Base','Employer Contribution','Employee Contribution','Occupational Safety','Medical Check','Blue Card','Foreign Worker','Compliance','HR Policy','Salary Adjustment','Labor Market','Unemployment','Training','Employee Relations','Severance','Holiday Pay','Remote Work']
+    },
+    '新加坡': {
+      top10: [
+        ['CPF',93],['MOM',88],['Work Permit',82],['Employment Act',77],['Levy',72],['Foreign Worker',67],['IRAS',62],['SDL',56],['Leave',51],['Payroll',46]
+      ],
+      words: ['CPF','MOM','Work Permit','Employment Act','Levy','Foreign Worker','IRAS','SDL','Leave','Payroll','EP Pass','S Pass','Workfare','SkillsFuture','Retirement Age','Re-employment','Tripartite Guidelines','Fair Employment','Salary','Overtime','Rest Day','Public Holiday','Annual Leave','Sick Leave','Maternity Leave','Childcare Leave','Central Provident Fund','Income Tax','Auto Inclusion','Payroll Vendor','Employment Contract','Probation','Notice Period','Termination','Retrenchment','Workplace Safety','WSH','Medical Benefits','Flexible Work','Remote Work','Talent Attraction','Hiring','Compliance','HR Policy','Employee Relations','Training','Data Protection','PDPA']
+    }
+  };
+
+  const cloudColors = ['#214d9c','#e53e3e','#12a06d','#6c4fe0','#f15a24','#0085be','#09937e','#e43f31','#1e9d69','#9a58d0','#0d64b7','#09a08f','#dd3e2d','#1d5ba5','#00a77b','#6c4fe0','#0b579a','#ed6c02'];
+  const cloudLayout = [
+    [50,47,42,0],[43,42,38,0],[45,56,34,0],[55,56,34,0],[31,43,30,0],[62,45,27,0],[38,50,25,0],[51,36,24,0],[36,60,21,0],[57,67,20,0],
+    [66,58,18,0],[27,55,18,0],[72,34,17,0],[74,49,16,0],[23,30,16,0],[31,68,15,0],[62,73,15,0],[45,28,14,0],[25,38,14,0],[80,61,14,0],
+    [18,48,13,0],[67,25,13,0],[78,42,13,0],[42,72,12,0],[52,24,12,0],[34,25,12,0],[70,70,12,0],[21,64,12,0],[59,31,12,0],[48,79,11,0],
+    [84,52,11,0],[14,36,11,0],[29,76,11,0],[74,78,11,0],[37,34,11,0],[63,80,10,0],[20,75,10,0],[87,35,10,0],[12,56,10,0],[52,14,10,0],
+    [33,84,10,0],[68,14,10,0],[84,75,10,0],[16,22,10,0],[57,88,10,0],[24,86,10,0],[76,20,10,0],[45,88,10,0]
+  ];
+
+  function safeBuzzText(v){ return String(v || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+
+  function renderTop10(items){
+    const top10 = document.querySelector('.top10');
+    if(!top10) return;
+    const max = Math.max(...items.map(i => i[1]), 1);
+    top10.innerHTML = '<h3>關鍵字 Top 10</h3>' + items.map((item, idx) => {
+      const width = Math.max(18, Math.round(item[1] / max * 94));
+      const hot = idx < 5 ? ' hot' : '';
+      return `<div class="bar-row"><span>${safeBuzzText(item[0])}</span><div class="bar-bg"><div class="bar${hot}" style="width:${width}%"></div></div><span class="num">${item[1]}</span></div>`;
+    }).join('');
+  }
+
+  function renderCloud(words){
+    const cloud = document.getElementById('wordCloud');
+    if(!cloud) return;
+    cloud.innerHTML = words.slice(0, 48).map((word, idx) => {
+      const p = cloudLayout[idx % cloudLayout.length];
+      const color = cloudColors[idx % cloudColors.length];
+      const weight = idx < 10 ? 900 : 800;
+      return `<span class="word" style="left:${p[0]}%;top:${p[1]}%;font-size:${p[2]}px;color:${color};font-weight:${weight};transform:translate(-50%,-50%);">${safeBuzzText(word)}</span>`;
+    }).join('');
+  }
+
+  function setBuzzRegion(region){
+    const data = buzzData[region] || buzzData['台灣'];
+    document.querySelectorAll('.region-tabs button').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === region);
+    });
+    renderTop10(data.top10);
+    renderCloud(data.words);
+    resetCloud();
+  }
+
+  function bindBuzzTabs(){
+    document.querySelectorAll('.region-tabs button').forEach(btn => {
+      btn.addEventListener('click', () => setBuzzRegion(btn.textContent.trim()));
+    });
+  }
+
   let graphScale = .96;
   function applyGraphTransform(){ document.getElementById('graphInner').style.transform = `scale(${graphScale})`; }
   function zoomGraph(v){ graphScale = Math.max(.8, Math.min(1.45, graphScale * v)); applyGraphTransform(); }
@@ -400,6 +501,8 @@
     selectNode('tw');
   }
   setUpdatedAt();
+  bindBuzzTabs();
+  setBuzzRegion('台灣');
 </script>
 </body>
 </html>
