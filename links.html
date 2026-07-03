@@ -1,1598 +1,508 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<title>常用網站</title>
-
-<style>
-.navbar{
-    width:calc(100% - 80px);
-    max-width:1200px;
-    height:64px;
-    margin:20px auto 40px auto;
-    background:#1e3a8a;
-    border-radius:36px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-}
-
-.navbar a{
-    color:#ffffff;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:16px;
-    height:100%;
-    padding:0 36px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-right:1px solid rgba(255,255,255,0.18);
-    transition:.2s;
-}
-
-.navbar a:last-child{ border-right:none; }
-.navbar a:hover{ background:rgba(255,255,255,0.10); }
-
-
-.navbar a.active{
-    background:rgba(255,255,255,0.16);
-}
-body{
-    font-family: Arial, sans-serif;
-    padding:0;
-    background:#f3f4f6;
-    margin:0;
-}
-
-h1{
-    max-width:1200px;
-    margin:0 auto 20px auto;
-    padding:0 20px;
-    box-sizing:border-box;
-}
-
-.layout{ display:block; }
-
-.leftPanel{
-    width:100%;
-    max-width:1200px;
-    margin:0 auto;
-    padding:0 20px;
-    box-sizing:border-box;
-}
-
-.card{
-    margin-bottom:30px;
-    width:100%;
-    border:1px solid #ddd;
-    border-radius:16px;
-    padding:20px;
-    background:#ffffff;
-    box-sizing:border-box;
-    transition:.2s;
-}
-
-.card:hover{
-    box-shadow:0 8px 20px rgba(0,0,0,0.06);
-}
-
-.sectionTitle{
-    padding-bottom:10px;
-    margin-bottom:20px;
-    border-bottom:1px solid #ddd;
-    color:#1e3a8a;
-}
-
-.linkGrid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:16px;
-}
-
-.linkCard{
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:14px;
-    padding:24px 16px;
-    text-align:center;
-    text-decoration:none;
-    color:#111827;
-    font-size:28px;
-    transition:.2s;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.linkCard span{
-    font-size:15px;
-    font-weight:bold;
-}
-
-.linkCard:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    background:#eff6ff;
-}
-
-.assistantBox{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.assistantBox input{
-    flex:1;
-    height:48px;
-    padding:0 14px;
-    border:1px solid #ccc;
-    border-radius:10px;
-    font-size:15px;
-    box-sizing:border-box;
-}
-
-.assistantBox button{
-    width:140px;
-    min-width:140px;
-    height:48px;
-    border:none;
-    background:#1e3a8a;
-    color:#fff;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-    transition:.2s;
-}
-
-.assistantBox button:hover{ opacity:.9; }
-
-.recommendResult{
-    margin-top:16px;
-    padding:16px 18px;
-    background:#f8fafc;
-    border-left:5px solid #1e3a8a;
-    border-radius:10px;
-    line-height:1.8;
-    color:#1f2937;
-}
-
-.newsFloatingBtn{
-    position:fixed;
-    right:0;
-    top:220px;
-    background:#1e3a8a;
-    color:#fff;
-    padding:18px 14px;
-    writing-mode:vertical-rl;
-    text-orientation:mixed;
-    font-weight:bold;
-    border-radius:10px 0 0 10px;
-    cursor:pointer;
-    z-index:1000;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
-}
-
-.newsDrawer{
-    position:fixed;
-    top:0;
-    right:-430px;
-    width:410px;
-    height:100vh;
-    background:#fff;
-    box-shadow:-4px 0 20px rgba(0,0,0,0.15);
-    transition:all .3s ease;
-    z-index:1100;
-    display:flex;
-    flex-direction:column;
-}
-
-.newsDrawer.open{ right:0; }
-
-.newsDrawerHeader{
-    padding:20px;
-    border-bottom:1px solid #ddd;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:20px;
-    font-weight:bold;
-}
-
-.newsDrawerHeader button{
-    border:none;
-    background:none;
-    font-size:20px;
-    cursor:pointer;
-}
-
-.newsDrawerContent{
-    padding:20px;
-    overflow-y:auto;
-    flex:1;
-}
-
-.newsGroup{ margin-bottom:30px; }
-
-.newsGroup h3{
-    margin-bottom:12px;
-    padding-bottom:6px;
-    border-bottom:2px solid #ddd;
-}
-
-.newsItem{
-    margin-bottom:15px;
-    padding-bottom:10px;
-    border-bottom:1px solid #eee;
-}
-
-.newsDate{
-    font-size:12px;
-    color:#888;
-    margin-bottom:4px;
-}
-
-.newsTitle a{
-    color:#1a5fb4;
-    text-decoration:none;
-    font-size:14px;
-    line-height:1.5;
-    font-weight:bold;
-}
-
-.newsTitle a:hover{ text-decoration:underline; }
-
-
-
-/* ===== 區塊收放 ===== */
-.card.collapsible{
-    overflow:hidden;
-}
-
-.collapseToggle,
-.worldTimeHeader.collapseToggle{
-    cursor:pointer;
-    user-select:none;
-    position:relative;
-}
-
-.collapseToggle::after,
-.worldTimeHeader.collapseToggle::after{
-    content:"▾";
-    position:absolute;
-    right:2px;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:16px;
-    color:#64748b;
-    transition:transform .2s ease;
-}
-
-.worldTimeHeader.collapseToggle::after{
-    right:24px;
-}
-
-.card.collapsed .collapseToggle::after,
-.card.collapsed .worldTimeHeader.collapseToggle::after{
-    transform:translateY(-50%) rotate(-90deg);
-}
-
-.collapseBody{
-    overflow:hidden;
-    max-height:2000px;
-    opacity:1;
-    transition:max-height .25s ease, opacity .2s ease, padding .2s ease, margin .2s ease;
-}
-
-.card.collapsed .collapseBody{
-    max-height:0;
-    opacity:0;
-}
-
-@media(max-width:768px){
-    .worldTimeCard{
-        padding:12px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>輿情觀察</title>
+  <style>
+    :root{
+      --blue:#173a86;
+      --blue2:#24489b;
+      --blue3:#2b61b1;
+      --light:#f5f7fb;
+      --card:#ffffff;
+      --line:#d9e3f1;
+      --text:#0d254c;
+      --muted:#6e7f99;
+      --teal:#0f9aa2;
+      --red:#ef5350;
+      --orange:#f5a623;
+      --purple:#7757dc;
+      --green:#1a9a72;
+      --shadow:0 7px 20px rgba(21,53,102,.08);
+      --radius:14px;
     }
 
-    .worldTimeHeader{
-        padding:2px 0 8px 0;
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:#f4f6fa;color:var(--text);font-family:"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;}
+    body{min-width:1100px;}
+
+    /* 原本樣式：上方選單列 */
+    .top-wrap{padding:18px 0 0;background:#f4f6fa;}
+    .nav-pill{
+      width:1080px;margin:0 auto;height:58px;border-radius:30px;background:#213f91;
+      box-shadow:0 8px 16px rgba(26,54,110,.25);display:flex;overflow:hidden;align-items:stretch;
     }
-
-    .worldTimeHeader .sectionTitle{
-        margin-bottom:0;
-        color:#1e3a8a;
+    .nav-item{
+      flex:1;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;
+      border-left:1px solid rgba(255,255,255,.18);letter-spacing:.2px;text-decoration:none;
     }
+    .nav-item:hover{background:rgba(255,255,255,.10);}
+    .nav-item.active{background:rgba(255,255,255,.15)}
+    .nav-item.blank{background:#213f91;pointer-events:none;}
+    .nav-item.blank.left{flex:1.45;border-left:0;}
+    .nav-item.blank.right{flex:1.45;}
 
-    .worldMapWrap{
-        height:auto;
-        margin:0;
-        padding:0;
-        background:#ffffff;
-        border:none;
-        border-radius:0;
-        box-shadow:none;
-        overflow:visible;
-    }
+    .page{width:1080px;margin:38px auto 56px;}
+    .page-head{display:flex;align-items:flex-end;justify-content:space-between;margin:0 0 18px 20px;}
+    h1{margin:0;font-size:30px;letter-spacing:.5px;color:#000;font-weight:900;}
+    .page-updated{display:flex;align-items:center;gap:8px;color:#5f7190;font-size:13px;font-weight:800;padding-right:4px;}
+    .page-updated .clock{width:20px;height:20px;border-radius:50%;background:#eef5ff;color:#1e5ca7;display:inline-flex;align-items:center;justify-content:center;font-size:11px;}
 
-    .worldMapWrap::before,
-    .worldMapWrap::after,
-    .worldMapSvg,
-    .tzDot,
-    .tzConnector{
-        display:none !important;
-    }
+    .section{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 18px;overflow:hidden;}
+    .section-title{height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 18px;border-bottom:1px solid #d7dde7;font-weight:900;color:#0d3b7c;font-size:20px;background:#fff;}
+    .section-title .left{display:flex;align-items:center;gap:0}
+    .section-title .dot{display:none;}
+    .section-title button{border:0;background:transparent;color:#6b7b93;border-radius:0;width:auto;height:auto;padding:0 2px;font-weight:900;cursor:pointer;line-height:1;font-size:12px;box-shadow:none;}
+    .section-body{padding:18px 22px 22px;}
+    .collapsed .section-body{display:none}
+    .collapsed .section-title{border-bottom:0}
 
-    #worldClockLayer{
-        position:relative !important;
-        inset:auto !important;
-        display:grid;
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:8px;
-    }
+    /* AI 摘要 */
+    .summary-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:14px;}
+    .summary-card{border:1px solid #d7e4f4;border-radius:13px;padding:16px 18px;background:linear-gradient(180deg,#fff,#f8fbff);min-height:118px;}
+    .summary-card h3{margin:0 0 10px;font-size:17px;color:#0b3471;}
+    .summary-card p{margin:0;line-height:1.75;font-size:14px;color:#304864;}
+    .badge{display:inline-flex;align-items:center;height:24px;border-radius:20px;padding:0 10px;background:#eef5ff;color:#1d5ba5;font-size:12px;font-weight:800;margin-right:6px;}
+    .badge.red{background:#fff0ef;color:#d94a43}.badge.orange{background:#fff6e5;color:#bd7300}.badge.green{background:#eaf8f3;color:#087552}
 
-    .tzBubble{
-        position:relative !important;
-        left:auto !important;
-        top:auto !important;
-        width:100%;
-        min-height:auto;
-        opacity:1;
-        transform:none !important;
-        box-shadow:0 8px 18px rgba(15,23,42,.08);
-        backdrop-filter:none;
-        -webkit-backdrop-filter:none;
-        border-radius:10px;
-    }
+    /* 聲量圖 */
+    .buzz-wrap{display:grid;grid-template-columns:330px 1fr;gap:18px;}
+    .top10{border:1px solid #d7e4f4;border-radius:13px;padding:18px 18px 20px;background:#fff;min-height:340px;}
+    .top10 h3{font-size:17px;margin:0 0 14px;color:#143b7f;font-weight:900;}
+    .bar-row{display:grid;grid-template-columns:86px 1fr 36px;gap:10px;align-items:center;margin:13px 0;font-size:13px;font-weight:800;color:#0e2f64;}
+    .bar-bg{height:8px;border-radius:20px;background:#eef3f8;overflow:hidden;}
+    .bar{height:8px;border-radius:20px;background:linear-gradient(90deg,#2f80d5,#0c9b97);}
+    .bar.hot{background:linear-gradient(90deg,#f5a623,#ef5350)}
+    .bar-row .num{text-align:right;color:#445b7c;font-size:12px;}
 
-    .tzBubble:hover,
-    .tzBubble.active{
-        transform:none !important;
-    }
+    .cloud-card{border:1px solid #d7e4f4;border-radius:13px;background:#fff;min-height:340px;position:relative;overflow:hidden;}
+    .cloud-controls{position:absolute;top:14px;right:14px;z-index:5;display:flex;gap:8px;}
+    .cloud-controls button{height:33px;border:1px solid #cfe0f3;background:#fff;color:#0d3b7c;border-radius:8px;padding:0 12px;font-weight:800;cursor:pointer;}
+    .word-cloud{height:330px;position:relative;display:flex;align-items:center;justify-content:center;transform-origin:center;transition:.2s ease;}
+    .word{position:absolute;font-weight:900;white-space:nowrap;}
+    .word.w1{font-size:42px;color:#214d9c;left:44%;top:44%;}
+    .word.w2{font-size:38px;color:#e53e3e;left:35%;top:38%;}
+    .word.w3{font-size:34px;color:#12a06d;left:36%;top:54%;}
+    .word.w4{font-size:34px;color:#6c4fe0;left:51%;top:54%;}
+    .word.w5{font-size:30px;color:#f15a24;left:21%;top:40%;}
+    .word.w6{font-size:27px;color:#0085be;left:58%;top:43%;}
+    .word.w7{font-size:25px;color:#09937e;left:31%;top:48%;}
+    .word.w8{font-size:24px;color:#e43f31;left:47%;top:35%;}
+    .word.w9{font-size:20px;color:#1e9d69;left:29%;top:58%;}
+    .word.w10{font-size:19px;color:#9a58d0;left:52%;top:65%;}
+    .word.w11{font-size:18px;color:#0d64b7;left:61%;top:57%;}
+    .word.w12{font-size:18px;color:#09a08f;left:18%;top:53%;}
+    .word.w13{font-size:17px;color:#dd3e2d;left:68%;top:34%;}
+    .word.w14{font-size:16px;color:#1d5ba5;left:70%;top:49%;}
+    .word.w15{font-size:16px;color:#00a77b;left:13%;top:30%;}
+    .word.w16{font-size:15px;color:#6c4fe0;left:22%;top:65%;}
+    .word.w17{font-size:15px;color:#0b579a;left:57%;top:72%;}
+    .word.w18{font-size:14px;color:#ed6c02;left:40%;top:28%;}
+    .word.w19{font-size:14px;color:#169d73;left:16%;top:38%;}
+    .word.w20{font-size:14px;color:#ec5252;left:75%;top:59%;}
+    .region-tabs{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+    .region-tabs button{border:1px solid #d4e2f3;background:#fff;color:#11366f;border-radius:18px;padding:8px 18px;font-weight:800;cursor:pointer;}
+    .region-tabs button.active{background:#234aa0;color:#fff;border-color:#234aa0;}
 
-    .tzTopLine{
-        flex-wrap:wrap;
-        gap:4px 6px;
-        margin-bottom:5px;
-    }
+    /* 圖譜 */
+    .graph-panel{display:grid;grid-template-columns:1fr 270px;gap:14px;}
+    .graph-toolbar{display:flex;gap:8px;margin-bottom:10px;align-items:center;justify-content:space-between;}
+    .graph-canvas-controls{position:absolute;top:10px;right:10px;z-index:10;display:flex;gap:8px;}
+    .graph-canvas-controls button{height:33px;border:1px solid #cfe0f3;background:#fff;color:#0d3b7c;border-radius:8px;padding:0 12px;font-weight:800;cursor:pointer;box-shadow:0 2px 8px rgba(20,56,105,.06);}
+    .legend{display:flex;gap:8px;flex-wrap:wrap;}
+    .legend span{display:inline-flex;align-items:center;gap:6px;border:1px solid #d6e4f3;background:#fff;border-radius:16px;height:28px;padding:0 10px;font-size:12px;font-weight:800;color:#173c79;}
+    .legend i{width:8px;height:8px;border-radius:50%;display:inline-block;}
+    .filter-buttons{display:flex;gap:8px;}
+    .filter-buttons button{height:30px;border:1px solid #d2e0f1;background:#fff;border-radius:8px;padding:0 12px;color:#0d3b7c;font-weight:800;cursor:pointer;}
+    .filter-buttons button.active{background:#225cad;color:#fff;border-color:#225cad;}
 
-    .tzTimeStrong{
-        font-size:15px;
-    }
+    .graph-canvas{border:1px solid #d7e4f4;border-radius:13px;background:#fff;height:540px;position:relative;overflow:hidden;}
+    .graph-inner{position:absolute;inset:0;transform-origin:center;transition:.15s ease;transform:scale(.96);}
+    .graph-inner svg{position:absolute;inset:0;width:100%;height:100%;}
+    .edge{fill:none;stroke-width:4;stroke-linecap:round;opacity:.9;}
+    .edge.core{stroke:#245fae;}
+    .edge.hub{stroke:#735adf;stroke-dasharray:10 8;animation:dash 14s linear infinite;}
+    .edge.radar{stroke:#ef5550;stroke-dasharray:8 8;animation:dash 12s linear infinite;}
+    .edge.weak{stroke:#f0a11b;stroke-dasharray:8 7;animation:dash 14s linear infinite;}
+    .edge.fade{opacity:.16;}
+    @keyframes dash{to{stroke-dashoffset:-120}}
+    .node{position:absolute;width:104px;height:104px;border-radius:56px;background:#0d9aa1;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-size:15px;font-weight:900;box-shadow:0 14px 26px rgba(17,70,128,.16);border:5px solid rgba(255,255,255,.96);cursor:pointer;line-height:1.35;}
+    .node small{display:block;font-size:11px;margin-top:4px;color:rgba(255,255,255,.86)}
+    .node.center{width:122px;height:122px;background:#155aa9;border:6px solid #ffc72c;left:372px;top:208px;font-size:18px;}
+    .node.radar{background:#ef5550;left:70px;top:88px;}
+    .node.hub{background:#735adf;left:620px;top:98px;}
+    .node.n1{left:245px;top:250px}.node.n2{left:280px;top:395px}.node.n3{left:505px;top:400px}.node.n4{left:638px;top:258px}.node.n5{left:388px;top:70px}.node.n6{left:230px;top:92px}.node.n7{left:70px;top:270px}.node.n8{left:140px;top:390px}
+    .node.dim{opacity:.18}.node.active{box-shadow:0 0 0 7px rgba(255,199,44,.55),0 14px 28px rgba(17,70,128,.18)}
 
-    .tzDateWeek{
-        font-size:10px;
-    }
+    .side-card{border:1px solid #d7e4f4;border-radius:13px;background:#fff;padding:16px;height:540px;overflow:auto;}
+    .side-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+    .side-icon{width:36px;height:36px;border-radius:10px;background:#225cad;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;}
+    .side-card h3{margin:0;color:#123a79;font-size:18px;}
+    .side-card p{font-size:13px;line-height:1.75;color:#4c5f78;margin:8px 0 14px;}
+    .tags{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 13px;}
+    .tags span{background:#eef6ff;color:#1e5ca7;border:1px solid #d2e5fb;border-radius:15px;padding:5px 9px;font-size:12px;font-weight:800;}
+    .side-card h4{border-top:1px dashed #d5e1ee;padding-top:12px;font-size:13px;margin:14px 0 8px;color:#123a79;}
+    .side-card ul{margin:0 0 12px 17px;padding:0;color:#3f5876;font-size:13px;line-height:1.7;}
+    .links{display:grid;gap:8px;}
+    .links button{border:1px solid #d6e4f3;background:#fff;border-radius:8px;height:31px;text-align:left;padding:0 10px;color:#123a79;font-weight:800;cursor:pointer;}
 
-    .tzLocation,
-    .tzCompare{
-        white-space:normal;
-    }
+    /* 最新輿情資訊 */
+    .news-meta{display:flex;justify-content:flex-end;color:#6f8098;font-size:12px;font-weight:700;margin-bottom:10px;}
+    .news-table-wrap{padding-top:0;}
+    .news-table{width:100%;border-collapse:collapse;background:#fff;}
+    .news-table thead th{background:#f1f5fb;color:#000;font-size:15px;font-weight:900;text-align:left;padding:14px 12px;border-bottom:1px solid #d8e4f2;}
+    .news-table tbody td{padding:14px 12px;border-bottom:1px solid #e8eef6;font-size:14px;color:#243b5f;vertical-align:top;}
+    .news-table tbody tr:hover{background:#fafcff;}
+    .news-table .col-date{width:145px;white-space:nowrap;}
+    .news-table .col-source{width:185px;white-space:nowrap;font-weight:700;color:#193f7f;}
+    .news-link{color:#0d4ea3;font-weight:800;text-decoration:none;}
+    .news-link:hover{text-decoration:underline;}
+    .news-link::after{content:" ↗";font-size:11px;color:#6b7b93;}
+    .news-pagination{display:flex;align-items:center;justify-content:space-between;margin-top:14px;color:#111;font-size:14px;}
+    .page-size{display:flex;align-items:center;gap:10px;}
+    .page-size select{height:34px;border:1px solid #cfd9e8;border-radius:7px;background:#fff;padding:0 28px 0 12px;font-weight:700;color:#111;}
+    .page-nav{display:flex;align-items:center;gap:10px;}
+    .page-nav button{height:34px;border:0;border-radius:7px;padding:0 14px;font-weight:900;cursor:pointer;}
+    .page-nav button.prev{background:#d6e1ec;color:#fff;cursor:not-allowed;}
+    .page-nav button.next{background:#203f91;color:#fff;}
+    .page-nav .page-status{color:#2b3546;font-size:14px;}
 
-    .tzBubbleBody{
-        padding:7px 8px 8px 8px;
-        font-size:10px;
-    }
-
-    .tzTopLine{
-        margin-bottom:4px;
-    }
-
-    .tzTimeStrong{
-        font-size:14px;
-    }
-
-    .tzDateWeek,
-    .tzCompare{
-        font-size:10px;
-    }
-
-    .tzLocation{
-        font-size:11px;
-        margin-bottom:2px;
-    }
-
-    .card{
-        margin-bottom:14px;
-        padding:14px;
-    }
-
-    .sectionTitle{
-        margin-bottom:12px;
-        padding-bottom:8px;
-        font-size:18px;
-    }
-
-    .linkGrid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:10px;
-    }
-
-    .linkCard{
-        padding:14px 10px;
-        font-size:22px;
-        border-radius:12px;
-    }
-
-    .linkCard span{
-        font-size:13px;
-    }
-
-    .assistantBox input,
-    .assistantBox button{
-        height:42px;
-        font-size:14px;
-    }
-
-    .recommendResult{
-        margin-top:10px;
-        padding:12px 14px;
-        line-height:1.6;
-        font-size:14px;
-    }
-
-}
-
-@media(max-width:390px){
-    #worldClockLayer{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:768px){
-    .navbar{
-        width:calc(100% - 32px);
-        height:auto;
-        min-height:56px;
-        flex-wrap:wrap;
-        justify-content:center;
-        border-radius:24px;
-        margin:16px auto 30px auto;
-    }
-
-    .navbar a{
-        height:48px;
-        padding:0 18px;
-        font-size:15px;
-        border-right:none;
-    }
-
-    .assistantBox{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .assistantBox button{
-        width:100%;
-    }
-
-    .newsDrawer{
-        width:100%;
-        right:-100%;
-    }
-}
-
-/* ===== AI 網站引導浮動助手 ===== */
-.aiAssistantBtn{
-    position:fixed;
-    right:24px;
-    bottom:26px;
-    width:72px;
-    height:72px;
-    border:none;
-    border-radius:50%;
-    cursor:pointer;
-    z-index:1200;
-    background:linear-gradient(145deg,#0f172a,#1d4ed8 55%,#22d3ee);
-    box-shadow:0 18px 34px rgba(15,23,42,.26), 0 0 0 8px rgba(59,130,246,.08);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:transform .18s ease, box-shadow .18s ease;
-}
-
-.aiAssistantBtn:hover{
-    transform:translateY(-2px) scale(1.03);
-    box-shadow:0 22px 40px rgba(15,23,42,.3), 0 0 0 10px rgba(59,130,246,.1);
-}
-
-
-.aiRobotIcon,
-.aiMiniRobot{
-    display:block;
-    flex:0 0 auto;
-    background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5NiA5NiI+CiAgPGRlZnM+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9ImJnIiBjeD0iMzIlIiBjeT0iMjglIiByPSI3MiUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmY3ZWQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIwLjI1IiBzdG9wLWNvbG9yPSIjZjVmM2ZmIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMC42IiBzdG9wLWNvbG9yPSIjZGJlYWZlIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2M0YjVmZCIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaGFsbyIgeDE9IjE1IiB5MT0iMTAiIHgyPSI3OCIgeTI9Ijg2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzhiNWNmNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjAuNDUiIHN0b3AtY29sb3I9IiMwNmI2ZDQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZjU5ZTBiIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJmYWNlIiB4MT0iMjYiIHkxPSIyOCIgeDI9IjY4IiB5Mj0iNjAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMWUxYjRiIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMC40NSIgc3RvcC1jb2xvcj0iIzBmM2U4OCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwZWE1ZTkiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJvZHkiIHgxPSIyOCIgeTE9IjYwIiB4Mj0iNjgiIHkyPSI4MiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmRlNjhhIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjQiIHN0ZERldmlhdGlvbj0iNCIgZmxvb2QtY29sb3I9IiMzMTJlODEiIGZsb29kLW9wYWNpdHk9IjAuMiIvPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgoKICA8Y2lyY2xlIGN4PSI0OCIgY3k9IjQ4IiByPSI0MiIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSI0OCIgY3k9IjQ4IiByPSIzOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2hhbG8pIiBzdHJva2Utd2lkdGg9IjQiIG9wYWNpdHk9IjAuOTUiLz4KICA8Y2lyY2xlIGN4PSI0OCIgY3k9IjQ4IiByPSIzMCIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC4yNSIvPgoKICA8ZyBmaWx0ZXI9InVybCgjc2hhZG93KSI+CiAgICA8cGF0aCBkPSJNMzcgMjUgQzM5IDIxLCA1NyAyMSwgNTkgMjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhiNWNmNiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGNpcmNsZSBjeD0iMzciIGN5PSIzNCIgcj0iNCIgZmlsbD0iI2Y1ZjNmZiIgc3Ryb2tlPSIjOGI1Y2Y2IiBzdHJva2Utd2lkdGg9IjEuOCIvPgogICAgPGNpcmNsZSBjeD0iNTkiIGN5PSIzNCIgcj0iNCIgZmlsbD0iI2VjZmVmZiIgc3Ryb2tlPSIjMDZiNmQ0IiBzdHJva2Utd2lkdGg9IjEuOCIvPgoKICAgIDxyZWN0IHg9IjI1IiB5PSIyNiIgd2lkdGg9IjQ2IiBoZWlnaHQ9IjM4IiByeD0iMTYiIGZpbGw9IiNmZmZkZjciLz4KICAgIDxyZWN0IHg9IjI5IiB5PSIzMSIgd2lkdGg9IjM4IiBoZWlnaHQ9IjI1IiByeD0iMTEuNSIgZmlsbD0idXJsKCNmYWNlKSIvPgoKICAgIDxlbGxpcHNlIGN4PSI0MCIgY3k9IjQzIiByeD0iNC4zIiByeT0iNS4zIiBmaWxsPSIjNjdlOGY5Ii8+CiAgICA8ZWxsaXBzZSBjeD0iNTYiIGN5PSI0MyIgcng9IjQuMyIgcnk9IjUuMyIgZmlsbD0iI2M0YjVmZCIvPgogICAgPGNpcmNsZSBjeD0iMzguNiIgY3k9IjQwLjciIHI9IjEuNCIgZmlsbD0iI2ZmZmZmZiIvPgogICAgPGNpcmNsZSBjeD0iNTQuOCIgY3k9IjQwLjciIHI9IjEuNCIgZmlsbD0iI2ZmZmZmZiIvPgoKICAgIDxwYXRoIGQ9Ik00Mi41IDUwLjUgUTQ4IDU1IDUzLjUgNTAuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmVmM2M3IiBzdHJva2Utd2lkdGg9IjIuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CgogICAgPHBhdGggZD0iTTM1IDYxIEg2MSBDNjYuMiA2MSA3MCA2NC44IDcwIDcwIFY3Ni41IEgyNiBWNzAgQzI2IDY0LjggMjkuOCA2MSAzNSA2MSBaIiBmaWxsPSJ1cmwoI2JvZHkpIi8+CiAgICA8Y2lyY2xlIGN4PSI0OCIgY3k9IjY4LjUiIHI9IjYuNiIgZmlsbD0iIzhiNWNmNiIvPgogICAgPHBhdGggZD0iTTQ0IDY4LjUgSDUyIiBzdHJva2U9IiNmZWYzYzciIHN0cm9rZS13aWR0aD0iMi4xIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik00Mi41IDc2LjUgQzQ0IDc5IDUyIDc5IDUzLjUgNzYuNSIgZmlsbD0iIzBmM2U4OCIgb3BhY2l0eT0iMC43Ii8+CiAgPC9nPgo8L3N2Zz4=");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-}
-
-.aiRobotIcon{
-    width:52px;
-    height:52px;
-    border-radius:50%;
-    box-shadow:0 6px 16px rgba(15,23,42,.18), 0 0 0 2px rgba(255,255,255,.86), 0 0 14px rgba(139,92,246,.16);
-}
-
-.aiMiniRobot{
-    width:34px;
-    height:34px;
-    border-radius:50%;
-    box-shadow:0 2px 8px rgba(15,23,42,.14), 0 0 0 1.5px rgba(255,255,255,.82), 0 0 10px rgba(139,92,246,.14);
-}
-
-.aiAssistantPanel{
-    position:fixed;
-    right:24px;
-    bottom:112px;
-    width:380px;
-    max-width:calc(100vw - 48px);
-    background:#ffffff;
-    border:1px solid #e2e8f0;
-    border-radius:20px;
-    box-shadow:0 24px 56px rgba(15,23,42,.22);
-    z-index:1190;
-    overflow:hidden;
-    opacity:0;
-    transform:translateY(12px) scale(.98);
-    pointer-events:none;
-    transition:opacity .18s ease, transform .18s ease;
-}
-
-.aiAssistantPanel.open{
-    opacity:1;
-    transform:translateY(0) scale(1);
-    pointer-events:auto;
-}
-
-.aiAssistantHeader{
-    padding:16px 18px;
-    background:linear-gradient(135deg,#0f172a,#1e40af);
-    color:#ffffff;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-}
-
-.aiAssistantTitle{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-weight:bold;
-    font-size:16px;
-}
-
-.aiAssistantClose{
-    border:none;
-    background:rgba(255,255,255,.12);
-    color:#ffffff;
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    cursor:pointer;
-    font-size:16px;
-}
-
-.aiAssistantBody{
-    padding:18px;
-}
-
-.aiAssistantHint{
-    color:#64748b;
-    font-size:13px;
-    line-height:1.6;
-    margin:0 0 14px 0;
-}
-
-.aiAssistantPanel .assistantBox{
-    gap:8px;
-}
-
-.aiAssistantPanel .assistantBox input{
-    height:44px;
-    border-radius:12px;
-}
-
-.aiAssistantPanel .assistantBox button{
-    width:96px;
-    min-width:96px;
-    height:44px;
-    border-radius:12px;
-    background:#1d4ed8;
-}
-
-.aiAssistantPanel .recommendResult{
-    margin-top:14px;
-    border-left:4px solid #1d4ed8;
-    font-size:14px;
-}
-
-@media(max-width:768px){
-    .aiAssistantBtn{
-        right:18px;
-        bottom:18px;
-        width:62px;
-        height:62px;
-    }
-
-    .aiRobotIcon{
-        width:44px;
-        height:44px;
-    }
-
-    .aiAssistantPanel{
-        left:12px;
-        right:12px;
-        bottom:88px;
-        width:auto;
-        max-width:none;
-        border-radius:18px;
-    }
-
-    .aiAssistantBody{
-        padding:14px;
-    }
-
-    .aiAssistantPanel .assistantBox{
-        flex-direction:row;
-        align-items:center;
-    }
-
-    .aiAssistantPanel .assistantBox button{
-        width:78px;
-        min-width:78px;
-    }
-}
-
-
-/* ===== AI 助手輸入框固定同列 ===== */
-.aiAssistantPanel .assistantBox{
-    display:flex !important;
-    flex-direction:row !important;
-    align-items:center !important;
-    gap:10px;
-    width:100%;
-}
-.aiAssistantPanel .assistantBox input{
-    flex:1 1 auto;
-    min-width:0;
-    box-sizing:border-box;
-}
-.aiAssistantPanel .assistantBox button{
-    flex:0 0 96px;
-    width:96px;
-    min-width:96px;
-    white-space:nowrap;
-    box-sizing:border-box;
-}
-@media(max-width:768px){
-    .aiAssistantPanel .assistantBox{
-        flex-direction:row !important;
-        gap:8px;
-    }
-    .aiAssistantPanel .assistantBox button{
-        flex:0 0 78px;
-        width:78px;
-        min-width:78px;
-        padding:0;
-    }
-}
-
-
-
-/* =====================================================
-   Global HR Hub v2.0 - override only world time section
-===================================================== */
-.worldTimeHeader{
-    padding:22px 24px 10px 24px;
-}
-.worldTimeHeader .sectionTitle{
-    margin-bottom:6px;
-    border-bottom:none;
-    padding-bottom:2px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-.worldTimeSubtitle{
-    margin:0 0 8px 0;
-    color:#64748b;
-    font-size:13px;
-    letter-spacing:.2px;
-}
-.worldMapWrap{
-    background:
-        radial-gradient(circle at 18% 22%, rgba(37,99,235,.11), transparent 30%),
-        radial-gradient(circle at 78% 28%, rgba(14,165,233,.13), transparent 34%),
-        linear-gradient(180deg,#f8fbff 0%,#eef5fb 100%);
-}
-.worldMapWrap::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(135deg,rgba(255,255,255,.36),rgba(255,255,255,.08));
-    pointer-events:none;
-    z-index:1;
-}
-.worldMapSvg{ z-index:0; }
-#worldClockLayer{ z-index:2; }
-.tzDot{
-    width:10px;
-    height:10px;
-    background:#1e3a8a;
-    box-shadow:0 0 0 5px rgba(37,99,235,.14), 0 0 18px rgba(37,99,235,.35);
-}
-.tzDot.active,
-.tzDot:hover{
-    background:#dc2626;
-    box-shadow:0 0 0 6px rgba(220,38,38,.16), 0 0 20px rgba(220,38,38,.35);
-}
-.tzBubble{
-    width:150px;
-    min-height:86px;
-    border-radius:14px;
-    color:#0f172a;
-    background:rgba(255,255,255,.68);
-    border:1px solid rgba(255,255,255,.78);
-    box-shadow:0 10px 24px rgba(15,23,42,.12);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    opacity:.72;
-    cursor:pointer;
-    transition:transform .22s ease, opacity .22s ease, box-shadow .22s ease, background .22s ease;
-}
-.tzBubbleBody{
-    background:transparent !important;
-    color:#0f172a;
-    padding:10px 11px;
-    font-size:12px;
-    line-height:1.35;
-}
-.tzBubble:hover,
-.tzBubble.active{
-    opacity:1;
-    background:rgba(255,255,255,.92);
-    transform:translateY(-4px) scale(1.05);
-    box-shadow:0 18px 34px rgba(15,23,42,.18);
-    z-index:8;
-}
-.tzTopLine{
-    justify-content:space-between;
-    align-items:flex-start;
-    margin-bottom:7px;
-}
-.tzTimeStrong{
-    color:#0f172a;
-    font-size:18px;
-    letter-spacing:.2px;
-}
-.tzDateWeek{
-    color:#64748b;
-    font-size:10px;
-    line-height:1.25;
-    text-align:right;
-}
-.tzLocation{
-    margin-bottom:2px;
-    white-space:normal;
-}
-.tzLocationCountry{
-    display:block;
-    color:#111827;
-    font-weight:800;
-    font-size:12px;
-}
-.tzLocationCity{
-    display:block;
-    color:#475569;
-    font-size:11px;
-    font-weight:600;
-    margin-top:1px;
-}
-.tzCompare{
-    color:#64748b;
-    font-size:10px;
-    white-space:normal;
-    margin-top:4px;
-}
-.tzUpdateBadge{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    margin-top:7px;
-    padding:4px 8px;
-    border-radius:999px;
-    background:rgba(220,38,38,.10);
-    color:#b91c1c;
-    font-size:10px;
-    font-weight:800;
-    white-space:nowrap;
-}
-.tzBubble:not(.hasHrUpdate) .tzUpdateBadge{ display:none; }
-.globalDrawerMeta{
-    margin:0 0 16px 0;
-    padding:12px 14px;
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    color:#475569;
-    font-size:13px;
-    line-height:1.6;
-}
-.globalUpdateItem{
-    margin-bottom:14px;
-    padding:14px;
-    border:1px solid #e5e7eb;
-    border-radius:14px;
-    background:#ffffff;
-    box-shadow:0 6px 16px rgba(15,23,42,.04);
-}
-.globalUpdateTag{
-    display:inline-flex;
-    margin-bottom:8px;
-    padding:4px 9px;
-    border-radius:999px;
-    background:#eff6ff;
-    color:#1d4ed8;
-    font-size:12px;
-    font-weight:800;
-}
-.globalUpdateTitle{
-    font-size:15px;
-    font-weight:800;
-    color:#111827;
-    line-height:1.5;
-    margin-bottom:5px;
-}
-.globalUpdateDesc{
-    font-size:13px;
-    color:#475569;
-    line-height:1.65;
-}
-.globalUpdateDate{
-    margin-top:8px;
-    color:#94a3b8;
-    font-size:12px;
-}
-.globalNoUpdate{
-    padding:16px;
-    border-radius:14px;
-    background:#f8fafc;
-    border:1px dashed #cbd5e1;
-    color:#64748b;
-    line-height:1.7;
-    font-size:13px;
-}
-@media(max-width:768px){
-    .worldTimeSubtitle{
-        margin-bottom:4px;
-        font-size:12px;
-    }
-    .tzBubble{
-        width:100%;
-        opacity:.86;
-        border-radius:12px;
-        background:#ffffff;
-    }
-    .tzBubbleBody{
-        padding:10px;
-    }
-    .tzBubble:hover,
-    .tzBubble.active{
-        opacity:1;
-        transform:none !important;
-    }
-    .tzLocationCountry,
-    .tzLocationCity,
-    .tzCompare{
-        white-space:normal;
-    }
-}
-
-</style>
+    .note{font-size:12px;color:#73849b;margin-top:10px;line-height:1.7;}
+  </style>
 </head>
-
 <body>
+  <div class="top-wrap">
+    <nav class="nav-pill" aria-label="main navigation">
+      <div class="nav-item blank left"></div>
+      <a class="nav-item" href="./index.html">Global HR Hub</a>
+      <a class="nav-item" href="./links.html">常用網站</a>
+      <a class="nav-item" href="./indicators.html">經社指標</a>
+      <a class="nav-item" href="./tools.html">HR工具</a>
+      <a class="nav-item active" href="./insight.html">輿情觀察</a>
+      <div class="nav-item blank right"></div>
+    </nav>
+  </div>
 
-<div class="navbar">
-    <a href="index.html">Global HR Hub</a>
-    <a href="links.html" class="active">常用網站</a>
-    <a href="indicators.html">經社指標</a>
-    <a href="tools.html">HR工具</a>
-    <a href="insight.html">輿情觀察</a>
-</div>
-
-<h1>常用網站</h1>
-
-<div class="layout">
-<div class="leftPanel">
-
-        <div class="card">
-        <h2 class="sectionTitle">政府法規</h2>
-
-        <div class="linkGrid">
-            <a class="linkCard" href="https://www.mol.gov.tw/" target="_blank">⚖️<span>勞動部</span></a>
-            <a class="linkCard" href="https://laws.mol.gov.tw/" target="_blank">📚<span>勞動法令查詢</span></a>
-            <a class="linkCard" href="https://www.wda.gov.tw/" target="_blank">🧰<span>勞動力發展署</span></a>
-            <a class="linkCard" href="https://www.osha.gov.tw/" target="_blank">🦺<span>職業安全衛生署</span></a>
-            <a class="linkCard" href="https://www.bli.gov.tw/" target="_blank">🛡️<span>勞工保險局</span></a>
-            <a class="linkCard" href="https://www.nhi.gov.tw/" target="_blank">🏥<span>健保署</span></a>
-            <a class="linkCard" href="https://ilabor.ntpc.gov.tw/" target="_blank">🏛️<span>新北勞工局</span></a>
-            <a class="linkCard" href="https://www.ntbna.gov.tw/" target="_blank">💰<span>國稅局</span></a>
-        </div>
+  <main class="page">
+    <div class="page-head">
+      <h1>輿情觀察</h1>
+      <div class="page-updated"><span class="clock">🕒</span><span>最新更新：<span id="updatedAt">2026/07/02 10:30</span></span></div>
     </div>
 
-    <div class="card">
-        <h2 class="sectionTitle">統計資料</h2>
-
-        <div class="linkGrid">
-            <a class="linkCard" href="https://www.stat.gov.tw/" target="_blank">📊<span>行政院主計總處</span></a>
-            <a class="linkCard" href="https://mops.twse.com.tw/" target="_blank">📈<span>公開資訊觀測站</span></a>
+    <section class="section" id="summary-section">
+      <div class="section-title"><div class="left"><span class="dot"></span>AI 今日重點摘要</div><button onclick="toggleSection('summary-section')">▾</button></div>
+      <div class="section-body">
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3>本期高關注議題</h3>
+            <p><span class="badge red">高關注</span> 職場霸凌、缺工、AI 轉型仍是近期 HR 輿情主軸，且與勞資關係、職安與人才發展連動較高。</p>
+          </div>
+          <div class="summary-card">
+            <h3>全球連動觀察</h3>
+            <p><span class="badge orange">追蹤中</span> 海外裁員、薪資透明、遠距與混合辦公討論增加，可作為台灣 HR 制度調整與風險盤點參考。</p>
+          </div>
+          <div class="summary-card">
+            <h3>建議優先關注</h3>
+            <p><span class="badge green">建議</span> 先聚焦申訴機制、用工合規、人才留任與 AI 技能轉型，並建立定期輿情回饋追蹤。</p>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <div class="card">
-        <h2 class="sectionTitle">招募網站</h2>
+    <section class="section" id="buzz-section">
+      <div class="section-title"><div class="left"><span class="dot"></span>HR 聲量圖</div><button onclick="toggleSection('buzz-section')">▾</button></div>
+      <div class="section-body">
+        <div class="buzz-wrap">
+          <div class="top10">
+            <h3>關鍵字 Top 10</h3>
+            <div class="bar-row"><span>職場霸凌</span><div class="bar-bg"><div class="bar hot" style="width:94%"></div></div><span class="num">94</span></div>
+            <div class="bar-row"><span>缺工</span><div class="bar-bg"><div class="bar" style="width:88%"></div></div><span class="num">88</span></div>
+            <div class="bar-row"><span>AI 轉型</span><div class="bar-bg"><div class="bar" style="width:81%"></div></div><span class="num">81</span></div>
+            <div class="bar-row"><span>薪酬壓力</span><div class="bar-bg"><div class="bar hot" style="width:76%"></div></div><span class="num">76</span></div>
+            <div class="bar-row"><span>勞資爭議</span><div class="bar-bg"><div class="bar hot" style="width:70%"></div></div><span class="num">70</span></div>
+            <div class="bar-row"><span>遠距工作</span><div class="bar-bg"><div class="bar" style="width:63%"></div></div><span class="num">63</span></div>
+            <div class="bar-row"><span>DEI</span><div class="bar-bg"><div class="bar" style="width:58%"></div></div><span class="num">58</span></div>
+            <div class="bar-row"><span>學習發展</span><div class="bar-bg"><div class="bar" style="width:53%"></div></div><span class="num">53</span></div>
+            <div class="bar-row"><span>法規變動</span><div class="bar-bg"><div class="bar" style="width:48%"></div></div><span class="num">48</span></div>
+            <div class="bar-row"><span>雇主品牌</span><div class="bar-bg"><div class="bar" style="width:42%"></div></div><span class="num">42</span></div>
+          </div>
 
-        <div class="linkGrid">
-            <a class="linkCard" href="https://www.104.com.tw/" target="_blank">👔<span>104人力銀行</span></a>
-            <a class="linkCard" href="https://www.1111.com.tw/" target="_blank">💼<span>1111人力銀行</span></a>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2 class="sectionTitle">人資咖啡站</h2>
-
-        <div class="linkGrid">
-            <a class="linkCard" href="https://www.hr.org.tw/" target="_blank">☕<span>中華人事主管協會</span></a>
-            <a class="linkCard" href="https://www.chrma.net/Template/Index.aspx" target="_blank">📘<span>中華人力資源管理協會</span></a>
-            <a class="linkCard" href="https://hrlearning.com.tw/" target="_blank">🌿<span>人資小周末</span></a>
-            <a class="linkCard" href="https://hiproficiency.com/forum/%e4%ba%ba%e5%8a%9b%e8%b3%87%e6%ba%90%e8%ab%96%e5%a3%87/" target="_blank">🚶<span>HRJOURNEY</span></a>
-        </div>
-    </div>
-
-</div>
-</div>
-
-
-<button class="aiAssistantBtn" onclick="toggleAiAssistant()" aria-label="開啟網站引導助手">
-    <span class="aiRobotIcon" aria-hidden="true"></span>
-</button>
-
-<div class="aiAssistantPanel" id="aiAssistantPanel" aria-label="網站引導助手">
-    <div class="aiAssistantHeader">
-        <div class="aiAssistantTitle">
-            <span class="aiMiniRobot" aria-hidden="true"></span>
-            <span>網站引導助手</span>
-        </div>
-        <button class="aiAssistantClose" onclick="toggleAiAssistant(false)">✕</button>
-    </div>
-    <div class="aiAssistantBody">
-        <p class="aiAssistantHint">輸入你想查的內容，例如資遣費、勞基法、勞保、健保、公司財報，我會建議你去哪個網站查。</p>
-        <div class="assistantBox">
-            <input id="siteQuestion" placeholder="例如：我想查資遣費、勞基法、勞保">
-            <button onclick="recommendSite()">詢問</button>
-        </div>
-        <div id="siteRecommendResult" class="recommendResult">
-            請輸入需求後點選「詢問」。
-        </div>
-    </div>
-</div>
-
-<div class="newsFloatingBtn" onclick="toggleNewsPanel()">重要公告</div>
-
-<div class="newsDrawer" id="newsDrawer">
-    <div class="newsDrawerHeader">
-        <span id="newsDrawerTitle">重要公告彙整</span>
-        <button onclick="toggleNewsPanel(false)">✕</button>
-    </div>
-
-    <div class="newsDrawerContent" id="newsDrawerContent">
-        <div id="taiwanNewsPanel">
-            <div class="newsGroup">
-                <h3>勞動部</h3>
-                <div id="newsMol">載入中...</div>
+          <div>
+            <div class="cloud-card">
+              <div class="cloud-controls"><button onclick="zoomCloud(1.1)">＋ 放大</button><button onclick="zoomCloud(.9)">－ 縮小</button><button onclick="resetCloud()">重設</button></div>
+              <div class="word-cloud" id="wordCloud">
+                <span class="word w1">缺工</span><span class="word w2">調薪</span><span class="word w3">加班</span><span class="word w4">最低工資</span>
+                <span class="word w5">半導體</span><span class="word w6">AI</span><span class="word w7">職安</span><span class="word w8">招聘</span>
+                <span class="word w9">勞基法</span><span class="word w10">工時</span><span class="word w11">移工</span><span class="word w12">派遣</span>
+                <span class="word w13">福利</span><span class="word w14">薪資透明</span><span class="word w15">產業外移</span><span class="word w16">職場申訴</span>
+                <span class="word w17">薪資中位數</span><span class="word w18">通勤</span><span class="word w19">勞檢</span><span class="word w20">電保</span>
+              </div>
             </div>
-
-            <div class="newsGroup">
-                <h3>勞動力發展署</h3>
-                <div id="newsWda">載入中...</div>
+            <div class="region-tabs">
+              <button class="active">台灣</button><button>中國</button><button>印度</button><button>越南</button><button>美國</button><button>墨西哥</button><button>捷克</button><button>新加坡</button>
             </div>
-
-            <div class="newsGroup">
-                <h3>勞保局</h3>
-                <div id="newsBli">載入中...</div>
-            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div id="globalHrUpdatePanel" style="display:none;"></div>
-    </div>
-</div>
+    <section class="section" id="graph-section">
+      <div class="section-title"><div class="left"><span class="dot"></span>全球 HR 輿情雷達：台灣 HR 影響關聯圖譜</div><button onclick="toggleSection('graph-section')">▾</button></div>
+      <div class="section-body">
+        <div class="graph-toolbar">
+          <div class="legend">
+            <span><i style="background:#155aa9"></i>台灣 HR 面向</span>
+            <span><i style="background:#ef5550"></i>輿情雷達：新聞／風險／即時訊號</span>
+            <span><i style="background:#735adf"></i>Global HR Hub：制度／標竿／國家比較</span>
+            <span><i style="background:#f0a11b"></i>待加強關聯</span>
+          </div>
+          <div class="filter-buttons"><button class="active" onclick="setGraphFilter('all',this)">全部</button><button onclick="setGraphFilter('risk',this)">高風險</button><button onclick="setGraphFilter('weak',this)">待加強</button></div>
+        </div>
+        <div class="graph-panel">
+          <div class="graph-canvas" id="graphCanvas">
+            <div class="graph-canvas-controls"><button onclick="zoomGraph(1.1)">＋ 放大</button><button onclick="zoomGraph(.9)">－ 縮小</button><button onclick="resetGraphView()">重設</button></div>
+            <div class="graph-inner" id="graphInner">
+              <svg viewBox="0 0 780 540" preserveAspectRatio="none">
+                <path class="edge core" d="M433,269 C392,262 365,267 303,302" />
+                <path class="edge core" d="M433,269 C405,340 381,395 332,438" />
+                <path class="edge core" d="M433,269 C475,337 505,390 557,438" />
+                <path class="edge core" d="M433,269 C515,266 566,270 640,300" />
+                <path class="edge core" d="M433,269 C435,190 433,150 434,120" />
+                <path class="edge weak" data-type="weak" d="M122,140 C220,205 320,240 433,269" />
+                <path class="edge radar" data-type="risk" d="M122,140 C126,228 120,285 108,322" />
+                <path class="edge radar" data-type="risk" d="M122,140 C188,332 248,388 332,438" />
+                <path class="edge radar" data-type="risk" d="M122,140 C298,330 486,326 640,300" />
+                <path class="edge hub" data-type="hub" d="M672,148 C605,178 535,220 433,269" />
+                <path class="edge hub" data-type="hub" d="M672,148 C590,126 520,110 434,120" />
+                <path class="edge weak" data-type="weak" d="M434,120 C432,180 432,220 433,269" />
+              </svg>
+              <div class="node center active" data-node="tw" onclick="selectNode('tw')">台灣 HR<small>影響中心</small></div>
+              <div class="node radar" data-node="radar" onclick="selectNode('radar')">全球 HR<br>輿情雷達<small>新聞・風險・即時</small></div>
+              <div class="node hub" data-node="hub" onclick="selectNode('hub')">Global<br>HR Hub<small>制度・標竿・比較</small></div>
+              <div class="node n1" data-node="recruit" onclick="selectNode('recruit')">招募<br>與任用</div>
+              <div class="node n2" data-node="pay" onclick="selectNode('pay')">薪酬<br>與福利</div>
+              <div class="node n3" data-node="labor" onclick="selectNode('labor')">勞資關係<br>與溝通</div>
+              <div class="node n4" data-node="law" onclick="selectNode('law')">法規<br>與合規</div>
+              <div class="node n5" data-node="tech" onclick="selectNode('tech')">HR 科技<br>與數據</div>
+              <div class="node n7" data-node="safety" onclick="selectNode('safety')">職場安全<br>升溫</div>
+              <div class="node n8" data-node="shortage" onclick="selectNode('shortage')">缺工<br>人才競爭</div>
+            </div>
+          </div>
+          <aside class="side-card" id="infoPanel">
+            <div class="side-head"><div class="side-icon">TW</div><div><h3>台灣 HR</h3><div style="font-size:12px;color:#6b7b93;font-weight:800">中心節點</div></div></div>
+            <p>台灣 HR 是圖譜中心，用來承接全球輿情、國際制度與本地管理議題之間的關聯。</p>
+            <div class="tags"><span>台灣</span><span>HR 生態</span><span>影響中心</span></div>
+            <h4>建議動作</h4>
+            <ul><li>依聲量變化調整台灣 HR 優先議題</li><li>將高風險訊號轉成管理提醒與制度檢核</li></ul>
+            <h4>直接關聯</h4>
+            <div class="links"><button>招募與任用</button><button>薪酬與福利</button><button>勞資關係與溝通</button><button>法規與合規</button><button>HR 科技與數據</button><button>全球 HR 輿情雷達</button><button>Global HR Hub</button></div>
+          </aside>
+        </div>
+        <p class="note">說明：圖譜區塊用於呈現「全球輿情訊號如何影響台灣 HR 議題」。Global HR Hub 偏制度與標竿；全球 HR 輿情雷達偏新聞、風險與即時訊號。</p>
+      </div>
+    </section>
+
+    <section class="section" id="news-section">
+      <div class="section-title"><div class="left"><span class="dot"></span>最新輿情資訊</div><button onclick="toggleSection('news-section')">▾</button></div>
+      <div class="section-body">
+        <div class="news-table-wrap">
+          <div class="news-meta">最多保留 100 則歷史輿情｜點擊標題直接開啟原新聞網站</div>
+          <table class="news-table">
+            <thead>
+              <tr><th class="col-date">更新日</th><th class="col-source">來源</th><th>標題</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-date">2026/07/01</td><td class="col-source">台灣好報</td><td><a class="news-link" href="https://newstaiwan.net/2026/07/01/454353/" target="_blank" rel="noopener noreferrer">AI翻轉創業思維 勞工大學帶領斜槓族打造品牌新競爭力</a></td></tr>
+              <tr><td class="col-date">2026/07/01</td><td class="col-source">太報</td><td><a class="news-link" href="https://www.taisounds.com/news/content/77/265151" target="_blank" rel="noopener noreferrer">暑假勞檢違法率逼近25％ 勞動部：加強稽核、違反最低工資重罰</a></td></tr>
+              <tr><td class="col-date">2026/07/01</td><td class="col-source">匯流新聞網</td><td><a class="news-link" href="https://life.tw/article/%E7%AB%8B%E5%A7%94%E6%86%82%E6%9A%91%E6%9C%9F%E5%B7%A5%E8%AE%80%E7%94%9F%E8%B8%A9%E9%9B%B7-%E5%8B%9E%E5%8B%95%E9%83%A8%E6%8E%A8%E6%A0%A1%E5%9C%92%E5%8B%9E%E6%AC%8A%E6%95%99%E8%82%B2-1955%E7%94%B3%E8%A8%B4-3079802" target="_blank" rel="noopener noreferrer">立委憂暑期工讀生踩雷 勞動部推校園勞權教育、1955申訴</a></td></tr>
+              <tr><td class="col-date">2026/07/01</td><td class="col-source">天下雜誌</td><td><a class="news-link" href="https://www.cw.com.tw/article/5141828" target="_blank" rel="noopener noreferrer">55歲後只能等退休？台灣中高齡友善職缺不到三成「企業喊缺工，但不願意改」</a></td></tr>
+              <tr><td class="col-date">2026/07/01</td><td class="col-source">臺中市政府</td><td><a class="news-link" href="https://www.taichung.gov.tw/8868/8872/9962/3310038" target="_blank" rel="noopener noreferrer">「富市台中 就業成功」中市勞工局7月邀60家企業釋出逾2,000個職缺</a></td></tr>
+              <tr><td class="col-date">2026/07/01</td><td class="col-source">ELLE</td><td><a class="news-link" href="https://www.elle.com/tw/life/hot-news/g71790357/workplace-bully-law/" target="_blank" rel="noopener noreferrer">職場霸凌新制7/1上路！哪些行為算霸凌？5大認定要件、申訴流程一次看</a></td></tr>
+              <tr><td class="col-date">2026/07/01</td><td class="col-source">CSRone 永續智庫</td><td><a class="news-link" href="https://csrone.com/topics/9994" target="_blank" rel="noopener noreferrer">人資必看！7月1日起職場霸凌新法上路，主管一句話恐罰450萬</a></td></tr>
+              <tr><td class="col-date">2026/07/01</td><td class="col-source">Cheers快樂工作人</td><td><a class="news-link" href="https://www.cheers.com.tw/talent/article.action?id=5105748" target="_blank" rel="noopener noreferrer">【職場霸凌防治新法上路】專訪勞動部長洪申翰：怎樣算是職場霸凌？</a></td></tr>
+              <tr><td class="col-date">2026/07/01</td><td class="col-source">天下雜誌</td><td><a class="news-link" href="https://www.cw.com.tw/article/5141826" target="_blank" rel="noopener noreferrer">洪申翰專訪》職安法新制上路！訂雞排不揪、交辦困難任務算霸凌？注意事項一文看懂</a></td></tr>
+              <tr><td class="col-date">2026/07/01</td><td class="col-source">1111人力銀行</td><td><a class="news-link" href="https://www.1111.com.tw/news/166489/amp/" target="_blank" rel="noopener noreferrer">職場霸凌新制7月上路！不分公司大小都適用 五大重點解析</a></td></tr>
+            </tbody>
+          </table>
+          <div class="news-pagination">
+            <div class="page-size">
+              <span>每頁顯示：</span>
+              <select aria-label="每頁顯示筆數">
+                <option selected>20則</option>
+                <option>50則</option>
+                <option>100則</option>
+              </select>
+            </div>
+            <div class="page-nav">
+              <button class="prev" disabled>上一頁</button>
+              <span class="page-status">第 1 / 5 頁</span>
+              <button class="next">下一頁</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
 <script>
+  function toggleSection(id){ document.getElementById(id).classList.toggle('collapsed'); }
 
-// =====================================================
-// 跨時區世界地圖
-// =====================================================
+  let cloudScale = 1;
+  function zoomCloud(v){ cloudScale = Math.max(.65, Math.min(1.6, cloudScale * v)); document.getElementById('wordCloud').style.transform = `scale(${cloudScale})`; }
+  function resetCloud(){ cloudScale = 1; document.getElementById('wordCloud').style.transform = 'scale(1)'; }
 
-const worldClockZones = [
-    {
-        key: "tzUnitedStates",
-        flag: "🇺🇸",
-        city: "Wisconsin",
-        country: "United States",
-        timeZone: "America/Chicago",
-        dotX: 20,
-        dotY: 34,
-        cardX: 7,
-        cardY: 18,
-        updates: [
-            { type:"Government Notice", title:"HR update placeholder", desc:"Use this area to maintain local labour, payroll, tax, social insurance or government notice items.", date:"Manual update" }
-        ]
+
+  const buzzData = {
+    '台灣': {
+      top10: [
+        ['職場霸凌',94],['缺工',88],['AI 轉型',81],['薪酬壓力',76],['勞資爭議',70],['遠距工作',63],['DEI',58],['學習發展',53],['法規變動',48],['雇主品牌',42]
+      ],
+      words: ['職場霸凌','缺工','AI轉型','薪酬壓力','勞資爭議','遠距工作','DEI','學習發展','法規變動','雇主品牌','調薪','加班','最低工資','半導體','AI','職安','招聘','勞基法','工時','移工','派遣','福利','薪資透明','產業外移','職場申訴','薪資中位數','通勤','勞檢','電保','中高齡就業','暑期工讀','心理安全','申訴流程','主管責任','人才留任','教育訓練','混合辦公','數位轉型','人力需求','職缺','產業投資','勞權教育','職涯發展','員工體驗','人資科技','離職率','缺才','勞動市場']
     },
-    {
-        key: "tzMexico",
-        flag: "🇲🇽",
-        city: "Tijuana",
-        country: "Mexico",
-        timeZone: "America/Tijuana",
-        dotX: 16,
-        dotY: 45,
-        cardX: 13,
-        cardY: 52,
-        updates: [
-            { type:"Minimum Wage", title:"HR update placeholder", desc:"Maintain effective date, scope, source link and HR impact here.", date:"Manual update" }
-        ]
+    '中國': {
+      top10: [
+        ['社會保險',90],['最低工資',86],['勞動合同',82],['加班工時',78],['招聘需求',72],['製造業用工',68],['住房公積金',63],['個人所得稅',59],['勞務派遣',54],['工傷保險',49]
+      ],
+      words: ['社會保險','最低工資','勞動合同','加班工時','招聘需求','製造業用工','住房公積金','個人所得稅','勞務派遣','工傷保險','鄭州','河南','人才引進','用工合規','高溫津貼','靈活用工','平台用工','社保基數','薪資調整','離職補償','工會','就業補貼','畢業生就業','職業教育','勞動仲裁','工資支付','休假制度','夜班津貼','人力成本','勞動監察','企業裁員','產線招募','宿舍管理','員工關係','勞動爭議','外包用工','五險一金','生育保險','醫療保險','養老保險','失業保險','工時管理','人事檔案','入離職管理','合規稽核','薪酬制度','績效考核','員工安置']
     },
-    {
-        key: "tzCzech",
-        flag: "🇨🇿",
-        city: "Kutná Hora",
-        country: "Czech Republic",
-        timeZone: "Europe/Prague",
-        dotX: 53,
-        dotY: 27,
-        cardX: 43,
-        cardY: 11,
-        updates: [
-            { type:"Labour Law", title:"HR update placeholder", desc:"Maintain Czech Republic HR compliance updates here.", date:"Manual update" }
-        ]
+    '印度': {
+      top10: [
+        ['EPF',92],['ESIC',87],['CTC',83],['Payroll',79],['Gratuity',74],['Labour Codes',69],['Minimum Wage',65],['TDS',60],['Shops Act',55],['Professional Tax',50]
+      ],
+      words: ['EPF','ESIC','CTC','Payroll','Gratuity','Labour Codes','Minimum Wage','TDS','Shops Act','Professional Tax','PF UAN','Form 11','Form 16','Bonus Act','Leave Policy','Maternity Benefit','Offer Letter','Appointment Letter','Chennai','Bangalore','New Delhi','Karnataka','Tamil Nadu','Delhi','Payroll Vendor','Compliance','Statutory Register','Factory Act','Labour Welfare Fund','Income Tax','PAN','Aadhaar','Bank KYC','Notice Period','Probation','Background Check','Onboarding','Exit Formality','Separation','Full and Final','Attendance','Overtime','Holiday List','Insurance','Group Mediclaim','Canteen','Transport','HR Policy','Employee Handbook']
     },
-    {
-        key: "tzChina",
-        flag: "🇨🇳",
-        city: "Zhengzhou",
-        country: "China",
-        timeZone: "Asia/Shanghai",
-        dotX: 77,
-        dotY: 37,
-        cardX: 65,
-        cardY: 17,
-        updates: [
-            { type:"Social Insurance", title:"HR update placeholder", desc:"Maintain local social insurance, payroll or government notice items here.", date:"Manual update" }
-        ]
+    '越南': {
+      top10: [
+        ['社會保險',91],['最低工資',85],['勞動合約',80],['工會',75],['加班',71],['個人所得稅',66],['工廠招募',62],['外籍員工',57],['產假',51],['離職補償',46]
+      ],
+      words: ['社會保險','最低工資','勞動合約','工會','加班','個人所得稅','工廠招募','外籍員工','產假','離職補償','MOLISA','VSS','Bac Ninh','Hanoi','Ho Chi Minh','工時','試用期','薪資表','區域最低工資','勞動法','年假','病假','工作許可','簽證','勞動紀律','工傷','健康檢查','薪資扣繳','福利','宿舍','膳食','班車','夜班津貼','工會費','社保基數','個稅申報','勞動稽核','人力供給','產線缺工','招募活動','離職率','員工關係','教育訓練','合規','薪資調整','績效獎金','勞資溝通','安全衛生']
     },
-    {
-        key: "tzTaiwan",
-        flag: "🇹🇼",
-        city: "Taipei",
-        country: "Taiwan",
-        timeZone: "Asia/Taipei",
-        dotX: 84,
-        dotY: 42,
-        cardX: 81,
-        cardY: 34,
-        updates: []
+    '美國': {
+      top10: [
+        ['Overtime',89],['Minimum Wage',84],['FMLA',78],['OSHA',73],['Union',69],['Layoff',64],['Pay Transparency',59],['Discrimination',54],['Remote Work',49],['Benefits',44]
+      ],
+      words: ['Overtime','Minimum Wage','FMLA','OSHA','Union','Layoff','Pay Transparency','Discrimination','Remote Work','Benefits','DOL','IRS','FLSA','EEOC','Workers Compensation','W-2','I-9','Payroll Tax','Health Insurance','401k','Paid Leave','Sick Leave','WARN Act','Wisconsin','California','New York','Employment Law','Harassment','DEI','Talent Shortage','Recruiting','Retention','Severance','Noncompete','Workplace Safety','Contractor','Exempt','Non-exempt','Salary Threshold','Wage and Hour','Immigration','H-1B','Hybrid Work','Employee Relations','Training','HR Compliance','Labor Market','Job Opening']
     },
-    {
-        key: "tzVietnam",
-        flag: "🇻🇳",
-        city: "Bac Ninh",
-        country: "Vietnam",
-        timeZone: "Asia/Ho_Chi_Minh",
-        dotX: 78,
-        dotY: 50,
-        cardX: 65,
-        cardY: 47,
-        updates: [
-            { type:"Government Notice", title:"HR update placeholder", desc:"Maintain Vietnam labour, minimum wage, social insurance or government notice items here.", date:"Manual update" }
-        ]
+    '墨西哥': {
+      top10: [
+        ['IMSS',90],['Minimum Wage',86],['PTU',81],['Payroll Tax',76],['Labor Reform',71],['INFONAVIT',66],['Union',61],['Outsourcing',56],['Aguinaldo',51],['Severance',46]
+      ],
+      words: ['IMSS','Minimum Wage','PTU','Payroll Tax','Labor Reform','INFONAVIT','Union','Outsourcing','Aguinaldo','Severance','STPS','SAT','Social Security','RFC','CURP','Vacaciones','Prima Vacacional','Working Hours','Overtime','Profit Sharing','Nearshoring','Manufacturing','Tijuana','Border Region','Hiring','Employee Benefits','Labor Inspection','Employment Contract','Collective Bargaining','Resignation','Termination','Seniority Premium','Payroll Vendor','Tax Withholding','Attendance','Shift Work','Transport','Canteen','Housing Credit','Workplace Safety','Risk Premium','Compliance','Union Negotiation','Salary Adjustment','Talent Market','Factory Labor','HR Policy','Employee Relations']
     },
-    {
-        key: "tzIndia",
-        flag: "🇮🇳",
-        city: "New Delhi",
-        country: "India",
-        timeZone: "Asia/Kolkata",
-        dotX: 68,
-        dotY: 47,
-        cardX: 52,
-        cardY: 57,
-        updates: [
-            { type:"EPF / Payroll", title:"HR update placeholder", desc:"Maintain EPF, ESIC, payroll, tax or labour compliance updates here.", date:"Manual update" }
-        ]
+    '捷克': {
+      top10: [
+        ['Minimum Wage',88],['Social Insurance',83],['Health Insurance',79],['Labour Code',74],['Payroll',69],['Sick Leave',63],['Pension',58],['Holiday',53],['Tax',48],['Work Permit',43]
+      ],
+      words: ['Minimum Wage','Social Insurance','Health Insurance','Labour Code','Payroll','Sick Leave','Pension','Holiday','Tax','Work Permit','Czech Republic','Kutná Hora','Prague','MPSV','CSSZ','Income Tax','Employee Benefits','Working Time','Overtime','Annual Leave','Meal Voucher','Probation','Notice Period','Termination','Collective Agreement','Recruitment','Manufacturing','Shift Work','Attendance','Payroll Calculation','Tax Relief','Insurance Base','Employer Contribution','Employee Contribution','Occupational Safety','Medical Check','Blue Card','Foreign Worker','Compliance','HR Policy','Salary Adjustment','Labor Market','Unemployment','Training','Employee Relations','Severance','Holiday Pay','Remote Work']
     },
-    {
-        key: "tzSingapore",
-        flag: "🇸🇬",
-        city: "Singapore",
-        country: "Singapore",
-        timeZone: "Asia/Singapore",
-        dotX: 80,
-        dotY: 58,
-        cardX: 80,
-        cardY: 62,
-        updates: []
+    '新加坡': {
+      top10: [
+        ['CPF',93],['MOM',88],['Work Permit',82],['Employment Act',77],['Levy',72],['Foreign Worker',67],['IRAS',62],['SDL',56],['Leave',51],['Payroll',46]
+      ],
+      words: ['CPF','MOM','Work Permit','Employment Act','Levy','Foreign Worker','IRAS','SDL','Leave','Payroll','EP Pass','S Pass','Workfare','SkillsFuture','Retirement Age','Re-employment','Tripartite Guidelines','Fair Employment','Salary','Overtime','Rest Day','Public Holiday','Annual Leave','Sick Leave','Maternity Leave','Childcare Leave','Central Provident Fund','Income Tax','Auto Inclusion','Payroll Vendor','Employment Contract','Probation','Notice Period','Termination','Retrenchment','Workplace Safety','WSH','Medical Benefits','Flexible Work','Remote Work','Talent Attraction','Hiring','Compliance','HR Policy','Employee Relations','Training','Data Protection','PDPA']
     }
-];
+  };
 
-function getOffsetMinutesByZone(timeZone, date){
-    const parts = new Intl.DateTimeFormat("en-US", {
-        timeZone,
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-    }).formatToParts(date);
+  const cloudColors = ['#214d9c','#e53e3e','#12a06d','#6c4fe0','#f15a24','#0085be','#09937e','#e43f31','#1e9d69','#9a58d0','#0d64b7','#09a08f','#dd3e2d','#1d5ba5','#00a77b','#6c4fe0','#0b579a','#ed6c02'];
+  const cloudLayout = [
+    [50,47,42,0],[43,42,38,0],[45,56,34,0],[55,56,34,0],[31,43,30,0],[62,45,27,0],[38,50,25,0],[51,36,24,0],[36,60,21,0],[57,67,20,0],
+    [66,58,18,0],[27,55,18,0],[72,34,17,0],[74,49,16,0],[23,30,16,0],[31,68,15,0],[62,73,15,0],[45,28,14,0],[25,38,14,0],[80,61,14,0],
+    [18,48,13,0],[67,25,13,0],[78,42,13,0],[42,72,12,0],[52,24,12,0],[34,25,12,0],[70,70,12,0],[21,64,12,0],[59,31,12,0],[48,79,11,0],
+    [84,52,11,0],[14,36,11,0],[29,76,11,0],[74,78,11,0],[37,34,11,0],[63,80,10,0],[20,75,10,0],[87,35,10,0],[12,56,10,0],[52,14,10,0],
+    [33,84,10,0],[68,14,10,0],[84,75,10,0],[16,22,10,0],[57,88,10,0],[24,86,10,0],[76,20,10,0],[45,88,10,0]
+  ];
 
-    const map = {};
-    parts.forEach(part => {
-        if(part.type !== "literal") map[part.type] = part.value;
+  function safeBuzzText(v){ return String(v || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+
+  function renderTop10(items){
+    const top10 = document.querySelector('.top10');
+    if(!top10) return;
+    const max = Math.max(...items.map(i => i[1]), 1);
+    top10.innerHTML = '<h3>關鍵字 Top 10</h3>' + items.map((item, idx) => {
+      const width = Math.max(18, Math.round(item[1] / max * 94));
+      const hot = idx < 5 ? ' hot' : '';
+      return `<div class="bar-row"><span>${safeBuzzText(item[0])}</span><div class="bar-bg"><div class="bar${hot}" style="width:${width}%"></div></div><span class="num">${item[1]}</span></div>`;
+    }).join('');
+  }
+
+  function renderCloud(words){
+    const cloud = document.getElementById('wordCloud');
+    if(!cloud) return;
+    cloud.innerHTML = words.slice(0, 48).map((word, idx) => {
+      const p = cloudLayout[idx % cloudLayout.length];
+      const color = cloudColors[idx % cloudColors.length];
+      const weight = idx < 10 ? 900 : 800;
+      return `<span class="word" style="left:${p[0]}%;top:${p[1]}%;font-size:${p[2]}px;color:${color};font-weight:${weight};transform:translate(-50%,-50%);">${safeBuzzText(word)}</span>`;
+    }).join('');
+  }
+
+  function setBuzzRegion(region){
+    const data = buzzData[region] || buzzData['台灣'];
+    document.querySelectorAll('.region-tabs button').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === region);
     });
+    renderTop10(data.top10);
+    renderCloud(data.words);
+    resetCloud();
+  }
 
-    const localAsUTC = Date.UTC(
-        Number(map.year),
-        Number(map.month) - 1,
-        Number(map.day),
-        Number(map.hour),
-        Number(map.minute),
-        Number(map.second)
-    );
-
-    return Math.round((localAsUTC - date.getTime()) / 60000);
-}
-
-function formatTaiwanDiff(zoneTimeZone, now){
-    const taiwanOffset = getOffsetMinutesByZone("Asia/Taipei", now);
-    const zoneOffset = getOffsetMinutesByZone(zoneTimeZone, now);
-    const diffMinutes = zoneOffset - taiwanOffset;
-
-    if(diffMinutes === 0) return "Same as Taiwan";
-
-    const absMinutes = Math.abs(diffMinutes);
-    const hours = Math.floor(absMinutes / 60);
-    const minutes = absMinutes % 60;
-    const hourText = hours > 0 ? `${hours}h` : "";
-    const minuteText = minutes > 0 ? `${minutes}m` : "";
-    const timeText = [hourText, minuteText].filter(Boolean).join(" ");
-
-    return diffMinutes > 0 ? `${timeText} ahead of Taiwan` : `${timeText} behind Taiwan`;
-}
-
-function renderWorldClock(){
-    const layer = document.getElementById("worldClockLayer");
-    if(!layer) return;
-
-    layer.style.position = "absolute";
-    layer.style.inset = "0";
-
-    layer.innerHTML = worldClockZones.map((zone, index) => {
-        const hasUpdate = Array.isArray(zone.updates) && zone.updates.length > 0;
-        return `
-        <div class="tzDot" data-index="${index}" tabindex="0" aria-label="${zone.country} ${zone.city}" style="left:${zone.dotX}%;top:${zone.dotY}%;"></div>
-        <div class="tzBubble ${zone.key} ${hasUpdate ? 'hasHrUpdate' : ''}" data-index="${index}" tabindex="0" role="button" aria-label="Open ${zone.country} HR information" style="left:${zone.cardX}%;top:${zone.cardY}%;">
-            <div class="tzBubbleBody">
-                <div class="tzTopLine">
-                    <span class="tzTimeStrong" id="worldClockTime${index}">--:--</span>
-                    <span class="tzDateWeek">
-                        <span id="worldClockDate${index}">Loading</span><br>
-                        <span id="worldClockWeek${index}">--</span>
-                    </span>
-                </div>
-                <div class="tzLocation">
-                    <span class="tzLocationCountry">${zone.flag} ${zone.country}</span>
-                    <span class="tzLocationCity">${zone.city}</span>
-                </div>
-                <div class="tzCompare" id="worldClockDiff${index}"></div>
-                ${hasUpdate ? '<div class="tzUpdateBadge">📢 HR Update</div>' : ''}
-            </div>
-        </div>
-    `}).join("");
-
-    updateWorldClock();
-    bindWorldClockInteractions();
-    setActiveWorldClock(4);
-}
-
-function setActiveWorldClock(index){
-    document.querySelectorAll('#worldClockLayer .tzBubble').forEach(el => {
-        el.classList.toggle('active', Number(el.dataset.index) === index);
+  function bindBuzzTabs(){
+    document.querySelectorAll('.region-tabs button').forEach(btn => {
+      btn.addEventListener('click', () => setBuzzRegion(btn.textContent.trim()));
     });
-    document.querySelectorAll('#worldClockLayer .tzDot').forEach(el => {
-        el.classList.toggle('active', Number(el.dataset.index) === index);
-    });
-}
+  }
 
-function bindWorldClockInteractions(){
-    document.querySelectorAll('#worldClockLayer .tzBubble, #worldClockLayer .tzDot').forEach(el => {
-        const index = Number(el.dataset.index);
-        el.addEventListener('mouseenter', () => setActiveWorldClock(index));
-        el.addEventListener('click', () => {
-            setActiveWorldClock(index);
-            openGlobalHrDrawer(index);
-        });
-        el.addEventListener('focus', () => setActiveWorldClock(index));
-        el.addEventListener('keydown', (e) => {
-            if(e.key === 'Enter' || e.key === ' '){
-                e.preventDefault();
-                setActiveWorldClock(index);
-                openGlobalHrDrawer(index);
-            }
-        });
-    });
-}
-
-
-function updateWorldClock(){
+  let graphScale = .96;
+  function applyGraphTransform(){ document.getElementById('graphInner').style.transform = `scale(${graphScale})`; }
+  function zoomGraph(v){ graphScale = Math.max(.8, Math.min(1.45, graphScale * v)); applyGraphTransform(); }
+  function resetGraphView(){ graphScale = .96; applyGraphTransform(); }
+  function setUpdatedAt(){
+    const el = document.getElementById('updatedAt');
+    if(!el) return;
     const now = new Date();
-    worldClockZones.forEach((zone, index) => {
-        const timeText = new Intl.DateTimeFormat("en-US", {
-            timeZone: zone.timeZone,
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false
-        }).format(now);
+    const y = now.getFullYear();
+    const m = String(now.getMonth()+1).padStart(2,'0');
+    const d = String(now.getDate()).padStart(2,'0');
+    const hh = String(now.getHours()).padStart(2,'0');
+    const mm = String(now.getMinutes()).padStart(2,'0');
+    el.textContent = `${y}/${m}/${d} ${hh}:${mm}`;
+  }
 
-        const localDateParts = new Intl.DateTimeFormat("en-US", {
-            timeZone: zone.timeZone,
-            month: "2-digit",
-            day: "2-digit",
-            weekday: "short"
-        }).formatToParts(now);
-
-        const localDateMap = {};
-        localDateParts.forEach(part => {
-            if(part.type !== "literal") localDateMap[part.type] = part.value;
-        });
-
-        const dateText = `${localDateMap.month}/${localDateMap.day}`;
-        const weekText = `${localDateMap.weekday}`;
-
-        const timeEl = document.getElementById(`worldClockTime${index}`);
-        const dateEl = document.getElementById(`worldClockDate${index}`);
-        const weekEl = document.getElementById(`worldClockWeek${index}`);
-        const diffEl = document.getElementById(`worldClockDiff${index}`);
-
-        if(timeEl) timeEl.textContent = timeText;
-        if(dateEl) dateEl.textContent = dateText;
-        if(weekEl) weekEl.textContent = weekText;
-        if(diffEl) diffEl.textContent = formatTaiwanDiff(zone.timeZone, now);
+  const info = {
+    tw:{icon:'TW',title:'台灣 HR',sub:'中心節點',desc:'台灣 HR 是圖譜中心，用來承接全球輿情、國際制度與本地管理議題之間的關聯。',tags:['台灣','HR 生態','影響中心'],actions:['依聲量變化調整台灣 HR 優先議題','將高風險訊號轉成管理提醒與制度檢核'],links:['招募與任用','薪酬與福利','勞資關係與溝通','法規與合規','HR 科技與數據','全球 HR 輿情雷達','Global HR Hub']},
+    radar:{icon:'R',title:'全球 HR 輿情雷達',sub:'新聞・風險・即時訊號',desc:'收斂全球新聞、輿情與突發風險，作為台灣 HR 風險預警與議題追蹤來源。',tags:['即時訊號','新聞','風險'],actions:['每日追蹤高聲量議題','將事件對應至台灣 HR 風險面向'],links:['職場安全升溫','缺工人才競爭','勞資關係與溝通','法規與合規']},
+    hub:{icon:'GH',title:'Global HR Hub',sub:'制度・標竿・國家比較',desc:'整理各國制度、國際標竿與管理模式，用於台灣 HR 的制度對照與改善參考。',tags:['制度','標竿','國家比較'],actions:['建立國家比較資料庫','將全球標竿轉為台灣可用做法'],links:['HR 科技與數據','法規與合規','招募與任用','薪酬與福利']},
+    recruit:{icon:'HR',title:'招募與任用',sub:'HR 面向',desc:'受缺工、國際人才流動、雇主品牌與 AI 招募工具影響。',tags:['招募','任用','人才競爭'],actions:['補強關鍵職缺市場資料','觀察海外人才與招募工具趨勢'],links:['台灣 HR','缺工人才競爭','Global HR Hub']},
+    pay:{icon:'$',title:'薪酬與福利',sub:'HR 面向',desc:'與薪資透明、調薪壓力、福利彈性與全球人才競爭相關。',tags:['薪酬','福利','留才'],actions:['建立薪酬聲量與市場指標連動','追蹤福利與調薪議題'],links:['台灣 HR','Global HR Hub','缺工人才競爭']},
+    labor:{icon:'ER',title:'勞資關係與溝通',sub:'HR 面向',desc:'與職場安全、申訴、裁員、勞資爭議及管理者溝通密切相關。',tags:['勞資','溝通','申訴'],actions:['優先檢核申訴與回應機制','強化管理者風險溝通'],links:['台灣 HR','全球 HR 輿情雷達','職場安全升溫']},
+    law:{icon:'法',title:'法規與合規',sub:'HR 面向',desc:'對應工時、解僱、職安、個資、跨國用工與供應鏈人權治理要求。',tags:['法規','合規','風險'],actions:['建立法規變動追蹤清單','把輿情事件轉成法遵檢核點'],links:['台灣 HR','Global HR Hub','全球 HR 輿情雷達']},
+    tech:{icon:'AI',title:'HR 科技與數據',sub:'HR 面向',desc:'連動 AI、自動化、人力數據分析、HRIS、ATS 與技能轉型。',tags:['HR Tech','AI','People Analytics'],actions:['優先建立人力數據口徑','盤點可導入 AI 的 HR 流程'],links:['台灣 HR','Global HR Hub']},
+    safety:{icon:'!',title:'職場安全升溫',sub:'高風險輿情',desc:'職場霸凌、心理安全與申訴事件容易快速擴散，需與勞資關係及法遵連動。',tags:['高風險','職安','申訴'],actions:['建立高風險事件回應 SOP','同步管理者教育訓練'],links:['全球 HR 輿情雷達','勞資關係與溝通','法規與合規']},
+    shortage:{icon:'缺',title:'缺工人才競爭',sub:'高聲量議題',desc:'缺工、薪酬壓力與海外人才競爭會影響招募、留才與雇主品牌。',tags:['缺工','人才','薪酬'],actions:['追蹤重點產業人才缺口','連動薪酬福利與招募策略'],links:['全球 HR 輿情雷達','招募與任用','薪酬與福利']}
+  };
+  function selectNode(k){
+    const d=info[k]||info.tw;
+    document.querySelectorAll('.node').forEach(n=>n.classList.toggle('active', n.dataset.node===k));
+    document.getElementById('infoPanel').innerHTML = `<div class="side-head"><div class="side-icon">${d.icon}</div><div><h3>${d.title}</h3><div style="font-size:12px;color:#6b7b93;font-weight:800">${d.sub}</div></div></div><p>${d.desc}</p><div class="tags">${d.tags.map(t=>`<span>${t}</span>`).join('')}</div><h4>建議動作</h4><ul>${d.actions.map(a=>`<li>${a}</li>`).join('')}</ul><h4>直接關聯</h4><div class="links">${d.links.map(l=>`<button>${l}</button>`).join('')}</div>`;
+  }
+  function setGraphFilter(type, btn){
+    document.querySelectorAll('.filter-buttons button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.edge').forEach(e=>{
+      e.classList.remove('fade');
+      if(type==='risk' && e.dataset.type!=='risk') e.classList.add('fade');
+      if(type==='weak' && e.dataset.type!=='weak') e.classList.add('fade');
     });
-}
-
-
-
-function initCollapsibleCards(){
-    const cards = document.querySelectorAll('.leftPanel .card');
-
-    cards.forEach((card, cardIndex) => {
-        card.classList.add('collapsible');
-
-        if(card.classList.contains('worldTimeCard')){
-            const header = card.querySelector('.worldTimeHeader');
-            if(!header || card.querySelector('.collapseBody')) return;
-            header.classList.add('collapseToggle');
-
-            const body = document.createElement('div');
-            body.className = 'collapseBody';
-            while(header.nextSibling){
-                body.appendChild(header.nextSibling);
-            }
-            card.appendChild(body);
-
-            header.addEventListener('click', () => card.classList.toggle('collapsed'));
-            header.setAttribute('tabindex','0');
-            header.addEventListener('keydown', (e) => {
-                if(e.key === 'Enter' || e.key === ' '){
-                    e.preventDefault();
-                    card.classList.toggle('collapsed');
-                }
-            });
-        }else{
-            const title = card.querySelector('.sectionTitle');
-            if(!title || title.parentElement !== card || card.querySelector('.collapseBody')) return;
-            title.classList.add('collapseToggle');
-
-            const body = document.createElement('div');
-            body.className = 'collapseBody';
-            while(title.nextSibling){
-                body.appendChild(title.nextSibling);
-            }
-            card.appendChild(body);
-
-            title.addEventListener('click', () => card.classList.toggle('collapsed'));
-            title.setAttribute('tabindex','0');
-            title.addEventListener('keydown', (e) => {
-                if(e.key === 'Enter' || e.key === ' '){
-                    e.preventDefault();
-                    card.classList.toggle('collapsed');
-                }
-            });
-        }
-    });
-}
-
-initCollapsibleCards();
-
-if(window.innerWidth <= 768){
-    document.querySelectorAll('.leftPanel .card').forEach((card, idx) => {
-        if(idx > 1) card.classList.add('collapsed');
-    });
-}
-function toggleAiAssistant(forceOpen){
-    const panel = document.getElementById("aiAssistantPanel");
-    if(!panel) return;
-
-    if(typeof forceOpen === "boolean"){
-        panel.classList.toggle("open", forceOpen);
-    }else{
-        panel.classList.toggle("open");
-    }
-
-    if(panel.classList.contains("open")){
-        setTimeout(() => {
-            const input = document.getElementById("siteQuestion");
-            if(input) input.focus();
-        }, 80);
-    }
-}
-
-fetch("./data/taiwan_news.json")
-.then(res => res.json())
-.then(news => {
-    renderNewsGroup(news,"勞動部","newsMol");
-    renderNewsGroup(news,"勞動力發展署","newsWda");
-    renderNewsGroup(news,"勞保局","newsBli");
-});
-
-function showTaiwanNewsPanel(){
-    const title = document.getElementById("newsDrawerTitle");
-    const taiwanPanel = document.getElementById("taiwanNewsPanel");
-    const globalPanel = document.getElementById("globalHrUpdatePanel");
-
-    if(title) title.textContent = "🇹🇼 Taiwan｜Important Announcements";
-    if(taiwanPanel) taiwanPanel.style.display = "block";
-    if(globalPanel) globalPanel.style.display = "none";
-}
-
-function toggleNewsPanel(forceOpen){
-    const drawer = document.getElementById("newsDrawer");
-    if(!drawer) return;
-
-    showTaiwanNewsPanel();
-
-    if(typeof forceOpen === "boolean"){
-        drawer.classList.toggle("open", forceOpen);
-    }else{
-        drawer.classList.toggle("open");
-    }
-}
-
-function openGlobalHrDrawer(index){
-    const zone = worldClockZones[index];
-    const drawer = document.getElementById("newsDrawer");
-    const title = document.getElementById("newsDrawerTitle");
-    const taiwanPanel = document.getElementById("taiwanNewsPanel");
-    const globalPanel = document.getElementById("globalHrUpdatePanel");
-
-    if(!zone || !drawer || !title || !taiwanPanel || !globalPanel) return;
-
-    if(zone.country === "Taiwan"){
-        showTaiwanNewsPanel();
-        drawer.classList.add("open");
-        return;
-    }
-
-    title.textContent = `${zone.flag} ${zone.country}｜HR Updates`;
-    taiwanPanel.style.display = "none";
-    globalPanel.style.display = "block";
-
-    const updates = Array.isArray(zone.updates) ? zone.updates : [];
-
-    globalPanel.innerHTML = `
-        <div class="globalDrawerMeta">
-            <b>${zone.country}｜${zone.city}</b><br>
-            Local time, labour law, minimum wage, social insurance, tax and government notice updates can be maintained here.
-        </div>
-        ${updates.length ? updates.map(item => `
-            <div class="globalUpdateItem">
-                <div class="globalUpdateTag">📢 ${item.type}</div>
-                <div class="globalUpdateTitle">${item.title}</div>
-                <div class="globalUpdateDesc">${item.desc}</div>
-                <div class="globalUpdateDate">${item.date}</div>
-            </div>
-        `).join("") : `
-            <div class="globalNoUpdate">
-                No HR update is currently maintained for this location.<br>
-                Add items in <b>worldClockZones[index].updates</b> when there is a new labour law, minimum wage, social insurance, tax or government announcement update.
-            </div>
-        `}
-    `;
-
-    drawer.classList.add("open");
-}
-
-function renderNewsGroup(news, unitName, elementId){
-    const box = document.getElementById(elementId);
-
-    const filtered = news
-        .filter(x => x.單位 === unitName)
-        .sort((a,b)=>b.日期.localeCompare(a.日期))
-        .slice(0,5);
-
-    box.innerHTML = filtered.map(item => `
-        <div class="newsItem">
-            <div class="newsDate">${item.日期}</div>
-            <div class="newsTitle">
-                <a href="${item.連結}" target="_blank">${item.標題}</a>
-            </div>
-        </div>
-    `).join("");
-}
-
-function recommendSite(){
-
-    const q = document.getElementById("siteQuestion").value.trim();
-
-    const result = document.getElementById("siteRecommendResult");
-
-    if(!q){
-
-        result.innerHTML = "請先輸入你想查詢的內容。";
-
-        return;
-    }
-
-    let answer = "";
-
-    if(
-        q.includes("資遣通報") ||
-        q.includes("就業金卡") ||
-        q.includes("外勞") ||
-        q.includes("移工") ||
-        q.includes("聘僱") ||
-        q.includes("職能") ||
-        q.includes("訓練")
-    ){
-
-        answer = `
-            <b>建議網站：勞動力發展署</b><br>
-            適合查詢資遣通報、外國人聘僱、就業金卡、職能發展與訓練資源。<br><br>
-
-            <a href="https://www.wda.gov.tw/"
-               target="_blank">
-               前往網站
-            </a>
-        `;
-    }
-
-    else if(
-        q.includes("資遣") ||
-        q.includes("遣散")
-    ){
-
-        answer = `
-            <b>建議網站：資遣費試算</b><br>
-            適合查詢資遣費、年資與給付概算。<br><br>
-
-            <a href="https://calcr2.mol.gov.tw/SeverancePay"
-               target="_blank">
-               前往網站
-            </a>
-        `;
-    }
-
-    else if(
-        q.includes("勞基法") ||
-        q.includes("法規") ||
-        q.includes("工時") ||
-        q.includes("加班")
-    ){
-
-        answer = `
-            <b>建議網站：勞動法令查詢系統</b><br>
-            適合查詢勞基法、勞退、加班、工時等法規。<br><br>
-
-            <a href="https://laws.mol.gov.tw/"
-               target="_blank">
-               前往網站
-            </a>
-        `;
-    }
-
-    else if(
-        q.includes("勞保") ||
-        q.includes("退休金") ||
-        q.includes("職災")
-    ){
-
-        answer = `
-            <b>建議網站：勞工保險局</b><br>
-            適合查詢勞保、勞退、職災相關資訊。<br><br>
-
-            <a href="https://www.bli.gov.tw/"
-               target="_blank">
-               前往網站
-            </a>
-        `;
-    }
-
-    else if(
-        q.includes("健保") ||
-        q.includes("眷屬")
-    ){
-
-        answer = `
-            <b>建議網站：健保署</b><br>
-            適合查詢健保加退保與保費資訊。<br><br>
-
-            <a href="https://www.nhi.gov.tw/"
-               target="_blank">
-               前往網站
-            </a>
-        `;
-    }
-
-    else if(
-        q.includes("財報") ||
-        q.includes("年報") ||
-        q.includes("公開資訊")
-    ){
-
-        answer = `
-            <b>建議網站：公開資訊觀測站</b><br>
-            適合查詢上市櫃公司財報與重大訊息。<br><br>
-
-            <a href="https://mops.twse.com.tw/"
-               target="_blank">
-               前往網站
-            </a>
-        `;
-    }
-
-    else{
-
-        answer = `
-            <b>建議先查詢：</b><br>
-            勞動部 或 勞動法令查詢系統。<br><br>
-
-            若是法規條文建議使用「勞動法令查詢」。<br>
-            若是政策公告建議使用「勞動部」。
-        `;
-    }
-
-    result.innerHTML = answer;
-}
-
-
-document.addEventListener("keydown", function(e){
-    if(e.key === "Escape"){
-        toggleAiAssistant(false);
-        toggleNewsPanel(false);
-    }
-
-    const input = document.getElementById("siteQuestion");
-    if(input && document.activeElement === input && e.key === "Enter"){
-        recommendSite();
-    }
-});
-
+  }
+  function resetGraph(){
+    document.querySelectorAll('.edge').forEach(e=>e.classList.remove('fade'));
+    document.querySelectorAll('.filter-buttons button').forEach((b,i)=>b.classList.toggle('active', i===0));
+    selectNode('tw');
+  }
+  setUpdatedAt();
+  bindBuzzTabs();
+  setBuzzRegion('台灣');
 </script>
-
 </body>
 </html>
