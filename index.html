@@ -1433,6 +1433,55 @@ h1.pageTitle{
 .globalHrSummaryContent a:hover{
     text-decoration:underline;
 }
+
+.globalHrSummaryCountry{
+    color:#111827;
+    font-weight:700;
+}
+.globalHrSummaryType{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    padding:4px 8px;
+    font-size:11px;
+    font-weight:800;
+    line-height:1;
+    white-space:nowrap;
+    border:1px solid transparent;
+}
+.globalHrSummaryType.labor{
+    background:#fff7ed;
+    color:#c2410c;
+    border-color:#fed7aa;
+}
+.globalHrSummaryType.tax{
+    background:#ecfdf5;
+    color:#047857;
+    border-color:#a7f3d0;
+}
+.globalHrSummaryType.social{
+    background:#ecfdf5;
+    color:#047857;
+    border-color:#a7f3d0;
+}
+.globalHrSummaryType.recruit{
+    background:#f5f3ff;
+    color:#6d28d9;
+    border-color:#ddd6fe;
+}
+.globalHrSummaryType.general{
+    background:#eef2ff;
+    color:#4338ca;
+    border-color:#c7d2fe;
+}
+.globalHrSummaryDesc{
+    margin-top:4px;
+    color:#64748b;
+    font-size:12px;
+    line-height:1.5;
+}
+
 .globalHrSummaryEmpty{
     color:#64748b;
     text-align:center !important;
@@ -1520,210 +1569,6 @@ h1.pageTitle{
     }
 }
 
-
-/* =====================================================
-   Global HR Hub 官方來源表格
-===================================================== */
-.officialSourceIntro{
-    color:#6b7280;
-    font-size:14px;
-    line-height:1.6;
-    margin:0 0 12px 0;
-}
-
-.officialFilterBar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:14px;
-    margin-bottom:14px;
-    padding:12px 14px;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    background:#f8fafc;
-}
-
-.officialFilterTitle{
-    font-weight:800;
-    color:#1e3a8a;
-    white-space:nowrap;
-}
-
-.officialFilterDesc{
-    flex:1;
-    color:#64748b;
-    font-size:13px;
-    line-height:1.5;
-}
-
-.officialTabs{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-}
-
-.officialTabs button{
-    border:1px solid #dbe3ea;
-    background:#ffffff;
-    color:#1e3a8a;
-    border-radius:16px;
-    padding:6px 12px;
-    font-size:12px;
-    font-weight:800;
-    cursor:pointer;
-}
-
-.officialTabs button.active{
-    background:#1e3a8a;
-    color:#ffffff;
-    border-color:#1e3a8a;
-}
-
-.officialTable{
-    width:100%;
-    border-collapse:collapse;
-    background:#ffffff;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    overflow:hidden;
-}
-
-.officialTable th{
-    background:#f1f5f9;
-    color:#111827;
-    text-align:left;
-    font-size:14px;
-    padding:13px 12px;
-    border-bottom:1px solid #e5e7eb;
-}
-
-.officialTable td{
-    padding:13px 12px;
-    border-bottom:1px solid #eef2f7;
-    color:#1f2937;
-    font-size:14px;
-    vertical-align:top;
-    line-height:1.5;
-}
-
-.officialTable tr:last-child td{
-    border-bottom:none;
-}
-
-.officialTable a{
-    color:#0057d9;
-    text-decoration:none;
-    font-weight:800;
-}
-
-.officialTable a:hover{
-    text-decoration:underline;
-}
-
-.officialType{
-    display:inline-flex;
-    align-items:center;
-    border-radius:14px;
-    padding:4px 9px;
-    font-size:12px;
-    font-weight:800;
-    background:#eff6ff;
-    color:#1e40af;
-    border:1px solid #bfdbfe;
-    white-space:nowrap;
-}
-
-.officialNote{
-    margin-top:4px;
-    color:#64748b;
-    font-size:12px;
-}
-
-.officialFooter{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:14px;
-    font-size:14px;
-}
-
-.pageSize{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.pageSize select{
-    height:34px;
-    border:1px solid #d1d5db;
-    border-radius:7px;
-    background:#ffffff;
-    padding:0 28px 0 10px;
-}
-
-.pageNav{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.pageNav button{
-    height:34px;
-    border:none;
-    border-radius:7px;
-    padding:0 14px;
-    font-weight:800;
-    cursor:pointer;
-}
-
-.pageNav .prev{
-    background:#d9e2ec;
-    color:#ffffff;
-    cursor:not-allowed;
-}
-
-.pageNav .next{
-    background:#1e3a8a;
-    color:#ffffff;
-}
-
-
-.officialType.labor{
-    background:#fff7ed;
-    color:#c2410c;
-    border-color:#fed7aa;
-}
-.officialType.tax{
-    background:#ecfdf5;
-    color:#047857;
-    border-color:#a7f3d0;
-}
-.officialType.social{
-    background:#ecfdf5;
-    color:#047857;
-    border-color:#a7f3d0;
-}
-.officialType.recruit{
-    background:#f5f3ff;
-    color:#6d28d9;
-    border-color:#ddd6fe;
-}
-
-
-.officialSummary{
-    display:block;
-    color:#003f91 !important;
-    font-weight:800;
-    line-height:1.6;
-}
-.officialOriginal{
-    margin-top:5px;
-    color:#64748b;
-    font-size:12px;
-    line-height:1.5;
-}
-
 </style>
 </head>
 
@@ -1777,13 +1622,14 @@ h1.pageTitle{
                 <thead>
                     <tr>
                         <th style="width:110px;">更新日</th>
-                        <th style="width:150px;">區域</th>
+                        <th style="width:130px;">國家</th>
+                        <th style="width:110px;">分類</th>
                         <th style="width:150px;">來源</th>
                         <th>內容</th>
                     </tr>
                 </thead>
                 <tbody id="globalHrSummaryBody">
-                    <tr><td colspan="4" class="globalHrSummaryEmpty">載入中...</td></tr>
+                    <tr><td colspan="5" class="globalHrSummaryEmpty">載入中...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -1844,146 +1690,6 @@ h1.pageTitle{
 
         <div id="globalHrUpdatePanel" style="display:none;"></div>
     </div>
-
-        <div class="card collapsible" id="officialSourceCard">
-            <h2 class="sectionTitle collapseToggle">全球 HR 官方來源總覽</h2>
-            <div class="collapseBody">
-                <p class="officialSourceIntro">
-                    官方網站集中放在 Global HR Hub，不與輿情觀察混在一起。此區依 HR 實務用途分類，方便快速判斷是否影響制度、薪資、社保、招募或外籍用工。
-                </p>
-
-                <div class="officialFilterBar">
-                    <div class="officialFilterTitle">官方來源聚焦</div>
-                    <div class="officialFilterDesc">欄位先維持：更新日、國家、分類、來源、內容；內容欄改為中文摘要為主，原文標題放在摘要下方。</div>
-                    <div class="officialTabs">
-                        <button class="active">全部</button>
-                        <button>勞動法規</button>
-                        <button>薪資稅務</button>
-                        <button>社保保險</button>
-                        <button>就業招募</button>
-                        <button>外籍用工</button>
-                    </div>
-                </div>
-
-                <table class="officialTable">
-                    <thead>
-                        <tr>
-                            <th style="width:120px;">更新日</th>
-                            <th style="width:130px;">國家</th>
-                            <th style="width:130px;">分類</th>
-                            <th style="width:190px;">來源</th>
-                            <th>內容</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2026/06/30</td>
-                            <td><strong>United States</strong></td>
-                            <td><span class="officialType labor">勞動法規</span></td>
-                            <td><a href="https://www.oig.dol.gov/public/PressReleases.htm" target="_blank" rel="noopener noreferrer">Department of Labor OIG</a></td>
-                            <td>
-                                <a class="officialSummary" href="https://www.oig.dol.gov/public/PressReleases.htm" target="_blank" rel="noopener noreferrer">美國勞動部監察長辦公室發布勞動相關新聞，適合追蹤雇主合規、勞動稽核與違規裁罰案例。</a>
-                                <div class="officialOriginal">原文：Press Releases - Department of Labor Office of Inspector General</div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>2026/06/30</td>
-                            <td><strong>United States</strong></td>
-                            <td><span class="officialType tax">稅務社保</span></td>
-                            <td><a href="https://www.irs.gov/businesses/gig-economy-tax-center" target="_blank" rel="noopener noreferrer">IRS</a></td>
-                            <td>
-                                <a class="officialSummary" href="https://www.irs.gov/businesses/gig-economy-tax-center" target="_blank" rel="noopener noreferrer">IRS 說明零工、承攬與平台工作者的稅務責任，可作為非典型用工、報酬給付與薪資扣繳判斷參考。</a>
-                                <div class="officialOriginal">原文：Taxes for gig work - IRS</div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>2026/06/30</td>
-                            <td><strong>United States</strong></td>
-                            <td><span class="officialType tax">稅務社保</span></td>
-                            <td><a href="https://www.irs.gov/businesses/small-businesses-self-employed/manage-taxes-for-your-gig-work" target="_blank" rel="noopener noreferrer">IRS</a></td>
-                            <td>
-                                <a class="officialSummary" href="https://www.irs.gov/businesses/small-businesses-self-employed/manage-taxes-for-your-gig-work" target="_blank" rel="noopener noreferrer">美國官方針對 Gig economy 的稅務資訊，可用於觀察彈性用工、兼職與外包合作的稅務合規要求。</a>
-                                <div class="officialOriginal">原文：Gig economy - IRS</div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>2026/06/30</td>
-                            <td><strong>Mexico</strong></td>
-                            <td><span class="officialType social">社保稅務</span></td>
-                            <td><a href="https://www.imss.gob.mx/prensa" target="_blank" rel="noopener noreferrer">IMSS</a></td>
-                            <td>
-                                <a class="officialSummary" href="https://www.imss.gob.mx/prensa" target="_blank" rel="noopener noreferrer">墨西哥社會保險機構新聞頁，適合追蹤員工醫療保險、社會保險、工傷與雇主申報相關更新。</a>
-                                <div class="officialOriginal">原文：Prensa - IMSS</div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>2026/06/30</td>
-                            <td><strong>Mexico</strong></td>
-                            <td><span class="officialType social">社保稅務</span></td>
-                            <td><a href="https://www.sat.gob.mx/" target="_blank" rel="noopener noreferrer">SAT</a></td>
-                            <td>
-                                <a class="officialSummary" href="https://www.sat.gob.mx/" target="_blank" rel="noopener noreferrer">墨西哥稅務機關入口，與公司稅務登入、申報驗證、薪資稅務及雇主行政作業相關。</a>
-                                <div class="officialOriginal">原文：SAT Autenticación - SAT</div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>2026/06/30</td>
-                            <td><strong>China</strong></td>
-                            <td><span class="officialType tax">稅務社保</span></td>
-                            <td><a href="https://etax.hainan.chinatax.gov.cn/" target="_blank" rel="noopener noreferrer">etax.hainan.chinatax.gov.cn</a></td>
-                            <td>
-                                <a class="officialSummary" href="https://etax.hainan.chinatax.gov.cn/" target="_blank" rel="noopener noreferrer">海南電子稅務局提供地方稅務申報與服務資訊，可作為中國各地薪資稅務與公司申報流程參考。</a>
-                                <div class="officialOriginal">原文：海南 - etax.hainan.chinatax.gov.cn</div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>2026/06/30</td>
-                            <td><strong>China</strong></td>
-                            <td><span class="officialType recruit">就業招募</span></td>
-                            <td><a href="https://chinajob.mohrss.gov.cn/" target="_blank" rel="noopener noreferrer">chinajob.mohrss.gov.cn</a></td>
-                            <td>
-                                <a class="officialSummary" href="https://chinajob.mohrss.gov.cn/" target="_blank" rel="noopener noreferrer">河南地方推動「安薪守護」行動，重點在欠薪治理與薪資保障，對中國地區勞資風險與薪資管理具參考性。</a>
-                                <div class="officialOriginal">原文：河南錦繡：「安薪守護」行動顯成效 築牢民生保障防線</div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>2026/06/30</td>
-                            <td><strong>China</strong></td>
-                            <td><span class="officialType recruit">就業招募</span></td>
-                            <td><a href="https://chinajob.mohrss.gov.cn/" target="_blank" rel="noopener noreferrer">chinajob.mohrss.gov.cn</a></td>
-                            <td>
-                                <a class="officialSummary" href="https://chinajob.mohrss.gov.cn/" target="_blank" rel="noopener noreferrer">安徽地方推動社保卡服務活動，涉及社保服務、員工保障與地方行政服務流程，適合 HR 追蹤員工社保作業變化。</a>
-                                <div class="officialOriginal">原文：安徽亳州：社保保障卡惠民服務活動全面啟動</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="officialFooter">
-                    <div class="pageSize">
-                        <span>每頁顯示：</span>
-                        <select>
-                            <option selected>20則</option>
-                            <option>50則</option>
-                            <option>100則</option>
-                        </select>
-                    </div>
-                    <div class="pageNav">
-                        <button class="prev" disabled>上一頁</button>
-                        <span>第 1 / 5 頁</span>
-                        <button class="next">下一頁</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 </div>
 
 <script>
@@ -2149,6 +1855,87 @@ function getGlobalHrCategories(country){
     return base;
 }
 
+function getGlobalHrSummaryType(zone, item){
+    const source = String(item.source || "").toLowerCase();
+    const title = String(item.title || "").toLowerCase();
+    const country = String(zone.country || "").toLowerCase();
+
+    if(source.includes("irs") || source.includes("tax") || title.includes("tax") || title.includes("payroll")){
+        return { label:"稅務社保", cls:"tax" };
+    }
+    if(source.includes("imss") || source.includes("sat")){
+        return { label:"社保稅務", cls:"social" };
+    }
+    if(source.includes("etax") || source.includes("chinatax")){
+        return { label:"稅務社保", cls:"tax" };
+    }
+    if(source.includes("chinajob") || source.includes("mohrss")){
+        return { label:"就業招募", cls:"recruit" };
+    }
+    if(source.includes("labor") || title.includes("employment") || title.includes("jobs report") || title.includes("nursing") || title.includes("women")){
+        return { label:"勞動法規", cls:"labor" };
+    }
+    if(country === "mexico"){
+        return { label:"社保稅務", cls:"social" };
+    }
+    if(country === "china"){
+        return { label:"就業招募", cls:"recruit" };
+    }
+    return { label:"政府公告", cls:"general" };
+}
+
+function getGlobalHrChineseSummary(zone, item, typeInfo){
+    const title = String(item.title || "");
+    const titleLower = title.toLowerCase();
+    const source = String(item.source || "");
+    const desc = String(item.desc || item.summary || "");
+
+    if(/[\u4e00-\u9fff]/.test(desc)) return desc;
+
+    if(titleLower.includes("monthly numbers")){
+        return "美國勞工部發布月度統計資訊，可用於追蹤就業、工資與勞動市場變化。";
+    }
+    if(titleLower.includes("pregnancy") || titleLower.includes("birth") || titleLower.includes("nursing")){
+        return "此則與懷孕、生產及哺乳相關就業權益有關，可供 HR 參考女性員工保護與職場支持措施。";
+    }
+    if(titleLower.includes("jobs report")){
+        return "此則與美國就業報告有關，適合追蹤就業市場變化、招募趨勢與薪資環境。";
+    }
+    if(titleLower.includes("working families tax cuts")){
+        return "此則與稅務減免及家庭相關稅務議題有關，可作為薪資稅務與員工稅負政策參考。";
+    }
+    if(titleLower.includes("payroll tax fraud") || titleLower.includes("illegal alien")){
+        return "此則涉及薪資稅務詐欺與非法聘僱案件，可作為薪資申報與聘僱合規風險提醒。";
+    }
+    if(titleLower.includes("federal resources for women")){
+        return "此則整理女性相關聯邦資源，可延伸參考職場平等、女性員工支持與福利政策。";
+    }
+    if(source.toLowerCase().includes("irs")){
+        return "美國國稅局官方資訊，與薪資稅務、報酬申報、扣繳或非典型用工稅務管理相關。";
+    }
+    if(source.toLowerCase().includes("department of labor")){
+        return "美國勞工部官方資訊，適合追蹤勞動法規、雇主責任、就業議題與勞動市場資訊。";
+    }
+    if(source.toLowerCase().includes("imss")){
+        return "墨西哥社會保險機構官方資訊，適合追蹤員工醫療保險、社會保險與雇主申報相關更新。";
+    }
+    if(source.toLowerCase().includes("sat")){
+        return "墨西哥稅務機關官方資訊，與公司申報驗證、薪資稅務及雇主行政作業相關。";
+    }
+    if(source.toLowerCase().includes("chinatax") || source.toLowerCase().includes("etax")){
+        return "中國地方稅務機關公告，可作為薪資稅務、公司申報與地方稅務作業流程參考。";
+    }
+    if(source.toLowerCase().includes("chinajob") || source.toLowerCase().includes("mohrss")){
+        return "中國人社就業官方資訊，適合追蹤就業招募、社保服務、欠薪治理與地方人社政策。";
+    }
+
+    if(typeInfo.label === "勞動法規") return "此則與勞動法規、就業議題或勞動市場資訊有關，可作為 HR 合規與制度參考。";
+    if(typeInfo.label === "稅務社保") return "此則與薪資稅務、報酬申報或社會保險制度有關，可作為 HR 稅務作業參考。";
+    if(typeInfo.label === "社保稅務") return "此則與社會保險、醫療保險或稅務行政作業有關，可作為員工保險與申報作業參考。";
+    if(typeInfo.label === "就業招募") return "此則與就業招募、社保服務或地方人社政策有關，可作為招募與員工管理參考。";
+    return "此則為官方 HR 相關更新，可作為制度、法規或行政作業追蹤參考。";
+}
+
 function collectGlobalHrSummaryRows(payload){
     const rows = [];
     worldClockZones.forEach(zone => {
@@ -2157,12 +1944,16 @@ function collectGlobalHrSummaryRows(payload){
             .filter(item => item.isNew !== false);
         items.forEach(item => {
             const status = getGlobalHrSourceStatus(zone.country);
+            const typeInfo = getGlobalHrSummaryType(zone, item);
             rows.push({
                 date: item.date || (status && (status.lastSuccessAt || status.lastCheckedAt)) || (payload && payload.generatedAt) || "",
                 sortDate: item.date || (status && (status.lastSuccessAt || status.lastCheckedAt)) || (payload && payload.generatedAt) || "",
-                region: `${zone.flag} ${zone.country}｜${zone.city}`,
+                country: zone.country,
+                typeLabel: typeInfo.label,
+                typeClass: typeInfo.cls,
                 source: item.source || "Official source",
                 title: item.title || "Official HR update",
+                summary: getGlobalHrChineseSummary(zone, item, typeInfo),
                 url: item.url || ""
             });
         });
