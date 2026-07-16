@@ -58,8 +58,15 @@
   {
     "日期": "2026/07/16",
     "來源": "TechNews 科技新報",
-    "標題": "台積電加碼美國投資 1,000 億美元！估有望再增建 4 座晶圓廠 - TechNews 科技新報",
+    "標題": "台積電加碼美國投資 1,000 億美元！估有望再增建四座晶圓廠 - TechNews 科技新報",
     "連結": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1DanBEU2tBVUxYWGFfRzhTM0JjTGZ4SW9RZ21Ha3NGb0ptanVlU284d3NLSXZEcHBXbDA4Rm9mRnlYSVp2RWotSm14emtMbHpZM2p0WERNOUFLM3R3anVUazgxalFCb3N5ck9LSHJ3?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/16",
+    "來源": "news.cnyes.com",
+    "標題": "〈台積電法說〉宣布追加美國1000億美元投資 魏哲家：再建4座新廠 - news.cnyes.com",
+    "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE03bnVXZk04WjdRTUVScUs2V3BjdldoQmh2RjBsOHJFMEN0alUxYnVPeFN1U043TnlCWXYzSjEwSEk4dWJ4eGdwZkZ4c2tjSFE?oc=5",
     "重要": true
   },
   {
@@ -78,6 +85,20 @@
   },
   {
     "日期": "2026/07/16",
+    "來源": "台視新聞網",
+    "標題": "台積電加碼投資美國 政院「確保3優先」：最大產能、最先進技術留台灣 - 台視新聞網",
+    "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5fOWVrUTRkY0JFeEFGdzdUdlY2akk2LUdBbVJyajRfdlFOUms1SWJUajRmaEl2b3hGR09yWXFhQ0hwVThQY2lHa2ZsUGpJaWFDRC1Jb19Rdw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/16",
+    "來源": "PChome Online 新聞",
+    "標題": "台積電擴大對美投資 政院：確保三個優先、維持台灣領先 - 政治新聞 - PChome Online 新聞 - PChome Online 新聞",
+    "連結": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPUGVVMHlYRUtPRUI2YUxCYzRIUmtkT1p1c0UwY3BlM29yQkFoZ3d3M1NGSEpVSjRzV3Rjd2xNLUFraW1FTml6X0IxZ2FzVFAyemxRUlNGdGpsYXBlaEM0UTFLeXg1endZWW5hbWxNSTc5dDloTE1EOUpYa202S01TaHdtX2xSVERpZnBfRGhfOA?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/16",
     "來源": "FTNN",
     "標題": "台積電法說／魏哲家宣布加碼千億美元在美擴廠！看旺Q3營收季增12％、全年營收上調至年增40 - FTNN",
     "連結": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBfdmlSRUY5Mkc2OE9JeVgyMXdINERYQ3kyZ0lzOVFkUmtVVVhzUi1udVdLRWpuR2VTSE1nbUh4Q2lTdG93YWxGNVBlQQ?oc=5",
@@ -88,13 +109,6 @@
     "來源": "LINE TODAY",
     "標題": "魏哲家拋震撼彈！台積電美國追加1千億美元擴廠 A14製程藍圖驚豔曝光 | 鏡週刊 - LINE TODAY",
     "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9IYTJyc2t3Q1E1a0pmQnVuX2NCMDJOSGtpNlpWTGVBX1pPVV9aNnB4OGdLbWpNZGYtWnRmYncxeHVYVjAwSkV5S3UwSG5GS1BaZUdSUUxn?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/16",
-    "來源": "LINE TODAY",
-    "標題": "台積電宣布擴大對美投資千億 政院：確保三個優先維持台灣領先 | Newtalk - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9rMTZOWWJWR2RaSmV0QzA3WjZ4MHAzeVN0VElxaGtqajdiZjlhVkVyUURPd1BQSFhFUVhPWXpnaXZpaUxmYTFWbWlFLThKR2Z3REljVEVR?oc=5",
     "重要": true
   },
   {
@@ -141,13 +155,6 @@
   },
   {
     "日期": "2026/07/16",
-    "來源": "中央社 CNA",
-    "標題": "台灣首創臨場顯微半導體檢測技術盼助產業加速驗證| 產經 - 中央社 CNA",
-    "連結": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBoMVJyN1ZrN3dTN0lSZGo1dHlzd3FCRWFFUlBCSE53NEpPRWI4UUloQk8xNGgxUVBzSGN4OW53RWhoUnM1bkgxQ3VWX1pCT1FvZ0JoZUJWU1A2elNIM0E?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/16",
     "來源": "自由評論網",
     "標題": "林修民 半導體看天下》近期國際記憶體股價波動終生難見 - 自由評論網",
     "連結": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5fUXh2dkVZT1BWQzdKWDM2Y3hVR3Y2LTQ2V2hBMlJFTGRLeWxXNFI4cTA5clNUY3JTN0p0S080SXJBZnl4TGtYR3Q0d09Dc3M4VkQ3NzU1Q1BaRU1lU2lTOXJn0gFnQVVfeXFMUEdObDVwUE1XYjZjZGwzaVBfTC1xNFdSdDNQbzQxd2haVHhFcUNHTTZta1l5MFFsR0xPNmJQOWROQ3J1M2JvbndrQjN1V1lJeG50U1JJell2Y19Da2FrNGV5Rkh6c0d2TQ?oc=5",
@@ -155,9 +162,9 @@
   },
   {
     "日期": "2026/07/16",
-    "來源": "Storm.mg",
-    "標題": "AI投資熱潮未歇！SEMI上修2028全球半導體設備銷售2,295億美元創新高，HBM、2奈米、 先進封裝成三大引擎 - Storm.mg",
-    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBGZl9LdFBWZ2ViVzJnZ0J1dG5jZ0ZGZmlidW9ydjZ1Wm4xdE1renI0SmlTR2FYZW13RlQ4V1VVVEVCRnp5dkUzUGtYekkwZw?oc=5",
+    "來源": "中央社 CNA",
+    "標題": "台灣首創臨場顯微半導體檢測技術盼助產業加速驗證| 產經 - 中央社 CNA",
+    "連結": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBoMVJyN1ZrN3dTN0lSZGo1dHlzd3FCRWFFUlBCSE53NEpPRWI4UUloQk8xNGgxUVBzSGN4OW53RWhoUnM1bkgxQ3VWX1pCT1FvZ0JoZUJWU1A2elNIM0E?oc=5",
     "重要": true
   },
   {
@@ -165,6 +172,13 @@
     "來源": "UDN",
     "標題": "台灣團隊首創「臨場顯微半導體檢測技術」 成果登頂尖期刊 - UDN",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBsRzdEZzc3bUdpUHY4T2pzZHdRNm51V3hpRExYREsxRVVSRFFKbEdKNmVwb3BwZm45UVZnOHFuR2h6MmtZUGh1d3lxb2RVcER50gFWQVVfeXFMT25oQWtsSlBkcVljamtHamdlaWpabU5uSl90dkNBb3VibThhc3RJNUlmaFhjQWsxbEF2U2tLRU5aM2tUaTEyZkVGQndDOXVwbjF3bG1XbHc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/16",
+    "來源": "Storm.mg",
+    "標題": "AI投資熱潮未歇！SEMI上修2028全球半導體設備銷售2,295億美元創新高，HBM、2奈米、 先進封裝成三大引擎 - Storm.mg",
+    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBGZl9LdFBWZ2ViVzJnZ0J1dG5jZ0ZGZmlidW9ydjZ1Wm4xdE1renI0SmlTR2FYZW13RlQ4V1VVVEVCRnp5dkUzUGtYekkwZw?oc=5",
     "重要": true
   },
   {
@@ -204,6 +218,13 @@
   },
   {
     "日期": "2026/07/16",
+    "來源": "科技島",
+    "標題": "揭示次世代電晶體微縮關鍵 臺灣團隊首創「臨場顯微半導體檢測技術」 - 科技島",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBYSEtTWU1LcEVQSlg1UFA5dm44bm4wNG5GS0hKbGx1dDhPZzJ3akV4aWJXcUZFMUlfTG1LZVNxeFNOMllJTVpzYUNmT21iY3huZlNubVJfYUZEMDFlTl9V?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/16",
     "來源": "MoneyDJ",
     "標題": "鴻海張慶瑞：量子時代將接棒半導體，台灣須搶占新供應鏈- 新聞 - MoneyDJ",
     "連結": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPUDdMTmNVaFJZbFk1M1NJRHVDbGFNVURabDF6ek1sYlBlN0YtTFE0LVhJTUo1LVFmNkd1dERMcV9BQXdqdXBwaUJZc0JJY0RQUVhXZi03Z01ENVgzbGFKQ1poazU2VGlZVW52Zm1md0J3R0ZFQXZ4aTExWGJjdUZQekFuSkl5YURTOThCT2dmVkU3UQ?oc=5",
@@ -232,6 +253,13 @@
   },
   {
     "日期": "2026/07/16",
+    "來源": "自由時報",
+    "標題": "劉上旗接任國泰投信總經理 - 自由時報",
+    "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9JVDVNbG1iME9UaEhUZ3JhVlBuTEYzX3lIQUY3RXExSFAzbjIzMjA3cnYydlkzaENNMGlKajJHa3gyUm5YbWhCNlRwNzB0Q1F2bkRSbkkxSUo?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/16",
     "來源": "中央社 CNA",
     "標題": "陳祖培接任國泰世華銀董事劉上旗出任投信總經理| 產經 - 中央社 CNA",
     "連結": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE05RFlCcE1jQTM0Q0FwbUdzdzdNeHotVTZoakhhOU0yNE1LZkNRR0JHRjRZYU1PZHJUSllENUFTMktINXFaclVwZDNURi1jS0tTUmRSSGxUZEZpZDZMNmc?oc=5",
@@ -239,9 +267,9 @@
   },
   {
     "日期": "2026/07/16",
-    "來源": "自由時報",
-    "標題": "劉上旗接任國泰投信總經理 - 自由時報",
-    "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9JVDVNbG1iME9UaEhUZ3JhVlBuTEYzX3lIQUY3RXExSFAzbjIzMjA3cnYydlkzaENNMGlKajJHa3gyUm5YbWhCNlRwNzB0Q1F2bkRSbkkxSUo?oc=5",
+    "來源": "Yahoo新聞",
+    "標題": "國泰投信副董劉上旗 接任總經理 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxPdWd5UlhOcXQxbVduYkxHYk5weDNHNHZHWTBpNEJQODF4aTVqbUZyU2pqNURuQWk3NXlCdFFPX3gwb2NRZTdUck9ZSDJiaXdXNFlUWWVJS0pTRDJfRmctWW9QU3dPNGFGTUMyczVRWkJ1UXc1dDdoTTlyckhBWkZfaXpWWnFPRkthNEFwa0lhMzRFa09pV2RoamFRWG01dmMtaDZqWXhrMVZ4aHUxeHFnU0xaYm1ZUnBwQTFXOUdxU0hldG9COFpmZXhKT2l2azBBWGtrcFA2MjVqVkZOME56SkRGTTJsUjNsYmF1NUtVVXdiR1Myb3dIWHdYNnE?oc=5",
     "重要": true
   },
   {
@@ -260,13 +288,6 @@
   },
   {
     "日期": "2026/07/16",
-    "來源": "Yahoo新聞",
-    "標題": "國泰投信副董劉上旗 接任總經理 - Yahoo新聞",
-    "連結": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxPdWd5UlhOcXQxbVduYkxHYk5weDNHNHZHWTBpNEJQODF4aTVqbUZyU2pqNURuQWk3NXlCdFFPX3gwb2NRZTdUck9ZSDJiaXdXNFlUWWVJS0pTRDJfRmctWW9QU3dPNGFGTUMyczVRWkJ1UXc1dDdoTTlyckhBWkZfaXpWWnFPRkthNEFwa0lhMzRFa09pV2RoamFRWG01dmMtaDZqWXhrMVZ4aHUxeHFnU0xaYm1ZUnBwQTFXOUdxU0hldG9COFpmZXhKT2l2azBBWGtrcFA2MjVqVkZOME56SkRGTTJsUjNsYmF1NUtVVXdiR1Myb3dIWHdYNnE?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/16",
     "來源": "DIGITIMES",
     "標題": "AI熱潮推升HBM設備缺口 韓美半導體評估南韓仁川增建新廠 - DIGITIMES",
     "連結": "https://news.google.com/rss/articles/CBMia0FVX3lxTE96Y3VjeFIwQnJhX3JRRXJEaU5yRDUwR3ZRNUdlRnJjSVRDdk1vMmJKN0tzb3NRa1BXblNqMGdLWldWMXVINHpWNUJSZUpJdm1PVmxIWkdmNWtNblA3ZlpNaWU5ZkFfR2Rjb1dr?oc=5",
@@ -277,6 +298,20 @@
     "來源": "LINE TODAY",
     "標題": "AI 帶旺第三類半導體，台灣上游材料廠迎新商機 | 科技新報 - LINE TODAY",
     "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5uZi1oN0taQ2Y0dk85ZlNGcWxmekpSNWZ5RVotMGstdHlSeFJ1UkFpWnFlamNnTzNvb2laVFNySmprMW9QY0dGRHFBc3FBTVc3YnNTei1R?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/16",
+    "來源": "TechNews 科技新報",
+    "標題": "台積電加碼美國投資 1,000 億美元！估有望再增建 4 座晶圓廠 - TechNews 科技新報",
+    "連結": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1DanBEU2tBVUxYWGFfRzhTM0JjTGZ4SW9RZ21Ha3NGb0ptanVlU284d3NLSXZEcHBXbDA4Rm9mRnlYSVp2RWotSm14emtMbHpZM2p0WERNOUFLM3R3anVUazgxalFCb3N5ck9LSHJ3?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/16",
+    "來源": "LINE TODAY",
+    "標題": "台積電宣布擴大對美投資千億 政院：確保三個優先維持台灣領先 | Newtalk - LINE TODAY",
+    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9rMTZOWWJWR2RaSmV0QzA3WjZ4MHAzeVN0VElxaGtqajdiZjlhVkVyUURPd1BQSFhFUVhPWXpnaXZpaUxmYTFWbWlFLThKR2Z3REljVEVR?oc=5",
     "重要": true
   },
   {
@@ -379,16 +414,16 @@
   },
   {
     "日期": "2026/07/15",
-    "來源": "壹蘋新聞網",
-    "標題": "《勞務師盧武鎮》成最強職場劇！鄭敬淏化身見鬼勞務師 霸凌、過勞議題引共鳴 - 壹蘋新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1haEVZT1dqSTZ3R1NkUnRRR0Jfbk9LMzNvSmZCUmJVVUhmaFc4MHBnMW1vcHl0WjZzQ1h4VjV6cS1OVVhqNkRVTFh0NEpsd3o2alQwSkZxMUFsTWRhd18yRUs0WWJPUTZyYjBXTzNNVGV5d09uLVF3N3A4RUEyUQ?oc=5",
+    "來源": "1111人力銀行",
+    "標題": "[新版職場不法侵害預防指引強化職場內外部暴力預防機制] - 1111人力銀行",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1WSHg0XzIzMDJZeHZfR3JTTC1VRFZDLTJtSy00X0F0ZUNDNzNGSGJkNzZMX0dMVHc1U3hLZ0tJQWN4LUFlT0JmYzRla3JXay1CMlHSAVJBVV95cUxNVkh4NF8yMzAyWXh2X0dyU0wtVURWQy0ybUstNF9BdGVDQzczRkhiZDc2TF9HTFR3NVN4S2dLSUFjeC1BZU9CZmM0ZWtyV2stQjJR?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/15",
-    "來源": "1111人力銀行",
-    "標題": "[新版職場不法侵害預防指引強化職場內外部暴力預防機制] - 1111人力銀行",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1WSHg0XzIzMDJZeHZfR3JTTC1VRFZDLTJtSy00X0F0ZUNDNzNGSGJkNzZMX0dMVHc1U3hLZ0tJQWN4LUFlT0JmYzRla3JXay1CMlHSAVJBVV95cUxNVkh4NF8yMzAyWXh2X0dyU0wtVURWQy0ybUstNF9BdGVDQzczRkhiZDc2TF9HTFR3NVN4S2dLSUFjeC1BZU9CZmM0ZWtyV2stQjJR?oc=5",
+    "來源": "LINE TODAY",
+    "標題": "移工年消費破千億！超商搶商機 東南亞專區業績飆漲3成 | TVBS - LINE TODAY",
+    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE85TnJSWHBadkxOYUhKX19kUUZpdXFPazVtbHRSejlESEROV3dESExHbDZfejFRLWxIaGpLeWpIanVlRjA0cmRybFB5ZjR3b0hzeWk5cUd3?oc=5",
     "重要": true
   },
   {
@@ -428,9 +463,9 @@
   },
   {
     "日期": "2026/07/15",
-    "來源": "商傳媒",
-    "標題": "AI推升需求 台積電財報前台灣半導體鏈全線飆漲 - 商傳媒",
-    "連結": "https://news.google.com/rss/articles/CBMi0gJBVV95cUxNOFJFM0RZMWIzX2oyTG5FLW9QQzFQeDdtNWJkUkgtc3RHVzlOdUJSb2luNW9NSDNfc3l3NUpCVXJ6UURwTVdLMFdFZWExUUMwazBjREt2SkhEYzA1amI2S3JQQmZnYTV1QllOTGltaWZlR0tEcC1fUXdhYUh0OFFpNXpaLUVRQTdIOVdUenB0dEFoUy1LaFNLN3VmNnphTHpjSVpCZzFSZjlTZVdDR2xRQTlVM0YxdWl5LWthQWU3VFh3ZlM1dEFlZWo1aE9ndm1UU2pGYk1RbEVFak1uV2FFeWktZEYzdXRNb2tHaExGeGpMRUhMVVpVV2NpZ1ptRDNTX040SVU5U1JXUXZvYUUxNXBsZnVwcjNwTWlBTjgwN3R6MkV3d1ZNU1V6ZDhiQV9aS20yWmE3S29lQ2thaVdfWGhWajdBQTBFNm9LclRSZXpzdw?oc=5",
+    "來源": "Yahoo股市",
+    "標題": "AI推升需求 台積電財報前台灣半導體鏈全線飆漲 - Yahoo股市",
+    "連結": "https://news.google.com/rss/articles/CBMizwJBVV95cUxQWVV0TkpzSFY5cGw2a1A1UEplbG5VUGJKNXFqMldRR0E3NXc4UFdrcU5oM2dxYTViVlZoWkR4anBmcDdwdnE3Z0hxRTVpNDhEdGV4UnhJdVB5WXNBQzkyUGtjNWhFSTdQa1VqODFESHNIRVN5ZlVUVktXQnpqT1lvcFhacTdTTnJLZnZ0dEFOcWRCdnhoZnJ0MUpQdTc5RmpEa01HaTI4ek81QVJxc1NqdlFieWUyRWxHZ2ZpQU92akJQcHZBcTRqOExIUTRMZ0ZmUjg1ZmVZQk1nb3g1ZkRnWjJPU0lhRmN6bDFYVTdQaVNRT3VCUldVSng5UjJFRUpXcUttaGlZb1ZHVlBOY3ZzWkNaRzRraTdYSFpCUThBMEJPdTNaM2lySHZvaV9iNWNKYzJRWURHbmlEdllFSWVZVllUQjl2Tk95ZHA3aUVucw?oc=5",
     "重要": true
   },
   {
@@ -498,16 +533,16 @@
   },
   {
     "日期": "2026/07/15",
-    "來源": "LINE TODAY",
-    "標題": "移工年消費破千億！超商搶商機 東南亞專區業績飆漲3成 | TVBS - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE85TnJSWHBadkxOYUhKX19kUUZpdXFPazVtbHRSejlESEROV3dESExHbDZfejFRLWxIaGpLeWpIanVlRjA0cmRybFB5ZjR3b0hzeWk5cUd3?oc=5",
+    "來源": "壹蘋新聞網",
+    "標題": "《勞務師盧武鎮》成最強職場劇！鄭敬淏化身見鬼勞務師 霸凌、過勞議題引共鳴 - 壹蘋新聞網",
+    "連結": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1haEVZT1dqSTZ3R1NkUnRRR0Jfbk9LMzNvSmZCUmJVVUhmaFc4MHBnMW1vcHl0WjZzQ1h4VjV6cS1OVVhqNkRVTFh0NEpsd3o2alQwSkZxMUFsTWRhd18yRUs0WWJPUTZyYjBXTzNNVGV5d09uLVF3N3A4RUEyUQ?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/15",
-    "來源": "Yahoo股市",
-    "標題": "AI推升需求 台積電財報前台灣半導體鏈全線飆漲 - Yahoo股市",
-    "連結": "https://news.google.com/rss/articles/CBMizwJBVV95cUxQWVV0TkpzSFY5cGw2a1A1UEplbG5VUGJKNXFqMldRR0E3NXc4UFdrcU5oM2dxYTViVlZoWkR4anBmcDdwdnE3Z0hxRTVpNDhEdGV4UnhJdVB5WXNBQzkyUGtjNWhFSTdQa1VqODFESHNIRVN5ZlVUVktXQnpqT1lvcFhacTdTTnJLZnZ0dEFOcWRCdnhoZnJ0MUpQdTc5RmpEa01HaTI4ek81QVJxc1NqdlFieWUyRWxHZ2ZpQU92akJQcHZBcTRqOExIUTRMZ0ZmUjg1ZmVZQk1nb3g1ZkRnWjJPU0lhRmN6bDFYVTdQaVNRT3VCUldVSng5UjJFRUpXcUttaGlZb1ZHVlBOY3ZzWkNaRzRraTdYSFpCUThBMEJPdTNaM2lySHZvaV9iNWNKYzJRWURHbmlEdllFSWVZVllUQjl2Tk95ZHA3aUVucw?oc=5",
+    "來源": "商傳媒",
+    "標題": "AI推升需求 台積電財報前台灣半導體鏈全線飆漲 - 商傳媒",
+    "連結": "https://news.google.com/rss/articles/CBMi0gJBVV95cUxNOFJFM0RZMWIzX2oyTG5FLW9QQzFQeDdtNWJkUkgtc3RHVzlOdUJSb2luNW9NSDNfc3l3NUpCVXJ6UURwTVdLMFdFZWExUUMwazBjREt2SkhEYzA1amI2S3JQQmZnYTV1QllOTGltaWZlR0tEcC1fUXdhYUh0OFFpNXpaLUVRQTdIOVdUenB0dEFoUy1LaFNLN3VmNnphTHpjSVpCZzFSZjlTZVdDR2xRQTlVM0YxdWl5LWthQWU3VFh3ZlM1dEFlZWo1aE9ndm1UU2pGYk1RbEVFak1uV2FFeWktZEYzdXRNb2tHaExGeGpMRUhMVVpVV2NpZ1ptRDNTX040SVU5U1JXUXZvYUUxNXBsZnVwcjNwTWlBTjgwN3R6MkV3d1ZNU1V6ZDhiQV9aS20yWmE3S29lQ2thaVdfWGhWajdBQTBFNm9LclRSZXpzdw?oc=5",
     "重要": true
   },
   {
@@ -662,41 +697,6 @@
     "來源": "知新聞",
     "標題": "486先生嘆缺工！黃士修嗆：只給香蕉請不到人 怪東怪西就是不怪自己 - 知新聞",
     "連結": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBkTFV5Q1Nvc0M0WkxpeTZ4b2V4RURaQjFPeWp0THdtaUFDcE55alpabFZGS1UwcWwwUnVUaDNKTEo4U2RRUnpvNVZPWExKYVpWek95UlpRbHdFMFFGMHZPYlJaTVl3aHhFX0xzODRKOA?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/14",
-    "來源": "鏡週刊Mirror Media",
-    "標題": "486先生曝台灣缺工大難題　籲4點重新設計工作：放棄坐滿8小時迷思 - 鏡週刊Mirror Media",
-    "連結": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9Hc253N1psLWZ0UC1oTlNyeFN6SXhQTy1PWlMxODJBZnhNY2FDVkF3OXczeUZfSGgybFBIUmR6cDF4Q2F0UXQ3eFgzd2Q0Z1hUeXhMckdZaFV6X0RRbnEzZtIBYEFVX3lxTE9Hc253N1psLWZ0UC1oTlNyeFN6SXhQTy1PWlMxODJBZnhNY2FDVkF3OXczeUZfSGgybFBIUmR6cDF4Q2F0UXQ3eFgzd2Q0Z1hUeXhMckdZaFV6X0RRbnEzZg?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/14",
-    "來源": "知新聞",
-    "標題": "缺工！全家試行「大夜班無人模式」 486先生：企業要放棄工作8小時迷思 - 知新聞",
-    "連結": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1pamVVNFR4dTdMNWgxV0VySFhvUjdBSnJsZktLOER0bmhTUUotMlBHSzhEU0hJbmtCZHgtOHRUdnItSUlDQWUxQ3AyV19QNTJfUnRiZFZ0VThnZHd2djFiRE50SkxTQjhnSFcxVExsWQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/14",
-    "來源": "UDN",
-    "標題": "農業大缺工時代！農產採收「找嘸工」 老農組千歲團苦撐 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE42emxoZ3VZWHJId2o0dWJpall4T1dqdDlDaE5xdFdONUtaUXAtNEVEMExfZDFLcUpRRi1fRW0xb1dXM2Y0SEFTQndjTHRrbmMz0gFWQVVfeXFMTXhPR2NudnJSZm0tOGpqYklHbU5acy1hUGQySFBEeDc2WG5faW56TG1XbFlTcUxqSXI1eW5SZkh5MXNTeTNtbkJiMWlGN2w5QjFISzlXdHc?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/14",
-    "來源": "自由評論網",
-    "標題": "自由開講》高標準管理=職場霸凌？ 一位第一線部屬的觀察 - 自由評論網",
-    "連結": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFA5aXU3TEY5RXhDcTFFNHJILXBNcTd5RG8waENhMWRFcVRrUllKb0FNeUtkYlg5Mjc3bklVOWEyUi1lOUFJemRjX1Nvb2VFTkVuWGpjUnRYdk80TzJrdXVKc3N30gFnQVVfeXFMTXBvOHVhN0JGMHR3SlZULUZBNzFOaEFtOFB5LTN5SEVzUmllaFpncWM2NzJCZENlc2FQOTRlV3RHVFFXTl9fU1JHWEVDR01XcEJ1UTBJTHoyU2lOai16b0p6SlZZREJGSQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/14",
-    "來源": "經濟日報",
-    "標題": "職場霸凌防治法7月上路 勞動部：期望帶來三大變革 - 經濟日報",
-    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNOXEzMmRZMzFONXZyckFjekdHcjFjQ2JjVGYxTkx2UFRaa05ib2R4aU9iUVFla2k3T2MwUFVxVzZWOWhVaW1lZjZXamMycnZmTE5ablE4c3hlRzFqSEZZbi13OW45bmZfcnh4WF9nYTUzNjFjZ1M2SW5UZDNNb2FKb1VB0gFfQVVfeXFMT0tVel84Z25FSFQ2NGJuMnhTcVBYV0MtOGstYXA3aDNjM2ZGRTVIajF4S2xVTmR4aXRlaXdkdDFBcTA2cS1YY1VvamlfZmVHSjN6aW01a1lLeVNLUV9lQVk?oc=5",
     "重要": true
   }
 ]
