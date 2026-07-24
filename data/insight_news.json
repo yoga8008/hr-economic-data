@@ -36,6 +36,13 @@
   },
   {
     "日期": "2026/07/24",
+    "來源": "北美智權",
+    "標題": "【北美智權報】台灣AI伺服器製造廠落腳美國！黃仁勳：台灣不再代表便宜，代表的是先進| 2026 年 7 月 24 日 - 北美智權",
+    "連結": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1ka1dYQkl0a0l0a0hmWmp0dXFTWmFwaGVtcW1XZlZDYVpycVgzQ0ZkX2cyaVRxWXRCVWpZdjNXVzlHekhneG9SVA?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/24",
     "來源": "TechNews 科技新報",
     "標題": "馬來西亞雪州向台積電招手，盼台企布局設廠 - TechNews 科技新報",
     "連結": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNTnJXOHl6NHFUckVSUjJFUzYtSWU2LUQtaHNUZGU2WmdBbDJsUG5DMUU4dldNcERXNkM4X3FkSjRfNjRBdkJ1VjYyZ3ljb2s4UXp2ZzBRMHJyR3JWQjN4SWJNOFpMMmlra3Zjck5uQzdUQy1uRHF0eFRzZWdnMk1oWTdVN0lUWlVPTl9qVEJ6aVlCNXM?oc=5",
@@ -120,20 +127,6 @@
   },
   {
     "日期": "2026/07/24",
-    "來源": "中華新聞雲／中華日報",
-    "標題": "美301關稅24日上路 專家：對半導體產業影響有限 - 中華新聞雲／中華日報",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5JZENjellHQTFNd21OMW5SQUdlZGJjeE9Ia0hDRHY5NlprYjdJM1hkQnVEbDVKWUd3NTBoZVBpalFaNnhOckV6dlRhTVU3NVUzRWc?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/24",
-    "來源": "中時新聞網",
-    "標題": "美新關稅大刀狠砍！台灣半導體受衝擊？台經院開口給「定心丸」 - 中時新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1Uc3ZvVS14dGphUFdGakRYOUtPQUZneWtLbHdnT0M1Z0NiX0o5TW5LT3ZDZ29oSVhlZU5LRVNnOEdJOG9OOXZ2TjVZNjFXVHU1bGloRzI4d1BoZ3RGbDd5bHdES1ltTW9FdTZzUmdR?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/24",
     "來源": "今周刊",
     "標題": "預見 SEMICON Taiwan 2026：當半導體遇上新創，護國群山催生百工百業升級 - 今周刊",
     "連結": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOU2xEdEI4RWFWbzEwcW4xRE9tRkVISEZqaVRiekRuN0J2YjhfWkhHZ2hDdUw1RFZiVkUwaGRSQWVHeVdWN2dqRDNISkgybUNpVFB3RjRlTTFXRjdSbDlZSGJlV0N1MkE4OUQ3d2RtTHQxU3hHVjA3ZTB1VFh6Ry1iNQ?oc=5",
@@ -141,9 +134,9 @@
   },
   {
     "日期": "2026/07/24",
-    "來源": "壹蘋新聞網",
-    "標題": "亞翔法說會｜未來3年工程能見度明確 台灣半導體客戶需求變更急更大 - 壹蘋新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTHZxZGJQNlFIam0xbkhUNkdKM1pmOHp1MlV1d2RiNmxlc29XakRHMzNYaE1HOHFJSXBZMk1IQ21SUHFYVGhuNHVvMFhoY1BmYVpMRzBCMlNQVEV1SUdiMDNzTjU5Ri1rcUFxVVc2bmRMenktbDlndlotbDVlclpYbk1R?oc=5",
+    "來源": "中華新聞雲／中華日報",
+    "標題": "美301關稅24日上路 專家：對半導體產業影響有限 - 中華新聞雲／中華日報",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5JZENjellHQTFNd21OMW5SQUdlZGJjeE9Ia0hDRHY5NlprYjdJM1hkQnVEbDVKWUd3NTBoZVBpalFaNnhOckV6dlRhTVU3NVUzRWc?oc=5",
     "重要": true
   },
   {
@@ -158,6 +151,20 @@
     "來源": "UDN",
     "標題": "美301關稅定案台灣10% 張建一：半導體仍待7月底調查結果 - UDN",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5XNGxNSzNoeDVmcGpiWXk2dk9VREFVZzRMcDBVVGUwTExtUUc4a2ZEcnlpRzFqYWpRTlYtMzU5aG1mekR4RE5LTXdYNHA4c0520gFWQVVfeXFMTTJaLWJaMFlVay1mODdSTWNQZ1B6ZHVQcF9ZcnpjYTRjWEVqQWlOUmxiX1VlX05MeWNHd1JJcmNjc2Jzc3FuaXozY3Vua0JfZVVEWU56NlE?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/24",
+    "來源": "壹蘋新聞網",
+    "標題": "亞翔法說會｜未來3年工程能見度明確 台灣半導體客戶需求變更急更大 - 壹蘋新聞網",
+    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTHZxZGJQNlFIam0xbkhUNkdKM1pmOHp1MlV1d2RiNmxlc29XakRHMzNYaE1HOHFJSXBZMk1IQ21SUHFYVGhuNHVvMFhoY1BmYVpMRzBCMlNQVEV1SUdiMDNzTjU5Ri1rcUFxVVc2bmRMenktbDlndlotbDVlclpYbk1R?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/24",
+    "來源": "中時新聞網",
+    "標題": "美新關稅大刀狠砍！台灣半導體受衝擊？台經院開口給「定心丸」 - 中時新聞網",
+    "連結": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1Uc3ZvVS14dGphUFdGakRYOUtPQUZneWtLbHdnT0M1Z0NiX0o5TW5LT3ZDZ29oSVhlZU5LRVNnOEdJOG9OOXZ2TjVZNjFXVHU1bGloRzI4d1BoZ3RGbDd5bHdES1ltTW9FdTZzUmdR?oc=5",
     "重要": true
   },
   {
@@ -211,9 +218,23 @@
   },
   {
     "日期": "2026/07/24",
+    "來源": "優分析UAnalyze",
+    "標題": "印度砸132億美元推Semicon 2.0 與前一輪半導體計畫差在哪？ - 優分析UAnalyze",
+    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBMb3owNHBiYmIzOTZ1NUVUTExyMW90Y1JIQm10MTJ2Y0pIRHdYaUJLQW9DX1EwQlpfcEl5N0pNWHQ2X3JZUnBwazczSUFheE85RnZvbHNR?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/24",
     "來源": "經濟日報",
     "標題": "臺銀人壽總經理異動 董事長張志宏代理 - 經濟日報",
-    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9TS3dZWGlYaDUwa2VGdnFNdk1YRDFhenFkUjRHRElfRWZCaHNIMC1vWlE3d3EzYzA1RlpiRjZmejloU09iVm9tblBhcFpUR3A4ZDMzb19HdjhtUdIBX0FVX3lxTFBrOXZ4QkM0eGtiaWdLcGt6dE96QlZDTkJDRG1wM2UzekluN0pNX0JRZWxDMkc1aXVaN0otN09LT25fcTJlT1A1OS1XV1dSZ3liVHh2Tjl3ai1WV19WLWtN?oc=5",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5RQXJSbFdfc2gwWFR1MnNubnRXRFlTSy1YLXBIZlpWR1B2bUxKUExnU21nbkZzbUpVdHZjUGJDLVIxTVBEbkhYR0pXTGotbjI2dWRVTXRtdmxCc3hpQU1J0gFfQVVfeXFMTlFBclJsV19zaDBYVHUyc25udFdEWVNLLVgtcEhmWlZHUHZtTEpQTGdTbWduRnNtSlV0dmNQYkMtUjFNUERuSFhHSldMai1uMjZ1ZFVNdG12bEJzeGlBTUk?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/24",
+    "來源": "經濟日報",
+    "標題": "獨家／挖人了！兆豐投顧董事長換人當 第一金留政鈺月底接任 - 經濟日報",
+    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5PbEJ2VTA2TzRfUkwwUTdMZ3NMN2FsQVlFaUw5MEpORjlKRTg5LS02c2M2X1d2WFZLM3VYYTMxZzBscFpTZFd4VjNYRmVrUmctWW1XSmZjQ0pMQdIBX0FVX3lxTE9ESU5maGJPM1VvSk5jekFVMzgyZDVqWFVxM0J5T0RNT0x3OEpaLTdETGlkdmhzOTVYSmtqODNxaFlVYU9mLWNwX2tyTW5YdjFDSVpLbmJXTkp2ZzYwTXUw?oc=5",
     "重要": true
   },
   {
@@ -442,6 +463,20 @@
   },
   {
     "日期": "2026/07/23",
+    "來源": "三嘻行動哇 Yipee!",
+    "標題": "Air Products 擴大台灣供氣網路，支援半導體晶圓廠與封裝廠擴產 - 三嘻行動哇 Yipee!",
+    "連結": "https://news.google.com/rss/articles/CBMiwwJBVV95cUxNaWRvSzlNTEZQMnNQRDJkQ0xtRy02djM2djdHdmVfVlcyZ0tKWjMxSlBpbzVHeUtqU3JXRWR4RHhmQlpOenA1REhjRkZHeUxaWWxfTGZaaHdSTkF6WGdURjBRX3pYcDBUZzRDaFFLbGZxZ2tsR3JaWlYwOFM2QlFySEZrdE5tUVBnc1ZBR2JhdmIxWFZKTXlKR1duMTZjWHRQZVZoOGNuckhCZEJTTHMzbzg5aTBYWEttSTFMOVdnUHVFOXRkTHczdTVLS1pkb1dvNGd5S3V3aTNLeVM4c3ZPUXBCaG90eXkwcGlkVVlsSWItLUN1MHBzMllLbldSOFhJeHhJY0JIckJkREdZVVl0Q0swa0kxUl9HVlVEZVFocjVDV0VPRkVYRkJrVEoyeDNMcm1qaDBsX1N5UkVnbll5bUx4Zw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/23",
+    "來源": "經濟日報",
+    "標題": "台灣半導體核心難動搖！資策會：2030年產能占比仍逼近八成 - 經濟日報",
+    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBIT3Y3Y2FtY2J0eGlTaFRxeGpfYzNrdzBBWWhvZXpwaC0tU2RsRTZkMkxXVmVXb2Zqc1c3dXZHUy1wT05OdlBHeEQxN1J5Q09MS01pNC0xMUlkQdIBX0FVX3lxTE1hTXcxWWVpdXBkd24yaE5wQ0FhNnRqcjJoTmd4MG5rc0tZcUs5UXF2SkJQR3dudnJfZUFsd1BBVTZubThIVGhsNjBlekNiME91WG5MbElXX3pQUDhmMjJR?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/23",
     "來源": "財訊",
     "標題": "不只台灣有風險？南韓央行也示警：晶片業獨大恐患「半導體版荷蘭病」 - 財訊",
     "連結": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9jOFQ2VnNpLTdiVl9JcG9uN1VoX3FYUlBwN1IyOUpZNFJXZDBKSHdBNHFRUXJXY3M5R1dhbFJveTRuWmlpR0liNkZ5T3BwT1FpdDhpam5Va2M0SWNlalNVTHRfTTRITWtGS3RLRjVpZmFjQ2Q4MHRQZFNKTQ?oc=5",
@@ -501,13 +536,6 @@
     "來源": "電子工程專輯",
     "標題": "聚焦散熱與低碳循環 工研院攜手產業探討AI算力永續 - 電子工程專輯",
     "連結": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQRFEyZUxZay1QZWY2SmdDeGVxZDNYemRjWGZnRDVjZGluQ3pYdWlTVEZFZDZlTnFyNEREc2V5ZklNRjR5aWY4U3FSQVpyYzJSRVBieldYS05abTZVQWtlTkZ3c2FEWGZ5U001Nlc2MlFubU5xWUNqd2FsVHhPeHdkMUlwUUR2UEU?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/23",
-    "來源": "三嘻行動哇 Yipee!",
-    "標題": "Air Products 擴大台灣供氣網路，支援半導體晶圓廠與封裝廠擴產 - 三嘻行動哇 Yipee!",
-    "連結": "https://news.google.com/rss/articles/CBMiwwJBVV95cUxNaWRvSzlNTEZQMnNQRDJkQ0xtRy02djM2djdHdmVfVlcyZ0tKWjMxSlBpbzVHeUtqU3JXRWR4RHhmQlpOenA1REhjRkZHeUxaWWxfTGZaaHdSTkF6WGdURjBRX3pYcDBUZzRDaFFLbGZxZ2tsR3JaWlYwOFM2QlFySEZrdE5tUVBnc1ZBR2JhdmIxWFZKTXlKR1duMTZjWHRQZVZoOGNuckhCZEJTTHMzbzg5aTBYWEttSTFMOVdnUHVFOXRkTHczdTVLS1pkb1dvNGd5S3V3aTNLeVM4c3ZPUXBCaG90eXkwcGlkVVlsSWItLUN1MHBzMllLbldSOFhJeHhJY0JIckJkREdZVVl0Q0swa0kxUl9HVlVEZVFocjVDV0VPRkVYRkJrVEoyeDNMcm1qaDBsX1N5UkVnbll5bUx4Zw?oc=5",
     "重要": true
   },
   {
@@ -610,15 +638,8 @@
   },
   {
     "日期": "2026/07/23",
-    "來源": "UDN",
-    "標題": "群益金鼎證高層人事異動楊杰斌接任總經理| 金融要聞| 產經 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBfMFRsaEZ6ejZvR09UcW1KSzkyS1JlQkZhVE5yZHJoaVZGZUo0QkFCNmF4SHZ6NEdwSHctOHYzZDN6SDdrb29fcWgzQkpSdUZh?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/23",
-    "來源": "三立新聞",
-    "標題": "台積電擴廠搶人才！「這高中」與美國名校合開課　學生免出國玩頂級設備 - 三立新聞",
+    "來源": "三立新聞網SETN.com",
+    "標題": "台積電擴廠搶人才！「這高中」與美國名校合開課　學生免出國玩頂級設備 - 三立新聞網SETN.com",
     "連結": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE84RmdhS3c0R2VYRERWdXloVXRMVTZyNGRkU2szMnhYbUNBM0ttR0NtMWhycnJUdEpMaTdtR2M4NmkyT0RmQ3dOU9IBTEFVX3lxTFBCUVNrcXpldE5yMFk3bHlTV1RheXZiMF9jMEFkT3BtUG8yTHlnaWVURTFJaV9rcVpqOXh5VGxmNEdLWlA5Y3FrblVrMTM?oc=5",
     "重要": true
   },
@@ -634,13 +655,6 @@
     "來源": "香港01",
     "標題": "德國車企集體關廠裁員 Tesla逆市擴產招3500人成「就業引擎」 - 香港01",
     "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE55RWlUdlBsTXl4dUw3RV80YnkxU29KdkxOUl9sU2ZubU0yNGFRcFJ4dGJSR0VWTjkzb2R5dWR0X2JscnFqQkd0QnF1M0lHZw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/23",
-    "來源": "DIGITIMES",
-    "標題": "海信擴大AI價值鏈版圖 涵蓋能源、半導體及汽車電子 - DIGITIMES",
-    "連結": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPRlYyT29vblZ6NzhmSGxvLWlEQ0d0Um9uX0RENXlURkVQaFBSOGdyNk9NSFh2TWx1aVZ6clNJSEIxNGxxazJBenVJWVczOEVrWS11SGpwVGJmZzJXc2pnU2psc1ZBSlIzTmpoU0lMeURJcFgwMnZMSkFTcHotdXMwTDNZT1NiMGtxQWJxQ3lB?oc=5",
     "重要": true
   },
   {
@@ -666,6 +680,13 @@
   },
   {
     "日期": "2026/07/23",
+    "來源": "DIGITIMES",
+    "標題": "海信擴大AI價值鏈版圖 涵蓋能源、半導體及汽車電子 - DIGITIMES",
+    "連結": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPRlYyT29vblZ6NzhmSGxvLWlEQ0d0Um9uX0RENXlURkVQaFBSOGdyNk9NSFh2TWx1aVZ6clNJSEIxNGxxazJBenVJWVczOEVrWS11SGpwVGJmZzJXc2pnU2psc1ZBSlIzTmpoU0lMeURJcFgwMnZMSkFTcHotdXMwTDNZT1NiMGtxQWJxQ3lB?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/23",
     "來源": "inside.com.tw",
     "標題": "狂砸 AI 卻裁 AI 人才？亞馬遜縮編 AGI 部門 受影響人數未公布 - inside.com.tw",
     "連結": "https://news.google.com/rss/articles/CBMifEFVX3lxTE8wcEJ0U1RCWUctWDNvNG1fMHJwYjFWdXhlOGRfeXM1dlJvNHFHZUlISldoOXB5cVhwOW83Yk5ZVmtXaUU3a3ozeU9EMDdGQkxfREtWVVdCcE9ZZi1Qb3NJUFBfa1Rsb2t5WVBPWkNIUXlPVHUyMlR4dWNPLWE?oc=5",
@@ -674,29 +695,8 @@
   {
     "日期": "2026/07/23",
     "來源": "LINE TODAY",
-    "標題": "20年都沒提高！ 勞團集結立法院支持勞退修法、要求提高雇主提撥率 | Newtalk - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFAyc0NZYlF6cEdUeGpYcmhrVXNiSUgwLUNaQUxYbmpKR3BzMEFFNnN0ZWt5blhLdWRJMm1MMVVzWXR2cWVXU19kcHo2bXFDUjBGTUtVdC1B?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/23",
-    "來源": "LINE TODAY",
-    "標題": "黃仁勳：台灣救了美半導體業 | 經濟日報 - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5JX1p1cXlzQVVnaWU1ZTQyQ0l5X1hZRFp1cXlVTTctTkY3VElIMTFYV2RCeWlBd1pseGNDQXduOVYyV3c0RDNmOVY3NGhCU3BRNW1SNmx3?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/23",
-    "來源": "unwire",
-    "標題": "黃仁勳：台灣拯救了美國半導體業 反駁特朗普台灣偷晶片論 「沒台灣支持沒今日美半導體」 - unwire",
-    "連結": "https://news.google.com/rss/articles/CBMibkFVX3lxTFAzU1VMY0wxYkVDWjRoNm9vS3prRHdGREdDU3lXMHdBaXZqR3pUYjFQazhBTERTV0UxMnJSVG1ha0hjNElURzJmand5bFRSdDlFblp6OFhDUlR4VnJPSlItZGlCUWtva1R3eTdIMEln?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/23",
-    "來源": "理財周刊",
-    "標題": "榮宗科技JCT GROUP｜SEMICON Taiwan 打造「半導體良率守護三大服務」 - 理財周刊",
-    "連結": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1fanByMjhuVjVSUDducjdxQU4wTkR2b28wMW5MNnlfLWF4cG1RbDNiSDcyaVpaa0hfdllncnU1RDBXd2VFTEFITVFOYWdkRjFaVEdIcks0dzBhUWxkV2VhUWVWZks3cXN5QVMxWWpzSQ?oc=5",
+    "標題": "20年都沒提高！ 勞團集結立法院支持勞退修法、要求提高雇主提撥率| Newtalk - LINE TODAY",
+    "連結": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOSng2SFBTeEc1X1pJTlZ6OHN2Uk1EUEI3Q3VCakdhSWxFcVY1OE9fMzc4MlhBZDZKVllBWWFrMHloNXBfS0w2OXB5bUxOTE5TQllrZjBRY2F3WUxFazhVOTZQc0lvdkNoUTQzcG1paEJfQ1E4OWM5S1VPWndlakx3R2RBVQ?oc=5",
     "重要": true
   }
 ]
