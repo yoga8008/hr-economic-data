@@ -15,13 +15,6 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "Yahoo新聞",
-    "標題": "強迫勞動貨品將禁輸台灣！勞動部、經濟部聯手審定 - Yahoo新聞",
-    "連結": "https://news.google.com/rss/articles/CBMi0gJBVV95cUxNcXJYNndOdG5VcTdmTm85QVNSaTVwa09TSnhrRmJ6WDlMQTdva1V1RU80b2l4RDBnZF9VSUpONHNja1lRRXV1bDVaQVloVUVjR3dKRmlSdzlJRzBPVUVBa1ZmQ1VqRFIxUnUzYkd0NlJGaklWMVBuZ1NnMGV4VlM5UFl0bEhPbUNUbXBVT09OWlBEc3hEdkFiVWFWSGxGamQtVnNJU2cwamZiWldvV3AzUzlzaUVPT0x5R1N1RjN6Z1Nwb0ZOYU1yaFNxTThrY3hNeG9GcVpPRDNxQ0ZvN2Q2b1F4M3RCQnktT2JQYzRuWTUtcHdGWTJkSk9sN3JQVWNFa3o4cnY0RkpPMksxLUowWTdabk8wemZCNWlBWlRKQjhnbU1ZVHVLUGF6LUZsMHdxRDNkSEV3QlVDMElJWnY0RHMwek90cDhpYUIwVlQ2dEFVZw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/30",
     "來源": "NOWnews今日新聞",
     "標題": "美國提強迫勞動貨品清單、台灣陷「長臂管轄」？勞動部回應 - NOWnews今日新聞",
     "連結": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1OWlJPMmxpOXFmaTV1U2gwQVA0V21CVlN4MjJYanJkRzdkQWdjbEptN0ZOSEQtY2M4M2ZPUnNfUnpNbm9nUTZEbXRWcWnSAVJBVV95cUxQNHc3Q28yMm9MN3Fvei1sR1g4LXJodmlHaThSOGlyb3dta1lwUlU0M2JaM1V5MWNqaTVJT0U5ZW1DNFdoZzBsRE9BSDVrYzdWbHBn?oc=5",
@@ -29,8 +22,15 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "udn.com",
-    "標題": "強迫勞動貨品禁入！經濟部與勞動部聯手以公權力「審定」嚴禁進口來台 - udn.com",
+    "來源": "Yahoo新聞",
+    "標題": "強迫勞動貨品將禁輸台灣！勞動部、經濟部聯手審定 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMi0gJBVV95cUxNcXJYNndOdG5VcTdmTm85QVNSaTVwa09TSnhrRmJ6WDlMQTdva1V1RU80b2l4RDBnZF9VSUpONHNja1lRRXV1bDVaQVloVUVjR3dKRmlSdzlJRzBPVUVBa1ZmQ1VqRFIxUnUzYkd0NlJGaklWMVBuZ1NnMGV4VlM5UFl0bEhPbUNUbXBVT09OWlBEc3hEdkFiVWFWSGxGamQtVnNJU2cwamZiWldvV3AzUzlzaUVPT0x5R1N1RjN6Z1Nwb0ZOYU1yaFNxTThrY3hNeG9GcVpPRDNxQ0ZvN2Q2b1F4M3RCQnktT2JQYzRuWTUtcHdGWTJkSk9sN3JQVWNFa3o4cnY0RkpPMksxLUowWTdabk8wemZCNWlBWlRKQjhnbU1ZVHVLUGF6LUZsMHdxRDNkSEV3QlVDMElJWnY0RHMwek90cDhpYUIwVlQ2dEFVZw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/30",
+    "來源": "UDN",
+    "標題": "強迫勞動貨品禁入！經濟部與勞動部聯手以公權力「審定」嚴禁進口來台 - UDN",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1vdEpIOGRfUlpnaUUxTEpSaFJaUTlXTmNWUnFRSlozTXVvN1AybkVscVdBX3M4SFk0RjZ2RnhZMm96aUtESE1wR1VXRDdLdWxG0gFWQVVfeXFMTlljRE1pcHJ6bkJUQ2lfVTU5N2l4dkJ0VDdjTnJFdllCOXBJdC1LWWtYYWpWUHhJRGRJWkU4V0tGR3R1S01pbmUxR2wzeFBLSTJfamZ1VkE?oc=5",
     "重要": true
   },
@@ -39,6 +39,13 @@
     "來源": "商傳媒",
     "標題": "新北公布第2季違法雇主名單 統聯、精華光學屢犯勞基法遭重罰 - 商傳媒",
     "連結": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQS0ZFMjVvOHBoWEtkaXB3X09UaDAxcXJ6VHQ2MXcySUp3SUc2X2dxWmNfOXJSRnZIdnd1VXE2TFkwZ0RtOVlnMkdEUlNNamU0VUVzR0cydm9rcEVkTWFqUlIwdWtTNVVfbkR2c3pHa2FKTldwZGROcWZhYy1jQlluMkd3Sk5MLVpxUkMxVTNxZVNyZEh0QV8tUHB3SWFaN044aGVFRmZUTkcwaGJvTkxwSUtDNFRpRHNRSmttTGo1YjE?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/30",
+    "來源": "LINE TODAY",
+    "標題": "台安藥局爆欠薪、大規模裁員！員工求助無門 台南勞工局出手了 | Newtalk - LINE TODAY",
+    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBfVHEwcmh4bzl0WDJvSmdfMVNiVF9JbkhFYnRSWkQ0RDR0dEVONjc4OUJrTzBHQWlQNFhmSUlHZWxpeHpxVkYtdjZJN0dwaVpzbGxfYzJB?oc=5",
     "重要": true
   },
   {
@@ -99,8 +106,8 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "udn.com",
-    "標題": "專家透視／台灣半導體與AI產業真實底氣 - udn.com",
+    "來源": "UDN",
+    "標題": "專家透視／台灣半導體與AI產業真實底氣 - UDN",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE4ydmhiSDhmM2pQTXNmTU5teEVTamZWblRvQUZyTllfa0pFS0JoVnVMdDM0VWpQWmhMMktsLXJQUGU4bnR2NGFwWnRFWl94MHFG0gFWQVVfeXFMT05EQTZsRWY1YWpSSFFOSGo2b1FTNFNSMHJvUFdtSUJhOFNnWFRkM2NfNE5sUkJyeEpZSW9OTlc1anRXVU5LV3VpYzlOVTZpMGExUGZILWc?oc=5",
     "重要": true
   },
@@ -113,8 +120,8 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "信報網站",
-    "標題": "富邦台灣半導體(03076) 交易所買賣基金的交易資料 - 信報網站",
+    "來源": "hkej.com",
+    "標題": "富邦台灣半導體(03076) 交易所買賣基金的交易資料 - hkej.com",
     "連結": "https://news.google.com/rss/articles/CBMi0wJBVV95cUxPMk04VFRkbGY3a1BrR0dDYmNQdGw2WDVkVGxHY3RJRkdVeDc0ZTlNeW5FRUVCM05NWmlNSm9wRUpVc2Ntb3dITzgwMERNcDdURVlZM3JOampmLTYwclpmT0ljQUlud2VhSXJ6bGZPU2o1SVhlbW5DSnhpX010Nk15ZTdlMFJfd2dtZV9jb3FNNERKUndDOURfR015TzFGUzVOOEdXVVIyOFNIUEZEM3hhMlFCQUVsRlV3enpfYmRLOWo4QWx0U0lPNWhRZjFIeXRxaFpvT19na0hrbm1EdFBNa08tdzN4aU0zNzVYU3h6eUNDS3pfOXZ1OXZNNWowYVZ3TmFrVUNBTWJqQlNIY3l6S2ZmYnNib1gzQnF2ckVpbWJOQ083M2g4Y0IxZzB1Nm1oNXM1NGZlZEtYYVc5bEUydDBySHpvSmFwQ2FVektBaUcxbk0?oc=5",
     "重要": true
   },
@@ -183,16 +190,16 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "TechNews 科技新報",
-    "標題": "友達總經理柯富仁辭職，財務長張博儀接任 - TechNews 科技新報",
-    "連結": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1IS2lVc20xUDhvLXoyTVpBNFRJYjdvclBacld2YW1oZ2Z1d09xOUFLSFJ5emtNVF9GSWloaWs5bzhBR3F4M1dFX0prdUNtQkpaaG5RVEJacVo3Nkd2UUxfQjRR?oc=5",
+    "來源": "news.cnyes.com",
+    "標題": "友達總經理柯富仁辭職 財務長張博儀接任7/31生效 - news.cnyes.com",
+    "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFB6SGtZeXNIem52dFFPWFpSLTJVaU4zbTJzV3RueE5ieFVDbTMyUGlmbDliY2lZMzdzZ0lCZkFrMFdtd3NfMkRXSWRfdl9vMFk?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/30",
-    "來源": "news.cnyes.com",
-    "標題": "友達總經理柯富仁辭職 財務長張博儀接任7/31生效 - news.cnyes.com",
-    "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFB6SGtZeXNIem52dFFPWFpSLTJVaU4zbTJzV3RueE5ieFVDbTMyUGlmbDliY2lZMzdzZ0lCZkFrMFdtd3NfMkRXSWRfdl9vMFk?oc=5",
+    "來源": "TechNews 科技新報",
+    "標題": "友達總經理柯富仁辭職，財務長張博儀接任 - TechNews 科技新報",
+    "連結": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1IS2lVc20xUDhvLXoyTVpBNFRJYjdvclBacld2YW1oZ2Z1d09xOUFLSFJ5emtNVF9GSWloaWs5bzhBR3F4M1dFX0prdUNtQkpaaG5RVEJacVo3Nkd2UUxfQjRR?oc=5",
     "重要": true
   },
   {
@@ -204,9 +211,9 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "太報 TaiSounds",
-    "標題": "友達突換將！總經理柯富仁請辭財務長張博儀接任加速三大事業轉型| 財經焦點 - 太報 TaiSounds",
-    "連結": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5OekxBWW5hSWMwWWhlMVBTbFlJZHMzSnJScVBvNW1RNHhtenVaanNaNDdxRWJsTm50UFFEekN5dTAwYjBzdm9WRzFDUmI5NVlZV3VsX2l1eHpvN1BG?oc=5",
+    "來源": "Yahoo新聞",
+    "標題": "友達突換將！總經理柯富仁請辭 財務長張博儀接任 加速三大事業轉型 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMipwNBVV95cUxOZjJLSE84VE9QVUhRbWZ5VDd4eC1EVEtXelh2akFRd09wNHlnbWwyRDVZd01LWWlNWGVHU2szejdpc2xfblVqWXc4Rjh6bktmbVp3bjNOMnhfY3JDLUgtYmJSUzBtd2xuMERrMWZQbWdPMjJkRXRNUHUzSTRCWGlzaHRZbnFVSWNpeEgwVkVnUjZnRFRPTFNkXzFxaS1GQldPUjFUMm02ZUUweFFoMXF6bjROTjV2TVBDbE92cnp1ZEEwcUVIVXgwd1l1QV9VSFo5U1hvR3JOM2NYMjZWZUFwTmYyREFQM2JINnVrajRUeGU0RHNPXy1NNDFEQ0pWSVBhRjRubDhGdnNQRmpVSlIzRGlDbWtzdDlCMm14ZWx2OFBSbEhyTmNkemhpNFhHaDlYMXlWcjJSOS1ZZXA2c1VtWmxFYjBBU0RDM1kzcldnNUZ5YkFRS3NYczlFbWoyMnVUYlVXMmdIWFowQnNNVDJHcGs2MC0yTGtUV0cxWWREQXYzRmhQU2tzY1pYNE5NbkZjTEV1ampQVXJ5Wl9IZkV1ZkFDZnVZUlE?oc=5",
     "重要": true
   },
   {
@@ -232,8 +239,8 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "cmoney.tw",
-    "標題": "2409 友達 - 友達總經理柯富仁辭職，財務長張博儀接任- 股市爆料同學會 - cmoney.tw",
+    "來源": "CMoney",
+    "標題": "2409 友達 - 友達總經理柯富仁辭職，財務長張博儀接任- 股市爆料同學會 - CMoney",
     "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE8tZnZPZDNkVzcwVnRGQW81Z1d1cUFVbFhmRzRDQ2g5VHNwMEJiR2hiZElYQWZRYWYxeE56dk9FRW5NREM1a25yVFJsaHp2QjFtX0ZHdDVzWXc?oc=5",
     "重要": true
   },
@@ -253,8 +260,15 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "信報網站",
-    "標題": "AI晶片需求勁 三星次季營業利潤飆18倍 - 信報網站",
+    "來源": "商傳媒",
+    "標題": "SK海力士ADR飆漲17%超越三星電子 引領半導體股強勁走勢 - 商傳媒",
+    "連結": "https://news.google.com/rss/articles/CBMi7AJBVV95cUxPTTFIMVd5bmpJN2pSckhCQ0Zuc05lX1ppQ202OTA0bmZyZmhsZXlsU19zbDI3elZSVXhvcVhGNFpHRldsWkN3U2ZDRnhqNDJTYk5nbDlsQWhJSks3VmUzWEJQWHlQamlzLVJMUlBwWTBzODd6R2JZS2wyY0ZxSTZYSjRlRGNQcER0eWJkOFpPVXJHM3lxWjE3Q04tS3JMQlJoQ216b01sTEdhelluQXBtZ0FscTB6MUtaNkdJQmF6OFo1Nzk5M3REdEZkV3lYcHRlQ3pUaDJhWFV5YndDaG56THY2am9RdklObXFXc0w4dUltZ0p6d3NLREcyTTJCVjhaMlJxWEV3NnNwRmRQQjRZajd6bTZYcm9tRldNMUZGNVd2WmhDa28wVVJjRkJ5QkNicG1xTElHT2xoN0RDMzZxTTNaTS1Wc3hlb29Sb1hzWFp1TktvM2JsWGhTM05wM09JYS1XU095V2ZjQkpU?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/30",
+    "來源": "hkej.com",
+    "標題": "AI晶片需求勁 三星次季營業利潤飆18倍 - hkej.com",
     "連結": "https://news.google.com/rss/articles/CBMiqwJBVV95cUxPbEVMRU9qTWc5NXctZ1JVd2JjeEhFMlZqOXVDV21RWkRGVm9VRE1jVGlWLVVPUFd6aUdaV0M3eFRyMWFZMzBzS1E1M1lpcU9VQXFIMllZU2ViaGFfT1lzSzh1LTVlc0o2VW9hSlZPZWFhUHdFc3U2UzYyYjNCVFltRmhmTXliUndxeWp3c3E1bmhjd0ZlcEZMNlA4RElud2RDMmRWT3JYUjZsSGktdjBvMlZTa3BLNUxNd0RTSDN6TkdpYWpGWGduRXFZNXgzU0x1ZVBxY1ZoeXVOTklReW5SM25HZVdoc2huRFpoQ2Uwa25QckxrMEtmUWhlYUVoVUMtWm02THZ3NGhBVlBHVE1CWGl4dWNYbW1IT1VNTkplNjFDejFTWTQyV0FDNA?oc=5",
     "重要": true
   },
@@ -281,16 +295,9 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "digitimes.com.tw",
-    "標題": "AI、半導體推升綠電需求 沃旭直指離岸風電應重價值勝規模 - digitimes.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMia0FVX3lxTE4ydzBpT0lzLXlPQ285YW1FU2JSa0JMeEhfMkRMU296QUIzdFhITEVHeGlhWUVxanBmWVlkU05KeFlHRmh2RVB3QnRsY01QVF9yMHZHLVFxbE52bFk4LW5GWnEwQ042bjNWd1A0?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/30",
-    "來源": "digitimes.com.tw",
-    "標題": "樺漢前進新加坡 卡位東南亞半導體與AI布局 - digitimes.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOX0Z1ZXI2OVlVMjhiN1ZkUmlYZzJieEZkbzU3MTJkRlRwNFJQTzRtdWVjTEtZV1BRUmVVRjBTb2tNbzJLbXB1QnRwZ1lFQ3BBYnFMTDFuVF91YjJTZ0FTcU5HOUNvbGI4aFR6TEtuRUNHc2ZQMUpFQU5iR1ZfazVCZGIxRVRLRXZqUVZyMmtB?oc=5",
+    "來源": "DIGITIMES",
+    "標題": "AI、半導體推升綠電需求 沃旭直指離岸風電應重價值勝規模 - DIGITIMES",
+    "連結": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNU0lRald3YUZYRnBCdnVtZGoyLVZqMU5BTWstMU02bndPWUxaWWlIb2RLWVctMTdFenJEWFZoUFRJalpwelZKZGR2clA3d056MEQ2bld1cEZyTDlGaVNhcVZFUUFKR3I4RG04UVRIZVJQYmV6UnJwVEhMZHpyRmxYcmFJVWlpNHNKWm1qTU0yY3daaENPbnkwQkN1NG5iTDJ2MVdYVlB6bUk1ek1R?oc=5",
     "重要": true
   },
   {
@@ -316,23 +323,58 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "UDN",
-    "標題": "強迫勞動貨品禁入！經濟部與勞動部聯手以公權力「審定」嚴禁進口來台 - UDN",
+    "來源": "udn.com",
+    "標題": "強迫勞動貨品禁入！經濟部與勞動部聯手以公權力「審定」嚴禁進口來台 - udn.com",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1vdEpIOGRfUlpnaUUxTEpSaFJaUTlXTmNWUnFRSlozTXVvN1AybkVscVdBX3M4SFk0RjZ2RnhZMm96aUtESE1wR1VXRDdLdWxG0gFWQVVfeXFMTlljRE1pcHJ6bkJUQ2lfVTU5N2l4dkJ0VDdjTnJFdllCOXBJdC1LWWtYYWpWUHhJRGRJWkU4V0tGR3R1S01pbmUxR2wzeFBLSTJfamZ1VkE?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/30",
-    "來源": "UDN",
-    "標題": "專家透視／台灣半導體與AI產業真實底氣 - UDN",
+    "來源": "udn.com",
+    "標題": "專家透視／台灣半導體與AI產業真實底氣 - udn.com",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE4ydmhiSDhmM2pQTXNmTU5teEVTamZWblRvQUZyTllfa0pFS0JoVnVMdDM0VWpQWmhMMktsLXJQUGU4bnR2NGFwWnRFWl94MHFG0gFWQVVfeXFMT05EQTZsRWY1YWpSSFFOSGo2b1FTNFNSMHJvUFdtSUJhOFNnWFRkM2NfNE5sUkJyeEpZSW9OTlc1anRXVU5LV3VpYzlOVTZpMGExUGZILWc?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/30",
-    "來源": "CMoney",
-    "標題": "2409 友達 - 友達總經理柯富仁辭職，財務長張博儀接任- 股市爆料同學會 - CMoney",
+    "來源": "信報網站",
+    "標題": "富邦台灣半導體(03076) 交易所買賣基金的交易資料 - 信報網站",
+    "連結": "https://news.google.com/rss/articles/CBMi0wJBVV95cUxPMk04VFRkbGY3a1BrR0dDYmNQdGw2WDVkVGxHY3RJRkdVeDc0ZTlNeW5FRUVCM05NWmlNSm9wRUpVc2Ntb3dITzgwMERNcDdURVlZM3JOampmLTYwclpmT0ljQUlud2VhSXJ6bGZPU2o1SVhlbW5DSnhpX010Nk15ZTdlMFJfd2dtZV9jb3FNNERKUndDOURfR015TzFGUzVOOEdXVVIyOFNIUEZEM3hhMlFCQUVsRlV3enpfYmRLOWo4QWx0U0lPNWhRZjFIeXRxaFpvT19na0hrbm1EdFBNa08tdzN4aU0zNzVYU3h6eUNDS3pfOXZ1OXZNNWowYVZ3TmFrVUNBTWJqQlNIY3l6S2ZmYnNib1gzQnF2ckVpbWJOQ083M2g4Y0IxZzB1Nm1oNXM1NGZlZEtYYVc5bEUydDBySHpvSmFwQ2FVektBaUcxbk0?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/30",
+    "來源": "太報 TaiSounds",
+    "標題": "友達突換將！總經理柯富仁請辭財務長張博儀接任加速三大事業轉型| 財經焦點 - 太報 TaiSounds",
+    "連結": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5OekxBWW5hSWMwWWhlMVBTbFlJZHMzSnJScVBvNW1RNHhtenVaanNaNDdxRWJsTm50UFFEekN5dTAwYjBzdm9WRzFDUmI5NVlZV3VsX2l1eHpvN1BG?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/30",
+    "來源": "cmoney.tw",
+    "標題": "2409 友達 - 友達總經理柯富仁辭職，財務長張博儀接任- 股市爆料同學會 - cmoney.tw",
     "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE8tZnZPZDNkVzcwVnRGQW81Z1d1cUFVbFhmRzRDQ2g5VHNwMEJiR2hiZElYQWZRYWYxeE56dk9FRW5NREM1a25yVFJsaHp2QjFtX0ZHdDVzWXc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/30",
+    "來源": "信報網站",
+    "標題": "AI晶片需求勁 三星次季營業利潤飆18倍 - 信報網站",
+    "連結": "https://news.google.com/rss/articles/CBMiqwJBVV95cUxPbEVMRU9qTWc5NXctZ1JVd2JjeEhFMlZqOXVDV21RWkRGVm9VRE1jVGlWLVVPUFd6aUdaV0M3eFRyMWFZMzBzS1E1M1lpcU9VQXFIMllZU2ViaGFfT1lzSzh1LTVlc0o2VW9hSlZPZWFhUHdFc3U2UzYyYjNCVFltRmhmTXliUndxeWp3c3E1bmhjd0ZlcEZMNlA4RElud2RDMmRWT3JYUjZsSGktdjBvMlZTa3BLNUxNd0RTSDN6TkdpYWpGWGduRXFZNXgzU0x1ZVBxY1ZoeXVOTklReW5SM25HZVdoc2huRFpoQ2Uwa25QckxrMEtmUWhlYUVoVUMtWm02THZ3NGhBVlBHVE1CWGl4dWNYbW1IT1VNTkplNjFDejFTWTQyV0FDNA?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/30",
+    "來源": "digitimes.com.tw",
+    "標題": "AI、半導體推升綠電需求 沃旭直指離岸風電應重價值勝規模 - digitimes.com.tw",
+    "連結": "https://news.google.com/rss/articles/CBMia0FVX3lxTE4ydzBpT0lzLXlPQ285YW1FU2JSa0JMeEhfMkRMU296QUIzdFhITEVHeGlhWUVxanBmWVlkU05KeFlHRmh2RVB3QnRsY01QVF9yMHZHLVFxbE52bFk4LW5GWnEwQ042bjNWd1A0?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/30",
+    "來源": "digitimes.com.tw",
+    "標題": "樺漢前進新加坡 卡位東南亞半導體與AI布局 - digitimes.com.tw",
+    "連結": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOX0Z1ZXI2OVlVMjhiN1ZkUmlYZzJieEZkbzU3MTJkRlRwNFJQTzRtdWVjTEtZV1BRUmVVRjBTb2tNbzJLbXB1QnRwZ1lFQ3BBYnFMTDFuVF91YjJTZ0FTcU5HOUNvbGI4aFR6TEtuRUNHc2ZQMUpFQU5iR1ZfazVCZGIxRVRLRXZqUVZyMmtB?oc=5",
     "重要": true
   },
   {
@@ -340,13 +382,6 @@
     "來源": "鏡週刊Mirror Media",
     "標題": "AI不是裁員工具　勤業眾信：人力效能可提升2至3成 - 鏡週刊Mirror Media",
     "連結": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE90QllIRW9NUlp6MEtqSXdTZmJfV2hiT2M0ZnZvbjBzV1dqbS1BQ1ZHd0RIM2lnS2Q1QVNJNlpwOXB3Y1NOcHBlY2puRUU4UWdocU5xRDBZQUpSVmpTMnAzSV9JdHBJUdIBa0FVX3lxTE5WYlZ5NHpLbnZVZUlNR25oeE9BZkctV0U5NW5BTExNMWUySmc4VzUxanFxRkFvSDdwc1JwWUJvaUk2STBFaUhHQXJqdkx2bFhEbkR1bkxQdGdfbHM5Z0dIUnRrUHZqUDM0alZF?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/30",
-    "來源": "DIGITIMES",
-    "標題": "AI、半導體推升綠電需求 沃旭直指離岸風電應重價值勝規模 - DIGITIMES",
-    "連結": "https://news.google.com/rss/articles/CBMia0FVX3lxTE4ydzBpT0lzLXlPQ285YW1FU2JSa0JMeEhfMkRMU296QUIzdFhITEVHeGlhWUVxanBmWVlkU05KeFlHRmh2RVB3QnRsY01QVF9yMHZHLVFxbE52bFk4LW5GWnEwQ042bjNWd1A0?oc=5",
     "重要": true
   },
   {
@@ -386,23 +421,9 @@
   },
   {
     "日期": "2026/07/30",
-    "來源": "hkej.com",
-    "標題": "富邦台灣半導體(03076) 交易所買賣基金的交易資料 - hkej.com",
-    "連結": "https://news.google.com/rss/articles/CBMi0wJBVV95cUxPMk04VFRkbGY3a1BrR0dDYmNQdGw2WDVkVGxHY3RJRkdVeDc0ZTlNeW5FRUVCM05NWmlNSm9wRUpVc2Ntb3dITzgwMERNcDdURVlZM3JOampmLTYwclpmT0ljQUlud2VhSXJ6bGZPU2o1SVhlbW5DSnhpX010Nk15ZTdlMFJfd2dtZV9jb3FNNERKUndDOURfR015TzFGUzVOOEdXVVIyOFNIUEZEM3hhMlFCQUVsRlV3enpfYmRLOWo4QWx0U0lPNWhRZjFIeXRxaFpvT19na0hrbm1EdFBNa08tdzN4aU0zNzVYU3h6eUNDS3pfOXZ1OXZNNWowYVZ3TmFrVUNBTWJqQlNIY3l6S2ZmYnNib1gzQnF2ckVpbWJOQ083M2g4Y0IxZzB1Nm1oNXM1NGZlZEtYYVc5bEUydDBySHpvSmFwQ2FVektBaUcxbk0?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/30",
     "來源": "太報 TaiSounds",
     "標題": "友達換帥！總經理柯富仁請辭財務長張博儀接任加速三大事業轉型| 財經焦點 - 太報 TaiSounds",
     "連結": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5OekxBWW5hSWMwWWhlMVBTbFlJZHMzSnJScVBvNW1RNHhtenVaanNaNDdxRWJsTm50UFFEekN5dTAwYjBzdm9WRzFDUmI5NVlZV3VsX2l1eHpvN1BG?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/30",
-    "來源": "hkej.com",
-    "標題": "AI晶片需求勁 三星次季營業利潤飆18倍 - hkej.com",
-    "連結": "https://news.google.com/rss/articles/CBMiqwJBVV95cUxPbEVMRU9qTWc5NXctZ1JVd2JjeEhFMlZqOXVDV21RWkRGVm9VRE1jVGlWLVVPUFd6aUdaV0M3eFRyMWFZMzBzS1E1M1lpcU9VQXFIMllZU2ViaGFfT1lzSzh1LTVlc0o2VW9hSlZPZWFhUHdFc3U2UzYyYjNCVFltRmhmTXliUndxeWp3c3E1bmhjd0ZlcEZMNlA4RElud2RDMmRWT3JYUjZsSGktdjBvMlZTa3BLNUxNd0RTSDN6TkdpYWpGWGduRXFZNXgzU0x1ZVBxY1ZoeXVOTklReW5SM25HZVdoc2huRFpoQ2Uwa25QckxrMEtmUWhlYUVoVUMtWm02THZ3NGhBVlBHVE1CWGl4dWNYbW1IT1VNTkplNjFDejFTWTQyV0FDNA?oc=5",
     "重要": true
   },
   {
@@ -417,13 +438,6 @@
     "來源": "sunmedia.tw",
     "標題": "新北公布第2季違法雇主名單 統聯、精華光學屢犯勞基法遭重罰 - sunmedia.tw",
     "連結": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQS0ZFMjVvOHBoWEtkaXB3X09UaDAxcXJ6VHQ2MXcySUp3SUc2X2dxWmNfOXJSRnZIdnd1VXE2TFkwZ0RtOVlnMkdEUlNNamU0VUVzR0cydm9rcEVkTWFqUlIwdWtTNVVfbkR2c3pHa2FKTldwZGROcWZhYy1jQlluMkd3Sk5MLVpxUkMxVTNxZVNyZEh0QV8tUHB3SWFaN044aGVFRmZUTkcwaGJvTkxwSUtDNFRpRHNRSmttTGo1YjE?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/30",
-    "來源": "LINE TODAY",
-    "標題": "台安藥局爆欠薪、大規模裁員！員工求助無門 台南勞工局出手了 | Newtalk - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBfVHEwcmh4bzl0WDJvSmdfMVNiVF9JbkhFYnRSWkQ0RDR0dEVONjc4OUJrTzBHQWlQNFhmSUlHZWxpeHpxVkYtdjZJN0dwaVpzbGxfYzJB?oc=5",
     "重要": true
   },
   {
@@ -519,6 +533,13 @@
   },
   {
     "日期": "2026/07/29",
+    "來源": "UDN",
+    "標題": "鋒形科技最新《2026企業勞動力觀測》 人才缺口成台灣企業共同難題 - UDN",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE55QWxEUVRQZHhfVm5DRUpLY1VXYnViUThpTzN3dkFKNVVxTmppeXI1RjJ4Q3kwV055Q3ppNXZoREx1YlgzX0FtM2tMdGFTNHhX0gFWQVVfeXFMUDdxS1NRVlVxaXZMdG9lbzltMlRGVVlVX1BvemVmd09sNDRvdm5NTDFUMm1nVVlWaFNRY2cydU5Fc25JVE9yUVc0TDZWeHBZN01IN1N2V1E?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/29",
     "來源": "台灣民眾電子報",
     "標題": "台南市勞工局辦理婦女再就業講座暨職場參訪活動 - 台灣民眾電子報",
     "連結": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBDRnVFV29sMXlVY0MwMUpQa0dEU3FxNVdicjJjYlhyM3VIeVNYVlNTZ21DdkUtYW4wb2VfdERTOGJ4NHk0dy1yNQ?oc=5",
@@ -540,8 +561,8 @@
   },
   {
     "日期": "2026/07/29",
-    "來源": "udn.com",
-    "標題": "缺工時代 零售業轉型打 「效率戰」 - udn.com",
+    "來源": "UDN",
+    "標題": "缺工時代 零售業轉型打 「效率戰」 - UDN",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE01MUd0MElBcnVhZzZqSnkxaG9KcTl6ZnlFbjAwX2ZROVRfQ1I0QnlRbEl0MFRuUFdvd2pMMzloUjNEUml2SXJsRE1JT19zdXJS0gFWQVVfeXFMT0JkZTN3SmJKZEV5YV9WVGNRTjc4ZG1tMUVDM1ZkaFQ0OFdhVS1HcU9XTGhVRU84SllTUGRvWUc3UVlzdHJnVGtIRWNDUkhpbkdENVB2bmc?oc=5",
     "重要": true
   },
@@ -561,9 +582,9 @@
   },
   {
     "日期": "2026/07/29",
-    "來源": "LINE TODAY",
-    "標題": "前政委兼政院經貿談判總代表楊珍妮涉職場霸凌 監院通過彈劾案、移送懲戒法院 | 台灣好新聞 - LINE TODAY",
-    "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBfc3dRZDlQd1Z0Z0JyZ3hXbW12dUZiNlpza1UydE1sV1lKLTdSajJvMnZnTjBVWFRNZjAxM2pIdF9MTC1CWGE2N0FmSkVPX2drY2Z2R2tB?oc=5",
+    "來源": "Newtalk新聞",
+    "標題": "楊珍妮涉職場霸凌監院今公告彈劾並移送懲戒法院審理| 政治 - Newtalk新聞",
+    "連結": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE8xVDRVdVUzSTJXNHJQcTk1a3FSeW1pZ2c2U2s2UTB5VUUyeFM3aDNWM3gtSlhsczBTODJQX3FFbnAzNXlyeG1YSldTMXJYN29RNmxPdWdMNWlvd2s?oc=5",
     "重要": true
   },
   {
@@ -610,9 +631,16 @@
   },
   {
     "日期": "2026/07/29",
-    "來源": "digitimes.com.tw",
-    "標題": "HBM綁定台積電供應鏈？ 南韓半導體出口台灣佔比翻倍、中國跌破5成 - digitimes.com.tw",
+    "來源": "DIGITIMES",
+    "標題": "HBM綁定台積電供應鏈？ 南韓半導體出口台灣佔比翻倍、中國跌破5成 - DIGITIMES",
     "連結": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQNHNpTWdUeGZOaW11a3BSSGNQUUJwcldWSDJMQWhiUDMwVnZlZ1hTdmlUanlzMzhuVG1QRVpuMHRRaGFoamhGbm43clcyeHduNVhfYmcxOUd3UzFYbjdNRkZHMmxJOFVZY2tya1k4NS1WUEdKOXhwS1pnUlJxVC1qd1JFcnM0TWIxaWVuMnBR?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/29",
+    "來源": "news.cnyes.com",
+    "標題": "惠譽確認維持台灣AA主權評等 展望穩定 看好半導體優勢助攻出口與財政 - news.cnyes.com",
+    "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE15WERiQXVsZ29xMmtaUGVDeVo2a0RJRXNqS1hXd004YWZla1BMZ1RqNU5BdzZYRDN5aFdzNTFjcGk0OHBoVWh5YTB5eTRJQW8?oc=5",
     "重要": true
   },
   {
@@ -627,13 +655,6 @@
     "來源": "Yahoo新聞",
     "標題": "稱台灣半導體王國！日本人搭北捷「悠遊卡慢半拍」愣住：怎比西瓜卡慢？內行曝背後原因 - Yahoo新聞",
     "連結": "https://news.google.com/rss/articles/CBMiqANBVV95cUxPVE5IRExVV3RHeHRuWENPZVo1MWJoOS0ycTZiQVRVdzJVRWhzZTNjVjZXbUJTU01GZWZjdmhKNlJRenpPczJLNEkzX3FGUVlwLVFfUXMweUtnbGRaYndmeXB2ODR3c0lXaUVnclMwMm5EalFsd080SWNrUHl5WFBnd3piejg5V29Jd2Q1SGpxRkdwenVKZU1hdGkxN1ZoTjMzaFFNdmVXMFpITnl3OVJLaEVHdGZWOFBVNDFJc0t1cUFjX29PRzNQRjk4dGdrOFdrbUhpWDRNQkU2ZlA1VzFyVkZQY05VS0xweFJXTjhSOHE2cnBoSG9NXzNCcGlqVkNXNjE1cVRBRi15M0dVX2xPX052TWN1WUkyX3l5bU5aWEZPVUw5ZFNmZmQwbE94dTNIZDQwT3FoWlhJM19HRTRuZE1DSlMyc0NtSzE3aWJHcGE1TXp0WlBvcTdNVE10LXZ2UHNrUkoxUURzdmlscEdnSFpwQklkQ3p4MWhvaHdNdy1lM0pBMEdVTU9rdFBoN043cHJlVmFRTFBlVnZFOVVNVFo5Mm05MnNu?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/29",
-    "來源": "news.cnyes.com",
-    "標題": "惠譽確認維持台灣AA主權評等 展望穩定 看好半導體優勢助攻出口與財政 - news.cnyes.com",
-    "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE15WERiQXVsZ29xMmtaUGVDeVo2a0RJRXNqS1hXd004YWZla1BMZ1RqNU5BdzZYRDN5aFdzNTFjcGk0OHBoVWh5YTB5eTRJQW8?oc=5",
     "重要": true
   },
   {
@@ -666,13 +687,6 @@
   },
   {
     "日期": "2026/07/29",
-    "來源": "PChome Online 新聞",
-    "標題": "成大半導體暑校首創「企業日」14國學生接軌台灣產業 - 生活新聞 - PChome Online 新聞 - PChome Online 新聞",
-    "連結": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOOFlMMjVsRWh6R3pWdzBaMDJTOVpKa0V0TU0ta1JhLVJxN3lYUHcwcE1uUHZmSVFtSFBEcmRNNDhjajFPSUZqV2V2Q0NmSUhNOGxDUXJVTDFiNFczZlJpZXU2eFpnMll5ZFpLUm9la3JfYjNYSHNhS3dMTEtNZUZkbk5jVG45eGFMaGF3?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/29",
     "來源": "LINE TODAY",
     "標題": "「半導體王國」卻輸日本？日網友疑悠遊卡感應較慢 內行揭關鍵差異 | CTWANT - LINE TODAY",
     "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE45ZlZMVy1DNElaQmJiWkljZVBha0owVTA5QXJhd0U2eUNfbVU4dXNZM01UN1ZqTVpGRmdYcVFXVkJwRFFWb0lnQ1AtSGZBbC13UnpTRE9n?oc=5",
@@ -683,20 +697,6 @@
     "來源": "放言Fount Media",
     "標題": "中鋼碳素研發中心啟用 助攻半導體供應鏈韌性 - 放言Fount Media",
     "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1EUkM5aGx0QURUN01mVS1QbTBVOU1DYXBLbzZoN1VTMTU0VmtuOGVNclRVNEdQR2JyemxFTUlpM21VTldGWXpLdWRfMEc0Z3NHRHc?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/29",
-    "來源": "蕃新聞",
-    "標題": "成大半導體國際暑期學校攜手5大企業14國72學子共創研習 - 蕃新聞",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE53aEMyY3BtNWRjRVNocE5hQndiRXBQdDBhQUVhRFdWaldMNWRHVjBUdUYycFU1Q0E1ZWRYZFRHdURWWW92SmI5c3lwNjhaMnk2TGc?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/29",
-    "來源": "NOWnews今日新聞",
-    "標題": "台灣明明是半導體王國！日本人驚「悠遊卡比西瓜卡慢」　關鍵是它 - NOWnews今日新聞",
-    "連結": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9yT0twV0o4X0ZtejBuR2tNRGJVSlk2OU9NaG9DMFF1YlgzTWd2WkV0MUZrUlhqeXZCV082eHczNmo4NU5sMUdTRFB1YjTSAVJBVV95cUxOa253UjhhS3lkM2lsenR5M1ZGcTBQN3RPeWItSHRqRjdPc0ZLR3czcG5UMU5LcXgxUHF3a0VQUzEyYjJxVmhKR2p6WGRIbUlHUGp3?oc=5",
     "重要": true
   }
 ]
