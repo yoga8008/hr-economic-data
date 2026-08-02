@@ -22,6 +22,13 @@
   },
   {
     "日期": "2026/08/02",
+    "來源": "Yahoo新聞",
+    "標題": "九命怪貓傳奇》黃崇仁曾會莫迪、馬克宏 助台灣「半導體外交」 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMi-AJBVV95cUxPZElOaXY0UTF4bEdfckVkeUlLWS10VmlvUENhYmM4NjJtdjY4ZjQzSHBPbnBzU00tcElZQmFINWRtTzFud0ctelVvNkxpMG1KbDB3SG1qUzlFMVBLUUdCVE41c21NakNZOVJiRG8xd3VlMlpvelh3RmIzek50UkVDcnRFN2ItV2NiRUszNk9VZGItZkhtLURpMGNYLWNzMW9iWWlZSTZqZnRxLXk1Y2NEMmN4ZG11VjRYbzEwZGdPdFFYZ0JWNnMzQzNKczlncmFRc29vUkduLTZOSndpaTk3TGhrcUJmSkpFOTJ3LV9xQkttaEtqQ2I4a2s5RUNqT19teEFnbWRjNkUtY0dwSHZFbXlYa1pweGY0QTdfME8tUVFQSE13RVFjUGFwdmw2QWhmLTljS0R3Z0Fmc2o3cENPQkRvUHcySWdyc1ZTSERGN3NSd2JGaHJ4WWlCcG9EdHplUWZHT0tUdEZqV1hnOU5xZTlxaUtGaW95?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/02",
     "來源": "Taiwan News",
     "標題": "〈時評〉台灣半導體產業諜影幢幢為哪椿？保密防諜事關重大 - Taiwan News",
     "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE40Nll1eFRiMkRXUFVSUHZFdmh0TU1BX2RxdE93RlFzSVk5bWcydGcxOFRIbTJFN0g3V3JTLUFQQ2hMX1Nsemk3ekVUN3BaVi1RTzdxcy16SV8?oc=5",
@@ -43,13 +50,6 @@
   },
   {
     "日期": "2026/08/02",
-    "來源": "newstaiwan.net",
-    "標題": "大陸光刻機問世，全球半導體業震撼！／何溢誠 - newstaiwan.net",
-    "連結": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBOSnRZTUdnb2VNbU9wZHlvSnZLUVBmUXBXbWtWSkEzbjZvRldyUFdSM251RFFBU09JcW5sWkxoN2o5c0djblBWMjBzcml4a2x6N2tR?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/02",
     "來源": "三立新聞網SETN.com",
     "標題": "AI鏈滿血復活！精選「5檔」半導體ETF 這檔黑馬狂飆126% - 三立新聞網SETN.com",
     "連結": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9hMl9kbDRzMzhldEhIeFNDVjRpYThodmxqQTJfUFFDMlkzTDhDTElObERueUhhZzJsQTREWEhDbDVzdUVYM01LYzFmMA?oc=5",
@@ -57,8 +57,8 @@
   },
   {
     "日期": "2026/08/02",
-    "來源": "知新聞",
-    "標題": "復工！熊本地震後半導體生產逐步恢復 台積電：不因地震而無法運作 - 知新聞",
+    "來源": "knews.com.tw",
+    "標題": "復工！熊本地震後半導體生產逐步恢復 台積電：不因地震而無法運作 - knews.com.tw",
     "連結": "https://news.google.com/rss/articles/CBMib0FVX3lxTE0waGtWelh0cUpyZnY1Mm9RZXptNHdGZ2VNaHBrSER2OURuV2dQNVBPajF0XzA0UjJIb0xNM0hVZnNpekJaTUxWOC1fSUdHd212UHN2VGR2X213c1Y4Tno5bE44VVROOVZLWlI2ZjR2MA?oc=5",
     "重要": true
   },
@@ -78,16 +78,23 @@
   },
   {
     "日期": "2026/08/02",
-    "來源": "科技島",
-    "標題": "TIARA搭起半導體產學橋樑 謝明得：讓學生從實作接軌產業需求 - 科技島",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9BM3doek9YcENUbXpxWkxsTHFCQ0JMWk5ZbDRBWUk5SUg2b0s3Y082VW56Q2tXbld4aTdPU01DYVY5Q283YmVvQTVOeEE2MFg1ZjFubmN2ekN4WE81eUlJ?oc=5",
+    "來源": "newstaiwan.net",
+    "標題": "大陸光刻機問世，全球半導體業震撼！／何溢誠 - newstaiwan.net",
+    "連結": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBOSnRZTUdnb2VNbU9wZHlvSnZLUVBmUXBXbWtWSkEzbjZvRldyUFdSM251RFFBU09JcW5sWkxoN2o5c0djblBWMjBzcml4a2x6N2tR?oc=5",
     "重要": true
   },
   {
     "日期": "2026/08/02",
-    "來源": "knews.com.tw",
-    "標題": "復工！熊本地震後半導體生產逐步恢復 台積電：不因地震而無法運作 - knews.com.tw",
+    "來源": "知新聞",
+    "標題": "復工！熊本地震後半導體生產逐步恢復 台積電：不因地震而無法運作 - 知新聞",
     "連結": "https://news.google.com/rss/articles/CBMib0FVX3lxTE0waGtWelh0cUpyZnY1Mm9RZXptNHdGZ2VNaHBrSER2OURuV2dQNVBPajF0XzA0UjJIb0xNM0hVZnNpekJaTUxWOC1fSUdHd212UHN2VGR2X213c1Y4Tno5bE44VVROOVZLWlI2ZjR2MA?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/02",
+    "來源": "科技島",
+    "標題": "TIARA搭起半導體產學橋樑 謝明得：讓學生從實作接軌產業需求 - 科技島",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9BM3doek9YcENUbXpxWkxsTHFCQ0JMWk5ZbDRBWUk5SUg2b0s3Y082VW56Q2tXbld4aTdPU01DYVY5Q283YmVvQTVOeEE2MFg1ZjFubmN2ekN4WE81eUlJ?oc=5",
     "重要": true
   },
   {
@@ -106,16 +113,9 @@
   },
   {
     "日期": "2026/08/01",
-    "來源": "UDN",
-    "標題": "半導體巨擘黃崇仁辭世 台大哀悼：為台灣高科技產業奠定人才基石 - UDN",
+    "來源": "udn.com",
+    "標題": "半導體巨擘黃崇仁辭世 台大哀悼：為台灣高科技產業奠定人才基石 - udn.com",
     "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9zQTl2SVVSV0d2dWI2MnBEYTZ4Q1UzTnp4WmxGdnl1eDhkRjhIaTlMYUZEVUtpTXh5Mk0xOXlQWDU4ZEx5NWRWbUcxVGtjWGlW0gFWQVVfeXFMTmh1c3B4dW8xNEtJakIyOF9EYXloQk1LazJYUDNyNDhWVlBaRjA3SkdWV2NUYm1TY0tvNk43MElONzhxaG42bkI2Tmh5Q3l0X2l5LUJvdFE?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/01",
-    "來源": "Yahoo新聞",
-    "標題": "台灣半導體業痛失大將！黃崇仁睡夢中辭世 - Yahoo新聞",
-    "連結": "https://news.google.com/rss/articles/CBMirAJBVV95cUxPSXdSY01yUXF5STI0LWY4Wnl4Ri1BRnRKWlY5MWhubkE4dWdKRmVnSzE4UVhYYVowV1JYU0xOTGpXR0ItcHpZNXo1YTY0M1E3QWYxWk1mQUZiQkZ3UThUOGx4QXFVMkZhcHBhUTNMN1RkOVp5MzRUSmhvQ2ZsakdGUDZvNll4Z1otXzZqR084VlBTT0JKRXAyeGhXTTVtSWR4anVHWHlmRFJpSlBwaWVyY2kwc0ZSdTRfU2ZHTDh6OHRSdGxnUzFPdlFIY0QwbG9KZF91aXJaZ0twNFZnNldjUzZxV0lCRElLQURSWEl3MW1ROVZITXlMdlUwMVR3M1p3X2pLVkdPem5PRk5udHJHZzlRbFk1YjROalp2MWxwS1JHT0FtMkxIbXczemM?oc=5",
     "重要": true
   },
   {
@@ -123,6 +123,13 @@
     "來源": "信傳媒",
     "標題": "「九命怪貓」黃崇仁謝幕 杜紫宸：老共今天做到的半導體產業，他是重要的功臣 - 信傳媒",
     "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9oVXJLRW42c2FzOHdVdVA1SURBSzRuYjc4aTBDcERuSDJLazA0SkE5Y25PWFlpc2FUbFhzZ1l6OWdEU2VKWVdScGhvV3JuQzVUTnVIeUpIZTRCdw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/01",
+    "來源": "Yahoo新聞",
+    "標題": "台灣半導體業痛失大將！黃崇仁睡夢中辭世 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMirAJBVV95cUxPSXdSY01yUXF5STI0LWY4Wnl4Ri1BRnRKWlY5MWhubkE4dWdKRmVnSzE4UVhYYVowV1JYU0xOTGpXR0ItcHpZNXo1YTY0M1E3QWYxWk1mQUZiQkZ3UThUOGx4QXFVMkZhcHBhUTNMN1RkOVp5MzRUSmhvQ2ZsakdGUDZvNll4Z1otXzZqR084VlBTT0JKRXAyeGhXTTVtSWR4anVHWHlmRFJpSlBwaWVyY2kwc0ZSdTRfU2ZHTDh6OHRSdGxnUzFPdlFIY0QwbG9KZF91aXJaZ0twNFZnNldjUzZxV0lCRElLQURSWEl3MW1ROVZITXlMdlUwMVR3M1p3X2pLVkdPem5PRk5udHJHZzlRbFk1YjROalp2MWxwS1JHT0FtMkxIbXczemM?oc=5",
     "重要": true
   },
   {
@@ -141,8 +148,8 @@
   },
   {
     "日期": "2026/08/01",
-    "來源": "鏡報",
-    "標題": "黃崇仁逝世 經長龔明鑫：生前促成售廠予美光是半導體產業一大貢獻 - 鏡報",
+    "來源": "mirrordaily.news",
+    "標題": "黃崇仁逝世 經長龔明鑫：生前促成售廠予美光是半導體產業一大貢獻 - mirrordaily.news",
     "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5IZkxjeTdZRzItZzFBbFFCSTd5VkxObzJTcTJ0cFp5SzZHSFozY0F2RGd6Yk81YURsN2hTaENpTUdBeUpVejFsanN1S0N6UFlRNmc?oc=5",
     "重要": true
   },
@@ -190,16 +197,23 @@
   },
   {
     "日期": "2026/08/01",
-    "來源": "tw.news.yahoo.com",
-    "標題": "台灣半導體業痛失大將！黃崇仁睡夢中辭世 - tw.news.yahoo.com",
-    "連結": "https://news.google.com/rss/articles/CBMirAJBVV95cUxPSXdSY01yUXF5STI0LWY4Wnl4Ri1BRnRKWlY5MWhubkE4dWdKRmVnSzE4UVhYYVowV1JYU0xOTGpXR0ItcHpZNXo1YTY0M1E3QWYxWk1mQUZiQkZ3UThUOGx4QXFVMkZhcHBhUTNMN1RkOVp5MzRUSmhvQ2ZsakdGUDZvNll4Z1otXzZqR084VlBTT0JKRXAyeGhXTTVtSWR4anVHWHlmRFJpSlBwaWVyY2kwc0ZSdTRfU2ZHTDh6OHRSdGxnUzFPdlFIY0QwbG9KZF91aXJaZ0twNFZnNldjUzZxV0lCRElLQURSWEl3MW1ROVZITXlMdlUwMVR3M1p3X2pLVkdPem5PRk5udHJHZzlRbFk1YjROalp2MWxwS1JHT0FtMkxIbXczemM?oc=5",
+    "來源": "UDN",
+    "標題": "半導體巨擘黃崇仁辭世 台大哀悼：為台灣高科技產業奠定人才基石 - UDN",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9zQTl2SVVSV0d2dWI2MnBEYTZ4Q1UzTnp4WmxGdnl1eDhkRjhIaTlMYUZEVUtpTXh5Mk0xOXlQWDU4ZEx5NWRWbUcxVGtjWGlW0gFWQVVfeXFMTmh1c3B4dW8xNEtJakIyOF9EYXloQk1LazJYUDNyNDhWVlBaRjA3SkdWV2NUYm1TY0tvNk43MElONzhxaG42bkI2Tmh5Q3l0X2l5LUJvdFE?oc=5",
     "重要": true
   },
   {
     "日期": "2026/08/01",
-    "來源": "mirrordaily.news",
-    "標題": "黃崇仁逝世 經長龔明鑫：生前促成售廠予美光是半導體產業一大貢獻 - mirrordaily.news",
+    "來源": "鏡報",
+    "標題": "黃崇仁逝世 經長龔明鑫：生前促成售廠予美光是半導體產業一大貢獻 - 鏡報",
     "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5IZkxjeTdZRzItZzFBbFFCSTd5VkxObzJTcTJ0cFp5SzZHSFozY0F2RGd6Yk81YURsN2hTaENpTUdBeUpVejFsanN1S0N6UFlRNmc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/01",
+    "來源": "tw.news.yahoo.com",
+    "標題": "台灣半導體業痛失大將！黃崇仁睡夢中辭世 - tw.news.yahoo.com",
+    "連結": "https://news.google.com/rss/articles/CBMirAJBVV95cUxPSXdSY01yUXF5STI0LWY4Wnl4Ri1BRnRKWlY5MWhubkE4dWdKRmVnSzE4UVhYYVowV1JYU0xOTGpXR0ItcHpZNXo1YTY0M1E3QWYxWk1mQUZiQkZ3UThUOGx4QXFVMkZhcHBhUTNMN1RkOVp5MzRUSmhvQ2ZsakdGUDZvNll4Z1otXzZqR084VlBTT0JKRXAyeGhXTTVtSWR4anVHWHlmRFJpSlBwaWVyY2kwc0ZSdTRfU2ZHTDh6OHRSdGxnUzFPdlFIY0QwbG9KZF91aXJaZ0twNFZnNldjUzZxV0lCRElLQURSWEl3MW1ROVZITXlMdlUwMVR3M1p3X2pLVkdPem5PRk5udHJHZzlRbFk1YjROalp2MWxwS1JHT0FtMkxIbXczemM?oc=5",
     "重要": true
   },
   {
@@ -267,15 +281,15 @@
   },
   {
     "日期": "2026/07/31",
-    "來源": "三立新聞",
-    "標題": "台灣缺工24萬人居亞洲之冠傳產徵無人恐被迫出走| 財經 - 三立新聞",
+    "來源": "setn.com",
+    "標題": "台灣缺工24萬人居亞洲之冠傳產徵無人恐被迫出走| 財經 - setn.com",
     "連結": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQeDNIVnhzczBGNHh0VTBrMF9WNmVselhMcTdXRXY0LUwzMnFvSmJCeXNHZTdaMDgxVTZKNEFHYWh2Yy1WaHlMdEc5cVJtSlVFclNIQ2tZWGluUElEVlVhUkRHTGR1Tk1BTU80SVV3TXozQ2k1LTZ2Mnhha2pNVWMwenZ0cWxhaVVkOXc?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/31",
-    "來源": "newstaiwan.net",
-    "標題": "高雄營造業300多人齊聚 15名代表出爐角逐全國理監事 職安、缺工成焦點 - newstaiwan.net",
+    "來源": "台灣好報",
+    "標題": "高雄營造業300多人齊聚 15名代表出爐角逐全國理監事 職安、缺工成焦點 - 台灣好報",
     "連結": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5YaEtVTFc0YUpmdGFnNU85Q3Y1bTQ0Ml9aXzU5R3A1Yjd5NWFwSENNZUVaZGVGNWpwa2I2S2hrejRrNlR1Nm5SYUc3S2NUOTRiRXpz?oc=5",
     "重要": true
   },
@@ -323,13 +337,6 @@
   },
   {
     "日期": "2026/07/31",
-    "來源": "CMoney投資網誌",
-    "標題": "台積電(2330)美國與台灣同步擴產，先被驗證的為何是氣體與廠務？-鄭子敏 - CMoney投資網誌",
-    "連結": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPbUpyWVQ1dF9jLVlydGVDdnFRVm9pZmpKbTMzVmxfQTV3R1BQeGF6ejRXMXI0SjhGblBGWUZhZkJ2WW5jbEZGOFdLVTNiMTdlUzEtSFRFNEdlemJoLU5nMlJfYldGYXYtRUMtRjVfRmduRnhFbmRQUkYzOFhkSURWcFVoaw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
     "來源": "news.cnyes.com",
     "標題": "欣銓加碼投資台灣285億元 龍潭廠擴大建置先進測試設備與智慧化產線 - news.cnyes.com",
     "連結": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1JUTdTYW05a2ZRUkpuYzktcURuaXRTLS1jYnJOU0N6Z09XTUpJMWVXVkJuYWhkek5teG9uNGk4eXBvNWozMWVvc0w0OFRtQjg?oc=5",
@@ -372,16 +379,16 @@
   },
   {
     "日期": "2026/07/31",
-    "來源": "Yahoo新聞",
-    "標題": "台灣半導體業痛失大將！黃崇仁睡夢中辭世，力積電由謝再居代理董事長、力晶接班人待選 - Yahoo新聞",
-    "連結": "https://news.google.com/rss/articles/CBMikwRBVV95cUxQZ0VPZXN4a2duZVlUeWpKSFNvRkVraHhocENLRi15VVhPTlZlNU1PZXRfN3RLeGVoc0xtd3M1NUpnMzVxY3FmMjVodzUwb0xZZk15S19LUnlvVXFuRW1fY19YTkZ5dHBCVlNUSHAyT0dXYVlnOVJOTG1YcVd4Y1k5aHRELWt0em9Ic1ZuOENoSU5oemZoTXRhdHJuN1NydFprVnhYVXgtT2FvMzByZFJicWdxZ0IxQ0RyckJEQkZQS0tGUnVMMFZkZ3M0MVhFR0c5VHpOWWVWRHFTRWFsV1Q5UnFsTm9taGtZUWc2RGFNc216NHd5NkN3SWdDa3E4b3BTdlJYQ3Yya3hxRmgtOFhPUExnSDZOTTJpanljX0pFcncyNktwWGc0enZaU1hEb0JRMURjUktFX0FjckJMRWhCMXAwSGs5dE03SVRzM1g2YkVqTGhNaUItT1U2WXUtUlVXOFNWOFlIbnR1TkoxY0JiSGxzREdIczk4UjNSdXBuZW1XWmhDU0VKSFhjXzZidE5xNUFWNlAtOE5xTVVfSWtwVzVzUXp1bFFUNFJ1M3JKeFlTVVEzRGJENHp2bmJpWlhwNGJaV2RvUmpiN0ZQWXJ0SFhBWmFzZEpFNjR0ZWtkWVVoVjZwUkJCX0NsdWZHS2VlX2ZmUG9VcGZONEtINDJyWXZZTmdKN3BBbDhVajR4WDNDanM?oc=5",
+    "來源": "udn.com",
+    "標題": "台灣半導體傳奇人物黃崇仁辭世…走過力積電千億負債重生 人生就此謝幕 - udn.com",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1pWXctbEVXcVdVVVVPNHRWRktCSzN2a2h1ZngyN3NjMllzUlV2YkdwbHBndlJaNzJ5RTItUWxHaHUxbFJFYldrUU1JWEViOE9y0gFWQVVfeXFMT0lZU3BfbzZ1Z2pmRUNCQkhrRHdUZnZ4QUhzTkV6QXNuaWZfajlJWF96Sl9NSDB6LXppUTE0S0dUdWZCX3hsUXVneXUtMjQ4d2tiRjVVdWc?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/31",
-    "來源": "UDN",
-    "標題": "台灣半導體傳奇人物黃崇仁辭世…走過力積電千億負債重生 人生就此謝幕 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1pWXctbEVXcVdVVVVPNHRWRktCSzN2a2h1ZngyN3NjMllzUlV2YkdwbHBndlJaNzJ5RTItUWxHaHUxbFJFYldrUU1JWEViOE9y0gFWQVVfeXFMT0lZU3BfbzZ1Z2pmRUNCQkhrRHdUZnZ4QUhzTkV6QXNuaWZfajlJWF96Sl9NSDB6LXppUTE0S0dUdWZCX3hsUXVneXUtMjQ4d2tiRjVVdWc?oc=5",
+    "來源": "Yahoo新聞",
+    "標題": "台灣半導體業痛失大將！黃崇仁睡夢中辭世，力積電由謝再居代理董事長、力晶接班人待選 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMikwRBVV95cUxQZ0VPZXN4a2duZVlUeWpKSFNvRkVraHhocENLRi15VVhPTlZlNU1PZXRfN3RLeGVoc0xtd3M1NUpnMzVxY3FmMjVodzUwb0xZZk15S19LUnlvVXFuRW1fY19YTkZ5dHBCVlNUSHAyT0dXYVlnOVJOTG1YcVd4Y1k5aHRELWt0em9Ic1ZuOENoSU5oemZoTXRhdHJuN1NydFprVnhYVXgtT2FvMzByZFJicWdxZ0IxQ0RyckJEQkZQS0tGUnVMMFZkZ3M0MVhFR0c5VHpOWWVWRHFTRWFsV1Q5UnFsTm9taGtZUWc2RGFNc216NHd5NkN3SWdDa3E4b3BTdlJYQ3Yya3hxRmgtOFhPUExnSDZOTTJpanljX0pFcncyNktwWGc0enZaU1hEb0JRMURjUktFX0FjckJMRWhCMXAwSGs5dE03SVRzM1g2YkVqTGhNaUItT1U2WXUtUlVXOFNWOFlIbnR1TkoxY0JiSGxzREdIczk4UjNSdXBuZW1XWmhDU0VKSFhjXzZidE5xNUFWNlAtOE5xTVVfSWtwVzVzUXp1bFFUNFJ1M3JKeFlTVVEzRGJENHp2bmJpWlhwNGJaV2RvUmpiN0ZQWXJ0SFhBWmFzZEpFNjR0ZWtkWVVoVjZwUkJCX0NsdWZHS2VlX2ZmUG9VcGZONEtINDJyWXZZTmdKN3BBbDhVajR4WDNDanM?oc=5",
     "重要": true
   },
   {
@@ -414,16 +421,16 @@
   },
   {
     "日期": "2026/07/31",
-    "來源": "經濟日報",
-    "標題": "欣銓加碼投資台灣285億元　擴充半導體測試產能 - 經濟日報",
-    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5uYVFaX2tVdGpBV3FiS296QUw5Uy1vOWJkU2l6eWJQVjYzejVZTmN4QVpjT1FBWEFsblROalVIQ3dsY3V5V21yNXhOc01YRkRHcGtIZG1kQnJMQdIBX0FVX3lxTE9tNkpPaDFJUzBlMWFsMVdhTUd0SklYVXRGZ2E0VjlKYTFRX0ltWUxYc0d2Y2FqMW5iaVdOdm9XVlhEdGU1NWNOOVhsLW1QZnNRUnVDc25yZldhUmZsY29v?oc=5",
+    "來源": "mirrordaily.news",
+    "標題": "促成美光買廠補齊台灣HBM拼圖 力積電黃崇仁為台灣半導體留下禮物：出貨不用靠韓國 - mirrordaily.news",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE0zWndSRjU0LW5lem9MdjNjVHFkOEhva2pOZVN1VGlnZXcyRDRZeEstYmRweTlLNmVWLXNSRlFnc2c5bUYtTzQ2d200OFVjbl9VZUE?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/31",
-    "來源": "鏡報",
-    "標題": "促成美光買廠補齊台灣HBM拼圖 力積電黃崇仁為台灣半導體留下禮物：出貨不用靠韓國 - 鏡報",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE0zWndSRjU0LW5lem9MdjNjVHFkOEhva2pOZVN1VGlnZXcyRDRZeEstYmRweTlLNmVWLXNSRlFnc2c5bUYtTzQ2d200OFVjbl9VZUE?oc=5",
+    "來源": "經濟日報",
+    "標題": "欣銓加碼投資台灣285億元　擴充半導體測試產能 - 經濟日報",
+    "連結": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5vWUZPVEcyOFc2aS1tWkF1dGVmYlRsVE03QXl1WTdhSmFSeFhrRnZSOUNEaVdRRTR1ZTktcUtlVWRwUHJzTXhYUVpIZDZxWnNpUGVnU2s5eVpwNkHSAWBBVV95cUxPS3ZCblJKc0dVVTRrYkFPVkFkVnJwV2g3NDhKZ2s2RktVUnZKNDVqZktsaGhWTDFyLUdHc1dMX3pOa2RQQ3M2aDRyTy1MMVNlNmo5WGJ3TTdnYmlHUU93WW0?oc=5",
     "重要": true
   },
   {
@@ -449,16 +456,16 @@
   },
   {
     "日期": "2026/07/31",
-    "來源": "經濟日報",
-    "標題": "從力晶下市到力積電重返市場　「九命怪貓」黃崇仁近40年半導體人生 - 經濟日報",
-    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1aU0F3M21OWU9oMklScm9EcWtFZFJ3ZmZRZllXdUVEU1NEaUVlWlZFdjRaUlJiRUVOblRkX3VKa1loWUZBYVJpLUFHTmZ4M1NqMTJSNmROREloQdIBX0FVX3lxTFBMSm1BbzVTUkpWWHB5dU9ZTXJlMmNJQzg0eVpWandIZ1ltSmZUbHdxTF9wRUtVeXlXSVNKSW43NmVEbVJSRjZkb2JhcXc3OGhTM1RDOTFNZHFIU18tZHpZ?oc=5",
+    "來源": "focusnews.com.tw",
+    "標題": "石化跨足半導體高值化材料典範 台塑德山加碼投資高雄10億元 - focusnews.com.tw",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1NUURXTWhYZ0RIMDktR3hHUFc3YTdnMEE2blA1UW1UVzE5Zlk4RTJwbE8ydzRRb1JERHQ5cHpFV2pxcnB0TFlOQ3JLSmw2QlNOdXfSAVJBVV95cUxNTVFEV01oWGdESDA5LUd4R1BXN2E3ZzBBNm5QNVFtVFcxOWZZOEUycGxPMnc0UW9SRER0OXB6RVdqcXJwdExZTkNyS0psNkJTTnV3?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/31",
-    "來源": "自由財經",
-    "標題": "欣銓再次申請回台投資方案 砸285億強化半導體測試產能 - 自由財經",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54Uk1LRW51ek1pM1dVNURCMWpWM21xczk5R2dxNW1SZjd3bDVzb2hReVBYTnJFc3RBalRmU3dOV0pNdG1uNHdmUnM5djJOR3IyZEE1ZFc1X3hwQWVlYndF?oc=5",
+    "來源": "經濟日報",
+    "標題": "從力晶下市到力積電重返市場　「九命怪貓」黃崇仁近40年半導體人生 - 經濟日報",
+    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1aU0F3M21OWU9oMklScm9EcWtFZFJ3ZmZRZllXdUVEU1NEaUVlWlZFdjRaUlJiRUVOblRkX3VKa1loWUZBYVJpLUFHTmZ4M1NqMTJSNmROREloQdIBX0FVX3lxTFBMSm1BbzVTUkpWWHB5dU9ZTXJlMmNJQzg0eVpWandIZ1ltSmZUbHdxTF9wRUtVeXlXSVNKSW43NmVEbVJSRjZkb2JhcXc3OGhTM1RDOTFNZHFIU18tZHpZ?oc=5",
     "重要": true
   },
   {
@@ -470,16 +477,16 @@
   },
   {
     "日期": "2026/07/31",
-    "來源": "財訊",
-    "標題": "力積電董事長黃崇仁心肺衰竭於自宅安詳逝世 享壽76歲！副董謝再居依法代理 - 財訊",
-    "連結": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBPY2JCS3h3ZjlabktGNnpUWjZ1SWltbUJvakEzTHV6SEVzUWladW1JQl9RcUFHSFJpLWg4QnVoQTIyX2NwOXJOZWRaZEZ6aUlyX2xvcDluTkRrbnlYWjZ2djIwT3ZKazBHYVFXa3lKN2hwbkNyMmVLOTJTOA?oc=5",
+    "來源": "mirrordaily.news",
+    "標題": "投書：台灣應該在中東歐建立半導體與無人機的戰略堡壘 - mirrordaily.news",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE85bi1jSTZER2F3eW1TMTRpdVpVQmdDdW9vWjBLMnRFUTB6Z05ZZ0lYSGU2WEJxMXJaXzNsX3pMaEp3VlpraTdtQm5lY1dDS3ZaWXc?oc=5",
     "重要": true
   },
   {
     "日期": "2026/07/31",
-    "來源": "鏡報",
-    "標題": "投書：台灣應該在中東歐建立半導體與無人機的戰略堡壘 - 鏡報",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE85bi1jSTZER2F3eW1TMTRpdVpVQmdDdW9vWjBLMnRFUTB6Z05ZZ0lYSGU2WEJxMXJaXzNsX3pMaEp3VlpraTdtQm5lY1dDS3ZaWXc?oc=5",
+    "來源": "財訊",
+    "標題": "力積電董事長黃崇仁心肺衰竭於自宅安詳逝世 享壽76歲！副董謝再居依法代理 - 財訊",
+    "連結": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBPY2JCS3h3ZjlabktGNnpUWjZ1SWltbUJvakEzTHV6SEVzUWladW1JQl9RcUFHSFJpLWg4QnVoQTIyX2NwOXJOZWRaZEZ6aUlyX2xvcDluTkRrbnlYWjZ2djIwT3ZKazBHYVFXa3lKN2hwbkNyMmVLOTJTOA?oc=5",
     "重要": true
   },
   {
@@ -491,8 +498,8 @@
   },
   {
     "日期": "2026/07/31",
-    "來源": "technice.com.tw",
-    "標題": "美國再砸8.74億美元扶植半導體研發 聚焦AI晶片、先進封裝與光學互連 - technice.com.tw",
+    "來源": "科技島",
+    "標題": "美國再砸8.74億美元扶植半導體研發 聚焦AI晶片、先進封裝與光學互連 - 科技島",
     "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54N0pSSnZYSkhrWlVpcFM3NTRXSzV2bGRzd19pakdnenB6d3BYZWphSWVYODVLWGpFZHVUY0g1bnVaRkwwNWRySlBLYnlkMkhEeWlEcXpOYmpFc0hGdVFr?oc=5",
     "重要": true
   },
@@ -515,6 +522,125 @@
     "來源": "風傳媒",
     "標題": "台塑德山加碼投資高雄10億元！擴建半導體材料產線、打造循環供應鏈 | 徐炳文 | 地方新聞 - 風傳媒",
     "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBYYTl2WDFUN1RJSncweFRCVXZ1Ul9jdGdURVA4SGlEUWxCR1U1MGxGUl9xdlpjeVpKQWtkV2p1VDFWdFlHd0RqQURaallHZw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "科技島",
+    "標題": "力積電董事長黃崇仁安詳辭世 享壽76歲 - 科技島",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1lZ0YxbGtsb0hhVVh1dDVZQ1haSWtpZ2JSOWJjbERiVGhrRy1vVDdlRy1XaFpsdTVoU3VheVVQUGlKT0RlNFpWWlNIdERfNVhWWjZ3S3JUSUR6MFJoTGdn?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "knews.com.tw",
+    "標題": "「相信黃董年底就懂」成絕唱！力積電黃崇仁逝世 棄醫從商寫台半導體傳奇一頁 - knews.com.tw",
+    "連結": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1KSXNhUEFTQ0MycVNQTVlIbi03em1rbnVOaVVfaURvQ1pHalp1eDE3UFFjS3RuVTYwZldOWDRiVFFURk45cThpa0RzQ1U0d0FHRVh4T1dRSlowcTdxYndPSjVoekhDOUZmMV8xYW8wQQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "放言Fount Media",
+    "標題": "7月14日才出席法說會！力積電董事長黃崇仁睡夢中辭世 「九命怪貓」告別半導體業 - 放言Fount Media",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE85SmpSZ291dTYxeWJaUnlfT1pzSmZCemtWcFdOUjdXTjFYT1RnQXNRYVh2VXBIR3BNbzFBQVhQQV9xdXI2YnhBT3dtZTRZODZvVmc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "蕃新聞",
+    "標題": "力積電董座黃崇仁辭世享壽76歲｜從千億負債重返資本市場、寫下半導體傳奇 - 蕃新聞",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1ibU1xS1NJRGVfdUR4MGw0T0hnLUpPT1J4aHZOdmQyWXkwREh1ajlUQnpKUkVTc2pxN2Z1clU4TlZTdFhDNTMyOXhuWUtKTExlVHc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "緯來新聞網",
+    "標題": "力積電董事長黃崇仁辭世引關注！醫揭心臟衰竭4分級 胸悶、無法平躺快就醫 - 緯來新聞網",
+    "連結": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOMFBUNXB4bVlUblVuYjByX2JtVWk3MFNzbXNEZlpCYWpoT2lCU0I5S2RrdTVsMFIyQ1FTQ0dLYldwTThfNE44eHE5RXVXQ3JtRzNDa3ZCOHdTb2Rja2lXQm9EMWs0b2pYMjYwTFJNN3dKLTdGalpqdVBKZ2lkTUFCTmtRdnRsUQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "經濟日報",
+    "標題": "快訊／力積電董事長黃崇仁過世 - 經濟日報",
+    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0xQWxnSG90U2pSSWNDWDdjdVNWNEx4M1RBcnRWUVVSMFFuMEozSHFvY1NTcmdmZXg5b253VkZ4Uy1YeS1RU0F6anZzMTdrcUtPM0RpeGV0aUMzd9IBX0FVX3lxTE9NelQ0eUVDYjJlUWpKR194bVFiNzJsb09faTMxbHM0eTVXSnhDaEh0NG56RWowdlBCUEFncDYxd0EwVVVqbmtqbXFkaVZIQ01LYTB2emZQWnM5Q2M2R2tJ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "TVBS新聞網",
+    "標題": "保時捷撐不住了？2035年將前砍9千職缺 背後原因曝 - TVBS新聞網",
+    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1rRlloVXZJNzR5b2kyUFBIbW4zblZvTDNCbWktQWFiazdfN3E1bl9UcXpTdHhWMGxiVFFHNDU0clAtaXJYY3lSYzlJMDhIZw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "CIO Taiwan",
+    "標題": "Meta 驚爆 AI 裁員風暴！你的考績被影子演算法黑掉了嗎？ - CIO Taiwan",
+    "連結": "https://news.google.com/rss/articles/CBMiREFVX3lxTE5XeXBMdjU2dGNYNGJUSWEzLW4xLUZpbWFBVHFCczRjUVNwUWY0R3JaeXRnc2Ywc2FUX0dZLUdmSy1fc2Zs?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "Life 生活網",
+    "標題": "AI取代人類夢碎？美大企業認「人力不夠」重啟徵才 這類人更吃香 - Life 生活網",
+    "連結": "https://news.google.com/rss/articles/CBMi7wJBVV95cUxQeXRoMFM0SDZiaVdEVXhsN005dlBETWowNEdNaEtzVHgxNDNQYmd2bk5rMjZLakZPRDM2UzRreko5ZFpBLVZkVlhOMUZ6alA5dWx4WEdkWVppRkRCRnVZRkw4cXhHb2VWSmJlbU9rYUdCdl9CYnQ0Z2dBNlhtX2tnWTg0NTVFeHhuX3RLQmd1ZkwwclZVZVYwYWNPRGRPRTFGVzNaNlNWWkRJemJMUHdlWC1wcXpZeExEX29zanJUUUhzaGlFTHM0WW1HV0RoamR3WFpTNWhuOXM4OGc5SkJyak42SHUtUGc1NlNyTnJXd1pfZHBLZnNZNENwdENWVnZDRTZVLXNxVG9xQ1RnVlVPbEVJeS1mMy0xZUFCSTVkSGpiVzNzOUJUTElxRk1iRGgyUTBOM0RzOWphZ0gySU1yZTY1TmdWcVRrU0dIT2lMOGxiOHJ4czJfR0pxdmVVOS1LTTJPUVZHRDMyQ3dPRldr?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "三立新聞",
+    "標題": "台灣缺工24萬人居亞洲之冠傳產徵無人恐被迫出走| 財經 - 三立新聞",
+    "連結": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQeDNIVnhzczBGNHh0VTBrMF9WNmVselhMcTdXRXY0LUwzMnFvSmJCeXNHZTdaMDgxVTZKNEFHYWh2Yy1WaHlMdEc5cVJtSlVFclNIQ2tZWGluUElEVlVhUkRHTGR1Tk1BTU80SVV3TXozQ2k1LTZ2Mnhha2pNVWMwenZ0cWxhaVVkOXc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "newstaiwan.net",
+    "標題": "高雄營造業300多人齊聚 15名代表出爐角逐全國理監事 職安、缺工成焦點 - newstaiwan.net",
+    "連結": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5YaEtVTFc0YUpmdGFnNU85Q3Y1bTQ0Ml9aXzU5R3A1Yjd5NWFwSENNZUVaZGVGNWpwa2I2S2hrejRrNlR1Nm5SYUc3S2NUOTRiRXpz?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "CMoney投資網誌",
+    "標題": "台積電(2330)美國與台灣同步擴產，先被驗證的為何是氣體與廠務？-鄭子敏 - CMoney投資網誌",
+    "連結": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPbUpyWVQ1dF9jLVlydGVDdnFRVm9pZmpKbTMzVmxfQTV3R1BQeGF6ejRXMXI0SjhGblBGWUZhZkJ2WW5jbEZGOFdLVTNiMTdlUzEtSFRFNEdlemJoLU5nMlJfYldGYXYtRUMtRjVfRmduRnhFbmRQUkYzOFhkSURWcFVoaw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "UDN",
+    "標題": "台灣半導體傳奇人物黃崇仁辭世…走過力積電千億負債重生 人生就此謝幕 - UDN",
+    "連結": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1pWXctbEVXcVdVVVVPNHRWRktCSzN2a2h1ZngyN3NjMllzUlV2YkdwbHBndlJaNzJ5RTItUWxHaHUxbFJFYldrUU1JWEViOE9y0gFWQVVfeXFMT0lZU3BfbzZ1Z2pmRUNCQkhrRHdUZnZ4QUhzTkV6QXNuaWZfajlJWF96Sl9NSDB6LXppUTE0S0dUdWZCX3hsUXVneXUtMjQ4d2tiRjVVdWc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "鏡報",
+    "標題": "促成美光買廠補齊台灣HBM拼圖 力積電黃崇仁為台灣半導體留下禮物：出貨不用靠韓國 - 鏡報",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE0zWndSRjU0LW5lem9MdjNjVHFkOEhva2pOZVN1VGlnZXcyRDRZeEstYmRweTlLNmVWLXNSRlFnc2c5bUYtTzQ2d200OFVjbl9VZUE?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "自由財經",
+    "標題": "欣銓再次申請回台投資方案 砸285億強化半導體測試產能 - 自由財經",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54Uk1LRW51ek1pM1dVNURCMWpWM21xczk5R2dxNW1SZjd3bDVzb2hReVBYTnJFc3RBalRmU3dOV0pNdG1uNHdmUnM5djJOR3IyZEE1ZFc1X3hwQWVlYndF?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "鏡報",
+    "標題": "投書：台灣應該在中東歐建立半導體與無人機的戰略堡壘 - 鏡報",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE85bi1jSTZER2F3eW1TMTRpdVpVQmdDdW9vWjBLMnRFUTB6Z05ZZ0lYSGU2WEJxMXJaXzNsX3pMaEp3VlpraTdtQm5lY1dDS3ZaWXc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/07/31",
+    "來源": "technice.com.tw",
+    "標題": "美國再砸8.74億美元扶植半導體研發 聚焦AI晶片、先進封裝與光學互連 - technice.com.tw",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54N0pSSnZYSkhrWlVpcFM3NTRXSzV2bGRzd19pakdnenB6d3BYZWphSWVYODVLWGpFZHVUY0g1bnVaRkwwNWRySlBLYnlkMkhEeWlEcXpOYmpFc0hGdVFr?oc=5",
     "重要": true
   },
   {
@@ -547,13 +673,6 @@
   },
   {
     "日期": "2026/07/31",
-    "來源": "蕃新聞",
-    "標題": "力積電董座黃崇仁辭世享壽76歲｜從千億負債重返資本市場、寫下半導體傳奇 - 蕃新聞",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1ibU1xS1NJRGVfdUR4MGw0T0hnLUpPT1J4aHZOdmQyWXkwREh1ajlUQnpKUkVTc2pxN2Z1clU4TlZTdFhDNTMyOXhuWUtKTExlVHc?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
     "來源": "知新聞",
     "標題": "人物｜黃崇仁「九命怪貓」傳奇人生 創半導體股「壁紙變回股票」奇蹟 - 知新聞",
     "連結": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBrQkQ5emxvOVRjN1A5cXQ4dEJURm5wTFNhOFVMcldLOFV4ajR2WUxPZk9QZXdsdXhVdWhtdXV6S2QtUlZsN1A5UEFBY3FfZlFWWnhSZkRCaEZ4Z0lBbGVEZjZ3NVU2ZlBtMzE3bHByaw?oc=5",
@@ -568,34 +687,6 @@
   },
   {
     "日期": "2026/07/31",
-    "來源": "經濟日報",
-    "標題": "快訊／力積電董事長黃崇仁過世 - 經濟日報",
-    "連結": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0xQWxnSG90U2pSSWNDWDdjdVNWNEx4M1RBcnRWUVVSMFFuMEozSHFvY1NTcmdmZXg5b253VkZ4Uy1YeS1RU0F6anZzMTdrcUtPM0RpeGV0aUMzd9IBX0FVX3lxTE9NelQ0eUVDYjJlUWpKR194bVFiNzJsb09faTMxbHM0eTVXSnhDaEh0NG56RWowdlBCUEFncDYxd0EwVVVqbmtqbXFkaVZIQ01LYTB2emZQWnM5Q2M2R2tJ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "TVBS新聞網",
-    "標題": "保時捷撐不住了？2035年將前砍9千職缺 背後原因曝 - TVBS新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1rRlloVXZJNzR5b2kyUFBIbW4zblZvTDNCbWktQWFiazdfN3E1bl9UcXpTdHhWMGxiVFFHNDU0clAtaXJYY3lSYzlJMDhIZw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "CIO Taiwan",
-    "標題": "Meta 驚爆 AI 裁員風暴！你的考績被影子演算法黑掉了嗎？ - CIO Taiwan",
-    "連結": "https://news.google.com/rss/articles/CBMiREFVX3lxTE5XeXBMdjU2dGNYNGJUSWEzLW4xLUZpbWFBVHFCczRjUVNwUWY0R3JaeXRnc2Ywc2FUX0dZLUdmSy1fc2Zs?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "台灣好報",
-    "標題": "高雄營造業300多人齊聚 15名代表出爐角逐全國理監事 職安、缺工成焦點 - 台灣好報",
-    "連結": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5YaEtVTFc0YUpmdGFnNU85Q3Y1bTQ0Ml9aXzU5R3A1Yjd5NWFwSENNZUVaZGVGNWpwa2I2S2hrejRrNlR1Nm5SYUc3S2NUOTRiRXpz?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
     "來源": "焦點時報",
     "標題": "AI智慧助媒合青年就業更契合！ 七十家企業聯手釋出逾3500職缺 - 焦點時報",
     "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBYeWZfYzZWS0VoOEstSjVBMkRjMFY4blp4Qk9NRVYwaU9TOFhEX0pueEJ6Y2o1T0lUU1dHUXdSQmNqZVJkVV9ydkwyMFczZnVIM0NtcVZPWQ?oc=5",
@@ -606,97 +697,6 @@
     "來源": "gvm.com.tw",
     "標題": "職場霸凌防治新制上路！主管、HR別做這八大地雷行為 - gvm.com.tw",
     "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBrbmVpRFM4S0lrS3pELS1EOVhjbjZEMnNHcXZsZDlTWmpSeElDcVZoODBaWGVDRlNPM0xRdTUzamE2WGJoUGRWNDlsNVI2dw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "stock.ltn.com.tw",
-    "標題": "墨西哥為何成美國AI霸權關鍵？外媒揭「真正推手」竟是台灣企業 - stock.ltn.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB4elRZVHpHX0dBVl9QNzR4OTY5VjlUOXVXanZla2V4Qi1uM0pia2FhQWZLOC14U3JQOTlSZGxjQVQ4cFRLWWdRMnhPQkNnZHU0YkNiTm5KOVU?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "tw.news.yahoo.com",
-    "標題": "台灣半導體業痛失大將！黃崇仁睡夢中辭世，力積電由謝再居代理董事長、力晶接班人待選 - tw.news.yahoo.com",
-    "連結": "https://news.google.com/rss/articles/CBMikwRBVV95cUxQZ0VPZXN4a2duZVlUeWpKSFNvRkVraHhocENLRi15VVhPTlZlNU1PZXRfN3RLeGVoc0xtd3M1NUpnMzVxY3FmMjVodzUwb0xZZk15S19LUnlvVXFuRW1fY19YTkZ5dHBCVlNUSHAyT0dXYVlnOVJOTG1YcVd4Y1k5aHRELWt0em9Ic1ZuOENoSU5oemZoTXRhdHJuN1NydFprVnhYVXgtT2FvMzByZFJicWdxZ0IxQ0RyckJEQkZQS0tGUnVMMFZkZ3M0MVhFR0c5VHpOWWVWRHFTRWFsV1Q5UnFsTm9taGtZUWc2RGFNc216NHd5NkN3SWdDa3E4b3BTdlJYQ3Yya3hxRmgtOFhPUExnSDZOTTJpanljX0pFcncyNktwWGc0enZaU1hEb0JRMURjUktFX0FjckJMRWhCMXAwSGs5dE03SVRzM1g2YkVqTGhNaUItT1U2WXUtUlVXOFNWOFlIbnR1TkoxY0JiSGxzREdIczk4UjNSdXBuZW1XWmhDU0VKSFhjXzZidE5xNUFWNlAtOE5xTVVfSWtwVzVzUXp1bFFUNFJ1M3JKeFlTVVEzRGJENHp2bmJpWlhwNGJaV2RvUmpiN0ZQWXJ0SFhBWmFzZEpFNjR0ZWtkWVVoVjZwUkJCX0NsdWZHS2VlX2ZmUG9VcGZONEtINDJyWXZZTmdKN3BBbDhVajR4WDNDanM?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "mirrordaily.news",
-    "標題": "促成美光買廠補齊台灣HBM拼圖 力積電黃崇仁為台灣半導體留下禮物：出貨不用靠韓國 - mirrordaily.news",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE0zWndSRjU0LW5lem9MdjNjVHFkOEhva2pOZVN1VGlnZXcyRDRZeEstYmRweTlLNmVWLXNSRlFnc2c5bUYtTzQ2d200OFVjbl9VZUE?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "gvm.com.tw",
-    "標題": "台積電攜手陽明交大、中山大學開半導體暑期課，中文系、醫學系也搶當AI人才 - gvm.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1LM1NLMFhFRnQxaFBYS1g0RHZCRktEcWVFVVUzbmtocVo2dFo4Y01OWVc4QWRlbzIxajNQX3VEd01ZZnRlTnE5bkJ5eFBGUQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "mirrordaily.news",
-    "標題": "投書：台灣應該在中東歐建立半導體與無人機的戰略堡壘 - mirrordaily.news",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE85bi1jSTZER2F3eW1TMTRpdVpVQmdDdW9vWjBLMnRFUTB6Z05ZZ0lYSGU2WEJxMXJaXzNsX3pMaEp3VlpraTdtQm5lY1dDS3ZaWXc?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "UDN",
-    "標題": "半導體業震撼彈 力積電董座黃崇仁辭世 - UDN",
-    "連結": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9WTVAxS3ZtdkFTSUlEVWNiaXptUTQ3elZEeUw4ZWpuRFRDNnBUQ1F3VHIzb09YUEdPWmFvOFhTRHA0U3FlSXVPdEpQZFk4YkprYVdlTlpoZFFJN0pJSFdpaGpfOGJ5VEloSk1kTUtLYU1zRnfSAVZBVV95cUxPeDZtZ1F2WHd3Ykxlc3gtbzNQN2x3dGJfNlFWT0pmcHJ3djZuTHIxSnVGcjhtSGZWdFVvdE5lRWRHbXIwQXpKcHlVM0c5UElDMm83Qkk1QQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "科技島",
-    "標題": "美國再砸8.74億美元扶植半導體研發 聚焦AI晶片、先進封裝與光學互連 - 科技島",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54N0pSSnZYSkhrWlVpcFM3NTRXSzV2bGRzd19pakdnenB6d3BYZWphSWVYODVLWGpFZHVUY0g1bnVaRkwwNWRySlBLYnlkMkhEeWlEcXpOYmpFc0hGdVFr?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "科技島",
-    "標題": "力積電董事長黃崇仁安詳辭世 享壽76歲 - 科技島",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1lZ0YxbGtsb0hhVVh1dDVZQ1haSWtpZ2JSOWJjbERiVGhrRy1vVDdlRy1XaFpsdTVoU3VheVVQUGlKT0RlNFpWWlNIdERfNVhWWjZ3S3JUSUR6MFJoTGdn?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "緯來新聞網",
-    "標題": "力積電董事長黃崇仁辭世引關注！醫揭心臟衰竭4分級 胸悶、無法平躺快就醫 - 緯來新聞網",
-    "連結": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOMFBUNXB4bVlUblVuYjByX2JtVWk3MFNzbXNEZlpCYWpoT2lCU0I5S2RrdTVsMFIyQ1FTQ0dLYldwTThfNE44eHE5RXVXQ3JtRzNDa3ZCOHdTb2Rja2lXQm9EMWs0b2pYMjYwTFJNN3dKLTdGalpqdVBKZ2lkTUFCTmtRdnRsUQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "未來商務",
-    "標題": "2026 AI TAIWAN 精選解方| 飛騰雲端擴大智慧人資布局，推出 AI 智能排班與WGS 職場治理雙解方 - 未來商務",
-    "連結": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBUbDdfaE9xc0ZUbjlkdEdIRWhfejBzOVgySkVwYTcxRWVMS3VKRjZ1NnJ4OXFSUU1QWG1rNk9TVFlYbDJvZXVqQ0FZMklZSS1CZldQSw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "focus.586.com.tw",
-    "標題": "AI智慧助媒合青年就業更契合！ 七十家企業聯手釋出逾3500職缺 - focus.586.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBYeWZfYzZWS0VoOEstSjVBMkRjMFY4blp4Qk9NRVYwaU9TOFhEX0pueEJ6Y2o1T0lUU1dHUXdSQmNqZVJkVV9ydkwyMFczZnVIM0NtcVZPWQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "商傳媒",
-    "標題": "印尼喊話車廠兌現11.7億美元電動車承諾 實際到位僅四分之一 - 商傳媒",
-    "連結": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTjVWbFlhUmJScEppV2tVU1VsRnpzMmhXZnlLMUFOcEpXM3dHY1lOVDRfcFJZNmhCUGhHZkRjS0RVU1hiWjY1T0w5OW84NDFrZV9kSnJMUWRHeHFZMUJnQUxpeklKQ09rQ09GbE91eFloV01hSEk1LTBxT09LUnp1ZkhPdWlXX2UzbkVUQmgxS2sxMkV2dUlLaVdTQ0s?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/07/31",
-    "來源": "ec.ltn.com.tw",
-    "標題": "「九命怪貓」黃崇仁謝幕 從1200億債務到力積電再起的半導體人生 - ec.ltn.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9QWXRjazVORE5mREExSEVtd3YzV2dISklMR194NmZiT2dzckhyOGpmLTFwN3ZZbk5TSmtmY0ZvdHpuS3VqMUpzb3Fad2xyVE9wNGYzdEZwdjZtV0Qxc2VF?oc=5",
     "重要": true
   }
 ]
