@@ -1,6 +1,20 @@
 [
   {
     "日期": "2026/08/13",
+    "來源": "more-news.tw",
+    "標題": "Femas HR布局越南 李佳鴻受聘ACTA顧問串聯跨境人資管理 - more-news.tw",
+    "連結": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE9zTzBFWE1oc2o0QjZROFZGUWRYY0doUzQ1VWpOTVhEd0VFV25seC0wVTZxdW9CMHhwYVZTc0lnQWxXZw?oc=5",
+    "重要": false
+  },
+  {
+    "日期": "2026/08/13",
+    "來源": "蕃新聞",
+    "標題": "台灣半導體不甘只當打工仔！京元電、致茂集體發聲：我們要當「規矩制定者」！ - 蕃新聞",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9XYjE0azVTd1MzMzctSDBfaXQxOUJoLXVCd2ZwYzN5UnJHVUwybkZWLTJJS2tjeGJtaG9GRTNpN05rclkzT0I2b3JGLUhwYWQzTnc?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/13",
     "來源": "iThome",
     "標題": "千人齊聚Synopsys Converge 大會 SNUG 與 Simulation World 兩大盛會攜手登場鏈結台灣關鍵產業生態系，驅動 AI 工程創新 - iThome",
     "連結": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBvNDdGb3BRcXJPVzg0dlc2eDFsQ1FyMkxPYTlkOU1Rb1BpU0J6cUc4RWJyUUozMm5Eem03Wmw0TVNLQ2R0NWVrV094TQ?oc=5",
@@ -8,16 +22,16 @@
   },
   {
     "日期": "2026/08/13",
-    "來源": "商傳媒",
-    "標題": "台灣半導體不甘只當打工仔！京元電、致茂集體發聲：我們要當「規矩制定者」！ - 商傳媒",
-    "連結": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPYlB1anlCaFJkUlRURjhObGlCalQ1eXQ3eU52WWhuSkxxOW1qUzBhSlZablJMUXVlUlZEd3VCVGx2dG96VGJmQkVYTVhnTG5nampZR2dPbFNnQUhDODJnand0Rm03ZklQSkNxVzVUZU5IX1FON3lKN0tEYmVabVVPSG5EaEdweVZWMWM5M3ZtbHdTOS1zanVKV01HRTFuRlFoNmc?oc=5",
+    "來源": "富聯網",
+    "標題": "個股：一零四(3130)總經理黃于純退休，由蘇宏文接任，10/1生效 - 富聯網",
+    "連結": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNUFpRQUJJNldNY0JaX3dfYlRJeVJMbzNTLXRNanBEa1BTY1J4NExlLU1fWEJIT3p6VTRmTV9UMzRJN2pVVHBiV3dHUzFlZGxpQ1N0dzNZY1ZzQjhsMWRuTmhOaXpaYm94cXhTMWMtbS1JVTl4aUpZb1Z3eloyUEZ0RE55OVlQcTU4?oc=5",
     "重要": true
   },
   {
     "日期": "2026/08/13",
-    "來源": "富聯網",
-    "標題": "個股：一零四(3130)總經理黃于純退休，由蘇宏文接任，10/1生效 - 富聯網",
-    "連結": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNUFpRQUJJNldNY0JaX3dfYlRJeVJMbzNTLXRNanBEa1BTY1J4NExlLU1fWEJIT3p6VTRmTV9UMzRJN2pVVHBiV3dHUzFlZGxpQ1N0dzNZY1ZzQjhsMWRuTmhOaXpaYm94cXhTMWMtbS1JVTl4aUpZb1Z3eloyUEZ0RE55OVlQcTU4?oc=5",
+    "來源": "商傳媒",
+    "標題": "台灣半導體不甘只當打工仔！京元電、致茂集體發聲：我們要當「規矩制定者」！ - 商傳媒",
+    "連結": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPYlB1anlCaFJkUlRURjhObGlCalQ1eXQ3eU52WWhuSkxxOW1qUzBhSlZablJMUXVlUlZEd3VCVGx2dG96VGJmQkVYTVhnTG5nampZR2dPbFNnQUhDODJnand0Rm03ZklQSkNxVzVUZU5IX1FON3lKN0tEYmVabVVPSG5EaEdweVZWMWM5M3ZtbHdTOS1zanVKV01HRTFuRlFoNmc?oc=5",
     "重要": true
   },
   {
@@ -45,7 +59,7 @@
     "日期": "2026/08/12",
     "來源": "今周刊",
     "標題": "加薪也留不住人？缺工時代職場心理安全成留才關鍵，ISO 45003、TISFD揭企業治理新課題 - 今周刊",
-    "連結": "https://news.google.com/rss/articles/CBMinwRBVV95cUxPMHlHWlZRM05MTTl6RGRTRWRwMG5nOG1ScHlJamN4Y2RGVnZuakZERndOT25nb3JSTUI5Nlh6bGFTTWZoYmpwYms1S2x5RDlXR3ZaQ0MtOG1xQUhGV3hVOWZtVDVHbUpGOGtpRjVsTVFseHBqUENwWmx5Q1JYMFE0LUVMSE1LMTNUOS1tSDdKZ3hfbFhzNXlBU1BIN09ZblA3a1lwd0doeHEyel95dDcxX2tic0QwSzUzem5NM180VW5HRVh2RlROOE1kX2taQmNxUjYxcDJZWnI0dTh3WmFON0dIYzBZaWxyNFFZU1FkZDRuLVNKcFN0cS1zU2NfaXh5SGhzUHQwNzhEVkx1Mk1yeFZIMU5IYkFudnc3TC0zMk5NRWVJZlNBS0dtaHY4ekRGYUhORU1jeHFzazB0bmEwV3p4X1pkNmRLWDVMemN3VXh2cFhNVmw0VEUyMFdpR2RYcXlMUEhONzloNGxWVmxITEFLUy1UOHFTZzNmLW8wTmJuS3c4OUlucHpaWURCVUw4UDZfODVUMVBhR2h0U2VJejVnYjR6TDUtc2Z6X3JyVlVvQW1WeG9SSzhNek01V05xUE1DdUZtc2EtZmhCbXBzZHVkeXkwRkcyU3ZCU2pnMGJnbjVIMlFpNXl5aXNDalFFWXpQWVhrT3dWY3lxSGhFVWUzWG82cGZTWk50Z3hIOXVYQm85d2lJQUUzaGlBakU?oc=5",
+    "連結": "https://news.google.com/rss/articles/CBMif0FVX3lxTE53MC1jbFVzVXM0dmdPRmcwd1hPQzREcjNrX3BaMGxDWkg4cGdfaE96MWJKRG5qTGhDLTlOMlRYeVQ1Rkk3MFQxZGhPUk9jVFJMSW1yZ1cxWU5iMGFPaGV4WFNIcXMwWm1FMUptX2ZnOFJkV240d3NZWWVvMk1xTFE?oc=5",
     "重要": true
   },
   {
@@ -59,7 +73,7 @@
     "日期": "2026/08/12",
     "來源": "聯合報數位版",
     "標題": "主管不敢管人…日本「逆霸凌」掀職場新危機，台灣呢？ - 聯合報數位版",
-    "連結": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1CUWhpRTltdlpfQVZFdEtmcUFnUkIxQ2dnVTJVbktlc3B6NmcwSlkyaHU2TjRXTEdvd2dZY0pfdUstWE91cnZCYk8tU0x3RkFRMVp3cFd2MGFabUlsRGJIWHlqOHUwZC1rNWM5cXdfWQ?oc=5",
+    "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9xTFlHdjJYY3lXSFdLTkNyUXpaTHVjblFiUi1Gc2NCdHVQWTlCT2dlUEt2WmZ1UzI2YmFYQ1Z2a0d6dlJNYWdHdnZ3czFmUFVjNE1pVE95aw?oc=5",
     "重要": true
   },
   {
@@ -120,6 +134,13 @@
   },
   {
     "日期": "2026/08/12",
+    "來源": "sinotrade.com.tw",
+    "標題": "SEMICON Taiwan 2026 半導體展必看亮點！台積電、日月光引領先進封裝與 AI 供應鏈趨勢解析｜股市話題 - sinotrade.com.tw",
+    "連結": "https://news.google.com/rss/articles/CBMioARBVV95cUxPd1lrUlplVnFuUWdyWk1yT0luQmxmZG5DS0pIbzFPOGRRZnlmYTdvNU4wUDNWa1lmX1k4VkZzSXFVLWVEVFFqc1dRb3ZyTkZuOG13SFhsMEV1QUNENFR4WUFTVXR2X2g3SllnQ3VpUjJEaWJrR0Y5SWZ1R2lVYmdWRmdaUzROamxKN1BudEFwMTlBQ2VtUDNSTEs5UG5MSDdha1I2dmRHM0YySUNxR0JqR0NlZEJ0dy05VXNPZ0R0aVQ1Zk1tdXlMVHJ5RDhXY09Uam53cXlmQ2dUcm1KVmNvN01rQjV4aC1Fal9ldlBSZVFteUpOY1k5ckJQclBMVTFxXzMxeG9Xa0FkOTYyaUQ1cWk0SXlEUXRNcElSU05BdmpmdzJyTVBVVGFpSUV5OHZTRU5HVkMxZk4yUEd1NHpDSU9UNWYtSFhWakUwRmxRbTVxQWRRdmZfaDNQUlR4M3dtYXA3dFR4U1VqTnBES2ZLTDU4R1pHWnJGNHFVRzJoNEJqbGdoSU1sRjc3UjVqSUVBTW5RWEM2cTNtT1RHY1B2VktYTkx5U0E4WFl3VGp5bV9sZ0h6dFVxTW1yLWcwWWdSN3htdk10M20xRDhXZ1oxY21qdzVZZ1BjTm9aMi1IdEloZ1V2aXlscElROXprTy1SOFRMbkFBQXpHMnZiUTBsWDdvN3ZDdlhsMExvSTBEMTlVWHB2b1dMdUc4RkxEdWFY?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
     "來源": "風傳媒",
     "標題": "揭台灣「這13種半導體產業」7月大賺！陸行之也點名最大輸家：被記憶體害到 | 張大任 | 新聞 - 風傳媒",
     "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE82aDlPYTBJVkpDRU1aOW9NR2hyenpvQ0lEOWNiLTJ0M1ZIaG1NQ0xTWnNFV1BkdjhEWVZOLTZiZ1ItYURiRXZ5MERCSWJnZw?oc=5",
@@ -134,9 +155,44 @@
   },
   {
     "日期": "2026/08/12",
-    "來源": "sinotrade.com.tw",
-    "標題": "SEMICON Taiwan 2026 半導體展必看亮點！台積電、日月光引領先進封裝與 AI 供應鏈趨勢解析｜股市話題 - sinotrade.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMioARBVV95cUxPd1lrUlplVnFuUWdyWk1yT0luQmxmZG5DS0pIbzFPOGRRZnlmYTdvNU4wUDNWa1lmX1k4VkZzSXFVLWVEVFFqc1dRb3ZyTkZuOG13SFhsMEV1QUNENFR4WUFTVXR2X2g3SllnQ3VpUjJEaWJrR0Y5SWZ1R2lVYmdWRmdaUzROamxKN1BudEFwMTlBQ2VtUDNSTEs5UG5MSDdha1I2dmRHM0YySUNxR0JqR0NlZEJ0dy05VXNPZ0R0aVQ1Zk1tdXlMVHJ5RDhXY09Uam53cXlmQ2dUcm1KVmNvN01rQjV4aC1Fal9ldlBSZVFteUpOY1k5ckJQclBMVTFxXzMxeG9Xa0FkOTYyaUQ1cWk0SXlEUXRNcElSU05BdmpmdzJyTVBVVGFpSUV5OHZTRU5HVkMxZk4yUEd1NHpDSU9UNWYtSFhWakUwRmxRbTVxQWRRdmZfaDNQUlR4M3dtYXA3dFR4U1VqTnBES2ZLTDU4R1pHWnJGNHFVRzJoNEJqbGdoSU1sRjc3UjVqSUVBTW5RWEM2cTNtT1RHY1B2VktYTkx5U0E4WFl3VGp5bV9sZ0h6dFVxTW1yLWcwWWdSN3htdk10M20xRDhXZ1oxY21qdzVZZ1BjTm9aMi1IdEloZ1V2aXlscElROXprTy1SOFRMbkFBQXpHMnZiUTBsWDdvN3ZDdlhsMExvSTBEMTlVWHB2b1dMdUc4RkxEdWFY?oc=5",
+    "來源": "財訊",
+    "標題": "AI產業對良率和可靠度瑕疵零容忍 測試與量測技術布局，聚焦先進封裝、矽光子兩大重點 - 財訊",
+    "連結": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5YalJXVzdJdEl1VXdCLUtmZUh2QmpvT1ZicmYyVk5VaDZSRmtmZ3pQSE1lcVhOdEo1YjBETFphalhaTWZGTjN0cGZtWXJkUmtIT2tpMTVLNDBPSmdUbGU3OUphQ0tfZmpya2FJOWNLZFNScUFSbnhhVlo2Yw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "數位時代",
+    "標題": "測試設備市場將衝208億美元！AI晶片測試提前至設計端，半導體最缺哪3類人才？ - 數位時代",
+    "連結": "https://news.google.com/rss/articles/CBMie0FVX3lxTE8zX0V1SjhkRkkwUlV0b1l3aU5fV0dZYmgwdXNmVkZuRkFoNWV0V1VrLVA5alB1WW1BR3lEdm1XUVFWRVQwcFZuUzdlazJQR0Y4QVJvODViXzRwY2lvbXdDeWV3SVdma2xCWC01MGlUcWVtc1p0Sl9uWTRPbw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "三立新聞",
+    "標題": "矽品斥資1千億斗六新廠動土 雲林躍升中台灣半導體產業重鎮 - 三立新聞",
+    "連結": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5ZWUZDVEdoUzhqaGszZEJkREtDZHp5QW1ZS1pPVGYwbkxOa2NDbWs3V3VVWWJlMGxRSFFyQXgxWW9Gb3VlSmgwMUcycw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "Yahoo新聞",
+    "標題": "矽品砸千億進駐斗六 張麗善：雲林躍升中台灣半導體重鎮 - Yahoo新聞",
+    "連結": "https://news.google.com/rss/articles/CBMi9gJBVV95cUxNZ3ZLaXZldFpjeEE0NVMzRHZPaUJqVDJQdE9NWXRkbGx1aWlQX2IwU3MtSEdrRWhRNk1LODVLR0V5LUk0enEtUnNTbVNuWERzVGlVRDdhblFabVM1NmYwTXJja0hRdDJKNjBQdFhjd291MHFhVlh4bnFRWEU0ZDNQQnJ3azRJRjBWQ0lZRWVlT1R6Unk2ZTdKeEtYbEt0NWFxWko4YkhyS2M5bVEzbTBrVFBTNGM5d3V6SzJKbFJIU183NlZJWXMtckIxZFFQVXlKdGRSa0tISXB4b1I2MUd4SDd3bTlnU01aRXRLOGZqeUN5R09TaWZMcWY5b0Q4LVR3X1NoTmpIVVYzeHM1WTlpa3M5S21YbjExRUFnSUkybS1lNC1tcV83QkM4R0VsOF9oZlRHR2UzTVdfb1RQeG16Z05xaEdIdE5ZTm9HZEkxRTBiOWN4NEcyN1lQZ1JQS1VjNXNSSUZEdjJqZnNyREZUNXJSR3lZUQ?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "rti.org.tw",
+    "標題": "台塑布局半導體化學品 合資日商設廠拚2028年投產 - rti.org.tw",
+    "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE95RWxWYlVjMzdSUWpDZnVQZWYyOTBjLVBMVUFsOG5HTzVPWk1QYkJDa1M5VmlYaVM1SFZXb0FjN2YtcUxubW9ITU9CU29aMW9lbFFOeG03Yw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "工商時報",
+    "標題": "台塑結盟日商拓半導體商機- 日報 - 工商時報",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB5VjVhbGNXSFNZYThoZ044ejBJMkw4VUpHcC0weGdpVEQ1QkwwVzlta2x4MUlKRERsaFdCYTA5eno5cXQxaWt6RThObk15NVB6MkFFdDY4SGk1eGhSTzBZ?oc=5",
     "重要": true
   },
   {
@@ -155,58 +211,9 @@
   },
   {
     "日期": "2026/08/12",
-    "來源": "wealth.com.tw",
-    "標題": "AI產業對良率和可靠度瑕疵零容忍 測試與量測技術布局，聚焦先進封裝、矽光子兩大重點 - wealth.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5YalJXVzdJdEl1VXdCLUtmZUh2QmpvT1ZicmYyVk5VaDZSRmtmZ3pQSE1lcVhOdEo1YjBETFphalhaTWZGTjN0cGZtWXJkUmtIT2tpMTVLNDBPSmdUbGU3OUphQ0tfZmpya2FJOWNLZFNScUFSbnhhVlo2Yw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "數位時代",
-    "標題": "測試設備市場將衝208億美元！AI晶片測試提前至設計端，半導體最缺哪3類人才？ - 數位時代",
-    "連結": "https://news.google.com/rss/articles/CBMie0FVX3lxTE8zX0V1SjhkRkkwUlV0b1l3aU5fV0dZYmgwdXNmVkZuRkFoNWV0V1VrLVA5alB1WW1BR3lEdm1XUVFWRVQwcFZuUzdlazJQR0Y4QVJvODViXzRwY2lvbXdDeWV3SVdma2xCWC01MGlUcWVtc1p0Sl9uWTRPbw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "TechNews 科技新報",
-    "標題": "AI 顛覆半導體測試！京元電總經理張高薰：測試定位從供應鏈轉為製程核心 - TechNews 科技新報",
+    "來源": "finance.technews.tw",
+    "標題": "AI 顛覆半導體測試！京元電總經理張高薰：測試定位從供應鏈轉為製程核心 - finance.technews.tw",
     "連結": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNamxFNFc5N3c3aUFuUTdGbTJ6QnJqR3VoWlFNYi1JMjdEZ0M0Nk1NQmQyeFJvbTFPcV90MkZtS3ZENFZRb1o5SGQtZzc2N0kyX1lkS2JhbV9sU1cyRktaLUFtMXQySjlYUS04TDBPWXN6VFdleTZRN2t3d2NJU0JZdHFERDBKZjFSZHhxWkNGU0RLUVc2SFB5cjJR?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "Yahoo新聞",
-    "標題": "矽品砸千億進駐斗六 張麗善：雲林躍升中台灣半導體重鎮 - Yahoo新聞",
-    "連結": "https://news.google.com/rss/articles/CBMi9gJBVV95cUxNZ3ZLaXZldFpjeEE0NVMzRHZPaUJqVDJQdE9NWXRkbGx1aWlQX2IwU3MtSEdrRWhRNk1LODVLR0V5LUk0enEtUnNTbVNuWERzVGlVRDdhblFabVM1NmYwTXJja0hRdDJKNjBQdFhjd291MHFhVlh4bnFRWEU0ZDNQQnJ3azRJRjBWQ0lZRWVlT1R6Unk2ZTdKeEtYbEt0NWFxWko4YkhyS2M5bVEzbTBrVFBTNGM5d3V6SzJKbFJIU183NlZJWXMtckIxZFFQVXlKdGRSa0tISXB4b1I2MUd4SDd3bTlnU01aRXRLOGZqeUN5R09TaWZMcWY5b0Q4LVR3X1NoTmpIVVYzeHM1WTlpa3M5S21YbjExRUFnSUkybS1lNC1tcV83QkM4R0VsOF9oZlRHR2UzTVdfb1RQeG16Z05xaEdIdE5ZTm9HZEkxRTBiOWN4NEcyN1lQZ1JQS1VjNXNSSUZEdjJqZnNyREZUNXJSR3lZUQ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "三立新聞",
-    "標題": "矽品斥資1千億斗六新廠動土 雲林躍升中台灣半導體產業重鎮 - 三立新聞",
-    "連結": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5ZWUZDVEdoUzhqaGszZEJkREtDZHp5QW1ZS1pPVGYwbkxOa2NDbWs3V3VVWWJlMGxRSFFyQXgxWW9Gb3VlSmgwMUcycw?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "工商時報",
-    "標題": "台塑結盟日商拓半導體商機- 日報 - 工商時報",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB5VjVhbGNXSFNZYThoZ044ejBJMkw4VUpHcC0weGdpVEQ1QkwwVzlta2x4MUlKRERsaFdCYTA5eno5cXQxaWt6RThObk15NVB6MkFFdDY4SGk1eGhSTzBZ?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "工商時報",
-    "標題": "台塑半導體布局再下新城！夥日商合資仁武設廠切入電子級光阻稀釋劑事業- 產業 - 工商時報",
-    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1kTW5PMEp0LVJGMGNiQ0NaVENNQlNSV3NIZEZObG8zTzNXRURwT0Q4MVFfOVIxVUtUVDZIOEFLNmVKalRmcjlWTWh5aW1SeVRUZGMybzFXWWVSMHd6c1Fr?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "rti.org.tw",
-    "標題": "台塑布局半導體化學品 合資日商設廠拚2028年投產 - rti.org.tw",
-    "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE95RWxWYlVjMzdSUWpDZnVQZWYyOTBjLVBMVUFsOG5HTzVPWk1QYkJDa1M5VmlYaVM1SFZXb0FjN2YtcUxubW9ITU9CU29aMW9lbFFOeG03Yw?oc=5",
     "重要": true
   },
   {
@@ -214,6 +221,13 @@
     "來源": "TechNews 科技新報",
     "標題": "陽明交大突破二維半導體介面瓶頸，為後矽時代晶片技術奠定基礎 - TechNews 科技新報",
     "連結": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQWG90c0s1RjVBV2lnb3lZekdPVDg0d05udzc1VkNGbkpsQ2xBY1J1TnE5VUc2QzFDNTZpLVJXd3l1ZVFncTBFZURRNXI3Qlc4LXJwaUFnSnlsNnJnZ3hhV2xJWkZFZnU5NFU1SzQzanhoUHZqcndGeGZlRVJZV3hGWjFqdnNNOEZMMEZZNU43NmcxbE5mU2lCeXN4VkQwaXlRNWRseE5fWFJXWEVzM1FJajVpNW1hOGdyRVI3Q0ZvN0VtYjVSTVVxczlubV82bFlqSFE?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "工商時報",
+    "標題": "台塑半導體布局再下新城！夥日商合資仁武設廠切入電子級光阻稀釋劑事業- 產業 - 工商時報",
+    "連結": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1kTW5PMEp0LVJGMGNiQ0NaVENNQlNSV3NIZEZObG8zTzNXRURwT0Q4MVFfOVIxVUtUVDZIOEFLNmVKalRmcjlWTWh5aW1SeVRUZGMybzFXWWVSMHd6c1Fr?oc=5",
     "重要": true
   },
   {
@@ -232,6 +246,13 @@
   },
   {
     "日期": "2026/08/12",
+    "來源": "CMoney投資網誌",
+    "標題": "AI驅動半導體測試升級，鴻海伺服器出貨旺-財經焦點情報站 - CMoney投資網誌",
+    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQUlAzX3otLUxHeUpCTUVkWldyb0pyNjBHN0dLcHNyb1VCcW9DTE40RzZub2lXenZTUUJURDlaYVNGR2NyUU85TmNrdXBMQUFoVjFqOFJQVFNDdDhrZ2x5ZGZyYURqel9mU0tqSTRPVG4zV1o1UnBDOE1aQ2FRR1B6U1RR?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
     "來源": "TVBS新聞網",
     "標題": "半導體量測產業成AI關鍵！SEMI曹世綸：台灣具備3競爭優勢 - TVBS新聞網",
     "連結": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFB0Mjl2c0RCenRZOWEwc0hoc0pSYzkyU3dNa3BqdWROUy1pOTJQM0VmV3FONFRIT1dGX2l5Z1RzVHR3MGVMVVl5djc2eVpYQQ?oc=5",
@@ -240,22 +261,8 @@
   {
     "日期": "2026/08/12",
     "來源": "CMoney投資網誌",
-    "標題": "AI驅動半導體測試升級，鴻海伺服器出貨旺-財經焦點情報站 - CMoney投資網誌",
-    "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQUlAzX3otLUxHeUpCTUVkWldyb0pyNjBHN0dLcHNyb1VCcW9DTE40RzZub2lXenZTUUJURDlaYVNGR2NyUU85TmNrdXBMQUFoVjFqOFJQVFNDdDhrZ2x5ZGZyYURqel9mU0tqSTRPVG4zV1o1UnBDOE1aQ2FRR1B6U1RR?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "CMoney投資網誌",
     "標題": "台積電領軍台股大漲，半導體設備與記憶體齊揚-財經焦點情報站 - CMoney投資網誌",
     "連結": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQQjVLTjlnZGlPR2xWblA0blVGOU5RWVlYTm1WZkRIU1RCVDJuaVRzemJ2R1VOcmk4WUg5LTBWYW9ZMnlwb1ZrMVNDQlZPUW1DR1JIY0JJby15RWNJRF9oa01lNU9pdmJpMGdQd1VJNjdZZjNrOUVpVWtiUTRzN2hQMjBR?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "mirrordaily.news",
-    "標題": "AI晶片能不能出貨要看它！測試成半導體神山支柱 SEMI首提三大訴求 - mirrordaily.news",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1CbUVPeDdwVGZ1cWhLcUQ5ZDdwNElaUEcxV2Q4UHprb1REQjBaWk9xTUxtZ0h3YllpMEdFTjk4TVdIeFRkYWxPUldWclphMVBRSEE?oc=5",
     "重要": true
   },
   {
@@ -323,6 +330,20 @@
   },
   {
     "日期": "2026/08/12",
+    "來源": "PChome Online 新聞",
+    "標題": "智冠科技啟動經營傳承王俊博退居幕後、改任集團總裁 由王思淳接任董事長、李殷獎出任總經理 - PChome Online 新聞",
+    "連結": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOcXQ0b24tNWs3SWwzd21TeDRiOHIxOHlXb1M5MS1CSDZ0UW13NlBRbU9kaExCSkRIX19jbmdFNFp0cnJ1UjdsWl8tc1dmSzl6R2F3dE43OHd1dE8yOE9sNk9vSEJoOWZJT1JkMEx1QXVCUTNRTE5fTWk0Q01QNHFwY2RjSGo?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "more-news.tw",
+    "標題": "智冠經營團隊換血王俊博交棒 王思淳掌舵、李殷獎接任總經理 - more-news.tw",
+    "連結": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE5EX2JmRURYeGYwcjQxY2hNbmxaVzVZdkVaNGxfYTg1T1BkT2h0ZDBHcVJ4ajhFcU9UQ3hocWxudl9pdw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
     "來源": "LINE TODAY",
     "標題": "智冠啟動傳承 王俊博轉任集團總裁 女兒王思淳接董事長、女婿李殷獎升總經理 | 太報 - LINE TODAY",
     "連結": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBIX2FlVUFqTlBqWE51NWZNYzNJNjVyaDFlOHZaNXNwYlBUeXVGWHVNdXdTSXZmS25wRF9iZ1FtWERlU0tOb2lKZDNZdkZGNFd2WUFWMUJB?oc=5",
@@ -333,20 +354,6 @@
     "來源": "ETtoday遊戲雲",
     "標題": "快訊／智冠董事長王俊博辭職　大女兒王思淳接任 - ETtoday遊戲雲",
     "連結": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE8wX1R3Umh5QW5LV3RZa2lWeS1vNDVZbGNObzFSdU1iOFZUV1QzbXNadkw1QlJmcDFhdGduSWNQTEVYYmtyTXl4RWhSNDExUG9pU3FWTzBlZ9IBTEFVX3lxTE9zM2xaRW8ycFdvNGNtRDcwMEtEUTE1RTdPbWxNWXhBVzhqNUo3THNuVi1Yd05oZlh0YzlaczNkQzk3aDY0ZTEtclB4RW0?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "PChome Online 新聞",
-    "標題": "智冠科技啟動經營傳承王俊博退居幕後、改任集團總裁 由王思淳接任董事長、李殷獎出任總經理 - PChome Online 新聞",
-    "連結": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOcXQ0b24tNWs3SWwzd21TeDRiOHIxOHlXb1M5MS1CSDZ0UW13NlBRbU9kaExCSkRIX19jbmdFNFp0cnJ1UjdsWl8tc1dmSzl6R2F3dE43OHd1dE8yOE9sNk9vSEJoOWZJT1JkMEx1QXVCUTNRTE5fTWk0Q01QNHFwY2RjSGo?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "墨新聞-MORE News",
-    "標題": "智冠經營團隊換血王俊博交棒 王思淳掌舵、李殷獎接任總經理 - 墨新聞-MORE News",
-    "連結": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE5EX2JmRURYeGYwcjQxY2hNbmxaVzVZdkVaNGxfYTg1T1BkT2h0ZDBHcVJ4ajhFcU9UQ3hocWxudl9pdw?oc=5",
     "重要": true
   },
   {
@@ -368,6 +375,34 @@
     "來源": "DIGITIMES",
     "標題": "半導體擴產、AI算力需求增 陳其邁、英國BOT與SEMI齊談低碳電力新解方 - DIGITIMES",
     "連結": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOZHhwQkl4a3lpYzdkT0tHS0ZzZnY3NC1nU0hDSnFkZEFhZjhXZTRWQ2JKNlExa1dZV18yRkh3VFZyM213SE50TjlOVDUybDdHdEpJeGJGVzBfcUJvVUx1WjVzbzZBcjZReE5HVjh5R1p4aFVBbU5KZGZlOVZJWVFXTWR4Q1RZWDk1Z0IySm5n?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "wealth.com.tw",
+    "標題": "AI產業對良率和可靠度瑕疵零容忍 測試與量測技術布局，聚焦先進封裝、矽光子兩大重點 - wealth.com.tw",
+    "連結": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5YalJXVzdJdEl1VXdCLUtmZUh2QmpvT1ZicmYyVk5VaDZSRmtmZ3pQSE1lcVhOdEo1YjBETFphalhaTWZGTjN0cGZtWXJkUmtIT2tpMTVLNDBPSmdUbGU3OUphQ0tfZmpya2FJOWNLZFNScUFSbnhhVlo2Yw?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "TechNews 科技新報",
+    "標題": "AI 顛覆半導體測試！京元電總經理張高薰：測試定位從供應鏈轉為製程核心 - TechNews 科技新報",
+    "連結": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNamxFNFc5N3c3aUFuUTdGbTJ6QnJqR3VoWlFNYi1JMjdEZ0M0Nk1NQmQyeFJvbTFPcV90MkZtS3ZENFZRb1o5SGQtZzc2N0kyX1lkS2JhbV9sU1cyRktaLUFtMXQySjlYUS04TDBPWXN6VFdleTZRN2t3d2NJU0JZdHFERDBKZjFSZHhxWkNGU0RLUVc2SFB5cjJR?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "mirrordaily.news",
+    "標題": "AI晶片能不能出貨要看它！測試成半導體神山支柱 SEMI首提三大訴求 - mirrordaily.news",
+    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1CbUVPeDdwVGZ1cWhLcUQ5ZDdwNElaUEcxV2Q4UHprb1REQjBaWk9xTUxtZ0h3YllpMEdFTjk4TVdIeFRkYWxPUldWclphMVBRSEE?oc=5",
+    "重要": true
+  },
+  {
+    "日期": "2026/08/12",
+    "來源": "墨新聞-MORE News",
+    "標題": "智冠經營團隊換血王俊博交棒 王思淳掌舵、李殷獎接任總經理 - 墨新聞-MORE News",
+    "連結": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE5EX2JmRURYeGYwcjQxY2hNbmxaVzVZdkVaNGxfYTg1T1BkT2h0ZDBHcVJ4ajhFcU9UQ3hocWxudl9pdw?oc=5",
     "重要": true
   },
   {
@@ -396,13 +431,6 @@
     "來源": "Yahoo新聞",
     "標題": "揭台灣「這13種半導體產業」7月大賺！陸行之也點名最大輸家：被記憶體害到 - Yahoo新聞",
     "連結": "https://news.google.com/rss/articles/CBMiuANBVV95cUxNZXhWSWtSaTJpaHdpYURaaFBoVTIza3dJc21zcFh6S210Y2NMX2k0cjIzSllLc0lYbzNqdXVnNFhheE9jQzVZWHlVLWU3cnhudTBJb04wUDdKTWZtYk1iVFNSVDFPVWdqSk5nMXhVQnJnRHB0RFVydDVWcjI4RDdMZE9ycF9BMElaNUNBWElsX2tjSFdCak55NXBRSlF4ZWh2a1NqaGl0emtiVzdLVDM3TFp1NGZubF9pWTlzVWZkR3NOcTJ0Um9sRmVNY0ZHcTY1M1B4eFh1S0R5ZXFNWXc2SlRFc19VbHB6WmZSZzB6X1IwRUJqQVRjLVhFUlNPTUdONE16QWdlSndFWFpEdk1MZjFjMENkWmFsZDZYa0JNd0ZlSXozaC0yM3F1cG9mY3Q1bVVVV09IdzZmWDVhbEZDSVlYcjNHV0hGcFg1WE9CTkpFdG5PdTNGU2RwMjJGUkZJc1dwRm5KMS13YTRwLXFmalJySF9qVFZyS0JaSmNENTQ3M3F0bEFVUUdxNk9zUWg3OU1aSGhBQ1FXbzYwV3ZycWpGQ3ZTcC1PTjFlc0tPUzZjcGpQUjNiQg?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "財訊",
-    "標題": "AI產業對良率和可靠度瑕疵零容忍 測試與量測技術布局，聚焦先進封裝、矽光子兩大重點 - 財訊",
-    "連結": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5YalJXVzdJdEl1VXdCLUtmZUh2QmpvT1ZicmYyVk5VaDZSRmtmZ3pQSE1lcVhOdEo1YjBETFphalhaTWZGTjN0cGZtWXJkUmtIT2tpMTVLNDBPSmdUbGU3OUphQ0tfZmpya2FJOWNLZFNScUFSbnhhVlo2Yw?oc=5",
     "重要": true
   },
   {
@@ -669,34 +697,6 @@
     "來源": "鏡報",
     "標題": "AI晶片能不能出貨要看它！量測成半導體神山支柱 SEMI首提三大訴求 - 鏡報",
     "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1CbUVPeDdwVGZ1cWhLcUQ5ZDdwNElaUEcxV2Q4UHprb1REQjBaWk9xTUxtZ0h3YllpMEdFTjk4TVdIeFRkYWxPUldWclphMVBRSEE?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "n.yam.com",
-    "標題": "台灣團隊突破二維半導體瓶頸 助攻次世代晶片發展 - n.yam.com",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9GcjBraHNhWWZaVWNweTcweGNNcS10WC05SkhkUzl2c0ZkbklneEtUcmlzR2xFUElrUkVOLU55YmwySXp5enowOXZRWUs5UmxtWVE?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "n.yam.com",
-    "標題": "智冠經營團隊換血王俊博交棒 王思淳掌舵、李殷獎接任總經理 - n.yam.com",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFB1TThuTHRaNDZ6NUxlR3RyOHJEdW9iRUh6S1RUcmNXY2o2LUZla0Qtd3l1Rkd0Y3F6WEc3aDNmNDRRMjlxUllDY0I0UFBmalpSOHc?oc=5",
-    "重要": true
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "crossing.cw.com.tw",
-    "標題": "越南傳產現場：薪資漲、工時縮，台商能否擺脫「不轉型等死，轉型是找死」的窘境？ - crossing.cw.com.tw",
-    "連結": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5LTXVxX2VBLUtqaUp5d0xiRnBIeExGS0lwM2s3M1NvSS1CVjE2cUhoSFU5aGtDME1wQTV3a1FFZ2VOc0FxT21jcFQ0czZFU080SXc?oc=5",
-    "重要": false
-  },
-  {
-    "日期": "2026/08/12",
-    "來源": "上報Up Media",
-    "標題": "矽品砸千億進駐斗六 張麗善：雲林躍升中台灣半導體重鎮 - 上報Up Media",
-    "連結": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5YWjNOZ19GNGd6UHMzY2RMQVRWRjVseWtNc0w3YXc0NHA4bVNIMlZmUW5tLV93LWN2U3dZeXJSTWhFOGllaDNrR2ZYdnBqaFZNU29VWjlVeXZjcGxDdXc?oc=5",
     "重要": true
   }
 ]
